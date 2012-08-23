@@ -1,0 +1,26 @@
+ <?php echo $this->doctype() ?>
+ <html>
+ <head>
+    <?php /**@var $this Zend_View */ ?>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+    <?php echo $this->headScript() ?>
+ </head>
+<body>
+<div class="region admin-menu">
+
+</div>
+<div id="mane_wrapper">
+    <div id="page">
+        <?php echo $this->render("header.phtml") ?>
+        <div id="main">
+            <div id="content">
+                <?php echo $this->layout()->content ?>
+            </div>
+        </div>
+        <?php echo $this->render("footer.phtml")?>
+    </div>
+</div>
+</body>
+</html>
