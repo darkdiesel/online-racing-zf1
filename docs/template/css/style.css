@@ -1,0 +1,39 @@
+﻿html, body {
+    height:100%;
+    margin:0;
+    padding:0;
+}
+body{
+	font-size: 100%;
+	background:url("../images/3.png");
+}
+#mane_wrapper{
+	min-height: 100%;
+	position:relative;
+	width:1034px;
+	margin:0 auto;
+	padding:0 5px;
+	background:url("../images/main_hor_sprite.png") repeat-y;
+}
+	#page{
+		padding-bottom: 150px;
+	}
+		#header{
+			border:1px solid #000;
+			width:1024px;
+			height:150px;
+			background:url("../images/foot_head_vert_sprite.png") repeat-x;
+		}
+		#main{
+		
+		}
+		#footer{
+			border-top:2px solid #8C8C8C;
+			height:150px;
+			width:1024px;
+			position:absolute;
+			bottom:0;
+			background:url("../images/foot_head_vert_sprite.png") repeat-x;
+			margin:0 auto;
+			display:inline;
+		}
