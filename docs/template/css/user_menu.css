@@ -1,0 +1,30 @@
+﻿#user_toolbar{
+	position:absolute;
+	right:0;
+	display:inline-block;
+	padding:5px 10px 0 0;
+}
+	#user_toolbar #user_menu{
+		margin:0;
+		padding:0;
+		height:33px;
+		overflow:hidden;
+		display:inline-block;
+	}
+		#user_toolbar #user_menu li{
+			list-style-type:none;
+			height:28px;
+			display:inline-block;
+			color:#B5B0B0;
+			margin-left:-5px;
+			padding:0 10px 0 0;
+			font-weight:bold;
+		}
+			#user_toolbar #user_menu li:before{
+				content:"|";
+				font-weight:bold;
+				padding-right:10px;
+			}
+			#user_toolbar #user_menu li a{
+			
+			}

@@ -5,7 +5,7 @@
 }
 body{
 	font-size: 100%;
-	background:url("../images/background.png");
+	background:url("../images/background.png") fixed;
 }
 #mane_wrapper{
 	min-height: 100%;
@@ -19,13 +19,14 @@ body{
 		padding-bottom: 150px;
 	}
 		#header{
-			border:1px solid #000;
+			border-bottom:2px solid #8C8C8C;
 			width:1024px;
 			height:150px;
 			background:url("../images/foot_head_vert_sprite.png") repeat-x;
 		}
 		#main{
-		
+			border-left:2px solid #8C8C8C;
+			border-right:2px solid #8C8C8C;
 		}
 		#footer{
 			border-top:2px solid #8C8C8C;
