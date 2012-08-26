@@ -3,17 +3,17 @@
     margin:0;
     padding:0;
 }
+
 body{
-	font-size: 100%;
-	background:url("../images/background.png") fixed;
+	background:url("../img/background.png") fixed;d
 }
 #mane_wrapper{
 	min-height: 100%;
 	position:relative;
 	width:1024px;
 	margin:0 auto;
-	padding:0 5px;
-	background:url("../images/main_hor_sprite.png") repeat-y;
+	padding:0;
+	background:url("../img/main_hor_sprite.png") repeat-y center;
 	box-shadow:0 20px 50px #000000;
 }
 	#page{
@@ -24,17 +24,22 @@ body{
 			border-bottom:2px solid #8C8C8C;
 			width:1024px;
 			height:150px;
-			background:url("../images/vert_sprite.png") repeat-x 0 0;
+			background:url("../img/vert_sprite.png") repeat-x 0 0;
 			
 		}
+            #logo_box{
+                position:absolute;
+                padding: 10px 20px;
+            }
+                #logo{
+
+                }
 		#main{
-			border-left:2px solid #8C8C8C;
-			border-right:2px solid #8C8C8C;
 			width:1024px;
 		}
 			#content{
-				
-				width:1024px;
+			    padding:10px 15px;
+				text-align:justify;
 			}
 		#footer{
 			border-top:2px solid #8C8C8C;
@@ -42,7 +47,7 @@ body{
 			width:1024px;
 			position:absolute;
 			bottom:0;
-			background:url("../images/vert_sprite.png") repeat-x 0 0;
+			background:url("../img/vert_sprite.png") repeat-x 0 0;
 			margin:0 auto;
 			display:inline;
 		}

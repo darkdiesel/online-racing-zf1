@@ -618,7 +618,3 @@ EOS;
 
 
 }
-
-if (!getenv('ZF_NO_MAIN')) {
-    ZF::main();
-}
