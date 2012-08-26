@@ -1,0 +1,59 @@
+#box_main_menu{
+    position:absolute;
+    right:0;
+    top:50px;
+    padding:5px 20px 0 0;
+
+}
+    #main_menu{
+        position:relative;
+        height:29px;
+        background:url("../img/vert_sprite.png") repeat-x 0 -164px;
+        padding:10px 20px;
+        margin:0;
+        overflow:hidden;
+        border:2px solid;
+        border-radius:10px;
+    }
+        #main_menu li{
+            float: left;
+            list-style: none;
+            margin:0 5px;
+        }
+            #main_menu li.back{
+                background:url("../img/vert_sprite.png") repeat-x 0 -889px;
+                width: 9px; height: 30px;
+                z-index: 8;
+                position: absolute;
+                border-radius:10px 10px;
+                border:1px solid;
+            }
+                #main_menu li.back .left{
+                    background:url("../img/vert_sprite.png") repeat-x 0 -889px;
+                    height: 30px;
+                    margin-right: 9px; /* 7px is the width of the rounded shape */
+                    border-radius:10px 0 0 10px ;
+                }
+                #main_menu li a{
+                    font: bold 14px arial;
+                    text-decoration: none;
+                    color: #AA9898;
+                    outline: none;
+                    text-align: center;
+                    top: 7px;
+                    text-transform: uppercase;
+                    letter-spacing: 0;
+                    z-index: 10;
+                    display: block;
+                    float: left;
+                    height: 30px;
+                    position: relative;
+                    overflow: hidden;
+                    margin: auto 10px;
+                }
+                    #main_menu li a.current{
+                        color:#fff;
+                    }
+                #main_menu li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
+                    border: none;
+                }
