@@ -14,6 +14,7 @@
         overflow:hidden;
         border:2px solid;
         border-radius:10px;
+		box-shadow:0 0 10px #767373;
     }
         #main_menu li{
             float: left;
@@ -27,6 +28,7 @@
                 position: absolute;
                 border-radius:10px 10px;
                 border:1px solid;
+				box-shadow:0 0 5px #fff;
             }
                 #main_menu li.back .left{
                     background:url("../img/vert_sprite.png") repeat-x 0 -889px;

@@ -7,7 +7,7 @@
 body{
 	background:url("../img/background.png") fixed;d
 }
-#mane_wrapper{
+#page_wrapper{
 	min-height: 100%;
 	position:relative;
 	width:1024px;
@@ -23,22 +23,38 @@ body{
 		#header{
 			border-bottom:2px solid #8C8C8C;
 			width:1024px;
-			height:150px;
+			height:140px;
 			background:url("../img/vert_sprite.png") repeat-x 0 0;
 			
 		}
             #logo_box{
                 position:absolute;
-                padding: 10px 20px;
+                padding: 20px 0 0 20px;
             }
                 #logo{
 
                 }
+        #main_wrapper{
+            position:relative;
+        }
 		#main{
 			width:1024px;
 		}
+            #left_sidebar{
+                width:230px;
+                padding:10px 5px 10px 20px;
+                float:left;
+                margin-left:0;
+                margin-right:-255px;
+                overflow:visible;
+            }
 			#content{
-			    padding:10px 15px;
+                overflow:visible;
+                margin-left:255px;
+                margin-right:-1024px;
+                width:744px;
+                float:left;
+			    padding:10px 20px 10px 5px;
 				text-align:justify;
 			}
 		/*scroll to top button*/
@@ -62,7 +78,7 @@ body{
 				font-weight:bold;
 			}
 			#back-top a:hover {
-				color: #000;
+				color: #bbbbbb;
 			}
 				/* arrow icon (span tag) */
 				#back-top span {
@@ -92,4 +108,12 @@ body{
 			background:url("../img/vert_sprite.png") repeat-x 0 0;
 			margin:0 auto;
 			display:inline;
+            clear:both;
 		}
+.clearfix:after{
+    clear:both;
+    content:".";
+    display:block;
+    height:0;
+    visibility:hidden;
+}

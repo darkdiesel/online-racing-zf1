@@ -6,12 +6,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         // ������������� ����
         $view = new Zend_View();
-        $view->doctype('XHTML1_STRICT');
+
         $view->headTitle('Online-Racing');
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.min.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-        $view->headScript()->appendFile($view->baseUrl("scripts/bootstrap.min.js"));
-        $view->headScript()->appendFile($view->baseUrl("scripts/jquery-1.8.0_min.js"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/admin_menu.css"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.0_min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/my_js.js"));
 
         // ���������� ���� � ViewRenderer
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(

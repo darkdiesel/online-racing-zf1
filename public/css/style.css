@@ -7,7 +7,7 @@
 body{
 	background:url("../img/background.png") fixed;d
 }
-#mane_wrapper{
+#page_wrapper{
 	min-height: 100%;
 	position:relative;
 	width:1024px;
@@ -23,24 +23,82 @@ body{
 		#header{
 			border-bottom:2px solid #8C8C8C;
 			width:1024px;
-			height:150px;
+			height:140px;
 			background:url("../img/vert_sprite.png") repeat-x 0 0;
 			
 		}
             #logo_box{
                 position:absolute;
-                padding: 10px 20px;
+                padding: 20px 0 0 20px;
             }
                 #logo{
 
                 }
+        #main_wrapper{
+            position:relative;
+        }
 		#main{
 			width:1024px;
 		}
+            #left_sidebar{
+                width:230px;
+                padding:10px 5px 10px 20px;
+                float:left;
+                margin-left:0;
+                margin-right:-255px;
+                overflow:visible;
+            }
 			#content{
-			    padding:10px 15px;
+                overflow:visible;
+                margin-left:255px;
+                margin-right:-1024px;
+                width:744px;
+                float:left;
+			    padding:10px 20px 10px 5px;
 				text-align:justify;
 			}
+		/*scroll to top button*/
+		#back-top {
+			position: fixed;
+			bottom: 30px;
+			margin-left: -120px;
+		}
+			#back-top a {
+				width: 90px;
+				display: block;
+				text-align: center;
+				font: 11px/100% Arial, Helvetica, sans-serif;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: #bbb;
+				/* background color transition */
+				-webkit-transition: 1s;
+				-moz-transition: 1s;
+				transition: 1s;
+				font-weight:bold;
+			}
+			#back-top a:hover {
+				color: #bbbbbb;
+			}
+				/* arrow icon (span tag) */
+				#back-top span {
+					width: 90px;
+					height: 130px;
+					display: block;
+					margin-bottom: 7px;
+					background: #ddd url("../img/scroll_to_top.png") no-repeat center center;
+					/* rounded corners */
+					-webkit-border-radius: 15px;
+					-moz-border-radius: 15px;
+					border-radius: 15px;
+					/* background color transition */
+					-webkit-transition: 1s;
+					-moz-transition: 1s;
+					transition: 1s;
+				}
+					#back-top a:hover span {
+						background-color: #777;
+					}
 		#footer{
 			border-top:2px solid #8C8C8C;
 			height:150px;
@@ -50,4 +108,12 @@ body{
 			background:url("../img/vert_sprite.png") repeat-x 0 0;
 			margin:0 auto;
 			display:inline;
+            clear:both;
 		}
+.clearfix:after{
+    clear:both;
+    content:".";
+    display:block;
+    height:0;
+    visibility:hidden;
+}

@@ -8,19 +8,36 @@
     <?php echo $this->headScript() ?>
  </head>
 <body>
-<div class="region admin-menu">
-
+<div id="admin_toolbar">
+    <ul id="admin_menu">
+        <li class="home"><a href="">Home</a></li>
+        <li><a href="/">Link1</a></li>
+        <li><a href="/">Link2</a></li>
+    </ul>
 </div>
-<div id="mane_wrapper">
+<div id="page_wrapper">
     <div id="page">
         <?php echo $this->render("header.phtml") ?>
-        <div id="main">
-            <div id="content">
-                <?php echo $this->layout()->content ?>
+        <div id="main_wrapper">
+            <div id="main" class="clearfix">
+                <div id="content">
+                    <?php echo $this->layout()->content ?>
+                </div>
+                <div id="left_sidebar">
+                    SideBar SideBar SideBar SideBar SideBar SideBar
+                    SideBar SideBar SideBar SideBar SideBar SideBar
+                    SideBar SideBar SideBar SideBar SideBar SideBar
+                    SideBar SideBar SideBar SideBar SideBar SideBar
+                    SideBar SideBar SideBar SideBar SideBar SideBar
+                </div>
             </div>
         </div>
         <?php echo $this->render("footer.phtml")?>
     </div>
+
+    <p id="back-top">
+        <a href="#top"><span></span>На подиум!</a>
+    </p>
 </div>
 </body>
 </html>
