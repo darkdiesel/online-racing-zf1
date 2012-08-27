@@ -41,6 +41,48 @@ body{
 			    padding:10px 15px;
 				text-align:justify;
 			}
+		/*scroll to top button*/
+		#back-top {
+			position: fixed;
+			bottom: 30px;
+			margin-left: -120px;
+		}
+			#back-top a {
+				width: 90px;
+				display: block;
+				text-align: center;
+				font: 11px/100% Arial, Helvetica, sans-serif;
+				text-transform: uppercase;
+				text-decoration: none;
+				color: #bbb;
+				/* background color transition */
+				-webkit-transition: 1s;
+				-moz-transition: 1s;
+				transition: 1s;
+				font-weight:bold;
+			}
+			#back-top a:hover {
+				color: #000;
+			}
+				/* arrow icon (span tag) */
+				#back-top span {
+					width: 90px;
+					height: 130px;
+					display: block;
+					margin-bottom: 7px;
+					background: #ddd url("../img/scroll_to_top.png") no-repeat center center;
+					/* rounded corners */
+					-webkit-border-radius: 15px;
+					-moz-border-radius: 15px;
+					border-radius: 15px;
+					/* background color transition */
+					-webkit-transition: 1s;
+					-moz-transition: 1s;
+					transition: 1s;
+				}
+					#back-top a:hover span {
+						background-color: #777;
+					}
 		#footer{
 			border-top:2px solid #8C8C8C;
 			height:150px;
