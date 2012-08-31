@@ -31,6 +31,13 @@
 			display:inline;
 			float:right;
         }
+			/* Clear button position */
+			#user_toolbar .login .wrap_x_field .icon_clear{
+				top:-1px;
+				right:10px;
+				height:15px;
+				padding:2px 5px;
+			}
             #user_toolbar .login .btn{
                 height:18px;
             }

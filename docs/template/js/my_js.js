@@ -70,18 +70,41 @@
 
 		$('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
 	});
-});
-
-$(document).on('keyup', 'input[class=x_field]', function() {
-    if ($(this).val().length > 0) {
-        $('.icon_clear').fadeIn(300);
-    }
-    else {
-        $('.icon_clear').fadeOut(300);
-    }
-});
-
-$(document).on('click','.icon_clear',function() {
-    $('input[name=x_field]').val('');
-    $(this).delay(700).fadeOut(300);
+	
+	/* Clear button for input field */
+	$.fn.addXbtn = (function () {
+		$(this).each(function() {
+			$(this).wrap('<span class="wrap_x_field"></span>');
+			$(this).parent().append('<span class="icon_clear">X</span>');
+		});
+		
+		$(this).blur(function(o) {
+			$('.icon_clear').fadeOut(300);
+		});
+		
+		$(this).parent().click(function(o) {
+			if (($("input",this).val() != '') && ($(o.target).is("input"))){
+				$('.icon_clear', this).fadeIn(400);
+			}
+			if ($(o.target).is("span")){
+				$('input',this).val('');
+				$('.icon_clear', this).delay(100).fadeOut(400);
+			}
+		});
+		
+		$(this).parent().keyup(function() {
+			if ($("input",this).val().length > 0) {
+				$('.icon_clear',this).fadeIn(300);
+			}
+			else {
+				$('.icon_clear').fadeOut(300);
+			}
+		});
+	});
+	
+	$(function() {$(".x_field").addXbtn({
+	
+		});
+	});
+	
 });
