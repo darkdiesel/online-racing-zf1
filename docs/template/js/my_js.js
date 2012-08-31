@@ -1,4 +1,4 @@
-jQuery(function($) {
+﻿jQuery(function($) {
 	// hide #back-top first
 	$("#back-top").hide();
 	
@@ -70,5 +70,18 @@ jQuery(function($) {
 
 		$('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
 	});
+});
 
+$(document).on('keyup', 'input[class=x_field]', function() {
+    if ($(this).val().length > 0) {
+        $('.icon_clear').fadeIn(300);
+    }
+    else {
+        $('.icon_clear').fadeOut(300);
+    }
+});
+
+$(document).on('click','.icon_clear',function() {
+    $('input[name=x_field]').val('');
+    $(this).delay(700).fadeOut(300);
 });

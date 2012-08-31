@@ -1,5 +1,59 @@
 <header id="header">
-    <div id="logo_box">
+    <!-- Site Logo -->
+	<div id="logo_box">
         <a id="logo"><img src="logo.png" alt="Главная"></a>
     </div>
+	<!-- User ToolBar -->
+	<div id="user_toolbar">
+		<ul id="user_menu">
+			<li>
+				<span>Добропожаловать,</span>
+			</li>
+			<li>
+				<span><a href="#/login">Гость</a></span>
+			</li>
+		</ul>
+		<div class="login">
+			<div class="btn-group dropdown">
+				<a class="btn btn-primary" href="http://google.com/login"><i class="icon-user icon-white"></i> Войти</a>
+				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li>
+						<form class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">E-mail:</label>
+								<div class="controls">
+									<input type="text" id="inputEmail" placeholder="E-mail">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">Пароль:</label>
+								<div class="controls">
+									<input type="password" id="inputPassword" placeholder="Пароль">
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<label class="checkbox">
+										<input type="checkbox"> Remember me
+									</label>
+									<button type="submit" class="btn">Sign in</button>
+								</div>
+							</div>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Main Menu -->
+	<div id="box_main_menu">
+		<ul id="main_menu">
+			<li><a  href="#" class="current">Главная</a></li>
+			<li><a href="#">Чемпионат</a></li>
+			<li><a href="#">Гонщики</a></li>
+			<li><a href="#">Файлы</a></li>
+			<li><a href="#">Форум</a></li>
+		</ul>
+	</div>
 </header>

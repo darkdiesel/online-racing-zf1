@@ -1,0 +1,78 @@
+﻿#user_toolbar{
+	position:absolute;
+	right:0;
+	display:inline-block;
+	padding:5px 25px 0 0;
+}
+	#user_toolbar #user_menu{
+		margin:0;
+		padding:0;
+		display:inline-block;
+		height:30px;
+	}
+		#user_toolbar #user_menu li{
+			list-style-type:none;
+			display:inline-block;
+			color:#F7F7F7;
+			margin-left:-5px;
+			padding:7px 10px 0 0;
+			height:16px;
+			font: bold 12px arial;
+		}
+			#user_toolbar #user_menu li a{
+                color:#F7F7F7;
+                text-decoration:underline;
+			}
+                #user_toolbar #user_menu li a:hover{
+                    color:#B5B0B0;
+					text-decoration:none;
+                }
+        #user_toolbar .login{
+			display:inline;
+			float:right;
+        }
+            #user_toolbar .login .btn{
+                height:18px;
+            }
+            #user_toolbar .login a{
+                color:#fff;
+            }
+                #user_toolbar .login .dropdown-menu{
+                    box-shadow:0 0 30px #4D95EB;
+					padding:5px 15px;
+                }
+                #user_toolbar .login .dropdown-menu li{
+                    display:block;
+                    margin:0;
+                    padding:0;
+					color:#000;
+                }
+                    #user_toolbar .login .dropdown-menu li a{
+                        color:#333333;
+                    }
+					#user_toolbar .login .dropdown-menu form{
+						margin:0;
+					}
+						#user_toolbar .login .dropdown-menu form div{
+							margin-bottom:8px;
+						}
+							#user_toolbar .login .dropdown-menu form div label{
+								width:60px;
+								float:none;
+								text-align:left;
+							}
+							#user_toolbar .login .dropdown-menu form div .controls{
+								margin-left:0px;
+							}
+								#user_toolbar .login .dropdown-menu form div .controls input{
+									height:25px;
+								}
+							#user_toolbar .login .dropdown-menu form div .controls label{
+							
+							}
+								#user_toolbar .login .dropdown-menu form div .controls label input{
+									height:10px;
+								}
+							#user_toolbar .login .dropdown-menu form div .controls .btn{
+								height:30px;
+							}

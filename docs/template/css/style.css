@@ -5,7 +5,7 @@
 }
 
 body{
-	background:url("../img/background.png") fixed;d
+	background:url("../img/background.png") fixed;
 }
 #page_wrapper{
 	min-height: 100%;
@@ -86,7 +86,7 @@ body{
 					height: 130px;
 					display: block;
 					margin-bottom: 7px;
-					background: #ddd url("../img/scroll_to_top.png") no-repeat center center;
+					background: #ddd url("../img/scroll_to_top.gray.png") no-repeat center center;
 					/* rounded corners */
 					-webkit-border-radius: 15px;
 					-moz-border-radius: 15px;
@@ -117,3 +117,22 @@ body{
     height:0;
     visibility:hidden;
 }
+/* CSS for clear X btn input */
+.x_field{
+    padding-right:30px !important;
+}
+	span.icon_clear{   
+		display:none;
+		font-family:verdana;
+		cursor:pointer;
+		color:#38468F;
+		font-weight:bold;
+		position:relative;
+		height:20px;
+		left:-30px;
+		top:-3px;
+		padding:6px 6px;
+	}
+		span.icon_clear:hover{
+			color:#ccc;
+		}
