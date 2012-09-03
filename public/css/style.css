@@ -117,33 +117,3 @@ body{
     height:0;
     visibility:hidden;
 }
-/* CSS for clear X btn input */
-.wrap_x_field{
-	position:relative;
-	overflow:hidden;
-	display:inline-block;
-}
-.x_field{
-    padding-right:30px !important;
-}
-	span.icon_clear{   
-		border:1px solid #D2D2D2;
-		background:#EDEDED;
-		border-radius:40px;
-		display:none;
-		font-family:verdana;
-		cursor:pointer;
-		color:#BEBEBE;
-		font-weight:bold;
-		position:absolute;
-		right:5px;
-		top:25%;
-		padding:3px 5px;
-		font-size:13px;
-		line-height:13px;
-	}
-		span.icon_clear:hover{
-			color:#A9A9A9;
-			background:#EAEAEA;
-			border-color:#ADADAD;
-		}

@@ -1,7 +1,7 @@
 <header id="header">
     <!-- Site Logo -->
 	<div id="logo_box">
-        <a id="logo"><img src="logo.png" alt="Главная"></a>
+        <a id="logo" href="<?php echo $this->baseUrl(''); ?>"><img src="<?php echo $this->baseUrl('logo.png'); ?>" alt="Главная"></a>
     </div>
 	<!-- User ToolBar -->
 	<div id="user_toolbar">
@@ -10,12 +10,12 @@
 				<span>Добропожаловать,</span>
 			</li>
 			<li>
-				<span><a href="#/login">Гость</a></span>
+				<span><a href="<?php echo $this->baseUrl('user/login'); ?>">Гость</a></span>
 			</li>
 		</ul>
 		<div class="login">
 			<div class="btn-group dropdown">
-				<a class="btn btn-primary" href="http://google.com/login"><i class="icon-user icon-white"></i> Войти</a>
+				<a class="btn btn-primary" href="<?php echo $this->baseUrl('user/login'); ?>"><i class="icon-user icon-white"></i> Войти</a>
 				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li>
