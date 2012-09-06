@@ -26,7 +26,7 @@ $.fn.lavaLamp = function(o) {
 
         $li.click(function(e) {
 		if ((!$(this).parent().parent().hasClass('expanded'))&&($(e.target).is("a"))){
-            setCurr(this);
+			setCurr(this);
             return o.click.apply(this, [e, this]);
 		}
         });

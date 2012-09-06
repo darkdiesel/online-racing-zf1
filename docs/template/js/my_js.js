@@ -27,10 +27,7 @@
 	// lavalamp main menu plugin
 	$(function() {$("#header #box_main_menu #main_menu").lavaLamp({
 		fx: "backout",
-		speed: 600,
-			click: function(event, menuItem) {
-				return false;
-			}
+		speed: 600
 		});
 	});
 
@@ -76,7 +73,7 @@
 		$('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
 	});
 	
-	/* Clear button for input field */
+	/* Clear button for .x_field field */
 	$.fn.addXbtn = (function (e) {
 		$(this).each(function() {
 			$(this).wrap('<span class="wrap_x_field"></span>');
@@ -106,19 +103,15 @@
 				$('.icon_clear',this).css("border",e.color);
 			}		
 			
-			if ($('input',this).outerHeight() >= 35 ) {
+			if ($('.x_field',this).outerHeight() >= 35 ) {
 				$('.icon_clear',this).css({"line-height":"18px", "font-size":"11px", "width":"18px","height":"18px"});
 			} else {
-				$('.icon_clear',this).css({"line-height":$('input',this).outerHeight()/2+"px", "font-size":$('input',this).outerHeight()/3.2+"px", "width":$('input',this).outerHeight()/2+"px",
-					"height":$('input',this).outerHeight()/2+"px"});
+				$('.icon_clear',this).css({"line-height":$('.x_field',this).outerHeight()/2+"px", "font-size":$('.x_field',this).outerHeight()/3.2+"px", "width":$('.x_field',this).outerHeight()/2+"px",
+					"height":$('.x_field',this).outerHeight()/2+"px"});
 			}
 			
-			
-			$('.icon_clear',this).css({"top":(($('input',this).outerHeight()-$('.icon_clear',this).outerHeight())/2)+"px"});
-			$('input',this).css({"padding-right":($('.icon_clear',this).outerHeight())+8+"px"});
-			
-			//$('input',this).css({"padding-right":$('.icon_clear',this).outerHeight()+"px !important"});
-			
+			$('.icon_clear',this).css({"top":(($('.x_field',this).outerHeight()-$('.icon_clear',this).outerHeight())/2)+"px"});
+			$('.x_field',this).css({"padding-right":($('.icon_clear',this).outerHeight())+8+"px"});
 		});
 		
 		$(this).blur(function(o) {
@@ -126,17 +119,17 @@
 		});
 		
 		$(this).parent().click(function(o) {
-			if (($("input",this).val() != '') && ($(o.target).is("input"))){
+			if (($(".x_field",this).val() != '') && ($(o.target).is('.x_field'))){
 				$('.icon_clear', this).fadeIn(400);
 			}
 			if ($(o.target).is("span")){
-				$('input',this).val('');
+				$('.x_field',this).val('');
 				$('.icon_clear', this).delay(100).fadeOut(400);
 			}
 		});
 		
 		$(this).parent().keyup(function() {
-			if ($("input",this).val().length > 0) {
+			if ($(".x_field",this).val().length > 0) {
 				$('.icon_clear',this).fadeIn(300);
 			}
 			else {

@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<projectProfile type="default" version="1.11.11">
+<projectProfile type="default" version="1.12.0">
   <projectDirectory>
     <projectProfileFile filesystemName=".zfproject.xml"/>
     <applicationDirectory classNamePrefix="Application_">
-      <apisDirectory enabled="false"/>
       <configsDirectory>
         <applicationConfigFile type="ini"/>
       </configsDirectory>
@@ -17,6 +16,7 @@
       <layoutsDirectory enabled="false"/>
       <modelsDirectory/>
       <modulesDirectory enabled="false"/>
+      <servicesDirectory enabled="false"/>
       <viewsDirectory>
         <viewScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Index">

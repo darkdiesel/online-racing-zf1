@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<skitter>
+	<slide>
+		<link class="big">user/registration</link>
+		<image type="directionTop">../img/slider/post/001.jpg</image>
+		<label><![CDATA[<p>Открыта регистрация на сайте</p>]]></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/slider/post/002.jpg</image>
+		<label><![CDATA[<p>Идет активная разработка сайта. Нам нужна ваша помощь.</p>]]></label>
+	</slide>
+</skitter>

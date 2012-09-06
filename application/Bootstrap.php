@@ -44,6 +44,49 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $view;
     }
 	
+	/* // Initialisation Authorisation
+	public function _initAuth(){
+		$auth = Zend_Auth::getInstance();
+		$data = $auth->getStorage()->read();
+		if (!isset($data->status)){
+			$storage_data = new stdClass();
+			$storage_data->status = 'guest';
+			$auth->getStorage()->write($storage_data);
+		}
+	}
+	*/
+	public function _initAcl(){
+		Zend_Loader::loadClass('Acl');
+		Zend_Loader::loadClass('CheckAccess');
+		Zend_Controller_Front::getInstance()->registerPlugin(new CheckAccess());
+		return new Acl();
+	}
 	
+	public function _initLogger()
+    {
+		$writer = new Zend_Log_Writer_Stream(APPLICATION_PATH . '/../data/logs/application.log');
+        $logger = new Zend_Log($writer);
+        Zend_Registry::set( 'logger', $logger );
+	}
+	
+	public function _initTranslate()
+    {
+        $locales = array(
+            'en_US','ru_RU'
+        );
+        $locale = new Zend_Locale();
+        /*if(!in_array($locale,$locales)) {
+            $locale = "en_US";
+        }
+        $translate = new Zend_Translate(
+            array(
+                'adapter' => 'gettext',
+                'content' => APPLICATION_PATH . '/languages/' . $locale . '.mo',
+                'locale'  => $locale
+            )
+        );
 
+        Zend_Registry::set('Zend_Translate', $translate);*/
+
+    }
 }
