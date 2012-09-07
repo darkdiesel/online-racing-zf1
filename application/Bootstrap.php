@@ -16,7 +16,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle('Online-Racing');
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/admin_menu.css"));
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/admin_menu.css"));
 		$view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
 		$view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<skitter>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/slider/post/debelopming.gif</image>
+		<label><![CDATA[<p>Идет активная разработка сайта. Нам нужна ваша помощь!</p>]]></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/slider/post/oursite.jpg</image>
+		<label><![CDATA[<p>В будущем на нашем портале вас ожидает море адреналина. Присоеденяйтесь!</p>]]></label>
+	</slide>
+</skitter>

@@ -8,3 +8,11 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
+#DirectoryIndex index.html
+#RewriteRule ^.*$ index.html [NC,L]
+
+#AuthName "Restricted Area"
+#AuthType Basic
+#AuthUserFile /home/onlinera/domains/online-racing.net/.htpasswd/.protected.list
+#AuthGroupFile /dev/null
+#require valid-user

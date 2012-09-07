@@ -9,16 +9,27 @@
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
     <?php echo $this->headScript() ?>
-	
+	<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-32674101-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
  </head>
 <body>
-<div id="admin_toolbar">
+<!--<div id="admin_toolbar">
     <ul id="admin_menu">
         <li class="home"><a href="">Home</a></li>
         <li><a href="/">Link1</a></li>
         <li><a href="/">Link2</a></li>
     </ul>
-</div>
+</div>-->
 <div id="page_wrapper">
     <div id="page">
         <?php echo $this->render("header.phtml") ?>
@@ -28,9 +39,11 @@
                     <?php echo $this->layout()->content ?>
                 </div>
                 <div id="left_sidebar">
-                    <div class="sidebar_container">
-                        <div class="container_title">До открытия сайта осталось:</div>
-                        <div class="container_content">
+                    <div class="sidebar_box">
+                        <div class="sidebar_box_title">
+                            До открытия сайта осталось:
+                        </div>
+                        <div class="sidebar_box_content">
                             <div id="countdown_dashboard">
                                 <div class="dash weeks_dash">
                                     <span class="dash_title">weeks</span>
@@ -63,29 +76,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
-                        Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .Sidebar .
                     </div>
                 </div>
             </div>
