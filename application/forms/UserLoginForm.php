@@ -28,6 +28,7 @@
 				
 			$this->addElement( 'submit', 'submit', array(
 				'ignore' => true,
+                'class' => 'btn btn-primary',
 				'label' => 'Войти',
 			));
 		}

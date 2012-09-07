@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headLink()->appendStylesheet($view->baseUrl("css/admin_menu.css"));
 		$view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
 		$view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
-        
+
 		// start slider css
 		$view->headLink()->appendStylesheet($view->baseUrl("css/skitter.styles.css"));
 		// end slider css
@@ -27,7 +27,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.0.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.my.js"));
-		
+        $view->headScript()->appendFile($view->baseUrl("js/jquery.lwtCountdown-1.0.js"));
+
 		// start slider js
 		$view->headScript()->appendFile($view->baseUrl("js/jquery.easing.1.3.js"));
 		$view->headScript()->appendFile($view->baseUrl("js/jquery.animate_colors.min.js"));
@@ -44,7 +45,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $view;
     }
 	
-	/* // Initialisation Authorisation
+	// Initialisation Authorisation
 	public function _initAuth(){
 		$auth = Zend_Auth::getInstance();
 		$data = $auth->getStorage()->read();
@@ -54,7 +55,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			$auth->getStorage()->write($storage_data);
 		}
 	}
-	*/
+
 	public function _initAcl(){
 		Zend_Loader::loadClass('Acl');
 		Zend_Loader::loadClass('CheckAccess');

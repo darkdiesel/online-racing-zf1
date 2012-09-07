@@ -19,6 +19,6 @@ class IndexController extends Zend_Controller_Action
 			$user_data = $auth->getStorage()->read();
 		}
 		
-		return $this->view->user_data = $user_data;
+		//return $this->view->user_data = $user_data;
     }
 }

@@ -145,5 +145,19 @@
 			}
 		);
 	});
-	
+
+    // countdown script
+    $('#countdown_dashboard').countDown({
+        targetDate: {
+            'day':1,
+            'month':2,
+            'year':2013,
+            'hour':19,
+            'min':0,
+            'sec':0,
+            // time set as UTC
+            'utc':true
+        }
+    });
+
 });
