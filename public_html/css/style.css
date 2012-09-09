@@ -52,7 +52,7 @@ body{
             		margin:0px 0 25px 0;
             	}
             	#left_sidebar .sidebar_box:after{
-            		background:url("../img/shadow-sprite.png") no-repeat 0 -29px;
+            		background:url("../img/shadow_sprite.png") no-repeat 0 -29px;
             		display:block;
             		height:20px;
             		content:"";
@@ -63,11 +63,13 @@ body{
             			background:url("../img/vert_sprite.png") repeat-x 0 -10px;
             			border-radius:5px 5px 0 0;
             			border:1px solid #221F1F;
-            			color:#999696;
+            			color:#F7F7F7;
+                        font:bold 13px arial;
             		}
             		#left_sidebar .sidebar_box .sidebar_box_content{
             			padding:5px 10px;
-            			border:1px solid #CACACA;
+            			border:2px solid #CACACA;
+                        border-top:none;
                         background:none repeat scroll 0 0 #F5F5F5;
             		}
 			#content{
@@ -84,11 +86,14 @@ body{
             overflow:hidden;
             height:100px;
             text-align:center;
+            padding:10px 0;
         }
             #left_sidebar #countdown_dashboard span.dash_title{
                 clear:both;
                 display:block;
                 font-size:12px;
+                background: transparent url('../img/countdown_sprite.png') -50px -22px no-repeat;
+                font-weight:bold;
             }
             #left_sidebar #countdown_dashboard div.dash{
                 display:inline-block;
@@ -97,14 +102,18 @@ body{
                 margin:2px 5px;
                 text-align:center;
                 width:50px;
-
+                height:43px;
+                background: transparent url('../img/countdown_sprite.png') 0 0 no-repeat;
+                box-shadow:0 0 10px #000;
             }
                 #left_sidebar #countdown_dashboard div.dash div.digit{
                     float:left;
                     font: bold 14pt Verdana;
+                    line-height:15pt;
                     text-align: center;
                     width:25px;
-                    height:15pt;
+                    height:22px;
+                    background: transparent url('../img/countdown_sprite.png') -50px 0 no-repeat;
                 }
 		/*scroll to top button*/
 		#back-top {
@@ -160,6 +169,34 @@ body{
             clear:both;
             padding:20px 15px 10px 15px;
 		}
+            #footer .socialNetworks{
+                border:1px solid #0E0E0E;
+                border-radius:5px;
+                background:rgba(113, 113, 113, 0.15);
+                display:inline-block;
+                position:absolute;
+                bottom:10px;
+                right:15px;
+                padding:5px;
+                height:50px;
+            }
+                #footer .socialNetworks a{
+                    display:inline-block;
+                }
+                #footer .socialNetworks .socnet{
+                    width:50px;
+                    height:50px;
+                    display:inline-block;
+                }
+                #footer .socialNetworks .vk{
+                    background:url("../img/socNet_Sprite.gif") no-repeat -50px 0;
+                }
+                #footer .socialNetworks .fb{
+                    background:url("../img/socNet_Sprite.gif") no-repeat 0 0;
+                }
+                #footer .socialNetworks .tw{
+
+                }
 .clearfix:after{
     clear:both;
     content:".";
