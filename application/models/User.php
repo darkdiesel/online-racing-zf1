@@ -4,6 +4,7 @@ class Application_Model_Guestbook
 	protected $_id;
 	protected $_login;
 	protected $_password;
+	protected $_role_id
 	protected $_email;
 	protected $_name;
 	protected $_surname;

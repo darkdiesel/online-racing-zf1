@@ -8,7 +8,8 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
 				  `id` int(11) NOT NULL AUTO_INCREMENT,
 				  `login` text NOT NULL,
 				  `password` text NOT NULL,
-				  `mail` text NOT NULL,
+				  `role_id` int(11) NOT NULL,
+				  `email` text NOT NULL,
 				  `name` text NOT NULL,
 				  `surname` text NOT NULL,
 				  `country` text NOT NULL,
@@ -18,8 +19,12 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
 				  `icq` text NOT NULL,
 				  `www` text NOT NULL,
 				  `about` text NOT NULL,
-				  PRIMARY KEY (`id`)
+				  PRIMARY KEY (`id`),
+				  KEY `role_id` (`role_id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+				ALTER TABLE `user`
+  					ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`);
 				";
         $this->_db->query($sql);
     }

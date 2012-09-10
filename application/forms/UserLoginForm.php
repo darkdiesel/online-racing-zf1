@@ -6,6 +6,8 @@
 		{
 			// Set the method for the display form to POST
 			$this->setMethod('post');
+			$this->setName('userlogin');
+			$isEmptyMessage = 'Значение является обязательным и не может быть пустым';
 			
 			// Add an email element
 			$this->addElement('text', 'email', array(

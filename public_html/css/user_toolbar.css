@@ -28,10 +28,18 @@
                     color:#B5B0B0;
 					text-decoration:none;
                 }
+        #user_toolbar .user{
+			display:inline;
+			float:right;
+        }
+        	#user_toolbar .user .btn{
+        		height:18px;
+        	}
         #user_toolbar .login{
 			display:inline;
 			float:right;
         }
+
             #user_toolbar .login .btn{
                 height:18px;
             }

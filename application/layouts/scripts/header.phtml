@@ -3,58 +3,10 @@
 	<div id="logo_box">
         <a id="logo" href="<?php echo $this->baseUrl(''); ?>"><img src="<?php echo $this->baseUrl('logo.png'); ?>" alt="Главная"></a>
     </div>
+
 	<!-- User ToolBar -->
-	<div id="user_toolbar">
-		<ul id="user_menu">
-			<li>
-				<span>Добро пожаловать,</span>
-			</li>
-			<li>
-				<span><a href="<?php echo $this->baseUrl('user/login'); ?>">Гость</a></span>
-			</li>
-		</ul>
-		<div class="login">
-			<div class="btn-group dropdown">
-				<a class="btn btn-primary" href="<?php echo $this->baseUrl('user/login'); ?>"><i class="icon-user icon-white"></i> Войти</a>
-				<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-				<ul class="dropdown-menu">
-					<li>
-						<form class="form-horizontal">
-							<div class="control-group">
-								<label class="control-label" for="inputEmail">E-mail:</label>
-								<div class="controls">
-									<input class="x_field" type="text" id="inputEmail" placeholder="E-mail">
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword">Пароль:</label>
-								<div class="controls">
-									<input class="x_field" type="password" id="inputPassword" placeholder="Пароль">
-								</div>
-							</div>
-							<div class="control-group">
-								<div class="controls">
-									<label class="checkbox">
-										<input type="checkbox"> Запомнить меня
-									</label>
-									<button type="submit" class="btn">Войти</button>
-								</div>
-							</div>
-							<a href="<?php echo $this->baseUrl('user/registration')?>">Зарегестрироваться</a>
-						</form>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+	<?php echo $this->partial('user_toolbar.phtml'); ?>
+
 	<!-- Main Menu -->
-	<div id="box_main_menu">
-		<ul id="main_menu">
-			<li><a href="<?php echo $this->baseUrl("")?>" class="current">Главная</a></li>
-			<li><a href="<?php echo $this->baseUrl("")?>">Чемпионат</a></li>
-			<li><a href="<?php echo $this->baseUrl("")?>">Гонщики</a></li>
-			<li><a href="<?php echo $this->baseUrl("")?>">Файлы</a></li>
-			<li><a href="<?php echo $this->baseUrl("")?>">Форум</a></li>
-		</ul>
-	</div>
+	<?php echo $this->partial('main_menu.phtml'); ?>
 </header>

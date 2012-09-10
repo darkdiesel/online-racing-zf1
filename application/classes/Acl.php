@@ -17,12 +17,14 @@ class Acl extends Zend_Acl {
 		// user resources
 		$this->add(new Zend_Acl_Resource('user_allow'));
 		$this->add(new Zend_Acl_Resource('user/info'), 'user_allow');
+		$this->add(new Zend_Acl_Resource('user/logout'), 'user_allow');
 
 		// admin resources
 		$this->add(new Zend_Acl_Resource('admin_allow'));
 				
 		// master resources
 		$this->add(new Zend_Acl_Resource('master_allow'));
+		$this->add(new Zend_Acl_Resource('admin/index'),'master_allow');
 
 		//Выставляем права, по-умолчанию всё запрещено
 		$this->deny(null, null, null);

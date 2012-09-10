@@ -1,0 +1,62 @@
+<div id="user_toolbar">
+	<ul id="user_menu">
+		<li>
+			<span>Добро пожаловать,</span>
+		</li>
+		<li>
+			<?php if (Zend_Auth::getInstance()->getStorage()->read()->status == 'guest') {?>
+				<span><a href="<?php echo $this->baseUrl('user/login'); ?>">Гость</a></span>
+			<?php } else { ?>
+				<span><a href="<?php echo $this->baseUrl('user/info'); ?>"><?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?></a></span>
+			<?php } ?>
+		</li>
+	</ul>
+
+	<?php if (Zend_Auth::getInstance()->getStorage()->read()->status == 'guest') {?>
+	<div class="login">
+		<div class="btn-group dropdown">
+			<a class="btn btn-primary" href="<?php echo $this->baseUrl('user/login'); ?>"><i class="icon-user icon-white"></i> Войти</a>
+			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li>
+					<form class="form-horizontal">
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">E-mail:</label>
+							<div class="controls">
+								<input class="x_field" type="text" id="inputEmail" placeholder="E-mail">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputPassword">Пароль:</label>
+							<div class="controls">
+								<input class="x_field" type="password" id="inputPassword" placeholder="Пароль">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<label class="checkbox">
+									<input type="checkbox"> Запомнить меня
+								</label>
+								<button type="submit" class="btn">Войти</button>
+							</div>
+						</div>
+						<a href="<?php echo $this->baseUrl('user/registration')?>">Зарегестрироваться</a>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<?php } else { ?>
+		<div class="user">
+		<div class="btn-group dropdown">
+			<a class="btn btn-primary" href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-user icon-white"></i> Выйти</a>
+			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li>
+					
+				</li>
+			</ul>
+		</div>
+	</div>
+	<?php } ?>
+</div>
