@@ -58,10 +58,10 @@ body{
             		content:"";
             	}
             		#left_sidebar .sidebar_box .sidebar_box_title{
-            			padding:5px 10px;
+            			padding:10px 10px;
             			font-weight:bold;
             			background:url("../img/vert_sprite.png") repeat-x 0 -10px;
-            			border-radius:5px 5px 0 0;
+            			border-radius:10px 10px 0 0;
             			border:1px solid #221F1F;
             			color:#F7F7F7;
                         font:bold 13px arial;
@@ -189,10 +189,10 @@ body{
                     display:inline-block;
                 }
                 #footer .socialNetworks .vk{
-                    background:url("../img/socNet_Sprite.gif") no-repeat -50px 0;
+                    background:url("../img/socNet_Sprite.gif") no-repeat 0 0;
                 }
                 #footer .socialNetworks .fb{
-                    background:url("../img/socNet_Sprite.gif") no-repeat 0 0;
+                    background:url("../img/socNet_Sprite.gif") no-repeat -50px 0;
                 }
                 #footer .socialNetworks .tw{
 

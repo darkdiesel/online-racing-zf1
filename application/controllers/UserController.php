@@ -80,6 +80,14 @@ class UserController extends Zend_Controller_Action
                 $storage_data->status = 'user';
                 $storage->write($storage_data);
                 $this->_helper->redirector('index', 'index');
+            }   else {
+                //rewrite session for guest
+                $storage_data = new stdClass();
+                $storage_data->status = 'guest';
+                Zend_Auth::getInstance()->getStorage()->write($storage_data);
+
+            
+                $this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
             }
 		}
 		
