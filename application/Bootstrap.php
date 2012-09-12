@@ -48,6 +48,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	// Initialisation Authorisation
 	public function _initAuth(){
 		$auth = Zend_Auth::getInstance();
+		$auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
 		$data = $auth->getStorage()->read();
 		if (!isset($data->status)){
 			$storage_data = new stdClass();

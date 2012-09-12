@@ -62,6 +62,10 @@
 					#user_toolbar .login .dropdown-menu form{
 						margin:0;
 					}
+						#user_toolbar .login .dropdown-menu form .reg_link{
+
+						}
+					
 						#user_toolbar .login .dropdown-menu form div{
 							margin-bottom:8px;
 						}

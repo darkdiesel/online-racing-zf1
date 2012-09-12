@@ -3,6 +3,11 @@
 class ErrorController extends Zend_Controller_Action
 {
 
+    public function init()
+    {
+        $this->_helper->layout->disableLayout();
+    }
+
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -31,8 +36,11 @@ class ErrorController extends Zend_Controller_Action
         
         // Log exception, if logger available
         if ($log = $this->getLog()) {
-            $log->log($this->view->message, $priority, $errors->exception);
-            $log->log('Request Parameters', $priority, $errors->request->getParams());
+            /*$log->log($this->view->message, $priority, $errors->exception);
+            $log->log('Request Parameters', $priority, $errors->request->getParams());*/
+            $log->log( $this->view->message, $priority );
+            $log->log( 'Request params: ' . print_r( $errors->request->getParams(),true ), $priority );
+            $log->log( $errors->exception, $priority );
         }
         
         // conditionally display exceptions
@@ -45,6 +53,7 @@ class ErrorController extends Zend_Controller_Action
 
     public function getLog()
     {
+        //return Zend_Registry::get('logger');
         $bootstrap = $this->getInvokeArg('bootstrap');
         if (!$bootstrap->hasResource('Log')) {
             return false;

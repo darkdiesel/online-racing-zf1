@@ -60,6 +60,7 @@ class UserController extends Zend_Controller_Action
         if ($form->isValid($this->getRequest()->getPost())){
             $bootstrap = $this->getInvokeArg('bootstrap');
             $auth = Zend_Auth::getInstance();
+            $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
             $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
             $authAdapter = new Zend_Auth_Adapter_DbTable(
 				$adapter, 'user', 'email', 
@@ -69,29 +70,32 @@ class UserController extends Zend_Controller_Action
             $authAdapter->setCredential($form->password->getValue());
             $result = $auth->authenticate($authAdapter);
 
-            // Если валидация прошла успешно сохраняем в storage инфу о пользователе
-            if ($result->isValid()){
-                $storage = $auth->getStorage();
-                $storage_data = $authAdapter->getResultRowObject(
-                                         null, 
-                                         array('activate', 'password', 'enabled'));
-                //$user_model = new Application_Model_DbTable_User();
-                //$language_model = new Application_Model_DbTable_Language();
-                $storage_data->status = 'user';
-                $storage->write($storage_data);
-                $this->_helper->redirector('index', 'index');
-            }   else {
-                //rewrite session for guest
-                $storage_data = new stdClass();
-                $storage_data->status = 'guest';
-                Zend_Auth::getInstance()->getStorage()->write($storage_data);
+            switch ($result->getCode()) {
+                case Zend_Auth_Result::SUCCESS:
+                    /** Выполнить действия при успешной аутентификации **/
+                    $storage = $auth->getStorage('online-racing');
+                    $storage_data = $authAdapter->getResultRowObject(
+                                             array('login','id'),
+                                                                null);
+                    //$user_model = new Application_Model_DbTable_User();
+                    //$language_model = new Application_Model_DbTable_Language();
+                    $storage_data->status = 'user';
+                    $storage->write($storage_data);
+                    $this->_helper->redirector('index', 'index');
+                    break;
+             
+                default:
+                    /** Выполнить действия для остальных ошибок **/
+                    //rewrite session for guest
+                    $storage_data = new stdClass();
+                    $storage_data->status = 'guest';
+                    Zend_Auth::getInstance()->getStorage()->write($storage_data);
 
-            
-                $this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
+                
+                    $this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
+                    break;
             }
 		}
-		
-		
 		$this->view->form = $form;
 	}
 	
