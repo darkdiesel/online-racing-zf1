@@ -1,0 +1,24 @@
+13-09-2012 14:50:39 CRIT (2): Application error
+13-09-2012 14:50:39 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => index
+    [module] => default
+)
+
+13-09-2012 14:50:39 CRIT (2): exception 'Exception' with message 'Invalid role property' in D:\dev\localhost\online-racing\application\models\Role.php:27
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\views\scripts\user\index.phtml(11): Application_Model_Role->__get('email')
+#1 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#2 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('user/index.phtm...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('user/index.phtm...', NULL)
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}

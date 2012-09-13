@@ -5,7 +5,7 @@ class CreateRoleTable extends Akrabat_Db_Schema_AbstractChange
     {
         $sql = "  CREATE TABLE IF NOT EXISTS `role` (
                   `id` int(11) NOT NULL AUTO_INCREMENT,
-                  `role` text NOT NULL,
+                  `name` text NOT NULL,
                   PRIMARY KEY (`id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
                ";

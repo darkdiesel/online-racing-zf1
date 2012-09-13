@@ -1,5 +1,5 @@
 <?php
-class Application_Model_Guestbook
+class Application_Model_User
 {
 	protected $_id;
 	protected $_login;
@@ -27,6 +27,15 @@ class Application_Model_Guestbook
         }
     }
 	
+	public function __set($name, $value)
+    {
+        $method = 'set' . $name;
+        if (('mapper' == $name) || !method_exists($this, $method)) {
+            throw new Exception('Invalid user property');
+        }
+        $this->$method($value);
+    }
+
 	public function __get($name)
     {
         $method = 'get' . $name;
@@ -34,5 +43,94 @@ class Application_Model_Guestbook
             throw new Exception('Invalid user property');
         }
         return $this->$method();
+    }
+
+    public function setOptions(array $options)
+    {
+        $methods = get_class_methods($this);
+        foreach ($options as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (in_array($method, $methods)) {
+                $this->$method($value);
+            }
+        }
+        return $this;
+    }
+
+    public function setId($id)
+    {
+        $this->_id = (int) $id;
+        return $this;
+    }
+ 
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    public function setEmail($email)
+    {
+        $this->_email = (string) $email;
+        return $this;
+    }
+ 
+    public function getEmail()
+    {
+        return $this->_email;
+    }
+
+    public function setVk($vk)
+    {
+        $this->_vk = (string) $vk;
+        return $this;
+    }
+ 
+    public function getVk()
+    {
+        return $this->_vk;
+    }
+
+    public function setFb($fb)
+    {
+        $this->_fb = (string) $fb;
+        return $this;
+    }
+ 
+    public function getFb()
+    {
+        return $this->_fb;
+    }
+
+    public function setTw($tw)
+    {
+        $this->_tw = (string) $tw;
+        return $this;
+    }
+ 
+    public function getTw()
+    {
+        return $this->_tw;
+    }
+
+    public function setGp($gp)
+    {
+        $this->_gp = (string) $gp;
+        return $this;
+    }
+ 
+    public function getGp()
+    {
+        return $this->_gp;
+    }
+
+    public function setAbout($about)
+    {
+        $this->_about = (string) $about;
+        return $this;
+    }
+ 
+    public function getAbout()
+    {
+        return $this->_about;
     }
 }

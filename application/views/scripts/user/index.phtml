@@ -1,1 +1,15 @@
-index
+<h2>Роли пользователей</h2>
+	 <table style="border:1px solid;">
+	 	<thead style="border:1px solid;">
+	 		<tr>
+	 			<td style="border:1px solid;">id</td>
+	 			<td>name</td>
+	 		</tr>
+	 	</thead>
+	 	<tbody style="border:1px solid;">
+	        <?php foreach ($this->entries as $entry): ?>
+	        <tr style="border:1px solid;"><td style="border:1px solid;"><?php echo $this->escape($entry->id) ?></td>
+	        <td><?php echo $this->escape($entry->name) ?></td></tr>
+	        <?php endforeach ?>
+    	</tbody>
+    </table>

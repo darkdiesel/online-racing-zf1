@@ -21,7 +21,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
 
 		// start slider css
-		$view->headLink()->appendStylesheet($view->baseUrl("css/skitter.styles.css"));
+		
 		// end slider css
 		
 		$view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.0.min.js"));
