@@ -59,7 +59,6 @@ class UserController extends Zend_Controller_Action
                     $storage_data->status = 'guest';
                     Zend_Auth::getInstance()->getStorage()->write($storage_data);
 
-                
                     $this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
                     break;
             }
@@ -67,18 +66,65 @@ class UserController extends Zend_Controller_Action
 		$this->view->form = $form;
 	}
 	
+    public function registrationAction()
+    {
+        $request = $this->getRequest();
+        $form    = new Application_Form_UserRegistrationForm();
+        
+        
+
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($request->getPost())) {
+                    
+                    $mapper  = new Application_Model_UserMapper();
+
+                    if ($mapper->emailIsAvailable($form->email->getValue()))
+                    {
+                        $user = new Application_Model_User($form->getValues());
+                        
+                        // Function to generate random string
+                        function generatePassword($length = 8){
+                          $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
+                          $numChars = strlen($chars);
+                          $string = '';
+                          for ($i = 0; $i < $length; $i++) {
+                            $string .= substr($chars, rand(1, $numChars) - 1, 1);
+                          }
+                          return $string;
+                        }
+
+                        $user->activate = generatePassword(8);
+                        $user->enabled = 0;
+                        $user->role_id = 3;
+
+                        $mapper->AddNewUser($user);
+                        return $this->_helper->redirector('confirm','user');
+                    } else {
+                        echo "User Already Exist";
+                    }
+                }
+            }
+
+        $this->view->form = $form;
+    }
+
+    public function confirmAction()
+    {
+        $request = $this->getRequest();
+        $form    = new Application_Form_UserConfirmForm();
+
+        if($form->isvalid($this->getRequest()->getPost()))
+        {
+
+        }
+
+        $this->view->form = $form;
+    }
+
 	public function logoutAction()
 	{
         Zend_Auth::getInstance()->clearIdentity();
         $this->_redirect('/user/login');
-	}
-	
-	public function registrationAction()
-	{
-		$request = $this->getRequest();
-		$form    = new Application_Form_UserRegistrationForm();
-		
-		$this->view->form = $form;
 	}
 	
 	public function infoAction(){
@@ -89,6 +135,6 @@ class UserController extends Zend_Controller_Action
             $user_data = $auth->getStorage()->read();
         }
         
-        return $this->view->user_data = $user_data;
+        $this->view->user_data = $user_data;
 	}
 }

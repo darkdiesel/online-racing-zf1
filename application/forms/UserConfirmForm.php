@@ -1,23 +1,14 @@
 <?php
 
-	class Application_Form_UserRegistrationForm extends Zend_Form
+	class Application_Form_UserConfirmForm extends Zend_Form
     {
 		public function init()
 		{
 			// Set the method for the display form to POST
 			$this->setMethod('post');
-			$this->setName('userRegistration');
+			$this->setName('userConfirm');
 			
-			$this->addElement('text', 'login', array(
-				'label'      => 'Ваш логин:',
-				'required'   => true,
-				'class'		 => 'x_field',
-				'filters'    => array('StringTrim'),
-				'validators' => array('alnum',
-			        array('regex', false, '/^[a-z]/i')
-			    )
-			));
-
+			// Add an email element
 			$this->addElement('text', 'email', array(
 				'label'      => 'Ваш email:',
 				'required'   => true,
@@ -35,6 +26,17 @@
 				'filters'    => array('StringTrim'),
 				
 			));
+			
+			$this->addElement('text', 'confirmcode', array(
+				'label'      => 'Код подтверждения:',
+				'required'   => true,
+				'class'		 => 'x_field',
+				'filters'    => array('StringTrim'),
+				'validators' => array('alnum',
+			        //array('regex', false, '/^[a-z]/i')
+			    )
+			));
+
 			/*
 			$this->addElement(
 			    new Zend_Form_Element_Captcha('captcha', array(
@@ -62,7 +64,7 @@
 			$this->addElement( 'submit', 'submit', array(
 				'ignore' => true,
 				'class' => 'btn btn-primary',
-				'label' => 'Зарегестрировать',
+				'label' => 'Подвердить',
 			));
 		}
 		

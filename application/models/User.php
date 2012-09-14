@@ -4,7 +4,9 @@ class Application_Model_User
 	protected $_id;
 	protected $_login;
 	protected $_password;
-	protected $_role_id
+    protected $_activate;
+    protected $_enabled;
+	protected $_role_id;
 	protected $_email;
 	protected $_name;
 	protected $_surname;
@@ -66,6 +68,61 @@ class Application_Model_User
     public function getId()
     {
         return $this->_id;
+    }
+
+    public function setLogin($login)
+    {
+        $this->_login = (string) $login;
+        return $this;
+    }
+ 
+    public function getLogin()
+    {
+        return $this->_login;
+    }
+
+    public function setPassword($password)
+    {
+        $this->_password = (string) $password;
+        return $this;
+    }
+ 
+    public function getPassword()
+    {
+        return $this->_password;
+    }
+
+    public function setActivate($activate)
+    {
+        $this->_activate = (string) $activate;
+        return $this;
+    }
+ 
+    public function getActivate()
+    {
+        return $this->_activate;
+    }
+
+    public function setEnabled($enabled)
+    {
+        $this->_enabled = (string) $enabled;
+        return $this;
+    }
+ 
+    public function getEnabled()
+    {
+        return $this->_enabled;
+    }
+
+    public function setRole_id($role_id)
+    {
+        $this->_role_id = (int) $role_id;
+        return $this;
+    }
+ 
+    public function getRole_id()
+    {
+        return $this->_role_id;
     }
 
     public function setEmail($email)

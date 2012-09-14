@@ -7,17 +7,19 @@ class Acl extends Zend_Acl {
 		$this->addRole('admin', 'user');
 		$this->addRole('master', 'admin');
 				
+		//$this->addResource(new Zend_Acl_Resource('user/registration'));
 		//Add resources
 		// guest resources
 		$this->add(new Zend_Acl_Resource('guest_allow'));
 		$this->add(new Zend_Acl_Resource('index/index'),'guest_allow');
 		$this->add(new Zend_Acl_Resource('user/login'),'guest_allow');
-		$this->add(new Zend_Acl_Resource('user/registration'),'guest_allow');
+		//$this->allow('guest','user/registration');
 
 		// user resources
 		$this->add(new Zend_Acl_Resource('user_allow'));
 		$this->add(new Zend_Acl_Resource('user/info'), 'user_allow');
 		$this->add(new Zend_Acl_Resource('user/logout'), 'user_allow');
+		//$this->deny('user', 'user/registration');
 
 		// admin resources
 		$this->add(new Zend_Acl_Resource('admin_allow'));
@@ -27,7 +29,7 @@ class Acl extends Zend_Acl {
 		$this->add(new Zend_Acl_Resource('admin/index'),'master_allow');
 
 		//Выставляем права, по-умолчанию всё запрещено
-		$this->deny(null, null, null);
+		// /$this->deny('user', 'user_deny', 'show');
 		$this->allow('guest', 'guest_allow', 'show');
 		$this->allow('user', 'user_allow', 'show');
 		$this->allow('admin','admin_allow', 'show');

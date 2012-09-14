@@ -10,7 +10,12 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
-        
+		// Js for Skitter slider
+		$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.easing.1.3.js"));
+		$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.animate_colors.min.js"));
+		$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.skitter.js"));
+
+		// Css for skitter slider
+		$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/skitter.styles.css"));
     }
 }
