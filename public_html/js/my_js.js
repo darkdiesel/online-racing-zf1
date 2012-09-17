@@ -1,54 +1,14 @@
-﻿// lavalamp main menu plugin
-jQuery(function($) {
-	$(function() {$("#header #box_main_menu #main_menu").lavaLamp({
-		fx: "backout",
-		speed: 600
-		});
-	});
-});
+﻿//init google analitycs
+jQuery(function($){
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-32674101-2']);
+    _gaq.push(['_trackPageview']);
 
-// back to top button plugin
-jQuery(function($) {
-	$(function() {	
-		// hide #back-top first
-		$("#back-top").hide();
-	
-		// fade in #back-top
-		$(function () {
-			$(window).scroll(function () {
-				if ($(this).scrollTop() > 100) {
-					$('#back-top').fadeIn();
-				} else {
-					$('#back-top').fadeOut();
-				}
-			});
-
-			// scroll body to 0px on click
-			$('#back-top a').click(function () {
-				$('body,html').animate({
-					scrollTop: 0
-				}, 800);
-				return false;
-			});
-		});
-	});	
-});	
-	
-	
-// countdown clock script
-jQuery(function($) {
-    $('#countdown_dashboard').countDown({
-        targetDate: {
-            'day':1,
-            'month':2,
-            'year':2013,
-            'hour':19,
-            'min':0,
-            'sec':0,
-            // time set as UTC
-            'utc':true
-        }
-    });
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 });
 
 // Clear button for .x_field field
@@ -115,57 +75,5 @@ jQuery(function($) {
 				$('.icon_clear').fadeOut(300);
 			}
 		});
-	});
-	
-	// run function for clear "X" button
-	$(function() {$(".x_field").addXbtn({
-
-			}
-		);
-	});
-});
-
-// skitter slider plugin
-jQuery(function($) {
-	$(function() {
-		var options = {};
-		
-		options['label'] = true;
-		options['numbers'] = true;
-		options['preview'] = true;
-		options['velocity'] = 2500;
-		options['dots'] = true;
-		options['focus'] = true;
-		options['focus_position'] = 'leftTop';
-		options['controls'] = true;
-		options['controls_position'] = 'rightTop';
-		options['hideTools'] = true;
-		options['animation'] = 'random';
-		//options['easing_default'] = 'random';
-		options['interval'] = 5000;
-		options['xml'] = '../xml/skitter_slider.xml';
-		
-		if (document.location.search) {
-			var array = document.location.search.split('=');
-			var param = array[0].replace('?', '');
-			var value = array[1];
-			
-			if (param == 'animation') {
-				options.animation = value;
-			}
-			else if (param == 'type_navigation') {
-				if (value == 'dots_preview') {
-					$('.border_box').css({'marginBottom': '40px'});
-					options['dots'] = true;
-					options['preview'] = true;
-				}
-				else {
-					options[value] = true;
-					if (value == 'dots') $('.border_box').css({'marginBottom': '40px'});
-				}
-			}
-		}
-
-		$('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
 	});
 });

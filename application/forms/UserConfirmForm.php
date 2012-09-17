@@ -6,28 +6,30 @@
 		{
 			// Set the method for the display form to POST
 			$this->setMethod('post');
+            $this->setAction('/user/confirm');
 			$this->setName('userConfirm');
+            $this->setAttrib('class', 'white_border');
 			
 			// Add an email element
 			$this->addElement('text', 'email', array(
-				'label'      => 'Ваш email:',
+				'label'      => 'E-mail:',
 				'required'   => true,
 				'class'		 => 'x_field',
-				'filters'    => array('StringTrim'),
+                'filters'    => array('StringTrim','StringToLower'),
 				'validators' => array(
 					'EmailAddress',
 				)
 			));
 
 			$this->addElement('password', 'password', array(
-				'label'      => 'Ваш пароль:',
+				'label'      => 'Пароль:',
 				'required'   => true,
 				'class'		 => 'x_field',
 				'filters'    => array('StringTrim'),
 				
 			));
-			
-			$this->addElement('text', 'confirmcode', array(
+
+			$this->addElement('text', 'confirmCode', array(
 				'label'      => 'Код подтверждения:',
 				'required'   => true,
 				'class'		 => 'x_field',

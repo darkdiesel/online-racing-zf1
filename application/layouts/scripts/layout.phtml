@@ -9,26 +9,16 @@
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
     <?php echo $this->headScript() ?>
-	<script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32674101-2']);
-      _gaq.push(['_trackPageview']);
+    <script type="text/javascript">
+        // run function for clear "X" button
+        $(function() {$(".x_field").addXbtn({
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+            });
+        });
+     </script>
  </head>
 <body>
-<!--<div id="admin_toolbar">
-    <ul id="admin_menu">
-        <li class="home"><a href="">Home</a></li>
-        <li><a href="/">Link1</a></li>
-        <li><a href="/">Link2</a></li>
-    </ul>
-</div>-->
+<?php echo $this->render("admin_toolbar.phtml") ?>
 <div id="page_wrapper">
     <div id="page">
         <?php echo $this->render("header.phtml") ?>
@@ -38,53 +28,13 @@
                     <?php echo $this->layout()->content ?>
                 </div>
                 <div id="left_sidebar">
-                    <div class="sidebar_box">
-                        <div class="sidebar_box_title">
-                            До открытия сайта осталось:
-                        </div>
-                        <div class="sidebar_box_content">
-                            <div id="countdown_dashboard">
-                                <div class="dash weeks_dash">
-                                    <span class="dash_title">Нед.</span>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                </div>
-
-                                <div class="dash days_dash">
-                                    <span class="dash_title">Дн.</span>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                </div>
-
-                                <div class="dash hours_dash">
-                                    <span class="dash_title">Час.</span>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                </div>
-
-                                <div class="dash minutes_dash">
-                                    <span class="dash_title">Мин.</span>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                </div>
-
-                                <div class="dash seconds_dash">
-                                    <span class="dash_title">Сек.</span>
-                                    <div class="digit">0</div>
-                                    <div class="digit">0</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php echo $this->render("left_sidebar.phtml") ?>
                 </div>
             </div>
         </div>
         <?php echo $this->render("footer.phtml")?>
     </div>
-
-    <p id="back-top">
-        <a href="#top"><span></span>На подиум!</a>
-    </p>
+    <?php echo $this->render("back_to_top.phtml")?>
 </div>
 </body>
 </html>

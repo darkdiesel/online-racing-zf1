@@ -6,34 +6,35 @@
 		{
 			// Set the method for the display form to POST
 			$this->setMethod('post');
+            $this->setAction('/user/registration');
 			$this->setName('userRegistration');
+            $this->setAttrib('class', 'white_border');
 			
 			$this->addElement('text', 'login', array(
-				'label'      => 'Ваш логин:',
+				'label'      => 'Логин:',
 				'required'   => true,
 				'class'		 => 'x_field',
-				'filters'    => array('StringTrim'),
+                'filters'    => array('StringTrim','StringToLower'),
 				'validators' => array('alnum',
 			        array('regex', false, '/^[a-z]/i')
 			    )
 			));
 
 			$this->addElement('text', 'email', array(
-				'label'      => 'Ваш email:',
+				'label'      => 'E-mail:',
 				'required'   => true,
 				'class'		 => 'x_field',
-				'filters'    => array('StringTrim'),
+                'filters'    => array('StringTrim','StringToLower'),
 				'validators' => array(
 					'EmailAddress',
 				)
 			));
 
 			$this->addElement('password', 'password', array(
-				'label'      => 'Ваш пароль:',
+				'label'      => 'Пароль:',
 				'required'   => true,
 				'class'		 => 'x_field',
 				'filters'    => array('StringTrim'),
-				
 			));
 			/*
 			$this->addElement(
