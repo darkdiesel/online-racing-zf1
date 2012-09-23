@@ -19,29 +19,15 @@
 			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li>
-					<form class="form-horizontal">
-						<div class="control-group">
-							<label class="control-label" for="inputEmail">E-mail:</label>
-							<div class="controls">
-								<input class="x_field" type="text" id="inputEmail" placeholder="E-mail">
-							</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label" for="inputPassword">Пароль:</label>
-							<div class="controls">
-								<input class="x_field" type="password" id="inputPassword" placeholder="Пароль">
-							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<label class="checkbox">
-									<input type="checkbox"> Запомнить меня
-								</label>
-								<button type="submit" class="btn">Войти</button>
-							</div>
-						</div>
-						<a class="reg_link" href="<?php echo $this->baseUrl('user/registration')?>">Зарегестрироваться</a>
-					</form>
+					<?php
+						$form    = new Application_Form_UserLoginForm();
+						echo $form;
+					?>
+					<hr style="margin:20px 0 10px 0">
+					<blockquote>
+				    	<p><a class="reg_link" href="<?php echo $this->baseUrl('user/register')?>">Регистарция</a></p>
+                        <p><a class="reg_link" href="<?php echo $this->baseUrl('user/restorepasswd')?>">Забыли пароль?</a></p>
+				    </blockquote>
 				</li>
 			</ul>
 		</div>
@@ -52,9 +38,12 @@
 			<a class="btn btn-primary" href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-user icon-white"></i> Выйти</a>
 			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li>
-					
-				</li>
+				<li><a href="<?php echo $this->baseUrl('user/view'); ?>"><i class="icon-briefcase"></i> Профиль</a><li>
+				<li><a href="<?php echo $this->baseUrl('user/message'); ?>"><i class="icon-envelope"></i> Соощбщения</a><li>
+				<li><a href="<?php echo $this->baseUrl('user/settings'); ?>"><i class="icon-wrench"></i> Настройки</a></li>
+				<li><a href="<?php echo $this->baseUrl('user/edit'); ?>"><i class="icon-edit"></i> Редактировать</a></li>
+				<li class="divider"></li>
+				<li><a href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-remove"></i> Выйти</a></li>
 			</ul>
 		</div>
 	</div>

@@ -47,9 +47,10 @@ body{
                 margin-left:0;
                 margin-right:-255px;
                 overflow:visible;
+                /*border-right:1px solid #E0E0E0;*/
             }
             	#left_sidebar .sidebar_box{
-            		margin:0px 0 25px 0;
+            		margin:0px 0 5px 0;
             	}
             	#left_sidebar .sidebar_box:after{
             		background:url("../img/shadow_sprite.png") no-repeat 0 -29px;
@@ -58,19 +59,21 @@ body{
             		content:"";
             	}
             		#left_sidebar .sidebar_box .sidebar_box_title{
-            			padding:10px 10px;
-            			font-weight:bold;
+            			padding:5px 10px;
             			background:url("../img/vert_sprite.png") repeat-x 0 -10px;
-            			border-radius:10px 10px 0 0;
+            			border-radius:7px 7px 0 0;
             			border:1px solid #221F1F;
             			color:#F7F7F7;
-                        font:bold 13px arial;
+                        font-weight:bold;
+                        font-size:13px;
+                        font-family:"Arial";
             		}
             		#left_sidebar .sidebar_box .sidebar_box_content{
             			padding:5px 10px;
-            			border:2px solid #CACACA;
+            			border:1px solid #CACACA;
                         border-top:none;
-                        background:none repeat scroll 0 0 #F5F5F5;
+                        background:none repeat scroll 0 0 #FBFBFB;
+                        border-radius:0 0 7px 7px;
             		}
 			#content{
                 overflow:visible;
@@ -80,7 +83,14 @@ body{
                 float:left;
 			    padding:20px 15px 10px 10px;
 				text-align:justify;
+                border-left:1px solid #E0E0E0;
+                height:100%;
+                min-height:100px;
 			}
+                #content h2.page_title{
+                    font-family:"PT Serif";
+                    margin-top:0;
+                }
         /*countdown_dashboard*/
         #left_sidebar #countdown_dashboard{
             overflow:hidden;
@@ -205,9 +215,120 @@ body{
     visibility:hidden;
 }
 
-form.white_border{
-    border:1px solid #CACACA;
-    background:none repeat scroll 0 0 #F5F5F5;
-    border-radius:10px;
-    padding:0px 20px;
+fieldset.form_white_box{
+
+}
+    fieldset.form_white_box legend{
+        font-family:"PT Serif";
+        font-size:35px;
+        position:relative;
+    }
+form.white_box{
+    display:block;
+    margin:0 auto;
+    overflow:hidden;
+    width:500px;
+}
+form.white_box:after{
+    background:url("../img/shadow_sprite.png") no-repeat 0 -74px;
+    display:block;
+    height:20px;
+    content:"";
+    margin:0 auto;
+    width:280px;
+}
+    form.white_box label.required:after{
+        content:"*";
+        color:red;
+    }
+    form.white_box label.error{
+        /*position:absolute;*/
+    }
+    form.white_box label.valid{
+        position:absolute;
+    }
+    form.white_box dl{
+        border:1px solid #CACACA;
+        background:none repeat scroll 0 0 #FBFBFB;
+        padding:20px;
+        margin:0;
+        border-radius:7px;
+    }
+    form.white_box ul.errors{
+        margin:0;
+    }
+        form.white_box ul.errors li{
+            color:#BE3838;
+            font-family:serif;
+            font-size:14px;
+            line-height:14px;
+            list-style-type:none;
+        }
+form#userlogin{
+    width:270px;
+}
+    form#userlogin #submit-element{
+        margin-left:25px;
+    }
+form#userRegister{
+    width:360px;
+}
+form#userConfirm{
+    width:290px;
+}
+form#userRestorePasswd{
+    width:360px;  
+}
+    form.white_box #remember-label{
+        display:inline-block;
+        padding: 3px 0 0 10px;
+    }
+    form.white_box #remember-element{
+        display:inline-block;
+        float:left;
+    }
+    form.white_box #reset-label{
+        display:none;
+    }
+    form.white_box #reset-element{
+        display:inline-block;
+    }
+    form.white_box #submit-label{
+        
+    }
+    form.white_box #submit-element{
+        display:inline-block;
+        margin:0 20px 0px 10px;
+    }
+
+/*Messages*/
+div.messages{
+    padding: 10px 20px 10px 40px;
+    border: 1px solid;
+    margin:10px 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:14px;
+    line-height:14px;
+    text-align:justify;
+}
+    div.errors{
+        border-color:#ED541D;
+        background:url("../img/error.png") no-repeat 10px 7px #FEF5F1;
+        color:#8C2E0B;
+
+    }
+
+label.error {
+    color:#BE3838;
+    font-family:serif;
+    font-size:14px;
+    line-height:14px;
+    list-style-type:none;
+}
+label.valid {
+    background: url("../img/valid.png") no-repeat scroll center center transparent;
+    display:inline-block;
+    height:24px;
+    text-indent:-9999px;
+    width:24px;
 }

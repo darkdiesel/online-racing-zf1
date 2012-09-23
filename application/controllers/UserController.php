@@ -16,11 +16,12 @@ class UserController extends Zend_Controller_Action
 	
 	public function loginAction()
 	{
-        
         if (Zend_Auth::getInstance()->getStorage()->read()->status != 'guest') {
-            // если да, то делаем редирект, чтобы исключить многократную авторизацию
             $this->_helper->redirector('index', 'index');
         }
+
+        // page title
+        $this->view->headTitle('Авторизация');
 
 		$request = $this->getRequest();
 		$form    = new Application_Form_UserLoginForm();
@@ -32,27 +33,47 @@ class UserController extends Zend_Controller_Action
                 $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
                 $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
                 $authAdapter = new Zend_Auth_Adapter_DbTable(
-                    $adapter, 'user', 'email',
-                    'password'
+                    $adapter, 'user', 'email','password'
                 );
-                $authAdapter->setIdentity($form->email->getValue());
-                $authAdapter->setCredential($form->password->getValue());
+
+                $authAdapter->setIdentity($form->loginemail->getValue());
+                $authAdapter->setCredential(sha1($form->loginpassword->getValue()));
                 $result = $auth->authenticate($authAdapter);
 
                 switch ($result->getCode()) {
                     case Zend_Auth_Result::SUCCESS:
                         /** Выполнить действия при успешной аутентификации **/
-                        $storage = $auth->getStorage('online-racing');
+                        $mapper  = new Application_Model_UserMapper();
                         $storage_data = $authAdapter->getResultRowObject(
-                            array('login','id'),
-                            null);
-                        //$user_model = new Application_Model_DbTable_User();
-                        //$language_model = new Application_Model_DbTable_Language();
-                        $storage_data->status = 'user';
-                        $storage->write($storage_data);
-                        $this->_helper->redirector('index', 'index');
+                                    array('login','id'), null);
+                        switch ($mapper->checkUserStatus($storage_data->id)) {
+                            case '1':
+                                //rewrite session for guest
+                                $storage_data = new stdClass();
+                                $storage_data->status = 'guest';
+                                Zend_Auth::getInstance()->getStorage()->write($storage_data);
+                                
+                                //print message
+                                $this->view->errMessage = 'Пользователь с этими данными не активирован! Перейдите на <a href="'. $this->view->baseUrl('user/activate').'">страницу</a> для активации.';
+                                break;
+                            case '2':
+                                //rewrite session for guest
+                                $storage_data = new stdClass();
+                                $storage_data->status = 'guest';
+                                Zend_Auth::getInstance()->getStorage()->write($storage_data);
+                               
+                                //print message
+                                $this->view->errMessage = 'Пользователь с этими данными заблокирован! Абротитесь к администрации сайта для разблокировки.';
+                                break;
+                            default:
+                                $storage = $auth->getStorage('online-racing');
+                                //$user_model = new Application_Model_DbTable_User();
+                                $storage_data->status = 'user';
+                                $storage->write($storage_data);
+                                $this->_helper->redirector('index', 'index');
+                                break;
+                        }
                         break;
-
                     default:
                         /** Выполнить действия для остальных ошибок **/
                         //rewrite session for guest
@@ -60,64 +81,145 @@ class UserController extends Zend_Controller_Action
                         $storage_data->status = 'guest';
                         Zend_Auth::getInstance()->getStorage()->write($storage_data);
 
-                        $this->view->errMessage = 'Вы ввели неверное имя пользователя или неверный пароль';
+                        $this->view->errMessage .= 'Вы ввели неверное имя пользователя или пароль. Повторите ввод.<br />Забыди <a href="'. $this->view->baseUrl('user/restorepasswd').'">пароль?</a>';
                         break;
                 }
+            } else {
+                $this->view->errMessage .= 'Забыди <a href="'. $this->view->baseUrl('user/restorepasswd').'">пароль?</a>';
             }
         }
 
 		$this->view->form = $form;
 	}
 	
-    public function registrationAction()
+    public function registerAction()
     {
+        // page title
+        $this->view->headTitle('Регистрация');
+
+        $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
+        //$this->view->headScript()->appendFile($this->view->baseUrl("js/script.js"));
+
         $request = $this->getRequest();
-        $form    = new Application_Form_UserRegistrationForm();
+        $form    = new Application_Form_UserRegisterForm();
         
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
                     
-                    $mapper  = new Application_Model_UserMapper();
+                    $user = new Application_Model_User($form->getValues());
 
-                    if ($mapper->emailIsAvailable($form->email->getValue()))
-                    {
-                        $user = new Application_Model_User($form->getValues());
+                    $mapper = new Application_Model_UserMapper();
                         
-                        // Function to generate random string
-                        function generatePassword($length = 8){
-                          $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
-                          $numChars = strlen($chars);
-                          $string = '';
-                          for ($i = 0; $i < $length; $i++) {
+                    // Function to generate random string
+                    function generatePassword($length = 8){
+                        $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
+                        $numChars = strlen($chars);
+                        $string = '';
+                        for ($i = 0; $i < $length; $i++) {
                             $string .= substr($chars, rand(1, $numChars) - 1, 1);
-                          }
-                          return $string;
                         }
-
-                        $user->activate = generatePassword(8);
-                        $user->enabled = 0;
-                        $user->role_id = 3;
-
-                        $mapper->AddNewUser($user);
-                        return $this->_helper->redirector('confirm','user');
-                    } else {
-                        echo "User Already Exist";
+                            return $string;
                     }
+
+                    $user->activate = generatePassword(8);
+                    $user->enabled = 0;
+                    $user->role_id = 3;
+
+                    $mapper->AddNewUser($user);
+
+                    $mail = new Zend_Mail('UTF-8');
+                    $mail->setBodyHtml('Спасибо за регистарцию на нашем портале.<br/>'.
+                        'На <a href="http://online-racing.net/user/activate">странице</a> для подтверждения регистрации введите следующие данные:<br/><br/>'.
+                        'Логин: <strong>'.$user->login.'</strong><br/>'.
+                        'E-mail: <strong>'.$user->email.'</strong><br/>'.
+                        'Пароль: <strong>'.$user->password.'</strong><br/>'.
+                        'код: <strong>'.$user->activate.'</strong><br/><br/>'.
+                        'С Уважением, Администрация <a href="http://Online-Racing.net">Online-Racing.net</a>');
+                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                    $mail->addTo($user->email, $user->email);
+                    $mail->setSubject('Online-Racing.net - Код подверждения регистрации.');
+                    $mail->send();
+
+                    return $this->_helper->redirector('activate','user');
+                } else {
+                    $this->view->errMessage .= "Исправте ошибки для корректной регистрации!";
                 }
             }
 
         $this->view->form = $form;
     }
 
-    public function confirmAction()
+    public function activateAction()
     {
+        // page title
+        $this->view->headTitle('Активация пользователя');
+
         $request = $this->getRequest();
-        $form    = new Application_Form_UserConfirmForm();
+        $form    = new Application_Form_UserActivateForm();
 
         if($this->getRequest()->isPost())
         {
             if ($form->isValid($request->getPost())) {
-                
+                $mapper  = new Application_Model_UserMapper();
+
+                $userEmail = $form->email->getValue();
+                $userPassword = sha1($form->password->getValue());
+                $userConfirmCode = $form->confirmCode->getValue();
+
+                if ($mapper->activateUserByEmail($userEmail, $userPassword, $userConfirmCode) == 1) {
+                    $mail = new Zend_Mail('UTF-8');
+                    $mail->setBodyHtml('Ваш профиль активирован. Приятного время провождения на нашем портале.<br/>');
+                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                    $mail->addTo($userEmail, $userEmail);
+                    $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
+                    $mail->send();
+
+                    $bootstrap = $this->getInvokeArg('bootstrap');
+                    $auth = Zend_Auth::getInstance();
+                    $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+                    $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
+                    $authAdapter = new Zend_Auth_Adapter_DbTable(
+                        $adapter, 'user', 'email','password'
+                    );
+
+                    $authAdapter->setIdentity($userEmail);
+                    $authAdapter->setCredential($userPassword);
+                    $result = $auth->authenticate($authAdapter);
+
+                    $mapper  = new Application_Model_UserMapper();
+                    $storage_data = $authAdapter->getResultRowObject(array('login','id'), null);
+
+                    $storage = $auth->getStorage('online-racing');
+                    //$user_model = new Application_Model_DbTable_User();
+                    $storage_data->status = 'user';
+                    $storage->write($storage_data);
+
+                    return $this->_helper->redirector('login','user');
+                } else {
+                    $this->view->errMessage .= 'Введены неверные данные активации.<br>';
+                }
+            } else {
+                $this->view->errMessage .= "Исправте ошибки для корректной активации профиля!";
+            }
+        }
+
+        $this->view->form = $form;
+    }
+
+    public function restorepasswdAction()
+    {
+        // page title
+        $this->view->headTitle('Востановление пароля');
+
+        $request = $this->getRequest();
+        $form    = new Application_Form_UserRestorePasswdForm();
+
+        if($this->getRequest()->isPost())
+        {
+            if ($form->isValid($request->getPost())) {
+                $this->view->errMessage = $this->params['email'];
+            } else {
+                $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!";
             }
         }
 
@@ -130,14 +232,23 @@ class UserController extends Zend_Controller_Action
         return $this->_helper->redirector('login','user');
 	}
 	
-	public function infoAction(){
-	   $auth = Zend_Auth::getInstance();
-        // Если пользователь аутентифицирован
-        if ($auth->hasIdentity()){
-            // Считываем данные о пользователе
-            $user_data = $auth->getStorage()->read();
-        }
-        
-        $this->view->user_data = $user_data;
+	public function viewAction(){
+	   // page title
+        $this->view->headTitle('Просмотр профиля');
 	}
+
+    public function messageAction(){
+       // page title
+        $this->view->headTitle('Сообщения');
+    }
+
+    public function settingsAction(){
+       // page title
+        $this->view->headTitle('Настройки профиля');
+    }
+
+    public function editAction(){
+       // page title
+        $this->view->headTitle('Редактирование профиля');
+    }
 }

@@ -38,14 +38,30 @@ class Application_Model_UserMapper
       return $entries;
   }
 
-  public function emailIsAvailable($email)
-  {
+  public function checkUserStatus($id){
+    $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
+    if ($result->activate != "") {
+      return 1;
+    } else if ($result->enabled != 1) {
+              return 2;
+            } else {
+              return 0;
+            }
+  }
+
+  public function activateUserByEmail($email, $password, $confirmCode){
     $result = $this->getDbTable()->fetchRow(array('email = ?' => strtolower($email)));
 
-    if (0 == count($result)) {
-       return true;
+    if (($result->password == $password) && ($result->activate == $confirmCode)) {
+      $data = array(
+        'activate' => "",
+        'enabled' => 1
+      );
+
+      $this->getDbTable()->update($data, array('email = ?' => $email));
+      return 1;
     } else {
-      return false;
+      return 0;
     }
   }
 
@@ -54,10 +70,11 @@ class Application_Model_UserMapper
       $data = array(
         'login'   => $newUser->getLogin(),
         'email'   => $newUser->getEmail(),
-        'password' => $newUser->getPassword(),
+        'password' => sha1($newUser->getPassword()),
         'activate' => $newUser->getActivate(),
-        'enabled' => $newUser->getEnabled(),
-        'role_id' => $newUser->getRole_id()
+        'enabled' => "1",
+        'role_id' => "3",
+        'created' => date('Y-m-d H:i:s')
       );
 
       if (null === ($id = $newUser->getId())) {

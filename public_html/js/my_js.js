@@ -1,14 +1,38 @@
-﻿//init google analitycs
-jQuery(function($){
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-32674101-2']);
-    _gaq.push(['_trackPageview']);
+﻿jQuery(function($){
+	// back to top button plugin
+    $(function() {
+        $("#back-top").hide();
 
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+        $(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('#back-top').fadeIn();
+                } else {
+                    $('#back-top').fadeOut();
+                }
+            });
+
+            $('#back-top a').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+        });
+    });
+});
+
+jQuery(function($){
+	// lavalamp main menu plugin
+    $(function() {$("#header #box_main_menu #main_menu").lavaLamp({
+            fx: "backout",
+            speed: 600
+        });
+    });
+});
+
+jQuery(function($){
+	//$("#main #content").css({"height":($("#main").height()-30)+"px"});
 });
 
 // Clear button for .x_field field
@@ -21,7 +45,7 @@ jQuery(function($) {
 		
 		// add css for clear "X" button
 		$(this).parent().each(function() {
-			$(this).css({"position":"relative","display":"inline-block"});
+			$(this).css({"position":"relative","display":"inline-block","width":$('.x_field',this).outerWidth()+"px"});
 			$('.icon_clear',this).css({"border-radius":"30px", "display":"none", "font-family":"Verdana", "cursor":"pointer",
 			"font-weight":"bold", "position":"absolute", "right":"5px", "text-align":"center"});
 			
@@ -50,7 +74,8 @@ jQuery(function($) {
 			}
 			
 			$('.icon_clear',this).css({"top":(($('.x_field',this).outerHeight()-$('.icon_clear',this).outerHeight())/2)+"px"});
-			$('.x_field',this).css({"padding-right":($('.icon_clear',this).outerHeight())+8+"px"});
+			$('.x_field',this).css({"padding-right":($('.icon_clear',this).outerHeight())+8+"px","width":($('.x_field',this).width()-(($('.icon_clear',this).outerHeight())+8))+"px"});
+			$(this).css({"width":$('.x_field',this).outerWidth()+"px"});
 		});
 		
 		$(this).blur(function(o) {
@@ -76,4 +101,11 @@ jQuery(function($) {
 			}
 		});
 	});
+});
+
+jQuery(function($){
+	// run function for clear "X" button
+    $(function() {$(".x_field").addXbtn({
+	    });
+    });
 });

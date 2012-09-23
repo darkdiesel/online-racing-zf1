@@ -1,27 +1,33 @@
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	
     <?php /**@var $this Zend_View */ ?>
     <?php echo $this->headTitle() ?>
+    <?php echo $this->headMeta() ?>
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <?php echo $this->headScript() ?>
+    <!-- Google analytics -->
     <script type="text/javascript">
-        // run function for clear "X" button
-        $(function() {$(".x_field").addXbtn({
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-32674101-2']);
+        _gaq.push(['_trackPageview']);
 
-            });
-        });
-     </script>
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
  </head>
 <body>
 <?php echo $this->render("admin_toolbar.phtml") ?>
 <div id="page_wrapper">
     <div id="page">
-        <?php echo $this->render("header.phtml") ?>
+        <header id="header">
+            <?php echo $this->render("header.phtml") ?>
+        </header>
         <div id="main_wrapper">
             <div id="main" class="clearfix">
                 <div id="content">
@@ -32,7 +38,9 @@
                 </div>
             </div>
         </div>
-        <?php echo $this->render("footer.phtml")?>
+        <footer id="footer">
+            <?php echo $this->render("footer.phtml")?>
+        </footer>
     </div>
     <?php echo $this->render("back_to_top.phtml")?>
 </div>

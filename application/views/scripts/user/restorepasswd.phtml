@@ -1,0 +1,10 @@
+<?php
+if ($this->errMessage != "") {
+    $this->errMessage='<div class="messages errors">'.$this->errMessage.'</div>';
+}
+
+echo $this->fieldset('loginFieldSet', '
+	<p>Для востановления своего пароля введие e-mail адрес указаный при регистрации, на который вам будет выслан пароль.</p>'.
+    $this->errMessage.
+    $this->form, array('legend'=>'Востановление пароля','class'=>'form_white_box'));
+?>

@@ -1,0 +1,10 @@
+<?php
+if ($this->errMessage != "") {
+		$this->errMessage='<div class="messages errors">'.$this->errMessage.'</div>';
+	}
+
+echo $this->fieldset('loginFieldSet', '
+	<p>Вам на почту высланы данныя для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.</p>'.
+	$this->errMessage.
+	$this->form, array('legend'=>'Активация пользователя','class'=>'form_white_box'));
+?>

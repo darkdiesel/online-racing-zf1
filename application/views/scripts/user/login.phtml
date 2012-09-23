@@ -1,6 +1,10 @@
-<h3>Авторизация</h3>
-
 <?php
-echo $this->form;
+if ($this->errMessage != "") {
+		$this->errMessage='<div class="messages errors">'.$this->errMessage.'</div>';
+	}
 
-echo $this->errMessage;?>
+echo $this->fieldset('loginFieldSet', '
+	<p>Введите данные в форму ниже, чтобы авторизоваться на сайте.</p>'.
+	$this->errMessage.
+	$this->form, array('legend'=>'Авторизация','class'=>'form_white_box'));
+?>

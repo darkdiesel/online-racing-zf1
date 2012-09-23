@@ -1,0 +1,92 @@
+<script type="text/javascript">
+$(document).ready(function(){
+		$('#userRegister').validate({
+	    rules: {
+	      'login': {
+	        minlength: 3,
+	        maxlength: 20,
+	        required: true,
+	        regex: '^[a-z0-9_-]{3,16}$'
+	      },
+	      'email': {
+	        required: true,
+            email: true,
+            minlength: 5,
+            maxlength: 50,
+	      },
+	      'password': {
+	      	required: true,
+	      	minlength: 6,
+            maxlength: 25,
+	      },
+	      'confirmpassword': {
+	      	required: true,
+	      	minlength: 6,
+            maxlength: 25,
+	      	equalTo: '#password',
+	      },
+		},
+	     
+	    messages: {
+                'login': {
+                    required : "<?php echo $this->translate( "Login is required." ); ?>",
+                    minlength: "<?php echo $this->translate( "Login Name length must be between 3 and 20 characters." ); ?>",
+                    maxlength: "<?php echo $this->translate( "Login Name length must be between 3 and 20 characters." ); ?>",
+                    regex    : "<?php echo $this->translate( "Login Name must be included only letters, symbols '-_'." ); ?>"
+                },
+                'email': {
+                    required : "<?php echo $this->translate( "Email address is required." ); ?>",
+                    minlength: "<?php echo $this->translate( "Email length must be between 5 and 50 characters." ); ?>",
+                    maxlength: "<?php echo $this->translate( "Email length must be between 5 and 50 characters." ); ?>",
+                    email    : "<?php echo $this->translate( "Please enter a valid email address. For example user@domain.com." ); ?>",
+                    //regex    : "<?php echo $this->translate( "Please enter a valid email address. For example user@domain.com." ); ?>"
+                },
+                'password': {
+                    required : "<?php echo $this->translate( "Password is required." ); ?>",
+                    minlength: "<?php echo $this->translate( "Password length must be between 6 and 25 characters." ); ?>",
+                    maxlength: "<?php echo $this->translate( "Password length must be between 6 and 25 characters." ); ?>",
+                    //regex    : "<?php echo $this->translate( "Password must be included only letters or digits." ); ?>"
+                },
+                'confirmpassword': {
+                    required : "<?php echo $this->translate( "Confirm Password is required." ); ?>",
+                    minlength: "<?php echo $this->translate( "Confirm Password length must be between 6 and 25 characters." ); ?>",
+                    maxlength: "<?php echo $this->translate( "Confirm Password length must be between 6 and 25 characters." ); ?>",
+                    equalTo  : "<?php echo $this->translate( "Please make sure your passwords match." ); ?>",
+                    //regex    : "<?php echo $this->translate( "Confirm Password must be included only letters or digits." ); ?>"
+                }
+        },
+
+	    errorElement: 'label',
+        errorClass: 'error',
+        errorPlacement: function(error, element) {
+            var el = $(element.parent().parent().parent());
+            if (!(el.children('ul')).length) {
+                el.append('<ul class="errors"></ul>');
+            }
+
+            error.appendTo( el.children('.controls'));
+        },
+
+	    highlight: function(label) {
+	    	$(label).closest('.control-group').removeClass('success');
+	    	$(label).closest('.control-group').addClass('error');
+	    	$(label).removeClass("valid");
+	    },
+	    success: function(label) {
+                label.closest('.control-group').removeClass('error');
+                label.closest('.control-group').addClass('success');
+                label.addClass("valid");
+	    },
+	  });
+	});
+</script>
+<?php
+if ($this->errMessage != "") {
+		$this->errMessage='<div class="messages errors">'.$this->errMessage.'</div>';
+	}
+
+echo $this->fieldset('loginFieldSet', '
+	<p>Введите данные в форму ниже, чтобы зарегестрировать польвателя на сайте.</p>'.
+	$this->errMessage.
+	$this->form, array('legend'=>'Регистарция','class'=>'form_white_box'));
+?>

@@ -1,52 +1,9 @@
-<script type="text/javascript">
-    // skitter slider plugin
-    $(function() {
-        var options = {};
-
-        options['label'] = true;
-        options['numbers'] = true;
-        options['preview'] = true;
-        options['velocity'] = 2500;
-        options['dots'] = true;
-        //options['focus'] = true;
-        //options['focus_position'] = 'leftTop';
-        //options['controls'] = true;
-        //options['controls_position'] = 'rightTop';
-        options['hideTools'] = true;
-        options['animation'] = 'random';
-        //options['easing_default'] = 'random';
-        options['interval'] = 5000;
-        options['xml'] = '../xml/skitter_slider.xml';
-
-        if (document.location.search) {
-            var array = document.location.search.split('=');
-            var param = array[0].replace('?', '');
-            var value = array[1];
-
-            if (param == 'animation') {
-                options.animation = value;
-            }
-            else if (param == 'type_navigation') {
-                if (value == 'dots_preview') {
-                    $('.border_box').css({'marginBottom': '40px'});
-                    options['dots'] = true;
-                    options['preview'] = true;
-                } else {
-                    options[value] = true;
-                    if (value == 'dots')
-                        $('.border_box').css({'marginBottom': '40px'});
-                }
-            }
-        }
-
-        $('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
-    });
-</script>
 <div class="border_box">
 	<div class="box_skitter box_skitter_large">
+
 	</div>
 </div>
 
 <p>
-Сделано пока совсем не много, но не все сразу, постепенно вырастем.<br>Регистрация будет открыта в ближайшее время.
+Сделано пока совсем не много, но не все сразу, постепенно вырастем.<br/>Регистрация будет открыта в ближайшее время.
 </p>
