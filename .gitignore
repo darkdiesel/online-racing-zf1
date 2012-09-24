@@ -1,3 +1,4 @@
 .idea/
 .data/logs/application.log
 .data/logs/errors.log
+/nbproject/private/
