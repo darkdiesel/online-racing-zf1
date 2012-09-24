@@ -179,34 +179,69 @@ body{
             clear:both;
             padding:20px 15px 10px 15px;
 		}
-            #footer .socialNetworks{
-                border:1px solid #0E0E0E;
-                border-radius:5px;
-                background:rgba(113, 113, 113, 0.15);
-                display:inline-block;
-                position:absolute;
-                bottom:10px;
-                right:15px;
-                padding:5px;
-                height:50px;
+            #footer .footer_box{
+                position:relative;
+                height:120px;
             }
-                #footer .socialNetworks a{
-                    display:inline-block;
+                #footer .footer_left{
+                    float:left;
+                    width:200px;
                 }
-                #footer .socialNetworks .socnet{
-                    width:50px;
-                    height:50px;
-                    display:inline-block;
+                #footer .footer_center{
+                    float:left;
+                    margin:0 7px;
+                    width:570px;
                 }
-                #footer .socialNetworks .vk{
-                    background:url("../img/socNet_Sprite.gif") no-repeat 0 0;
+                #footer .footer_right{
+                    width:200px;
+                    float:right;
                 }
-                #footer .socialNetworks .fb{
-                    background:url("../img/socNet_Sprite.gif") no-repeat -50px 0;
-                }
-                #footer .socialNetworks .tw{
+                    /*block for social liveinternet*/
+                    #footer .footer_right .liveinternet{
+                        position:absolute;
+                        right:5px;
+                        top:15px;
+                    }
+                    #footer .copyright{
+                        color:#B1B1B1;
+                        font-size:11px;
+                        text-align:center;
+                        position:relative;
+                        top:100px;
+                    }
+                    #footer .footer_logo{
+                        position:relative;
+                        top:30px;
+                    }
+                    /*block for social network*/
+                    #footer .socialNetworks{
+                        border:1px solid #0E0E0E;
+                        border-radius:5px;
+                        background:rgba(113, 113, 113, 0.15);
+                        display:inline-block;
+                        position:absolute;
+                        bottom:5px;
+                        right:5px;
+                        padding:5px;
+                        height:50px;
+                    }
+                        #footer .socialNetworks a{
+                            display:inline-block;
+                        }
+                        #footer .socialNetworks .socnet{
+                            width:50px;
+                            height:50px;
+                            display:inline-block;
+                        }
+                        #footer .socialNetworks .vk{
+                            background:url("../img/socNet_Sprite.gif") no-repeat 0 0;
+                        }
+                        #footer .socialNetworks .fb{
+                            background:url("../img/socNet_Sprite.gif") no-repeat -50px 0;
+                        }
+                        #footer .socialNetworks .tw{
 
-                }
+                        }
 .clearfix:after{
     clear:both;
     content:".";
@@ -214,7 +249,7 @@ body{
     height:0;
     visibility:hidden;
 }
-
+/*forms*/
 fieldset.form_white_box{
 
 }
@@ -300,7 +335,6 @@ form#userRestorePasswd{
         display:inline-block;
         margin:0 20px 0px 10px;
     }
-
 /*Messages*/
 div.messages{
     padding: 10px 20px 10px 40px;

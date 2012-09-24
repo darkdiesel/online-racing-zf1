@@ -1,18 +1,17 @@
-﻿<!-- Place this tag where you want the +1 button to render. -->
-<div class="g-plusone" data-annotation="inline" data-width="300"></div>
-
-<!-- Place this tag after the last +1 button tag. -->
-<script type="text/javascript">
-  window.___gcfg = {lang: 'ru'};
-
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-<div class="socialNetworks">
-	<a href="http://vk.com/OnlineRacingNet" target="_blank"><div class="socnet vk"></div></a>
-        <a href="http://www.facebook.com/OnlineRacingNet" target="_blank"><div class="socnet fb"></div></a>
+<div class="footer_box footer_left">
+<div class="footer_logo">
+    <a href="http://online-racing.net"><img src="../img/logo_small.png" alt=""></a>
 </div>
-<div>© 2012 Online-Racing.net</div>
+</div>
+<div class="footer_box footer_center">
+    <div class="copyright">2012 © Online-Racing.net</div>
+</div>
+<div class="footer_box footer_right">
+    <div class="liveinternet">
+        <?php echo $this->render("LiveInternet.phtml")?>
+    </div>
+    <div class="socialNetworks">
+        <a href="http://vk.com/OnlineRacingNet" target="_blank"><div class="socnet vk"></div></a>
+        <a href="http://www.facebook.com/OnlineRacingNet" target="_blank"><div class="socnet fb"></div></a>
+    </div>
+</div>

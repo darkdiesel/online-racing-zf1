@@ -32,6 +32,7 @@
             <div id="main" class="clearfix">
                 <div id="content">
                     <?php echo $this->layout()->content ?>
+                    <?php echo $this->render("googlePlusBtn.phtml")?>
                 </div>
                 <div id="left_sidebar">
                     <?php echo $this->render("left_sidebar.phtml") ?>
@@ -39,7 +40,7 @@
             </div>
         </div>
         <footer id="footer">
-            <?php echo $this->render("footer.phtml")?>
+		<?php echo $this->render("footer.phtml")?>
         </footer>
     </div>
     <?php echo $this->render("back_to_top.phtml")?>
