@@ -1,21 +1,21 @@
 <?php
-class Application_Model_Mod
-	protected $_id;
-	protected $_game_id;
-    protected $_name;
-    protected $_developer
-    protected $_year;
-	protected $_description;
 
-	public function __construct(array $options = null)
-    {
+class Application_Model_Mod {
+
+    protected $_id;
+    protected $_game_id;
+    protected $_name;
+    protected $_developer;
+    protected $_year;
+    protected $_description;
+
+    public function __construct(array $options = null) {
         if (is_array($options)) {
             $this->setOptions($options);
         }
     }
-	
-	public function __set($name, $value)
-    {
+
+    public function __set($name, $value) {
         $method = 'set' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
             throw new Exception('Invalid mod property');
@@ -23,8 +23,7 @@ class Application_Model_Mod
         $this->$method($value);
     }
 
-	public function __get($name)
-    {
+    public function __get($name) {
         $method = 'get' . $name;
         if (('mapper' == $name) || !method_exists($this, $method)) {
             throw new Exception('Invalid mod property');
@@ -32,8 +31,7 @@ class Application_Model_Mod
         return $this->$method();
     }
 
-    public function setOptions(array $options)
-    {
+    public function setOptions(array $options) {
         $methods = get_class_methods($this);
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -44,69 +42,58 @@ class Application_Model_Mod
         return $this;
     }
 
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->_id = (int) $id;
         return $this;
     }
- 
-    public function getId()
-    {
+
+    public function getId() {
         return $this->_id;
     }
 
-    public function setGameId($gameid)
-    {
+    public function setGameId($gameid) {
         $this->_game_id = (int) $gameid;
         return $this;
     }
- 
-    public function getGameId()
-    {
+
+    public function getGameId() {
         return $this->_game_id;
     }
 
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->_name = (string) $name;
         return $this;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->_name;
     }
 
-    public function setDeveloper($developer)
-    {
+    public function setDeveloper($developer) {
         $this->_developer = (string) $developer;
         return $this;
     }
 
-    public function getDeveloper()
-    {
+    public function getDeveloper() {
         return $this->_developer;
     }
 
-    public function setYear($year)
-    {
+    public function setYear($year) {
         $this->_year = (string) $year;
         return $this;
     }
 
-    public function getYear()
-    {
+    public function getYear() {
         return $this->_year;
     }
 
-    public function setDescription($descrpt)
-    {
+    public function setDescription($descrpt) {
         $this->_description = (string) $descrpt;
         return $this;
     }
 
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->_description;
     }
+
 }

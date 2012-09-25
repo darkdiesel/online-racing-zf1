@@ -26,7 +26,7 @@ class Application_Form_UserRegisterForm extends Zend_Form {
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
-                array('regex', false, '/^[a-z0-9_-]{3,20}$/'),
+                array('regex', false, '/^[a-zA-Z0-9_-]{3,20}$/'),
                 array('StringLength', true, array('min' => 3, 'max' => 20)),
                 new App_Validate_NoDbRecordExists('user', 'login')
             ),
