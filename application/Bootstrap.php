@@ -19,13 +19,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
         // setting the site in the title; possibly in the layout script:
-        $view->headTitle('Online-Racing.net');
-
-        // setting a separator string for segments:
-        $view->headTitle()->setSeparator(' - ');
-
+        $view->headTitle('Online-Racing.net')
+                ->setSeparator(' - '); // setting a separator string for segments
         //head meta
-
         $view->headMeta()
                 ->appendName('description', 'Site for online racing competition with rFactor games and mods and F1 news.')
                 ->appendName('keywords', 'F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
@@ -95,7 +91,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Registry::set('logger', $logger);
     }
 
-    public function _initTranslate() {
+    public function _initTranslate1() {
         /* $locales = array(
           'en_US','ru_RU'
           );
@@ -113,31 +109,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
           Zend_Registry::set('Zend_Translate', $translate); */
 
-        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'staging');
+        /* $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'staging');
 
-        $locales = $config->locales->toArray();
-        $locale = new Zend_Locale('auto');
+          $locales = $config->locales->toArray();
+          $locale = new Zend_Locale('auto');
 
-        $lang = array_key_exists($locale->getLanguage(), $locales) ? $locale->getLanguage() : $config->locales->key();
+          $lang = array_key_exists($locale->getLanguage(), $locales) ? $locale->getLanguage() : $config->locales->key();
+         */
+    }
+
+    public function _initRoutes() {
 
         Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');
         Zend_Controller_Front::getInstance()->registerPlugin(new App_Controller_Plugin_LangSelector());
-    }
-    
-    public function _initRoutes() {
+
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
         //$router->setGlobalParam('lang', 'en');
-        $router->removeDefaultRoutes();
+        //$router->removeDefaultRoutes();
         $router->addRoute(
-                'langmodcontrolleraction', 
-                new Zend_Controller_Router_Route('/:lang/:module/:controller/:action',
+                'langmodcontrolleraction', new Zend_Controller_Router_Route('/:lang/:module/:controller/:action',
                         array('lang' => ':lang')
                 )
         );
         $router->addRoute(
-                'langindex', 
-                new Zend_Controller_Router_Route('/:lang',
+                'langindex', new Zend_Controller_Router_Route('/:lang',
                         array('lang' => 'ru',
                             'module' => 'default',
                             'controller' => 'index',
@@ -145,8 +141,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 )
         );
         $router->addRoute(
-                'langcontroller', 
-                new Zend_Controller_Router_Route('/:lang/:controller',
+                'langcontroller', new Zend_Controller_Router_Route('/:lang/:controller',
                         array('lang' => 'ru',
                             'module' => 'default',
                             'controller' => 'index',
@@ -154,8 +149,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 )
         );
         $router->addRoute(
-                'langcontrolleraction', 
-                new Zend_Controller_Router_Route('/:lang/:controller/:action',
+                'controller', new Zend_Controller_Router_Route('/:controller',
+                        array('lang' => 'ru',
+                            'module' => 'default',
+                            'controller' => 'index',
+                            'action' => 'index')
+                )
+        );
+        $router->addRoute(
+                'langcontrolleraction', new Zend_Controller_Router_Route('/:lang/:controller/:action',
+                        array('lang' => 'ru',
+                            'module' => 'default',
+                            'controller' => 'index',
+                            'action' => 'index')
+                )
+        );
+        $router->addRoute(
+                'controlleraction', new Zend_Controller_Router_Route('/:controller/:action',
                         array('lang' => 'ru',
                             'module' => 'default',
                             'controller' => 'index',
@@ -163,4 +173,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 )
         );
     }
+
 }

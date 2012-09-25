@@ -6,5 +6,5 @@ if ($this->errMessage != "") {
 echo $this->fieldset('loginFieldSet', '
 	<p>Для востановления своего пароля введие e-mail адрес указаный при регистрации, на который вам будет выслан пароль.</p>'.
     $this->errMessage.
-    $this->form, array('legend'=>'Востановление пароля','class'=>'form_white_box'));
+    $this->form, array('legend'=>$this->translate('Восcтановление пароля'),'class'=>'form_white_box'));
 ?>

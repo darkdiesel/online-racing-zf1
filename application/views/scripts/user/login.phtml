@@ -6,5 +6,5 @@ if ($this->errMessage != "") {
 echo $this->fieldset('loginFieldSet', '
 	<p>Введите данные в форму ниже, чтобы авторизоваться на сайте.</p>'.
 	$this->errMessage.
-	$this->form, array('legend'=>'Авторизация','class'=>'form_white_box'));
+	$this->form, array('legend'=>$this->translate('Авторизация'),'class'=>'form_white_box'));
 ?>

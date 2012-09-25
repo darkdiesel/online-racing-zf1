@@ -2,6 +2,12 @@
 
 class Application_Form_UserRegisterForm extends Zend_Form {
 
+    protected function translate($str) {
+        $translate = new Zend_View_Helper_Translate();
+        $lang = Zend_Registry::get('Zend_Locale');
+        return $translate->translate($str, $lang);
+    }
+
     public function init() {
         // loading validators
         Zend_Loader::loadClass('App_Validate_EqualInputs');
@@ -14,8 +20,8 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         $this->setAttrib('class', 'white_box');
 
         $this->addElement('text', 'login', array(
-            'label' => 'Логин:',
-            'placeholder' => 'Логин',
+            'label' => $this->translate('Логин'),
+            'placeholder' => $this->translate('Логин'),
             'required' => true,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
@@ -33,7 +39,7 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         ));
 
         $this->addElement('text', 'email', array(
-            'label' => 'E-mail:',
+            'label' => 'E-mail',
             'placeholder' => 'E-mail',
             'required' => true,
             'class' => 'x_field',
@@ -52,8 +58,8 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         ));
 
         $this->addElement('password', 'password', array(
-            'label' => 'Пароль:',
-            'placeholder' => 'Пароль',
+            'label' => $this->translate('Пароль'),
+            'placeholder' => $this->translate('Пароль'),
             'required' => true,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim'),
@@ -69,8 +75,8 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         ));
 
         $this->addElement('password', 'confirmpassword', array(
-            'label' => 'Подтвердите пароль:',
-            'placeholder' => 'Подтвердите пароль',
+            'label' => $this->translate('Подтвердите пароль'),
+            'placeholder' => $this->translate('Подтвердите пароль'),
             'AllowEmpty' => false,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim'),
@@ -89,7 +95,7 @@ class Application_Form_UserRegisterForm extends Zend_Form {
                 new Zend_Form_Element_Captcha('captcha', array(
                     'ignore' => true, // игнорируем, чтобы не получать значение элемента при вызове
                     // метода getValues() нашей формы
-                    'label' => 'captchaLabel',
+                    //'label' => 'captchaLabel',
                     'captcha' => array(
                         'captcha' => 'ReCaptcha',
                         'pubKey' => '6LdvedYSAAAAALfZ46Sx1yYF75erQzJdkZ0OG2Kt', // для получения ключей, нужно зарегистроваться
@@ -110,14 +116,15 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => 'Зарегестрировать',
+            'label' => $this->translate('Зарегестрировать'),
         ));
 
         $this->addElement('reset', 'reset', array(
             'label' => "",
             'ignore' => true,
             'class' => 'btn',
-            'label' => 'Сбросить',
+            'label' => $this->translate('Сбросить'),
         ));
     }
+
 }

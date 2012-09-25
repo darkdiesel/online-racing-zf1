@@ -6,5 +6,5 @@ if ($this->errMessage != "") {
 echo $this->fieldset('loginFieldSet', '
 	<p>Вам на почту высланы данныя для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.</p>'.
 	$this->errMessage.
-	$this->form, array('legend'=>'Активация пользователя','class'=>'form_white_box'));
+	$this->form, array('legend'=>$this->translate('Активация пользователя'),'class'=>'form_white_box'));
 ?>

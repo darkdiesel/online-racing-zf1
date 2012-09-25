@@ -273,7 +273,7 @@ form.white_box:after{
     width:280px;
 }
     form.white_box label.required:after{
-        content:"*";
+        content:" *";
         color:red;
     }
     form.white_box label.error{

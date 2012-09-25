@@ -1,0 +1,141 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Online-Racing.net\n"
+"POT-Creation-Date: 2012-09-25 16:58+0300\n"
+"PO-Revision-Date: 2012-09-25 16:58+0300\n"
+"Last-Translator: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
+"Language-Team: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
+"Language: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;translate;$this->translate\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: d:\\dev\\localhost\\online-racing\\application"
+"\\controllers\n"
+"X-Poedit-SearchPath-1: d:\\dev\\localhost\\online-racing\\application"
+"\\forms\n"
+"X-Poedit-SearchPath-2: d:\\dev\\localhost\\online-racing\\application\\views"
+"\\scripts\\user\n"
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:21
+#: d:\dev\localhost\online-racing\application\views\scripts\user/login.phtml:9
+msgid "Авторизация"
+msgstr "Authorization"
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:94
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:89
+msgid "Регистрация"
+msgstr "Registration"
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:159
+#: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:9
+msgid "Активация пользователя"
+msgstr "User activation"
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:223
+msgid "Восстановление пароля"
+msgstr "Password reminder"
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:246
+msgid "Просмотр профиля"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:251
+msgid "Сообщения"
+msgstr "Messages"
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:256
+msgid "Настройки профиля"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:261
+msgid "Редактирование профиля"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:29
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:30
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:59
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:60
+msgid "Пароль"
+msgstr "Password"
+
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:40
+msgid "Запомнить меня"
+msgstr "Remember me"
+
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:46
+msgid "Войти"
+msgstr "Login"
+
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:52
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:124
+msgid "Сбросить"
+msgstr "Reset"
+
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:21
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:22
+msgid "Логин"
+msgstr "Login"
+
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:76
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:77
+msgid "Подтвердите пароль"
+msgstr "Confirm password"
+
+#: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:117
+msgid "Зарегестрировать"
+msgstr "Register"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:39
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:50
+msgid "Поле обязательно для заполнения"
+msgstr "Field is required"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:35
+msgid "Длина поля должна быть от 3 до 20 символов"
+msgstr "Field length must be between 3 and 20 characters"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:36
+msgid "Поле должно содержать только буквы и цивры, а также символы '-' и '_'"
+msgstr ""
+"Field Name must be included only letters and digits , symbols '-' and '_'"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:40
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:41
+msgid "Длина поля должна быть от 5 до 50 символов"
+msgstr "Field length must be between 5 and 50 characters"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:42
+msgid "Пожалуйста введите правильный e-mail адрес. Например user@domain.com"
+msgstr "Please enter a valid e-mail address. For example user@domain.com"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:46
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:47
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:51
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:52
+msgid "Длина поля должна быть от 6 до 25 символов"
+msgstr "Field length must be between 6 and 25 characters"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:53
+msgid "Пароли должны совпадать"
+msgstr "Passwords must be matched"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/restorepasswd.phtml:9
+msgid "Восcтановление пароля"
+msgstr "Password reminder"
+
+#~ msgid "Поле 'Логин' обязательно"
+#~ msgstr "Field 'Login' is required"
+
+#~ msgid "Поле 'E-mail' обязательно"
+#~ msgstr "Field 'E-mail' address is required"
+
+#, fuzzy
+#~ msgid "Поле 'Password' обязательноPassword is required."
+#~ msgstr "Field 'E-mail' address is required"

@@ -15,7 +15,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
 
         // Add an email element
         $this->addElement('text', 'email', array(
-            'label' => 'E-mail:',
+            'label' => 'E-mail',
             'placeholder' => 'E-mail',
             'required' => true,
             'class' => 'x_field',
@@ -26,8 +26,8 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             )
         ));
         $this->addElement('text', 'confirmemail', array(
-            'label' => 'Подтвердите E-mail:',
-            'placeholder' => 'E-mail',
+            'label' => 'Подтвердите E-mail',
+            'placeholder' => 'Подтвердите E-mail',
             'AllowEmpty' => false,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),

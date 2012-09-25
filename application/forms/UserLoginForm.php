@@ -2,6 +2,12 @@
 
 class Application_Form_UserLoginForm extends Zend_Form {
 
+    protected function translate($str) {
+        $translate = new Zend_View_Helper_Translate();
+        $lang = Zend_Registry::get('Zend_Locale');
+        return $translate->translate($str, $lang);
+    }
+
     public function init() {
         // Set the method for the display form to POST
         $this->setMethod('post');
@@ -23,8 +29,8 @@ class Application_Form_UserLoginForm extends Zend_Form {
         ));
 
         $this->addElement('password', 'loginpassword', array(
-            'label' => 'Пароль:',
-            'placeholder' => 'Пароль',
+            'label' => $this->translate('Пароль'),
+            'placeholder' => $this->translate('Пароль'),
             'required' => true,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim'),
@@ -34,19 +40,19 @@ class Application_Form_UserLoginForm extends Zend_Form {
         ));
 
         $this->addElement('checkbox', 'remember', array(
-            'label' => 'Запомнить меня',
+            'label' => $this->translate('Запомнить меня'),
         ));
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => 'Войти',
+            'label' => $this->translate('Войти'),
         ));
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
-            'label' => 'Сбросить',
+            'label' => $this->translate('Сбросить'),
         ));
     }
 
