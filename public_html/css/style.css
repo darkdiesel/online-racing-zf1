@@ -1,32 +1,32 @@
-﻿html, body {
+html, body {
     height:100%;
     margin:0;
     padding:0;
 }
 
 body{
-	background:url("../img/background.png") fixed;
+    background:url("../img/background.png") fixed;
 }
 #page_wrapper{
-	min-height: 100%;
-	position:relative;
-	width:1024px;
-	margin:0 auto;
-	padding:0;
-	background:url("../img/main_hor_sprite.png") repeat-y center;
-	box-shadow:0 20px 50px #000000;
+    min-height: 100%;
+    position:relative;
+    width:1024px;
+    margin:0 auto;
+    padding:0;
+    background:url("../img/main_hor_sprite.png") repeat-y center;
+    box-shadow:0 20px 50px #000000;
 }
-	#page{
-		padding-bottom: 150px;
-		
-	}
-		#header{
-			border-bottom:2px solid #8C8C8C;
-			width:1024px;
-			height:140px;
-			background:url("../img/vert_sprite.png") repeat-x 0 0;
-			
-		}
+    #page{
+        padding-bottom: 150px;
+    }
+        #header{
+            border-bottom:2px solid #8C8C8C;
+            width:1024px;
+            height:170px;
+            background:url("../img/vert_sprite.png") repeat-x 0 0;
+            position:relative;
+            overflow:hidden;
+        }
             #logo_box{
                 position:absolute;
                 padding: 20px 0 0 20px;
@@ -34,6 +34,40 @@ body{
                 #logo{
 
                 }
+            #header .moving_text{
+                font-family:"Press Start 2P";
+                font-size:10px;
+                line-height:10px;
+                background:url("../img/moving_text_bgr.png");
+                border:2px solid #CBD78A;
+                color:#D3D221;
+                position:absolute;
+                width:1010px;
+                bottom:0;
+                height:20px;
+                padding:5px 5px;
+                overflow:hidden;
+                box-shadow:inset 0px 0px 9px 2px #999651;
+            }
+                #header .moving_text marquee{
+
+                }
+                    #header .moving_text marquee .header_news{
+
+                    }
+                        #header .moving_text marquee .header_news li{
+                            display:inline-block;
+                            margin-right:20px;
+                        }
+                        #header .moving_text marquee .header_news li:before{
+                            content:">>";
+                            margin-right:10px;
+                            font-size:7px;
+                        }
+                            #header .moving_text marquee .header_news li a{
+                                color:#D3D221;
+                                text-decoration:underline;
+                            }
         #main_wrapper{
             position:relative;
         }
@@ -50,42 +84,42 @@ body{
                 /*border-right:1px solid #E0E0E0;*/
             }
             	#left_sidebar .sidebar_box{
-            		margin:0px 0 5px 0;
+                    margin:0px 0 5px 0;
+                    border-radius: 5px 5px 0 0;
             	}
             	#left_sidebar .sidebar_box:after{
-            		background:url("../img/shadow_sprite.png") no-repeat 0 -29px;
-            		display:block;
-            		height:20px;
-            		content:"";
+                    background:url("../img/shadow_sprite.png") no-repeat 0 -29px;
+                    display:block;
+                    height:20px;
+                    content:"";
             	}
-            		#left_sidebar .sidebar_box .sidebar_box_title{
-            			padding:5px 10px;
-            			background:url("../img/vert_sprite.png") repeat-x 0 -10px;
-            			border-radius:7px 7px 0 0;
-            			border:1px solid #221F1F;
-            			color:#F7F7F7;
-                        font-weight:bold;
-                        font-size:13px;
-                        font-family:"Arial";
-            		}
+                        #left_sidebar .sidebar_box .sidebar_box_title{
+                            background:url("../img/vert_sprite.png") repeat-x #0D0C0C;
+                            border-radius: 5px 5px 0 0;
+                            color:#DCDCDC;
+                            font-size:12px;
+                            font-weight:bold;
+                            padding:10px 6px;
+                            line-height:12px;
+                        }
             		#left_sidebar .sidebar_box .sidebar_box_content{
-            			padding:5px 10px;
-            			border:1px solid #CACACA;
-                        border-top:none;
-                        background:none repeat scroll 0 0 #FBFBFB;
-                        border-radius:0 0 7px 7px;
+                            padding:5px 10px;
+                            border:1px solid #CACACA;
+                            border-top:none;
+                            background:none repeat scroll 0 0 #FBFBFB;
+                            border-radius:0 0 7px 7px;
             		}
 			#content{
-                overflow:visible;
-                margin-left:255px;
-                margin-right:-1024px;
-                width:744px;
-                float:left;
-			    padding:20px 15px 10px 10px;
-				text-align:justify;
-                border-left:1px solid #E0E0E0;
-                height:100%;
-                min-height:100px;
+                            overflow:visible;
+                            margin-left:255px;
+                            margin-right:-1024px;
+                            width:744px;
+                            float:left;
+                            padding:20px 15px 10px 10px;
+                            text-align:justify;
+                            border-left:1px solid #E0E0E0;
+                            height:100%;
+                            min-height:100px;
 			}
                 #content h2.page_title{
                     font-family:"PT Serif";
@@ -203,7 +237,7 @@ body{
                         top:15px;
                     }
                     #footer .copyright{
-                        color:#B1B1B1;
+                        color:#848484;
                         font-size:11px;
                         text-align:center;
                         position:relative;
@@ -213,6 +247,9 @@ body{
                         position:relative;
                         top:30px;
                     }
+                        #footer .footer_logo a {
+                            display:block;
+                        }
                     /*block for social network*/
                     #footer .socialNetworks{
                         border:1px solid #0E0E0E;

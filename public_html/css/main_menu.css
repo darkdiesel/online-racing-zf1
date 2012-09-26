@@ -1,20 +1,21 @@
 #box_main_menu{
     position:absolute;
     right:0;
-    top:50px;
-    padding:5px 20px 0 0;
-
+    bottom:60px;
+    padding:0;
 }
     #main_menu{
         position:relative;
         height:29px;
-        background:url("../img/vert_sprite.png") repeat-x 0 -164px;
+        background:url("../img/nav_bgr.png");
         padding:10px 20px;
         margin:0;
         overflow:hidden;
-        border:2px solid;
-        border-radius:10px;
-		box-shadow:0 0 10px #767373;
+        border:3px solid gray;
+        border-right:none;
+        border-radius:10px 0 0 10px;
+        float:right;
+        box-shadow:-2px 0px 9px 2px #767373;
     }
         #main_menu li{
             float: left;
