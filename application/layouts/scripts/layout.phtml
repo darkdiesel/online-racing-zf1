@@ -5,21 +5,20 @@
         <?php echo $this->headMeta() ?>
         <?php echo $this->headLink() ?>
         <?php echo $this->headStyle() ?>
-        <link href='http://fonts.googleapis.com/css?family=PT+Serif&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-            <link href='http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-            <?php echo $this->headScript() ?>
-            <!-- Google analytics -->
-            <script type="text/javascript">
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-32674101-2']);
-                _gaq.push(['_trackPageview']);
 
-                (function() {
-                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                })();
-            </script>
+        <?php echo $this->headScript() ?>
+        <!-- Google analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-32674101-2']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
     </head>
     <body>
         <?php echo $this->render("admin_toolbar.phtml") ?>
@@ -34,7 +33,6 @@
                         <!-- Content -->
                         <div id="content">
                             <?php echo $this->layout()->content ?>
-                            <?php echo $this->render("googlePlusBtn.phtml") ?>
                         </div>
                         <!-- Left sidebar -->
                         <div id="left_sidebar">
@@ -47,6 +45,7 @@
                 </footer>
             </div>
             <?php echo $this->render("back_to_top.phtml") ?>
+            <?php echo $this->render("share_block.phtml") ?>
         </div>
     </body>
 </html>

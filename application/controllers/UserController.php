@@ -147,7 +147,7 @@ class UserController extends Zend_Controller_Action {
                 $html = new Zend_View();
                 $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
                 // e-mail template values for admin
-                $html->assign('login', $user->login);
+                $html->assign('login', "Глава сайта Online-racing.net");
                 $html->assign('content', 'На сайте появился новый пользователь.<br/>' .
                         'Регистрационные данные:<br/><br/>' .
                         'Логин: <strong>' . $user->login . '</strong><br/>' .
@@ -206,7 +206,7 @@ class UserController extends Zend_Controller_Action {
                     $html = new Zend_View();
                     $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
                     // e-mail template values for admin
-                    $html->assign('login', $user->login);
+                    $html->assign('login', "Глава сайта Online-racing.net");
                     $html->assign('content', 'На сайте активирован новый пользователь.<br/>' .
                             'Данные пользователя:<br/><br/>' .
                             'E-mail: <strong>' . $userEmail . '</strong><br/>');

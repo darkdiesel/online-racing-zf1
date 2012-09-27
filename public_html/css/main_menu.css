@@ -1,12 +1,13 @@
 #box_main_menu{
     position:absolute;
     right:0;
-    bottom:60px;
-    padding:0;
+    bottom:50px;
+    padding:10px 0 10px 10px;
+    overflow:hidden;
 }
     #main_menu{
         position:relative;
-        height:29px;
+        height:32px;
         background:url("../img/nav_bgr.png");
         padding:10px 20px;
         margin:0;
@@ -61,3 +62,14 @@
                 #main_menu li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
                     border: none;
                 }
+            #main_menu li.expanded ul
+            {
+                position:absolute;
+                left:0;
+                top:35px;
+                display:none;
+                float:left;
+            }
+            #main_menu li.expanded:hover ul{
+                display: block;
+            }

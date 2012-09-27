@@ -41,17 +41,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ->appendHttpEquiv('Content-Language', 'en-US')
                 ->appendHttpEquiv('Content-Language', 'ru');
 
+        // StyleSheets
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
         //$view->headLink()->appendStylesheet($view->baseUrl("css/admin_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
 
+        // Google fonts
+        $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=PT+Serif&subset=latin,cyrillic", "screen, print");
+        $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
+
+        // JS Scripts
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.2.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
 
+        // Share block script
+        $view->headScript()->appendFile($view->baseUrl("js/share.js"));
+
+        // Script for main menu
         $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.my.js"));
 
+        // Script for count down block
         $view->headScript()->appendFile($view->baseUrl("js/jquery.lwtCountdown.js"));
 
         // All Common scripts

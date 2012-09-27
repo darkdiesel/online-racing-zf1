@@ -3,7 +3,6 @@ html, body {
     margin:0;
     padding:0;
 }
-
 body{
     background:url("../img/background.png") fixed;
 }
@@ -25,7 +24,6 @@ body{
             height:170px;
             background:url("../img/vert_sprite.png") repeat-x 0 0;
             position:relative;
-            overflow:hidden;
         }
             #logo_box{
                 position:absolute;
@@ -36,18 +34,18 @@ body{
                 }
             #header .moving_text{
                 font-family:"Press Start 2P";
-                font-size:10px;
-                line-height:10px;
+                font-size:11px;
+                line-height:11px;
                 background:url("../img/moving_text_bgr.png");
-                border:2px solid #CBD78A;
-                color:#D3D221;
+                border:2px solid #C1C1C1;
+                color:#C5C5C2;
                 position:absolute;
                 width:1010px;
                 bottom:0;
                 height:20px;
                 padding:5px 5px;
                 overflow:hidden;
-                box-shadow:inset 0px 0px 9px 2px #999651;
+                box-shadow:inset 0px 0px 9px 5px #000;
             }
                 #header .moving_text marquee{
 
@@ -57,17 +55,24 @@ body{
                     }
                         #header .moving_text marquee .header_news li{
                             display:inline-block;
-                            margin-right:20px;
+                            margin-right:40px;
                         }
                         #header .moving_text marquee .header_news li:before{
-                            content:">>";
+                            content:"";
                             margin-right:10px;
                             font-size:7px;
+                            background:url('../favicon.ico') no-repeat center center;
+                            width:16px;
+                            height:16px;
+                            display:inline-block;
                         }
                             #header .moving_text marquee .header_news li a{
-                                color:#D3D221;
+                                color:#E1E1E0;
                                 text-decoration:underline;
                             }
+                                #header .moving_text marquee .header_news li a:hover{
+                                    text-decoration:none;
+                                }
         #main_wrapper{
             position:relative;
         }
@@ -161,58 +166,51 @@ body{
                 }
 		/*scroll to top button*/
 		#back-top {
-			position: fixed;
-			bottom: 30px;
-			margin-left: -120px;
+                    position:fixed;
+                    bottom:10px;
+                    margin-left:-85px;
+                    display:none;
 		}
 			#back-top a {
-				width: 90px;
-				display: block;
-				text-align: center;
-				font: 11px/100% Arial, Helvetica, sans-serif;
-				text-transform: uppercase;
-				text-decoration: none;
-				color: #bbb;
-				/* background color transition */
-				-webkit-transition: 1s;
-				-moz-transition: 1s;
-				transition: 1s;
-				font-weight:bold;
+                            width:65px;
+                            display:block;
+                            text-align:center;
+                            font:10px/100% Arial, Helvetica, sans-serif;
+                            text-transform:uppercase;
+                            text-decoration:none;
+                            color:#bbb;
+                            font-weight:bold;
+                            opacity:0.5;
+                            
 			}
 			#back-top a:hover {
-				color: #bbbbbb;
+                            color:#bbbbbb;
 			}
-				/* arrow icon (span tag) */
 				#back-top span {
-					width: 90px;
-					height: 130px;
-					display: block;
-					margin-bottom: 7px;
-					background: #ddd url("../img/scroll_to_top.gray.png") no-repeat center center;
-					/* rounded corners */
-					-webkit-border-radius: 15px;
-					-moz-border-radius: 15px;
-					border-radius: 15px;
-					/* background color transition */
-					-webkit-transition: 1s;
-					-moz-transition: 1s;
-					transition: 1s;
+                                    width:65px;
+                                    height:110px;
+                                    display:block;
+                                    margin-bottom:7px;
+                                    background:#ddd url("../img/scroll_to_top.gray.png") no-repeat center center;
+                                    -webkit-border-radius:15px;
+                                    -moz-border-radius:15px;
+                                    border-radius:15px;
+                                    -webkit-transition:1s;
+                                    -moz-transition:1s;
+                                    transition:1s;
 				}
-					#back-top a:hover span {
-						background-color: #777;
-					}
-		#footer{
-			border-top:2px solid #8C8C8C;
-			height:120px;
-			width:994px;
-			position:absolute;
-			bottom:0;
-			background:url("../img/vert_sprite.png") repeat-x 0 0;
-			margin:0 auto;
-			display:inline;
+        #footer{
+            border-top:2px solid #8C8C8C;
+            height:120px;
+            width:994px;
+            position:absolute;
+            bottom:0;
+            background:url("../img/vert_sprite.png") repeat-x 0 0;
+            margin:0 auto;
+            display:inline;
             clear:both;
             padding:20px 15px 10px 15px;
-		}
+        }
             #footer .footer_box{
                 position:relative;
                 height:120px;
@@ -244,9 +242,8 @@ body{
                         top:100px;
                     }
                     #footer .footer_logo{
-                        position:relative;
-                        top:30px;
-                    }
+                        margin-top:30px;
+                    }   
                         #footer .footer_logo a {
                             display:block;
                         }
@@ -386,9 +383,7 @@ div.messages{
         border-color:#ED541D;
         background:url("../img/error.png") no-repeat 10px 7px #FEF5F1;
         color:#8C2E0B;
-
     }
-
 label.error {
     color:#BE3838;
     font-family:serif;
@@ -403,3 +398,39 @@ label.valid {
     text-indent:-9999px;
     width:24px;
 }
+.soc_buttons {
+    position: absolute;
+    right:0;
+    top:15px;
+    width:70px;
+    left:-100px;
+    border:1px solid #fff;
+}
+
+.soc_buttons a {
+    display: block;
+}
+
+div.shareblock{
+    position: absolute;
+    right:-20px;
+    top:0;
+    opacity:0.5;
+}
+    div.shareblock #shareblock{
+        background:#F0F0F0;
+        padding:10px;
+        border-radius:10px;
+        border:2px solid #706E88;
+    }
+        div.shareblock #shareblock a{
+            border:3px solid #BCBBBB;
+            border-radius:10px;
+
+        }
+        div.shareblock #shareblock:hover a{
+            opacity:0.5;
+        }
+            div.shareblock #shareblock a:hover{
+                opacity:1;
+            }

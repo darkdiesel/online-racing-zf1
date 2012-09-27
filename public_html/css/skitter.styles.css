@@ -50,7 +50,7 @@
 -------------------------------------------------------------- */
 .box_skitter .label_skitter 	{ z-index:150;position:absolute;bottom:0px;left:0px;display:none; }
 .box_skitter .label_skitter 	{ z-index:150;position:absolute;bottom:0px;left:0px;color:#fff;display:none;opacity:0.8;background:#000; }
-.box_skitter .label_skitter p 	{ padding:10px;margin:0;font:normal 22px arial,tahoma;letter-spacing:-1px; }
+.box_skitter .label_skitter p 	{ padding:10px;margin:0;font:normal 18px arial,tahoma;letter-spacing:-1px;text-align:justify;word-wrap:break-word;overflow:hidden;}
 .box_skitter .info_slide * 		{ font-family:Consolas,arial,tahoma !important; }
 .box_skitter .progressbar 		{ background:#000; position:absolute; top:5px;left:15px;height:5px; width: 200px; z-index:99; border-radius:20px; }
 
