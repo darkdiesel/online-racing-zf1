@@ -84,4 +84,9 @@ class Application_Model_UserMapper
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
   }
+  
+  public function  getUserRole($id){
+      $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
+      return $result->role_id;
+  }
 }

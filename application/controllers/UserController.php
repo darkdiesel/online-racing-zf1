@@ -13,7 +13,7 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function loginAction() {
-        if (Zend_Auth::getInstance()->getStorage()->read()->status != 'guest') {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');
         }
 
@@ -25,16 +25,19 @@ class UserController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $bootstrap = $this->getInvokeArg('bootstrap');
+
+                $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+
+                $authAdapter->setTableName('user')
+                        ->setIdentityColumn('email')
+                        ->setCredentialColumn('password');
+
                 $auth = Zend_Auth::getInstance();
                 $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
-                $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
-                $authAdapter = new Zend_Auth_Adapter_DbTable(
-                                $adapter, 'user', 'email', 'password'
-                );
 
-                $authAdapter->setIdentity($form->loginemail->getValue());
-                $authAdapter->setCredential(sha1($form->loginpassword->getValue()));
+                $authAdapter->setIdentity($form->loginemail->getValue())
+                        ->setCredential(sha1($form->loginpassword->getValue()));
+
                 $result = $auth->authenticate($authAdapter);
 
                 switch ($result->getCode()) {
@@ -45,27 +48,15 @@ class UserController extends Zend_Controller_Action {
                                 array('login', 'id'), null);
                         switch ($mapper->checkUserStatus($storage_data->id)) {
                             case '1':
-                                //rewrite session for guest
-                                $storage_data = new stdClass();
-                                $storage_data->status = 'guest';
-                                Zend_Auth::getInstance()->getStorage()->write($storage_data);
-
                                 //print message
                                 $this->view->errMessage = 'Пользователь с этими данными не активирован! Перейдите на <a href="' . $this->view->baseUrl('user/activate') . '">страницу</a> для активации.';
                                 break;
                             case '2':
-                                //rewrite session for guest
-                                $storage_data = new stdClass();
-                                $storage_data->status = 'guest';
-                                Zend_Auth::getInstance()->getStorage()->write($storage_data);
-
                                 //print message
                                 $this->view->errMessage = 'Пользователь с этими данными заблокирован! Абротитесь к администрации сайта для разблокировки.';
                                 break;
                             default:
                                 $storage = $auth->getStorage('online-racing');
-                                //$user_model = new Application_Model_DbTable_User();
-                                $storage_data->status = 'user';
                                 $storage->write($storage_data);
                                 $this->_helper->redirector('index', 'index');
                                 break;
@@ -73,11 +64,6 @@ class UserController extends Zend_Controller_Action {
                         break;
                     default:
                         /** Выполнить действия для остальных ошибок * */
-                        //rewrite session for guest
-                        $storage_data = new stdClass();
-                        $storage_data->status = 'guest';
-                        Zend_Auth::getInstance()->getStorage()->write($storage_data);
-
                         $this->view->errMessage .= 'Вы ввели неверное имя пользователя или пароль. Повторите ввод.<br />Забыди <a href="' . $this->view->baseUrl('user/restorepasswd') . '">пароль?</a>';
                         break;
                 }
@@ -90,6 +76,10 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function registerAction() {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_helper->redirector('index', 'index');
+        }
+
         // page title
         $this->view->headTitle($this->view->translate('Регистрация'));
 
@@ -171,6 +161,10 @@ class UserController extends Zend_Controller_Action {
     }
 
     public function activateAction() {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_helper->redirector('index', 'index');
+        }
+
         // page title
         $this->view->headTitle($this->view->translate('Активация пользователя'));
 
@@ -276,6 +270,7 @@ class UserController extends Zend_Controller_Action {
 
     public function viewAction() {
         // page title
+        $this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
         $this->view->headTitle($this->view->translate('Просмотр профиля'));
     }
 

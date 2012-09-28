@@ -44,9 +44,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // StyleSheets
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-        //$view->headLink()->appendStylesheet($view->baseUrl("css/admin_menu.css"));
+        //
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
+
+        // master menu
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+        $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
+        //$mapper = new Application_Model_UserMapper();
+
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            if ($storage_data->id == 1) {
+                $view->headLink()->appendStylesheet($view->baseUrl("css/master_menu.css"));
+                $view->showMasterPanel = 1;
+            } else {
+                $view->showMasterPanel = 0;
+            }
+        }
 
         // Google fonts
         $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=PT+Serif&subset=latin,cyrillic", "screen, print");
@@ -79,14 +93,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     // Initialisation Authorisation
     public function _initAuth() {
-        $auth = Zend_Auth::getInstance();
-        $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
-        $data = $auth->getStorage()->read();
-        if (!isset($data->status)) {
-            $storage_data = new stdClass();
-            $storage_data->status = 'guest';
-            $auth->getStorage()->write($storage_data);
-        }
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
     }
 
     public function _initAcl() {
@@ -102,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Registry::set('logger', $logger);
     }
 
-    public function _initTranslate1() {
+    public function _initTranslate() {
         /* $locales = array(
           'en_US','ru_RU'
           );

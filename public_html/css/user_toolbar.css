@@ -1,39 +1,39 @@
-﻿#user_toolbar{
-	position:absolute;
-	right:0;
-	display:inline-block;
-	padding:5px 25px 0 0;
+#user_toolbar{
+    position:absolute;
+    right:0;
+    display:inline-block;
+    padding:5px 25px 0 0;
 }
 	#user_toolbar #user_menu{
-		margin:0;
-		padding:0;
-		display:inline-block;
-		height:30px;
-		float:left;
+            margin:0;
+            padding:0;
+            display:inline-block;
+            height:30px;
+            float:left;
 	}
 		#user_toolbar #user_menu li{
-			list-style-type:none;
-			display:inline-block;
-			color:#F7F7F7;
-			margin-left:-5px;
-			padding:7px 10px 0 0;
-			height:16px;
-			font: bold 12px arial;
+                    list-style-type:none;
+                    display:inline-block;
+                    color:#F7F7F7;
+                    margin-left:-5px;
+                    padding:7px 10px 0 0;
+                    height:16px;
+                    font: bold 12px arial;
 		}
 			#user_toolbar #user_menu li a{
-                color:#F7F7F7;
-                text-decoration:underline;
+                            color:#F7F7F7;
+                            text-decoration:underline;
 			}
                 #user_toolbar #user_menu li a:hover{
                     color:#B5B0B0;
-					text-decoration:none;
+                    text-decoration:none;
                 }
         #user_toolbar .user{
-			display:inline;
-			float:right;
+            display:inline;
+            float:right;
         }
         	#user_toolbar .user .btn{
-        		height:18px;
+                    height:18px;
         	}
         #user_toolbar .login{
 			display:inline;
@@ -47,9 +47,11 @@
             }
                 #user_toolbar .dropdown-menu{
                     box-shadow:0 0 30px #4D95EB;
+                    z-index:99999;
                 }
                 #user_toolbar .login .dropdown-menu{
                     padding:5px 15px;
+                    z-index:99999;
                 }
                 #user_toolbar .login .dropdown-menu li{
                     display:block;
@@ -68,31 +70,31 @@
                     	margin-bottom:5px;
                     }
 					#user_toolbar .login .dropdown-menu li a:hover{
-						background:none;
-						text-decoration:underline;
+                                            background:none;
+                                            text-decoration:underline;
 					}
 					#user_toolbar .login .dropdown-menu form{
-						margin:0;
-						padding:0;
-						width:auto;
+                                            margin:0;
+                                            padding:0;
+                                            width:auto;
 					}
 						#user_toolbar .login .dropdown-menu form:after{
-							display:none;
+                                                    display:none;
 						}
 						#user_toolbar .login .dropdown-menu form dl{
-							padding:0;
-							border:none;
-							background:none;
+                                                    padding:0;
+                                                    border:none;
+                                                    background:none;
 						}
 							#user_toolbar .login .dropdown-menu form #remember-label{
-								float:right;
-								position:relative;
-								left:-85px;
+                                                            float:right;
+                                                            position:relative;
+                                                            left:-85px;
 							}
 							#user_toolbar .login .dropdown-menu form #remember-element{
 
 							}
 							#user_toolbar .login .dropdown-menu form #submit-element{
-								clear:both;
-								margin:20px 22px 0;
+                                                            clear:both;
+                                                            margin:20px 22px 0;
 							}

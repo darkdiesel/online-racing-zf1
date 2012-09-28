@@ -54,6 +54,8 @@ $(document).ready(function(){
         $(function() {
             var offset = $(".shareblock").offset();
             
+            var topPadding = 15;
+            
             if ($(window).scrollTop() > offset.top) {
                 $(".shareblock").stop().animate({
                     marginTop: $(window).scrollTop() - offset.top
@@ -73,14 +75,14 @@ $(document).ready(function(){
                     opacity:'0.5'
                 },300);
             });
-            var topPadding = 0;
+            
             $(window).scroll(function() {
                 if (offset == undefined) {
                     offset = $(".shareblock").offset();
                 }
                 if ($(window).scrollTop() > offset.top) {
                     $(".shareblock").stop().animate({
-                        marginTop: $(window).scrollTop() - offset.top + topPadding
+                        marginTop: $(window).scrollTop() - offset.top + $('body').css('padding-top').replace('px','')
                     },300);
                 }
                 else {

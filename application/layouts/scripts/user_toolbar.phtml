@@ -4,14 +4,29 @@
             <span>Добро пожаловать,</span>
         </li>
         <li>
-            <?php if (Zend_Auth::getInstance()->getStorage()->read()->status == 'guest') { ?>
-                <span><a href="<?php echo $this->baseUrl('user/login'); ?>">Гость</a></span>
+            <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+                <span><a href="<?php echo $this->baseUrl('user/view'); ?>"><?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?></a></span>
             <?php } else { ?>
-                <span><a href="<?php echo $this->baseUrl('user/info'); ?>"><?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?></a></span>
+                <span><a href="<?php echo $this->baseUrl('user/login'); ?>">Гость</a></span>
             <?php } ?>
         </li>
     </ul>
-    <?php if (Zend_Auth::getInstance()->getStorage()->read()->status == 'guest') { ?>
+    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+        <div class="user">
+            <div class="btn-group dropdown">
+                <a class="btn btn-primary" href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-user icon-white"></i> Выйти</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="<?php echo $this->baseUrl('user/view'); ?>"><i class="icon-briefcase"></i> Профиль</a><li>
+                    <li><a href="<?php echo $this->baseUrl('user/message'); ?>"><i class="icon-envelope"></i> Соощбщения</a><li>
+                    <li><a href="<?php echo $this->baseUrl('user/settings'); ?>"><i class="icon-wrench"></i> Настройки</a></li>
+                    <li><a href="<?php echo $this->baseUrl('user/edit'); ?>"><i class="icon-edit"></i> Редактировать</a></li>
+                    <li class="divider"></li>
+                    <li><a href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-remove"></i> Выйти</a></li>
+                </ul>
+            </div>
+        </div>
+    <?php } else { ?>
         <div class="login">
             <div class="btn-group dropdown">
                 <a class="btn btn-primary" href="<?php echo $this->baseUrl('user/login'); ?>"><i class="icon-user icon-white"></i> Войти</a>
@@ -28,21 +43,6 @@
                             <p><a class="reg_link" href="<?php echo $this->baseUrl('user/restorepasswd') ?>">Забыли пароль?</a></p>
                         </blockquote>
                     </li>
-                </ul>
-            </div>
-        </div>
-    <?php } else { ?>
-        <div class="user">
-            <div class="btn-group dropdown">
-                <a class="btn btn-primary" href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-user icon-white"></i> Выйти</a>
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="<?php echo $this->baseUrl('user/view'); ?>"><i class="icon-briefcase"></i> Профиль</a><li>
-                    <li><a href="<?php echo $this->baseUrl('user/message'); ?>"><i class="icon-envelope"></i> Соощбщения</a><li>
-                    <li><a href="<?php echo $this->baseUrl('user/settings'); ?>"><i class="icon-wrench"></i> Настройки</a></li>
-                    <li><a href="<?php echo $this->baseUrl('user/edit'); ?>"><i class="icon-edit"></i> Редактировать</a></li>
-                    <li class="divider"></li>
-                    <li><a href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-remove"></i> Выйти</a></li>
                 </ul>
             </div>
         </div>

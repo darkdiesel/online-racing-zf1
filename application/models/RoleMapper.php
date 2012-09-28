@@ -1,10 +1,10 @@
 <?php
-class Application_Model_RoleMapper
-{
-	protected $_dbTable;
 
-  public function setDbTable($dbTable)
-    {
+class Application_Model_RoleMapper {
+
+    protected $_dbTable;
+
+    public function setDbTable($dbTable) {
         if (is_string($dbTable)) {
             $dbTable = new $dbTable();
         }
@@ -14,25 +14,28 @@ class Application_Model_RoleMapper
         $this->_dbTable = $dbTable;
         return $this;
     }
- 
-  public function getDbTable()
-  {
-      if (null === $this->_dbTable) {
-          $this->setDbTable('Application_Model_DbTable_Role');
-      }
-      return $this->_dbTable;
-  }
 
-	public function fetchAll()
-  {
-      $resultSet = $this->getDbTable()->fetchAll();
-      $entries   = array();
-      foreach ($resultSet as $row) {
-          $entry = new Application_Model_Role();
-          $entry->setId($row->id)
-                ->setName($row->name);
-          $entries[] = $entry;
-      }
-      return $entries;
-  }
+    public function getDbTable() {
+        if (null === $this->_dbTable) {
+            $this->setDbTable('Application_Model_DbTable_Role');
+        }
+        return $this->_dbTable;
+    }
+
+    public function fetchAll() {
+        $resultSet = $this->getDbTable()->fetchAll();
+        $entries = array();
+        foreach ($resultSet as $row) {
+            $entry = new Application_Model_Role();
+            $entry->setId($row->id)
+                    ->setName($row->name);
+            $entries[] = $entry;
+        }
+        return $entries;
+    }
+
+    public function getRoleName($id) {
+        $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
+        return $result->name;
+    }
 }

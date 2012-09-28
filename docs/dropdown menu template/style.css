@@ -1,0 +1,52 @@
+body{
+}
+
+ul.main_menu{
+    border:1px solid red;
+    display:inline-block;
+    position: relative;
+}
+    ul.main_menu li{
+        float:left;
+        
+        border:1px solid green;
+        list-style-type:none;
+        position:relative;
+        display:block;
+        overflow:visible;
+    }
+        ul.main_menu li a{
+            
+        }
+        ul.main_menu li.expanded{
+
+        }
+        ul.main_menu li.expanded div{
+            position: relative;
+        }
+            ul.main_menu li.expanded ul.menu{
+                position: absolute;
+                display:none;
+                padding:0;
+            }
+            ul.main_menu li.expanded:hover ul.menu{
+                display:block;
+            }
+            ul.main_menu li.expanded:hover ul.menu li{
+                display:block;
+                position: relative;
+                overflow:visible;
+                float:none;
+            }
+            ul.main_menu li.expanded ul.menu li{
+                height: 20px;
+                float:none;
+                width:100%;
+                margin:0;
+            }
+            ul.main_menu li.expanded ul.menu li a{
+                display:block;
+                height:20px;
+                overflow: visible;
+                white-space: nowrap;
+            }
