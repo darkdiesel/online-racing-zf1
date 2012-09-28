@@ -3,25 +3,22 @@
     right:0;
     bottom:50px;
     padding:10px 0 10px 10px;
-    overflow:hidden;
 }
     #main_menu{
         position:relative;
-        height:32px;
         background:url("../img/nav_bgr.png");
         padding:10px 20px;
         margin:0;
-        overflow:hidden;
         border:3px solid gray;
         border-right:none;
         border-radius:10px 0 0 10px;
         float:right;
-        box-shadow:-2px 0px 9px 2px #767373;
+        box-shadow:-6px 0px 9px 2px #767373;
     }
         #main_menu li{
             float: left;
             list-style: none;
-            margin:0 5px;
+            margin:0px 5px;
         }
             #main_menu li.back{
                 background:url("../img/vert_sprite.png") repeat-x 0 -889px;
@@ -31,7 +28,7 @@
                 position: absolute;
                 border-radius:10px 10px;
                 border:1px solid;
-				box-shadow:0 0 5px #fff;
+                box-shadow:0 0 5px #fff;
             }
                 #main_menu li.back .left{
                     background:url("../img/vert_sprite.png") repeat-x 0 -889px;
@@ -62,14 +59,37 @@
                 #main_menu li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
                     border: none;
                 }
-            #main_menu li.expanded ul
-            {
-                position:absolute;
-                left:0;
-                top:35px;
-                display:none;
-                float:left;
+            #main_menu li.expanded{
+                 position:relative;   
             }
-            #main_menu li.expanded:hover ul{
-                display: block;
-            }
+                #main_menu li.expanded ul
+                {
+                    position:absolute;
+                    left:0;
+                    top:35px;
+                    display:none;
+                    float:left;
+                    background:#000;
+                    margin:0;
+                    z-index:9999999;
+                    margin:-1px 0 0 -10px;
+                    box-shadow:0 0 5px #fff;
+                    border-radius:10px;
+                    padding:7px 5px;
+                }
+                    #main_menu li.expanded ul li{
+                        display:block;
+                        width:100%;
+                        margin:0;
+                    }
+                        #main_menu li.expanded ul li:hover{
+                            background:#fff;
+                        }
+                        #main_menu li.expanded ul li a{
+                            width:100%;
+                            margin:0;
+                            text-align:left;
+                        }
+                #main_menu li.expanded:hover ul{
+                    display: block;
+                }
