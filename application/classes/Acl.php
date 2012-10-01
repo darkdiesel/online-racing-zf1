@@ -36,6 +36,7 @@ class Acl extends Zend_Acl {
 
 		// admin resources
 		$this->add(new Zend_Acl_Resource('admin_allow'));
+                $this->add(new Zend_Acl_Resource('article/message'), 'user_allow');
 				
 		// master resources
 		$this->add(new Zend_Acl_Resource('master_allow'));

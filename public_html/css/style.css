@@ -33,9 +33,7 @@ body{
 
                 }
             #header .moving_text{
-                font-family:"Press Start 2P";
-                font-size:11px;
-                line-height:11px;
+                
                 background:url("../img/moving_text_bgr.png");
                 border:2px solid #C1C1C1;
                 color:#C5C5C2;
@@ -51,11 +49,17 @@ body{
 
                 }
                     #header .moving_text marquee .header_news{
-
+                        margin:0;
+                        overflow:hidden;
+                        white-space:nowrap;
                     }
                         #header .moving_text marquee .header_news li{
                             display:inline-block;
+                            float:left;
                             margin-right:40px;
+                            font-family:"Press Start 2P";
+                            font-size:11px;
+                            line-height:11px;
                         }
                         #header .moving_text marquee .header_news li:before{
                             content:"";
@@ -86,7 +90,8 @@ body{
                 margin-left:0;
                 margin-right:-255px;
                 overflow:visible;
-                /*border-right:1px solid #E0E0E0;*/
+                overflow:hidden;
+                word-wrap: break-word;
             }
             	#left_sidebar .sidebar_box{
                     margin:0px 0 5px 0;
@@ -113,9 +118,12 @@ body{
                             border-top:none;
                             background:none repeat scroll 0 0 #FBFBFB;
                             border-radius:0 0 7px 7px;
+                            overflow:hidden;
+                            word-wrap: break-word;
             		}
 			#content{
-                            overflow:visible;
+                            overflow:hidden;
+                            word-wrap: break-word;
                             margin-left:255px;
                             margin-right:-1024px;
                             width:744px;
@@ -126,10 +134,6 @@ body{
                             height:100%;
                             min-height:100px;
 			}
-                #content h2.page_title{
-                    font-family:"PT Serif";
-                    margin-top:0;
-                }
         /*countdown_dashboard*/
         #left_sidebar #countdown_dashboard{
             overflow:hidden;
@@ -434,3 +438,22 @@ div.shareblock{
             div.shareblock #shareblock a:hover{
                 opacity:1;
             }
+/* RSS Block */
+#rss_block{
+    width:100%;
+}
+    #rss_block p{
+        margin:0;
+    }
+    #rss_block img{
+        float:left;
+        margin-right:10px;
+    }
+    #rss_block .rss_more{
+        text-decoration:underline;
+        color:#0073EA;
+        font-size:12px;
+    }
+        #rss_block .rss_more:hover{
+            text-decoration:none;
+        }
