@@ -7,3 +7,45 @@
 <p>
 Сделано пока совсем не много, но не все сразу, постепенно вырастем.<br/>Регистрация будет открыта в ближайшее время.
 </p>
+
+
+<!-- 
+Используйте эти CSS классы для настройки внешнего вида вашей ленты.
+Скопируйте это внутрь тега <head>:
+		<style>
+		/*div - контейнер для новости*/
+		.rss{margin:10px;  padding-bottom: 15px;}
+		
+		/*div - контейнер для всей ленты*/
+		.rss_container{padding:10px; background: #fff;}
+		
+		/*div - контейнер для медиа-файлов*/
+		.media{background-color:#f0f0f0; background-image:url(http://www.rss-script.ru/img/skrepka.gif); background-repeat:no-repeat; padding-top: 5px;padding-bottom: 5px;padding-left: 13px}
+		
+		/*div - ссылка на медиа-файл*/
+		.media a{color:#000000;font-size:0.7em}
+		
+		/*div - изображение медиа-файл*/
+		.media a img{height:16px; border:0px; vertical-align: middle; text-decoration: none; margin:3px;}
+		
+		/*div - контейнер даты новости и заголовка rss-канала*/
+		.rssdate{font-size:0.7em; color:#c0c0c0; margin:7px; }
+		
+		/*div - ссылка даты новости и заголовка rss-канала*/
+		.rssdate a{color:#c0c0c0;}
+		
+		</style>
+		
+-->
+<!-- Скопируйте следующий код в место, отведенное для показа ленты -->
+<script type="text/javascript">var charset='UTF-8';var t=document.getElementsByTagName('meta');for(var i=0; i<t.length; i++){var rg=/charset=["']?([^"']*)/g;if(t[i].content.indexOf('charset')!=-1){charset=rg.exec(t[i].content)[1];break;}}document.write('<script type="text/javascript" src="http://www.rss-script.ru/rss-script.php?charset='+charset+'&rss[]=http%3A%2F%2Fwww.f1news.ru%2Fexport%2Fnews.xml&media=1&notitle=1&nodata=1&count=10"><\/script>');</script><noscript>Для просмотра этой RSS ленты требуется поддержка Java Script</noscript>
+<!-- 
+		Чтобы скрипт работал, необходимо чтобы на странице, где он установлен, была ссылка на www.rss-script.ru. 
+		В случае использования нескольких лент, достаточно одной ссылки в любом месте страницы.
+-->
+<center><small><a title='RSS новости на вашем сайте' href='http://www.rss-script.ru' style="display:none;">RSS импорт: www.rss-script.ru</a></small></center>
+<!--
+		Так же следует учесть, что в HTML-коде страницы должна быть явно указана кодировка страницы, 
+		в противном случае возможно некорректное отображение лент в IE.
+		Например: <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ -->

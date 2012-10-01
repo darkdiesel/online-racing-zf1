@@ -82,7 +82,7 @@ $(document).ready(function(){
                 }
                 if ($(window).scrollTop() > offset.top) {
                     $(".shareblock").stop().animate({
-                        marginTop: $(window).scrollTop() - offset.top + $('body').css('padding-top').replace('px','')
+                        marginTop: $(window).scrollTop() - (offset.top) + parseInt($('body').css('padding-top').replace('px',''))
                     },300);
                 }
                 else {

@@ -19,7 +19,7 @@ class Acl extends Zend_Acl {
 		$this->add(new Zend_Acl_Resource('user/login'),'guest_allow');
 		
                 $this->allow('guest','user/register');
-                $this->allow('user','user/activate');
+                $this->allow('guest','user/activate');
                 $this->allow('guest','user/restorepasswd');
 
 		// user resources
