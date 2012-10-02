@@ -59,7 +59,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // StyleSheets
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-        //
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
 
@@ -74,7 +73,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 $view->showMasterPanel = 1;
             } elseif ($mapper->getUserRole($storage_data->id) == 2) {
                 $view->showMasterPanel = 2;
-                
                 } else {
                     $view->showMasterPanel = 0;
                 }
@@ -86,6 +84,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // JS Scripts
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.2.min.js"));
+        // jQuery UI
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.8.23.custom.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
 
         // Share block script

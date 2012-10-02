@@ -212,6 +212,8 @@ body{
             display:inline;
             clear:both;
             padding:20px 15px 10px 15px;
+            color:#5C5656;
+            font-size:11px;
         }
             #footer .footer_box{
                 position:relative;
@@ -220,15 +222,47 @@ body{
                 #footer .footer_left{
                     float:left;
                     width:200px;
+                    font-size:12px;
+                    text-align:center;
+                    border-right:1px dashed #3D3A3A;
                 }
                 #footer .footer_center{
                     float:left;
                     margin:0 7px;
                     width:570px;
+                    color:#5C5656;
                 }
+                    #footer .footer_center .footer_menu{
+                        text-align:center;
+                    }
+                        #footer .footer_center .footer_menu #footer_menu{
+                            display:inline-block;
+                            margin: 0 auto;
+                            overflow:hidden;
+                        }
+                            #footer .footer_center .footer_menu #footer_menu li{
+                                float:left;
+                                list-style-type:none;
+                                margin-right:15px;
+                                margin-left:-2px;
+                            }
+                            #footer .footer_center .footer_menu #footer_menu li:before{
+                                content:"|";
+                                margin-right:12px;
+                                line-height: 15px;
+                            }
+                                #footer .footer_center .footer_menu #footer_menu li a{
+                                    font-size:13px;
+                                    font-family:sans-serif;
+                                    color:#9F9D9D;
+                                }
+                                #footer .footer_center .footer_menu #footer_menu li a:hover{
+                                    text-decoration:underline;
+                                }
                 #footer .footer_right{
                     width:200px;
                     float:right;
+                    border-left:1px dashed #3D3A3A;
                 }
                     /*block for social liveinternet*/
                     #footer .footer_right .liveinternet{
@@ -237,14 +271,13 @@ body{
                         top:15px;
                     }
                     #footer .copyright{
-                        color:#848484;
-                        font-size:11px;
+                        font-family:monospace;
                         text-align:center;
                         position:relative;
-                        top:100px;
+                        top:60px;
                     }
                     #footer .footer_logo{
-                        margin-top:30px;
+                        margin-top:20px;
                     }   
                         #footer .footer_logo a {
                             display:block;
