@@ -27,7 +27,8 @@ class App_Controller_Plugin_LangSelector extends Zend_Controller_Plugin_Abstract
                             'locale' => $locale
                         )
         );
-        
+
         Zend_Registry::set('Zend_Translate', $translate);
     }
+
 }

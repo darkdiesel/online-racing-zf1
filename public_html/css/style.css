@@ -49,9 +49,7 @@ body{
 
                 }
                     #header .moving_text marquee .header_news{
-                        margin:0;
-                        overflow:hidden;
-                        white-space:nowrap;
+                        display:inline-block;
                     }
                         #header .moving_text marquee .header_news li{
                             display:inline-block;

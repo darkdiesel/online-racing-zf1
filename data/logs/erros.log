@@ -9467,3 +9467,621 @@ Stack trace:
 #2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #4 {main}
+02-10-2012 11:25:53 NOTICE (5): Error 404. Page not found
+02-10-2012 11:25:53 NOTICE (5): Request params: Array
+(
+    [lang] => ru
+    [module] => img
+    [controller] => bootstrap
+    [action] => glyphicons-halflings-white.png
+)
+
+02-10-2012 11:25:53 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (bootstrap)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:29:52 NOTICE (5): Error 404. Page not found
+02-10-2012 12:29:52 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => bootstrap.min.css
+    [lang] => ru
+    [module] => default
+)
+
+02-10-2012 12:29:52 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:30:01 NOTICE (5): Error 404. Page not found
+02-10-2012 12:30:01 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => bootstrap.min.css
+    [lang] => ru
+    [module] => default
+)
+
+02-10-2012 12:30:01 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:30:07 NOTICE (5): Error 404. Page not found
+02-10-2012 12:30:07 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => bootstrap.min.css
+    [lang] => ru
+    [module] => default
+)
+
+02-10-2012 12:30:07 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:30:15 NOTICE (5): Error 404. Page not found
+02-10-2012 12:30:15 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => bootstrap.min.css
+    [lang] => ru
+    [module] => default
+)
+
+02-10-2012 12:30:15 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:30:25 NOTICE (5): Error 404. Page not found
+02-10-2012 12:30:25 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => bootstrap.min.css
+    [lang] => ru
+    [module] => default
+)
+
+02-10-2012 12:30:25 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:41:32 NOTICE (5): Error 404. Page not found
+02-10-2012 12:41:32 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 12:41:32 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:41:42 NOTICE (5): Error 404. Page not found
+02-10-2012 12:41:42 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 12:41:42 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 12:53:29 CRIT (2): Error 500. Application error
+02-10-2012 12:53:29 CRIT (2): Request params: Array
+(
+    [lang] => en
+    [controller] => user
+    [action] => login
+    [module] => default
+    [layoutFullContent] => <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Online-Racing.net - Authorization</title>        <meta name="description" content="Site for online racing competition with rFactor games and mods and F1 news." >
+<meta name="keywords" content="F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite" >
+<meta name="subject" content="Sim racing" >
+<meta name="title" content="Online-Racing" >
+<meta name="revisit" content="5 days" >
+<meta name="resource-type" content="document" >
+<meta name="Copyright" content="Igor Peshkov. Copyright 2012" >
+<meta name="Author" content="Igor Peshkov. Copyright 2012" >
+<meta name="reply-to" content="Igor.Peshkov@gmail.com" >
+<meta name="Generator" content="Sublime Text 2, phpStorm, notepad++" >
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >
+<meta http-equiv="Cache-Control" content="no-store" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<meta http-equiv="Content-Language" content="en-US" >
+<meta http-equiv="Content-Language" content="ru" >        <link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/main_menu.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/user_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=PT+Serif&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >                
+        
+    [layoutContent] => <fieldset id="loginFieldSet" class="form_white_box"><legend>Authorization</legend>
+
+	<p>Введите данные в форму ниже, чтобы авторизоваться на сайте.</p><form id="userlogin" name="userlogin" enctype="application/x-www-form-urlencoded" method="post" action="/user/login" class="white_box"><dl class="zend_form">
+<dt id="loginemail-label"><label for="loginemail" class="required">E-mail:</label></dt>
+<dd id="loginemail-element">
+<input type="text" name="loginemail" id="loginemail" value="" placeholder="E-mail" class="x_field"></dd>
+<dt id="loginpassword-label"><label for="loginpassword" class="required">Password</label></dt>
+<dd id="loginpassword-element">
+<input type="password" name="loginpassword" id="loginpassword" value="" placeholder="Password" class="x_field"></dd>
+<dt id="remember-label"><label for="remember" class="optional">Remember me</label></dt>
+<dd id="remember-element">
+<input type="hidden" name="remember" value="0"><input type="checkbox" name="remember" id="remember" value="1"></dd>
+<dt id="submit-label">&#160;</dt><dd id="submit-element">
+<input type="submit" name="submit" id="submit" value="Login" class="btn btn-primary"></dd>
+<dt id="reset-label">&#160;</dt><dd id="reset-element">
+<input type="reset" name="reset" id="reset" value="Reset" class="btn"></dd></dl></form></fieldset>
+)
+
+02-10-2012 12:53:29 CRIT (2): exception 'Zend_Loader_PluginLoader_Exception' with message 'Plugin by name 'MinStyleSheets' was not found in the registry; used paths:
+Zend_View_Helper_: Zend/View/Helper/;D:/dev/localhost/online-racing/application/views\helpers/' in D:\dev\localhost\online-racing\library\Zend\Loader\PluginLoader.php:412
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(1182): Zend_Loader_PluginLoader->load('MinStyleSheets')
+#1 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(618): Zend_View_Abstract->_getPlugin('helper', 'minStyleSheets')
+#2 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(344): Zend_View_Abstract->getHelper('minStyleSheets')
+#3 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View_Abstract->__call('minStyleSheets', Array)
+#4 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View->minStyleSheets()
+#5 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#6 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#7 D:\dev\localhost\online-racing\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#8 D:\dev\localhost\online-racing\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+02-10-2012 12:54:34 CRIT (2): Error 500. Application error
+02-10-2012 12:54:34 CRIT (2): Request params: Array
+(
+    [lang] => en
+    [controller] => user
+    [action] => login
+    [module] => default
+    [layoutFullContent] => <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Online-Racing.net - Authorization</title>        <meta name="description" content="Site for online racing competition with rFactor games and mods and F1 news." >
+<meta name="keywords" content="F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite" >
+<meta name="subject" content="Sim racing" >
+<meta name="title" content="Online-Racing" >
+<meta name="revisit" content="5 days" >
+<meta name="resource-type" content="document" >
+<meta name="Copyright" content="Igor Peshkov. Copyright 2012" >
+<meta name="Author" content="Igor Peshkov. Copyright 2012" >
+<meta name="reply-to" content="Igor.Peshkov@gmail.com" >
+<meta name="Generator" content="Sublime Text 2, phpStorm, notepad++" >
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >
+<meta http-equiv="Cache-Control" content="no-store" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<meta http-equiv="Content-Language" content="en-US" >
+<meta http-equiv="Content-Language" content="ru" >        <link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/main_menu.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/user_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=PT+Serif&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >                
+        
+    [layoutContent] => <fieldset id="loginFieldSet" class="form_white_box"><legend>Authorization</legend>
+
+	<p>Введите данные в форму ниже, чтобы авторизоваться на сайте.</p><form id="userlogin" name="userlogin" enctype="application/x-www-form-urlencoded" method="post" action="/user/login" class="white_box"><dl class="zend_form">
+<dt id="loginemail-label"><label for="loginemail" class="required">E-mail:</label></dt>
+<dd id="loginemail-element">
+<input type="text" name="loginemail" id="loginemail" value="" placeholder="E-mail" class="x_field"></dd>
+<dt id="loginpassword-label"><label for="loginpassword" class="required">Password</label></dt>
+<dd id="loginpassword-element">
+<input type="password" name="loginpassword" id="loginpassword" value="" placeholder="Password" class="x_field"></dd>
+<dt id="remember-label"><label for="remember" class="optional">Remember me</label></dt>
+<dd id="remember-element">
+<input type="hidden" name="remember" value="0"><input type="checkbox" name="remember" id="remember" value="1"></dd>
+<dt id="submit-label">&#160;</dt><dd id="submit-element">
+<input type="submit" name="submit" id="submit" value="Login" class="btn btn-primary"></dd>
+<dt id="reset-label">&#160;</dt><dd id="reset-element">
+<input type="reset" name="reset" id="reset" value="Reset" class="btn"></dd></dl></form></fieldset>
+)
+
+02-10-2012 12:54:34 CRIT (2): exception 'Zend_Loader_PluginLoader_Exception' with message 'Plugin by name 'MinStyleSheets' was not found in the registry; used paths:
+Zend_View_Helper_: Zend/View/Helper/;D:/dev/localhost/online-racing/application/views\helpers/' in D:\dev\localhost\online-racing\library\Zend\Loader\PluginLoader.php:412
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(1182): Zend_Loader_PluginLoader->load('MinStyleSheets')
+#1 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(618): Zend_View_Abstract->_getPlugin('helper', 'minStyleSheets')
+#2 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(344): Zend_View_Abstract->getHelper('minStyleSheets')
+#3 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View_Abstract->__call('minStyleSheets', Array)
+#4 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View->minStyleSheets()
+#5 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#6 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#7 D:\dev\localhost\online-racing\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#8 D:\dev\localhost\online-racing\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+02-10-2012 12:55:56 CRIT (2): Error 500. Application error
+02-10-2012 12:55:56 CRIT (2): Request params: Array
+(
+    [lang] => en
+    [controller] => user
+    [action] => login
+    [module] => default
+    [layoutFullContent] => <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Online-Racing.net - Authorization</title>        <meta name="description" content="Site for online racing competition with rFactor games and mods and F1 news." >
+<meta name="keywords" content="F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite" >
+<meta name="subject" content="Sim racing" >
+<meta name="title" content="Online-Racing" >
+<meta name="revisit" content="5 days" >
+<meta name="resource-type" content="document" >
+<meta name="Copyright" content="Igor Peshkov. Copyright 2012" >
+<meta name="Author" content="Igor Peshkov. Copyright 2012" >
+<meta name="reply-to" content="Igor.Peshkov@gmail.com" >
+<meta name="Generator" content="Sublime Text 2, phpStorm, notepad++" >
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >
+<meta http-equiv="Cache-Control" content="no-store" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<meta http-equiv="Content-Language" content="en-US" >
+<meta http-equiv="Content-Language" content="ru" >        <link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/main_menu.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/user_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=PT+Serif&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >                        
+    [layoutContent] => <fieldset id="loginFieldSet" class="form_white_box"><legend>Authorization</legend>
+
+	<p>Введите данные в форму ниже, чтобы авторизоваться на сайте.</p><form id="userlogin" name="userlogin" enctype="application/x-www-form-urlencoded" method="post" action="/user/login" class="white_box"><dl class="zend_form">
+<dt id="loginemail-label"><label for="loginemail" class="required">E-mail:</label></dt>
+<dd id="loginemail-element">
+<input type="text" name="loginemail" id="loginemail" value="" placeholder="E-mail" class="x_field"></dd>
+<dt id="loginpassword-label"><label for="loginpassword" class="required">Password</label></dt>
+<dd id="loginpassword-element">
+<input type="password" name="loginpassword" id="loginpassword" value="" placeholder="Password" class="x_field"></dd>
+<dt id="remember-label"><label for="remember" class="optional">Remember me</label></dt>
+<dd id="remember-element">
+<input type="hidden" name="remember" value="0"><input type="checkbox" name="remember" id="remember" value="1"></dd>
+<dt id="submit-label">&#160;</dt><dd id="submit-element">
+<input type="submit" name="submit" id="submit" value="Login" class="btn btn-primary"></dd>
+<dt id="reset-label">&#160;</dt><dd id="reset-element">
+<input type="reset" name="reset" id="reset" value="Reset" class="btn"></dd></dl></form></fieldset>
+)
+
+02-10-2012 12:55:56 CRIT (2): exception 'Zend_Loader_PluginLoader_Exception' with message 'Plugin by name 'MinStyleSheets' was not found in the registry; used paths:
+Zend_View_Helper_: Zend/View/Helper/;D:/dev/localhost/online-racing/application/views\helpers/' in D:\dev\localhost\online-racing\library\Zend\Loader\PluginLoader.php:412
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(1182): Zend_Loader_PluginLoader->load('MinStyleSheets')
+#1 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(618): Zend_View_Abstract->_getPlugin('helper', 'minStyleSheets')
+#2 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(344): Zend_View_Abstract->getHelper('minStyleSheets')
+#3 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View_Abstract->__call('minStyleSheets', Array)
+#4 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View->minStyleSheets()
+#5 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#6 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#7 D:\dev\localhost\online-racing\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#8 D:\dev\localhost\online-racing\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+02-10-2012 12:57:57 CRIT (2): Error 500. Application error
+02-10-2012 12:57:57 CRIT (2): Request params: Array
+(
+    [lang] => en
+    [controller] => user
+    [action] => login
+    [module] => default
+    [layoutFullContent] => <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Online-Racing.net - Authorization</title>        <meta name="description" content="Site for online racing competition with rFactor games and mods and F1 news." >
+<meta name="keywords" content="F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite" >
+<meta name="subject" content="Sim racing" >
+<meta name="title" content="Online-Racing" >
+<meta name="revisit" content="5 days" >
+<meta name="resource-type" content="document" >
+<meta name="Copyright" content="Igor Peshkov. Copyright 2012" >
+<meta name="Author" content="Igor Peshkov. Copyright 2012" >
+<meta name="reply-to" content="Igor.Peshkov@gmail.com" >
+<meta name="Generator" content="Sublime Text 2, phpStorm, notepad++" >
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >
+<meta http-equiv="Cache-Control" content="no-store" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<meta http-equiv="Content-Language" content="en-US" >
+<meta http-equiv="Content-Language" content="ru" >        <link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/main_menu.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/user_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=PT+Serif&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >                        
+    [layoutContent] => <fieldset id="loginFieldSet" class="form_white_box"><legend>Authorization</legend>
+
+	<p>Введите данные в форму ниже, чтобы авторизоваться на сайте.</p><form id="userlogin" name="userlogin" enctype="application/x-www-form-urlencoded" method="post" action="/user/login" class="white_box"><dl class="zend_form">
+<dt id="loginemail-label"><label for="loginemail" class="required">E-mail:</label></dt>
+<dd id="loginemail-element">
+<input type="text" name="loginemail" id="loginemail" value="" placeholder="E-mail" class="x_field"></dd>
+<dt id="loginpassword-label"><label for="loginpassword" class="required">Password</label></dt>
+<dd id="loginpassword-element">
+<input type="password" name="loginpassword" id="loginpassword" value="" placeholder="Password" class="x_field"></dd>
+<dt id="remember-label"><label for="remember" class="optional">Remember me</label></dt>
+<dd id="remember-element">
+<input type="hidden" name="remember" value="0"><input type="checkbox" name="remember" id="remember" value="1"></dd>
+<dt id="submit-label">&#160;</dt><dd id="submit-element">
+<input type="submit" name="submit" id="submit" value="Login" class="btn btn-primary"></dd>
+<dt id="reset-label">&#160;</dt><dd id="reset-element">
+<input type="reset" name="reset" id="reset" value="Reset" class="btn"></dd></dl></form></fieldset>
+)
+
+02-10-2012 12:57:57 CRIT (2): exception 'Zend_Loader_PluginLoader_Exception' with message 'Plugin by name 'MinStyleSheets' was not found in the registry; used paths:
+Zend_View_Helper_: Zend/View/Helper/;D:/dev/localhost/online-racing/application/views\helpers/' in D:\dev\localhost\online-racing\library\Zend\Loader\PluginLoader.php:412
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(1182): Zend_Loader_PluginLoader->load('MinStyleSheets')
+#1 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(618): Zend_View_Abstract->_getPlugin('helper', 'minStyleSheets')
+#2 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(344): Zend_View_Abstract->getHelper('minStyleSheets')
+#3 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View_Abstract->__call('minStyleSheets', Array)
+#4 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(9): Zend_View->minStyleSheets()
+#5 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#6 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#7 D:\dev\localhost\online-racing\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#8 D:\dev\localhost\online-racing\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+02-10-2012 12:58:09 NOTICE (5): Error 404. Page not found
+02-10-2012 12:58:09 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 12:58:09 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:34:11 NOTICE (5): Error 404. Page not found
+02-10-2012 13:34:11 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:34:11 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:36:39 NOTICE (5): Error 404. Page not found
+02-10-2012 13:36:39 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:36:39 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:36:58 NOTICE (5): Error 404. Page not found
+02-10-2012 13:36:58 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:36:58 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:37:00 NOTICE (5): Error 404. Page not found
+02-10-2012 13:37:00 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:37:00 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:37:05 NOTICE (5): Error 404. Page not found
+02-10-2012 13:37:05 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:37:05 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:37:10 NOTICE (5): Error 404. Page not found
+02-10-2012 13:37:10 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:37:10 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:37:12 NOTICE (5): Error 404. Page not found
+02-10-2012 13:37:12 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:37:12 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:37:13 NOTICE (5): Error 404. Page not found
+02-10-2012 13:37:13 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:37:13 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:37:13 NOTICE (5): Error 404. Page not found
+02-10-2012 13:37:13 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:37:13 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:38:08 NOTICE (5): Error 404. Page not found
+02-10-2012 13:38:08 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:38:08 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:38:31 NOTICE (5): Error 404. Page not found
+02-10-2012 13:38:31 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:38:31 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:38:50 NOTICE (5): Error 404. Page not found
+02-10-2012 13:38:50 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:38:50 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-10-2012 13:39:24 NOTICE (5): Error 404. Page not found
+02-10-2012 13:39:24 NOTICE (5): Request params: Array
+(
+    [lang] => en
+    [controller] => img
+    [action] => icons.png
+    [module] => default
+)
+
+02-10-2012 13:39:24 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}

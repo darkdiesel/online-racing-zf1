@@ -2,15 +2,30 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
+    public function _initConfig() {
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', APPLICATION_ENV, array('allowModifications' => true));
+        $config->domain = $_SERVER['HTTP_HOST'];
+        $config->setReadOnly();
+        Zend_Registry::set('config', $config);
+    }
+
+    protected function _initDb() {
+        try {
+            $config = $this->getOptions();
+            $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
+            Zend_Db_Table::setDefaultAdapter($db);
+        } catch (Exception $e) {
+            exit($e->getMessage());
+        }
+        Zend_Registry::set('db', $db);
+        return $db;
+    }
+
     protected function _initDoctype() {
         $this->bootstrap('view');
         $view = $this->getResource('view');
         //$view->doctype('XHTML1_STRICT');
         $view->doctype('HTML5');
-    }
-
-    protected function _initAutoload() {
-        
     }
 
     protected function _initView() {
@@ -51,15 +66,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // master menu
         Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
         $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
-        //$mapper = new Application_Model_UserMapper();
+        $mapper = new Application_Model_UserMapper();
 
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            if ($storage_data->id == 1) {
-                $view->headLink()->appendStylesheet($view->baseUrl("css/master_menu.css"));
+            if ($mapper->getUserRole($storage_data->id) == 1) {
+                $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
                 $view->showMasterPanel = 1;
-            } else {
-                $view->showMasterPanel = 0;
-            }
+            } elseif ($mapper->getUserRole($storage_data->id) == 2) {
+                $view->showMasterPanel = 2;
+                
+                } else {
+                    $view->showMasterPanel = 0;
+                }
         }
 
         // Google fonts

@@ -16,6 +16,7 @@
           <actionMethod actionName="add"/>
           <actionMethod actionName="delete"/>
           <actionMethod actionName="edit"/>
+          <actionMethod actionName="view"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -42,6 +43,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Article">
             <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Article">
+            <viewScriptFile forActionName="view"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

@@ -10,7 +10,7 @@ class ArticleController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->_helper->redirector('view', 'article');
     }
 
     public function addAction()
@@ -28,8 +28,15 @@ class ArticleController extends Zend_Controller_Action
         // action body
     }
 
+    public function viewAction()
+    {
+        // action body
+    }
+
 
 }
+
+
 
 
 

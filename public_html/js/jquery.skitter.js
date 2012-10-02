@@ -13,8 +13,8 @@ jQuery(function($){
         //options['controls'] = true;
         //options['controls_position'] = 'rightTop';
         options['hideTools'] = true;
-        options['animation'] = 'random';
-        options['easing_default'] = 'random';
+        options['animation'] = 'swapBarsBack';
+        //options['easing_default'] = 'random';
         options['interval'] = 5000;
         options['xml'] = '../xml/skitter_slider.xml';
 

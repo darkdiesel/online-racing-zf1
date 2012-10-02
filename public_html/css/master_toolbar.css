@@ -60,6 +60,19 @@ body{
 				#admin_toolbar #admin_menu li.home a:hover{
 					background:url("../img/home.png") no-repeat 0 0px;
 				}
+                #admin_toolbar #admin_menu li.name{
+                    position:absolute;
+                    right:20px;
+                    top:4px;
+                }
+                #admin_toolbar #admin_menu li.name:before{
+                    content:"";
+                }
+                    #admin_toolbar #admin_menu li.name a{
+                        font-family:monospace;
+                        font-weight:bold;
+                        font-size:18px;
+                    }
                 #admin_toolbar #admin_menu li.expanded{
                     
                 }

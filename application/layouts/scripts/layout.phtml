@@ -5,7 +5,12 @@
         <?php echo $this->headMeta() ?>
         <?php echo $this->headLink() ?>
         <?php echo $this->headStyle() ?>
-
+            
+        <?php
+        echo $this->minifyHeadLink()             // Whatever was already loaded from Controller.
+  
+        ?>
+      
         <?php echo $this->headScript() ?>
         <!-- Google analytics -->
         <script type="text/javascript">
@@ -24,9 +29,9 @@
         <?php echo $this->render("master_toolbar.phtml") ?>
         <div id="page_wrapper">
             <div id="page">
-                <header id="header">
+                <div id="header">
                     <?php echo $this->render("header.phtml") ?>
-                </header>
+                </div>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">
 
@@ -40,9 +45,9 @@
                         </div>
                     </div>
                 </div>
-                <footer id="footer">
+                <div id="footer">
                     <?php echo $this->render("footer.phtml") ?>
-                </footer>
+                </div>
             </div>
             <?php echo $this->render("back_to_top.phtml") ?>
             <?php echo $this->render("share_block.phtml") ?>
