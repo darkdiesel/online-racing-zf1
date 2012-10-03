@@ -33,7 +33,6 @@ body{
 
                 }
             #header .moving_text{
-                
                 background:url("../img/moving_text_bgr.png");
                 border:2px solid #C1C1C1;
                 color:#C5C5C2;
@@ -43,21 +42,28 @@ body{
                 height:20px;
                 padding:5px 5px;
                 overflow:hidden;
+                display:block;
                 box-shadow:inset 0px 0px 9px 5px #000;
+                white-space:nowrap;
             }
                 #header .moving_text marquee{
-
+                    display:inline-block;
                 }
                     #header .moving_text marquee .header_news{
                         display:inline-block;
+                        height:12px;
+                        white-space:nowrap;
                     }
                         #header .moving_text marquee .header_news li{
-                            display:inline-block;
                             float:left;
+                            margin:0;
                             margin-right:40px;
                             font-family:"Press Start 2P";
                             font-size:11px;
                             line-height:11px;
+                            height:20px;
+                            list-style-type:none;
+                            
                         }
                         #header .moving_text marquee .header_news li:before{
                             content:"";
@@ -231,6 +237,7 @@ body{
                     margin:0 7px;
                     width:570px;
                     color:#5C5656;
+                    text-align:center;
                 }
                     #footer .footer_center .footer_menu{
                         text-align:center;
@@ -259,6 +266,22 @@ body{
                                 #footer .footer_center .footer_menu #footer_menu li a:hover{
                                     text-decoration:underline;
                                 }
+                #footer .footer_center .web_counters{
+                    position:relative;
+                    top:30px;
+                }
+                    #footer .footer_center .web_counters .liveinternet{
+                        display:inline-block;
+                        margin:0 5px;
+                    }
+                    #footer .footer_center .web_counters .rambler100{
+                        display:inline-block;
+                        margin:0 5px;
+                    }
+                    #footer .footer_center .web_counters .yandex{
+                        display:inline-block;
+                        margin:0 5px;
+                    }
                 #footer .footer_right{
                     width:200px;
                     float:right;
@@ -274,7 +297,7 @@ body{
                         font-family:monospace;
                         text-align:center;
                         position:relative;
-                        top:60px;
+                        top:40px;
                     }
                     #footer .footer_logo{
                         margin-top:20px;

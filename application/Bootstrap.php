@@ -49,6 +49,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ->appendName('Author', 'Igor Peshkov. Copyright 2012')
                 ->appendName('reply-to', 'Igor.Peshkov@gmail.com')
                 ->appendName('Generator', 'Sublime Text 2, phpStorm, notepad++')
+                ->appendName('yandex-verification','715d9bbdfc996f86')
                 ->setHttpEquiv('X-UA-Compatible', 'IE=edge')
                 ->setHttpEquiv('X-UA-Compatible', 'IE=EmulateIE9')
                 ->setHttpEquiv('Cache-Control', 'no-store')
