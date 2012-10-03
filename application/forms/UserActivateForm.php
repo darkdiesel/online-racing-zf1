@@ -2,6 +2,12 @@
 
 class Application_Form_UserActivateForm extends Zend_Form {
 
+    protected function translate($str) {
+        $translate = new Zend_View_Helper_Translate();
+        $lang = Zend_Registry::get('Zend_Locale');
+        return $translate->translate($str, $lang);
+    }
+    
     public function init() {
         // Set the method for the display form to POST
         $this->setMethod('post');
@@ -11,7 +17,7 @@ class Application_Form_UserActivateForm extends Zend_Form {
 
         // Add an email element
         $this->addElement('text', 'email', array(
-            'label' => 'E-mail:',
+            'label' => 'E-mail',
             'placeholder' => 'E-mail',
             'required' => true,
             'class' => 'x_field',
@@ -22,7 +28,7 @@ class Application_Form_UserActivateForm extends Zend_Form {
         ));
 
         $this->addElement('password', 'password', array(
-            'label' => 'Пароль:',
+            'label' => 'Пароль',
             'placeholder' => 'Пароль',
             'required' => true,
             'class' => 'x_field',

@@ -15,7 +15,20 @@ class ArticleController extends Zend_Controller_Action
 
     public function addAction()
     {
-        // action body
+        // page title
+        $this->view->headTitle($this->view->translate('Добавление контента'));
+        
+        $request = $this->getRequest();
+        // form
+        $form = new Application_Form_ArticleAddForm();
+        
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                
+            }
+        }
+        
+        $this->view->form = $form;
     }
 
     public function deleteAction()

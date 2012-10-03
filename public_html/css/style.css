@@ -6,6 +6,9 @@ html, body {
 body{
     background:url("../img/background.png") fixed;
 }
+body iframe{
+    display:none;
+}
 #page_wrapper{
     min-height: 100%;
     position:relative;
@@ -135,8 +138,6 @@ body{
                             padding:20px 15px 10px 10px;
                             text-align:justify;
                             border-left:1px solid #E0E0E0;
-                            height:100%;
-                            min-height:100px;
 			}
         /*countdown_dashboard*/
         #left_sidebar #countdown_dashboard{
@@ -298,6 +299,7 @@ body{
                         text-align:center;
                         position:relative;
                         top:40px;
+                        line-height:12px;
                     }
                     #footer .footer_logo{
                         margin-top:20px;

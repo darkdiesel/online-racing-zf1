@@ -1,4 +1,10 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Article</b> and script/action name <b>add</b></p>
-</div>
+<?php
+if ($this->errMessage != "") {
+		$this->errMessage='<div class="messages errors">'.$this->errMessage.'</div>';
+	}
+
+echo $this->fieldset('loginFieldSet', '
+	<p>Выберите тип добавляемого контента и заполните формы.</p>'.
+	$this->errMessage.
+	$this->form, array('legend'=>$this->translate('Добавление контента'),'class'=>'form_white_box'));
+?>
