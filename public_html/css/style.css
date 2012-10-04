@@ -45,28 +45,21 @@ body iframe{
                 height:20px;
                 padding:5px 5px;
                 overflow:hidden;
-                display:block;
+                display:inline-block;
                 box-shadow:inset 0px 0px 9px 5px #000;
                 white-space:nowrap;
             }
                 #header .moving_text marquee{
-                    display:inline-block;
                 }
                     #header .moving_text marquee .header_news{
-                        display:inline-block;
-                        height:12px;
-                        white-space:nowrap;
                     }
                         #header .moving_text marquee .header_news li{
-                            float:left;
-                            margin:0;
-                            margin-right:40px;
+                            display:inline-block;
+                            margin:0 40px 0 0;
                             font-family:"Press Start 2P";
                             font-size:11px;
                             line-height:11px;
-                            height:20px;
                             list-style-type:none;
-                            
                         }
                         #header .moving_text marquee .header_news li:before{
                             content:"";
@@ -308,33 +301,34 @@ body iframe{
                             display:block;
                         }
                     /*block for social network*/
+                    #footer .socialNetworks_slogan{
+                        padding:4px;
+                        text-align:center;
+                        font-size:13px;
+                        color:#9F9D9D;
+                    }
                     #footer .socialNetworks{
                         border:1px solid #0E0E0E;
                         border-radius:5px;
                         background:rgba(113, 113, 113, 0.15);
                         display:inline-block;
                         position:absolute;
-                        bottom:5px;
+                        bottom:0px;
                         right:5px;
-                        padding:5px;
-                        height:50px;
+                        padding:4px;
+                        height:40px;
+                        box-shadow:0 0 3px #fff;
+                    }
+                    #footer .socialNetworks:before{
+                        content:"";
+                        display:block;
+                        border:1px dashed #3D3A3A;
+                        position:relative;
+                        top:-15px;
+                        width:100%;
                     }
                         #footer .socialNetworks a{
                             display:inline-block;
-                        }
-                        #footer .socialNetworks .socnet{
-                            width:50px;
-                            height:50px;
-                            display:inline-block;
-                        }
-                        #footer .socialNetworks .vk{
-                            background:url("../img/socNet_Sprite.gif") no-repeat 0 0;
-                        }
-                        #footer .socialNetworks .fb{
-                            background:url("../img/socNet_Sprite.gif") no-repeat -50px 0;
-                        }
-                        #footer .socialNetworks .tw{
-
                         }
 .clearfix:after{
     clear:both;
@@ -498,6 +492,9 @@ div.shareblock{
 #rss_block{
     width:100%;
 }
+    #rss_block .rss_item{
+        
+    }
     #rss_block p{
         margin:0;
     }
