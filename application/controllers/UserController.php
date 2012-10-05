@@ -272,6 +272,10 @@ class UserController extends Zend_Controller_Action {
         // page title
         $this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
         $this->view->headTitle($this->view->translate('Просмотр профиля'));
+        
+        $request = $this->getRequest();
+        $id = $request->getParam('id');
+        
     }
 
     public function messageAction() {

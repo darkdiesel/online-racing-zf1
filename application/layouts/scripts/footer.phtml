@@ -1,12 +1,26 @@
 <div class="footer_box footer_left">
     <div class="footer_logo">
-        <a href="http://online-racing.net"><img src="<?php echo $this->baseUrl('img/logo_190.png'); ?>" alt=""></a>
+        <a href="http://online-racing.net"><img src="<?php echo $this->baseUrl('img/logo_190.png'); ?>" alt="<?php echo $this->translate('Online-Racing.net') ?>"></a>
     </div>
-    <div>online-racing.net</div>
+    <div><?php echo $this->translate('Online-Racing.net') ?></div>
 </div>
 <div class="footer_box footer_center">
     <div class="footer_menu">
         <?php echo $this->render("footer_menu.phtml") ?>
+    </div>
+</div>
+<div class="footer_box footer_right">
+    <div class="socialNetworks_slogan">
+        <?php echo $this->translate('Наши ссылки в социальных сетях') ?>:
+    </div>
+    <div class="socialNetworks">
+        <?php echo $this->render("socialNetworks_block.phtml") ?>
+    </div>
+</div>
+<div class="footer_bootom">
+    <div class="copyright">
+        <?php echo $this->translate('Версия сайта') ?> 0.4.2<br>
+        2012 © Online-Racing.net
     </div>
     <div class="web_counters">
         <div class="liveinternet">
@@ -18,20 +32,5 @@
         <div class="yandex">
             <?php echo $this->render("yandex_block.phtml") ?>
         </div>
-    </div>
-    <div class="copyright">
-        v. 0.4.2<br>
-        2012 © Online-Racing.net
-    </div>
-</div>
-<div class="footer_box footer_right">
-    <div class="socialNetworks_slogan">
-        Наши ссылки в социальных сетях:
-    </div>
-    <div class="socialNetworks">
-        <a href="http://vk.com/OnlineRacingNet" target="_blank"><img src="../img/soc_net/vk.gif" /></a>
-        <a href="http://www.facebook.com/OnlineRacingNet" target="_blank"><img src="../img/soc_net/fb.gif" /></a>
-        <a href="http://twitter.com/OnlineRacingnet" target="_blank"><img src="../img/soc_net/tw.gif" /></a>
-        <a href="http://www.youtube.com/user/OnlineRacingNet" target="_blank"><img src="../img/soc_net/yt.gif" /></a>
     </div>
 </div>

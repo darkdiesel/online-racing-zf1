@@ -8,7 +8,7 @@ class App_Controller_Plugin_LangSelector extends Zend_Controller_Plugin_Abstract
         //die("Language: " . $lang);
 
         if ($lang !== 'en' && $lang !== 'ru')
-            $request->setParam('lang', 'ru');
+            $request->setParam('lang', 'en');
         $lang = $request->getParam('lang');
 
         if ($lang == 'en')

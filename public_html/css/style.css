@@ -19,7 +19,7 @@ body iframe{
     box-shadow:0 20px 50px #000000;
 }
     #page{
-        padding-bottom: 150px;
+        padding-bottom: 190px;
     }
         #header{
             border-bottom:2px solid #8C8C8C;
@@ -203,7 +203,7 @@ body iframe{
 				}
         #footer{
             border-top:2px solid #8C8C8C;
-            height:120px;
+            height:160px;
             width:994px;
             position:absolute;
             bottom:0;
@@ -212,12 +212,13 @@ body iframe{
             display:inline;
             clear:both;
             padding:20px 15px 10px 15px;
-            color:#5C5656;
+            color:#6C6A6A;
             font-size:11px;
         }
             #footer .footer_box{
                 position:relative;
                 height:120px;
+                margin-bottom:10px;
             }
                 #footer .footer_left{
                     float:left;
@@ -255,24 +256,26 @@ body iframe{
                                 #footer .footer_center .footer_menu #footer_menu li a{
                                     font-size:13px;
                                     font-family:sans-serif;
-                                    color:#9F9D9D;
+                                    color:#6C6A6A;
                                 }
                                 #footer .footer_center .footer_menu #footer_menu li a:hover{
                                     text-decoration:underline;
+                                    color:#968F8F;
                                 }
-                #footer .footer_center .web_counters{
-                    position:relative;
-                    top:30px;
+                #footer .footer_bootom .web_counters{
+                    position:absolute;
+                    right:0px;
+                    display:inline-block;
                 }
-                    #footer .footer_center .web_counters .liveinternet{
+                    #footer .footer_bootom .web_counters .liveinternet{
                         display:inline-block;
                         margin:0 5px;
                     }
-                    #footer .footer_center .web_counters .rambler100{
+                    #footer .footer_bootom .web_counters .rambler100{
                         display:inline-block;
                         margin:0 5px;
                     }
-                    #footer .footer_center .web_counters .yandex{
+                    #footer .footer_bootom .web_counters .yandex{
                         display:inline-block;
                         margin:0 5px;
                     }
@@ -289,10 +292,10 @@ body iframe{
                     }
                     #footer .copyright{
                         font-family:monospace;
-                        text-align:center;
+                        text-align:left;
                         position:relative;
-                        top:40px;
-                        line-height:12px;
+                        line-height:15px;
+                        display:inline-block;
                     }
                     #footer .footer_logo{
                         margin-top:20px;
@@ -300,12 +303,18 @@ body iframe{
                         #footer .footer_logo a {
                             display:block;
                         }
+             #footer .footer_bootom{
+                 border-top:1px dashed #3D3A3A;
+                 clear:both;
+                 padding-top:5px;
+                 position:relative;
+             }
                     /*block for social network*/
                     #footer .socialNetworks_slogan{
-                        padding:4px;
+                        padding:5px 20px;
                         text-align:center;
                         font-size:13px;
-                        color:#9F9D9D;
+                        color:#6C6A6A;
                     }
                     #footer .socialNetworks{
                         border:1px solid #0E0E0E;
@@ -317,7 +326,6 @@ body iframe{
                         right:5px;
                         padding:4px;
                         height:40px;
-                        box-shadow:0 0 3px #fff;
                     }
                     #footer .socialNetworks:before{
                         content:"";

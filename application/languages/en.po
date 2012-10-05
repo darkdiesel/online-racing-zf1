@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Online-Racing.net\n"
-"POT-Creation-Date: 2012-09-27 17:42+0300\n"
-"PO-Revision-Date: 2012-09-27 17:42+0300\n"
+"POT-Creation-Date: 2012-10-05 16:50+0300\n"
+"PO-Revision-Date: 2012-10-05 18:19+0300\n"
 "Last-Translator: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language-Team: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language: Russian\n"
@@ -19,40 +19,59 @@ msgstr ""
 "\\forms\n"
 "X-Poedit-SearchPath-2: d:\\dev\\localhost\\online-racing\\application\\views"
 "\\scripts\\user\n"
+"X-Poedit-SearchPath-3: d:\\dev\\localhost\\online-racing\\application"
+"\\layouts\\scripts\n"
+
+#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:19
+msgid "Добавление контента"
+msgstr "Add content"
 
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:21
 #: d:\dev\localhost\online-racing\application\views\scripts\user/login.phtml:9
 msgid "Авторизация"
 msgstr "Authorization"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:94
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:84
 #: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:88
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:42
 msgid "Регистрация"
 msgstr "Registration"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:175
-#: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:9
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:169
+#: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:10
 msgid "Активация пользователя"
 msgstr "User activation"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:256
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:250
 msgid "Восстановление пароля"
 msgstr "Password reminder"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:279
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:274
 msgid "Просмотр профиля"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:284
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:279
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:21
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:25
 msgid "Сообщения"
 msgstr "Messages"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:289
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:284
 msgid "Настройки профиля"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:294
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:289
 msgid "Редактирование профиля"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:18
+#: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:19
+msgid "Заголовок"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:25
+#: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:26
+msgid "Текст статьи"
 msgstr ""
 
 #: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:32
@@ -67,6 +86,7 @@ msgid "Запомнить меня"
 msgstr "Remember me"
 
 #: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:49
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:32
 msgid "Войти"
 msgstr "Login"
 
@@ -129,6 +149,102 @@ msgstr "Passwords must be matched"
 #: d:\dev\localhost\online-racing\application\views\scripts\user/restorepasswd.phtml:9
 msgid "Восcтановление пароля"
 msgstr "Password reminder"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/back_to_top.phtml:2
+msgid "На подиум!"
+msgstr "To the podium!"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer.phtml:3
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer.phtml:5
+msgid "Online-Racing.net"
+msgstr "Online-Racing.net"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer.phtml:14
+msgid "Наши ссылки в социальных сетях"
+msgstr "Our links in social networks"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer.phtml:22
+msgid "Версия сайта"
+msgstr "Site version"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer_menu.phtml:2
+#: d:\dev\localhost\online-racing\application\layouts\scripts/header.phtml:3
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:3
+msgid "Главная"
+msgstr "Main"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer_menu.phtml:3
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:4
+msgid "Чемпионат"
+msgstr "Championship"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer_menu.phtml:4
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:5
+msgid "Гонщики"
+msgstr "Pilots"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer_menu.phtml:5
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:7
+msgid "Статьи"
+msgstr "Articles"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer_menu.phtml:6
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:13
+msgid "Файлы"
+msgstr "Files"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/footer_menu.phtml:7
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:20
+msgid "Форум"
+msgstr "Forum"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/left_sidebar.phtml:3
+msgid "Ближайшее событие"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:9
+msgid "Настройка болида"
+msgstr "Bolid settings"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:15
+msgid "Игры"
+msgstr "Games"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:16
+msgid "Плагины"
+msgstr "Plugins"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/main_menu.phtml:17
+msgid "Мануалы"
+msgstr "Manuals"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:4
+msgid "Добро пожаловать"
+msgstr "Welcome"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:10
+msgid "Гость"
+msgstr "Guest"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:17
+msgid "Выйти"
+msgstr "Exit"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:20
+msgid "Профиль"
+msgstr "Profile"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:22
+msgid "Настройки"
+msgstr "Settings"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:23
+msgid "Редактировать"
+msgstr "Edit"
+
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:43
+msgid "Забыли пароль?"
+msgstr "Forget password?"
 
 #~ msgid "Поле 'Логин' обязательно"
 #~ msgstr "Field 'Login' is required"
