@@ -18,8 +18,7 @@ class IndexController extends Zend_Controller_Action
 		// Css for skitter slider
 		$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/skitter.styles.css"));
 
-                // Css for jQuery UI
-                $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-1.8.23.custom.css"));
+                
 
         // page title
         $this->view->headTitle('Главная');

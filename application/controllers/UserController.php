@@ -4,6 +4,7 @@ class UserController extends Zend_Controller_Action {
 
     public function init() {
         /* Initialize action controller here */
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/user.css"));
     }
 
     public function indexAction() {
@@ -179,7 +180,7 @@ class UserController extends Zend_Controller_Action {
                 $userPassword = sha1($form->password->getValue());
                 $userConfirmCode = $form->confirmCode->getValue();
 
-                if ($mapper->activateUserByEmail($userEmail, $userPassword, $userConfirmCode) == 1) {
+                if ($mapper->activateUserByCode($userEmail, $userPassword, $userConfirmCode) == 1) {
 
                     // load e-mail script (template) for user
                     $html = new Zend_View();
@@ -268,13 +269,16 @@ class UserController extends Zend_Controller_Action {
         return $this->_helper->redirector('login', 'user');
     }
 
-    public function viewAction() {
+    public function infoAction() {
         // page title
         $this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
         $this->view->headTitle($this->view->translate('Просмотр профиля'));
         
         $request = $this->getRequest();
-        $id = $request->getParam('id');
+        $this->view->id = $request->getParam('id');
+        
+        $mapper = new Application_Model_UserMapper();
+        $this->view->user = $mapper->getUserById($this->view->id);
         
     }
 

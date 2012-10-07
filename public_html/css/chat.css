@@ -1,0 +1,71 @@
+#chat{
+    
+}
+    #chat .sidebar_box_content{
+        padding:5px 5px !important;
+    }
+    #chat #chat_textarea_count{
+        font-weight:bold;
+        font-size:11px;
+        float:right;
+        margin:7px 3px 0 0;
+    }
+/* form style */
+#chat #userChat{
+    margin:0;
+    padding:10px 0;
+    
+}
+    #chat #userChat dl{
+        margin:0;
+    }
+    #chat #chat_messages_box{
+        border:1px solid #CCCCCC;
+        border-radius:3px;
+        height:250px;
+        overflow:auto;
+        font-size:11px;
+        line-height:12px;
+        font-family:verdana,arial,helvetica;
+        padding:3px 0;
+        overflow-y:scroll;
+    }
+        #chat #chat_messages_box .chat_message_box{
+            border-bottom:1px solid #CCCCCC;
+        }
+            #chat #chat_messages_box .chat_message_box .chat_mesage_date{
+                font-style:italic;
+                float:right;
+                font-size:8px;
+                padding-right:3px;
+            }
+            #chat #chat_messages_box .chat_message_box .chat_mesage_nickname{
+                font-weight:bold;
+                color:#0073EA;
+                padding:0 4px;
+            }
+                #chat #chat_messages_box .chat_message_box .chat_mesage_nickname .nick{
+                
+                }
+            #chat #chat_messages_box .chat_message_box .chat_mesage_message{
+                padding:3px 4px;
+                text-align:justify;
+            }
+    #chat #userChat textarea#messageTextArea{
+        resize:none;
+        margin:0 0 15px 0;
+        width:208px;
+        height:60px;
+        font-size:11px;
+        line-height:12px;
+        font-family:verdana,arial,helvetica;
+    }
+    #chat #userChat .messageTextArea_Label{
+        font-size:11px;
+        line-height:12px;
+        font-family:verdana,arial,helvetica;
+    }
+    #chat #userChat .controls_box{
+        display:inline-block;
+        margin:0 3px;
+    }

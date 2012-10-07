@@ -132,6 +132,12 @@ body iframe{
                             text-align:justify;
                             border-left:1px solid #E0E0E0;
 			}
+                        #content .page_title{
+                            font-family:gill;
+                            font-size:35px;
+                            line-height:35px;
+                            position:relative;
+                        }
         /*countdown_dashboard*/
         #left_sidebar #countdown_dashboard{
             overflow:hidden;
@@ -350,7 +356,7 @@ fieldset.form_white_box{
 
 }
     fieldset.form_white_box legend{
-        font-family:"PT Serif";
+        font-family:gill;
         font-size:35px;
         position:relative;
     }

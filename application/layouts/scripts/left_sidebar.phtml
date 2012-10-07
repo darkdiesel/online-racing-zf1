@@ -54,6 +54,7 @@
         </div>
     </div>
 </div>
+<!--
 <div class="sidebar_box">
     <div class="sidebar_box_title">
         Поиск (Не работает)
@@ -66,15 +67,39 @@
             </div>
         </form>
     </div>
-</div>
-<div class="sidebar_box">
+</div>-->
+<!-- start chat -->
+<div id="chat" class="sidebar_box">
     <div class="sidebar_box_title">
         Чат (Не работает)
     </div>
     <div class="sidebar_box_content">
-        <input class="x_field"/>
+        <div id="chat_messages_box">
+
+            <div class="chat_message_box">
+                <div class="chat_mesage_date">
+                    27.07.2012 15:46
+                </div>
+                <div class="chat_mesage_nickname">
+                    <a href="<?php echo $this->baseUrl('user/info/') . 1 ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick">dark_diesel</a>
+                </div>
+                <div class="chat_mesage_message">
+                    Приветствую всех на нашем портале. Регистрируйтесь и коментируйте работу нашего сайта.
+                </div>
+            </div>
+        </div>
+        <?php
+        if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+        <div id="chat_textarea_count">500</div>
+        <?php
+            $form = new Application_Form_UserChatForm();
+            echo $form;
+        }
+        ?>
     </div>
 </div>
+<!-- end chat -->
+<!--
 <div class="sidebar_box">
     <div class="sidebar_box_title">
         Таблица (Не работает)
@@ -98,4 +123,4 @@
             </tr>
         </table>
     </div>
-</div>
+</div>-->

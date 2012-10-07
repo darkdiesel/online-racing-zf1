@@ -59,9 +59,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // StyleSheets
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
+        // jQuery UI css
+        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.8.24.custom.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
 
         // master menu
         Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
@@ -86,7 +89,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // JS Scripts
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.2.min.js"));
         // jQuery UI
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.8.23.custom.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.8.24.custom.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
 
         // Share block script
@@ -100,6 +103,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // All Common scripts
         $view->headScript()->appendFile($view->baseUrl("js/my_js.js"));
+        
+        // Script for chat
+        $view->headScript()->appendFile($view->baseUrl("js/chat.js"));
 
         // ViewRenderer
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
@@ -166,10 +172,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $frontController = Zend_Controller_Front::getInstance();
           $router = $frontController->getRouter();
         $route = new Zend_Controller_Router_Route(
-                        'user/view/:id',
+                        'user/info/:id',
                         array(
                             'controller' => 'user',
-                            'action' => 'view',
+                            'action' => 'info',
                             'id' => 0)
         );
         $router->addRoute('userview', $route);
