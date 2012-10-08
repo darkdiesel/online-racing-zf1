@@ -12,7 +12,7 @@ class Application_Form_UserChatForm extends Zend_Form
     public function init()
     {
         $this->setMethod('post');
-        $this->setAction('/article/add');
+        $this->setAction('/chat/addmessage');
         $this->setName('userChat');
         
         $this->setElementDecorators(array(
@@ -37,6 +37,9 @@ class Application_Form_UserChatForm extends Zend_Form
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'messageTextArea_box')),
             )
         ));
+        
+        $this->addElement('hidden','last_load');
+        $this->addElement('hidden','block_msg');
         
         $this->addElement('submit', 'submit', array(
             'ignore' => true,

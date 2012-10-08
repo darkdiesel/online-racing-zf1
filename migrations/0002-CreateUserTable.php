@@ -8,6 +8,7 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
 				  `id` int(11) NOT NULL AUTO_INCREMENT,
 				  `login` char(30) NOT NULL,
 				  `password` char(40) NOT NULL,
+                                  `last_login` datetime NOT NULL,
 				  `activate` text NOT NULL,
 				  `enabled` int(1) NOT NULL,
 				  `role_id` int(11) NOT NULL,

@@ -49,7 +49,7 @@ class Application_Form_UserActivateForm extends Zend_Form {
             )
         ));
 
-        $this->addElement(
+        /*$this->addElement(
                 new Zend_Form_Element_Captcha('captcha', array(
                     'ignore' => true, // игнорируем, чтобы не получать значение элемента при вызове
                     // метода getValues() нашей формы
@@ -69,7 +69,7 @@ class Application_Form_UserActivateForm extends Zend_Form {
                         array('Captcha'),
                         array('Errors'),
                     )
-                )));
+                )));*/
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,

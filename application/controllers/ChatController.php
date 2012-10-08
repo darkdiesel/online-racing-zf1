@@ -15,7 +15,11 @@ class ChatController extends Zend_Controller_Action
 
     public function addmessageAction()
     {
-        // action body
+        $request = $this->getRequest();
+        
+        if ($this->getRequest()->isPost()) {
+            echo $request->getParam('action');
+        }
     }
 
 

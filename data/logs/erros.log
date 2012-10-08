@@ -14317,3 +14317,90 @@ Stack trace:
 #2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #4 {main}
+08-10-2012 16:59:49 CRIT (2): Error 500. Application error
+08-10-2012 16:59:49 CRIT (2): Request params: Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+)
+
+08-10-2012 16:59:49 CRIT (2): exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#2 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1575): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1437): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 D:\dev\localhost\online-racing\application\models\RoleMapper.php(38): Zend_Db_Table_Abstract->fetchRow(Array)
+#7 D:\dev\localhost\online-racing\application\classes\Acl.php(69): Application_Model_RoleMapper->getRoleName(NULL)
+#8 D:\dev\localhost\online-racing\application\plugins\CheckAccess.php(12): Acl->can()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(309): CheckAccess->preDispatch(Object(Zend_Controller_Request_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(941): Zend_Controller_Plugin_Broker->preDispatch(Object(Zend_Controller_Request_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[HY093]: Invalid parameter number: no parameters were bound' in D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:234
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1575): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1437): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 D:\dev\localhost\online-racing\application\models\RoleMapper.php(38): Zend_Db_Table_Abstract->fetchRow(Array)
+#6 D:\dev\localhost\online-racing\application\classes\Acl.php(69): Application_Model_RoleMapper->getRoleName(NULL)
+#7 D:\dev\localhost\online-racing\application\plugins\CheckAccess.php(12): Acl->can()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(309): CheckAccess->preDispatch(Object(Zend_Controller_Request_Http))
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(941): Zend_Controller_Plugin_Broker->preDispatch(Object(Zend_Controller_Request_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}
+08-10-2012 17:00:46 NOTICE (5): Error 404. Page not found
+08-10-2012 17:00:46 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+08-10-2012 17:00:46 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+08-10-2012 17:00:49 NOTICE (5): Error 404. Page not found
+08-10-2012 17:00:49 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+08-10-2012 17:00:49 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+08-10-2012 17:01:55 NOTICE (5): Error 404. Page not found
+08-10-2012 17:01:55 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+08-10-2012 17:01:55 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
