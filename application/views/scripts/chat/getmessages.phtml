@@ -1,0 +1,13 @@
+<?php foreach ($this->chat_messages as $entry): ?>
+    <div class="chat_message_box">
+        <div class="chat_mesage_date"><?php echo $this->escape($entry->date) ?></div>
+        <div class="chat_mesage_nickname">
+            <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($entry->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick">user id#<?php echo $this->escape($entry->user_id)?></a>
+        </div>
+        <div class="chat_mesage_message">
+            <?php echo $this->escape($entry->message) ?>
+        </div>
+    </div>
+<?php endforeach ?>
+
+<?php //echo $this->escape($entry->id) ?>

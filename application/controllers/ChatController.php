@@ -16,7 +16,7 @@ class ChatController extends Zend_Controller_Action {
             $request = $this->getRequest();
 
             if ($this->getRequest()->isPost()) {
-                if (($request->getParam('action') == 'addmessage') && ($request->getParam('message_text') != '')) {
+                if (($request->getParam('ajax_action') == 'add_message') && ($request->getParam('message_text') != '')) {
                     $message = new Application_Model_UserChat(array('message' => $request->getParam('message_text'),
                                 'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
                     $mapper = new Application_Model_UserChatMapper();
@@ -31,7 +31,7 @@ class ChatController extends Zend_Controller_Action {
         $request = $this->getRequest();
         
         if ($this->getRequest()->isPost()) {
-            if ($request->getParam('action') == 'getchatmessage'){
+            if ($request->getParam('ajax_action') == 'get_chat_messages'){
                 $messages = new Application_Model_UserChatMapper();
                 $this->view->chat_messages = $messages->fetchAll();
             }

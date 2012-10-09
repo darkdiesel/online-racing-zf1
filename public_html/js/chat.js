@@ -41,7 +41,7 @@ $(document).ready(function(){
                     type: 'POST',
                     data:
                     {
-                        'action': 'addmessage',
+                        'ajax_action': 'add_message',
                         'message_text': message_text
                     },
                     dataType: 'json',
@@ -59,6 +59,8 @@ $(document).ready(function(){
             return false;
         });
         
+        get_chat_messages();
+        
         function get_chat_messages(){
             $.ajax(
             {
@@ -66,13 +68,14 @@ $(document).ready(function(){
                 type: 'POST',
                 data:
                 {
-                    'action': 'getchatmessage'
+                    'ajax_action': 'get_chat_messages'
                     //'last_act': last_act
                 },
                 dataType: 'json',
                 success: function (result)
                 {
-                    $('#chat #chat_messages_box').append(result);
+                    $('#chat #chat_messages_box').empty("");
+                    $('#chat #chat_messages_box').html(result);
                     // добавляем в текстовое поле новые сообщения
                     //$('#chat_text_field').append(/*result.message_code*/);
 
