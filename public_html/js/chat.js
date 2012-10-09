@@ -1,11 +1,14 @@
 $(document).ready(function(){
     jQuery(function($){
         $("#chat_messages_box .chat_message_box .chat_mesage_nickname .nick").click( function() {
-            $("#chat #userChat #messageTextArea").append('[i]'+$(this).html()+'[/i], ');
+            $("#chat #userChat #messageTextArea").val('[i]'+$(this).html()+'[/i], ');
+            checkMes();
         });
      
         $("#chat #userChat #reset").click(function(){
             $("#chat #userChat #messageTextArea").empty();
+            $("#chat #userChat #messageTextArea").val("");
+            checkMes();
         });
         
         $("#chat #userChat #messageTextArea").focus(function(){
@@ -25,6 +28,7 @@ $(document).ready(function(){
             $("#chat #chat_textarea_count").html(500 - $("#chat #messageTextArea").val().length);
         }
         
+        // send message to server script
         $("#chat #userChat").submit(function(){
             var message_text = $('#chat #messageTextArea').val();
             
@@ -37,26 +41,55 @@ $(document).ready(function(){
                     type: 'POST',
                     data:
                     {
-                        'action': 'add_message',
+                        'action': 'addmessage',
                         'message_text': message_text
                     },
                     dataType: 'json',
                     success: function (result)
                     {
-                        $("#chat #userChat #messageTextArea").empty(); // очищаем поле ввода
-
+                        $('#chat #messageTextArea').empty(); // очищаем поле ввода
+                        $('#chat #messageTextArea').val("");
+                        checkMes();
                         // сразу же подгружаем отправленное сообщение в чат
-                        //get_chat_messages();
+                        get_chat_messages();
                     }
                 });
             }
             
             return false;
         });
+        
+        function get_chat_messages(){
+            $.ajax(
+            {
+                url: '/chat/getmessages',
+                type: 'POST',
+                data:
+                {
+                    'action': 'getchatmessage'
+                    //'last_act': last_act
+                },
+                dataType: 'json',
+                success: function (result)
+                {
+                    $('#chat #chat_messages_box').append(result);
+                    // добавляем в текстовое поле новые сообщения
+                    //$('#chat_text_field').append(/*result.message_code*/);
+
+                    // обновляем значение последнего сообщения
+                    //$('#last_act').val(result.last_act);
+
+                    // автопрокрутка текстового поля вниз
+                    //$('#chat_text_field').scrollTop($('#chat_text_field').scrollTop()+100*$('.chat_post_my, .chat_post_other').size()); 
+
+                    //$('#block').val('no');// убираем блокировку
+                }
+            });
+        }
     });
 });
 
-$(document).ready(function () {
+/*$(document).ready(function () {
 
     // делаем фокус на поле ввода при загрузке страницы
     /*if ($("#chat_text_input").size()>0)
@@ -65,7 +98,7 @@ $(document).ready(function () {
     }*/
 
     // функция отправки сообщения
-    function send_message()
+    /*function send_message()
     {
         var message_text = $('#chat_text_input').val();
         if (message_text!="")
@@ -157,4 +190,4 @@ $(document).ready(function () {
     // прокрутка текстового поля до последнего сообщения вниз
     $('#chat_text_field').scrollTop($('#chat_text_field').scrollTop()+100*$('.chat_post_my, .chat_post_other').size());
 
-});
+});*/

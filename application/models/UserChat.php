@@ -56,11 +56,11 @@ class Application_Model_UserChat
     }
 
     public function getUser_id() {
-        return $this->_id;
+        return $this->_user_id;
     }
     
     public function setMessage($message) {
-        $this->_message = (int) $message;
+        $this->_message = (string) $message;
         return $this;
     }
 
@@ -69,13 +69,11 @@ class Application_Model_UserChat
     }
     
     public function setDate($date) {
-        $this->_date = (int) $date;
+        $this->_date = $date;
         return $this;
     }
 
     public function getDate() {
         return $this->_date;
     }
-
 }
-

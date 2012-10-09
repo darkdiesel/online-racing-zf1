@@ -14404,3 +14404,111 @@ Stack trace:
 #2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #4 {main}
+09-10-2012 14:16:32 CRIT (2): Error 500. Application error
+09-10-2012 14:16:32 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => addmessage
+    [module] => default
+    [message_text] => 123
+)
+
+09-10-2012 14:16:32 CRIT (2): exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null' in D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#2 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `us...', Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(575): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `us...', Array)
+#5 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1076): Zend_Db_Adapter_Abstract->insert('user_chat', Array)
+#6 D:\dev\localhost\online-racing\application\models\UserChatMapper.php(34): Zend_Db_Table_Abstract->insert(Array)
+#7 D:\dev\localhost\online-racing\application\controllers\ChatController.php(23): Application_Model_UserChatMapper->savemessage(Object(Application_Model_UserChat))
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChatController->addmessageAction()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('addmessageActio...')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null' in D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:234
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `us...', Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(575): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `us...', Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1076): Zend_Db_Adapter_Abstract->insert('user_chat', Array)
+#5 D:\dev\localhost\online-racing\application\models\UserChatMapper.php(34): Zend_Db_Table_Abstract->insert(Array)
+#6 D:\dev\localhost\online-racing\application\controllers\ChatController.php(23): Application_Model_UserChatMapper->savemessage(Object(Application_Model_UserChat))
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChatController->addmessageAction()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('addmessageActio...')
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}
+09-10-2012 14:25:48 CRIT (2): Error 500. Application error
+09-10-2012 14:25:48 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => addmessage
+    [module] => default
+    [message_text] => Ласт
+)
+
+09-10-2012 14:25:48 CRIT (2): exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null' in D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#2 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `us...', Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(575): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `us...', Array)
+#5 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1076): Zend_Db_Adapter_Abstract->insert('user_chat', Array)
+#6 D:\dev\localhost\online-racing\application\models\UserChatMapper.php(34): Zend_Db_Table_Abstract->insert(Array)
+#7 D:\dev\localhost\online-racing\application\controllers\ChatController.php(23): Application_Model_UserChatMapper->savemessage(Object(Application_Model_UserChat))
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChatController->addmessageAction()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('addmessageActio...')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null' in D:\dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:234
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `us...', Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(575): Zend_Db_Adapter_Pdo_Abstract->query('INSERT INTO `us...', Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1076): Zend_Db_Adapter_Abstract->insert('user_chat', Array)
+#5 D:\dev\localhost\online-racing\application\models\UserChatMapper.php(34): Zend_Db_Table_Abstract->insert(Array)
+#6 D:\dev\localhost\online-racing\application\controllers\ChatController.php(23): Application_Model_UserChatMapper->savemessage(Object(Application_Model_UserChat))
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChatController->addmessageAction()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('addmessageActio...')
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}
+09-10-2012 15:19:03 CRIT (2): Error 500. Application error
+09-10-2012 15:19:03 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => getmessages
+    [module] => default
+)
+
+09-10-2012 15:19:03 CRIT (2): exception 'Zend_View_Exception' with message 'script 'chat/getmessages.phtml' not found in path (D:/dev/localhost/online-racing/application/views\scripts/)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('chat/getmessage...')
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/getmessage...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/getmessage...', NULL)
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('getmessagesActi...')
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#10 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#11 {main}

@@ -1,7 +1,7 @@
 <?php
 
-class Application_Model_UserChatMapper
-{
+class Application_Model_UserChatMapper {
+
     protected $_dbTable;
 
     public function setDbTable($dbTable) {
@@ -22,5 +22,33 @@ class Application_Model_UserChatMapper
         return $this->_dbTable;
     }
 
+    public function savemessage(Application_Model_UserChat $message) {
+        $data = array(
+                'message'   => $message->getMessage(),
+                'user_id' => $message->getUser_id(),
+                'date' => date('Y-m-d H:i:s'),
+            );
+        
+        if (null === ($id = $message->getId())) {
+                unset($data['id']);
+                $this->getDbTable()->insert($data);
+            } else {
+                $this->getDbTable()->update($data, array('id = ?' => $id));
+            }
+    }
+    
+    public function fetchAll()
+        {
+            $resultSet = $this->getDbTable()->fetchAll();
+            $entries   = array();
+            foreach ($resultSet as $row) {
+                $entry = new Application_Model_UserChat();
+                $entry->setId($row->id)
+                      ->setUser_id($row->user_id)
+                      ->setMessage($row->message)
+                      ->setDate($row->date);
+                $entries[] = $entry;
+            }
+            return $entries;
+        }
 }
-

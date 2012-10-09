@@ -517,9 +517,9 @@ div.shareblock{
         margin-right:10px;
     }
     #rss_block .rss_more{
-        text-decoration:underline;
-        color:#0073EA;
+        color:#FFFFFF;
         font-size:12px;
+        margin-top:5px;
     }
         #rss_block .rss_more:hover{
             text-decoration:none;

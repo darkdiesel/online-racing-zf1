@@ -16,6 +16,7 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
 				  `name` char(250) NOT NULL,
 				  `surname` char(250) NOT NULL,
 				  `country` char(250) NOT NULL,
+                                  `lang` char(3) NOT NULL,
 				  `city` char(250) NOT NULL,
 				  `birthday` date NOT NULL,
 				  `skype` char(255) NOT NULL,

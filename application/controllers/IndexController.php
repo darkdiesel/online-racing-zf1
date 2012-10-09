@@ -21,6 +21,6 @@ class IndexController extends Zend_Controller_Action
                 
 
         // page title
-        $this->view->headTitle('Главная');
+        $this->view->headTitle($this->view->translate('Портал Онлай Скорости'));
     }
 }
