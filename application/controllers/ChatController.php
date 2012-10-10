@@ -33,7 +33,27 @@ class ChatController extends Zend_Controller_Action {
         if ($this->getRequest()->isPost()) {
             if ($request->getParam('ajax_action') == 'get_chat_messages'){
                 $messages = new Application_Model_UserChatMapper();
-                $this->view->chat_messages = $messages->fetchAll();
+                $chat_messages = $messages->fetchAll();
+                
+                $messages_html = '';
+                
+                foreach ($chat_messages as $message):
+                    // get user login
+                    $mapper = new Application_Model_UserMapper();
+                    $user_login = $mapper->getUserLoginById($message->user_id);
+                    
+                    //construct message html code
+                    $messages_html .= '<div class="chat_message_box">';
+                    $messages_html .= '<div class="chat_mesage_date">'.$message->date.'</div>';
+                    $messages_html .= '<div class="chat_mesage_nickname">';
+                    $messages_html .= '<a href="'.'user/info/'.$message->user_id.'" target="_BLINK"><i class="icon-user icon-black"></i></a>'.'<a href="javascript:void('."'Apply to'".')" class="nick">'.$user_login->login.'</a>';
+                    $messages_html .= '</div>';
+                    $messages_html .= '<div class="chat_mesage_message">'.$message->message.'</div>';
+                    $messages_html .= '</div>';
+                endforeach;
+                    
+                $data_str = array('message_html' => $messages_html);
+                echo json_encode($data_str);
             }
         }
     }

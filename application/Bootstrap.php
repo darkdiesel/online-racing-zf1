@@ -76,6 +76,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
                 $view->showMasterPanel = 1;
             } elseif ($mapper->getUserRole($storage_data->id) == 2) {
+                $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
                 $view->showMasterPanel = 2;
             } else {
                 $view->showMasterPanel = 0;

@@ -59,7 +59,7 @@ $(document).ready(function(){
             return false;
         });
         
-        get_chat_messages();
+        //get_chat_messages();
         
         function get_chat_messages(){
             $.ajax(
@@ -75,7 +75,7 @@ $(document).ready(function(){
                 success: function (result)
                 {
                     $('#chat #chat_messages_box').empty("");
-                    $('#chat #chat_messages_box').html(result);
+                    $('#chat #chat_messages_box').html(result.message_html);
                     // добавляем в текстовое поле новые сообщения
                     //$('#chat_text_field').append(/*result.message_code*/);
 

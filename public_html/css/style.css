@@ -7,7 +7,7 @@ body{
     background:url("../img/background.png") fixed;
 }
 body iframe{
-    display:none;
+    display:inline;
 }
 #page_wrapper{
     min-height: 100%;
@@ -24,7 +24,7 @@ body iframe{
         #header{
             border-bottom:2px solid #8C8C8C;
             width:1024px;
-            height:170px;
+            height:195px;
             background:url("../img/vert_sprite.png") repeat-x 0 0;
             position:relative;
         }
@@ -41,7 +41,7 @@ body iframe{
                 color:#C5C5C2;
                 position:absolute;
                 width:1010px;
-                bottom:0;
+                top:135px;
                 height:20px;
                 padding:5px 5px;
                 overflow:hidden;
@@ -77,6 +77,11 @@ body iframe{
                                 #header .moving_text marquee .header_news li a:hover{
                                     text-decoration:none;
                                 }
+            #header #standings{
+                border:2px solid white;
+                top:168px;
+                position:relative;
+            }
         #main_wrapper{
             position:relative;
         }

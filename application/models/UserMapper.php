@@ -94,23 +94,45 @@ class Application_Model_UserMapper {
         $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
         return $result->role_id;
     }
-    
-    public function getUserById($id){
-        $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
-        /*$entries = array();
-        foreach ($result as $row) {
-            $entry = new Application_Model_User();
-            $entry->setId($row->id)
-              ->setEmail($row->email)
-              ->setComment($row->comment)
-              ->setCreated($row->created);
-              $entries[] = $entry;
+
+    public function getUserById($id) {
+        $result = $this->getDbTable()->find($id);
+        if (0 == count($result)) {
+            return;
         }
-        return $entries;*/
+        
         $entry = new Application_Model_User();
-        $entry->setId($result->id);
-        $entry->setEmail($result->email);
+        $row = $result->current();
+        
+        $entry->setId($row->id);
+        $entry->setEmail($row->email);
+        
         return $entry;
+    }
+
+    public function getUserLoginById($id) {
+        $result = $this->getDbTable()->find($id);
+        if (0 == count($result)) {
+            return;
+        }
+        $user = new Application_Model_User();
+        
+        $row = $result->current();
+        
+        $user->setLogin($row->login);
+        return $user;
+    }
+
+    public function find($id, Application_Model_Guestbook $guestbook) {
+        $result = $this->getDbTable()->find($id);
+        if (0 == count($result)) {
+            return;
+        }
+        $row = $result->current();
+        $guestbook->setId($row->id)
+                ->setEmail($row->email)
+                ->setComment($row->comment)
+                ->setCreated($row->created);
     }
 
 }
