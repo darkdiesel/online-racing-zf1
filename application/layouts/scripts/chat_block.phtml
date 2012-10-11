@@ -6,6 +6,7 @@
     <div class="sidebar_box_content">
         <div id="chat_messages_box">
             <?php
+            $bbcode = Zend_Markup::factory('Bbcode');
             $messages = new Application_Model_UserChatMapper();
             $chat_messages = $messages->fetchAll();
             ?>
@@ -19,17 +20,18 @@
                 <div class="chat_message_box">
                     <div class="chat_mesage_date"><?php echo $this->escape($message->date) ?></div>
                     <div class="chat_mesage_nickname">
-                        <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($message->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick"><?php echo $user_login->login ?></a>
+                        <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($message->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();"><?php echo $user_login->login ?></a>
                     </div>
                     <div class="chat_mesage_message">
-                        <?php echo $message->message ?>
+                        <?php echo $bbcode->render($message->message) ?>
                     </div>
                 </div>
             <?php endforeach ?>
 
         </div>
         <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-            <div id="chat_textarea_count">500</div>
+            <div id="chat_textarea_count" class="chat_buttons">500</div>
+            <div id="chat_ajax_img" class="chat_buttons"><img src="<?php echo $this->baseUrl('img/ajax_chat_loader.gif'); ?>"></div>
             <?php
             $form = new Application_Form_UserChatForm();
             echo $form;

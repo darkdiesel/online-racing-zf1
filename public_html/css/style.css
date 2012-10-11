@@ -24,7 +24,7 @@ body iframe{
         #header{
             border-bottom:2px solid #8C8C8C;
             width:1024px;
-            height:195px;
+            height:210px;
             background:url("../img/vert_sprite.png") repeat-x 0 0;
             position:relative;
         }
@@ -42,8 +42,8 @@ body iframe{
                 position:absolute;
                 width:1010px;
                 top:135px;
-                height:20px;
-                padding:5px 5px;
+                height:22px;
+                padding:7px 5px;
                 overflow:hidden;
                 display:inline-block;
                 box-shadow:inset 0px 0px 9px 5px #000;
@@ -52,6 +52,7 @@ body iframe{
                 #header .moving_text marquee{
                 }
                     #header .moving_text marquee .header_news{
+                        margin:0;
                     }
                         #header .moving_text marquee .header_news li{
                             display:inline-block;
@@ -77,11 +78,36 @@ body iframe{
                                 #header .moving_text marquee .header_news li a:hover{
                                     text-decoration:none;
                                 }
-            #header #standings{
+            #header #Hot_Laps_F1{
                 border:2px solid white;
-                top:168px;
+                top:173px;
+                position:relative;
+                height:35px;
+                background:url("../img/moving_text_bgr.png");
+                box-shadow:inset 0px 0px 9px 5px #000;
                 position:relative;
             }
+                #header #Hot_Laps_F1 .Marquee{
+                    padding-top:5px;
+                    display:inline-block;
+                }
+                #header #Hot_Laps_F1 .hot_laps_links{
+                    display:inline-block;
+                    padding:7px 5px;
+                    position:absolute;
+                    top:0;
+                }
+                    #header #Hot_Laps_F1 .hot_laps_links a{
+                        font-size:14px;
+                        font-weight:bold;
+                        margin-left:10px;
+                        color:#C5C5C2;
+                        text-decoration:underline;
+                    }
+                        #header #Hot_Laps_F1 .hot_laps_links a:hover{
+                            text-decoration:none;
+                            color:#E1E1E0;
+                        }
         #main_wrapper{
             position:relative;
         }
@@ -126,6 +152,9 @@ body iframe{
                             overflow:hidden;
                             word-wrap: break-word;
             		}
+                        #left_sidebar #user_earth_map .sidebar_box_content{
+                            padding:3px 3px;
+                        }
 			#content{
                             overflow:hidden;
                             word-wrap: break-word;

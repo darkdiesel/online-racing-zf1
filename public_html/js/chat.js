@@ -1,10 +1,5 @@
 $(document).ready(function(){
     jQuery(function($){
-        $("#chat_messages_box .chat_message_box .chat_mesage_nickname .nick").click( function() {
-            $("#chat #userChat #messageTextArea").val('[i]'+$(this).html()+'[/i], ');
-            checkMes();
-        });
-     
         $("#chat #userChat #reset").click(function(){
             $("#chat #userChat #messageTextArea").empty();
             $("#chat #userChat #messageTextArea").val("");
@@ -29,12 +24,17 @@ $(document).ready(function(){
         }
         
         // send message to server script
-        $("#chat #userChat").submit(function(){
+        $("#chat #userChat #submit").click(function(){
+            set_chat_message();
+        });
+        
+        function set_chat_message(){
             var message_text = $('#chat #messageTextArea').val();
             
             if (message_text.length==0) {
                 alert("Нельзя отправлять пустые сообщения!");
             } else {
+                $("#chat #chat_ajax_img").fadeIn(300);
                 $.ajax(
                 {
                     url: '/chat/addmessage',
@@ -54,12 +54,11 @@ $(document).ready(function(){
                         get_chat_messages();
                     }
                 });
+                $("#chat #chat_ajax_img").fadeOut(300);
             }
             
             return false;
-        });
-        
-        //get_chat_messages();
+        }
         
         function get_chat_messages(){
             $.ajax(
@@ -69,23 +68,23 @@ $(document).ready(function(){
                 data:
                 {
                     'ajax_action': 'get_chat_messages'
-                    //'last_act': last_act
+                //'last_act': last_act
                 },
                 dataType: 'json',
                 success: function (result)
                 {
                     $('#chat #chat_messages_box').empty("");
                     $('#chat #chat_messages_box').html(result.message_html);
-                    // добавляем в текстовое поле новые сообщения
-                    //$('#chat_text_field').append(/*result.message_code*/);
+                // добавляем в текстовое поле новые сообщения
+                //$('#chat_text_field').append(/*result.message_code*/);
 
-                    // обновляем значение последнего сообщения
-                    //$('#last_act').val(result.last_act);
+                // обновляем значение последнего сообщения
+                //$('#last_act').val(result.last_act);
 
-                    // автопрокрутка текстового поля вниз
-                    //$('#chat_text_field').scrollTop($('#chat_text_field').scrollTop()+100*$('.chat_post_my, .chat_post_other').size()); 
+                // автопрокрутка текстового поля вниз
+                //$('#chat_text_field').scrollTop($('#chat_text_field').scrollTop()+100*$('.chat_post_my, .chat_post_other').size()); 
 
-                    //$('#block').val('no');// убираем блокировку
+                //$('#block').val('no');// убираем блокировку
                 }
             });
         }

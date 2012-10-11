@@ -4,11 +4,16 @@
     #chat .sidebar_box_content{
         padding:5px 5px !important;
     }
+    #chat .chat_buttons{
+        float:right;
+        margin:7px 3px 0 0;
+    }
     #chat #chat_textarea_count{
         font-weight:bold;
         font-size:11px;
-        float:right;
-        margin:7px 3px 0 0;
+    }
+    #chat #chat_ajax_img{
+        display:none;
     }
 /* form style */
 #chat #userChat{
@@ -66,6 +71,13 @@
         font-family:verdana,arial,helvetica;
     }
     #chat #userChat .controls_box{
-        display:inline-block;
-        margin:0 3px;
+        margin:0;
     }
+    #chat #userChat #submit{
+        float:left;
+    }
+    #chat #userChat #reset{
+        float:right;
+    }
+    
+    

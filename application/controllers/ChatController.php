@@ -17,7 +17,8 @@ class ChatController extends Zend_Controller_Action {
 
             if ($this->getRequest()->isPost()) {
                 if (($request->getParam('ajax_action') == 'add_message') && ($request->getParam('message_text') != '')) {
-                    $message = new Application_Model_UserChat(array('message' => $request->getParam('message_text'),
+                    $message_text = htmlspecialchars((trim($request->getParam('message_text'))));
+                    $message = new Application_Model_UserChat(array('message' => $message_text,
                                 'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
                     $mapper = new Application_Model_UserChatMapper();
                     $mapper->savemessage($message);
@@ -36,6 +37,7 @@ class ChatController extends Zend_Controller_Action {
                 $chat_messages = $messages->fetchAll();
                 
                 $messages_html = '';
+                $bbcode = Zend_Markup::factory('Bbcode');
                 
                 foreach ($chat_messages as $message):
                     // get user login
@@ -46,9 +48,10 @@ class ChatController extends Zend_Controller_Action {
                     $messages_html .= '<div class="chat_message_box">';
                     $messages_html .= '<div class="chat_mesage_date">'.$message->date.'</div>';
                     $messages_html .= '<div class="chat_mesage_nickname">';
-                    $messages_html .= '<a href="'.'user/info/'.$message->user_id.'" target="_BLINK"><i class="icon-user icon-black"></i></a>'.'<a href="javascript:void('."'Apply to'".')" class="nick">'.$user_login->login.'</a>';
+                    $messages_html .= '<a href="'.'user/info/'.$message->user_id.'" target="_BLINK"><i class="icon-user icon-black"></i></a>';
+                    $messages_html .= '<a href="javascript:void('."'Apply to'".')" class="nick" onClick="$('."'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()".'">'.$user_login->login.'</a>';
                     $messages_html .= '</div>';
-                    $messages_html .= '<div class="chat_mesage_message">'.$message->message.'</div>';
+                    $messages_html .= '<div class="chat_mesage_message">'.$bbcode->render($message->message).'</div>';
                     $messages_html .= '</div>';
                 endforeach;
                     

@@ -41,7 +41,7 @@ class Application_Form_UserChatForm extends Zend_Form
         $this->addElement('hidden','last_load');
         $this->addElement('hidden','block_msg');
         
-        $this->addElement('submit', 'submit', array(
+        $this->addElement('button', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
             'label' => 'Отправить',
