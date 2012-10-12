@@ -319,6 +319,10 @@ body iframe{
                         display:inline-block;
                         margin:0 5px;
                     }
+                     #footer .footer_bootom .web_counters .mail_ru{
+                        display:inline-block;
+                        margin:0 5px;
+                    }
                 #footer .footer_right{
                     width:200px;
                     float:right;

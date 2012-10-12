@@ -134,5 +134,9 @@ class Application_Model_UserMapper {
                 ->setComment($row->comment)
                 ->setCreated($row->created);
     }
+    
+    public function save(Application_Model_User $user){
+        
+    }
 
 }

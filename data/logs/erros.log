@@ -17706,3 +17706,639 @@ Stack trace:
 #2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #4 {main}
+12-10-2012 10:52:18 NOTICE (5): Error 404. Page not found
+12-10-2012 10:52:18 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+12-10-2012 10:52:18 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+12-10-2012 10:52:25 NOTICE (5): Error 404. Page not found
+12-10-2012 10:52:25 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+12-10-2012 10:52:25 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+12-10-2012 11:14:59 NOTICE (5): Error 404. Page not found
+12-10-2012 11:14:59 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+12-10-2012 11:14:59 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+12-10-2012 11:41:21 NOTICE (5): Error 404. Page not found
+12-10-2012 11:41:21 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+12-10-2012 11:41:21 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+12-10-2012 11:53:42 NOTICE (5): Error 404. Page not found
+12-10-2012 11:53:42 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+12-10-2012 11:53:42 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+12-10-2012 11:59:21 CRIT (2): Error 500. Application error
+12-10-2012 11:59:21 CRIT (2): Request params: Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [layoutFullContent] => <!-- start chat -->
+<div id="chat" class="sidebar_box">
+    <div class="sidebar_box_title">
+        <i class="icon-book icon-white"></i> Chat (тестовая версия)
+    </div>
+    <div class="sidebar_box_content">
+        <div id="chat_messages_box">
+                        
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:35:37</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        123123123123123<em>master</em>,                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:35:15</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <em>master</em>, фывафывафыв                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:33:57</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <em>master</em>,                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:19:06</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Круто!                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:19:00</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Как дела?                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:18:52</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Хай                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:08:44</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <em>master</em>, как дела?                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:08:01</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Только его еще делать и делать )                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:07:44</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        У меня работает чат, какое счастье!:)                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:07:29</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Пиздец просто!                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:07:24</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Ура!                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:07:19</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        123                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:05:41</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Пока-пока                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:05:33</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Привет                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:05:27</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Привет                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:05:20</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        123123                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:05:14</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        12312312                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:05:10</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        &amp;lt;strong&amp;gt;                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 16:04:55</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        {fq.''''.                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:25:23</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <em>master</em>, <em>master</em>,                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:24:00</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        22                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:23:54</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <strong>123</strong>                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:23:46</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        12                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:23:41</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <strong>loh</strong>                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:22:29</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        1                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:20:06</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        <em>master</em>, 5                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:16:44</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        4                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:14:13</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        123                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:13:44</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        2                    </div>
+                </div>
+                            
+                <div class="chat_message_box">
+                    <div class="chat_mesage_date">2012-10-11 13:12:53</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        1                    </div>
+                </div>
+            
+        </div>
+                    75            <div id="chat_textarea_count" class="chat_buttons">500</div>
+            <div id="chat_ajax_img" class="chat_buttons"><img src="/img/ajax_chat_loader.gif"></div>
+            <div class="sidebar_box">
+    <div class="sidebar_box_title">
+        <i class="icon-plane icon-white"></i> Ближайшее событие    </div>
+    <div class="sidebar_box_content">
+        <script type="text/javascript">
+            // countdown clock script
+            $(function() {
+                $('#countdown_dashboard').countDown({
+                    targetDate: {
+                        'day':1,
+                        'month':2,
+                        'year':2013,
+                        'hour':19,
+                        'min':0,
+                        'sec':0,
+                        // time set as UTC
+                        'utc':true
+                    }
+                });
+            });
+        </script>
+        Открытие сайта
+        <div id="countdown_dashboard">
+            <div class="dash weeks_dash">
+                <span class="dash_title">Нед.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash days_dash">
+                <span class="dash_title">Дн.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash hours_dash">
+                <span class="dash_title">Час.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash minutes_dash">
+                <span class="dash_title">Мин.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash seconds_dash">
+                <span class="dash_title">Сек.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="sidebar_box">
+    <div class="sidebar_box_title">
+        Поиск (Не работает)
+    </div>
+    <div class="sidebar_box_content">
+        <form class="form-search" style="margin:5px 0;">
+            <div class="input-append">
+                <input type="text" class="span2 search-query" style="width:115px;">
+                <button type="submit" class="btn" style="width:70px;">Поиск</button>
+            </div>
+        </form>
+    </div>
+</div>-->
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Online-Racing.net - Online-Racing portal</title>        <meta name="description" content="Site for online racing competition with rFactor games and mods and F1 news." >
+<meta name="keywords" content="F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite" >
+<meta name="subject" content="Sim racing" >
+<meta name="title" content="Online-Racing" >
+<meta name="revisit" content="5 days" >
+<meta name="resource-type" content="document" >
+<meta name="Copyright" content="Igor Peshkov. Copyright 2012" >
+<meta name="Author" content="Igor Peshkov. Copyright 2012" >
+<meta name="reply-to" content="Igor.Peshkov@gmail.com" >
+<meta name="Generator" content="Sublime Text 2, phpStorm, notepad++" >
+<meta name="yandex-verification" content="715d9bbdfc996f86" >
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >
+<meta http-equiv="Cache-Control" content="no-store" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<meta http-equiv="Content-Language" content="en-US" >
+<meta http-equiv="Content-Language" content="ru" >        <link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/jquery-ui-1.8.24.custom.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/main_menu.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/user_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/chat.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=PT+Serif&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="/css/skitter.styles.css" media="screen" rel="stylesheet" type="text/css" >                        <script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.24.custom.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/share.js"></script>
+<script type="text/javascript" src="/js/jquery.lavalamp.my.js"></script>
+<script type="text/javascript" src="/js/jquery.lwtCountdown.js"></script>
+<script type="text/javascript" src="/js/my_js.js"></script>
+<script type="text/javascript" src="/js/chat.js"></script>
+<script type="text/javascript" src="/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/js/jquery.animate_colors.min.js"></script>
+<script type="text/javascript" src="/js/jquery.skitter.js"></script>        <!-- Google analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-32674101-2']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+                <div id="page_wrapper">
+            <div id="page">
+                <div id="header">
+                    <!-- Site Logo -->
+<div id="logo_box">
+    <a id="logo" href="/"><img src="/img/logo.png" alt="Main<" /></a>
+</div>
+
+<!-- User ToolBar -->
+<div id="user_toolbar">
+    <ul id="user_menu">
+        <li>
+            <span>Welcome,</span>
+        </li>
+        <li>
+                                            <span><a href="/user/info/1">master</a></span>
+                    </li>
+    </ul>
+            <div class="user">
+            <div class="btn-group dropdown">
+                <a class="btn btn-primary" href="/user/logout"><i class="icon-user icon-white"></i> Exit</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/user/info/1"><i class="icon-briefcase"></i> Profile</a><li>
+                    <li><a href="/user/message"><i class="icon-envelope"></i> Messages</a><li>
+                    <li><a href="/user/settings"><i class="icon-wrench"></i> Settings</a></li>
+                    <li><a href="/user/edit"><i class="icon-edit"></i> Edit</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/user/logout"><i class="icon-remove"></i> Messages</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-- Main Menu -->
+<div id="box_main_menu">
+    <ul id="main_menu" class="main_menu">
+        <li><a href="/" class="current">Main</a></li>
+        <li><a href="/">Championship</a></li>
+        <li><a href="/">Pilots</a></li>
+        <li class="expanded">
+            <a href="/">Articles</a>
+            <ul class="menu">
+                <li class="leaf"><a href="#" title="">Bolid settings</a></li>
+            </ul>
+        </li>
+        <li class="expanded">
+            <a href="/">Files</a>
+            <ul class="menu">
+                <li class="leaf"><a href="#" title="">Games</a></li>
+                <li class="leaf"><a href="#" title="">Plugins</a></li>
+                <li class="leaf"><a href="#" title="">Manuals</a></li>
+            </ul>
+        </li>
+        <li><a href="http://formula1osr.forum2x2.ru/" target="_BLINK">Forum</a></li>
+    </ul>
+</div>
+<!-- Moving text-->
+<div class="moving_text">
+    <marquee behavior="scroll" direction="left">
+        <div>
+            <ul class="header_news">
+                <li><a href="/user/register">Регистрируйтесь</a> на нашем портале</li>
+                <li>Если вы нашли баг, пожалуйста сообщите мне (Igor.Peshkov@gmail.com)</li>
+            </ul>
+        </div>
+    </marquee> 
+</div>
+<!-- Hot Lap -->
+<div id="Hot_Laps_F1">
+    <div class="Marquee">
+        <iframe src="http://83.242.255.227:27012/rFactorHotlaps/Marquee.htm" name="standings" width="800" height="25" scrolling="no" id="standings" frameborder="0" style="background:none;"></iframe>
+    </div>
+    <div class="hot_laps_links">
+        <span style="color:#fff">|</span>
+        <a href="http://83.242.255.227:27012/rFactorLive" target="_BLINK">Трансляция</a>
+        <a href="http://83.242.255.227:27012/rFactorHotlaps" target="_BLINK">Рекорды</a>
+    </div>
+</div>
+                </div>
+                <div id="main_wrapper">
+                    <div id="main" class="clearfix">
+
+                        <!-- Content -->
+                        <div id="content">
+                            <div class="border_box">
+    <div class="box_skitter box_skitter_large">
+
+    </div>
+</div>
+
+<div id="rss_block">
+    <h3>Новости из мира Formula-1:</h3>
+    <div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Фернандо Алонсо: Пока сложно оценить расстановку сил</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48244_79894.jpg" width=150 height=100></p><p>Во второй пятничной тренировке Фернандо Алонсо показал третье время, а Фелипе Масса – шестое, оба гонщика с оптимизмом комментировали итоги дня…</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79894.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Глок: К завтрашнему дню машину необходимо улучшить</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48243_79893.jpg" width=150 height=100></p><p>Для Marussia F1 пятничные тренировки на корейской трассе складывались непросто: работа по поиску оптимальных настроек потребовала от команды и гонщиков серьезных усилий...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79893.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Пик оштрафован за девятую смену мотора</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48242_79892.jpg" width=150 height=100></p><p>Marussia F1 Team в этом году превысила лимит из восьми разрешенных моторов на сезон – после окончания пятничных свободных заездов команда приняли решение о смене мотора на машине Шарля Пика, и это будет уже девятый двигатель.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79892.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Дженсон Баттон: Пока нам не хватает скорости</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48241_79891.jpg" width=150 height=100></p><p>Если первая часть пятничных свободных заездов в Корее осталась за Льюисом Хэмилтоном, то во второй тренировке гонщики McLaren уступили в скорости Red Bull Racing...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79891.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Бруно Сенна уверен в успешной квалификации</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48240_79890.jpg" width=150 height=100></p><p>Начало гоночного уик-энда оказалось сложным для Williams: на машине Пастора Мальдонадо возникли проблемы во второй сессии, которые предстоит решить до старта финальной тренировки. Тем не менее, в команде уверены, что завтра смогут добиться прогресса...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79890.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Стюарды предупредили Шумахера</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48239_79889.jpg" width=150 height=100></p><p>Рассмотрев обстоятельства инцидента с участием Михаэля Шумахера и гонщиков HRT во время пятничных свободных заездов, стюарды Гран При Кореи вынесли официальное предупреждение немецкому гонщику за блокировку соперников.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79889.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Пол Хембри: "Вероятно, мы увидим в гонке два пит-стопа"</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48238_79888.jpg" width=150 height=100></p><p>Директор Pirelli Motorsport Пол Хембри прокомментировал свои впечатления о работе шин во время пятничных свободных заездов Гран При Кореи…</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79888.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">ди Реста: На длинной дистанции мы вполне конкурентоспособны</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48237_79887.jpg" width=150 height=100></p><p>В пятницу в Корее команду Force Inda представляли сразу три гонщика: утром на трассе работал Пол ди Реста и резервный пилот команды Жюль Бьянки, а во второй сессии его сменил Нико Хюлкенберг...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79887.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Педро де ла Роса тестировал новое заднее крыло</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48236_79886.jpg" width=150 height=100></p><p>В Корею HRT привезла обновленное заднее крыло, которое на свободных заездах тестировал Педро де ла Роса. В команде остались довольны работой новинки и надеются, что она поможет немного сократить отставание от соперников.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79886.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div></div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $("#rss_block").accordion({ header: "h6" });
+        
+    });
+</script>                        </div>
+                        <!-- Left sidebar -->
+                        <div id="left_sidebar">
+                            
+    [layoutContent] => <div class="border_box">
+    <div class="box_skitter box_skitter_large">
+
+    </div>
+</div>
+
+<div id="rss_block">
+    <h3>Новости из мира Formula-1:</h3>
+    <div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Фернандо Алонсо: Пока сложно оценить расстановку сил</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48244_79894.jpg" width=150 height=100></p><p>Во второй пятничной тренировке Фернандо Алонсо показал третье время, а Фелипе Масса – шестое, оба гонщика с оптимизмом комментировали итоги дня…</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79894.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Глок: К завтрашнему дню машину необходимо улучшить</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48243_79893.jpg" width=150 height=100></p><p>Для Marussia F1 пятничные тренировки на корейской трассе складывались непросто: работа по поиску оптимальных настроек потребовала от команды и гонщиков серьезных усилий...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79893.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Пик оштрафован за девятую смену мотора</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48242_79892.jpg" width=150 height=100></p><p>Marussia F1 Team в этом году превысила лимит из восьми разрешенных моторов на сезон – после окончания пятничных свободных заездов команда приняли решение о смене мотора на машине Шарля Пика, и это будет уже девятый двигатель.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79892.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Дженсон Баттон: Пока нам не хватает скорости</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48241_79891.jpg" width=150 height=100></p><p>Если первая часть пятничных свободных заездов в Корее осталась за Льюисом Хэмилтоном, то во второй тренировке гонщики McLaren уступили в скорости Red Bull Racing...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79891.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Бруно Сенна уверен в успешной квалификации</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48240_79890.jpg" width=150 height=100></p><p>Начало гоночного уик-энда оказалось сложным для Williams: на машине Пастора Мальдонадо возникли проблемы во второй сессии, которые предстоит решить до старта финальной тренировки. Тем не менее, в команде уверены, что завтра смогут добиться прогресса...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79890.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Стюарды предупредили Шумахера</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48239_79889.jpg" width=150 height=100></p><p>Рассмотрев обстоятельства инцидента с участием Михаэля Шумахера и гонщиков HRT во время пятничных свободных заездов, стюарды Гран При Кореи вынесли официальное предупреждение немецкому гонщику за блокировку соперников.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79889.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Пол Хембри: "Вероятно, мы увидим в гонке два пит-стопа"</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48238_79888.jpg" width=150 height=100></p><p>Директор Pirelli Motorsport Пол Хембри прокомментировал свои впечатления о работе шин во время пятничных свободных заездов Гран При Кореи…</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79888.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">ди Реста: На длинной дистанции мы вполне конкурентоспособны</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48237_79887.jpg" width=150 height=100></p><p>В пятницу в Корее команду Force Inda представляли сразу три гонщика: утром на трассе работал Пол ди Реста и резервный пилот команды Жюль Бьянки, а во второй сессии его сменил Нико Хюлкенберг...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79887.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Педро де ла Роса тестировал новое заднее крыло</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48236_79886.jpg" width=150 height=100></p><p>В Корею HRT привезла обновленное заднее крыло, которое на свободных заездах тестировал Педро де ла Роса. В команде остались довольны работой новинки и надеются, что она поможет немного сократить отставание от соперников.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-79886.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div></div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $("#rss_block").accordion({ header: "h6" });
+        
+    });
+</script>
+)
+
+12-10-2012 11:59:21 CRIT (2): exception 'Zend_Form_Exception' with message 'Method last_load does not exist' in D:\dev\localhost\online-racing\library\Zend\Form.php:3174
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\layouts\scripts\chat_block.phtml(42): Zend_Form->__call('last_load', Array)
+#1 D:\dev\localhost\online-racing\application\layouts\scripts\chat_block.phtml(42): Application_Form_UserChatForm->last_load('value')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#4 D:\dev\localhost\online-racing\application\layouts\scripts\left_sidebar.phtml(71): Zend_View_Abstract->render('chat_block.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#6 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#7 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(39): Zend_View_Abstract->render('left_sidebar.ph...')
+#8 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#9 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#10 D:\dev\localhost\online-racing\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#11 D:\dev\localhost\online-racing\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#12 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#13 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#14 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#15 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#16 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#17 {main}
+12-10-2012 16:44:55 NOTICE (5): Error 404. Page not found
+12-10-2012 16:44:55 NOTICE (5): Request params: Array
+(
+    [controller] => css
+    [action] => user.css
+    [module] => default
+)
+
+12-10-2012 16:44:55 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (css)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}

@@ -38,8 +38,12 @@ class Application_Form_UserChatForm extends Zend_Form
             )
         ));
         
-        $this->addElement('hidden','last_load');
-        $this->addElement('hidden','block_msg');
+        $this->addElement('hidden','last_load', array(
+            'value' => 0
+        ));
+        $this->addElement('hidden','block_msg', array(
+            'value' => 'no'
+        ));
         
         $this->addElement('button', 'submit', array(
             'ignore' => true,

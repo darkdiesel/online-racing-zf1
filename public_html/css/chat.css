@@ -54,7 +54,6 @@
                 }
             #chat #chat_messages_box .chat_message_box .chat_mesage_message{
                 padding:3px 4px;
-                text-align:justify;
             }
     #chat #userChat textarea#messageTextArea{
         resize:none;

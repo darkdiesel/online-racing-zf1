@@ -9,10 +9,14 @@
             $bbcode = Zend_Markup::factory('Bbcode');
             $messages = new Application_Model_UserChatMapper();
             $chat_messages = $messages->fetchAll();
+            $last_message_id = 0;
             ?>
 
             <?php foreach ($chat_messages as $message): ?>
                 <?php
+                if ($message->id > $last_message_id) {
+                    $last_message_id = $message->id;
+                }
                 $mapper = new Application_Model_UserMapper();
                 $user_login = $mapper->getUserLoginById($message->user_id);
                 ?>
@@ -32,11 +36,12 @@
         <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
             <div id="chat_textarea_count" class="chat_buttons">500</div>
             <div id="chat_ajax_img" class="chat_buttons"><img src="<?php echo $this->baseUrl('img/ajax_chat_loader.gif'); ?>"></div>
-            <?php
-            $form = new Application_Form_UserChatForm();
-            echo $form;
-        }
-        ?>
+                <?php
+                $form = new Application_Form_UserChatForm();
+                $form->last_load->setvalue($last_message_id);
+                echo $form;
+            }
+            ?>
     </div>
 </div>
 <!-- end chat -->

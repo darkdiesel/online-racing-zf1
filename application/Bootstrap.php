@@ -64,6 +64,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
+        //chat
         $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
 
         // master menu
@@ -104,9 +105,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // All Common scripts
         $view->headScript()->appendFile($view->baseUrl("js/my_js.js"));
-        
-        // Script for chat
-        $view->headScript()->appendFile($view->baseUrl("js/chat.js"));
+
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            //chat script
+            $view->headScript()->appendFile($view->baseUrl("js/chat.js"));
+        }
 
         // ViewRenderer
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
@@ -171,7 +174,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     public function _initRoutes() {
         $frontController = Zend_Controller_Front::getInstance();
-          $router = $frontController->getRouter();
+        $router = $frontController->getRouter();
         $route = new Zend_Controller_Router_Route(
                         'user/info/:id',
                         array(

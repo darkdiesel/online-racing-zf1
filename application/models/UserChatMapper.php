@@ -38,7 +38,7 @@ class Application_Model_UserChatMapper {
     }
 
     public function fetchAll() {
-        $resultSet = $this->getDbTable()->fetchAll('id','date DESC',50,0);
+        $resultSet = $this->getDbTable()->fetchAll('id', 'date DESC', 50, 0);
         $entries = array();
         foreach ($resultSet as $row) {
             $entry = new Application_Model_UserChat();
@@ -49,6 +49,24 @@ class Application_Model_UserChatMapper {
             $entries[] = $entry;
         }
         return $entries;
+    }
+
+    public function fetchLast($last) {
+        $resultSet = $this->getDbTable()->fetchAll('id > "' . $last . '"', 'date DESC', 50, 0);
+        if (0 == count($resultSet)) {
+            return 'null';
+        } else {
+            $entries = array();
+            foreach ($resultSet as $row) {
+                $entry = new Application_Model_UserChat();
+                $entry->setId($row->id)
+                        ->setUser_id($row->user_id)
+                        ->setMessage($row->message)
+                        ->setDate($row->date);
+                $entries[] = $entry;
+            }
+            return $entries;
+        }
     }
 
 }
