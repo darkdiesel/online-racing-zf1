@@ -95,17 +95,23 @@ class Application_Model_UserMapper {
         return $result->role_id;
     }
 
-    public function getUserById($id) {
-        $result = $this->getDbTable()->find($id);
+    /*
+     * Uses for controller: user action: info
+     */
+    public function getUserDataById($id) {
+        $result = $this->getDbTable()->fetchRow('id = "' . $id . '"');
         if (0 == count($result)) {
-            return;
+            return 'null';
         }
         
         $entry = new Application_Model_User();
-        $row = $result->current();
         
-        $entry->setId($row->id);
-        $entry->setEmail($row->email);
+        $entry->setId($result->id);
+        $entry->setLogin($result->login);
+        $entry->setName($result->name);
+        $entry->setSurname($result->surname);
+        $entry->setBirthday($result->birthday);
+        $entry->setCreated($result->created);
         
         return $entry;
     }
@@ -138,5 +144,4 @@ class Application_Model_UserMapper {
     public function save(Application_Model_User $user){
         
     }
-
 }

@@ -21,6 +21,7 @@ class Application_Model_User {
     protected $_fb;
     protected $_tw;
     protected $_gp;
+    protected $_created;
     protected $_about;
 
     public function __construct(array $options = null) {
@@ -118,7 +119,52 @@ class Application_Model_User {
     public function getEmail() {
         return $this->_email;
     }
+    
+    public function setName($name) {
+        $this->_name = (string) $name;
+        return $this;
+    }
 
+    public function getName() {
+        return $this->_name;
+    }
+    
+    public function setSurname($surname) {
+        $this->_surname = (string) $surname;
+        return $this;
+    }
+
+    public function getSurname() {
+        return $this->_surname;
+    }
+    
+    public function setCountry($coutry) {
+        $this->_coutry = (string) $coutry;
+        return $this;
+    }
+
+    public function getCountry() {
+        return $this->_coutry;
+    }
+    
+    public function setCity($city) {
+        $this->_city = (string) $city;
+        return $this;
+    }
+
+    public function getCity() {
+        return $this->_city;
+    }
+    
+    public function setBirthday($birthday) {
+        $this->_birthday = $birthday;
+        return $this;
+    }
+
+    public function getBirthday() {
+        return $this->_birthday;
+    }
+    
     public function setVk($vk) {
         $this->_vk = (string) $vk;
         return $this;
@@ -155,6 +201,15 @@ class Application_Model_User {
         return $this->_gp;
     }
 
+    public function setCreated($created) {
+        $this->_created = $created;
+        return $this;
+    }
+
+    public function getCreated() {
+        return $this->_created;
+    }
+    
     public function setAbout($about) {
         $this->_about = (string) $about;
         return $this;

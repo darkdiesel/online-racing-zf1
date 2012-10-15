@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Online-Racing.net\n"
-"POT-Creation-Date: 2012-10-11 18:04+0300\n"
-"PO-Revision-Date: 2012-10-11 18:05+0300\n"
+"POT-Creation-Date: 2012-10-15 17:24+0300\n"
+"PO-Revision-Date: 2012-10-15 17:27+0300\n"
 "Last-Translator: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language-Team: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language: Russian\n"
@@ -54,17 +54,17 @@ msgstr "Password reminder"
 msgid "Просмотр профиля"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:287
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:301
 #: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:22
 #: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:26
 msgid "Сообщения"
 msgstr "Messages"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:292
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:306
 msgid "Настройки профиля"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:297
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:311
 msgid "Редактирование профиля"
 msgstr ""
 
@@ -121,21 +121,62 @@ msgstr "Confirm password"
 msgid "Зарегестрировать"
 msgstr "Register"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:6
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:7
+#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:21
+msgid "Профиль"
+msgstr "Profile"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:26
+msgid "Имя"
+msgstr "Name"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:30
+msgid "Фамилия"
+msgstr "Surname"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:34
+msgid "Дата рождения"
+msgstr "Date of birthday"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:38
+msgid "Страна"
+msgstr "Country"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:42
+msgid "Дата регистрации"
+msgstr "Registration date"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:50
 msgid "Информация"
 msgstr "Information"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:51
 msgid "Текущие данные"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:52
 msgid "Статистика"
 msgstr "Statistic"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:10
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:58
 msgid "Номер пользователя"
 msgstr "User number"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:62
+msgid "Дней на сайте"
+msgstr "Days on the site"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:66
+msgid "Лет"
+msgstr "Years"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:66
+msgid "Месяцев"
+msgstr "Months"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:66
+msgid "Дней"
+msgstr "Days"
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:32
 #: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:38
@@ -232,11 +273,11 @@ msgstr "Forum"
 
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hot_lap_block.phtml:7
 msgid "Трансляция"
-msgstr ""
+msgstr "Broadcasting"
 
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hot_lap_block.phtml:8
 msgid "Рекорды"
-msgstr ""
+msgstr "Rocords"
 
 #: d:\dev\localhost\online-racing\application\layouts\scripts/left_sidebar.phtml:3
 msgid "Ближайшее событие"
@@ -273,10 +314,6 @@ msgstr "Guest"
 #: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:18
 msgid "Выйти"
 msgstr "Exit"
-
-#: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:21
-msgid "Профиль"
-msgstr "Profile"
 
 #: d:\dev\localhost\online-racing\application\layouts\scripts/user_toolbar.phtml:23
 msgid "Настройки"

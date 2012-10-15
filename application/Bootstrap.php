@@ -38,6 +38,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ->setSeparator(' - '); // setting a separator string for segments
         //head meta
         $view->headMeta()
+                ->setHttpEquiv('X-UA-Compatible', 'IE=edge')
+                ->setHttpEquiv('X-UA-Compatible', 'IE=EmulateIE9')
+                ->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
+                ->appendHttpEquiv('Content-Language', 'en-US')
+                ->appendHttpEquiv('Content-Language', 'ru')
                 ->appendName('description', 'Site for online racing competition with rFactor games and mods and F1 news.')
                 ->appendName('keywords', 'F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
                                Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite')
@@ -50,12 +55,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ->appendName('reply-to', 'Igor.Peshkov@gmail.com')
                 ->appendName('Generator', 'Sublime Text 2, phpStorm, notepad++')
                 ->appendName('yandex-verification', '715d9bbdfc996f86')
-                ->setHttpEquiv('X-UA-Compatible', 'IE=edge')
-                ->setHttpEquiv('X-UA-Compatible', 'IE=EmulateIE9')
-                ->setHttpEquiv('Cache-Control', 'no-store')
-                ->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
-                ->appendHttpEquiv('Content-Language', 'en-US')
-                ->appendHttpEquiv('Content-Language', 'ru');
+                ->setHttpEquiv('Cache-Control', 'no-store');
 
         // StyleSheets
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));

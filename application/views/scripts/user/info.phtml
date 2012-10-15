@@ -1,20 +1,84 @@
-<div class="page_title">Профиль</div>
-<hr>
+<?php
+if ($this->errMessage != "") {
+    echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+} else {
+    ?>
+    <div id="user_info_page">
+        <div class="page_title"><?php echo $this->translate('Профиль') ?> - <?php echo $this->user->login ?></div>
+        <hr>
+        <div class="user_info_avatar">
+            <?php
+            echo $this->gravatar()
+                    ->setEmail('')
+                    ->setImgSize(200)
+                    ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
+                    ->setSecure(true)
+                    ->setAttribs(array('class' => 'img-polaroid', 'title' => 'Title for this image'));
+            ?>
+        </div>
 
-<div id="tabs">
-    <ul>
-        <li><a href="#tabs-1"><?php echo $this->translate('Информация')?></a></li>
-        <li><a href="#tabs-2"><?php echo $this->translate('Текущие данные')?></a></li>
-        <li><a href="#tabs-3"><?php echo $this->translate('Статистика')?></a></li>
-    </ul>
-    <div id="tabs-1"><?php echo $this->translate('Номер пользователя') . ': ' . $this->id ?></div>
-    <div id="tabs-2"></div>
-    <div id="tabs-3"></div>
-</div>
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        $('#tabs').tabs();
-    });
-</script>
 
-<?php print_r($this->user)?>
+
+        <div class="user_info_data img-polaroid">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td class="header_column"><?php echo $this->translate('Имя') ?>:</td>
+                        <td><?php echo $this->user->name ?></td>
+                    </tr>
+                    <tr>
+                        <td class="header_column"><?php echo $this->translate('Фамилия') ?>:</td>
+                        <td><?php echo $this->user->surname ?></td>
+                    </tr>
+                    <tr>
+                        <td class="header_column"><?php echo $this->translate('Дата рождения') ?>:</td>
+                        <td><?php echo date_format(date_create($this->user->birthday), 'F j, Y') ?></td>
+                    </tr>
+                    <tr>
+                        <td class="header_column"><?php echo $this->translate('Страна') ?>:</td>
+                        <td><img src="<?php echo $this->baseUrl('img/flags/belarus_fluttering_flag_64.png'); ?>"></td>
+                    </tr>
+                    <tr>
+                        <td class="header_column"><?php echo $this->translate('Дата регистрации') ?>:</td>
+                        <td><?php echo date_format(date_create($this->user->created), 'H:i F j, Y') ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1"><?php echo $this->translate('Информация') ?></a></li>
+                <li><a href="#tabs-2"><?php echo $this->translate('Текущие данные') ?></a></li>
+                <li><a href="#tabs-3"><?php echo $this->translate('Статистика') ?></a></li>
+            </ul>
+            <div id="tabs-1">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="header_column"><?php echo $this->translate('Номер пользователя') ?>:</td>
+                            <td><?php echo $this->user->id ?></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
+                            <td>
+                                <?php
+                                $d = new DateTime();
+                                echo "<strong>".$this->translate('Дней').":</strong> ".date_diff(new DateTime(), new DateTime($this->user->created))->days." ";
+                                echo $d->diff(new DateTime($this->user->created))->format("(<strong>".$this->translate('Лет').":</strong> %y <strong>".$this->translate('Месяцев').":</strong> %m <strong>".$this->translate('Дней').":</strong> %d)");
+                                
+                                ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tabs-2"></div>
+            <div id="tabs-3"></div>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                $('#tabs').tabs();
+            });
+        </script>
+    </div>
+<?php } ?>

@@ -271,14 +271,28 @@ class UserController extends Zend_Controller_Action {
 
     public function infoAction() {
         // page title
-        $this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
+        //$this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
         $this->view->headTitle($this->view->translate('Просмотр профиля'));
         
         $request = $this->getRequest();
-        $this->view->id = $request->getParam('id');
+        $user_id = $request->getParam('id');
+        
+        if ( $request->getParam('id') == 0) {
+            $this->view->errMessage = "Пользователь не существует";
+            return;
+        } else {
+            
+        }
         
         $mapper = new Application_Model_UserMapper();
-        $this->view->user = $mapper->getUserById($this->view->id);
+        $user_data = $mapper->getUserDataById($user_id);
+        
+        if ($user_data == 'null') {
+            $this->view->errMessage = "Пользователь не существует";
+            return;
+        } else {
+            $this->view->user = $user_data;
+        }
         
     }
 
