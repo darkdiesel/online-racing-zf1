@@ -309,6 +309,19 @@ class UserController extends Zend_Controller_Action {
     public function editAction() {
         // page title
         $this->view->headTitle($this->view->translate('Редактирование профиля'));
+        
+        $request = $this->getRequest();
+        $form = new Application_Form_UserEditForm();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $this->view->errMessage = $this->params['email'];
+            } else {
+                $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!";
+            }
+        }
+
+        $this->view->form = $form;
     }
 
 }

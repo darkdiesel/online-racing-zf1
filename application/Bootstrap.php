@@ -60,7 +60,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // StyleSheets
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
         // jQuery UI css
-        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.8.24.custom.css"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.9.0.custom.min.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
@@ -91,7 +91,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // JS Scripts
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.2.min.js"));
         // jQuery UI
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.8.24.custom.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.9.0.custom.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
 
         // Share block script

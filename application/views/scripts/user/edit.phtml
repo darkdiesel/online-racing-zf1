@@ -1,1 +1,10 @@
-<h2>Edit</h2>
+<?php
+if ($this->errMessage != "") {
+    $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+}
+
+echo $this->fieldset('loginFieldSet', '
+	<p>Введите новые данные и нажмите "Сохранить".</p>' .
+        $this->errMessage .
+        $this->form, array('legend' => $this->translate('Редактирование профиля'), 'class' => 'form_white_box'));
+?>

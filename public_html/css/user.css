@@ -30,3 +30,14 @@
     #user_info_page #tabs{
         clear:both;
     }
+    
+/* user edit page */
+#userEdit{
+    width:600px;
+}
+    #userEdit fieldset{
+    
+    }
+    #userEdit fieldset legend{
+        font-size:25px;
+    }
