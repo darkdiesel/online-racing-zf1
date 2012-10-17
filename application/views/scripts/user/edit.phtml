@@ -17,32 +17,37 @@ echo $this->fieldset('loginFieldSet', '
             </ul>
             <div id="tabs-1">'.
                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('personalInf').
-                $this->form->getDisplayGroup('formactions').
+                $this->form->getDisplayGroup('personal_Inf').
+                $this->form->tab_name->setvalue('personal_Inf').
+                $this->form->getDisplayGroup('form_actions').
                 '</form>'.
             '</div>
             <div id="tabs-2">'. 
                 '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('langsettings').
-                $this->form->getDisplayGroup('formactions').
+                $this->form->getDisplayGroup('lang_settings').
+                $this->form->tab_name->setvalue('lang_settings').
+                $this->form->getDisplayGroup('form_actions').
                 '</form>'.
             '</div>
             <div id="tabs-3">'. 
                 '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('contactsInf').
-                $this->form->getDisplayGroup('formactions').
+                $this->form->getDisplayGroup('contacts_Inf').
+                $this->form->tab_name->setvalue('contacts_Inf').
+                $this->form->getDisplayGroup('form_actions').
                 '</form>'.
             '</div>
             <div id="tabs-4">'. 
                 '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('socialnetwoks').
-                $this->form->getDisplayGroup('formactions').
+                $this->form->getDisplayGroup('social_netwoks').
+                $this->form->tab_name->setvalue('social_netwoks').
+                $this->form->getDisplayGroup('form_actions').
                 '</form>'.
             '</div>
             <div id="tabs-5">'. 
                 '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('additionalInf').
-                $this->form->getDisplayGroup('formactions').
+                $this->form->getDisplayGroup('additional_Inf').
+                $this->form->tab_name->setvalue('additional_Inf').
+                $this->form->getDisplayGroup('form_actions').
                 '</form>'.
             '</div>
         </div>

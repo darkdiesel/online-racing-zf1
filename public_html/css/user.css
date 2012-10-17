@@ -62,3 +62,26 @@
                 float:right;
                 margin-right:160px;
             }
+    #userEdit .form_actions{
+        margin-top:15px;
+    }
+        #userEdit .form_actions fieldset .fieldset_inner_form{
+            padding:15px;
+            text-align:center;
+        }
+            #userEdit .form_actions fieldset .fieldset_inner_form .form_actions_group{
+                margin:0 15px;
+            }
+    #userEdit label{
+        font-weight:bold;
+    }        
+    #userEdit .additional_Inf{
+
+    }
+    #userEdit .additional_Inf .fieldset_inner_form{
+    
+    }
+        #userEdit .additional_Inf .fieldset_inner_form textarea{
+            resize:none;
+            width:640px;
+        }

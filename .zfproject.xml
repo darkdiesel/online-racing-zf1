@@ -27,6 +27,7 @@
         <formFile formName="ArticleAdd"/>
         <formFile formName="UserChatForm"/>
         <formFile formName="UserEditForm"/>
+        <formFile formName="UserSettingsForm"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>

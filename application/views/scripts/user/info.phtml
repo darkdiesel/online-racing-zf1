@@ -17,8 +17,6 @@ if ($this->errMessage != "") {
             ?>
         </div>
 
-
-
         <div class="user_info_data img-polaroid">
             <table class="table table-striped">
                 <tbody>
@@ -59,13 +57,19 @@ if ($this->errMessage != "") {
                             <td><?php echo $this->user->id ?></td>
                         </tr>
                         <tr>
-                            <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
+                            <td class="header_column"><?php echo $this->translate('Времени на сайте') ?>:</td>
                             <td>
                                 <?php
                                 $d = new DateTime();
-                                echo "<strong>".$this->translate('Дней').":</strong> ".date_diff(new DateTime(), new DateTime($this->user->created))->days." ";
-                                echo $d->diff(new DateTime($this->user->created))->format("(<strong>".$this->translate('Лет').":</strong> %y <strong>".$this->translate('Месяцев').":</strong> %m <strong>".$this->translate('Дней').":</strong> %d)");
-                                
+                                echo $d->diff(new DateTime($this->user->created))->format("<strong>".$this->translate('Лет').":</strong> %y <strong>".$this->translate('Месяцев').":</strong> %m <strong>".$this->translate('Дней').":</strong> %d");
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
+                            <td>
+                                <?php
+                                echo date_diff(new DateTime(), new DateTime($this->user->created))->days;
                                 ?>
                             </td>
                         </tr>

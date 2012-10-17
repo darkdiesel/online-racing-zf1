@@ -18,6 +18,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Имя'),
             'placeholder' => $this->translate('Имя'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -30,6 +31,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'surname', array(
             'label' => $this->translate('Фамилия'),
             'placeholder' => $this->translate('Фамилия'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -42,6 +44,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'birthday', array(
             'label' => $this->translate('Дата рождения'),
             'placeholder' => $this->translate('Дата рождения'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -54,6 +57,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'country', array(
             'label' => $this->translate('Страна'),
             'placeholder' => $this->translate('Страна'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -66,6 +70,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'city', array(
             'label' => $this->translate('Город'),
             'placeholder' => $this->translate('Город'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -91,6 +96,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'skype', array(
             'label' => $this->translate('Skype'),
             'placeholder' => $this->translate('Skype'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -103,6 +109,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'icq', array(
             'label' => $this->translate('ICQ'),
             'placeholder' => $this->translate('ICQ'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -112,9 +119,10 @@ class Application_Form_UserEditForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'mail', array(
-            'label' => $this->translate('E-mail'),
-            'placeholder' => $this->translate('E-mail'),
+        $this->addElement('text', 'gtalk', array(
+            'label' => $this->translate('Google Talk'),
+            'placeholder' => $this->translate('Google Talk'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -125,8 +133,9 @@ class Application_Form_UserEditForm extends Zend_Form {
         ));
 
         $this->addElement('text', 'www', array(
-            'label' => $this->translate('www'),
-            'placeholder' => $this->translate('www'),
+            'label' => $this->translate('WWW'),
+            'placeholder' => $this->translate('WWW'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -139,28 +148,81 @@ class Application_Form_UserEditForm extends Zend_Form {
         // social networks
         $this->addElement('text', 'vk', array(
             'label' => $this->translate('Вконтакте'),
+            'placeholder' => $this->translate('Вконтакте'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
         ));
 
         $this->addElement('text', 'fb', array(
             'label' => $this->translate('FaceBook'),
+            'placeholder' => $this->translate('FaceBook'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
         ));
 
         $this->addElement('text', 'tw', array(
             'label' => $this->translate('Twitter'),
+            'placeholder' => $this->translate('Twitter'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
         ));
 
         $this->addElement('text', 'gp', array(
             'label' => $this->translate('Google+'),
+            'placeholder' => $this->translate('Google+'),
+            'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
         ));
 
         // additional information
         $this->addElement('textarea', 'about', array(
             'label' => $this->translate('О себе'),
-            'class' => 'x_field',
+            'placeholder' => $this->translate('О себе').' ...',
+            'cols' => 60,
+            'rows' => 5,
+            'maxlength' => 500,
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array(
+                array('validator' => 'StringLength', 'options' => array(0, 500))
+                ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'aboutTextArea_Label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'aboutTextArea_box')),
+            )
+        ));
+        
+        // element for saving tab name
+        $this->addElement('hidden','tab_name', array(
+            'value' => '',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('class' => 'tab_name hidden_group'))
+            )
         ));
 
         // conrols
@@ -168,6 +230,10 @@ class Application_Form_UserEditForm extends Zend_Form {
             'ignore' => true,
             'class' => 'btn btn-primary',
             'label' => $this->translate('Сохранить'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'span', 'class' => 'submit form_actions_group'))
+            )
         ));
 
         $this->addElement('reset', 'reset', array(
@@ -175,6 +241,10 @@ class Application_Form_UserEditForm extends Zend_Form {
             'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Сбросить'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'span', 'class' => 'reset form_actions_group'))
+            )
         ));
 
         $this->addDisplayGroup(array(
@@ -183,38 +253,38 @@ class Application_Form_UserEditForm extends Zend_Form {
             $this->getElement('birthday'),
             $this->getElement('country'),
             $this->getElement('city')
-                ), 'personalInf', array('legend' => $this->translate('Личные данные')));
-        
-        $this->getDisplayGroup('personalInf')->setDecorators(array(
-                'FormElements',
-                array(array('innerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'fieldset_inner_form')),
-                'Fieldset',
-                array(array('outerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'personalInf display_group')),
+                ), 'personal_Inf', array('legend' => $this->translate('Личные данные')));
+
+        $this->getDisplayGroup('personal_Inf')->setDecorators(array(
+            'FormElements',
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'personal_Inf display_group')),
         ));
 
         $this->addDisplayGroup(array(
             $this->getElement('lang')
-                ), 'langsettings', array('legend' => $this->translate('Языковые настройки')));
+                ), 'lang_settings', array('legend' => $this->translate('Языковые настройки')));
 
-        $this->getDisplayGroup('langsettings')->setDecorators(array(
+        $this->getDisplayGroup('lang_settings')->setDecorators(array(
             'FormElements',
-                array(array('innerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'fieldset_inner_form')),
-                'Fieldset',
-                array(array('outerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'langsettings display_group')),
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'lang_settings display_group')),
         ));
 
         $this->addDisplayGroup(array(
             $this->getElement('skype'),
             $this->getElement('icq'),
-            $this->getElement('mail'),
+            $this->getElement('gtalk'),
             $this->getElement('www')
-                ), 'contactsInf', array('legend' => $this->translate('Контактноя информация')));
+                ), 'contacts_Inf', array('legend' => $this->translate('Контактноя информация')));
 
-        $this->getDisplayGroup('contactsInf')->setDecorators(array(
+        $this->getDisplayGroup('contacts_Inf')->setDecorators(array(
             'FormElements',
-                array(array('innerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'fieldset_inner_form')),
-                'Fieldset',
-                array(array('outerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'contactsInf display_group')),
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'contacts_Inf display_group')),
         ));
 
         $this->addDisplayGroup(array(
@@ -222,36 +292,36 @@ class Application_Form_UserEditForm extends Zend_Form {
             $this->getElement('fb'),
             $this->getElement('tw'),
             $this->getElement('gp')
-                ), 'socialnetwoks', array('legend' => $this->translate('Социальные сети')));
+                ), 'social_netwoks', array('legend' => $this->translate('Социальные сети')));
 
-        $this->getDisplayGroup('socialnetwoks')->setDecorators(array(
+        $this->getDisplayGroup('social_netwoks')->setDecorators(array(
             'FormElements',
-                array(array('innerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'fieldset_inner_form')),
-                'Fieldset',
-                array(array('outerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'socialnetwoks display_group')),
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'social_netwoks display_group')),
         ));
 
         $this->addDisplayGroup(array(
             $this->getElement('about')
-                ), 'additionalInf', array('legend' => $this->translate('Дополнительная информация')));
+                ), 'additional_Inf', array('legend' => $this->translate('Дополнительная информация')));
 
-        $this->getDisplayGroup('additionalInf')->setDecorators(array(
+        $this->getDisplayGroup('additional_Inf')->setDecorators(array(
             'FormElements',
-                array(array('innerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'fieldset_inner_form')),
-                'Fieldset',
-                array(array('outerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'additionalInf display_group')),
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'additional_Inf display_group')),
         ));
 
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
-                ), 'formactions', array('legend' => $this->translate('Сохранить')." / ".$this->translate('Сбросить')." ".$this->translate('изминения')));
+                ), 'form_actions', array());
 
-        $this->getDisplayGroup('formactions')->setDecorators(array(
+        $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
-                array(array('innerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'fieldset_inner_form')),
-                'Fieldset',
-                array(array('outerHtmlTag'=>'HtmlTag'),array('tag'=>'div', 'class' => 'formactions display_group')),
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form_actions display_group')),
         ));
     }
 
