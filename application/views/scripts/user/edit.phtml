@@ -6,5 +6,51 @@ if ($this->errMessage != "") {
 echo $this->fieldset('loginFieldSet', '
 	<p>Введите новые данные и нажмите "Сохранить".</p>' .
         $this->errMessage .
-        $this->form, array('legend' => $this->translate('Редактирование профиля'), 'class' => 'form_white_box'));
+        '
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">' . $this->translate('Личное') . '</a></li>
+                <li><a href="#tabs-2">' . $this->translate('Язык') . '</a></li>
+                <li><a href="#tabs-3">' . $this->translate('Контакты') . '</a></li>
+                <li><a href="#tabs-4">' . $this->translate('Аккаунты') . '</a></li>
+                <li><a href="#tabs-5">' . $this->translate('Дополнительно') . '</a></li>
+            </ul>
+            <div id="tabs-1">'.
+               '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
+                $this->form->getDisplayGroup('personalInf').
+                $this->form->getDisplayGroup('formactions').
+                '</form>'.
+            '</div>
+            <div id="tabs-2">'. 
+                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
+                $this->form->getDisplayGroup('langsettings').
+                $this->form->getDisplayGroup('formactions').
+                '</form>'.
+            '</div>
+            <div id="tabs-3">'. 
+                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
+                $this->form->getDisplayGroup('contactsInf').
+                $this->form->getDisplayGroup('formactions').
+                '</form>'.
+            '</div>
+            <div id="tabs-4">'. 
+                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
+                $this->form->getDisplayGroup('socialnetwoks').
+                $this->form->getDisplayGroup('formactions').
+                '</form>'.
+            '</div>
+            <div id="tabs-5">'. 
+                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
+                $this->form->getDisplayGroup('additionalInf').
+                $this->form->getDisplayGroup('formactions').
+                '</form>'.
+            '</div>
+        </div>
+        ' 
+       , array('legend' => $this->translate('Редактирование профиля'), 'class' => 'form_white_box'));
 ?>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $('#tabs').tabs();
+    });
+</script>

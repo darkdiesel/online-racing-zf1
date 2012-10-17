@@ -19639,3 +19639,25 @@ Stack trace:
 #3 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #4 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #5 {main}
+17-10-2012 13:46:14 CRIT (2): Error 500. Application error
+17-10-2012 13:46:14 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+)
+
+17-10-2012 13:46:14 CRIT (2): exception 'Zend_Form_Exception' with message 'Invalid alias provided to addDecorator; must be alphanumeric string' in D:\dev\localhost\online-racing\library\Zend\Form\DisplayGroup.php:720
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Form\DisplayGroup.php(774): Zend_Form_DisplayGroup->addDecorator(Array, Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Form\DisplayGroup.php(796): Zend_Form_DisplayGroup->addDecorators(Array)
+#2 D:\dev\localhost\online-racing\application\forms\UserEditForm.php(131): Zend_Form_DisplayGroup->setDecorators(Array)
+#3 D:\dev\localhost\online-racing\library\Zend\Form.php(240): Application_Form_UserEditForm->init()
+#4 D:\dev\localhost\online-racing\application\controllers\UserController.php(314): Zend_Form->__construct()
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#8 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#10 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#11 {main}
