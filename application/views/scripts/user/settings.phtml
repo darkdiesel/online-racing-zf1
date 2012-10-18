@@ -1,1 +1,31 @@
-<h2>Settings</h2>
+<div id="user_settings_page">
+    <?php
+if ($this->errMessage != "") {
+    $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+}
+echo $this->fieldset('loginFieldSet', '
+	<p>Измините настройки и нажмите "Сохранить".</p>' .
+        $this->errMessage .
+        '
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">' . $this->translate('Язык') . '</a></li>
+            </ul>
+            <div id="tabs-1">'. 
+                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
+                $this->form->getDisplayGroup('lang_settings').
+                $this->form->tab_name->setvalue('lang_settings').
+                $this->form->getDisplayGroup('form_actions').
+                '</form>'.
+            '</div>
+        </div>
+        ' 
+       , array('legend' => $this->translate('Настройки профиля'), 'class' => 'form_white_box'));
+?>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $('#tabs').tabs();
+    });
+</script>
+    
+</div>

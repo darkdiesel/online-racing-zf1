@@ -429,15 +429,19 @@ form.white_box:after{
         margin:0;
         border-radius:7px;
     }
-    form.white_box ul.errors{
-        margin:0;
+    form ul.errors{
+        margin:5px auto;
+        clear:both;
+        overflow:hidden;
+        word-wrap:break-word;
+        width:90%;
     }
-        form.white_box ul.errors li{
+        form ul.errors li{
             color:#BE3838;
             font-family:serif;
             font-size:14px;
-            line-height:14px;
-            list-style-type:none;
+            line-height:17px;
+            text-align:center;
         }
 form#userlogin{
     width:270px;

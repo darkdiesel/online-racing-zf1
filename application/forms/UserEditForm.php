@@ -12,7 +12,6 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/user/edit');
         $this->setName('userEdit');
-        $this->setAttrib('class', 'white_box');
 
         // user info
         $this->addElement('text', 'name', array(
@@ -46,6 +45,10 @@ class Application_Form_UserEditForm extends Zend_Form {
             'placeholder' => $this->translate('Дата рождения'),
             'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
+            'validators' => array(
+                array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
+                array('StringLength', true, array('min' => 10, 'max' => 10)),
+            ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -79,11 +82,17 @@ class Application_Form_UserEditForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
-        // lang
-        $this->addElement('select', 'lang', array(
-            'label' => $this->translate('Язык'),
-            'multiOptions' => array('Русский', 'English'),
+        
+        // gravatar
+        $this->addElement('text', 'gravatar', array(
+            'label' => $this->translate('Gravatar'),
+            'placeholder' => $this->translate('Gravatar'),
+            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'class' => 'x_field',
+            'validators' => array(
+                'EmailAddress',
+                array('StringLength', true, array('min' => 5, 'max' => 100))
+            ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -133,8 +142,8 @@ class Application_Form_UserEditForm extends Zend_Form {
         ));
 
         $this->addElement('text', 'www', array(
-            'label' => $this->translate('WWW'),
-            'placeholder' => $this->translate('WWW'),
+            'label' => $this->translate('www'),
+            'placeholder' => $this->translate('www'),
             'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
@@ -160,8 +169,8 @@ class Application_Form_UserEditForm extends Zend_Form {
         ));
 
         $this->addElement('text', 'fb', array(
-            'label' => $this->translate('FaceBook'),
-            'placeholder' => $this->translate('FaceBook'),
+            'label' => $this->translate('Facebook'),
+            'placeholder' => $this->translate('Facebook'),
             'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
@@ -246,7 +255,8 @@ class Application_Form_UserEditForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'span', 'class' => 'reset form_actions_group'))
             )
         ));
-
+        
+        // personal information display group
         $this->addDisplayGroup(array(
             $this->getElement('name'),
             $this->getElement('surname'),
@@ -261,24 +271,26 @@ class Application_Form_UserEditForm extends Zend_Form {
             'Fieldset',
             array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'personal_Inf display_group')),
         ));
-
+        
+        // avatar display group
         $this->addDisplayGroup(array(
-            $this->getElement('lang')
-                ), 'lang_settings', array('legend' => $this->translate('Языковые настройки')));
+            $this->getElement('gravatar')
+                ), 'avatar', array('legend' => $this->translate('Изображение профиля')));
 
-        $this->getDisplayGroup('lang_settings')->setDecorators(array(
+        $this->getDisplayGroup('avatar')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
             'Fieldset',
-            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'lang_settings display_group')),
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'avatar display_group')),
         ));
-
+        
+        // contacts information display group
         $this->addDisplayGroup(array(
             $this->getElement('skype'),
             $this->getElement('icq'),
             $this->getElement('gtalk'),
             $this->getElement('www')
-                ), 'contacts_Inf', array('legend' => $this->translate('Контактноя информация')));
+                ), 'contacts_Inf', array('legend' => $this->translate('Контактная информация')));
 
         $this->getDisplayGroup('contacts_Inf')->setDecorators(array(
             'FormElements',
@@ -287,6 +299,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'contacts_Inf display_group')),
         ));
 
+        // social networks display group
         $this->addDisplayGroup(array(
             $this->getElement('vk'),
             $this->getElement('fb'),
@@ -301,6 +314,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'social_netwoks display_group')),
         ));
 
+        // additional information display group
         $this->addDisplayGroup(array(
             $this->getElement('about')
                 ), 'additional_Inf', array('legend' => $this->translate('Дополнительная информация')));
@@ -312,6 +326,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'additional_Inf display_group')),
         ));
 
+        // form actions display group
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
@@ -326,4 +341,3 @@ class Application_Form_UserEditForm extends Zend_Form {
     }
 
 }
-

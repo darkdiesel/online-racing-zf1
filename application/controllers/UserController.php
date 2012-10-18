@@ -40,6 +40,8 @@ class UserController extends Zend_Controller_Action {
                         ->setCredential(sha1($form->loginpassword->getValue()));
 
                 $result = $auth->authenticate($authAdapter);
+                
+                echo $form->remember->getvalue();
 
                 switch ($result->getCode()) {
                     case Zend_Auth_Result::SUCCESS:
@@ -59,6 +61,9 @@ class UserController extends Zend_Controller_Action {
                             default:
                                 $storage = $auth->getStorage('online-racing');
                                 $storage->write($storage_data);
+                                if ($form->remember->getvalue() == 1) {
+                                    Zend_Session::rememberMe(60*60*24*2);
+                                }
                                 $this->_helper->redirector('index', 'index');
                                 break;
                         }
@@ -266,6 +271,7 @@ class UserController extends Zend_Controller_Action {
 
     public function logoutAction() {
         Zend_Auth::getInstance()->clearIdentity();
+        Zend_Session::forgetMe();
         return $this->_helper->redirector('login', 'user');
     }
 
@@ -273,27 +279,32 @@ class UserController extends Zend_Controller_Action {
         // page title
         //$this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
         $this->view->headTitle($this->view->translate('Просмотр профиля'));
-        
+
         $request = $this->getRequest();
         $user_id = $request->getParam('id');
-        
-        if ( $request->getParam('id') == 0) {
+
+        if ($request->getParam('id') == 0) {
             $this->view->errMessage = "Пользователь не существует";
             return;
         } else {
             
         }
-        
+
         $mapper = new Application_Model_UserMapper();
         $user_data = $mapper->getUserDataById($user_id);
-        
+
         if ($user_data == 'null') {
             $this->view->errMessage = "Пользователь не существует";
             return;
         } else {
             $this->view->user = $user_data;
+            $this->view->gravatar = $this->view->gravatar()
+                    ->setEmail($user_data->gravatar)
+                    ->setImgSize(200)
+                    ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
+                    ->setSecure(true)
+                    ->setAttribs(array('class' => 'img-polaroid', 'title' => $user_data->login . " - profile avatar"));
         }
-        
     }
 
     public function messageAction() {
@@ -304,24 +315,88 @@ class UserController extends Zend_Controller_Action {
     public function settingsAction() {
         // page title
         $this->view->headTitle($this->view->translate('Настройки профиля'));
-    }
 
-    public function editAction() {
-        // page title
-        $this->view->headTitle($this->view->translate('Редактирование профиля'));
-        
         $request = $this->getRequest();
-        $form = new Application_Form_UserEditForm();
+        $form = new Application_Form_UserSettingsForm();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $this->view->errMessage = $this->params['email'];
+                
             } else {
                 $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!";
             }
         }
 
         $this->view->form = $form;
+    }
+
+    public function editAction() {
+        // page title
+        $this->view->headTitle($this->view->translate('Редактирование профиля'));
+
+        $request = $this->getRequest();
+        $form = new Application_Form_UserEditForm();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $userMapper = new Application_Model_UserMapper();
+                $user = new Application_Model_User(array('id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
+
+                switch ($request->getParam('tab_name')) {
+                    case 'avatar':
+                        $user->setGravatar($form->gravatar->getValue());
+                        $userMapper->save($user, 'avatar');
+                        break;
+                    case 'personal_Inf':
+                        $user->setName($form->name->getValue());
+                        $user->setSurname($form->surname->getvalue());
+                        $user->setBirthday($form->birthday->getValue());
+                        $user->setCountry($form->country->getValue());
+                        $user->setCity($form->city->getValue());
+                        $userMapper->save($user, 'personal_Inf');
+                        break;
+                    case 'contacts_Inf':
+                        $user->setSkype($form->skype->getValue());
+                        $user->setIcq($form->icq->getValue());
+                        $user->setGtalk($form->gtalk->getValue());
+                        $user->setWww($form->www->getvalue());
+                        $userMapper->save($user, 'contacts_Inf');
+                        break;
+                    case 'additional_Inf':
+                        $user->setAbout($form->about->getValue());
+                        $userMapper->save($user, 'additional_Inf');
+                        break;
+                    default:
+                        $this->view->errMessage .= $form->gravatar->getValue() . "Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.";
+                        break;
+                }
+            } else {
+                $this->view->errMessage .= "Исправте следующие ошибки для сохранения изминений профиля!";
+            }
+        }
+        
+        $mapper = new Application_Model_UserMapper();
+        $user_data = $mapper->getUserDataById(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+        
+        $form->name->setValue($user_data->name);
+        $form->surname->setValue($user_data->surname);
+        $form->birthday->setValue($user_data->birthday);
+        $form->country->setValue($user_data->country);
+        $form->city->setValue($user_data->city);
+        $form->gravatar->setValue($user_data->gravatar);
+        $form->skype->setValue($user_data->skype);
+        $form->icq->setValue($user_data->icq);
+        $form->gtalk->setValue($user_data->gtalk);
+        $form->www->setValue($user_data->www);
+        $form->about->setValue($user_data->about);
+        
+        $this->view->form = $form;
+        $this->view->gravatar = $this->view->gravatar()
+                ->setEmail($user_data->gravatar)
+                ->setImgSize(200)
+                ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
+                ->setSecure(true)
+                ->setAttribs(array('class' => 'img-polaroid', 'title' => " - profile avatar"));
     }
 
 }

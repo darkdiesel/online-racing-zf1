@@ -15,7 +15,7 @@
     <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
         <div class="user">
             <div class="btn-group dropdown">
-                <a class="btn btn-primary" href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Выйти') ?></a>
+                <a class="btn btn-primary" href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Выход') ?></a>
                 <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo $this->baseUrl('user/info/') . $storage_data->id; ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
@@ -23,7 +23,7 @@
                     <li><a href="<?php echo $this->baseUrl('user/settings'); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
                     <li><a href="<?php echo $this->baseUrl('user/edit'); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
                     <li class="divider"></li>
-                    <li><a href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Сообщения') ?></a></li>
+                    <li><a href="<?php echo $this->baseUrl('user/logout'); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
                 </ul>
             </div>
         </div>

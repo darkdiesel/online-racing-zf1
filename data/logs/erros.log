@@ -19688,3 +19688,358 @@ Stack trace:
 #14 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #15 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #16 {main}
+18-10-2012 10:01:12 CRIT (2): Error 500. Application error
+18-10-2012 10:01:12 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+)
+
+18-10-2012 10:01:12 CRIT (2): exception 'Zend_Form_Exception' with message 'No valid elements specified for display group' in D:\dev\localhost\online-racing\library\Zend\Form.php:1806
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\forms\UserEditForm.php(270): Zend_Form->addDisplayGroup(Array, 'lang_settings', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Form.php(240): Application_Form_UserEditForm->init()
+#2 D:\dev\localhost\online-racing\application\controllers\UserController.php(327): Zend_Form->__construct()
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#6 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#7 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#8 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#9 {main}
+18-10-2012 10:35:40 NOTICE (5): Error 404. Page not found
+18-10-2012 10:35:40 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23social_netwoks
+    [module] => default
+)
+
+18-10-2012 10:35:40 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23socialnetwoks" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23socialnet...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23socialnet...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:37:13 NOTICE (5): Error 404. Page not found
+18-10-2012 10:37:13 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23tabs-5
+    [module] => default
+)
+
+18-10-2012 10:37:13 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23tabs5" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23tabs5Acti...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23tabs5Acti...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:38:01 NOTICE (5): Error 404. Page not found
+18-10-2012 10:38:01 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23tabs-5
+    [module] => default
+)
+
+18-10-2012 10:38:01 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23tabs5" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23tabs5Acti...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23tabs5Acti...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:38:13 NOTICE (5): Error 404. Page not found
+18-10-2012 10:38:13 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23tabs-5
+    [module] => default
+)
+
+18-10-2012 10:38:13 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23tabs5" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23tabs5Acti...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23tabs5Acti...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:39:29 NOTICE (5): Error 404. Page not found
+18-10-2012 10:39:29 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23tabs-4
+    [module] => default
+)
+
+18-10-2012 10:39:29 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23tabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23tabs4Acti...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23tabs4Acti...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:42:24 NOTICE (5): Error 404. Page not found
+18-10-2012 10:42:24 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%26%23035%3Btabs-4
+    [module] => default
+)
+
+18-10-2012 10:42:24 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit26230353btabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit26230353bta...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit26230353bta...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:43:06 NOTICE (5): Error 404. Page not found
+18-10-2012 10:43:06 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%26%23035%3Btabs-4
+    [module] => default
+)
+
+18-10-2012 10:43:06 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit26230353btabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit26230353bta...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit26230353bta...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:43:33 NOTICE (5): Error 404. Page not found
+18-10-2012 10:43:33 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23tabs-4
+    [module] => default
+)
+
+18-10-2012 10:43:33 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23tabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23tabs4Acti...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23tabs4Acti...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:43:52 NOTICE (5): Error 404. Page not found
+18-10-2012 10:43:52 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%23tabs-4
+    [module] => default
+)
+
+18-10-2012 10:43:52 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit23tabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit23tabs4Acti...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit23tabs4Acti...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:43:59 NOTICE (5): Error 404. Page not found
+18-10-2012 10:43:59 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%3Fq%3Dtabs-4
+    [module] => default
+)
+
+18-10-2012 10:43:59 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit3fq3dtabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit3fq3dtabs4A...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit3fq3dtabs4A...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 10:44:11 NOTICE (5): Error 404. Page not found
+18-10-2012 10:44:11 NOTICE (5): Request params: Array
+(
+    [controller] => user
+    [action] => edit%3Fq%3Dtabs-4
+    [module] => default
+)
+
+18-10-2012 10:44:11 NOTICE (5): exception 'Zend_Controller_Action_Exception' with message 'Action "edit3fq3dtabs4" does not exist and was not trapped in __call()' in D:\dev\localhost\online-racing\library\Zend\Controller\Action.php:485
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(518): Zend_Controller_Action->__call('edit3fq3dtabs4A...', Array)
+#1 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('edit3fq3dtabs4A...')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#3 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#4 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#5 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#6 {main}
+18-10-2012 11:14:45 CRIT (2): Error 500. Application error
+18-10-2012 11:14:45 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+    [gravatar] => 123
+    [tab_name] => avatar
+    [submit] => Save
+)
+
+18-10-2012 11:14:45 CRIT (2): exception 'Zend_Form_Element_Exception' with message 'Method getValues does not exist' in D:\dev\localhost\online-racing\library\Zend\Form\Element.php:982
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\controllers\UserController.php(339): Zend_Form_Element->__call('getValues', Array)
+#1 D:\dev\localhost\online-racing\application\controllers\UserController.php(339): Zend_Form_Element_Text->getValues()
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#8 {main}
+18-10-2012 11:59:27 CRIT (2): Error 500. Application error
+18-10-2012 11:59:27 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+    [name] => 123
+    [surname] => 
+    [birthday] => 
+    [country] => 
+    [city] => 
+    [tab_name] => personal_Inf
+    [submit] => Save
+)
+
+18-10-2012 11:59:27 CRIT (2): exception 'Exception' with message 'Invalid user property' in D:\dev\localhost\online-racing\application\models\User.php:37
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\models\User.php(143): Application_Model_User->__set('_coutry', '')
+#1 D:\dev\localhost\online-racing\application\controllers\UserController.php(349): Application_Model_User->setCountry('')
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#8 {main}
+18-10-2012 13:02:15 CRIT (2): Error 500. Application error
+18-10-2012 13:02:15 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+)
+
+18-10-2012 13:02:15 CRIT (2): exception 'Zend_Form_Element_Exception' with message 'Method setText does not exist' in D:\dev\localhost\online-racing\library\Zend\Form\Element.php:982
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\controllers\UserController.php(385): Zend_Form_Element->__call('setText', Array)
+#1 D:\dev\localhost\online-racing\application\controllers\UserController.php(385): Zend_Form_Element_Textarea->setText(NULL)
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#8 {main}
+18-10-2012 13:02:30 CRIT (2): Error 500. Application error
+18-10-2012 13:02:30 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+)
+
+18-10-2012 13:02:30 CRIT (2): exception 'Zend_Form_Element_Exception' with message 'Method setHtml does not exist' in D:\dev\localhost\online-racing\library\Zend\Form\Element.php:982
+Stack trace:
+#0 D:\dev\localhost\online-racing\application\controllers\UserController.php(385): Zend_Form_Element->__call('setHtml', Array)
+#1 D:\dev\localhost\online-racing\application\controllers\UserController.php(385): Zend_Form_Element_Textarea->setHtml(NULL)
+#2 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#3 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#5 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#8 {main}
+18-10-2012 14:11:55 CRIT (2): Error 500. Application error
+18-10-2012 14:11:55 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+    [name] => Игорь
+    [surname] => Пешков
+    [birthday] => 2012-10-19
+    [country] => Беларусь
+    [city] => Гродно
+    [tab_name] => personal_Inf
+    [submit] => Save
+)
+
+18-10-2012 14:11:55 CRIT (2): exception 'Zend_Validate_Exception' with message 'Internal error while using the pattern '/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/'' in D:\dev\localhost\online-racing\library\Zend\Validate\Regex.php:111
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Validate\Regex.php(84): Zend_Validate_Regex->setPattern('/^(19|20)\d\d[-...')
+#1 [internal function]: Zend_Validate_Regex->__construct('/^(19|20)\d\d[-...')
+#2 D:\dev\localhost\online-racing\library\Zend\Form\Element.php(2157): ReflectionClass->newInstance('/^(19|20)\d\d[-...')
+#3 D:\dev\localhost\online-racing\library\Zend\Form\Element.php(1278): Zend_Form_Element->_loadValidator(Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Form\Element.php(1376): Zend_Form_Element->getValidators()
+#5 D:\dev\localhost\online-racing\library\Zend\Form.php(2253): Zend_Form_Element->isValid('2012-10-19', Array)
+#6 D:\dev\localhost\online-racing\application\controllers\UserController.php(335): Zend_Form->isValid(Array)
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}
+18-10-2012 14:49:19 CRIT (2): Error 500. Application error
+18-10-2012 14:49:19 CRIT (2): Request params: Array
+(
+    [controller] => user
+    [action] => edit
+    [module] => default
+    [name] => Игорь
+    [surname] => Пешков
+    [birthday] => 2012-07-18
+    [country] => Беларусь
+    [city] => Гродно
+    [tab_name] => personal_Inf
+    [submit] => Save
+)
+
+18-10-2012 14:49:19 CRIT (2): exception 'Zend_Validate_Exception' with message 'Internal error while using the pattern '/^(\(\d{4})-d{1,2})-(\d{1,2})$/'' in D:\dev\localhost\online-racing\library\Zend\Validate\Regex.php:111
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Validate\Regex.php(84): Zend_Validate_Regex->setPattern('/^(\(\d{4})-d{1...')
+#1 [internal function]: Zend_Validate_Regex->__construct('/^(\(\d{4})-d{1...')
+#2 D:\dev\localhost\online-racing\library\Zend\Form\Element.php(2157): ReflectionClass->newInstance('/^(\(\d{4})-d{1...')
+#3 D:\dev\localhost\online-racing\library\Zend\Form\Element.php(1278): Zend_Form_Element->_loadValidator(Array)
+#4 D:\dev\localhost\online-racing\library\Zend\Form\Element.php(1376): Zend_Form_Element->getValidators()
+#5 D:\dev\localhost\online-racing\library\Zend\Form.php(2253): Zend_Form_Element->isValid('2012-07-18', Array)
+#6 D:\dev\localhost\online-racing\application\controllers\UserController.php(335): Zend_Form->isValid(Array)
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(516): UserController->editAction()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editAction')
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}

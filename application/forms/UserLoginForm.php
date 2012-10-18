@@ -25,6 +25,7 @@ class Application_Form_UserLoginForm extends Zend_Form {
             'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
+                array('StringLength', true, array('min' => 5, 'max' => 100))
             )
         ));
 

@@ -4,7 +4,7 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
     function up()
     {
 	
-		$sql = " CCREATE TABLE IF NOT EXISTS `user` (
+		$sql = " CREATE TABLE IF NOT EXISTS `user` (
                             `id` int(11) NOT NULL AUTO_INCREMENT,
                             `login` varchar(30) NOT NULL,
                             `password` varchar(40) NOT NULL,
@@ -22,13 +22,14 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
                             `gravatar` varchar(100) NOT NULL,
                             `skype` varchar(255) NOT NULL,
                             `icq` int(20) NOT NULL,
+                            `gtalk` varchar(100) NOT NULL,
                             `www` varchar(255) NOT NULL,
                             `vk` varchar(255) NOT NULL,
                             `fb` varchar(255) NOT NULL,
                             `tw` varchar(255) NOT NULL,
                             `gp` varchar(255) NOT NULL,
                             `created` datetime NOT NULL,
-                            `about` text NOT NULL,
+                            `about` varchar(500) NOT NULL,
                             PRIMARY KEY (`id`),
                             KEY `role_id` (`role_id`)
                           ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

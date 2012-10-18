@@ -47,7 +47,7 @@ class Application_Form_UserRegisterForm extends Zend_Form {
             'validators' => array(
                 'EmailAddress',
                 new App_Validate_NoDbRecordExists('user', 'email'),
-                array('StringLength', true, array('min' => 5, 'max' => 50))
+                array('StringLength', true, array('min' => 5, 'max' => 100))
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',

@@ -10,49 +10,59 @@ echo $this->fieldset('loginFieldSet', '
         <div id="tabs">
             <ul>
                 <li><a href="#tabs-1">' . $this->translate('Личное') . '</a></li>
-                <li><a href="#tabs-2">' . $this->translate('Язык') . '</a></li>
+                <li><a href="#tabs-2">' . $this->translate('Аватар') . '</a></li>
                 <li><a href="#tabs-3">' . $this->translate('Контакты') . '</a></li>
                 <li><a href="#tabs-4">' . $this->translate('Аккаунты') . '</a></li>
                 <li><a href="#tabs-5">' . $this->translate('Дополнительно') . '</a></li>
             </ul>
-            <div id="tabs-1">'.
-               '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('personal_Inf').
-                $this->form->tab_name->setvalue('personal_Inf').
-                $this->form->getDisplayGroup('form_actions').
-                '</form>'.
-            '</div>
-            <div id="tabs-2">'. 
-                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('lang_settings').
-                $this->form->tab_name->setvalue('lang_settings').
-                $this->form->getDisplayGroup('form_actions').
-                '</form>'.
-            '</div>
-            <div id="tabs-3">'. 
-                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('contacts_Inf').
-                $this->form->tab_name->setvalue('contacts_Inf').
-                $this->form->getDisplayGroup('form_actions').
-                '</form>'.
-            '</div>
-            <div id="tabs-4">'. 
-                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('social_netwoks').
-                $this->form->tab_name->setvalue('social_netwoks').
-                $this->form->getDisplayGroup('form_actions').
-                '</form>'.
-            '</div>
-            <div id="tabs-5">'. 
-                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('additional_Inf').
-                $this->form->tab_name->setvalue('additional_Inf').
-                $this->form->getDisplayGroup('form_actions').
-                '</form>'.
-            '</div>
+            <div id="tabs-1">' .
+        '<form id="' . $this->form->getName() . '" action="' . $this->form->getAction() . '#tabs-1" method="' . $this->form->getMethod() . '">' .
+        $this->form->getDisplayGroup('personal_Inf') .
+        $this->form->tab_name->setvalue('personal_Inf') .
+        $this->form->getDisplayGroup('form_actions') .
+        '</form>' .
+        '<script>
+            $(function() {
+                $("#birthday").datepicker({
+                    showButtonPanel: true,
+                    dateFormat: "yy-mm-dd",
+                    showAnim: "clip"
+                });
+            });
+        </script>' .
+        '</div>
+            <div id="tabs-2">' .
+        '<form id="' . $this->form->getName() . '" action="' . $this->form->getAction() . '#tabs-2" method="' . $this->form->getMethod() . '">' .
+        $this->gravatar .
+        $this->form->getDisplayGroup('avatar') .
+        $this->form->tab_name->setvalue('avatar') .
+        $this->form->getDisplayGroup('form_actions') .
+        '</form>' .
+        '</div>
+            <div id="tabs-3">' .
+        '<form id="' . $this->form->getName() . '" action="' . $this->form->getAction() . '#tabs-3" method="' . $this->form->getMethod() . '">' .
+        $this->form->getDisplayGroup('contacts_Inf') .
+        $this->form->tab_name->setvalue('contacts_Inf') .
+        $this->form->getDisplayGroup('form_actions') .
+        '</form>' .
+        '</div>
+            <div id="tabs-4">' .
+        '<form id="' . $this->form->getName() . '" action="' . $this->form->getAction() . '#tabs-4" method="' . $this->form->getMethod() . '">' .
+        $this->form->getDisplayGroup('social_netwoks') .
+        $this->form->tab_name->setvalue('social_netwoks') .
+        $this->form->getDisplayGroup('form_actions') .
+        '</form>' .
+        '</div>
+            <div id="tabs-5">' .
+        '<form id="' . $this->form->getName() . '" action="' . $this->form->getAction() . '#tabs-5" method="' . $this->form->getMethod() . '">' .
+        $this->form->getDisplayGroup('additional_Inf') .
+        $this->form->tab_name->setvalue('additional_Inf') .
+        $this->form->getDisplayGroup('form_actions') .
+        '</form>' .
+        '</div>
         </div>
-        ' 
-       , array('legend' => $this->translate('Редактирование профиля'), 'class' => 'form_white_box'));
+        '
+        , array('legend' => $this->translate('Редактирование профиля'), 'class' => 'form_white_box'));
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function(){

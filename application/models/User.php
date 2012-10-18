@@ -14,8 +14,10 @@ class Application_Model_User {
     protected $_country;
     protected $_city;
     protected $_birthday;
+    protected $_gravatar;
     protected $_skype;
     protected $_icq;
+    protected $_gtalk;
     protected $_www;
     protected $_vk;
     protected $_fb;
@@ -139,12 +141,12 @@ class Application_Model_User {
     }
     
     public function setCountry($coutry) {
-        $this->_coutry = (string) $coutry;
+        $this->_country = (string) $coutry;
         return $this;
     }
 
     public function getCountry() {
-        return $this->_coutry;
+        return $this->_country;
     }
     
     public function setCity($city) {
@@ -163,6 +165,51 @@ class Application_Model_User {
 
     public function getBirthday() {
         return $this->_birthday;
+    }
+    
+    public function setGravatar($gravatar) {
+        $this->_gravatar = $gravatar;
+        return $this;
+    }
+
+    public function getGravatar() {
+        return $this->_gravatar;
+    }
+    
+    public function setSkype($skype) {
+        $this->_skype = $skype;
+        return $this;
+    }
+
+    public function getSkype() {
+        return $this->_skype;
+    }
+    
+    public function setIcq($icq) {
+        $this->_icq = (int) $icq;
+        return $this;
+    }
+
+    public function getIcq() {
+        return $this->_icq;
+    }
+    
+    public function setGtalk($gtalk) {
+        $this->_gtalk = $gtalk;
+        return $this;
+    }
+
+    public function getGtalk() {
+        return $this->_gtalk;
+    }
+    
+    public function setWww($www) {
+        $this->_www = $www;
+        return $this;
+    }
+
+    public function getWww() {
+        return $this->_www;
     }
     
     public function setVk($vk) {
@@ -211,7 +258,7 @@ class Application_Model_User {
     }
     
     public function setAbout($about) {
-        $this->_about = (string) $about;
+        $this->_about = $about;
         return $this;
     }
 

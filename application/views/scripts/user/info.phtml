@@ -8,12 +8,7 @@ if ($this->errMessage != "") {
         <hr>
         <div class="user_info_avatar">
             <?php
-            echo $this->gravatar()
-                    ->setEmail('')
-                    ->setImgSize(200)
-                    ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
-                    ->setSecure(true)
-                    ->setAttribs(array('class' => 'img-polaroid', 'title' => 'Title for this image'));
+            echo $this->gravatar;
             ?>
         </div>
 

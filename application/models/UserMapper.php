@@ -98,21 +98,30 @@ class Application_Model_UserMapper {
     /*
      * Uses for controller: user action: info
      */
+
     public function getUserDataById($id) {
         $result = $this->getDbTable()->fetchRow('id = "' . $id . '"');
         if (0 == count($result)) {
             return 'null';
         }
-        
+
         $entry = new Application_Model_User();
-        
+
         $entry->setId($result->id);
         $entry->setLogin($result->login);
         $entry->setName($result->name);
         $entry->setSurname($result->surname);
         $entry->setBirthday($result->birthday);
+        $entry->setCountry($result->country);
+        $entry->setCity($result->city);
+        $entry->setGravatar($result->gravatar);
+        $entry->setSkype($result->skype);
+        $entry->setIcq($result->icq);
+        $entry->setGtalk($result->gtalk);
+        $entry->setWww($result->www);
+        $entry->setAbout($result->about);
         $entry->setCreated($result->created);
-        
+
         return $entry;
     }
 
@@ -122,9 +131,9 @@ class Application_Model_UserMapper {
             return;
         }
         $user = new Application_Model_User();
-        
+
         $row = $result->current();
-        
+
         $user->setLogin($row->login);
         return $user;
     }
@@ -140,8 +149,48 @@ class Application_Model_UserMapper {
                 ->setComment($row->comment)
                 ->setCreated($row->created);
     }
-    
-    public function save(Application_Model_User $user){
-        
+
+    public function save(Application_Model_User $user, $action) {
+        switch ($action) {
+            case 'avatar':
+                $data = array(
+                    'gravatar' => $user->getGravatar(),
+                );
+                break;
+            case 'personal_Inf':
+                $data = array(
+                    'name' => $user->getName(),
+                    'surname' => $user->getSurname(),
+                    'birthday' => $user->getBirthday(),
+                    'country' => $user->getCountry(),
+                    'city' => $user->getCity()
+                );
+                break;
+            case 'contacts_Inf':
+                $data = array(
+                    'skype' => $user->getSkype(),
+                    'icq' => $user->getIcq(),
+                    'gtalk' => $user->getGtalk(),
+                    'www' => $user->getWww(),
+                );
+                break;
+            case 'additional_Inf':
+                $data = array(
+                  'about'  => $user->getAbout(),
+                );
+                break;
+            default:
+                $data = array(
+                );
+                break;
+        }
+
+        if (null === ($id = $user->getId())) {
+            unset($data['id']);
+            $this->getDbTable()->insert($data);
+        } else {
+            $this->getDbTable()->update($data, array('id = ?' => $id));
+        }
     }
+
 }
