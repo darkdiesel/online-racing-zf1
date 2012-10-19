@@ -1,8 +1,5 @@
 <!-- start chat -->
 <div id="chat" class="sidebar_box">
-    <div class="sidebar_box_title">
-        <i class="icon-book icon-white"></i> <?php echo $this->translate('Чат') ?> (тестовая версия)
-    </div>
     <div class="sidebar_box_content">
         <div id="chat_messages_box">
             <?php
@@ -11,7 +8,9 @@
             $chat_messages = $messages->fetchAll();
             $last_message_id = 0;
             ?>
-
+            
+           <?php $order = count($chat_messages)% 2; ?>
+            
             <?php foreach ($chat_messages as $message): ?>
                 <?php
                 if ($message->id > $last_message_id) {
@@ -21,7 +20,7 @@
                 $user_login = $mapper->getUserLoginById($message->user_id);
                 ?>
 
-                <div class="chat_message_box">
+                <div class="chat_message_box <?php echo ($order == 0) ? "even" : "odd"; ($order == 0) ? $order = 1 : $order = 0?>">
                     <div class="chat_mesage_date"><?php echo $this->escape($message->date) ?></div>
                     <div class="chat_mesage_nickname">
                         <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($message->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();"><?php echo $user_login->login ?></a>

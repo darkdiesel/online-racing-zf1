@@ -1,80 +1,12 @@
-<div class="sidebar_box">
-    <div class="sidebar_box_title">
-        <i class="icon-plane icon-white"></i> <?php echo $this->translate('Ближайшее событие') ?>
-    </div>
-    <div class="sidebar_box_content">
-        <script type="text/javascript">
-            // countdown clock script
-            $(function() {
-                $('#countdown_dashboard').countDown({
-                    targetDate: {
-                        'day':1,
-                        'month':2,
-                        'year':2013,
-                        'hour':19,
-                        'min':0,
-                        'sec':0,
-                        // time set as UTC
-                        'utc':true
-                    }
-                });
-            });
-        </script>
-        Открытие сайта
-        <div id="countdown_dashboard">
-            <div class="dash weeks_dash">
-                <span class="dash_title">Нед.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash days_dash">
-                <span class="dash_title">Дн.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash hours_dash">
-                <span class="dash_title">Час.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash minutes_dash">
-                <span class="dash_title">Мин.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash seconds_dash">
-                <span class="dash_title">Сек.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--
-<div class="sidebar_box">
-    <div class="sidebar_box_title">
-        Поиск (Не работает)
-    </div>
-    <div class="sidebar_box_content">
-        <form class="form-search" style="margin:5px 0;">
-            <div class="input-append">
-                <input type="text" class="span2 search-query" style="width:115px;">
-                <button type="submit" class="btn" style="width:70px;">Поиск</button>
-            </div>
-        </form>
-    </div>
-</div>-->
-<?php echo $this->render("chat_block.phtml") ?>
-
-<div class="sidebar_box" id="user_earth_map">
-    <div class="sidebar_box_title">
-         <i class="icon-eye-open icon-white"></i> <?php echo $this->translate("Карта посетителей")?>
-    </div>
-    <div class="sidebar_box_content">
-        <script type="text/javascript" src="http://jd.revolvermaps.com/r.js"></script><script type="text/javascript">rm_f1st('1','226','true','false','000000','37e0naemnzt','true','ff0000');</script><noscript><applet codebase="http://rd.revolvermaps.com/j" code="core.RE" width="226" height="226" archive="g.jar"><param name="cabbase" value="g.cab" /><param name="r" value="true" /><param name="n" value="false" /><param name="i" value="37e0naemnzt" /><param name="m" value="1" /><param name="s" value="226" /><param name="c" value="ff0000" /><param name="v" value="true" /><param name="b" value="000000" /><param name="rfc" value="true" /></applet></noscript>
-    </div>
-</div>
+<?php if ($this->ls_count_down_block) {
+    echo $this->partial("ls_count_down_block.phtml");
+}?>
+<?php if ($this->ls_search_block) {
+    echo $this->partial("ls_search_block.phtml");
+}?>
+<?php if ($this->ls_chat_block) {
+    echo $this->partial("ls_chat_block.phtml");
+}?>
+<?php if ($this->ls_user_map_block) {
+    echo $this->partial("ls_user_map_block.phtml");
+}?>

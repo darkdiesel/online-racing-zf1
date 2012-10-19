@@ -1,0 +1,22 @@
+<div class="web_counters">
+    <?php
+    if ($this->uc_live_internet_block) {
+        echo $this->render("uc_live_internet_block.phtml");
+    }
+    ?>
+    <?php
+    if ($this->uc_rambler100_block) {
+        echo $this->render("uc_rambler100_block.phtml");
+    }
+    ?>
+    <?php
+    if ($this->uc_mail_ru_block) {
+        echo $this->render("uc_mail_ru_block.phtml");
+    }
+    ?>
+    <?php
+    if ($this->uc_yandex_block) {
+        echo $this->render("uc_yandex_block.phtml");
+    }
+    ?>
+</div>

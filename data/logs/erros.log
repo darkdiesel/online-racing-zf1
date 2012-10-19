@@ -20043,3 +20043,723 @@ Stack trace:
 #11 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #12 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #13 {main}
+19-10-2012 10:16:51 CRIT (2): Error 500. Application error
+19-10-2012 10:16:51 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => index
+    [module] => default
+)
+
+19-10-2012 10:16:51 CRIT (2): exception 'Zend_View_Exception' with message 'script 'chat_block.phtml' not found in path (D:/dev/localhost/online-racing/application/views\scripts/)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('chat_block.phtm...')
+#1 D:\dev\localhost\online-racing\application\views\scripts\chat\index.phtml(1): Zend_View_Abstract->render('chat_block.phtm...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/index.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/index.phtm...', NULL)
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+19-10-2012 10:25:07 CRIT (2): Error 500. Application error
+19-10-2012 10:25:07 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => index
+    [module] => default
+)
+
+19-10-2012 10:25:07 CRIT (2): exception 'Zend_View_Exception' with message 'Requested scripts may not include parent directory traversal ("../", "..\" notation)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:966
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('../chat_block.p...')
+#1 D:\dev\localhost\online-racing\application\views\scripts\chat\index.phtml(6): Zend_View_Abstract->render('../chat_block.p...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/index.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/index.phtm...', NULL)
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+19-10-2012 10:25:33 CRIT (2): Error 500. Application error
+19-10-2012 10:25:33 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => index
+    [module] => default
+)
+
+19-10-2012 10:25:33 CRIT (2): exception 'Zend_View_Exception' with message 'Requested scripts may not include parent directory traversal ("../", "..\" notation)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:966
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('..\chat_block.p...')
+#1 D:\dev\localhost\online-racing\application\views\scripts\chat\index.phtml(6): Zend_View_Abstract->render('..\chat_block.p...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/index.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/index.phtm...', NULL)
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+19-10-2012 10:26:28 CRIT (2): Error 500. Application error
+19-10-2012 10:26:28 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => index
+    [module] => default
+)
+
+19-10-2012 10:26:28 CRIT (2): exception 'Zend_View_Exception' with message 'Requested scripts may not include parent directory traversal ("../", "..\" notation)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:966
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('../../layouts/s...')
+#1 D:\dev\localhost\online-racing\application\views\scripts\chat\index.phtml(6): Zend_View_Abstract->render('../../layouts/s...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/index.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/index.phtm...', NULL)
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+19-10-2012 10:27:38 CRIT (2): Error 500. Application error
+19-10-2012 10:27:38 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => index
+    [module] => default
+)
+
+19-10-2012 10:27:38 CRIT (2): exception 'Zend_View_Exception' with message 'script 'chat_block.phtml' not found in path (D:/dev/localhost/online-racing/application/views\scripts/)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('chat_block.phtm...')
+#1 D:\dev\localhost\online-racing\application\views\scripts\chat\index.phtml(6): Zend_View_Abstract->render('chat_block.phtm...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/index.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/index.phtm...', NULL)
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+19-10-2012 10:29:22 CRIT (2): Error 500. Application error
+19-10-2012 10:29:22 CRIT (2): Request params: Array
+(
+    [controller] => chat
+    [action] => index
+    [module] => default
+)
+
+19-10-2012 10:29:22 CRIT (2): exception 'Zend_View_Exception' with message 'script 'chat_block.phtml' not found in path (D:/dev/localhost/online-racing/application/views\scripts/)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('chat_block.phtm...')
+#1 D:\dev\localhost\online-racing\application\views\scripts\chat\index.phtml(5): Zend_View_Abstract->render('chat_block.phtm...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:/dev/localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(900): Zend_View_Abstract->render('chat/index.phtm...')
+#5 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(921): Zend_Controller_Action_Helper_ViewRenderer->renderScript('chat/index.phtm...', NULL)
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Action\Helper\ViewRenderer.php(960): Zend_Controller_Action_Helper_ViewRenderer->render()
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Action\HelperBroker.php(277): Zend_Controller_Action_Helper_ViewRenderer->postDispatch()
+#8 D:\dev\localhost\online-racing\library\Zend\Controller\Action.php(527): Zend_Controller_Action_HelperBroker->notifyPostDispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('indexAction')
+#10 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+19-10-2012 14:08:22 CRIT (2): Error 500. Application error
+19-10-2012 14:08:22 CRIT (2): Request params: Array
+(
+    [controller] => index
+    [action] => index
+    [module] => default
+    [layoutFullContent] => <!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Online-Racing.net - Online-Racing portal</title>        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<meta http-equiv="Content-Language" content="en-US" >
+<meta http-equiv="Content-Language" content="ru" >
+<meta name="description" content="Site for online racing competition with rFactor games and mods and F1 news." >
+<meta name="keywords" content="F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite" >
+<meta name="subject" content="Sim racing" >
+<meta name="title" content="Online-Racing" >
+<meta name="revisit" content="5 days" >
+<meta name="resource-type" content="document" >
+<meta name="Copyright" content="Igor Peshkov. Copyright 2012" >
+<meta name="Author" content="Igor Peshkov. Copyright 2012" >
+<meta name="reply-to" content="Igor.Peshkov@gmail.com" >
+<meta name="Generator" content="Sublime Text 2, phpStorm, notepad++" >
+<meta name="yandex-verification" content="715d9bbdfc996f86" >
+<meta http-equiv="Cache-Control" content="no-store" >        <link href="/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/jquery-ui-1.9.0.custom.min.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/style.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/main_menu.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/user_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/chat.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="/css/master_toolbar.css" media="screen" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=PT+Serif&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="http://fonts.googleapis.com/css?family=Press+Start+2P&amp;subset=latin,cyrillic" media="screen, print" rel="stylesheet" type="text/css" >
+<link href="/css/skitter.styles.css" media="screen" rel="stylesheet" type="text/css" >                        <script type="text/javascript" src="/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.9.0.custom.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/share.js"></script>
+<script type="text/javascript" src="/js/jquery.lavalamp.my.js"></script>
+<script type="text/javascript" src="/js/jquery.lwtCountdown.js"></script>
+<script type="text/javascript" src="/js/my_js.js"></script>
+<script type="text/javascript" src="/js/chat.js"></script>
+<script type="text/javascript" src="/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="/js/jquery.animate_colors.min.js"></script>
+<script type="text/javascript" src="/js/jquery.skitter.js"></script>        <!-- Google analytics -->
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-32674101-2']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="admin_toolbar">
+    <ul id="admin_menu">
+        <li class="home"><a href="/index/index">Home</a></li>
+        <li class="expanded">
+            <a href="/article/index">Контент</a>
+            <ul class="menu">
+                <li><a href="/article/add">Добавить</a></li>
+                <li><a href="/article/view">Просмотреть</a></li>
+            </ul>
+        </li>
+        <li class="expanded">
+            <a href="/user/index">Пользователи</a>
+            <ul class="menu">
+                <li><a href="/user/index">Просмотр</a></li>
+            </ul>
+        </li>
+        <li class="name"><a href="/#">Online-Racing Master</a></li>
+    </ul>
+</div>        <div id="page_wrapper">
+            <div id="page">
+                <div id="header">
+                    <!-- Site Logo -->
+<div id="logo_box">
+    <a id="logo" href="/"><img src="/img/logo.png" alt="Main<" /></a>
+</div>
+
+<!-- User ToolBar -->
+<div id="user_toolbar">
+    <ul id="user_menu">
+        <li>
+            <span>Welcome,</span>
+        </li>
+        <li>
+                                            <span><a href="/user/info/1">master</a></span>
+                    </li>
+    </ul>
+            <div class="user">
+            <div class="btn-group dropdown">
+                <a class="btn btn-primary" href="/user/logout"><i class="icon-user icon-white"></i> Logout</a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/user/info/1"><i class="icon-briefcase"></i> Profile</a><li>
+                    <li><a href="/user/message"><i class="icon-envelope"></i> Messages</a><li>
+                    <li><a href="/user/settings"><i class="icon-wrench"></i> Settings</a></li>
+                    <li><a href="/user/edit"><i class="icon-edit"></i> Edit</a></li>
+                    <li class="divider"></li>
+                    <li><a href="/user/logout"><i class="icon-remove"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-- Main Menu -->
+<div id="box_main_menu">
+    <ul id="main_menu" class="main_menu">
+        <li><a href="/" class="current">Main</a></li>
+        <li><a href="/">Championship</a></li>
+        <li><a href="/">Pilots</a></li>
+        <li class="expanded">
+            <a href="/">Articles</a>
+            <ul class="menu">
+                <li class="leaf"><a href="#" title="">Bolid settings</a></li>
+            </ul>
+        </li>
+        <li class="expanded">
+            <a href="/">Files</a>
+            <ul class="menu">
+                <li class="leaf"><a href="#" title="">Games</a></li>
+                <li class="leaf"><a href="#" title="">Plugins</a></li>
+                <li class="leaf"><a href="#" title="">Manuals</a></li>
+            </ul>
+        </li>
+        <li><a href="http://formula1osr.forum2x2.ru/" target="_BLINK">Forum</a></li>
+    </ul>
+</div>
+<!-- Moving text-->
+<div class="moving_text">
+    <marquee behavior="scroll" direction="left">
+        <div>
+            <ul class="header_news">
+                <li><a href="/user/register">Регистрируйтесь</a> на нашем портале</li>
+                <li>Если вы нашли баг, пожалуйста сообщите мне (Igor.Peshkov@gmail.com)</li>
+            </ul>
+        </div>
+    </marquee> 
+</div>
+<!-- Hot Lap -->
+<div id="Hot_Laps_F1">
+    <div class="Marquee">
+        <iframe src="http://83.242.255.227:27012/rFactorHotlaps/Marquee.htm" name="standings" width="800" height="25" scrolling="no" id="standings" frameborder="0" style="background:none;"></iframe>
+    </div>
+    <div class="hot_laps_links">
+        <span style="color:#fff">|</span>
+        <a href="http://83.242.255.227:27012/rFactorLive" target="_BLINK">Broadcasting</a>
+        <a href="http://83.242.255.227:27012/rFactorHotlaps" target="_BLINK">Records</a>
+    </div>
+</div>
+                </div>
+                <div id="main_wrapper">
+                    <div id="main" class="clearfix">
+
+                        <!-- Content -->
+                        <div id="content">
+                            <div class="border_box">
+    <div class="box_skitter box_skitter_large">
+
+    </div>
+</div>
+
+<div id="rss_block">
+    <h3>Новости из мира Formula-1:</h3>
+    <div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Майк Гаскойн намерен в одиночку пересечь Атлантику</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48468_80114.jpg" width=150 height=100></p><p>Исполнительный директор компаний Caterham Technology и Caterham Composites Майк Гаскойн в ноябре 2012 года предпримет попытку в одиночку переплыть Атлантический океан.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80114.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Круг по индийской трассе с Марком Уэббером</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48467_80113.jpg" width=150 height=100></p><p>Гонщик Red Bull Racing Марк Уэббер рассказывает о круге по трассе Гран При Индии, включенной в календарь чемпионата только в прошлом году. Кстати, в дебютной гонке на Buddh International Circuit австралиец занял 4-е место...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80113.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">В McLaren подтвердили состав участников тестов в Абу-Даби</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48466_80112.jpg" width=150 height=100></p><p>Команда McLaren подтвердила, что Кевин Магнуссен, Оливер Терви и Гэри Паффетт примут участие в молодежных тестах, которые пройдут на трассе Яс-Марина после Гран При Абу-Даби.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80112.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Росс Браун: Buddh International Circuit очень впечатляет</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48465_80110.jpg" width=150 height=100></p><p>На двух прошедших этапах в Японии и Корее пилоты Mercedes Михаэль Шумахер и Нико Росберг не смогли заработать очки. Команда надеется переломить неприятную для себя тенденцию через неделю в Гран При Индии.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80110.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Робин Фрийнс: "Я должен полагаться на свой талант"</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48464_80111.jpg" width=150 height=100></p><p>Вчера Sauber подтвердила состав участников молодежных тестов, которые пройдут в Абу-Даби с 6-го по 8-е ноября. Для Робина Фрийнса, занимающего вторую строчку зачета перед финальным этапом Мировой Серии Renault, это будет первый опыт работы на полноценных тестах Формулы 1.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80111.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">В Pirelli готовы к дебютной гонке в США</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48462_80109.jpg" width=150 height=100></p><p>Итальянские шинники хорошо подготовились к предстоящему Гран При США, благодаря применению технологий компьютерного моделирования, в процессе которого использовалась информация, собранная специалистами Pirelli, минувшим летом побывавшими на строящемся автодроме в Техасе. </p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80109.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Картикеян: "Я чувствую огромный интерес к Гран При Индии"</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48461_80108.jpg" width=150 height=100></p><p>В HRT готовятся к особенной гонке – домашнему Гран При для Нараина Картикеяна. В прошлом году он добился на Buddh International Circuit неплохих результатов – финишировал 17-м, уступив лишь полсекунды одному из пилотов Marussia... </p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80108.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Ferrari объяснила мотивы подписания контракта с Массой</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48460_80107.jpg" width=150 height=100></p><p>Команда Ferrari опубликовала заявление, в котором объяснила мотивы продления контракта с Фелипе Массой на 2013-й год…</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80107.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Гран При Нью-Джерси перенесен на 2014 год</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48459_70424.jpg" width=150 height=100></p><p>Дебютный Гран При Нью-Джерси, изначально запланированный на следующий сезон, был перенесен на 2014-й. Об этом Берни Экклстоун заявил в интервью Eurosport.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80106.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div></div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $("#rss_block").accordion({ header: "h6" });
+        
+    });
+</script>                        </div>
+                        <!-- Left sidebar -->
+                        <div id="left_sidebar">
+                            <div class="sidebar_box">
+    <div class="sidebar_box_title">
+        <i class="icon-plane icon-white"></i> Ближайшее событие    </div>
+    <div class="sidebar_box_content">
+        <script type="text/javascript">
+            // countdown clock script
+            $(function() {
+                $('#countdown_dashboard').countDown({
+                    targetDate: {
+                        'day':1,
+                        'month':2,
+                        'year':2013,
+                        'hour':19,
+                        'min':0,
+                        'sec':0,
+                        // time set as UTC
+                        'utc':true
+                    }
+                });
+            });
+        </script>
+        Открытие сайта
+        <div id="countdown_dashboard">
+            <div class="dash weeks_dash">
+                <span class="dash_title">Нед.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash days_dash">
+                <span class="dash_title">Дн.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash hours_dash">
+                <span class="dash_title">Час.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash minutes_dash">
+                <span class="dash_title">Мин.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+
+            <div class="dash seconds_dash">
+                <span class="dash_title">Сек.</span>
+                <div class="digit">0</div>
+                <div class="digit">0</div>
+            </div>
+        </div>
+    </div>
+</div><!-- start chat -->
+<div id="chat" class="sidebar_box">
+    <div class="sidebar_box_title">
+        <i class="icon-book icon-white"></i> <a href="/chat">Chat (тестовая версия)</a>
+    </div>
+    <div class="sidebar_box_content">
+        <div id="chat_messages_box">
+            
+            
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:23:18</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Что ты сказал, падла?                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:23:11</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Да пошел ты!                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:23:05</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Да ничего!                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:22:14</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        что?                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:20:03</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        еу!                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:19:14</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        эу!                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:16:05</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        да?                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:15:25</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        нет!                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:14:45</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Ты охуел?                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:10:08</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        На твою жизнь!                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:09:19</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        А на что хочешь?                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:09:07</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        На что?                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:07:56</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Поспорим?                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:07:48</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Не правда!                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:07:40</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        А у меня еще лучше!                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 11:05:47</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Круто!                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 11:04:25</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        У меня тоже все заепок!                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-19 10:58:17</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        все оки, а у тебя как?                    </div>
+                </div>
+                            
+                <div class="chat_message_box even">
+                    <div class="chat_mesage_date">2012-10-19 10:18:54</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Как делы?                    </div>
+                </div>
+                            
+                <div class="chat_message_box odd">
+                    <div class="chat_mesage_date">2012-10-15 10:07:02</div>
+                    <div class="chat_mesage_nickname">
+                        <a href="/user/info/1" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();">master</a>
+                    </div>
+                    <div class="chat_mesage_message">
+                        Hi!                    </div>
+                </div>
+                    </div>
+                    <div id="chat_textarea_count" class="chat_buttons">500</div>
+            <div id="chat_ajax_img" class="chat_buttons"><img src="/img/ajax_chat_loader.gif"></div>
+                <form id="userChat" name="userChat" enctype="application/x-www-form-urlencoded" method="post" action="/chat/addmessage"><dl class="zend_form">
+<div class="messageTextArea_box"><label for="messageTextArea" class="messageTextArea_Label required">Message</label>
+<div>
+<textarea name="messageTextArea" id="messageTextArea" placeholder="Message text" cols="28" rows="2" maxlength="500"></textarea></div></div>
+<div class="controls_box">
+<input type="hidden" name="last_load" value="20" id="last_load"></div>
+<div class="controls_box">
+<input type="hidden" name="block_msg" value="no" id="block_msg"></div>
+<div class="controls_box">
+<button name="submit" id="submit" type="button" class="btn btn-primary">Отправить</button></div>
+<div class="controls_box">
+<input type="reset" name="reset" id="reset" value="Очистить" class="btn"></div></dl></form>    </div>
+</div>
+<!-- end chat -->                        </div>
+                    </div>
+                </div>
+                <div id="footer">
+                    <div class="footer_box footer_left">
+    <div class="footer_logo">
+        <a href="http://online-racing.net"><img src="/img/logo_190.png" alt="Online-Racing.net"></a>
+    </div>
+    <div>Online-Racing.net</div>
+</div>
+<div class="footer_box footer_center">
+    <div class="footer_menu">
+    <ul id="footer_menu">
+        <li><a href="/">Main</a></li>
+        <li><a href="/">Championship</a></li>
+        <li><a href="/">Pilots</a></li>
+        <li><a href="/">Articles</a></li>
+        <li><a href="/">Files</a></li>
+        <li><a href="/">Forum</a></li>
+    </ul>
+</div></div>
+<div class="footer_box footer_right">
+    <div class="socialNetworks_slogan">
+        Our links in social networks:
+    </div>
+    <div class="socialNetworks">
+    <a href="http://vk.com/OnlineRacingNet" target="_blank"><img src="/img/soc_net/vk.gif" /></a>
+    <a href="http://www.facebook.com/OnlineRacingNet" target="_blank"><img src="/img/soc_net/fb.gif" /></a>
+    <a href="http://twitter.com/OnlineRacingnet" target="_blank"><img src="/img/soc_net/tw.gif" /></a>
+    <a href="http://www.youtube.com/user/OnlineRacingNet" target="_blank"><img src="/img/soc_net/yt.gif" /></a>
+</div></div>
+<div class="footer_bootom">
+    <div class="copyright">
+        Site version 0.5.4b<br>
+        2012 © Online-Racing.net
+    </div>
+    <div class="web_counters">
+    <div class="liveinternet">
+    <!--LiveInternet counter--><script type="text/javascript"><!--
+        document.write("<a href='http://www.liveinternet.ru/click' "+
+            "target=_blank><img src='//counter.yadro.ru/hit?t21.5;r"+
+            escape(document.referrer)+((typeof(screen)=="undefined")?"":
+            ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+            screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+            ";"+Math.random()+
+            "' alt='' title='LiveInternet: показано число просмотров за 24"+
+            " часа, посетителей за 24 часа и за сегодня' "+
+            "border='0' width='88' height='31'><\/a>")
+        //--></script><!--/LiveInternet-->
+</div>    <div class="rambler100">
+    <!-- begin of Top100 code -->
+    <script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?2784771"></script>
+    <noscript>
+    <a href="http://top100.rambler.ru/navi/2784771/">
+        <img src="http://counter.rambler.ru/top100.cnt?2784771" alt="Rambler's Top100" border="0" />
+    </a>
+    </noscript>
+    <!-- end of Top100 code -->
+</div>    <div class="mail_ru">
+    <!-- Rating@Mail.ru counter -->
+    <script type="text/javascript">//<![CDATA[
+        var a='',js=10;try{a+=';r='+escape(document.referrer);}catch(e){}try{a+=';j='+navigator.javaEnabled();js=11;}catch(e){}
+        try{s=screen;a+=';s='+s.width+'*'+s.height;a+=';d='+(s.colorDepth?s.colorDepth:s.pixelDepth);js=12;}catch(e){}
+        try{if(typeof((new Array).push('t'))==="number")js=13;}catch(e){}
+        try{document.write('<a href="http://top.mail.ru/jump?from=2258389">'+
+                '<img src="http://d5.c7.b2.a2.top.mail.ru/counter?id=2258389;t=48;js='+js+a+';rand='+Math.random()+
+                '" alt="Рейтинг@Mail.ru" style="border:0;" height="31" width="88" \/><\/a>');}catch(e){}//]]></script>
+    <noscript><p><a href="http://top.mail.ru/jump?from=2258389">
+            <img src="http://d5.c7.b2.a2.top.mail.ru/counter?js=na;id=2258389;t=48" 
+                 style="border:0;" height="31" width="88" alt="Рейтинг@Mail.ru" /></a></p></noscript>
+    <!-- //Rating@Mail.ru counter -->
+</div>    <div class="yandex">
+    <!-- Yandex.Metrika informer -->
+    <a href="http://metrika.yandex.ru/stat/?id=17466829&amp;from=informer"
+       target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/17466829/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"
+                                        style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" /></a>
+    <!-- /Yandex.Metrika informer -->
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter17466829 = new Ya.Metrika({id:17466829, enableAll: true});
+                } catch(e) { }
+            });
+    
+            var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="//mc.yandex.ru/watch/17466829" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</div></div></div>                </div>
+            </div>
+            
+    [layoutContent] => <div class="border_box">
+    <div class="box_skitter box_skitter_large">
+
+    </div>
+</div>
+
+<div id="rss_block">
+    <h3>Новости из мира Formula-1:</h3>
+    <div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Майк Гаскойн намерен в одиночку пересечь Атлантику</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48468_80114.jpg" width=150 height=100></p><p>Исполнительный директор компаний Caterham Technology и Caterham Composites Майк Гаскойн в ноябре 2012 года предпримет попытку в одиночку переплыть Атлантический океан.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80114.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Круг по индийской трассе с Марком Уэббером</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48467_80113.jpg" width=150 height=100></p><p>Гонщик Red Bull Racing Марк Уэббер рассказывает о круге по трассе Гран При Индии, включенной в календарь чемпионата только в прошлом году. Кстати, в дебютной гонке на Buddh International Circuit австралиец занял 4-е место...</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80113.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">В McLaren подтвердили состав участников тестов в Абу-Даби</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48466_80112.jpg" width=150 height=100></p><p>Команда McLaren подтвердила, что Кевин Магнуссен, Оливер Терви и Гэри Паффетт примут участие в молодежных тестах, которые пройдут на трассе Яс-Марина после Гран При Абу-Даби.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80112.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Росс Браун: Buddh International Circuit очень впечатляет</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48465_80110.jpg" width=150 height=100></p><p>На двух прошедших этапах в Японии и Корее пилоты Mercedes Михаэль Шумахер и Нико Росберг не смогли заработать очки. Команда надеется переломить неприятную для себя тенденцию через неделю в Гран При Индии.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80110.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Робин Фрийнс: "Я должен полагаться на свой талант"</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48464_80111.jpg" width=150 height=100></p><p>Вчера Sauber подтвердила состав участников молодежных тестов, которые пройдут в Абу-Даби с 6-го по 8-е ноября. Для Робина Фрийнса, занимающего вторую строчку зачета перед финальным этапом Мировой Серии Renault, это будет первый опыт работы на полноценных тестах Формулы 1.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80111.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">В Pirelli готовы к дебютной гонке в США</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48462_80109.jpg" width=150 height=100></p><p>Итальянские шинники хорошо подготовились к предстоящему Гран При США, благодаря применению технологий компьютерного моделирования, в процессе которого использовалась информация, собранная специалистами Pirelli, минувшим летом побывавшими на строящемся автодроме в Техасе. </p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80109.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Картикеян: "Я чувствую огромный интерес к Гран При Индии"</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48461_80108.jpg" width=150 height=100></p><p>В HRT готовятся к особенной гонке – домашнему Гран При для Нараина Картикеяна. В прошлом году он добился на Buddh International Circuit неплохих результатов – финишировал 17-м, уступив лишь полсекунды одному из пилотов Marussia... </p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80108.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Ferrari объяснила мотивы подписания контракта с Массой</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48460_80107.jpg" width=150 height=100></p><p>Команда Ferrari опубликовала заявление, в котором объяснила мотивы продления контракта с Фелипе Массой на 2013-й год…</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80107.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div><div class="rss_item clearfix"><h6 class="rss_title"><a href="#">Гран При Нью-Джерси перенесен на 2014 год</a></h6><div class="rss_description"><p><img src="http://www.f1news.ru/images/small/150x150/48459_70424.jpg" width=150 height=100></p><p>Дебютный Гран При Нью-Джерси, изначально запланированный на следующий сезон, был перенесен на 2014-й. Об этом Берни Экклстоун заявил в интервью Eurosport.</p><a class="rss_more btn btn-primary" href="http://www.f1news.ru/news/f1-80106.html" target="_BLINK">Подробнее на F1-News.ru</a></div></div></div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        $("#rss_block").accordion({ header: "h6" });
+        
+    });
+</script>
+)
+
+19-10-2012 14:08:22 CRIT (2): exception 'Zend_View_Exception' with message 'script 'back_to_top.phtml' not found in path (D:\dev\localhost\online-racing\application/layouts/scripts/;D:/dev/localhost/online-racing/application/views\scripts/)' in D:\dev\localhost\online-racing\library\Zend\View\Abstract.php:988
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(884): Zend_View_Abstract->_script('back_to_top.pht...')
+#1 D:\dev\localhost\online-racing\application\layouts\scripts\layout.phtml(55): Zend_View_Abstract->render('back_to_top.pht...')
+#2 D:\dev\localhost\online-racing\library\Zend\View.php(108): include('D:\dev\localhos...')
+#3 D:\dev\localhost\online-racing\library\Zend\View\Abstract.php(888): Zend_View->_run('D:\dev\localhos...')
+#4 D:\dev\localhost\online-racing\library\Zend\Layout.php(796): Zend_View_Abstract->render('layout.phtml')
+#5 D:\dev\localhost\online-racing\library\Zend\Layout\Controller\Plugin\Layout.php(143): Zend_Layout->render()
+#6 D:\dev\localhost\online-racing\library\Zend\Controller\Plugin\Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#7 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#8 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#9 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#10 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#11 {main}

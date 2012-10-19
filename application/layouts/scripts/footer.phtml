@@ -5,35 +5,30 @@
     <div><?php echo $this->translate('Online-Racing.net') ?></div>
 </div>
 <div class="footer_box footer_center">
-    <div class="footer_menu">
-        <?php echo $this->render("footer_menu.phtml") ?>
-    </div>
+    <?php
+    if ($this->ft_menu) {
+        echo $this->render("ft_menu.phtml");
+    }
+    ?>
 </div>
 <div class="footer_box footer_right">
     <div class="socialNetworks_slogan">
         <?php echo $this->translate('Наши ссылки в социальных сетях') ?>:
     </div>
-    <div class="socialNetworks">
-        <?php echo $this->render("socialNetworks_block.phtml") ?>
-    </div>
+    <?php
+    if ($this->ft_socialNetworks_block) {
+        echo $this->render("ft_socialNetworks_block.phtml");
+    }
+    ?>
 </div>
 <div class="footer_bootom">
     <div class="copyright">
         <?php echo $this->translate('Версия сайта') ?> 0.5.4b<br>
         2012 © Online-Racing.net
     </div>
-    <div class="web_counters">
-        <div class="liveinternet">
-            <?php echo $this->render("live_internet_block.phtml") ?>
-        </div>
-        <div class="rambler100">
-            <?php echo $this->render("rambler100_block.phtml") ?>
-        </div>
-        <div class="mail_ru">
-            <?php echo $this->render("mail_ru_block.phtml") ?>
-        </div>
-        <div class="yandex">
-            <?php echo $this->render("yandex_block.phtml") ?>
-        </div>
-    </div>
+    <?php
+    if ($this->ft_user_counters_block) {
+        echo $this->render("ft_user_counters_block.phtml");
+    }
+    ?>
 </div>

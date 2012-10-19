@@ -41,8 +41,6 @@ class UserController extends Zend_Controller_Action {
 
                 $result = $auth->authenticate($authAdapter);
                 
-                echo $form->remember->getvalue();
-
                 switch ($result->getCode()) {
                     case Zend_Auth_Result::SUCCESS:
                         /** Выполнить действия при успешной аутентификации * */
@@ -61,6 +59,10 @@ class UserController extends Zend_Controller_Action {
                             default:
                                 $storage = $auth->getStorage('online-racing');
                                 $storage->write($storage_data);
+                                //save date for last login
+                                $user = new Application_Model_User(array('id' => $storage_data->id));
+                                $mapper->save($user, 'last_login');
+                                
                                 if ($form->remember->getvalue() == 1) {
                                     Zend_Session::rememberMe(60*60*24*2);
                                 }
@@ -114,10 +116,8 @@ class UserController extends Zend_Controller_Action {
                 }
 
                 $user->activate = generatePassword(8);
-                $user->enabled = 0;
-                $user->role_id = 3;
 
-                $mapper->AddNewUser($user);
+                $mapper->save($user,'register');
 
                 // load e-mail script (template) for user
                 $html = new Zend_View();

@@ -1,95 +1,10 @@
 $(document).ready(function(){
     jQuery(function($){
-        // back to top button plugin
-        $(function() {
-            $(function () {
-                if ($(this).scrollTop() > 100) {
-                    $('#back-top').fadeIn();
-                } else {
-                    $('#back-top').fadeOut();
-                }
-            });
-
-            $(function () {
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 100) {
-                        $('#back-top').fadeIn();
-                    } else {
-                        $('#back-top').fadeOut();
-                    }
-                });
-
-                $('#back-top a').click(function () {
-                    $('body,html').animate({
-                        scrollTop: 0
-                    }, 300);
-                    return false;
-                });
-                $('#back-top a').mouseover(function(){
-                    $('#back-top a').animate({
-                        opacity:'1.0'
-                    },600);
-                });
-                $('#back-top a').mouseout(function(){
-                    $('#back-top a').animate({
-                        opacity:'0.5'
-                    },300);
-                });
-            });
-        });
-    });
-
-    jQuery(function($){
         // lavalamp main menu plugin
         $(function() {
             $("#header #box_main_menu #main_menu").lavaLamp({
                 fx: "backout",
                 speed: 600
-            });
-        });
-    });
-
-    // Share block script
-    jQuery(function($){
-        $(function() {
-            var offset = $(".shareblock").offset();
-            
-            var topPadding = 15;
-            
-            if ($(window).scrollTop() > offset.top) {
-                $(".shareblock").stop().animate({
-                    marginTop: $(window).scrollTop() - offset.top
-                },300);
-            };
-            
-            $(".shareblock").animate({
-                opacity:'0.5'
-            },1);
-            $(".shareblock").mouseover(function(){
-                $(".shareblock").stop().animate({
-                    opacity:'1.0'
-                },600);
-            });
-            $(".shareblock").mouseout(function(){
-                $(".shareblock").stop().animate({
-                    opacity:'0.5'
-                },300);
-            });
-            
-            $(window).scroll(function() {
-                if (offset == undefined) {
-                    offset = $(".shareblock").offset();
-                }
-                if ($(window).scrollTop() > offset.top) {
-                    $(".shareblock").stop().animate({
-                        marginTop: $(window).scrollTop() - (offset.top) + parseInt($('body').css('padding-top').replace('px',''))
-                    },300);
-                }
-                else {
-                    $(".shareblock").stop().animate({
-                        marginTop: 0
-                    });
-                };
             });
         });
     });

@@ -143,6 +143,9 @@ body iframe{
                             padding:10px 6px;
                             line-height:12px;
                         }
+                            #left_sidebar .sidebar_box .sidebar_box_title a{
+                                color:#DCDCDC;
+                            }
             		#left_sidebar .sidebar_box .sidebar_box_content{
                             padding:5px 10px;
                             border:1px solid #CACACA;

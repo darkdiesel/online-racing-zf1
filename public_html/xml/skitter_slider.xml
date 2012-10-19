@@ -8,6 +8,11 @@
 	<slide>
 		<link>#</link>
 		<image type="cubeSize">../img/slider/post/oursite.jpg</image>
-		<label><![CDATA[<p>В будущем на нашем портале вас ожидает море адреналина. Присоеденяйтесь!</p>]]></label>
+		<label><![CDATA[<p>Хотите получить море адреналина? <a href="/user/register">Присоеденяйтесь!</a></p>]]></label>
+	</slide>
+        <slide>
+		<link>#</link>
+		<image type="cubeSize">../img/slider/post/chat.jpg</image>
+		<label><![CDATA[<p>На сайт добавлен чат. <a href="/chat">Общайтесь!</a></p>]]></label>
 	</slide>
 </skitter>

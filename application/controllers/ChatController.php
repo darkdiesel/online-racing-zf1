@@ -8,6 +8,7 @@ class ChatController extends Zend_Controller_Action {
 
     public function indexAction() {
         // action body
+        $this->view->ls_chat_block = false;
     }
 
     public function addmessageAction() {
@@ -35,6 +36,8 @@ class ChatController extends Zend_Controller_Action {
             if ($request->getParam('ajax_action') == 'get_chat_messages') {
                 $messages = new Application_Model_UserChatMapper();
                 $chat_messages = $messages->fetchLast($request->getParam('last_act'));
+                $order = $request->getParam('last_act') % 2;
+                ($order == 0) ? $order = 'odd' : $order = 'even';
                 if ($chat_messages != 'null') {
                     $last_message_id = 0;
 
@@ -50,7 +53,8 @@ class ChatController extends Zend_Controller_Action {
                         $user_login = $mapper->getUserLoginById($message->user_id);
 
                         //construct message html code
-                        $messages_html .= '<div class="chat_message_box">';
+                        $messages_html .= '<div class="chat_message_box '.$order.'">';
+                        ($order == 'even') ? $order = 'odd' : $order = 'even';
                         $messages_html .= '<div class="chat_mesage_date">' . $message->date . '</div>';
                         $messages_html .= '<div class="chat_mesage_nickname">';
                         $messages_html .= '<a href="' . 'user/info/' . $message->user_id . '" target="_BLINK"><i class="icon-user icon-black"></i></a>';

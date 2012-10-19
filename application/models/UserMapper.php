@@ -67,25 +67,6 @@ class Application_Model_UserMapper {
         }
     }
 
-    public function AddNewUser(Application_Model_User $newUser) {
-        $data = array(
-            'login' => $newUser->getLogin(),
-            'email' => $newUser->getEmail(),
-            'password' => sha1($newUser->getPassword()),
-            'activate' => $newUser->getActivate(),
-            'enabled' => "1",
-            'role_id' => "3",
-            'created' => date('Y-m-d H:i:s')
-        );
-
-        if (null === ($id = $newUser->getId())) {
-            unset($data['id']);
-            $this->getDbTable()->insert($data);
-        } else {
-            $this->getDbTable()->update($data, array('id = ?' => $id));
-        }
-    }
-
     /*
      * Uses for acl class (application/claasses/Acl.php)
      */
@@ -96,7 +77,7 @@ class Application_Model_UserMapper {
     }
 
     /*
-     * Uses for controller: user action: info
+     * Uses for controller: user; action: info
      */
 
     public function getUserDataById($id) {
@@ -149,7 +130,10 @@ class Application_Model_UserMapper {
                 ->setComment($row->comment)
                 ->setCreated($row->created);
     }
-
+    
+    /*
+     * Uses for controller: user; action: edit , action: login, action: register
+     */
     public function save(Application_Model_User $user, $action) {
         switch ($action) {
             case 'avatar':
@@ -177,6 +161,22 @@ class Application_Model_UserMapper {
             case 'additional_Inf':
                 $data = array(
                   'about'  => $user->getAbout(),
+                );
+                break;
+            case 'last_login':
+                $data = array(
+                  'last_login'  => date('Y-m-d H:i:s'),
+                );
+                break;
+            case 'register':
+                $data = array(
+                    'login' => $user->getLogin(),
+                    'email' => $user->getEmail(),
+                    'password' => sha1($user->getPassword()),
+                    'activate' => $user->getActivate(),
+                    'enabled' => "1",
+                    'role_id' => "3",
+                    'created' => date('Y-m-d H:i:s')
                 );
                 break;
             default:

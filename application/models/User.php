@@ -5,6 +5,7 @@ class Application_Model_User {
     protected $_id;
     protected $_login;
     protected $_password;
+    protected $_last_login;
     protected $_activate;
     protected $_enabled;
     protected $_role_id;
@@ -84,6 +85,15 @@ class Application_Model_User {
 
     public function getPassword() {
         return $this->_password;
+    }
+    
+    public function setLast_login($last_login) {
+        $this->_last_login = $last_login;
+        return $this;
+    }
+
+    public function getLast_login() {
+        return $this->_last_login;
     }
 
     public function setActivate($activate) {

@@ -38,6 +38,12 @@
         #chat #chat_messages_box .chat_message_box{
             border-bottom:1px solid #CCCCCC;
         }
+        #chat #chat_messages_box .odd{
+            background:#FFFFFF;
+        }
+        #chat #chat_messages_box .even{
+            background:#EEEEEE;
+        }
             #chat #chat_messages_box .chat_message_box .chat_mesage_date{
                 font-style:italic;
                 float:right;
@@ -57,12 +63,13 @@
             }
     #chat #userChat textarea#messageTextArea{
         resize:none;
-        margin:0 0 15px 0;
-        width:208px;
+        margin:0 auto 15px;
+        width:94%;
         height:60px;
         font-size:11px;
         line-height:12px;
         font-family:verdana,arial,helvetica;
+        display:block;
     }
     #chat #userChat .messageTextArea_Label{
         font-size:11px;
@@ -78,5 +85,11 @@
     #chat #userChat #reset{
         float:right;
     }
-    
-    
+/* user chat page*/
+#user_chat_page{
+    border:1px solid #CACACA;
+    background:none repeat scroll 0 0 #F9F9F9;
+    padding:20px;
+    margin:0;
+    border-radius:7px;
+}

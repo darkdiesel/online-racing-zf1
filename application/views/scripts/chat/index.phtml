@@ -1,0 +1,10 @@
+<div id="user_chat_page">
+    <?php
+    echo $this->fieldset('loginFieldSet', '
+	<p>Введите сообщение в поле ввода и нажмите "Отправить".</p>' .
+            $this->render("chat_block.phtml")
+            , array('legend' => $this->translate('Чат')));
+    ?>
+
+    <?php //echo $this->render("chat_block.phtml"); ?>
+</div>

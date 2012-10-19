@@ -1,0 +1,49 @@
+<div class="shareblock" data-title="<?php echo strip_tags($this->headtitle()) ?>" data-url="<?php echo $this->url() ?>"></div>
+<script type='text/javascript'>
+    $(document).ready(function(){
+        // Share block script
+        jQuery(function($){
+            $(function() {
+                var offset = $(".shareblock").offset();
+            
+                var topPadding = 15;
+            
+                if ($(window).scrollTop() > offset.top) {
+                    $(".shareblock").stop().animate({
+                        marginTop: $(window).scrollTop() - offset.top
+                    },300);
+                };
+            
+                $(".shareblock").animate({
+                    opacity:'0.5'
+                },1);
+                $(".shareblock").mouseover(function(){
+                    $(".shareblock").stop().animate({
+                        opacity:'1.0'
+                    },600);
+                });
+                $(".shareblock").mouseout(function(){
+                    $(".shareblock").stop().animate({
+                        opacity:'0.5'
+                    },300);
+                });
+            
+                $(window).scroll(function() {
+                    if (offset == undefined) {
+                        offset = $(".shareblock").offset();
+                    }
+                    if ($(window).scrollTop() > offset.top) {
+                        $(".shareblock").stop().animate({
+                            marginTop: $(window).scrollTop() - (offset.top) + parseInt($('body').css('padding-top').replace('px',''))
+                        },300);
+                    }
+                    else {
+                        $(".shareblock").stop().animate({
+                            marginTop: 0
+                        });
+                    };
+                });
+            });
+        });
+    });
+</script>

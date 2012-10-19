@@ -1,0 +1,19 @@
+<div id="admin_toolbar">
+    <ul id="admin_menu">
+        <li class="home"><a href="<?php echo $this->baseUrl('index/index'); ?>">Home</a></li>
+        <li class="expanded">
+            <a href="<?php echo $this->baseUrl('article/index'); ?>">Контент</a>
+            <ul class="menu">
+                <li><a href="<?php echo $this->baseUrl('article/add'); ?>">Добавить</a></li>
+                <li><a href="<?php echo $this->baseUrl('article/view'); ?>">Просмотреть</a></li>
+            </ul>
+        </li>
+        <li class="expanded">
+            <a href="<?php echo $this->baseUrl('user/index'); ?>">Пользователи</a>
+            <ul class="menu">
+                <li><a href="<?php echo $this->baseUrl('user/index'); ?>">Просмотр</a></li>
+            </ul>
+        </li>
+        <li class="name"><a href="<?php echo $this->baseUrl('#'); ?>">Online-Racing Admin</a></li>
+    </ul>
+</div>
