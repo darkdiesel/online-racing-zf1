@@ -13,6 +13,6 @@
         <slide>
 		<link>#</link>
 		<image type="cubeSize">../img/slider/post/chat.jpg</image>
-		<label><![CDATA[<p>На сайт добавлен чат. <a href="/chat">Общайтесь!</a></p>]]></label>
+		<label><![CDATA[<p>На сайт добавлен чат. <a href="http://online-racing.net/chat">Общайтесь!</a></p>]]></label>
 	</slide>
 </skitter>

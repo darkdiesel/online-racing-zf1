@@ -569,3 +569,9 @@ div.shareblock{
         #rss_block .rss_more:hover{
             text-decoration:none;
         }
+        
+/* */
+.break_word_wrap{
+    overflow:hidden;
+    word-wrap:break-word;
+}

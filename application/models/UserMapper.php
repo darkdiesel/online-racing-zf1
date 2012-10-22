@@ -39,11 +39,11 @@ class Application_Model_UserMapper {
     public function checkUserStatus($id) {
         $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
         if ($result->activate != "") {
-            return 1;
+            return 'notActive';
         } else if ($result->enabled != 1) {
-            return 2;
+            return 'notEnabled';
         } else {
-            return 0;
+            return 'active';
         }
     }
 
@@ -90,6 +90,7 @@ class Application_Model_UserMapper {
 
         $entry->setId($result->id);
         $entry->setLogin($result->login);
+        $entry->setLast_login($result->last_login);
         $entry->setName($result->name);
         $entry->setSurname($result->surname);
         $entry->setBirthday($result->birthday);

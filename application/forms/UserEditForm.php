@@ -61,6 +61,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             'label' => $this->translate('Страна'),
             'placeholder' => $this->translate('Страна'),
             'filters' => array('StripTags', 'StringTrim'),
+            'maxlength' => 100,
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -74,6 +75,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             'label' => $this->translate('Город'),
             'placeholder' => $this->translate('Город'),
             'filters' => array('StripTags', 'StringTrim'),
+            'maxlength' => 100,
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',

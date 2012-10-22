@@ -6,10 +6,13 @@ if ($this->errMessage != "") {
     <div id="user_info_page">
         <div class="page_title"><?php echo $this->translate('Профиль') ?> - <?php echo $this->user->login ?></div>
         <hr>
-        <div class="user_info_avatar">
-            <?php
-            echo $this->gravatar;
-            ?>
+        <div class="user_info_ava">
+            <div class="user_info_avatar">
+                <?php echo $this->gravatar; ?>
+            </div>
+            <div class="img-polaroid">
+                <img src="<?php echo $this->baseUrl('img/flags/belarus_fluttering_flag_64.png'); ?>">
+            </div>
         </div>
 
         <div class="user_info_data img-polaroid">
@@ -17,24 +20,29 @@ if ($this->errMessage != "") {
                 <tbody>
                     <tr>
                         <td class="header_column"><?php echo $this->translate('Имя') ?>:</td>
-                        <td><?php echo $this->user->name ?></td>
+                        <td><div class="break_word_wrap"><?php echo $this->user->name ?></div></td>
                     </tr>
                     <tr>
                         <td class="header_column"><?php echo $this->translate('Фамилия') ?>:</td>
-                        <td><?php echo $this->user->surname ?></td>
+                        <td><div class="break_word_wrap"><?php echo $this->user->surname ?></div></td>
                     </tr>
                     <tr>
                         <td class="header_column"><?php echo $this->translate('Дата рождения') ?>:</td>
-                        <td><?php echo date_format(date_create($this->user->birthday), 'F j, Y') ?></td>
+                        <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->birthday), 'd.m.Y') ?></div></td>
                     </tr>
                     <tr>
                         <td class="header_column"><?php echo $this->translate('Страна') ?>:</td>
-                        <td><img src="<?php echo $this->baseUrl('img/flags/belarus_fluttering_flag_64.png'); ?>"></td>
+                        <td><div class="break_word_wrap"><?php echo $this->user->country ?></div></td>
                     </tr>
                     <tr>
-                        <td class="header_column"><?php echo $this->translate('Дата регистрации') ?>:</td>
-                        <td><?php echo date_format(date_create($this->user->created), 'H:i F j, Y') ?></td>
+                        <td class="header_column"><?php echo $this->translate('Город') ?>:</td>
+                        <td><div class="break_word_wrap"><?php echo $this->user->city ?></div></td>
                     </tr>
+                    <tr>
+                        <td class="header_column"><?php echo $this->translate('Последний визит') ?>:</td>
+                        <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->last_login), 'H:i d.m.Y') ?></div></td>
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -56,7 +64,7 @@ if ($this->errMessage != "") {
                             <td>
                                 <?php
                                 $d = new DateTime();
-                                echo $d->diff(new DateTime($this->user->created))->format("<strong>".$this->translate('Лет').":</strong> %y <strong>".$this->translate('Месяцев').":</strong> %m <strong>".$this->translate('Дней').":</strong> %d");
+                                echo $d->diff(new DateTime($this->user->created))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
                                 ?>
                             </td>
                         </tr>
@@ -67,6 +75,10 @@ if ($this->errMessage != "") {
                                 echo date_diff(new DateTime(), new DateTime($this->user->created))->days;
                                 ?>
                             </td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><?php echo $this->translate('Дата регистрации') ?>:</td>
+                            <td><?php echo date_format(date_create($this->user->created), 'H:i d.m.Y') ?></td>
                         </tr>
                     </tbody>
                 </table>

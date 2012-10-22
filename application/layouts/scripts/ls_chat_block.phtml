@@ -28,9 +28,7 @@
                     <div class="chat_mesage_nickname">
                         <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($message->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();"><?php echo $user_login->login ?></a>
                     </div>
-                    <div class="chat_mesage_message">
-                        <?php echo $bbcode->render($message->message) ?>
-                    </div>
+                    <div class="chat_mesage_message"><?php echo $bbcode->render($message->message) ?></div>
                 </div>
             <?php endforeach ?>
         </div>

@@ -40,31 +40,37 @@ class UserController extends Zend_Controller_Action {
                         ->setCredential(sha1($form->loginpassword->getValue()));
 
                 $result = $auth->authenticate($authAdapter);
-                
+
                 switch ($result->getCode()) {
                     case Zend_Auth_Result::SUCCESS:
                         /** Выполнить действия при успешной аутентификации * */
                         $mapper = new Application_Model_UserMapper();
                         $storage_data = $authAdapter->getResultRowObject(
                                 array('login', 'id'), null);
+                        
                         switch ($mapper->checkUserStatus($storage_data->id)) {
-                            case '1':
+                            case 'notActive':
                                 //print message
                                 $this->view->errMessage = 'Пользователь с этими данными не активирован! Перейдите на <a href="' . $this->view->baseUrl('user/activate') . '">страницу</a> для активации.';
+                                Zend_Auth::getInstance()->clearIdentity();
+                                Zend_Session::forgetMe();
                                 break;
-                            case '2':
+                            case 'notEnabled':
                                 //print message
                                 $this->view->errMessage = 'Пользователь с этими данными заблокирован! Абротитесь к администрации сайта для разблокировки.';
+                                Zend_Auth::getInstance()->clearIdentity();
+                                Zend_Session::forgetMe();
                                 break;
-                            default:
+                            case 'active':
                                 $storage = $auth->getStorage('online-racing');
                                 $storage->write($storage_data);
+
                                 //save date for last login
                                 $user = new Application_Model_User(array('id' => $storage_data->id));
                                 $mapper->save($user, 'last_login');
-                                
+
                                 if ($form->remember->getvalue() == 1) {
-                                    Zend_Session::rememberMe(60*60*24*2);
+                                    Zend_Session::rememberMe(60 * 60 * 24 * 2);
                                 }
                                 $this->_helper->redirector('index', 'index');
                                 break;
@@ -117,7 +123,7 @@ class UserController extends Zend_Controller_Action {
 
                 $user->activate = generatePassword(8);
 
-                $mapper->save($user,'register');
+                $mapper->save($user, 'register');
 
                 // load e-mail script (template) for user
                 $html = new Zend_View();
@@ -235,8 +241,10 @@ class UserController extends Zend_Controller_Action {
                     $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
 
                     $storage = $auth->getStorage('online-racing');
-                    //$user_model = new Application_Model_DbTable_User();
-                    $storage_data->status = 'user';
+                    //save date for last login
+                    $user = new Application_Model_User(array('id' => $storage_data->id));
+                    $mapper->save($user, 'last_login');
+
                     $storage->write($storage_data);
 
                     return $this->_helper->redirector('login', 'user');
@@ -374,10 +382,10 @@ class UserController extends Zend_Controller_Action {
                 $this->view->errMessage .= "Исправте следующие ошибки для сохранения изминений профиля!";
             }
         }
-        
+
         $mapper = new Application_Model_UserMapper();
         $user_data = $mapper->getUserDataById(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
-        
+
         $form->name->setValue($user_data->name);
         $form->surname->setValue($user_data->surname);
         $form->birthday->setValue($user_data->birthday);
@@ -389,7 +397,7 @@ class UserController extends Zend_Controller_Action {
         $form->gtalk->setValue($user_data->gtalk);
         $form->www->setValue($user_data->www);
         $form->about->setValue($user_data->about);
-        
+
         $this->view->form = $form;
         $this->view->gravatar = $this->view->gravatar()
                 ->setEmail($user_data->gravatar)
