@@ -196,7 +196,7 @@ class Application_Model_User {
     }
     
     public function setIcq($icq) {
-        $this->_icq = (int) $icq;
+        $this->_icq = $icq;
         return $this;
     }
 

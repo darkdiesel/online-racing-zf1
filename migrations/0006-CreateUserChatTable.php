@@ -11,10 +11,10 @@ class CreateUserChatTable extends Akrabat_Db_Schema_AbstractChange {
                     `date` datetime NOT NULL,
                     PRIMARY KEY (`id`),
                     KEY `user_id` (`user_id`)
-                  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+                  ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
                   
                  ALTER TABLE `user_chat`
-                    ADD CONSTRAINT `user_chat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `role` (`id`);
+                    ADD CONSTRAINT `user_chat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 				";
         $this->_db->query($sql);
     }
