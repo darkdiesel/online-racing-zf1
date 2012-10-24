@@ -1,0 +1,30 @@
+<div id="users_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Гонщики'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        echo $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml');
+        ?>
+        <?php if (count($this->paginator)): ?>
+            <div class="user_item">
+                <?php foreach ($this->paginator as $item): ?>
+                    <div>
+                        <?php
+                        echo $this->gravatar()
+                                ->setEmail($item['gravatar'])
+                                ->setImgSize(150)
+                                ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
+                                ->setSecure(true)
+                                ->setAttribs(array('class' => 'img-polaroid', 'title' => $item['login'] . " - profile avatar"));
+                        ?>
+                    </div>
+                    <div class="user_login"><a href="<?php echo $this->baseUrl('user/info/') . $item['id'] ?>"><?php echo $item['login']; ?></a></div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php
+        echo $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml');
+        ?>
+    </div>
+</div>

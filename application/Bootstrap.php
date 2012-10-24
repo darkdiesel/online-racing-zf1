@@ -84,7 +84,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->uc_mail_ru_block = true; // mail.ru user counter block
         $view->uc_rambler100_block = true; // rambler 100 user counter block
         $view->uc_yandex_block = true; // yandex user counter block
-        
+
         /* [CSS SETTINGS] */
         /* [BOOTSTRAP CSS] */
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
@@ -212,14 +212,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     public function _initRoutes() {
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
-        $route = new Zend_Controller_Router_Route(
+
+        $router->addRoute('userinfo', new Zend_Controller_Router_Route(
                         'user/info/:id',
                         array(
                             'controller' => 'user',
                             'action' => 'info',
                             'id' => 0)
-        );
-        $router->addRoute('userview', $route);
+        ));
+
+        $router->addRoute(
+                'allusers', new Zend_Controller_Router_Route('user/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'user',
+                            'action' => 'all',
+                            'page' => 1)
+        ));
 
         /*
           Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');

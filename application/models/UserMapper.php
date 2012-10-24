@@ -193,5 +193,9 @@ class Application_Model_UserMapper {
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
+    
+    public function getLimitUsers(){
+        
+    }
 
 }

@@ -3,7 +3,7 @@ if ($this->errMessage != "") {
     echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
 } else {
     ?>
-    <div id="user_info_page">
+    <div id="user_info_page" class="page">
         <div class="page_title"><?php echo $this->translate('Профиль') ?> - <?php echo $this->user->login ?></div>
         <hr>
         <div class="user_info_ava">
@@ -11,8 +11,8 @@ if ($this->errMessage != "") {
                 <?php echo $this->gravatar; ?>
             </div>
             <div class="img-polaroid nationality">
-                <img src="<?php echo $this->baseUrl('img/flags/blr_glossy_wave_64.png'); ?>">
-                <div clas="break_word_wrap">Belarus</div>
+                <img src="<?php echo $this->baseUrl('img/flags/eur_glossy_wave_64.png'); ?>">
+                <div clas="break_word_wrap">EUR</div>
             </div>
         </div>
 

@@ -7,12 +7,6 @@ class UserController extends Zend_Controller_Action {
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/user.css"));
     }
 
-    public function indexAction() {
-        // action body
-        $roles = new Application_Model_RoleMapper();
-        $this->view->entries = $roles->fetchAll();
-    }
-
     public function loginAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');
@@ -47,7 +41,7 @@ class UserController extends Zend_Controller_Action {
                         $mapper = new Application_Model_UserMapper();
                         $storage_data = $authAdapter->getResultRowObject(
                                 array('login', 'id'), null);
-                        
+
                         switch ($mapper->checkUserStatus($storage_data->id)) {
                             case 'notActive':
                                 //print message
@@ -405,6 +399,21 @@ class UserController extends Zend_Controller_Action {
                 ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                 ->setSecure(true)
                 ->setAttribs(array('class' => 'img-polaroid', 'title' => " - profile avatar"));
+    }
+
+    public function allAction() {
+        $this->view->headTitle($this->view->translate('Гонщики'));
+
+        $request = $this->getRequest();
+                
+        $db = Zend_Registry::get('db');
+        $adapter = new Zend_Paginator_Adapter_DbSelect($db->select('login, id, gravatar')->from('user')->order('id ASC'));
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage(6);
+        $paginator->setCurrentPageNumber($request->getParam('page'));
+        $paginator->setPageRange(5);
+        
+        $this->view->paginator = $paginator;
     }
 
 }
