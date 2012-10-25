@@ -7,6 +7,12 @@
         margin:0 0 20px 20px;
         width:210px;
     }
+    #user_info_page .user_info_ava:after{
+        background: url("../img/shadow_sprite.png") no-repeat scroll -250px -29px transparent;
+        content: "";
+        display: block;
+        height: 20px;
+    }
     #user_info_page .user_info_avatar{
          margin:0 0 5px 0;
     }
@@ -111,3 +117,33 @@
 #user_settings_page{
     
 }
+
+
+/* All users page */
+#users_page{
+    
+}
+    #users_page .pagination{
+        clear:both;
+    }
+    #users_page .user_item{
+        border:1px solid #CACACA;
+        padding:10px;
+        width:170px;
+        display:inline-block;
+        margin:5px 25px 25px;
+        position:relative;
+        background:none repeat scroll 0 0 #F5F5F5;
+        border-radius:3px;
+    }
+        #users_page .user_item .user_image{
+            text-align:center;
+            margin:0 0 10px 0;
+        }
+        #users_page .user_item .user_login{
+            
+        }
+        #users_page .user_item .user_flag{
+            display:inline-block;
+            float:left;
+        }

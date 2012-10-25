@@ -405,15 +405,10 @@ class UserController extends Zend_Controller_Action {
         $this->view->headTitle($this->view->translate('Гонщики'));
 
         $request = $this->getRequest();
-                
-        $db = Zend_Registry::get('db');
-        $adapter = new Zend_Paginator_Adapter_DbSelect($db->select('login, id, gravatar')->from('user')->order('id ASC'));
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setItemCountPerPage(6);
-        $paginator->setCurrentPageNumber($request->getParam('page'));
-        $paginator->setPageRange(5);
         
-        $this->view->paginator = $paginator;
+        $mapper = new Application_Model_UserMapper();
+                
+        $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5);
     }
 
 }

@@ -194,8 +194,13 @@ class Application_Model_UserMapper {
         }
     }
     
-    public function getLimitUsers(){
+    public function getUsersPager($count, $page, $page_range){
+        $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('user')->where('id > 1')->order('id ASC'));
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage($count);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange($page_range);
         
+        return $paginator;
     }
-
 }

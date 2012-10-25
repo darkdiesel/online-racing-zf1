@@ -6,21 +6,23 @@
         echo $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml');
         ?>
         <?php if (count($this->paginator)): ?>
-            <div class="user_item">
-                <?php foreach ($this->paginator as $item): ?>
-                    <div>
+
+            <?php foreach ($this->paginator as $item): ?>
+                <div class="user_item">
+                    <div class="user_image">
                         <?php
                         echo $this->gravatar()
                                 ->setEmail($item['gravatar'])
-                                ->setImgSize(150)
+                                ->setImgSize(160)
                                 ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                                 ->setSecure(true)
                                 ->setAttribs(array('class' => 'img-polaroid', 'title' => $item['login'] . " - profile avatar"));
                         ?>
                     </div>
+                    <div class="user_flag"><img src="<?php echo $this->baseUrl('img/flags/eur_round_32.png'); ?>"></div>
                     <div class="user_login"><a href="<?php echo $this->baseUrl('user/info/') . $item['id'] ?>"><?php echo $item['login']; ?></a></div>
-                <?php endforeach; ?>
-            </div>
+                </div>
+            <?php endforeach; ?>
         <?php endif; ?>
 
         <?php
