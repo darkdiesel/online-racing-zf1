@@ -177,11 +177,12 @@ body iframe{
                             color: #9A9A9A;
                             font-size: 35px;
                             line-height:35px;
-                            text-shadow:0 2px 2px #CACACA;
+                            text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
                         }
                         #content .page_content{
                             background:none repeat scroll 0 0 #FFFFFF;
                             border:1px solid #CACACA;
+                            padding:10px;
                         }
                         #content .page:after{
                             background:url("../img/shadow_sprite.png") no-repeat scroll 0 -54px transparent;
