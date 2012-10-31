@@ -1,3 +1,23 @@
+/* article add page */
 #article_add_page{
+    
+}
+    #article_add_page #articleAdd{
+        width:550px;
+    }
+    #article_add_page #articleAdd .form_actions_group{
+        text-align:center;
+        margin:0 10px;
+        display:inline-block;
+    }
+        #article_add_page #articleAdd #text{
+            width:495px;
+            resize:none;
+        }
+        #article_add_page #articleAdd #title{
+            width:495px;
+        }
+/* article all page */
+#articles_page{
     
 }

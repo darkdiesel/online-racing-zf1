@@ -1,0 +1,27 @@
+<div id="articles_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Контент'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+        ?>
+        <?php if (count($this->paginator)): ?>
+
+            <?php foreach ($this->paginator as $item): ?>
+                <div class="article_item">
+                    <div class="article_title"><?php echo $item['title']; ?></div>
+                    <div class="article_text"><?php echo $item['text']; ?></div>
+                    <div class="article_date"><?php echo $item['date']; ?></div>
+                    <?php if ($item['date'] != $item['date_edit']) {?>
+                        <div class="article_date_edit"><?php echo $item['date_edit']; ?></div>
+                    <?php } ?>
+                    <div class="article_views"><?php echo $item['views']; ?></div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+        ?>
+    </div>
+</div>

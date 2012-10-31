@@ -48,13 +48,13 @@ class Application_Form_UserChatForm extends Zend_Form
         $this->addElement('button', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => 'Отправить',
+            'label' => $this->translate('Отправить'),
         ));
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
-            'label' => 'Очистить',
+            'label' => $this->translate('Очистить'),
         ));
     }
 

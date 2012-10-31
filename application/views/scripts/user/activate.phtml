@@ -1,11 +1,14 @@
-<?php
-if ($this->errMessage != "") {
-		$this->errMessage='<div class="messages errors">'.$this->errMessage.'</div>';
-	}
-
-echo $this->fieldset('loginFieldSet', '
-	<p>Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.<br/>
-        P.S. Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом. </p>'.
-	$this->errMessage.
-	$this->form, array('legend'=>$this->translate('Активация пользователя'),'class'=>'form_white_box'));
-?>
+<div id="user_activate_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Активация пользователя'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <p>Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.<br/>
+            P.S. Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом. </p>
+        <?php
+        if ($this->errMessage != "") {
+            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+        }
+        ?>
+        <?php echo $this->form; ?>
+    </div>
+</div>

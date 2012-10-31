@@ -3,7 +3,7 @@
     <div class="div_hr"></div>
     <div class="page_content">
         <?php
-        echo $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml');
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
         ?>
         <?php if (count($this->paginator)): ?>
 
@@ -26,7 +26,7 @@
         <?php endif; ?>
 
         <?php
-        echo $this->paginationControl($this->paginator, 'Sliding', 'my_pagination_control.phtml');
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
         ?>
     </div>
 </div>

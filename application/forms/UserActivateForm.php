@@ -24,28 +24,46 @@ class Application_Form_UserActivateForm extends Zend_Form {
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
         $this->addElement('password', 'password', array(
-            'label' => 'Пароль',
-            'placeholder' => 'Пароль',
+            'label' => $this->translate('Пароль'),
+            'placeholder' => $this->translate('Пароль'),
             'required' => true,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6, 'max' => 25))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
         $this->addElement('text', 'confirmCode', array(
-            'label' => 'Код подтверждения:',
-            'placeholder' => 'Код подтверждения',
+            'label' => $this->translate('Код подтверждения'),
+            'placeholder' => $this->translate('Код подтверждения'),
             'required' => true,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array('alnum',
             //array('regex', false, '/^[a-z]/i')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
@@ -74,13 +92,13 @@ class Application_Form_UserActivateForm extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => 'Подвердить',
+            'label' => $this->translate('Подвердить'),
         ));
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
-            'label' => 'Сбросить',
+            'label' => $this->translate('Сбросить'),
         ));
     }
 

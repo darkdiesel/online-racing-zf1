@@ -1,4 +1,18 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Article</b> and script/action name <b>view</b></p>
+<div id="users_page" class="page">
+    <div class="page_title"><?php if (!$this->errMessage != "") { echo $this->article->title; } ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        if ($this->errMessage != "") {
+            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+        } else {
+        ?>
+        <?php echo $this->article->text; ?>
+        <div>Создано: <?php echo $this->article->date; ?></div>
+        <?php if ($this->article->date != $this->article->date_edit) { ?>
+            <div class="article_date_edit">Последнее редактирование: <?php echo $this->article->date ?></div>
+        <?php } ?>
+        <div>Просмотров: <?php echo $this->article->views; ?></div>
+        <?php }?>
+    </div>
 </div>

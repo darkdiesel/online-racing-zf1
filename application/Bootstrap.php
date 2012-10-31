@@ -213,8 +213,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
 
-        $router->addRoute('userinfo', new Zend_Controller_Router_Route(
-                        'user/info/:id',
+        $router->addRoute(
+                'userinfo', new Zend_Controller_Router_Route('user/info/:id',
                         array(
                             'controller' => 'user',
                             'action' => 'info',
@@ -226,6 +226,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         array(
                             'module' => 'default',
                             'controller' => 'user',
+                            'action' => 'all',
+                            'page' => 1)
+        ));
+
+        $router->addRoute(
+                'articleview', new Zend_Controller_Router_Route('article/view/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'article',
+                            'action' => 'view',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'allarticles', new Zend_Controller_Router_Route('article/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'article',
                             'action' => 'all',
                             'page' => 1)
         ));
