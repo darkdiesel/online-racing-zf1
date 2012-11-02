@@ -118,7 +118,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
 
         /* [GOOGLE FONTS] */
-        $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=PT+Serif&subset=latin,cyrillic", "screen, print");
         $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
 
         /* [JQUERY JS] */

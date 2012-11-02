@@ -38,18 +38,20 @@ class Application_Model_ArticleMapper {
         }
         return $entries;
     }
-    
+
     public function save(Application_Model_Article $article, $action) {
         switch ($action) {
             case 'add':
                 $date = date('Y-m-d H:i:s');
                 $data = array(
                     'user_id' => $article->getUser_id(),
+                    'type_id' => $article->getType_id(),
                     'title' => $article->getTitle(),
                     'text' => $article->getText(),
                     'date' => $date,
                     'date_edit' => $date,
                     'views' => 0,
+                    'publish' => $article->getPublish(),
                     'last_ip' => 'my'
                 );
                 break;
@@ -77,21 +79,31 @@ class Application_Model_ArticleMapper {
         } else {
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
-    
     }
-    
-     public function getArticlesPager($count, $page, $page_range){
-        $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->order('id ASC'));
+
+    public function getArticlesPager($count, $page, $page_range, $article_type, $action) {
+        switch ($action) {
+            case 'news':
+                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1 and type_id=' . $article_type)->order('id DESC'));
+                break;
+            case 'all':
+                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1')->order('id DESC'));
+                break;
+            default:
+
+                break;
+        }
+
         $paginator = new Zend_Paginator($adapter);
         $paginator->setItemCountPerPage($count);
         $paginator->setCurrentPageNumber($page);
         $paginator->setPageRange($page_range);
-        
+
         return $paginator;
     }
-    
+
     /*
-     * Uses for controller: user; action: info
+     * Uses for controller: article; action: view
      */
 
     public function getArticleDataById($id) {
@@ -103,11 +115,14 @@ class Application_Model_ArticleMapper {
         $entry = new Application_Model_Article();
 
         $entry->setId($result->id);
+        $entry->setUser_id($result->user_id);
+        $entry->setType_id($result->type_id);
         $entry->setTitle($result->title);
         $entry->setText($result->text);
         $entry->setdate($result->date);
         $entry->setDate_edit($result->date_edit);
         $entry->setViews($result->views);
+        $entry->setPublish($result->publish);
         $entry->setLast_ip($result->last_ip);
 
         return $entry;

@@ -77,13 +77,16 @@
         });
     });
 </script>
-<?php
-if ($this->errMessage != "") {
-    $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
-}
-
-echo $this->fieldset('loginFieldSet', '
-	<p>Введите данные в форму ниже, чтобы зарегистрировать польвателя на сайте.</p>' .
-        $this->errMessage .
-        $this->form, array('legend' => $this->translate('Регистрация'), 'class' => 'form_white_box'));
-?>
+<div id="user_register_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Регистрация'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <p>Введите данные в форму ниже, чтобы зарегистрировать польвателя на сайте.</p>
+        <?php
+        if ($this->errMessage != "") {
+            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+        }
+        ?>
+        <?php echo $this->form; ?>
+    </div>
+</div>

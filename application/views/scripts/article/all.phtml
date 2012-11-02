@@ -1,5 +1,5 @@
 <div id="articles_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Контент'); ?></div>
+    <div class="page_title"><?php echo $this->translate('Все статьи'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
         <?php
@@ -9,13 +9,16 @@
 
             <?php foreach ($this->paginator as $item): ?>
                 <div class="article_item">
-                    <div class="article_title"><?php echo $item['title']; ?></div>
+                    <div class="article_title"><a href="<?php echo $this->baseUrl('article/view/' . $item['id']) ?>"><?php echo $item['title']; ?></a></div>
                     <div class="article_text"><?php echo $item['text']; ?></div>
-                    <div class="article_date"><?php echo $item['date']; ?></div>
-                    <?php if ($item['date'] != $item['date_edit']) {?>
-                        <div class="article_date_edit"><?php echo $item['date_edit']; ?></div>
-                    <?php } ?>
-                    <div class="article_views"><?php echo $item['views']; ?></div>
+                    <div class="article_info">
+                        <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/'.$item['user_id'])?>"><?php echo $item['user_id'];?></a></div>
+                        <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $item['views']; ?></div>
+                        <div class="article_date article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $item['date']; ?></div>
+                        <?php if ($item['date'] != $item['date_edit']) { ?>
+                            <div class="article_date_edit article_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $item['date_edit'] ?></div>
+                        <?php } ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

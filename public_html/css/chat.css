@@ -23,6 +23,7 @@
 }
     #chat #userChat dl{
         margin:0;
+        overflow:hidden;
     }
     #chat #chat_messages_box{
         border:1px solid #CCCCCC;
@@ -87,9 +88,5 @@
     }
 /* user chat page*/
 #user_chat_page{
-    border:1px solid #CACACA;
-    background:none repeat scroll 0 0 #F9F9F9;
-    padding:20px;
-    margin:0;
-    border-radius:7px;
+
 }

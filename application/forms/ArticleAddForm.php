@@ -17,6 +17,7 @@ class Application_Form_ArticleAddForm extends Zend_Form {
         $this->addElement('text', 'title', array(
             'label' => $this->translate('Заголовок'),
             'placeholder' => $this->translate('Заголовок'),
+            'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
             'class' => 'x_field',
@@ -27,17 +28,41 @@ class Application_Form_ArticleAddForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
+        
+        // artcile type
+        $this->addElement('select', 'type', array(
+            'label' => $this->translate('Язык'),
+            'multiOptions' => array(1 => 'News', 2 => 'Plugins'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+        
         $this->addElement('textarea', 'text', array(
             'label' => $this->translate('Текст статьи'),
             'placeholder' => $this->translate('Текст статьи'),
             'cols' => 60,
             'rows' => 10,
+            'maxlength' => 10000,
             'required' => true,
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+            )
+        ));
+        
+        $this->addElement('checkbox', 'publish', array(
+            'label' => $this->translate('Опубликовать?'),
+            'value' => 1,
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
+                array('HtmlTag', array('tag' => 'span','class' => 'element_tag')),
             )
         ));
 

@@ -5,11 +5,6 @@
     #article_add_page #articleAdd{
         width:550px;
     }
-    #article_add_page #articleAdd .form_actions_group{
-        text-align:center;
-        margin:0 10px;
-        display:inline-block;
-    }
         #article_add_page #articleAdd #text{
             width:495px;
             resize:none;
@@ -21,3 +16,62 @@
 #articles_page{
     
 }
+    #articles_page .article_item{
+        border:1px solid #CACACA;
+        border-radius:7px;
+        margin:20px 0;
+        padding:10px;
+        background:none repeat scroll 0 0 #F5F5F5;
+    }
+        #articles_page .article_item .article_title{
+            border-bottom:1px solid #E6E0E0;
+            margin-bottom:5px;
+        }
+            #articles_page .article_item .article_title a{
+                color:#636262;
+                text-decoration:none;
+                font: 24px/30px sans-serif;
+                text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
+            }
+                #articles_page .article_item .article_title a:hover{
+                    color:#D33B3D;
+                }
+        #articles_page .article_item .article_text{
+            margin:10px 0;
+            color:#424242;
+            font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
+        }
+        #articles_page .article_item .article_author{
+        
+        }
+            #articles_page .article_item .article_author a{
+                color:#969696;
+            }
+            #articles_page .article_item .article_author a:hover{
+                color:#1F81C6;
+            }
+        #articles_page .article_item .article_date{
+
+        }
+        #articles_page .article_item .article_date_edit{
+        
+        }
+        #articles_page .article_item .article_views{
+        
+        }
+        #articles_page .article_item .article_info{
+            border-top:1px solid #E6E0E0;
+            font-size:10px;
+            color:#969696;
+            text-align:right;
+        }
+            #articles_page .article_item .article_info .article_info_item{
+                display:inline-block;
+            }
+                #articles_page .article_item .article_info .article_info_item:after{
+                    content:"|";
+                    margin:0 5px;
+                }
+                #articles_page .article_item .article_info .article_info_item span{
+                    font-weight:bold;
+                }

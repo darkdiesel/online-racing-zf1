@@ -16,11 +16,17 @@ class ArticleController extends Zend_Controller_Action {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $article = new Application_Model_Article($form->getValues());
+                $article = new Application_Model_Article();
                 $article->setUser_id(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                $article->setType_id($form->getValue('type'));
+                $article->setTitle($form->getValue('title'));
+                $article->setText($form->getValue('text'));
+                $article->setPublish($form->getValue('publish'));
+                
                 $mapper = new Application_Model_ArticleMapper();
-
                 $mapper->save($article, 'add');
+                
+                $this->_helper->redirector('all', 'article');
             }
         }
 
@@ -61,10 +67,8 @@ class ArticleController extends Zend_Controller_Action {
         $this->view->headTitle($this->view->translate('Статьи'));
 
         $request = $this->getRequest();
-
         $mapper = new Application_Model_ArticleMapper();
-
-        $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5);
+        $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5,1,'all');
     }
 
 }

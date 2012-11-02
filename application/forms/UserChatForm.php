@@ -49,12 +49,20 @@ class Application_Form_UserChatForm extends Zend_Form
             'ignore' => true,
             'class' => 'btn btn-primary',
             'label' => $this->translate('Отправить'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
+            )
         ));
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Очистить'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
+            )
         ));
     }
 

@@ -8,11 +8,12 @@
         } else {
         ?>
         <?php echo $this->article->text; ?>
-        <div>Создано: <?php echo $this->article->date; ?></div>
+        <div><span><?php echo $this->translate('Автор')?>: </span><?php echo $this->article->user_id; ?></div>
+        <div><span><?php echo $this->translate('Дата публикации')?>: </span><?php echo $this->article->date; ?></div>
         <?php if ($this->article->date != $this->article->date_edit) { ?>
-            <div class="article_date_edit">Последнее редактирование: <?php echo $this->article->date ?></div>
+            <div class="article_date_edit"><span><?php echo $this->translate('Последнее редактирование')?>: </span><?php echo $this->article->date ?></div>
         <?php } ?>
-        <div>Просмотров: <?php echo $this->article->views; ?></div>
+        <div><span><?php echo $this->translate('Просмотров')?>: </span><?php echo $this->article->views; ?></div>
         <?php }?>
     </div>
 </div>

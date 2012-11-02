@@ -1,12 +1,18 @@
 <div id="box_main_menu">
     <ul id="main_menu" class="main_menu">
         <li><a href="<?php echo $this->baseUrl("") ?>" class="current"><?php echo $this->translate('Главная') ?></a></li>
-        <li><a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Чемпионат') ?></a></li>
+        <li class="expanded">
+            <a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Чемпионат') ?></a>
+            <ul class="menu">
+                <li class="leaf"><a href="#" title=""><?php echo $this->translate('F1 Online Racing League') ?></a></li>
+            </ul>
+        </li>
         <li><a href="<?php echo $this->baseUrl("user/all") ?>"><?php echo $this->translate('Гонщики') ?></a></li>
         <li class="expanded">
             <a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Статьи') ?></a>
             <ul class="menu">
                 <li class="leaf"><a href="#" title=""><?php echo $this->translate('Настройка болида') ?></a></li>
+                <li class="leaf"><a href="<?php echo $this->baseUrl("article/all") ?>" title=""><?php echo $this->translate('Все') ?></a></li>
             </ul>
         </li>
         <li class="expanded">

@@ -183,6 +183,7 @@ body iframe{
                             background:none repeat scroll 0 0 #FFFFFF;
                             border:1px solid #CACACA;
                             padding:10px;
+                            border-radius:3px;
                         }
                         #content .page:after{
                             background:url("../img/shadow_sprite.png") no-repeat scroll 0 -54px transparent;
@@ -483,26 +484,15 @@ form#userConfirm{
 form#userRestorePasswd{
     width:360px;  
 }
-    form.white_box #remember-label{
+    form.white_box .checkbox{
+        margin:15px 0;
+    }
+        form.white_box .checkbox label{
+            display:inline;
+        }
+    form.white_box .form_actions_group{
+        margin:0 10px;
         display:inline-block;
-        padding: 3px 0 0 10px;
-    }
-    form.white_box #remember-element{
-        display:inline-block;
-        float:left;
-    }
-    form.white_box #reset-label{
-        display:none;
-    }
-    form.white_box #reset-element{
-        display:inline-block;
-    }
-    form.white_box #submit-label{
-        
-    }
-    form.white_box #submit-element{
-        display:inline-block;
-        margin:0 20px 0px 10px;
     }
 /*Messages*/
 div.messages{

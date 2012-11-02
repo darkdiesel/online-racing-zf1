@@ -26,6 +26,12 @@ class Application_Form_UserLoginForm extends Zend_Form {
             'validators' => array(
                 'EmailAddress',
                 array('StringLength', true, array('min' => 5, 'max' => 100))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
@@ -37,23 +43,43 @@ class Application_Form_UserLoginForm extends Zend_Form {
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6, 'max' => 25))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
         $this->addElement('checkbox', 'remember', array(
             'label' => $this->translate('Запомнить меня'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
+                array('HtmlTag', array('tag' => 'span','class' => 'element_tag')),
+            )
         ));
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
             'label' => $this->translate('Войти'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
+            )
         ));
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Сбросить'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
+            )
         ));
     }
 

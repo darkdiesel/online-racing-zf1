@@ -117,6 +117,10 @@ class Application_Form_UserRegisterForm extends Zend_Form {
             'ignore' => true,
             'class' => 'btn btn-primary',
             'label' => $this->translate('Зарегестрировать'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
+            )
         ));
 
         $this->addElement('reset', 'reset', array(
@@ -124,6 +128,10 @@ class Application_Form_UserRegisterForm extends Zend_Form {
             'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Сбросить'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
+            )
         ));
     }
 

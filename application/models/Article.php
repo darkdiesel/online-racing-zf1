@@ -4,11 +4,13 @@ class Application_Model_Article {
 
     protected $_id;
     protected $_user_id;
+    protected $_type_id;
     protected $_title;
     protected $_text;
     protected $_date;
     protected $_date_edit;
     protected $_views;
+    protected $_publish;
     protected $_last_ip;
 
     public function __construct(array $options = null) {
@@ -61,6 +63,15 @@ class Application_Model_Article {
     public function getUser_id() {
         return $this->_user_id;
     }
+    
+    public function setType_id($type_id) {
+        $this->_type_id = (int) $type_id;
+        return $this;
+    }
+
+    public function getType_id() {
+        return $this->_type_id;
+    }
 
     public function setTitle($title) {
         $this->_title = $title;
@@ -105,6 +116,15 @@ class Application_Model_Article {
 
     public function getViews() {
         return $this->_views;
+    }
+    
+    public function setPublish($publish) {
+        $this->_publish = (int) $publish;
+        return $this;
+    }
+
+    public function getPublish() {
+        return $this->_publish;
     }
 
     public function setLast_ip($last_ip) {
