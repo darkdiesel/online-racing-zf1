@@ -19,7 +19,7 @@
     for ($i = 1; $i < $count; $i++) {
         echo '<div class="rss_item clearfix"><h6 class="rss_title">' . '<a href="#">' . $element[$index["TITLE"][$i + 1]]["value"] . '</a>' . '</h6>';
         echo '<div class="rss_description">' . $element[$index["DESCRIPTION"][$i]]["value"];
-        echo '<a class="rss_more btn btn-primary" href="' . $element[$index["LINK"][$i + 1]]["value"] . '" target="_BLINK">' . $this->translate("Подробнее на F1-News.ru") . '</a></div></div>';
+        echo '<a class="rss_more btn btn-small btn-primary" href="' . $element[$index["LINK"][$i + 1]]["value"] . '" target="_BLINK">' . $this->translate("Подробнее на F1-News.ru") . '</a></div></div>';
     }
     ?>
 </div>

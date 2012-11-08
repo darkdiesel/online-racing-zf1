@@ -103,19 +103,9 @@ class UserController extends Zend_Controller_Action {
                 $user = new Application_Model_User($form->getValues());
 
                 $mapper = new Application_Model_UserMapper();
-
-                // Function to generate random string
-                function generatePassword($length = 8) {
-                    $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
-                    $numChars = strlen($chars);
-                    $string = '';
-                    for ($i = 0; $i < $length; $i++) {
-                        $string .= substr($chars, rand(1, $numChars) - 1, 1);
-                    }
-                    return $string;
-                }
-
-                $user->activate = generatePassword(8);
+                
+                Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
+                $user->activate = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
 
                 $mapper->save($user, 'register');
 

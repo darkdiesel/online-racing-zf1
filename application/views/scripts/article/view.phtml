@@ -1,19 +1,34 @@
-<div id="users_page" class="page">
-    <div class="page_title"><?php if (!$this->errMessage != "") { echo $this->article->title; } ?></div>
+<div id="article_page" class="page">
+    <div class="page_title"><?php
+if (!$this->errMessage != "") {
+    echo $this->escape($this->article->title);
+}
+?></div>
     <div class="div_hr"></div>
     <div class="page_content">
         <?php
         if ($this->errMessage != "") {
             echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
         } else {
-        ?>
-        <?php echo $this->article->text; ?>
-        <div><span><?php echo $this->translate('Автор')?>: </span><?php echo $this->article->user_id; ?></div>
-        <div><span><?php echo $this->translate('Дата публикации')?>: </span><?php echo $this->article->date; ?></div>
-        <?php if ($this->article->date != $this->article->date_edit) { ?>
-            <div class="article_date_edit"><span><?php echo $this->translate('Последнее редактирование')?>: </span><?php echo $this->article->date ?></div>
+            ?>
+            <div class="article_item">
+                <?php
+                $bbcode = Zend_Markup::factory('Bbcode');
+                if ($this->article->image != '') {
+                    ?>
+                    <img class="img-polaroid article_image" src="<?php echo $this->article->image; ?>">
+                <?php } ?>
+                <div class="article_text"><?php echo $this->article->text; ?></div>
+
+                <div class="article_info">
+                    <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($this->article->user_id)) ?>"><?php echo $this->article->user_id; ?></a></div>
+                    <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->article->views; ?></div>
+                    <div class="article_date article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article->date); ?></div>
+                    <?php if ($this->escape($this->article->date) != $this->escape($this->article->date_edit)) { ?>
+                        <div class="article_date_edit article_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->article->date_edit); ?></div>
+                    <?php } ?>
+                </div>
+            </div>
         <?php } ?>
-        <div><span><?php echo $this->translate('Просмотров')?>: </span><?php echo $this->article->views; ?></div>
-        <?php }?>
     </div>
 </div>

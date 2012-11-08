@@ -23,8 +23,16 @@
 }
     #chat #userChat dl{
         margin:0;
-        overflow:hidden;
     }
+    #chat #userChat .form_actions_group{
+        display:inline-block;
+    }
+        #chat #userChat .submit{
+            
+        }
+        #chat #userChat .reset{
+            float:right;
+        }
     #chat #chat_messages_box{
         border:1px solid #CCCCCC;
         border-radius:3px;
@@ -81,10 +89,10 @@
         margin:0;
     }
     #chat #userChat #submit{
-        float:left;
+
     }
     #chat #userChat #reset{
-        float:right;
+
     }
 /* user chat page*/
 #user_chat_page{

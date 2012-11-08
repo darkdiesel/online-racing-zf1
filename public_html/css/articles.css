@@ -3,7 +3,7 @@
     
 }
     #article_add_page #articleAdd{
-        width:550px;
+        width:650px;
     }
         #article_add_page #articleAdd #text{
             width:495px;
@@ -11,6 +11,9 @@
         }
         #article_add_page #articleAdd #title{
             width:495px;
+        }
+        #article_add_page #articleAdd #image{
+            width:380px;
         }
 /* article all page */
 #articles_page{
@@ -23,6 +26,16 @@
         padding:10px;
         background:none repeat scroll 0 0 #F5F5F5;
     }
+        #articles_page .article_item .article_more{
+            margin:5px 0;
+            float:right;
+            clear:both;
+        }
+        #articles_page .article_item .article_image{
+            float:left;
+            margin:0 15px 15px 0;
+            width:250px;
+        }
         #articles_page .article_item .article_title{
             border-bottom:1px solid #E6E0E0;
             margin-bottom:5px;
@@ -64,14 +77,70 @@
             font-size:10px;
             color:#969696;
             text-align:right;
+            clear:both;
         }
             #articles_page .article_item .article_info .article_info_item{
                 display:inline-block;
             }
-                #articles_page .article_item .article_info .article_info_item:after{
+                #articles_page .article_item .article_info .article_info_item:before{
                     content:"|";
                     margin:0 5px;
                 }
                 #articles_page .article_item .article_info .article_info_item span{
+                    font-weight:bold;
+                }
+/* article detail page */
+#article_page{
+    
+}
+
+    #article_page .article_item{
+        
+    }
+        #article_page .article_item .article_image{
+            margin:0 auto 20px;
+            display:block;
+            max-width:450px;
+            max-height:280px;
+        }
+        #article_page .article_item .article_text{
+            margin:10px 0;
+            color:#424242;
+            font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
+            padding:10px 20px;
+        }
+        #article_page .article_item .article_author{
+        
+        }
+            #article_page .article_item .article_author a{
+                
+            }
+            #article_page .article_item .article_author a:hover{
+                color:#1F81C6;
+            }
+        #article_page .article_item .article_date{
+
+        }
+        #article_page .article_item .article_date_edit{
+        
+        }
+        #article_page .article_item .article_views{
+        
+        }
+        #article_page .article_item .article_info{
+            border-top:1px solid #E6E0E0;
+            font-size:10px;
+            color:#969696;
+            text-align:right;
+            clear:both;
+        }
+            #article_page .article_item .article_info .article_info_item{
+                display:inline-block;
+            }
+                #article_page .article_item .article_info .article_info_item:before{
+                    content:"|";
+                    margin:0 5px;
+                }
+                #article_page .article_item .article_info .article_info_item span{
                     font-weight:bold;
                 }

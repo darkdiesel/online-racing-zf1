@@ -1,0 +1,50 @@
+/* articles page */
+#articles_page{
+    
+}
+    #articles_page .articles_data{
+        width:705px;
+        position:relative;
+    }
+        #articles_page .articles_data table{
+            display:block;
+            margin:0;
+        }
+            #articles_page .articles_data table thead{
+                font-weight:bold;
+                font-family:monospace;
+                font-size:12px;
+            }
+            #articles_page .articles_data table tbody{
+                font-size:12px;
+            }
+            #articles_page .articles_data table .article_number{
+                font-weight:bold;
+                font-family:monospace;
+                width:30px;
+            }
+            #articles_page .articles_data table .article_title > span{
+                width:315px;
+            }
+            #articles_page .articles_data table .article_author > span{
+                width:85px;
+            }
+            #articles_page .articles_data table .article_type > span{
+                width:55px;
+            }
+            #articles_page .articles_data table .article_action > span{
+                width:60px;
+            }
+            #articles_page .articles_data table .article_date > span{
+                width:55px;
+                font-style:italic;
+                font-size:11px;
+            }
+                #articles_page .articles_data table tr td{
+                    position:relative;
+                }
+                #articles_page .articles_data table tr td span{
+                    overflow:hidden;
+                    word-wrap:break-word;
+                    display:block;
+                }

@@ -55,7 +55,7 @@ class Application_Form_UserChatForm extends Zend_Form
             )
         ));
 
-        $this->addElement('reset', 'reset', array(
+        $this->addElement('button', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Очистить'),

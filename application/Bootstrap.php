@@ -246,6 +246,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
+        
+        $router->addRoute(
+                'alladminarticles', new Zend_Controller_Router_Route('admin/articles/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'admin',
+                            'action' => 'articles',
+                            'page' => 1)
+        ));
 
         /*
           Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');

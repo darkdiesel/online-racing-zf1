@@ -9,6 +9,7 @@ class ArticleController extends Zend_Controller_Action {
     public function addAction() {
         // page title
         $this->view->headTitle($this->view->translate('Добавление контента'));
+        $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
         // form
@@ -18,9 +19,11 @@ class ArticleController extends Zend_Controller_Action {
             if ($form->isValid($request->getPost())) {
                 $article = new Application_Model_Article();
                 $article->setUser_id(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
-                $article->setType_id($form->getValue('type'));
+                $article->setArticle_Type_id($form->getValue('article_type'));
+                $article->setContent_Type_id(0);
                 $article->setTitle($form->getValue('title'));
                 $article->setText($form->getValue('text'));
+                $article->setImage($form->getValue('image'));
                 $article->setPublish($form->getValue('publish'));
                 
                 $mapper = new Application_Model_ArticleMapper();
@@ -46,25 +49,24 @@ class ArticleController extends Zend_Controller_Action {
         $article_id = $request->getParam('id');
         
         if ($request->getParam('id') == 0) {
-            $this->view->errMessage = "Статья не существует";
+            $this->view->errMessage = $this->view->translate('Статья не существует');
             return;
-        } else {
-            
         }
         
         $mapper = new Application_Model_ArticleMapper();
         $article_data = $mapper->getArticleDataById($article_id);
         
         if ($article_data == 'null') {
-            $this->view->errMessage = "Статья не существует";
+            $this->view->errMessage = $this->view->translate('Статья не существует');
             return;
         } else {
             $this->view->article = $article_data;
+            $this->view->headTitle($article_data->title);
         }
     }
 
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Статьи'));
+        $this->view->headTitle($this->view->translate('Контент сайта'));
 
         $request = $this->getRequest();
         $mapper = new Application_Model_ArticleMapper();

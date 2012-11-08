@@ -29,6 +29,7 @@ class Acl extends Zend_Acl {
                 $this->add(new Zend_Acl_Resource('user/settings'), 'user_allow');
                 $this->add(new Zend_Acl_Resource('user/edit'), 'user_allow');
 		$this->add(new Zend_Acl_Resource('user/logout'), 'user_allow');
+                $this->add(new Zend_Acl_Resource('chat/addmessage'), 'user_allow');
                 
                 $this->deny('user','user/register');
                 $this->deny('user','user/activate');
@@ -36,7 +37,9 @@ class Acl extends Zend_Acl {
 
 		// admin resources
 		$this->add(new Zend_Acl_Resource('admin_allow'));
-                $this->add(new Zend_Acl_Resource('article/message'), 'user_allow');
+                $this->add(new Zend_Acl_Resource('article/add'), 'admin_allow');
+                $this->add(new Zend_Acl_Resource('article/edit'), 'admin_allow');
+                $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
 				
 		// master resources
 		$this->add(new Zend_Acl_Resource('master_allow'));

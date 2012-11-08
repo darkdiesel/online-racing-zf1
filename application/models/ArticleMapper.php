@@ -45,28 +45,31 @@ class Application_Model_ArticleMapper {
                 $date = date('Y-m-d H:i:s');
                 $data = array(
                     'user_id' => $article->getUser_id(),
-                    'type_id' => $article->getType_id(),
+                    'article_type_id' => $article->getArticle_Type_id(),
+                    'content_type_id' => $article->getContent_Type_id(),
                     'title' => $article->getTitle(),
                     'text' => $article->getText(),
+                    'image' => $article->getimage(),
                     'date' => $date,
                     'date_edit' => $date,
                     'views' => 0,
                     'publish' => $article->getPublish(),
-                    'last_ip' => 'my'
+                    'last_ip' => ''
                 );
                 break;
             case 'edit':
                 $data = array(
                     'title' => $article->getTitle(),
                     'text' => $article->getText(),
+                    'image' => $article->getimage(),
                     'date_edit' => date('Y-m-d H:i:s')
                 );
                 break;
-            case 'inc_views':
+            /*case 'inc_views':
                 $data = array(
                     'views' => $article->getViews()
                 );
-                break;
+                break;*/
             default:
                 $data = array(
                 );
@@ -84,10 +87,13 @@ class Application_Model_ArticleMapper {
     public function getArticlesPager($count, $page, $page_range, $article_type, $action) {
         switch ($action) {
             case 'news':
-                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1 and type_id=' . $article_type)->order('id DESC'));
+                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1 and article_type_id=' . $article_type)->order('id DESC'));
                 break;
             case 'all':
                 $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1')->order('id DESC'));
+                break;
+            case 'admin_all':
+                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->order('id DESC'));
                 break;
             default:
 
@@ -111,19 +117,32 @@ class Application_Model_ArticleMapper {
         if (0 == count($result)) {
             return 'null';
         }
-
+        
         $entry = new Application_Model_Article();
+        
+        //update counts of views
+        if ($result->last_ip != $_SERVER['REMOTE_ADDR']) {
+            $data = array(
+                'views' => ($result->views + 1),
+                'last_ip' => $_SERVER['REMOTE_ADDR']
+            );
+            $this->getDbTable()->update($data, array('id = ?' => $result->id));
+            $entry->setViews($data['views']);
+        } else {
+            $entry->setViews($result->views);
+        }
 
         $entry->setId($result->id);
         $entry->setUser_id($result->user_id);
-        $entry->setType_id($result->type_id);
+        $entry->setArticle_Type_id($result->article_type_id);
+        $entry->setContent_Type_id($result->content_type_id);
         $entry->setTitle($result->title);
         $entry->setText($result->text);
+        $entry->setImage($result->image);
         $entry->setdate($result->date);
         $entry->setDate_edit($result->date_edit);
-        $entry->setViews($result->views);
         $entry->setPublish($result->publish);
-        $entry->setLast_ip($result->last_ip);
+        //$entry->setLast_ip($result->last_ip);
 
         return $entry;
     }

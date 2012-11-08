@@ -21,6 +21,7 @@ class Application_Form_ArticleAddForm extends Zend_Form {
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
             'class' => 'x_field',
+            'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -30,9 +31,24 @@ class Application_Form_ArticleAddForm extends Zend_Form {
         ));
         
         // artcile type
-        $this->addElement('select', 'type', array(
-            'label' => $this->translate('Язык'),
+        $this->addElement('select', 'article_type', array(
+            'label' => $this->translate('Тип контента'),
             'multiOptions' => array(1 => 'News', 2 => 'Plugins'),
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+        
+        $this->addElement('text', 'image', array(
+            'label' => $this->translate('Изображение'),
+            'placeholder' => $this->translate('Изображение'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -48,6 +64,8 @@ class Application_Form_ArticleAddForm extends Zend_Form {
             'rows' => 10,
             'maxlength' => 10000,
             'required' => true,
+            'filters' => array('StringTrim'),
+            'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),

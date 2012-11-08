@@ -72,8 +72,8 @@ $(document).ready(function(){
                     "top":(($('.x_field',this).outerHeight()-$('.icon_clear',this).outerHeight())/2)+"px"
                 });
                 $('.x_field',this).css({
-                    "padding-right":($('.icon_clear',this).outerHeight())+8+"px",
-                    "width":($('.x_field',this).width()-(($('.icon_clear',this).outerHeight())+8))+"px"
+                    "padding-right":($('.icon_clear',this).outerWidth())+8+"px",
+                    "width":($('.x_field',this).width()-(($('.icon_clear',this).outerWidth())+2))+"px"
                 });
                 $(this).css({
                     "width":$('.x_field',this).outerWidth()+"px"

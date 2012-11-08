@@ -4,9 +4,11 @@ class Application_Model_Article {
 
     protected $_id;
     protected $_user_id;
-    protected $_type_id;
+    protected $_article_type_id;
+    protected $_content_type_id;
     protected $_title;
     protected $_text;
+    protected $_image;
     protected $_date;
     protected $_date_edit;
     protected $_views;
@@ -64,13 +66,22 @@ class Application_Model_Article {
         return $this->_user_id;
     }
     
-    public function setType_id($type_id) {
-        $this->_type_id = (int) $type_id;
+    public function setArticle_Type_id($article_type_id) {
+        $this->_article_type_id = (int) $article_type_id;
         return $this;
     }
 
-    public function getType_id() {
-        return $this->_type_id;
+    public function getArticle_Type_id() {
+        return $this->_article_type_id;
+    }
+    
+    public function setContent_Type_id($content_type_id) {
+        $this->_content_type_id = (int) $content_type_id;
+        return $this;
+    }
+
+    public function getContent_type_id() {
+        return $this->_content_type_id;
     }
 
     public function setTitle($title) {
@@ -89,6 +100,15 @@ class Application_Model_Article {
 
     public function getText() {
         return $this->_text;
+    }
+    
+    public function setImage($image) {
+        $this->_image = $image;
+        return $image;
+    }
+
+    public function getimage() {
+        return $this->_image;
     }
 
     public function setDate($date) {
