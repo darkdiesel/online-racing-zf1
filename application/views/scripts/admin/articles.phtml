@@ -2,19 +2,21 @@
     <div class="page_title"><?php echo $this->translate('Контент сайта'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml'); ?>
 
-        <div class="articles_data img-polaroid">
-            <?php if (count($this->paginator)): ?>
+        <?php
+        if (count($this->paginator)) {
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+            ?>
+            <div class="articles_data img-polaroid">
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <td class="article_number"><span>#</span></td>
-                            <td class="article_title"><span><?php echo $this->translate('Заголовок');?></span></td>
-                            <td class="article_author"><span><?php echo $this->translate('Автор');?></span></td>
-                            <td class="article_type"><span><?php echo $this->translate('Тип контента');?></span></td>
-                            <td class="article_date"><span><?php echo $this->translate('Дата');?></span></td>
-                            <td class="article_action"><span><?php echo $this->translate('Действие');?></span></td>
+                            <td class="article_title"><span><?php echo $this->translate('Заголовок'); ?></span></td>
+                            <td class="article_author"><span><?php echo $this->translate('Автор'); ?></span></td>
+                            <td class="article_type"><span><?php echo $this->translate('Тип контента'); ?></span></td>
+                            <td class="article_date"><span><?php echo $this->translate('Дата'); ?></span></td>
+                            <td class="article_action"><span><?php echo $this->translate('Действие'); ?></span></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -31,14 +33,18 @@
                                         <a href="<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a>
                                     </span></td>
                             </tr>
-                        <?php endforeach; ?>
+                            <?php
+                        endforeach;
+
+                        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+                        ?>
                     </tbody>
                 </table>
-            <?php endif; ?>
-
+            </div>
             <?php
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
-            ?>
-        </div>
+        } else {
+            echo $this->translate('Контент не найден на сайте!');
+        }
+        ?>
     </div>
 </div>

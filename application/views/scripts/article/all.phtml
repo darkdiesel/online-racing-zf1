@@ -3,11 +3,11 @@
     <div class="div_hr"></div>
     <div class="page_content">
         <?php
-        $filter = new Zend_Filter_StripTags();
-        $bbcode = Zend_Markup::factory('Bbcode');
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
-        ?>
-        <?php if (count($this->paginator)): ?>
+        if (count($this->paginator)) {
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+            $filter = new Zend_Filter_StripTags();
+            $bbcode = Zend_Markup::factory('Bbcode');
+            ?>
 
             <?php foreach ($this->paginator as $item): ?>
                 <div class="article_item">
@@ -27,11 +27,14 @@
                         <?php } ?>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-
-        <?php
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+                <?php
+            endforeach;
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+            ?>
+            <?php
+        } else {
+            echo $this->translate('Контент не найден на сайте!');
+        }
         ?>
     </div>
 </div>

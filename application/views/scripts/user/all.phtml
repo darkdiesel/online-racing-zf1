@@ -2,12 +2,13 @@
     <div class="page_title"><?php echo $this->translate('Гонщики'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <?php
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
-        ?>
-        <?php if (count($this->paginator)): ?>
 
-            <?php foreach ($this->paginator as $item): ?>
+        <?php
+        if (count($this->paginator)) {
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
+
+            foreach ($this->paginator as $item):
+                ?>
                 <div class="user_item">
                     <div class="user_image">
                         <?php
@@ -22,11 +23,11 @@
                     <div class="user_flag"><img src="<?php echo $this->baseUrl('img/flags/eur_round_32.png'); ?>"></div>
                     <div class="user_login"><a href="<?php echo $this->baseUrl('user/info/') . $item['id'] ?>"><?php echo $item['login']; ?></a></div>
                 </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+                <?php
+            endforeach;
 
-        <?php
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
+        }
         ?>
     </div>
 </div>

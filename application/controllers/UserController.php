@@ -63,7 +63,7 @@ class UserController extends Zend_Controller_Action {
                                 $user = new Application_Model_User(array('id' => $storage_data->id));
                                 $mapper->save($user, 'last_login');
 
-                                if ($form->remember->getvalue() == 1) {
+                                if ($form->remember->getValue() == 1) {
                                     Zend_Session::rememberMe(60 * 60 * 24 * 2);
                                 }
                                 $this->_helper->redirector('index', 'index');
