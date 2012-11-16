@@ -24,8 +24,8 @@
                             <tr>
                                 <td class="article_number"><span><?php echo $this->escape($item['id']); ?></span></td>
                                 <td class="article_title"><span><a href="<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>"><?php echo $this->escape($item['title']); ?></a></span></td>
-                                <td class="article_author"><span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($item['user_id'])) ?>"><?php echo $item['user_id']; ?></a></span></td>
-                                <td class="article_type"><span><?php echo $this->escape($this->escape($item['type_id'])); ?></span></td>
+                                <td class="article_author"><span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($item['user_id'])) ?>"><?php echo $item['login']; ?></a></span></td>
+                                <td class="article_type"><span><?php echo $this->escape($this->escape($item['name'])); ?></span></td>
                                 <td class="article_date"><span><?php echo $this->escape($this->escape($item['date_edit'])); ?></span></td>
                                 <td class="article_action"><span>
                                         <a href="<?php echo $this->baseUrl('article/edit/' . $this->escape($item['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
@@ -33,14 +33,11 @@
                                         <a href="<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a>
                                     </span></td>
                             </tr>
-                            <?php
-                        endforeach;
-
-                        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
-                        ?>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
+            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml'); ?>
             <?php
         } else {
             echo $this->translate('Контент не найден на сайте!');

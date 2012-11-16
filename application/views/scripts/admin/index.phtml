@@ -1,1 +1,25 @@
-<h2>Админка<h2>
+<div id="articles_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Панель управления сайтом'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <div>
+            <h2>Пользователи</h2>
+            
+            Действия:
+            <ul>
+                <li><a href="<?php echo $this->baseURL('admin/users')?>">Просмотреть в админке</a></li>
+                <li><a href="<?php echo $this->baseURL('user/all')?>">Просмотреть на сайте</a></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Контент</h2>
+            
+            Действия:
+            <ul>
+                <li><a href="<?php echo $this->baseURL('admin/articles')?>">Просмотреть в админке</a></li>
+                <li><a href="<?php echo $this->baseURL('article/all')?>">Просмотреть на сайте</a></li>
+                <li><a href="<?php echo $this->baseURL('article/add')?>">Добавить</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

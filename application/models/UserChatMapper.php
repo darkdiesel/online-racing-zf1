@@ -38,34 +38,54 @@ class Application_Model_UserChatMapper {
     }
 
     public function fetchAll() {
-        $resultSet = $this->getDbTable()->fetchAll('id', 'date DESC', 50, 0);
-        $entries = array();
-        foreach ($resultSet as $row) {
-            $entry = new Application_Model_UserChat();
-            $entry->setId($row->id)
-                    ->setUser_id($row->user_id)
-                    ->setMessage($row->message)
-                    ->setDate($row->date);
-            $entries[] = $entry;
-        }
-        return $entries;
+        $select = $this->getDbTable()
+                ->select()
+                ->setIntegrityCheck(false)
+                ->from(array('uc' => 'user_chat'), 'id')
+                ->columns('*')
+                ->join(array('u' => 'user'), 'uc.user_id = u.id', 'login')
+                ->order('date DESC')
+                ->limit(50, 0);
+
+
+        $resultSet = $this->getDbTable()->fetchAll($select);
+
+        /* $resultSet = $this->getDbTable()->fetchAll('id', 'date DESC', 50, 0);
+          $entries = array();
+          foreach ($resultSet as $row) {
+          $entry = new Application_Model_UserChat();
+          $entry->setId($row->id)
+          ->setUser_id($row->user_id)
+          ->setMessage($row->message)
+          ->setDate($row->date);
+          $entries[] = $entry;
+          }
+          return $entries;
+         */
+        return $resultSet;
     }
 
+    /*
+     * Uses for controller: chat; action: get last messages by ajax
+     */
+
     public function fetchLast($last) {
-        $resultSet = $this->getDbTable()->fetchAll('id > "' . $last . '"', 'date DESC', 50, 0);
+        $select = $this->getDbTable()
+                ->select()
+                ->setIntegrityCheck(false)
+                ->from(array('uc' => 'user_chat'), 'id')
+                ->columns('*')
+                ->where('uc.id > ?', $last)
+                ->join(array('u' => 'user'), 'uc.user_id = u.id', 'login')
+                ->order('date DESC')
+                ->limit(50, 0);
+
+        //$resultSet = $this->getDbTable()->fetchAll('id > "' . $last . '"', 'date DESC', 50, 0);
+        $resultSet = $this->getDbTable()->fetchAll($select);
         if (0 == count($resultSet)) {
             return 'null';
         } else {
-            $entries = array();
-            foreach ($resultSet as $row) {
-                $entry = new Application_Model_UserChat();
-                $entry->setId($row->id)
-                        ->setUser_id($row->user_id)
-                        ->setMessage($row->message)
-                        ->setDate($row->date);
-                $entries[] = $entry;
-            }
-            return $entries;
+            return $resultSet;
         }
     }
 

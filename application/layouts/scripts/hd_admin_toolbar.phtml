@@ -2,18 +2,18 @@
     <ul id="admin_menu">
         <li class="home"><a href="<?php echo $this->baseUrl(''); ?>">Home</a></li>
         <li class="expanded">
-            <a href="<?php echo $this->baseUrl('article/index'); ?>">Контент</a>
+            <a href="<?php echo $this->baseUrl('admin/articles'); ?>">Контент</a>
             <ul class="menu">
+                <li><a href="<?php echo $this->baseUrl('admin/articles'); ?>">Просмотр</a></li>
                 <li><a href="<?php echo $this->baseUrl('article/add'); ?>">Добавить</a></li>
-                <li><a href="<?php echo $this->baseUrl('article/view'); ?>">Просмотреть</a></li>
             </ul>
         </li>
         <li class="expanded">
-            <a href="<?php echo $this->baseUrl('user/index'); ?>">Пользователи</a>
+            <a href="<?php echo $this->baseUrl('admin/users'); ?>">Пользователи</a>
             <ul class="menu">
-                <li><a href="<?php echo $this->baseUrl('user/all'); ?>">Просмотр</a></li>
+                <li><a href="<?php echo $this->baseUrl('admin/users'); ?>">Просмотр</a></li>
             </ul>
         </li>
-        <li class="name"><a href="<?php echo $this->baseUrl('#'); ?>">Online-Racing Admin</a></li>
+        <li class="name"><a href="<?php echo $this->baseUrl('admin/index'); ?>">Online-Racing Admin</a></li>
     </ul>
 </div>

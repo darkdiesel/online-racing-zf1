@@ -38,4 +38,5 @@ class Application_Model_RoleMapper {
         $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
         return $result->name;
     }
+
 }

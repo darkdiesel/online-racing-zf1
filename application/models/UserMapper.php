@@ -107,19 +107,6 @@ class Application_Model_UserMapper {
         return $entry;
     }
 
-    public function getUserLoginById($id) {
-        $result = $this->getDbTable()->find($id);
-        if (0 == count($result)) {
-            return;
-        }
-        $user = new Application_Model_User();
-
-        $row = $result->current();
-
-        $user->setLogin($row->login);
-        return $user;
-    }
-
     public function find($id, Application_Model_Guestbook $guestbook) {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
@@ -131,10 +118,11 @@ class Application_Model_UserMapper {
                 ->setComment($row->comment)
                 ->setCreated($row->created);
     }
-    
+
     /*
      * Uses for controller: user; action: edit , action: login, action: register
      */
+
     public function save(Application_Model_User $user, $action) {
         switch ($action) {
             case 'avatar':
@@ -161,12 +149,12 @@ class Application_Model_UserMapper {
                 break;
             case 'additional_Inf':
                 $data = array(
-                  'about'  => $user->getAbout(),
+                    'about' => $user->getAbout(),
                 );
                 break;
             case 'last_login':
                 $data = array(
-                  'last_login'  => date('Y-m-d H:i:s'),
+                    'last_login' => date('Y-m-d H:i:s'),
                 );
                 break;
             case 'register':
@@ -193,14 +181,33 @@ class Application_Model_UserMapper {
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
-    
-    public function getUsersPager($count, $page, $page_range){
-        $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('user')->where('role_id != 1')->order('id ASC'));
+
+    public function getUsersPager($count, $page, $page_range, $action) {
+        switch ($action) {
+            case 'all':
+                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('user')->where('role_id != 1')->order('id ASC'));
+
+                break;
+            case 'admin_all':
+                $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
+                                        ->select()
+                                        ->setIntegrityCheck(false)
+                                        ->from(array('u' => 'user'), 'id')
+                                        ->join(array('r' => 'role'), 'u.role_id = r.id', 'name')
+                                        ->columns(array('login', 'activate', 'enabled', 'last_login'))
+                                        ->order('id ASC'));
+                break;
+            default:
+
+                break;
+        }
+
         $paginator = new Zend_Paginator($adapter);
         $paginator->setItemCountPerPage($count);
         $paginator->setCurrentPageNumber($page);
         $paginator->setPageRange($page_range);
-        
+
         return $paginator;
     }
+
 }

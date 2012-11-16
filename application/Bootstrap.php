@@ -89,7 +89,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         /* [BOOTSTRAP CSS] */
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
         /* [JQUERY UI CSS] */
-        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.9.0.custom.min.css"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.9.1.custom.min.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
@@ -123,7 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         /* [JQUERY JS] */
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.2.min.js"));
         /* [JQUERY UI JS] */
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.9.0.custom.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.9.1.custom.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
 
         // Share block script
@@ -213,7 +213,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $router = $frontController->getRouter();
 
         $router->addRoute(
-                'userinfo', new Zend_Controller_Router_Route('user/info/:id',
+                'userInfo', new Zend_Controller_Router_Route('user/info/:id',
                         array(
                             'controller' => 'user',
                             'action' => 'info',
@@ -221,7 +221,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allusers', new Zend_Controller_Router_Route('user/all/:page',
+                'allUsers', new Zend_Controller_Router_Route('user/all/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'user',
@@ -230,7 +230,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'articleview', new Zend_Controller_Router_Route('article/view/:id',
+                'articleView', new Zend_Controller_Router_Route('article/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'article',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'articleEdit', new Zend_Controller_Router_Route('article/view/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
@@ -239,7 +248,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         
         $router->addRoute(
-                'allarticles', new Zend_Controller_Router_Route('article/all/:page',
+                'allArticles', new Zend_Controller_Router_Route('article/all/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
@@ -248,11 +257,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         
         $router->addRoute(
-                'alladminarticles', new Zend_Controller_Router_Route('admin/articles/:page',
+                'allAdminArticles', new Zend_Controller_Router_Route('admin/articles/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'admin',
                             'action' => 'articles',
+                            'page' => 1)
+        ));
+        
+        $router->addRoute(
+                'allAdminUsers', new Zend_Controller_Router_Route('admin/users/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'admin',
+                            'action' => 'users',
                             'page' => 1)
         ));
 

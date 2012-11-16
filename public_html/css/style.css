@@ -138,19 +138,21 @@ body iframe{
             	}
                         #left_sidebar .sidebar_box .sidebar_box_title{
                             background:url("../img/vert_sprite.png") repeat-x #0D0C0C;
-                            border-radius: 5px 5px 0 0;
+                            border-radius:5px 5px 0 0;
                             color:#DCDCDC;
                             font-size:12px;
                             font-weight:bold;
                             padding:10px 6px;
                             line-height:12px;
+                            box-shadow:0 8px 9px 5px #6D6D6D inset;
+                            text-shadow:3px -2px 4px #000;
                         }
                             #left_sidebar .sidebar_box .sidebar_box_title a{
                                 color:#DCDCDC;
                             }
             		#left_sidebar .sidebar_box .sidebar_box_content{
                             padding:5px 10px;
-                            border:1px solid #CACACA;
+                            border:2px solid #CACACA;
                             border-top:none;
                             background:none repeat scroll 0 0 #FBFBFB;
                             border-radius:0 0 7px 7px;
@@ -587,4 +589,7 @@ div.shareblock{
     overflow:hidden;
     word-wrap:break-word;
 }
-
+/* articles */
+#articles_block{
+    margin:10px 0 20px 0;
+}

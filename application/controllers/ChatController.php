@@ -48,17 +48,14 @@ class ChatController extends Zend_Controller_Action {
                         if ($message->id > $last_message_id) {
                             $last_message_id = $message->id;
                         }
-                        // get user login
-                        $mapper = new Application_Model_UserMapper();
-                        $user_login = $mapper->getUserLoginById($message->user_id);
 
                         //construct message html code
-                        $messages_html .= '<div class="chat_message_box '.$order.'">';
+                        $messages_html .= '<div class="chat_message_box ' . $order . '">';
                         ($order == 'even') ? $order = 'odd' : $order = 'even';
                         $messages_html .= '<div class="chat_mesage_date">' . $message->date . '</div>';
                         $messages_html .= '<div class="chat_mesage_nickname">';
                         $messages_html .= '<a href="' . 'user/info/' . $message->user_id . '" target="_BLINK"><i class="icon-user icon-black"></i></a>';
-                        $messages_html .= '<a href="javascript:void(' . "'Apply to'" . ')" class="nick" onClick="$(' . "'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()" . '">' . $user_login->login . '</a>';
+                        $messages_html .= '<a href="javascript:void(' . "'Apply to'" . ')" class="nick" onClick="$(' . "'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()" . '">' . $message->login . '</a>';
                         $messages_html .= '</div>';
                         $messages_html .= '<div class="chat_mesage_message">' . $bbcode->render($message->message) . '</div>';
                         $messages_html .= '</div>';

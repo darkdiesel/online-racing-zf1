@@ -39,6 +39,10 @@ class Application_Model_ArticleMapper {
         return $entries;
     }
 
+    /*
+     * Uses for controller: article; action: add
+     */
+
     public function save(Application_Model_Article $article, $action) {
         switch ($action) {
             case 'add':
@@ -59,17 +63,15 @@ class Application_Model_ArticleMapper {
                 break;
             case 'edit':
                 $data = array(
+                    'id' => $article->getId(),
                     'title' => $article->getTitle(),
                     'text' => $article->getText(),
                     'image' => $article->getimage(),
+                    'publish' => $article->getPublish(),
                     'date_edit' => date('Y-m-d H:i:s')
                 );
+                print_r($data);
                 break;
-            /*case 'inc_views':
-                $data = array(
-                    'views' => $article->getViews()
-                );
-                break;*/
             default:
                 $data = array(
                 );
@@ -84,16 +86,39 @@ class Application_Model_ArticleMapper {
         }
     }
 
+    /*
+     * Uses for controller: article, admin; action: view, articles
+     */
+
     public function getArticlesPager($count, $page, $page_range, $article_type, $action) {
         switch ($action) {
             case 'news':
-                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1 and article_type_id=' . $article_type)->order('id DESC'));
+                $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
+                                        ->select()
+                                        ->from('article')
+                                        //->join('user', 'user.id = article.user_id')
+                                        ->where('publish=1 and article_type_id=' . $article_type)
+                                        ->order('id DESC'));
                 break;
             case 'all':
-                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->where('publish=1')->order('id DESC'));
+                $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
+                                        ->select()
+                                        ->setIntegrityCheck(false)
+                                        ->from(array('a' => 'article'), 'id')
+                                        ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
+                                        ->columns(array('id', 'user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit'))
+                                        ->where('publish=1')
+                                        ->order('id DESC'));
                 break;
             case 'admin_all':
-                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('article')->order('id DESC'));
+                $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
+                                        ->select()
+                                        ->setIntegrityCheck(false)
+                                        ->from(array('a' => 'article'), 'id')
+                                        ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
+                                        ->join(array('at' => 'article_type'), 'a.article_type_id = at.id', 'name')
+                                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id'))
+                                        ->order('id DESC'));
                 break;
             default:
 
@@ -112,39 +137,71 @@ class Application_Model_ArticleMapper {
      * Uses for controller: article; action: view
      */
 
-    public function getArticleDataById($id) {
-        $result = $this->getDbTable()->fetchRow('id = "' . $id . '"');
+    public function getArticleDataById($id, $action) {
+        switch ($action) {
+            case 'view':
+                $select = $this->getDbTable()
+                        ->select()
+                        ->setIntegrityCheck(false)
+                        ->from(array('a' => 'article'), 'id')
+                        ->where('a.id = ? and a.publish = 1', $id)
+                        ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
+                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
+                break;
+            case 'edit':
+                $select = $this->getDbTable()
+                        ->select()
+                        ->setIntegrityCheck(false)
+                        ->from(array('a' => 'article'), 'id')
+                        ->where('a.id = ?', $id)
+                        ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
+                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
+            default:
+
+                break;
+        }
+
+        $result = $this->getDbTable()
+                ->fetchRow($select);
+
         if (0 == count($result)) {
             return 'null';
         }
-        
-        $entry = new Application_Model_Article();
-        
-        //update counts of views
-        if ($result->last_ip != $_SERVER['REMOTE_ADDR']) {
-            $data = array(
-                'views' => ($result->views + 1),
-                'last_ip' => $_SERVER['REMOTE_ADDR']
-            );
-            $this->getDbTable()->update($data, array('id = ?' => $result->id));
-            $entry->setViews($data['views']);
-        } else {
-            $entry->setViews($result->views);
+
+        switch ($action) {
+            case 'view':
+                //update counts of views
+                if ($result->last_ip != $_SERVER['REMOTE_ADDR']) {
+                    $entry = new Application_Model_Article();
+                    $data = array(
+                        'views' => ($result->views + 1),
+                        'last_ip' => $_SERVER['REMOTE_ADDR']
+                    );
+                    $this->getDbTable()->update($data, array('id = ?' => $result->id));
+                    $result->views = $data['views'];
+                }
+                break;
+            default:
+
+                break;
         }
 
-        $entry->setId($result->id);
-        $entry->setUser_id($result->user_id);
-        $entry->setArticle_Type_id($result->article_type_id);
-        $entry->setContent_Type_id($result->content_type_id);
-        $entry->setTitle($result->title);
-        $entry->setText($result->text);
-        $entry->setImage($result->image);
-        $entry->setdate($result->date);
-        $entry->setDate_edit($result->date_edit);
-        $entry->setPublish($result->publish);
-        //$entry->setLast_ip($result->last_ip);
+        return $result;
+    }
 
-        return $entry;
+    public function getLastArticlesData($count) {
+        $select = $this->getDbTable()
+                ->select()
+                ->setIntegrityCheck(false)
+                ->from(array('a' => 'article'), 'id')
+                ->where('a.publish = 1')
+                ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
+                ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
+
+        $result = $this->getDbTable()
+                ->fetchAll($select);
+
+        return $result;
     }
 
 }

@@ -16,10 +16,20 @@
                         <img class="img-polaroid article_image" src="<?php echo $this->escape($item['image']); ?>">
                     <?php } ?>
                     <div class="article_text"><?php echo $this->truncate($bbcode->render($filter->filter($item['text'])))->toLength(1000); ?></div>
-                    <a href = "<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...');
-                    ?></a>
+                    <div class="article_controls">
+                        <?php
+                        if (Zend_Auth::getInstance()->hasIdentity()) {
+                            if (Zend_Auth::getInstance()->getStorage('online-racing')->read()->id == $item['user_id']) {
+                                ?>
+                                <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                                <?php
+                            }
+                        }
+                        ?>
+                        <a href = "<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
+                    </div>
                     <div class="article_info">
-                        <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($item['user_id'])) ?>"><?php echo $item['user_id']; ?></a></div>
+                        <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($item['user_id'])) ?>"><?php echo $item['login']; ?></a></div>
                         <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($item['views']); ?></div>
                         <div class="article_date article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($item['date']); ?></div>
                         <?php if ($item['date'] != $item['date_edit']) { ?>

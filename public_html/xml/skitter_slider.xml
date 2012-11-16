@@ -6,13 +6,13 @@
 		<label><![CDATA[<p>Идет активная разработка сайта. Нам нужна ваша помощь!</p>]]></label>
 	</slide>
 	<slide>
-		<link>#</link>
+		<link>/user/register</link>
 		<image type="cubeSize">../img/slider/post/oursite.jpg</image>
 		<label><![CDATA[<p>Хотите получить море адреналина? <a href="/user/register">Присоеденяйтесь!</a></p>]]></label>
 	</slide>
         <slide>
-		<link>#</link>
+		<link>/chat</link>
 		<image type="cubeSize">../img/slider/post/chat.jpg</image>
-		<label><![CDATA[<p>На сайт добавлен чат. <a href="http://online-racing.net/chat">Общайтесь!</a></p>]]></label>
+		<label><![CDATA[<p>На сайт добавлен чат. <a href="/chat">Общайтесь!</a></p>]]></label>
 	</slide>
 </skitter>

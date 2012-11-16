@@ -398,7 +398,7 @@ class UserController extends Zend_Controller_Action {
         
         $mapper = new Application_Model_UserMapper();
                 
-        $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5);
+        $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5, 'all');
     }
 
 }

@@ -29,6 +29,7 @@
         <formFile formName="UserChatForm"/>
         <formFile formName="UserEditForm"/>
         <formFile formName="UserSettingsForm"/>
+        <formFile formName="ArticleEditForm"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -36,11 +37,17 @@
           <dbTableFile dbTableName="Guestbook"/>
           <dbTableFile dbTableName="UserChat"/>
           <dbTableFile dbTableName="Article"/>
+          <dbTableFile dbTableName="ArticleType"/>
+          <dbTableFile dbTableName="ContentType"/>
         </dbTableDirectory>
         <modelFile modelName="UserChat"/>
         <modelFile modelName="UserChatMapper"/>
         <modelFile modelName="Article"/>
         <modelFile modelName="ArticleMapper"/>
+        <modelFile modelName="ArticleType"/>
+        <modelFile modelName="ArticleTypeMapper"/>
+        <modelFile modelName="ContentTypeMapper"/>
+        <modelFile modelName="ContentType"/>
       </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="UserChatForm">

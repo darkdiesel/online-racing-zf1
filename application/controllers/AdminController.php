@@ -23,7 +23,12 @@ class AdminController extends Zend_Controller_Action
     
     public function usersAction()
     {
-
+        $this->view->headTitle($this->view->translate('Пользователи'));
+        
+        $request = $this->getRequest();
+        $mapper = new Application_Model_UserMapper();
+        
+        $this->view->paginator = $mapper->getUsersPager(10, $request->getParam('page'), 5, 'admin_all');
     }
 
 }

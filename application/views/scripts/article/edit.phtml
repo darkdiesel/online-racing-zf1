@@ -1,4 +1,16 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Article</b> and script/action name <b>edit</b></p>
+<div id="article_edit_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Редактировать').' > '.$this->form->title->getvalue(); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        if ($this->errMessage != "") {
+            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+        }
+        ?>
+        <?php echo $this->form; ?>
+        <?php
+            $this->ckeditor = 'ckeditor';
+            echo $this->setupEditor('text');
+        ?>
+    </div>
 </div>
