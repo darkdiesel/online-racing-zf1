@@ -5,32 +5,33 @@
 </div>
 <div class="page_title"><?php echo $this->translate('Последнее добавления') ?>:</div>
 <div class="div_hr"></div>
-<div id="articles_block" class=''>
+<div id="articles_block">
     <?php
     $artiles = new Application_Model_ArticleMapper();
     $artiles_data = $artiles->getLastArticlesData(10);
+    
+    $filter = new Zend_Filter();
+    $filter->addFilter(new Zend_Filter_StripTags())
+            ->addFilter(new Zend_Filter_StringTrim());
+    
+    $bbcode = Zend_Markup::factory('Bbcode');
     ?>
-    <ul id="articles_block_carousel" class="jcarousel-skin-tango">
-        <?php foreach ($artiles_data as $article) { ?>
-            <li class='img-polaroid'>
-                <div class="article_image">
-                    <?php if (!$article->image == "") { ?>
-                        <image src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
-                    <?php } else { ?>
-                        <div class='no_image' width="150px" height="100px"><?php echo $this->translate('Изображение отсутствует') ?></div>
-                    <?php } ?>
-                </div>
-                <div class="article_title"><a href="<?php echo $this->baseUrl('article/view/' . $article->id) ?>"><?php echo $this->truncate($article->title)->toLength(100); ?></a></div>
-            </li>
-        <?php } ?>
-    </ul>    
+    <?php foreach ($artiles_data as $article) { ?>
+        <h6><a href="#"><?php echo $this->truncate($article->title)->toLength(100); ?></a></h6>
+        <div>
+            <div class="article_image">
+                <?php if (!$article->image == "") { ?>
+                    <image src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
+                <?php } else { ?>
+                    <div class='no_image' width="150px" height="100px"><?php echo $this->translate('Изображение отсутствует') ?></div>
+                <?php } ?>
+            </div>
+            <div><?php echo $this->truncate($bbcode->render($filter->filter($article->text)))->toLength(1000); ?></div></div>
+    <?php } ?>
 </div>
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        jQuery('#articles_block_carousel').jcarousel({
-            vertical:false
-            
-        });
+    jQuery(document).ready(function(){
+        $("#articles_block").accordion({ header: "h6" });
     });
 </script>
 <div class="page_title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
