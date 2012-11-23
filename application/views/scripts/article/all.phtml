@@ -5,17 +5,16 @@
         <?php
         if (count($this->paginator)) {
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
-            $filter = new Zend_Filter_StripTags();
             $bbcode = Zend_Markup::factory('Bbcode');
             ?>
 
             <?php foreach ($this->paginator as $item): ?>
                 <div class="article_item">
-                    <div class="article_title"><a href="<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>"><?php echo $this->escape($item['title']); ?></a></div>
+                    <div class="article_title"><a href="<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>"><?php echo $this->escape($item['title']); ?></a></div>
                     <?php if ($this->escape($item['image']) != '') { ?>
                         <img class="img-polaroid article_image" src="<?php echo $this->escape($item['image']); ?>">
                     <?php } ?>
-                    <div class="article_text"><?php echo $this->truncate($bbcode->render($filter->filter($item['text'])))->toLength(1000); ?></div>
+                    <div class="article_text"><?php echo $this->truncate($bbcode->render($this->escape($item['text'])))->toLength(1000); ?></div>
                     <div class="article_controls">
                         <?php
                         if (Zend_Auth::getInstance()->hasIdentity()) {
@@ -26,7 +25,7 @@
                             }
                         }
                         ?>
-                        <a href = "<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
+                        <a href = "<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="article_info">
                         <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($item['user_id'])) ?>"><?php echo $item['login']; ?></a></div>

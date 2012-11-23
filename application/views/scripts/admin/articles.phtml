@@ -30,7 +30,7 @@
                                 <td class="article_action"><span>
                                         <a href="<?php echo $this->baseUrl('article/edit/' . $this->escape($item['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
                                         <a href="<?php echo $this->baseUrl('article/delete/' . $this->escape($item['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
-                                        <a href="<?php echo $this->baseUrl('article/view/' . $this->escape($item['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a>
+                                        <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a>
                                     </span></td>
                             </tr>
                         <?php endforeach; ?>

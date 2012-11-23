@@ -65,7 +65,7 @@ class ArticleController extends Zend_Controller_Action {
                 $mapper = new Application_Model_ArticleMapper();
                 $mapper->save($article, 'edit');
 
-                $this->redirect($this->view->baseUrl('article/view/'.$article_id));
+                $this->redirect($this->view->baseUrl('article/id/'.$article_id));
             }
         }
 
@@ -95,7 +95,7 @@ class ArticleController extends Zend_Controller_Action {
         }
     }
 
-    public function viewAction() {
+    public function idAction() {
         $request = $this->getRequest();
         $article_id = $request->getParam('id');
 

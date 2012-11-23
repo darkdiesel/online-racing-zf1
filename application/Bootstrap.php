@@ -239,11 +239,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         
         $router->addRoute(
-                'articleEdit', new Zend_Controller_Router_Route('article/view/:id',
+                'articleEdit', new Zend_Controller_Router_Route('article/id/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
-                            'action' => 'view',
+                            'action' => 'id',
                             'id' => 0)
         ));
         
