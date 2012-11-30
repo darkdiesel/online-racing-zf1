@@ -8,7 +8,7 @@ class ArticleController extends Zend_Controller_Action {
 
     public function addAction() {
         // page title
-        $this->view->headTitle($this->view->translate('Добавление контента'));
+        $this->view->headTitle($this->view->translate('Добавить контент'));
         $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
@@ -41,7 +41,6 @@ class ArticleController extends Zend_Controller_Action {
     }
 
     public function editAction() {
-//        /$this->view->headTitle($this->view->translate('Редактировать'));
         $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
@@ -69,7 +68,7 @@ class ArticleController extends Zend_Controller_Action {
             }
         }
 
-        if ($request->getParam('id') == 0) {
+        if ($article_id == 0) {
             $this->view->errMessage = $this->view->translate('Статья не существует');
             $this->view->headTitle($this->view->translate('Статья не существует'));
             return;
@@ -83,7 +82,6 @@ class ArticleController extends Zend_Controller_Action {
             $this->view->headTitle($this->view->translate('Статья не существует'));
             return;
         } else {
-            //$this->view->article = $article_data;
             $this->view->headTitle($this->view->translate('Редактировать') . ' ' . $article_data->title);
 
             $form->title->setvalue($article_data->title);

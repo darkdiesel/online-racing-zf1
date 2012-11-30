@@ -34,4 +34,62 @@ class Application_Model_ArticleTypeMapper {
         return $entries;
     }
 
+    public function save(Application_Model_ArticleType $article_type, $action) {
+        switch ($action) {
+            case 'add':
+                $data = array(
+                    'name' => $article_type->getName(),
+                    'description' => $article_type->getDescription()
+                );
+                break;
+            case 'edit':
+                $data = array(
+                    'id' => $article_type->getId(),
+                    'name' => $article_type->getName(),
+                    'description' => $article_type->getDescription()
+                );
+                break;
+            default:
+                $data = array();
+                break;
+        }
+
+        if (null === ($id = $article_type->getId())) {
+            unset($data['id']);
+            $this->getDbTable()->insert($data);
+        } else {
+            $this->getDbTable()->update($data, array('id = ?' => $id));
+        }
+    }
+
+    public function getArticleTypeDataById($id, $action) {
+        switch ($action) {
+            case 'view':
+                $select = $this->getDbTable()
+                        ->select()
+                        ->from(array('a_t' => 'article_type'), 'id')
+                        ->where('a_t.id = ?', $id)
+                        ->columns(array('id', 'name', 'description'));
+                break;
+            case 'edit':
+                $select = $this->getDbTable()
+                        ->select()
+                        ->from(array('a_t' => 'article_type'), 'id')
+                        ->where('a_t.id = ?', $id)
+                        ->columns(array('id', 'name', 'description'));
+            default:
+
+                break;
+        }
+
+        $result = $this->getDbTable()
+                ->fetchRow($select);
+
+        if (0 == count($result)) {
+            return 'null';
+        }
+
+        return $result;
+    }
+
 }

@@ -1,5 +1,11 @@
-<div id="article_add_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Добавить контент'); ?></div>
+<div id="article_type_edit_page" class="page">
+    <div class="page_title">
+        <?php
+        if (!$this->errMessage != "") {
+            echo $this->translate('Редактировать') . ' > ' . $this->form->name->getvalue();
+        }
+        ?>
+    </div>
     <div class="div_hr"></div>
     <div class="page_content">
         <?php
@@ -8,9 +14,5 @@
         }
         ?>
         <?php echo $this->form; ?>
-        <?php
-            $this->ckeditor = 'ckeditor';
-            echo $this->setupBBCodeEditor('text');
-        ?>
     </div>
 </div>

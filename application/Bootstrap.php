@@ -121,7 +121,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
 
         /* [JQUERY JS] */
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.2.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.3.min.js"));
         /* [JQUERY UI JS] */
         $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.9.1.custom.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
@@ -272,6 +272,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'controller' => 'admin',
                             'action' => 'users',
                             'page' => 1)
+        ));
+        
+        $router->addRoute(
+                'articleTypeEdit', new Zend_Controller_Router_Route('articletype/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'articletype',
+                            'action' => 'edit',
+                            'id' => 1)
         ));
 
         /*

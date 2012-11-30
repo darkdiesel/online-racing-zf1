@@ -68,7 +68,7 @@ class Acl extends Zend_Acl {
                     $mapper = new Application_Model_UserMapper();
                     $role_id = $mapper->getUserRole($storage_data->id);
                     // get role name from role table
-                    $mapper = new Application_Model_RoleMapper();
+                    $mapper = new Application_Model_UserRoleMapper();
                     $role = $mapper->getRoleName($role_id);
                 } else {
                     $role = 'guest';

@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Role {
+class Application_Model_UserRole {
 
     protected $_id;
     protected $_name;

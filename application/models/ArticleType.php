@@ -4,6 +4,7 @@ class Application_Model_ArticleType {
 
     protected $_id;
     protected $_name;
+    protected $_description;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -54,6 +55,15 @@ class Application_Model_ArticleType {
 
     public function getName() {
         return $this->_name;
+    }
+    
+    public function setDescription($description) {
+        $this->_description = (string) $description;
+        return $this;
+    }
+
+    public function getDescription() {
+        return $this->_description;
     }
 
 }

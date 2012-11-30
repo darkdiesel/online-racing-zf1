@@ -8,7 +8,7 @@
 <div id="articles_block">
     <?php
     $artiles = new Application_Model_ArticleMapper();
-    $artiles_data = $artiles->getLastArticlesData(10);
+    $artiles_data = $artiles->getLastArticlesData(10, 'DESC');
     
     $filter = new Zend_Filter();
     $filter->addFilter(new Zend_Filter_StripTags())
@@ -19,14 +19,13 @@
     <?php foreach ($artiles_data as $article) { ?>
         <h6><a href="#"><?php echo $this->truncate($article->title)->toLength(100); ?></a></h6>
         <div>
-            <div class="article_image">
+            <p class="article_text">
                 <?php if (!$article->image == "") { ?>
-                    <image src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
-                <?php } else { ?>
-                    <div class='no_image' width="150px" height="100px"><?php echo $this->translate('Изображение отсутствует') ?></div>
+                    <img class ="article_image" src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
                 <?php } ?>
-            </div>
-            <div><?php echo $this->truncate($bbcode->render($filter->filter($article->text)))->toLength(1000); ?></div></div>
+                <?php echo $this->truncate($bbcode->render($filter->filter($article->text)))->toLength(1000); ?></p>
+            <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_more"><?php echo $this->translate("Подробнее...") ?></a>
+        </div>
     <?php } ?>
 </div>
 <script type="text/javascript">

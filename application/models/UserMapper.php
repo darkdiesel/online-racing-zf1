@@ -73,7 +73,7 @@ class Application_Model_UserMapper {
 
     public function getUserRole($id) {
         $result = $this->getDbTable()->fetchRow(array('id = ?' => $id));
-        return $result->role_id;
+        return $result->user_role_id;
     }
 
     /*
@@ -164,7 +164,7 @@ class Application_Model_UserMapper {
                     'password' => sha1($user->getPassword()),
                     'activate' => $user->getActivate(),
                     'enabled' => "1",
-                    'role_id' => "3",
+                    'user_role_id' => "3",
                     'created' => date('Y-m-d H:i:s')
                 );
                 break;
@@ -185,7 +185,7 @@ class Application_Model_UserMapper {
     public function getUsersPager($count, $page, $page_range, $action) {
         switch ($action) {
             case 'all':
-                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('user')->where('role_id != 1')->order('id ASC'));
+                $adapter = new Zend_Paginator_Adapter_DbSelect($this->getDbTable()->select()->from('user')->where('user_role_id != 1')->order('id ASC'));
 
                 break;
             case 'admin_all':
@@ -193,7 +193,7 @@ class Application_Model_UserMapper {
                                         ->select()
                                         ->setIntegrityCheck(false)
                                         ->from(array('u' => 'user'), 'id')
-                                        ->join(array('r' => 'role'), 'u.role_id = r.id', 'name')
+                                        ->join(array('r' => 'user_role'), 'u.user_role_id = r.id', 'name')
                                         ->columns(array('login', 'activate', 'enabled', 'last_login'))
                                         ->order('id ASC'));
                 break;

@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_RoleMapper {
+class Application_Model_UserRoleMapper {
 
     protected $_dbTable;
 
@@ -17,7 +17,7 @@ class Application_Model_RoleMapper {
 
     public function getDbTable() {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Role');
+            $this->setDbTable('Application_Model_DbTable_UserRole');
         }
         return $this->_dbTable;
     }
@@ -26,7 +26,7 @@ class Application_Model_RoleMapper {
         $resultSet = $this->getDbTable()->fetchAll();
         $entries = array();
         foreach ($resultSet as $row) {
-            $entry = new Application_Model_Role();
+            $entry = new Application_Model_UserRole();
             $entry->setId($row->id)
                     ->setName($row->name);
             $entries[] = $entry;

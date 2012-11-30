@@ -70,7 +70,6 @@ class Application_Model_ArticleMapper {
                     'publish' => $article->getPublish(),
                     'date_edit' => date('Y-m-d H:i:s')
                 );
-                print_r($data);
                 break;
             default:
                 $data = array(
@@ -189,14 +188,15 @@ class Application_Model_ArticleMapper {
         return $result;
     }
 
-    public function getLastArticlesData($count) {
+    public function getLastArticlesData($count, $order) {
         $select = $this->getDbTable()
                 ->select()
                 ->setIntegrityCheck(false)
                 ->from(array('a' => 'article'), 'id')
                 ->where('a.publish = 1')
                 ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
-                ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
+                ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'))
+                ->order('id ' . $order);
 
         $result = $this->getDbTable()
                 ->fetchAll($select);

@@ -8,7 +8,7 @@ class Application_Model_User {
     protected $_last_login;
     protected $_activate;
     protected $_enabled;
-    protected $_role_id;
+    protected $_user_role_id;
     protected $_email;
     protected $_name;
     protected $_surname;
@@ -114,13 +114,13 @@ class Application_Model_User {
         return $this->_enabled;
     }
 
-    public function setRole_id($role_id) {
-        $this->_role_id = (int) $role_id;
+    public function setUser_Role_id($user_role_id) {
+        $this->_user_role_id = (int) $user_role_id;
         return $this;
     }
 
-    public function getRole_id() {
-        return $this->_role_id;
+    public function getUser_Role_id() {
+        return $this->_user_role_id;
     }
 
     public function setEmail($email) {

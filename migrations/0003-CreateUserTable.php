@@ -37,7 +37,7 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
                   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
                     ALTER TABLE `user`
-                        ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+                        ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`),
                         ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`flag_id`) REFERENCES `flag` (`id`);
 			";
         $this->_db->query($sql);

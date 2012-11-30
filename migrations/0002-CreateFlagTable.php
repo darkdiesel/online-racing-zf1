@@ -18,7 +18,7 @@ class CreateFlagTable extends Akrabat_Db_Schema_AbstractChange
 
     function down()
     {
-        $sql = "DROP TABLE IF EXISTS `role`;";
+        $sql = "DROP TABLE IF EXISTS `flag`;";
         $this->_db->query($sql);
     }
 }

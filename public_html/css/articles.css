@@ -109,6 +109,13 @@
             font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
             padding:10px 20px;
         }
+            #article_page .article_item .article_text img{
+                border:1px solid #D2D2D2;
+                border-radius:2px;
+                padding:4px;
+                background:#ffffff;
+                box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+            }
         #article_page .article_item .article_controls{
             float:right;
             clear:both;
@@ -168,3 +175,7 @@
         #article_edit_page #articleEdit #image{
             width:380px;
         }
+/* article type add page */
+#article_type_add_page{
+    
+}

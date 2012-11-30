@@ -8,6 +8,7 @@ class Application_Model_Mod {
     protected $_developer;
     protected $_year;
     protected $_description;
+    protected $_article_id;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -87,13 +88,22 @@ class Application_Model_Mod {
         return $this->_year;
     }
 
-    public function setDescription($descrpt) {
-        $this->_description = (string) $descrpt;
+    public function setDescription($description) {
+        $this->_description = (string) $description;
         return $this;
     }
 
     public function getDescription() {
         return $this->_description;
+    }
+
+    public function setArticle_Id($id) {
+        $this->_article_id = (int) $id;
+        return $this;
+    }
+
+    public function getArticle_Id() {
+        return $this->_article_id;
     }
 
 }

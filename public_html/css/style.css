@@ -15,7 +15,6 @@ body iframe{
     width:1024px;
     margin:0 auto;
     padding:0;
-    background:url("../img/main_hor_sprite.png") repeat-y center;
     box-shadow:0 20px 50px #000000;
 }
     #page{
@@ -25,7 +24,7 @@ body iframe{
             border-bottom:2px solid #8C8C8C;
             width:1024px;
             height:210px;
-            background:url("../img/vert_sprite.png") repeat-x 0 0;
+            background:url("../img/lines_bg.png");
             position:relative;
         }
             #logo_box{
@@ -110,6 +109,7 @@ body iframe{
                         }
         #main_wrapper{
             position:relative;
+            background:#F0F0F0;
         }
 		#main{
 			width:1024px;
@@ -275,7 +275,7 @@ body iframe{
             width:994px;
             position:absolute;
             bottom:0;
-            background:url("../img/vert_sprite.png") repeat-x 0 0;
+            background:url("../img/lines_bg.png");
             margin:0 auto;
             display:inline;
             clear:both;
@@ -335,6 +335,12 @@ body iframe{
                     right:0px;
                     display:inline-block;
                 }
+                    #footer .footer_bootom .web_counters img{
+                        opacity:0.4;
+                    }
+                    #footer .footer_bootom .web_counters img:hover{
+                        opacity:1;
+                    }
                     #footer .footer_bootom .web_counters .liveinternet{
                         display:inline-block;
                         margin:0 5px;
@@ -561,6 +567,36 @@ div.shareblock{
             div.shareblock #shareblock a:hover{
                 opacity:1;
             }
+/* Last news block */
+#articles_block{
+    
+}
+    #articles_block .article_image{
+        float:left;
+        margin-right:10px;
+    }
+    #articles_block .article_text{
+
+    }
+        #articles_block .article_text img{
+            border:1px solid #D2D2D2;
+            border-radius:2px;
+            padding:4px;
+            background:#ffffff;
+            box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        #articles_block .article_more_box{
+            overflow:auto;
+            margin-top:10px;
+        }
+        #articles_block .article_more{
+            color:#fff;
+            
+            float:right;
+        }
+            #articles_block .article_more:hover{
+                text-decoration:none;
+            }
 /* RSS Block */
 #rss_block{
     width:100%;
@@ -574,11 +610,17 @@ div.shareblock{
     #rss_block img{
         float:left;
         margin-right:10px;
+        border:1px solid #D2D2D2;
+        border-radius:2px;
+        padding:4px;
+        background:#ffffff;
+        box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
     }
     #rss_block .rss_more{
         color:#FFFFFF;
         font-size:12px;
-        margin-top:5px;
+        margin-top:10px;
+        float:right;
     }
         #rss_block .rss_more:hover{
             text-decoration:none;
@@ -588,6 +630,14 @@ div.shareblock{
 .break_word_wrap{
     overflow:hidden;
     word-wrap:break-word;
+}
+.no_image{
+    border:1px solid #D2D2D2;
+    border-radius:2px;
+    padding:10px 5px;
+    background:#ffffff;
+    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+    color:#B5ADAD;
 }
 /* articles */
 #articles_block{

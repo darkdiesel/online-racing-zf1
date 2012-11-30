@@ -5,6 +5,7 @@ class Application_Model_Game {
     protected $_id;
     protected $_name;
     protected $_description;
+    protected $_article_id;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -64,6 +65,15 @@ class Application_Model_Game {
 
     public function getDescription() {
         return $this->_description;
+    }
+
+    public function setArticle_Id($id) {
+        $this->_article_id = (int) $id;
+        return $this;
+    }
+
+    public function getArticle_Id() {
+        return $this->_article_id;
     }
 
 }
