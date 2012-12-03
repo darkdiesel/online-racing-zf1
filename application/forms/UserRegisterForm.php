@@ -9,10 +9,6 @@ class Application_Form_UserRegisterForm extends Zend_Form {
     }
 
     public function init() {
-        // loading validators
-        Zend_Loader::loadClass('App_Validate_EqualInputs');
-        Zend_Loader::loadClass('App_Validate_NoDbRecordExists');
-
         // Set the method for the display form to POST
         $this->setMethod('post');
         $this->setAction('/user/register');
@@ -22,12 +18,13 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         $this->addElement('text', 'login', array(
             'label' => $this->translate('Логин'),
             'placeholder' => $this->translate('Логин'),
+            'title' => $this->translate('Длина поля должна быть от 5 до 20 символов, содержать только латинские буквы, цифпы и символы -_.'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
-                array('regex', false, '/^[a-zA-Z0-9_-]{3,20}$/'),
-                array('StringLength', true, array('min' => 3, 'max' => 20)),
+                array('regex', false, '/^[a-zA-Z0-9_-]{5,20}$/'),
+                array('StringLength', true, array('min' => 5, 'max' => 20)),
                 new App_Validate_NoDbRecordExists('user', 'login')
             ),
             'decorators' => array(
@@ -41,8 +38,9 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         $this->addElement('text', 'email', array(
             'label' => 'E-mail',
             'placeholder' => 'E-mail',
+            'title' => $this->translate('Поле должно содержать правильный адрес вашего электронного почтового ящика. Пример: example@mail.com.'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -60,8 +58,9 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         $this->addElement('password', 'password', array(
             'label' => $this->translate('Пароль'),
             'placeholder' => $this->translate('Пароль'),
+            'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6, 'max' => 25))
@@ -77,8 +76,9 @@ class Application_Form_UserRegisterForm extends Zend_Form {
         $this->addElement('password', 'confirmpassword', array(
             'label' => $this->translate('Подтвердите пароль'),
             'placeholder' => $this->translate('Подтвердите пароль'),
+            'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
             'AllowEmpty' => false,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 new App_Validate_EqualInputs('password')

@@ -11,7 +11,7 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
                     `last_login` datetime NOT NULL,
                     `activate` varchar(15) NOT NULL,
                     `enabled` int(1) NOT NULL,
-                    `role_id` int(11) NOT NULL,
+                    `user_role_id` int(11) NOT NULL,
                     `email` varchar(100) NOT NULL,
                     `name` varchar(250) NOT NULL,
                     `surname` varchar(250) NOT NULL,
@@ -32,12 +32,12 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
                     `created` datetime NOT NULL,
                     `about` varchar(500) NOT NULL,
                     PRIMARY KEY (`id`),
-                    KEY `role_id` (`role_id`),
+                    KEY `user_role_id` (`user_role_id`),
                     KEY `flag_id` (`flag_id`)
                   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
                     ALTER TABLE `user`
-                        ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`),
+                        ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_role_id`) REFERENCES `user_role` (`id`),
                         ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`flag_id`) REFERENCES `flag` (`id`);
 			";
         $this->_db->query($sql);

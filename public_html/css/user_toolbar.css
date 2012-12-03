@@ -47,11 +47,11 @@
             }
                 #user_toolbar .dropdown-menu{
                     box-shadow:0 0 30px #4D95EB;
-                    z-index:99999;
+                    z-index:999;
                 }
                 #user_toolbar .login .dropdown-menu{
                     padding:5px 15px;
-                    z-index:99999;
+                    z-index:999;
                 }
                 #user_toolbar .login .dropdown-menu li{
                     display:block;

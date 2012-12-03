@@ -112,5 +112,9 @@ $(document).ready(function(){
                 });
         });
     });
+    
+    $(function(){
+        $('.tooltip_field').tooltip();
+    });
 
 });

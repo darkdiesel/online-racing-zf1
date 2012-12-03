@@ -1,6 +1,6 @@
 <?php
 if ($this->errMessage != "") {
-    echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+    echo $this->errMessage = '<div class="alert alert-error">' . $this->errMessage . '</div>';
 } else {
     ?>
     <div id="user_info_page" class="page">
@@ -15,7 +15,6 @@ if ($this->errMessage != "") {
                 <div clas="break_word_wrap">EUR</div>
             </div>
         </div>
-
         <div class="user_info_data img-polaroid">
             <table class="table table-striped">
                 <tbody>
@@ -43,7 +42,6 @@ if ($this->errMessage != "") {
                         <td class="header_column"><?php echo $this->translate('Последний визит') ?>:</td>
                         <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->last_login), 'H:i d.m.Y') ?></div></td>
                     </tr>
-
                 </tbody>
             </table>
         </div>

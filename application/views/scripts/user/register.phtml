@@ -3,7 +3,7 @@
         $('#userRegister').validate({
             rules: {
                 'login': {
-                    minlength: 3,
+                    minlength: 5,
                     maxlength: 20,
                     required: true,
                     regex: '^[a-zA-Z0-9_-]{3,16}$'
@@ -81,10 +81,10 @@
     <div class="page_title"><?php echo $this->translate('Регистрация'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <p>Введите данные в форму ниже, чтобы зарегистрировать польвателя на сайте.</p>
+        <div  class='alert alert-info'><?php echo $this->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.');?></div>
         <?php
         if ($this->errMessage != "") {
-            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+            echo $this->errMessage = '<div class="alert alert-error">' . $this->errMessage . '</div>';
         }
         ?>
         <?php echo $this->form; ?>

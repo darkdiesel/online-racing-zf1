@@ -117,3 +117,33 @@ body{
     height:0;
     visibility:hidden;
 }
+
+/*Messages*/
+div.messages{
+    padding: 10px 20px 10px 40px;
+    border: 1px solid;
+    margin:10px 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:14px;
+    line-height:14px;
+    text-align:justify;
+}
+    div.errors{
+        border-color:#ED541D;
+        background:url("../img/error.png") no-repeat 10px 7px #FEF5F1;
+        color:#8C2E0B;
+    }
+label.error {
+    color:#BE3838;
+    font-family:serif;
+    font-size:14px;
+    line-height:14px;
+    list-style-type:none;
+}
+label.valid {
+    background: url("../img/valid.png") no-repeat scroll center center transparent;
+    display:inline-block;
+    height:24px;
+    text-indent:-9999px;
+    width:24px;
+}

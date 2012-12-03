@@ -73,6 +73,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->ls_chat_block = true; // chat block
         $view->ls_user_map_block = true; // user map block
         $view->ls_search_block = false; // search block
+        $view->ls_count_down2_block = true; //count down block
 
         /* [HEADER] */
         $view->hd_hot_lap_block = false; // hot lap block
@@ -141,6 +142,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // Script for count down block
         if ($view->ls_count_down_block) {
             $view->headScript()->appendFile($view->baseUrl("js/jquery.lwtCountdown.js"));
+        }
+        
+        if ($view->ls_count_down2_block) {
+            $view->headScript()->appendFile($view->baseUrl("js/jquery.countdown.min.js"));
         }
 
         // All Common scripts

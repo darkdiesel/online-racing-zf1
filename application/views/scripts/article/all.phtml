@@ -41,9 +41,8 @@
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
             ?>
             <?php
-        } else {
-            echo $this->translate('Контент не найден на сайте!');
-        }
-        ?>
+        } else { ?>
+            <div class='alert alert-error'> <?php echo $this->translate('Контент не найден на сайте!'); ?></div>
+        <?php } ?>
     </div>
 </div>

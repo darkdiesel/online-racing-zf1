@@ -27,7 +27,8 @@
             endforeach;
 
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
-        }
-        ?>
+        } else { ?>
+            <div class="alert alert-error"> <?php echo $this->translate('Пользователи на сайте не найдены!'); ?></div>
+        <?php } ?>
     </div>
 </div>

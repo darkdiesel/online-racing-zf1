@@ -9,7 +9,7 @@ class CreateUserRoleTable extends Akrabat_Db_Schema_AbstractChange
                     PRIMARY KEY (`id`)
                   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
                   
-                  INSERT INTO `role` (`id`, `name`) VALUES
+                  INSERT INTO `user_role` (`id`, `name`) VALUES
                     (1, 'master'),
                     (2, 'admin'),
                     (3, 'user'),

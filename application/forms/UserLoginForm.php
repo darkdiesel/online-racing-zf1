@@ -20,8 +20,10 @@ class Application_Form_UserLoginForm extends Zend_Form {
         $this->addElement('text', 'loginemail', array(
             'label' => 'E-mail:',
             'placeholder' => 'E-mail',
+            'title' => $this->translate('Поле должно содержать правильный адрес вашего электронного почтового ящика. Пример: example@mail.com.'),
+            'data-placement' => 'left',
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -38,8 +40,10 @@ class Application_Form_UserLoginForm extends Zend_Form {
         $this->addElement('password', 'loginpassword', array(
             'label' => $this->translate('Пароль'),
             'placeholder' => $this->translate('Пароль'),
+            'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
+            'data-placement' => 'left',
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6, 'max' => 25))
@@ -54,11 +58,14 @@ class Application_Form_UserLoginForm extends Zend_Form {
 
         $this->addElement('checkbox', 'remember', array(
             'label' => $this->translate('Запомнить меня'),
+            'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
+            'data-placeholder' => 'left',
+            'class' => 'tooltip_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
-                array('HtmlTag', array('tag' => 'span','class' => 'element_tag')),
+                array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
             )
         ));
 
