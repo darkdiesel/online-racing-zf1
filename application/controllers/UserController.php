@@ -1,9 +1,9 @@
 <?php
 
-class UserController extends Zend_Controller_Action {
+class UserController extends App_Controller_FirstBootController {
 
     public function init() {
-        /* Initialize action controller here */
+        parent::init();
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/user.css"));
     }
 
@@ -103,7 +103,7 @@ class UserController extends Zend_Controller_Action {
                 $user = new Application_Model_User($form->getValues());
 
                 $mapper = new Application_Model_UserMapper();
-                
+
                 Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
                 $user->activate = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
 
@@ -395,9 +395,9 @@ class UserController extends Zend_Controller_Action {
         $this->view->headTitle($this->view->translate('Гонщики'));
 
         $request = $this->getRequest();
-        
+
         $mapper = new Application_Model_UserMapper();
-                
+
         $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5, 'all');
     }
 

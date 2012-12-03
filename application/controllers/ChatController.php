@@ -1,13 +1,10 @@
 <?php
 
-class ChatController extends Zend_Controller_Action {
-
-    public function init() {
-        /* Initialize action controller here */
-    }
+class ChatController extends App_Controller_FirstBootController {
 
     public function indexAction() {
-        // action body
+        $this->view->headTitle($this->view->translate('Чат'));
+        
         $this->view->ls_chat_block = false;
     }
 

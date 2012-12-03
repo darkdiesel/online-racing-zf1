@@ -92,4 +92,23 @@ class Application_Model_ArticleTypeMapper {
         return $result;
     }
 
+    public function getArticleTypesPager($count, $page, $page_range, $action, $order) {
+        switch ($action) {
+            case 'all':
+                $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
+                                        ->select()
+                                        ->from(array('a_t' => 'article_type'), 'id')
+                                        ->columns(array('id', 'name', 'description'))
+                                        ->order('id ' . $order));
+                break;
+        }
+
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage($count);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange($page_range);
+
+        return $paginator;
+    }
+
 }

@@ -3,6 +3,8 @@
         <?php
         if (!$this->errMessage != "") {
             echo $this->escape($this->article->title);
+        } else {
+            echo $this->translate('Ошибка!!!');
         }
         ?>
     </div>

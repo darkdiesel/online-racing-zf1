@@ -1,4 +1,4 @@
-<div id="articles_page" class="page">
+<div id="admin_users_page" class="page">
     <div class="page_title"><?php echo $this->translate('Пользователи'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
@@ -10,26 +10,29 @@
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
-                            <td><span>#</span></td>
-                            <td><span><?php echo $this->translate('Логин'); ?></span></td>
-                            <td><span><?php echo $this->translate('Активация'); ?></span></td>
-                            <td><span><?php echo $this->translate('Статус'); ?></span></td>
-                            <td><span><?php echo $this->translate('Последний визит'); ?></span></td>
-                            <td class="article_action"><span><?php echo $this->translate('Действие'); ?></span></td>
+                            <td class="user_id"><span>#</span></td>
+                            <td class="user_login"><span><?php echo $this->translate('Логин'); ?></span></td>
+                            <td class="user_activation"><span><?php echo $this->translate('Активация'); ?></span></td>
+                            <td class="user_status"><span><?php echo $this->translate('Статус'); ?></span></td>
+                            <td class="user_last_activity"><span><?php echo $this->translate('Последний визит'); ?></span></td>
+                            <td class="user_action"><span><?php echo $this->translate('Действие'); ?></span></td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($this->paginator as $user): ?>
                             <tr>
-                                <td><span><a href="<?php echo $this->baseURL('user/info/'.$this->escape($user['id']))?>"><?php echo $this->escape($user['id']) ?></a></span></td>
-                                <td><span><a href="<?php echo $this->baseURL('user/info/'.$this->escape($user['id']))?>"><?php echo $this->escape($user['login']) ?></a></span></td>
-                                <td><span><?php echo $this->escape($user['activate']) ?></span></td>
-                                <td><span><?php echo ($this->escape($user['enabled']) == 1) ? $this->translate('Активный') : $this->translate('Забанен') ?></span></td>
-                                <td><span><?php echo $this->escape($user['last_login']) ?></span></td>
-                                <td class="article_action"><span>
+                                <td class="user_id"><span><a href="<?php echo $this->baseURL('user/info/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
+                                <td class="user_login"><span><a href="<?php echo $this->baseURL('user/info/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
+                                <td class="user_activation"><span><?php echo $this->escape($user['activate']) ?></span></td>
+                                <td class="user_status"><span><?php echo ($this->escape($user['enabled']) == 1) ? $this->translate('Активный') : $this->translate('Забанен') ?></span></td>
+                                <td class="user_last_activity"><span><?php echo $this->escape($user['last_login']) ?></span></td>
+                                <td class="user_action">
+                                    <span>
+                                        <a href="<?php echo $this->baseUrl('user/info/' . $this->escape($user['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
                                         <a href="<?php echo $this->baseUrl('user/edit/' . $this->escape($user['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-                                        <a href="<?php echo $this->baseUrl('user/info/' . $this->escape($user['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a>
-                                    </span></td>
+                                        <a href="<?php echo $this->baseUrl('user/ban/' . $this->escape($user['id'])) ?>"><i class="icon-ban-circle"></i> <?php echo $this->translate('Бан'); ?></a><br/>
+                                    </span>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

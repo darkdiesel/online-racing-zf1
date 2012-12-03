@@ -1,49 +1,182 @@
-/* articles page */
-#articles_page{
+/* admin articles page */
+#admin_articles_page{
     
 }
-    #articles_page .articles_data{
+    #admin_articles_page .articles_data{
         width:705px;
         position:relative;
     }
-        #articles_page .articles_data table{
+        #admin_articles_page .articles_data table{
             display:block;
             margin:0;
         }
-            #articles_page .articles_data table thead{
+            #admin_articles_page .articles_data table thead{
                 font-weight:bold;
                 font-family:monospace;
                 font-size:12px;
             }
-            #articles_page .articles_data table tbody{
+            #admin_articles_page .articles_data table tbody{
                 font-size:12px;
             }
-            #articles_page .articles_data table .article_number{
+            #admin_articles_page .articles_data table .article_id > span{
                 font-weight:bold;
                 font-family:monospace;
                 width:30px;
             }
-            #articles_page .articles_data table .article_title > span{
+            #admin_articles_page .articles_data table .article_title > span{
                 width:315px;
             }
-            #articles_page .articles_data table .article_author > span{
+            #admin_articles_page .articles_data table .article_author > span{
                 width:85px;
             }
-            #articles_page .articles_data table .article_type > span{
+            #admin_articles_page .articles_data table .article_type > span{
                 width:55px;
             }
-            #articles_page .articles_data table .article_action > span{
+            #admin_articles_page .articles_data table .article_action > span{
                 width:60px;
             }
-            #articles_page .articles_data table .article_date > span{
+            #admin_articles_page .articles_data table .article_date > span{
                 width:55px;
+            }
+            #admin_articles_page .articles_data table tbody .article_date > span{
                 font-style:italic;
                 font-size:11px;
             }
-                #articles_page .articles_data table tr td{
+                #admin_articles_page .articles_data table tr td{
                     position:relative;
                 }
-                #articles_page .articles_data table tr td span{
+                #admin_articles_page .articles_data table tr td span{
+                    overflow:hidden;
+                    word-wrap:break-word;
+                    display:block;
+                }
+/* article type add page */
+#article_type_add_page{
+    
+}
+    #article_type_add_page #articleTypeAdd{
+
+    }
+        #article_type_add_page #articleTypeAdd #name{
+            width:250px;
+        }
+        #article_type_add_page #articleTypeAdd #description{
+            width:445px;
+        }
+/* article type id page */
+#article_type_page{
+    
+}
+    #article_type_page .article_type_item{
+        
+    }
+        #article_type_page .article_type_item span{
+            font-weight:bold;
+            text-decoration:underline;
+            font-size:15px;
+            color:#565656;
+        }
+        #article_type_page .article_type_item .article_type_name{
+            color:#898989;
+        }
+        #article_type_page .article_type_item .article_type_descr{
+            color:#898989;
+        }
+/* article type all page */
+#article_types_page{
+    
+}
+    #article_types_page .article_types_data{
+        
+    }
+        #article_types_page .article_types_data table{
+            margin:0;
+        }
+            #article_types_page .article_types_data table thead{
+                font-weight:bold;
+                font-family:monospace;
+                font-size:12px;
+            }
+            #article_types_page .article_types_data table tbody{
+                font-size:12px;
+            }
+                #article_types_page .article_types_data table .article_type_id > span{
+                    font-weight:bold;
+                    font-family:monospace;
+                    width:30px;
+                }
+                #article_types_page .article_types_data table .article_type_name > span{
+                    width:180px;
+                }
+                #article_types_page .article_types_data table .article_type_descr > span{
+                    width:365px;
+                }
+                #article_types_page .article_types_data table .article_type_action > span{
+                    width:60px;
+                }
+                #article_types_page .article_types_data table tr td{
+                    position:relative;
+                }
+                #article_types_page .article_types_data table tr td span{
+                    overflow:hidden;
+                    word-wrap:break-word;
+                    display:block;
+                }
+/* article type edit page */
+#article_type_edit_page{
+    
+}
+    #article_type_edit_page #articleTypeEdit{
+
+    }
+        #article_type_edit_page #articleTypeEdit #name{
+            width:250px;
+        }
+        #article_type_edit_page #articleTypeEdit #description{
+            width:445px;
+        }
+/* admin users page */
+#admin_users_page{
+    
+}
+    #admin_users_page .users_data{
+        
+    }
+        #admin_users_page .users_data table{
+            margin:0;
+        }
+            #admin_users_page .users_data table thead{
+                font-weight:bold;
+                font-family:monospace;
+                font-size:12px;
+            }
+            #admin_users_page .users_data table tbody{
+                font-size:12px;
+            }
+                #admin_users_page .users_data table .user_id > span{
+                    font-weight:bold;
+                    font-family:monospace;
+                    width:30px;
+                }
+                #admin_users_page .users_data table .user_login > span{
+                    width:180px;
+                }
+                #admin_users_page .users_data table .user_activation > span{
+                    width:60px;
+                }
+                #admin_users_page .users_data table .user_status > span{
+                    width:60px;
+                }
+                #admin_users_page .users_data table .user_last_activity > span{
+                    width:60px;
+                }
+                #admin_users_page .users_data table .user_action > span{
+                    width:60px;
+                }
+                #admin_users_page .users_data table tr td{
+                    position:relative;
+                }
+                #admin_users_page .users_data table tr td span{
                     overflow:hidden;
                     word-wrap:break-word;
                     display:block;

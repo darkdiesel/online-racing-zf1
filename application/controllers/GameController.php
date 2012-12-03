@@ -1,10 +1,6 @@
 <?php
 
-class GameController extends Zend_Controller_Action {
-
-    public function init() {
-        
-    }
+class GameController extends App_Controller_FirstBootController {
 
     public function indexAction() {
         

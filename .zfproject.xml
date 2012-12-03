@@ -39,6 +39,9 @@
           <actionMethod actionName="edit"/>
           <actionMethod actionName="id"/>
         </controllerFile>
+        <controllerFile controllerName="FirstBoot">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false">
         <formFile formName="ArticleAdd"/>
@@ -144,6 +147,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="ArticleType">
             <viewScriptFile forActionName="id"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="FirstBoot">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

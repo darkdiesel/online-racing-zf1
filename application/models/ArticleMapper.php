@@ -89,7 +89,7 @@ class Application_Model_ArticleMapper {
      * Uses for controller: article, admin; action: view, articles
      */
 
-    public function getArticlesPager($count, $page, $page_range, $article_type, $action) {
+    public function getArticlesPager($count, $page, $page_range, $article_type, $action, $order) {
         switch ($action) {
             case 'news':
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
@@ -97,7 +97,7 @@ class Application_Model_ArticleMapper {
                                         ->from('article')
                                         //->join('user', 'user.id = article.user_id')
                                         ->where('publish=1 and article_type_id=' . $article_type)
-                                        ->order('id DESC'));
+                                        ->order('id '.$order));
                 break;
             case 'all':
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
@@ -107,7 +107,7 @@ class Application_Model_ArticleMapper {
                                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
                                         ->columns(array('id', 'user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit'))
                                         ->where('publish=1')
-                                        ->order('id DESC'));
+                                        ->order('id '.$order));
                 break;
             case 'admin_all':
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
@@ -117,7 +117,7 @@ class Application_Model_ArticleMapper {
                                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
                                         ->join(array('at' => 'article_type'), 'a.article_type_id = at.id', 'name')
                                         ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id'))
-                                        ->order('id DESC'));
+                                        ->order('id '.$order));
                 break;
             default:
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Online-Racing.net\n"
-"POT-Creation-Date: 2012-11-16 16:48+0300\n"
-"PO-Revision-Date: 2012-11-16 16:49+0300\n"
+"POT-Creation-Date: 2012-12-03 15:32+0300\n"
+"PO-Revision-Date: 2012-12-03 15:57+0300\n"
 "Last-Translator: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language-Team: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language: Russian\n"
@@ -30,44 +30,53 @@ msgstr ""
 "\\scripts\\article\n"
 "X-Poedit-SearchPath-7: d:\\dev\\localhost\\online-racing\\application\\views"
 "\\scripts\\admin\n"
+"X-Poedit-SearchPath-8: d:\\dev\\localhost\\online-racing\\application\\views"
+"\\scripts\\pagers\n"
+"X-Poedit-SearchPath-9: d:\\dev\\localhost\\online-racing\\application\\views"
+"\\scripts\\articletype\n"
 
-#: d:\dev\localhost\online-racing\application\controllers/AdminController.php:17
+#: d:\dev\localhost\online-racing\application\controllers/AdminController.php:15
 msgid "Контент"
 msgstr "Content"
 
-#: d:\dev\localhost\online-racing\application\controllers/AdminController.php:26
+#: d:\dev\localhost\online-racing\application\controllers/AdminController.php:23
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:2
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:2
 msgid "Пользователи"
 msgstr "Users"
 
-#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:11
-msgid "Добавление контента"
+#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:12
+#: d:\dev\localhost\online-racing\application\views\scripts/article/add.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts\article/add.phtml:2
+#, fuzzy
+msgid "Добавить контент"
 msgstr "Add content"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:73
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:74
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:82
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:83
+#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:102
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:103
-#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:104
+#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:111
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:112
-#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:113
 msgid "Статья не существует"
-msgstr "Artile not found"
+msgstr "Article not found"
 
-#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:87
+#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:86
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:80
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hd_user_toolbar.phtml:24
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:24
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:23
 #: d:\dev\localhost\online-racing\application\views\scripts/article/edit.phtml:2
-#: d:\dev\localhost\online-racing\application\views\scripts/article/view.phtml:27
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:24
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:29
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/edit.phtml:5
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:23
 #: d:\dev\localhost\online-racing\application\views\scripts\article/edit.phtml:2
-#: d:\dev\localhost\online-racing\application\views\scripts\article/view.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:29
 msgid "Редактировать"
 msgstr "Edit"
 
-#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:122
+#: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:121
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:2
 #: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:2
 #: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:2
@@ -75,7 +84,24 @@ msgstr "Edit"
 msgid "Контент сайта"
 msgstr "Site content"
 
-#: d:\dev\localhost\online-racing\application\controllers/IndexController.php:24
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:11
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/add.phtml:2
+msgid "Добавить тип статьи"
+msgstr "Add article type"
+
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:35
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:2
+msgid "Типы статей"
+msgstr "Arcticle types"
+
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:67
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:68
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:76
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:77
+msgid "Тип статьи не существует"
+msgstr "Article type not found"
+
+#: d:\dev\localhost\online-racing\application\controllers/IndexController.php:13
 msgid "Портал Онлай Скорости"
 msgstr "Online-Racing portal"
 
@@ -167,11 +193,14 @@ msgid "Опубликовать?"
 msgstr "Publish?"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:90
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:53
 msgid "Добавить"
 msgstr "Add"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:100
 #: d:\dev\localhost\online-racing\application\forms/ArticleEditForm.php:100
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:63
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:63
 #: d:\dev\localhost\online-racing\application\forms/UserActivateForm.php:105
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:258
 #: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:78
@@ -181,8 +210,24 @@ msgid "Сбросить"
 msgstr "Reset"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleEditForm.php:90
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:53
 msgid "Изменить"
 msgstr "Edit"
+
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:18
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:19
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:18
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:19
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:14
+msgid "Название"
+msgstr "Name"
+
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:35
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:36
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:35
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:36
+msgid "Описание типа статьи"
+msgstr "Arcticle type description"
 
 #: d:\dev\localhost\online-racing\application\forms/UserActivateForm.php:37
 #: d:\dev\localhost\online-racing\application\forms/UserActivateForm.php:38
@@ -632,10 +677,10 @@ msgid "Карта посетителей"
 msgstr "User Map"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:16
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:32
-#: d:\dev\localhost\online-racing\application\views\scripts/article/view.phtml:34
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:32
-#: d:\dev\localhost\online-racing\application\views\scripts\article/view.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:31
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:36
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:31
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:36
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:16
 msgid "Автор"
 msgstr "Author"
@@ -643,34 +688,44 @@ msgstr "Author"
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:18
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:18
 msgid "Дата"
-msgstr ""
+msgstr "Date"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:19
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:18
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:16
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:19
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:18
 msgid "Действие"
-msgstr ""
-
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:31
-msgid "Ред."
-msgstr "Edit"
+msgstr "Action"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:32
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:31
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:27
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:32
-msgid "Удал."
-msgstr "Del"
-
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:31
 msgid "Просм."
 msgstr "View"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:43
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:36
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:46
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:46
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:43
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:36
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:32
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:28
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:32
+msgid "Ред."
+msgstr "Edit"
+
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:29
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:34
+msgid "Удал."
+msgstr "Del"
+
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:43
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:43
 msgid "Контент не найден на сайте!"
 msgstr "Content not found on the site!"
 
@@ -689,57 +744,56 @@ msgstr "Activation"
 msgid "Статус"
 msgstr "Status"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:26
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:26
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:27
 msgid "Активный"
 msgstr "Active"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:26
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:26
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:27
 msgid "Забанен"
 msgstr "Baned"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/article/add.phtml:2
-#: d:\dev\localhost\online-racing\application\views\scripts\article/add.phtml:2
-#, fuzzy
-msgid "Добавить контент"
-msgstr "Add content"
-
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:29
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:29
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:28
+#: d:\dev\localhost\online-racing\application\views\scripts/index/index.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts\index/index.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:28
 msgid "Подробнее..."
 msgstr "More..."
 
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts/article/view.phtml:35
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts\article/view.phtml:35
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:32
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:37
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:32
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:37
 msgid "Просмотров"
 msgstr "Views"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:34
-#: d:\dev\localhost\online-racing\application\views\scripts/article/view.phtml:36
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:34
-#: d:\dev\localhost\online-racing\application\views\scripts\article/view.phtml:36
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:38
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:38
 msgid "Опубликовано"
 msgstr "Published"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:36
-#: d:\dev\localhost\online-racing\application\views\scripts/article/view.phtml:38
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:36
-#: d:\dev\localhost\online-racing\application\views\scripts\article/view.phtml:38
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:35
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:40
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:35
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:40
 msgid "Последнее редактирование"
 msgstr "Last edited"
+
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:15
+msgid "Описание"
+msgstr "Description"
+
+#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:42
+msgid "Типы статей не найдены на сайте!"
+msgstr "Article type not found on the site!"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/index/index.phtml:6
 #: d:\dev\localhost\online-racing\application\views\scripts\index/index.phtml:6
 msgid "Последнее добавления"
 msgstr "Last added"
-
-#: d:\dev\localhost\online-racing\application\views\scripts/index/index.phtml:20
-#: d:\dev\localhost\online-racing\application\views\scripts\index/index.phtml:20
-msgid "Изображение отсутствует"
-msgstr "No image"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/index/index.phtml:36
 #: d:\dev\localhost\online-racing\application\views\scripts\index/index.phtml:36
@@ -774,6 +828,12 @@ msgstr "First"
 #: d:\dev\localhost\online-racing\application\views\scripts/pagers/user_all_pagination_control.phtml:40
 msgid "Последняя"
 msgstr "Last"
+
+#~ msgid "Добавление контента"
+#~ msgstr "Add content"
+
+#~ msgid "Изображение отсутствует"
+#~ msgstr "No image"
 
 #~ msgid "Все статьи"
 #~ msgstr "All articles"

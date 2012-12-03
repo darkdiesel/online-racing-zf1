@@ -33,7 +33,6 @@ class Application_Form_ArticleAddForm extends Zend_Form {
         // artcile type
         $this->addElement('select', 'article_type', array(
             'label' => $this->translate('Тип контента'),
-            'multiOptions' => array(1 => 'News', 2 => 'Plugins'),
             'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',

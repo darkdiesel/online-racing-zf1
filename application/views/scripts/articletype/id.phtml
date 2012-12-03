@@ -2,12 +2,26 @@
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
-            echo $this->escape($this->article->title);
+            echo $this->escape($this->article_type->name);
+        } else {
+            echo $this->translate('Ошибка!!!');
         }
         ?>
     </div>
     <div class="div_hr"></div>
     <div class="page_content">
-        
+        <?php
+        if ($this->errMessage != "") {
+            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
+        } else {
+            ?>
+            <div class="article_type_item">
+                <span>Название:</span>
+                <div class="article_type_name"><?php echo $this->escape($this->article_type->name); ?></div>
+                <br>
+                <span>Описание:</span>
+                <div class="article_type_descr"><?php echo $this->escape($this->article_type->description); ?></div>
+            </div>
+        <?php } ?>
     </div>
 </div>

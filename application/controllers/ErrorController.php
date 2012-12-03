@@ -1,22 +1,15 @@
 <?php
 
-class ErrorController extends Zend_Controller_Action
-{
+class ErrorController extends App_Controller_FirstBootController {
 
-    public function init()
-    {
-        //$this->_helper->layout->disableLayout();
-    }
-
-    public function errorAction()
-    {
+    public function errorAction() {
         $errors = $this->_getParam('error_handler');
-        
+
         if (!$errors || !$errors instanceof ArrayObject) {
             $this->view->message = 'You have reached the error page';
             return;
         }
-        
+
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
@@ -33,26 +26,25 @@ class ErrorController extends Zend_Controller_Action
                 $this->view->message = 'Error 500. Application error';
                 break;
         }
-        
+
         // Log exception, if logger available
         if ($log = $this->getLog()) {
-            /*$log->log($this->view->message, $priority, $errors->exception);
-            $log->log('Request Parameters', $priority, $errors->request->getParams());*/
-            $log->log( $this->view->message, $priority );
-            $log->log( 'Request params: ' . print_r( $errors->request->getParams(),true ), $priority );
-            $log->log( $errors->exception, $priority );
+            /* $log->log($this->view->message, $priority, $errors->exception);
+              $log->log('Request Parameters', $priority, $errors->request->getParams()); */
+            $log->log($this->view->message, $priority);
+            $log->log('Request params: ' . print_r($errors->request->getParams(), true), $priority);
+            $log->log($errors->exception, $priority);
         }
-        
+
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
             $this->view->exception = $errors->exception;
         }
-        
-        $this->view->request   = $errors->request;
+
+        $this->view->request = $errors->request;
     }
 
-    public function getLog()
-    {
+    public function getLog() {
         //return Zend_Registry::get('logger');
         $bootstrap = $this->getInvokeArg('bootstrap');
         if (!$bootstrap->hasResource('Log')) {
@@ -61,4 +53,5 @@ class ErrorController extends Zend_Controller_Action
         $log = $bootstrap->getResource('Log');
         return $log;
     }
+
 }

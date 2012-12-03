@@ -8,6 +8,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $config->setReadOnly();
         Zend_Registry::set('config', $config);
     }
+    
+    protected function _initNameSpace(){
+        Zend_Loader_Autoloader::getInstance()->registerNamespace('App');
+    }
 
     protected function _initDb() {
         try {
@@ -35,7 +39,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         /* [MAIN SITE TITLE SETTINGS] */
         $view->headTitle('Online-Racing.net')
-                ->setSeparator(' - '); // setting a separator string for segments
+                ->setSeparator(' → '); // setting a separator string for segments
 
         /* [HEAD META SETTINGS] */
         $view->headMeta()
@@ -71,7 +75,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->ls_search_block = false; // search block
 
         /* [HEADER] */
-        $view->hd_hot_lap_block = true; // hot lap block
+        $view->hd_hot_lap_block = false; // hot lap block
         $view->hd_moving_text_block = true; // moving text block
 
         /* [FOOTER] */
@@ -272,6 +276,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'controller' => 'admin',
                             'action' => 'users',
                             'page' => 1)
+        ));
+        
+        $router->addRoute(
+                'articleTypeId', new Zend_Controller_Router_Route('articletype/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'articletype',
+                            'action' => 'id',
+                            'id' => 1)
         ));
         
         $router->addRoute(

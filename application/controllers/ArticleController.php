@@ -1,11 +1,40 @@
 <?php
 
-class ArticleController extends Zend_Controller_Action {
+class ArticleController extends App_Controller_FirstBootController {
 
     public function init() {
+        parent::init();
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/articles.css"));
     }
 
+    // action for view article
+    public function idAction() {
+        $request = $this->getRequest();
+        $article_id = (int) $request->getParam('id');
+
+        $mapper = new Application_Model_ArticleMapper();
+        $article_data = $mapper->getArticleDataById($article_id, 'view');
+
+        if ($article_data == 'null') {
+            $this->view->errMessage = $this->view->translate('Статья не существует');
+            $this->view->headTitle($this->view->translate('Статья не существует'));
+            return;
+        } else {
+            $this->view->article = $article_data;
+            $this->view->headTitle($article_data->title);
+        }
+    }
+
+    // action for view all articles
+    public function allAction() {
+        $this->view->headTitle($this->view->translate('Контент сайта'));
+
+        $request = $this->getRequest();
+        $mapper = new Application_Model_ArticleMapper();
+        $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5, 1, 'all', 'DESC');
+    }
+
+    // action for add new article
     public function addAction() {
         // page title
         $this->view->headTitle($this->view->translate('Добавить контент'));
@@ -32,23 +61,27 @@ class ArticleController extends Zend_Controller_Action {
                 $this->_helper->redirector('all', 'article');
             }
         }
-
+        
+        $mapper = new Application_Model_ArticleTypeMapper();
+        $article_types = $mapper->fetchAll();
+        
+        foreach ($article_types as $type):
+        $form->article_type->addMultiOption($type->id, $type->name);
+        endforeach;
+        
         $this->view->form = $form;
     }
 
-    public function deleteAction() {
-        // action body
-    }
-
+    // action for edit article
     public function editAction() {
         $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
-        $article_id = $request->getParam('id');
+        $article_id = (int) $request->getParam('id');
 
         // form
         $form = new Application_Form_ArticleEditForm();
-        $form->setAction('/article/edit/'.$article_id);
+        $form->setAction('/article/edit/' . $article_id);
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -64,14 +97,8 @@ class ArticleController extends Zend_Controller_Action {
                 $mapper = new Application_Model_ArticleMapper();
                 $mapper->save($article, 'edit');
 
-                $this->redirect($this->view->baseUrl('article/id/'.$article_id));
+                $this->redirect($this->view->baseUrl('article/id/' . $article_id));
             }
-        }
-
-        if ($article_id == 0) {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
-            return;
         }
 
         $mapper = new Application_Model_ArticleMapper();
@@ -82,7 +109,7 @@ class ArticleController extends Zend_Controller_Action {
             $this->view->headTitle($this->view->translate('Статья не существует'));
             return;
         } else {
-            $this->view->headTitle($this->view->translate('Редактировать') . ' ' . $article_data->title);
+            $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_data->title);
 
             $form->title->setvalue($article_data->title);
             $form->text->setvalue($article_data->text);
@@ -93,35 +120,11 @@ class ArticleController extends Zend_Controller_Action {
         }
     }
 
-    public function idAction() {
-        $request = $this->getRequest();
-        $article_id = $request->getParam('id');
+    // action for delete article
+    public function deleteAction() {
+        $this->view->headTitle($this->view->translate('Удалить статью'));
 
-        if ($request->getParam('id') == 0) {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
-            return;
-        }
-
-        $mapper = new Application_Model_ArticleMapper();
-        $article_data = $mapper->getArticleDataById($article_id, 'view');
-
-        if ($article_data == 'null') {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
-            return;
-        } else {
-            $this->view->article = $article_data;
-            $this->view->headTitle($article_data->title);
-        }
-    }
-
-    public function allAction() {
-        $this->view->headTitle($this->view->translate('Контент сайта'));
-
-        $request = $this->getRequest();
-        $mapper = new Application_Model_ArticleMapper();
-        $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5, 1, 'all');
+        $this->view->errMessage = $this->view->translate("Приносим свои извинения. Данный функционал еще не реализован!");
     }
 
 }

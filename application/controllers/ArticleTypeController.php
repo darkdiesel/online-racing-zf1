@@ -1,20 +1,41 @@
 <?php
 
-class ArticleTypeController extends Zend_Controller_Action
-{
+class ArticleTypeController extends App_Controller_FirstBootController {
 
-    public function init()
-    {
-        /* Initialize action controller here */
+    public function init() {
+        parent::init();
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/admin.css"));
     }
 
-    public function indexAction()
-    {
-        // action body
+    // action for view article type
+    public function idAction() {
+        $request = $this->getRequest();
+        $article_type_id = (int) $request->getParam('id');
+
+        $mapper = new Application_Model_ArticleTypeMapper();
+        $article_type_data = $mapper->getArticleTypeDataById($article_type_id, 'view');
+
+        if ($article_type_data == 'null') {
+            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
+            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
+            return;
+        } else {
+            $this->view->article_type = $article_type_data;
+            $this->view->headTitle($article_type_data->name);
+        }
     }
 
-    public function addAction()
-    {
+    // action for view all article types
+    public function allAction() {
+        $this->view->headTitle($this->view->translate('Типы статей'));
+
+        $request = $this->getRequest();
+        $mapper = new Application_Model_ArticleTypeMapper();
+        $this->view->paginator = $mapper->getArticleTypesPager(10, $request->getParam('page'), 5, 'all', 'ASC');
+    }
+
+    // action for add new article type
+    public function addAction() {
         $this->view->headTitle($this->view->translate('Добавить тип статьи'));
 
         $request = $this->getRequest();
@@ -34,19 +55,8 @@ class ArticleTypeController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    public function deleteAction()
-    {
-        // action body
-    }
-
-    public function allAction()
-    {
-        // action body
-    }
-
-    // action for editing article type
-    public function editAction()
-    {
+    // action for edit article type
+    public function editAction() {
         $request = $this->getRequest();
         $article_type_id = $request->getParam('id');
 
@@ -68,39 +78,29 @@ class ArticleTypeController extends Zend_Controller_Action
                 $this->redirect($this->view->baseUrl('articletype/id/' . $article_type_id));
             }
         }
-        
-        if ($article_type_id == 0) {
-            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
-            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
-            return;
-        }
-        
+
         $mapper = new Application_Model_ArticleTypeMapper();
         $article_type_data = $mapper->getArticleTypeDataById($article_type_id, 'edit');
-        
+
         if ($article_type_data == 'null') {
             $this->view->errMessage = $this->view->translate('Тип статьи не существует');
             $this->view->headTitle($this->view->translate('Тип статьи не существует'));
             return;
         } else {
-            $this->view->headTitle($this->view->translate('Редактировать') . ' ' . $article_type_data->name);
+            $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_type_data->name);
 
             $form->name->setvalue($article_type_data->name);
             $form->description->setvalue($article_type_data->description);
-            
+
             $this->view->form = $form;
         }
     }
 
-    // action for view article type
-    public function idAction()
-    {
-        $request = $this->getRequest();
-        $article_id = $request->getParam('id');
+    // action for delete article type
+    public function deleteAction() {
+        $this->view->headTitle($this->view->translate('Удалить тип статьи'));
+
+        $this->view->errMessage = $this->view->translate("Приносим свои извинения. Данный функционал еще не реализован!");
     }
 
-
 }
-
-
-

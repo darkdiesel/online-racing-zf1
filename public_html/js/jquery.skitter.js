@@ -10,8 +10,8 @@ jQuery(function($){
         options['dots'] = true;
         //options['focus'] = true;
         //options['focus_position'] = 'leftTop';
-        //options['controls'] = true;
-        //options['controls_position'] = 'rightTop';
+        options['controls'] = true;
+        options['controls_position'] = 'rightTop';
         options['hideTools'] = true;
         options['animation'] = 'swapBarsBack';
         //options['easing_default'] = 'random';

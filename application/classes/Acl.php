@@ -44,6 +44,11 @@ class Acl extends Zend_Acl {
 		// master resources
 		$this->add(new Zend_Acl_Resource('master_allow'));
 		$this->add(new Zend_Acl_Resource('admin/index'),'master_allow');
+                $this->add(new Zend_Acl_Resource('articletype/id'),'master_allow');
+                $this->add(new Zend_Acl_Resource('articletype/all'),'master_allow');
+                $this->add(new Zend_Acl_Resource('articletype/add'),'master_allow');
+                $this->add(new Zend_Acl_Resource('articletype/edit'),'master_allow');
+                $this->add(new Zend_Acl_Resource('articletype/delete'),'master_allow');
 
 		//Выставляем права, по-умолчанию всё запрещено
 		//this->deny('user', 'user_deny', 'show');
