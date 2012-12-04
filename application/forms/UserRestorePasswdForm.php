@@ -3,10 +3,6 @@
 class Application_Form_UserRestorePasswdForm extends Zend_Form {
 
     public function init() {
-        // loading validators
-        Zend_Loader::loadClass('App_Validate_EqualInputs');
-        Zend_Loader::loadClass('App_Validate_NoDbRecordExists');
-
         // Set the method for the display form to POST
         $this->setMethod('post');
         $this->setAction('/user/restorepasswd');
@@ -23,6 +19,12 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             'validators' => array(
                 'EmailAddress',
                 new App_Validate_NoDbRecordExists('user', 'email')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
         $this->addElement('text', 'confirmemail', array(
@@ -33,6 +35,12 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 new App_Validate_EqualInputs('email')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
@@ -62,12 +70,32 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             'ignore' => true,
             'class' => 'btn btn-primary',
             'label' => 'Востановить',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
+            )
         ));
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
             'label' => 'Сбросить',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
+            )
+        ));
+
+        $this->addDisplayGroup(array(
+            $this->getElement('submit'),
+            $this->getElement('reset')
+                ), 'form_actions', array());
+        
+        $this->getDisplayGroup('form_actions')->setDecorators(array(
+            'FormElements',
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form_actions display_group')),
         ));
     }
 

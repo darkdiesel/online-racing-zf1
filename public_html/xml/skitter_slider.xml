@@ -15,4 +15,9 @@
 		<image type="cubeSize">../img/slider/post/chat.jpg</image>
 		<label><![CDATA[<p>На сайт добавлен чат. <a href="/chat">Общайтесь!</a></p>]]></label>
 	</slide>
+        <slide>
+		<link></link>
+		<image type="cubeSize">http://rewalls.com/pic/201012/800x600/reWalls.com-12161.jpg</image>
+		<label><![CDATA[<p>Уже совсем скоро! Старт зимнего турнира.</p>]]></label>
+	</slide>
 </skitter>

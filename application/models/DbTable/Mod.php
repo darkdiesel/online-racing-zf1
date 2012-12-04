@@ -1,6 +1,4 @@
 <?php
-    // application/models/DbTable/Mod.php
-     
     /**
     * This is the DbTable class for the mod table.
     */

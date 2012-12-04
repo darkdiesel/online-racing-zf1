@@ -1,31 +1,36 @@
-<div id="user_settings_page">
-    <?php
-if ($this->errMessage != "") {
-    $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
-}
-echo $this->fieldset('loginFieldSet', '
-	<p>Измините настройки и нажмите "Сохранить".</p>' .
-        $this->errMessage .
-        '
+<div id="user_settings_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Настройки профиля'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+
+        <div class="alert alert-info alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4><?php echo $this->translate('Информация'); ?></h4>
+            <?php echo $this->translate('Измините настройки и нажмите "Сохранить".'); ?>
+        </div>
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } ?>  
         <div id="tabs">
             <ul>
-                <li><a href="#tabs-1">' . $this->translate('Язык') . '</a></li>
+                <li><a href="#tabs-1"><?php echo $this->translate('Язык'); ?></a></li>
             </ul>
-            <div id="tabs-1">'. 
-                '<form id="'.$this->form->getName().'" action="'.$this->form->getAction().'" method="'.$this->form->getMethod().'">'.
-                $this->form->getDisplayGroup('lang_settings').
-                $this->form->tab_name->setvalue('lang_settings').
-                $this->form->getDisplayGroup('form_actions').
-                '</form>'.
-            '</div>
+            <div id="tabs-1">
+                <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>">
+                    <?php echo $this->form->getDisplayGroup('lang_settings'); ?>
+                    <?php echo $this->form->tab_name->setvalue('lang_settings'); ?>
+                    <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+                </form>
+            </div>
         </div>
-        ' 
-       , array('legend' => $this->translate('Настройки профиля'), 'class' => 'form_white_box'));
-?>
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        $('#tabs').tabs();
-    });
-</script>
-    
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                $('#tabs').tabs();
+            });
+        </script>
+    </div>
 </div>

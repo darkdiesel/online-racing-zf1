@@ -2,7 +2,20 @@
     <div class="page_title"><?php echo $this->translate('Чат'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <p>Введите сообщение в поле ввода и нажмите "Отправить".</p>
-        <?php echo $this->render("chat_block.phtml");?>
+        <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+            <div class="alert alert-info alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Информация'); ?></h4>
+                <?php echo $this->translate('Введите сообщение в поле ввода и нажмите "Отправить".'); ?>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Предупреждение'); ?></h4>
+                <?php echo $this->translate('Сообщения в чате могут оставлять только авторизованные пользователи.'); ?>
+                <a href="<?php echo $this->baseURL('user/login') ?>"><?php echo $this->translate('Авторизуйтесь'); ?></a> <?php echo $this->translate('или') ?> <a href="<?php echo $this->baseURL('user/login') ?>"><?php echo $this->translate('Зарегистрируйтесь'); ?></a> <?php echo $this->translate('на сайте.'); ?>
+            </div>
+        <?php } ?>
+        <?php echo $this->render("chat_block.phtml"); ?>
     </div>
 </div>

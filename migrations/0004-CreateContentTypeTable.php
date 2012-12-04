@@ -14,7 +14,7 @@ class CreateContentTypeTable extends Akrabat_Db_Schema_AbstractChange {
     }
 
     function down() {
-        $sql = "DROP TABLE IF EXISTS `article_type`;";
+        $sql = "DROP TABLE IF EXISTS `content_type`;";
         $this->_db->query($sql);
     }
 

@@ -76,7 +76,7 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                 }
             } else {
-                $this->view->errMessage .= 'Забыди <a href="' . $this->view->baseUrl('user/restorepasswd') . '">пароль?</a>';
+                $this->view->errMessage .= 'Забыди <a href="' . $this->view->baseUrl('user/restorepasswd') . '">пароль?</a><br/><a href="' . $this->view->baseUrl('user/restorepasswd') . '">Зарегестрироваться?</a>';
             }
         }
 
@@ -92,7 +92,6 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Регистрация'));
 
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
-        //$this->view->headScript()->appendFile($this->view->baseUrl("js/script.js"));
 
         $request = $this->getRequest();
         $form = new Application_Form_UserRegisterForm();
@@ -363,7 +362,7 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                 }
             } else {
-                $this->view->errMessage .= "Исправте следующие ошибки для сохранения изминений профиля!";
+                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для сохранения изминений профиля!');
             }
         }
 

@@ -186,6 +186,7 @@ body iframe{
                             border:1px solid #CACACA;
                             padding:10px;
                             border-radius:3px;
+                            overflow:auto;
                         }
                         #content .page:after{
                             background:url("../img/shadow_sprite.png") no-repeat scroll 0 -54px transparent;
@@ -203,37 +204,10 @@ body iframe{
         /*countdown_dashboard*/
         #left_sidebar #countdown_dashboard{
             overflow:hidden;
-            height:100px;
             text-align:center;
             padding:10px 0;
         }
-            #left_sidebar #countdown_dashboard span.dash_title{
-                clear:both;
-                display:block;
-                font-size:12px;
-                background: transparent url('../img/countdown_sprite.png') -50px -22px no-repeat;
-                font-weight:bold;
-            }
-            #left_sidebar #countdown_dashboard div.dash{
-                display:inline-block;
-                overflow:hidden;
-                position:relative;
-                margin:2px 5px;
-                text-align:center;
-                width:50px;
-                height:43px;
-                background: transparent url('../img/countdown_sprite.png') 0 0 no-repeat;
-                box-shadow:0 0 10px #000;
-            }
-                #left_sidebar #countdown_dashboard div.dash div.digit{
-                    float:left;
-                    font: bold 14pt Verdana;
-                    line-height:15pt;
-                    text-align: center;
-                    width:25px;
-                    height:22px;
-                    background: transparent url('../img/countdown_sprite.png') -50px 0 no-repeat;
-                }
+            
 		/*scroll to top button*/
 		#back-top {
                     position:fixed;
@@ -416,6 +390,12 @@ body iframe{
                         #footer .socialNetworks a{
                             display:inline-block;
                         }
+                            #footer .socialNetworks img{
+                                opacity:0.7;
+                            }
+                                #footer .socialNetworks img:hover{
+                                opacity:1;
+                            }
 .clearfix:after{
     clear:both;
     content:".";
@@ -436,7 +416,7 @@ form.white_box{
     display:block;
     margin:0 auto;
     overflow:hidden;
-    width:500px;
+    width:400px;
 }
 form.white_box:after{
     background:url("../img/shadow_sprite.png") no-repeat 0 -74px;
@@ -464,25 +444,23 @@ form.white_box:after{
         border-radius:7px;
     }
     form ul.errors{
-        margin:5px auto;
+        margin:10px auto;
         clear:both;
         overflow:hidden;
         word-wrap:break-word;
-        width:90%;
     }
         form ul.errors li{
             color:#BE3838;
             font-family:serif;
             font-size:14px;
             line-height:17px;
-            text-align:center;
+            text-align:left;
+            margin-left:15px;
         }
+/* Width for white form */
 form#userlogin{
     width:270px;
 }
-    form#userlogin #submit-element{
-        margin-left:25px;
-    }
 form#userRegister{
     width:360px;
 }
@@ -492,16 +470,22 @@ form#userConfirm{
 form#userRestorePasswd{
     width:360px;  
 }
-    form.white_box .checkbox{
-        margin:15px 0;
-    }
-        form.white_box .checkbox label{
-            display:inline;
-        }
-    form.white_box .form_actions_group{
-        margin:0 10px;
-        display:inline-block;
-    }
+/* form white_box class */
+form.white_box .checkbox{
+    margin:15px 0;
+}
+form.white_box .checkbox label{
+    display:inline;
+}
+form.white_box .form_actions{
+    margin:10px 0;
+    text-align:center;
+}
+form.white_box .form_actions_group{
+    margin-right:10px;
+    display:inline-block;
+    clear:both;
+}
 .soc_buttons {
     position: absolute;
     right:0;
@@ -611,4 +595,23 @@ div.shareblock{
 /* articles */
 #articles_block{
     margin:10px 0 20px 0;
+}
+/* label for jQuery validate */
+label.error {
+    color:#BE3838;
+    font-family:serif;
+    font-size:14px;
+    line-height:14px;
+    list-style-type:none;
+}
+label.error:before{
+    content:"●";
+    margin-right:5px;
+}
+label.valid {
+    background: url("../img/valid.png") no-repeat scroll center center transparent;
+    display:inline-block;
+    height:24px;
+    text-indent:-9999px;
+    width:24px;
 }

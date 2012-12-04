@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_ArticleTypeEditForm extends Zend_Form {
+class Application_Form_LeagueAddForm extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,11 +10,12 @@ class Application_Form_ArticleTypeEditForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/articletype/edit');
-        $this->setName('articleTypeEdit');
+        $this->setAction('/league/add');
+        $this->setName('leagueAdd');
         $this->setAttrib('class', 'white_box');
 
-        $this->addElement('text', 'name', array('label' => $this->translate('Название'),
+        $this->addElement('text', 'name', array(
+            'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
@@ -30,31 +31,18 @@ class Application_Form_ArticleTypeEditForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('textarea', 'description', array('label' => $this->translate('Описание типа статьи'),
-            'placeholder' => $this->translate('Описание типа статьи'),
-            'cols' => 60,
-            'rows' => 10,
-            'maxlength' => 500,
-            'required' => true,
-            'filters' => array('StringTrim'),
-            'validators' => array('NotEmpty'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
-            )
-        ));
-
-        $this->addElement('submit', 'submit', array('ignore' => true,
+        $this->addElement('submit', 'submit', array(
+            'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Изменить'),
+            'label' => $this->translate('Добавить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
             )
         ));
 
-        $this->addElement('reset', 'reset', array('ignore' => true,
+        $this->addElement('reset', 'reset', array(
+            'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
@@ -67,6 +55,7 @@ class Application_Form_ArticleTypeEditForm extends Zend_Form {
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),

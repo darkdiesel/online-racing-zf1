@@ -49,6 +49,8 @@ class ArticleTypeController extends App_Controller_FirstBootController {
                 $mapper->save($article_type, 'add');
 
                 $this->_helper->redirector('all', 'articletype');
+            } else {
+                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления типа статьи!');
             }
         }
 
@@ -76,6 +78,8 @@ class ArticleTypeController extends App_Controller_FirstBootController {
                 $mapper->save($article, 'edit');
 
                 $this->redirect($this->view->baseUrl('articletype/id/' . $article_type_id));
+            } else {
+                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа статьи!');
             }
         }
 

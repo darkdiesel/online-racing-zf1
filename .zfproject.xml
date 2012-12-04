@@ -42,6 +42,14 @@
         <controllerFile controllerName="FirstBoot">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="League">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="id"/>
+          <actionMethod actionName="add"/>
+          <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
+          <actionMethod actionName="all"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false">
         <formFile formName="ArticleAdd"/>
@@ -51,6 +59,8 @@
         <formFile formName="ArticleEditForm"/>
         <formFile formName="ArticleTypeAddForm"/>
         <formFile formName="ArticleTypeEditForm"/>
+        <formFile formName="LeagueAddForm"/>
+        <formFile formName="LeagueEditForm"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -60,6 +70,7 @@
           <dbTableFile dbTableName="Article"/>
           <dbTableFile dbTableName="ArticleType"/>
           <dbTableFile dbTableName="ContentType"/>
+          <dbTableFile dbTableName="League"/>
         </dbTableDirectory>
         <modelFile modelName="UserChat"/>
         <modelFile modelName="UserChatMapper"/>
@@ -69,6 +80,8 @@
         <modelFile modelName="ArticleTypeMapper"/>
         <modelFile modelName="ContentTypeMapper"/>
         <modelFile modelName="ContentType"/>
+        <modelFile modelName="League"/>
+        <modelFile modelName="LeagueMapper"/>
       </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="UserChatForm">
@@ -150,6 +163,24 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="FirstBoot">
             <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="League">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="League">
+            <viewScriptFile forActionName="id"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="League">
+            <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="League">
+            <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="League">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="League">
+            <viewScriptFile forActionName="all"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

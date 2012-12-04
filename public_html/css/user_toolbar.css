@@ -50,14 +50,14 @@
                     z-index:999;
                 }
                 #user_toolbar .login .dropdown-menu{
-                    padding:5px 15px;
+                    padding:10px 15px;
                     z-index:999;
                 }
                 #user_toolbar .login .dropdown-menu li{
                     display:block;
                     margin:0;
                     padding:0;
-					color:#000;
+                    color:#000;
                 }
                     #user_toolbar .login .dropdown-menu li a{
                         color:#333333;

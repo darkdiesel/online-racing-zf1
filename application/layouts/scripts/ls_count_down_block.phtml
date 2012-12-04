@@ -4,53 +4,13 @@
     </div>
     <div class="sidebar_box_content">
         <script type="text/javascript">
-            // countdown clock script
-            $(function() {
-                $('#countdown_dashboard').countDown({
-                    targetDate: {
-                        'day':1,
-                        'month':2,
-                        'year':2013,
-                        'hour':19,
-                        'min':0,
-                        'sec':0,
-                        // time set as UTC
-                        'utc':true
-                    }
-                });
+            $(document).ready(function(){
+                var newYear = new Date(); 
+                newYear = new Date(2012, 12 - 1 ,14, 19, 30, 45); 
+                $('#countdown_dashboard').countdown({until: newYear, format: 'ODHMS', description: 'Осталось до отркытия сайта!'});
             });
         </script>
-        Открытие сайта
-        <div id="countdown_dashboard">
-            <div class="dash weeks_dash">
-                <span class="dash_title">Нед.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
 
-            <div class="dash days_dash">
-                <span class="dash_title">Дн.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash hours_dash">
-                <span class="dash_title">Час.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash minutes_dash">
-                <span class="dash_title">Мин.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-
-            <div class="dash seconds_dash">
-                <span class="dash_title">Сек.</span>
-                <div class="digit">0</div>
-                <div class="digit">0</div>
-            </div>
-        </div>
+        <div id="countdown_dashboard"></div>
     </div>
 </div>

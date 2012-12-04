@@ -87,12 +87,12 @@ class Application_Form_UserEditForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         // gravatar
         $this->addElement('text', 'gravatar', array(
             'label' => $this->translate('Gravatar'),
             'placeholder' => $this->translate('Gravatar'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'description' => 'Зарегестрируйтесь в сервисе Gravatar (http://Gravatar.com) и введите регистрационный e-mail в поле выше.',
             'class' => 'x_field',
             'validators' => array(
@@ -111,7 +111,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'skype', array(
             'label' => $this->translate('Skype'),
             'placeholder' => $this->translate('Skype'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -124,7 +124,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'icq', array(
             'label' => $this->translate('ICQ'),
             'placeholder' => $this->translate('ICQ'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -136,7 +136,7 @@ class Application_Form_UserEditForm extends Zend_Form {
 
         $this->addElement('text', 'gtalk', array(
             'label' => $this->translate('Google Talk'),
-            'placeholder' => $this->translate('Google Talk','StringToLower'),
+            'placeholder' => $this->translate('Google Talk', 'StringToLower'),
             'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
@@ -149,7 +149,7 @@ class Application_Form_UserEditForm extends Zend_Form {
 
         $this->addElement('text', 'www', array(
             'label' => $this->translate('www'),
-            'placeholder' => $this->translate('www','StringToLower'),
+            'placeholder' => $this->translate('www', 'StringToLower'),
             'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
             'decorators' => array(
@@ -164,7 +164,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'vk', array(
             'label' => $this->translate('Вконтакте'),
             'placeholder' => $this->translate('Вконтакте'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -177,7 +177,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'fb', array(
             'label' => $this->translate('Facebook'),
             'placeholder' => $this->translate('Facebook'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -190,7 +190,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'tw', array(
             'label' => $this->translate('Twitter'),
             'placeholder' => $this->translate('Twitter'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -203,7 +203,7 @@ class Application_Form_UserEditForm extends Zend_Form {
         $this->addElement('text', 'gp', array(
             'label' => $this->translate('Google+'),
             'placeholder' => $this->translate('Google+'),
-            'filters' => array('StripTags', 'StringTrim','StringToLower'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'class' => 'x_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -216,23 +216,23 @@ class Application_Form_UserEditForm extends Zend_Form {
         // additional information
         $this->addElement('textarea', 'about', array(
             'label' => $this->translate('О себе'),
-            'placeholder' => $this->translate('О себе').' ...',
+            'placeholder' => $this->translate('О себе') . ' ...',
             'cols' => 60,
             'rows' => 5,
             'maxlength' => 500,
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(0, 500))
-                ),
+            ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'aboutTextArea_box')),
             )
         ));
-        
+
         // element for saving tab name
-        $this->addElement('hidden','tab_name', array(
+        $this->addElement('hidden', 'tab_name', array(
             'value' => '',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
@@ -261,7 +261,7 @@ class Application_Form_UserEditForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'span', 'class' => 'reset form_actions_group'))
             )
         ));
-        
+
         // personal information display group
         $this->addDisplayGroup(array(
             $this->getElement('name'),
@@ -277,7 +277,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             'Fieldset',
             array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'personal_Inf display_group')),
         ));
-        
+
         // avatar display group
         $this->addDisplayGroup(array(
             $this->getElement('gravatar')
@@ -289,7 +289,7 @@ class Application_Form_UserEditForm extends Zend_Form {
             'Fieldset',
             array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'avatar display_group')),
         ));
-        
+
         // contacts information display group
         $this->addDisplayGroup(array(
             $this->getElement('skype'),

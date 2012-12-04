@@ -27,7 +27,7 @@
     
     #user_info_page .user_info_data{
         position:relative;
-        width:500px;
+        width:480px;
         margin:0 0 20px 0;
     }
         #user_info_page .user_info_data table{
@@ -82,13 +82,14 @@
             }
             #userEdit fieldset .fieldset_inner_form .element_box .element_tag{
                 float:right;
-                margin-right:160px;
+                margin-right:140px;
             }
             #userEdit fieldset .fieldset_inner_form .element_box p.hint{
                 margin:10px auto;
                 width:80%;
                 text-align:center;
                 font-size:13px;
+                color:#828282;
             }
     #userEdit .form_actions{
         margin-top:15px;
@@ -128,8 +129,8 @@
     }
     #users_page .user_item{
         border:1px solid #CACACA;
-        padding:10px;
-        width:170px;
+        padding:9px;
+        width:176px;
         display:inline-block;
         margin:5px 20px 25px;
         position:relative;

@@ -2,13 +2,18 @@
     <div class="page_title"><?php echo $this->translate('Активация пользователя'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <p>Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.<br/>
-            P.S. Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом. </p>
-        <?php
-        if ($this->errMessage != "") {
-            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
-        }
-        ?>
+        <div class="alert alert-info alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4><?php echo $this->translate('Информация'); ?></h4>
+            <?php echo $this->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.<br/><strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.'); ?>
+        </div>
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } ?>
         <?php echo $this->form; ?>
     </div>
 </div>

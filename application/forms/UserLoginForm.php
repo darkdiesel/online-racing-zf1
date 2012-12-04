@@ -20,8 +20,7 @@ class Application_Form_UserLoginForm extends Zend_Form {
         $this->addElement('text', 'loginemail', array(
             'label' => 'E-mail:',
             'placeholder' => 'E-mail',
-            'title' => $this->translate('Поле должно содержать правильный адрес вашего электронного почтового ящика. Пример: example@mail.com.'),
-            'data-placement' => 'left',
+            'title' => $this->translate('Введите свой электронный почтовый ящик. Пример: example@mail.com.'),
             'required' => true,
             'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
@@ -40,8 +39,7 @@ class Application_Form_UserLoginForm extends Zend_Form {
         $this->addElement('password', 'loginpassword', array(
             'label' => $this->translate('Пароль'),
             'placeholder' => $this->translate('Пароль'),
-            'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
-            'data-placement' => 'left',
+            'title' => $this->translate('Введите пароль от своей учетной записи.'),
             'required' => true,
             'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
@@ -87,6 +85,18 @@ class Application_Form_UserLoginForm extends Zend_Form {
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
+        ));
+        
+        $this->addDisplayGroup(array(
+            $this->getElement('submit'),
+            $this->getElement('reset')
+                ), 'form_actions', array());
+        
+        $this->getDisplayGroup('form_actions')->setDecorators(array(
+            'FormElements',
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form_actions display_group')),
         ));
     }
 

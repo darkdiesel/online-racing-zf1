@@ -30,8 +30,8 @@
             messages: {
                 'login': {
                     required : "<?php echo $this->translate("Поле обязательно для заполнения"); ?>",
-                    minlength: "<?php echo $this->translate("Длина поля должна быть от 3 до 20 символов"); ?>",
-                    maxlength: "<?php echo $this->translate("Длина поля должна быть от 3 до 20 символов"); ?>",
+                    minlength: "<?php echo $this->translate("Длина поля должна быть от 5 до 20 символов"); ?>",
+                    maxlength: "<?php echo $this->translate("Длина поля должна быть от 5 до 20 символов"); ?>",
                     regex    : "<?php echo $this->translate("Поле должно содержать только буквы и цивры, а также символы '-' и '_'"); ?>"
                 },
                 'email': {
@@ -81,12 +81,18 @@
     <div class="page_title"><?php echo $this->translate('Регистрация'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <div  class='alert alert-info'><?php echo $this->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.');?></div>
-        <?php
-        if ($this->errMessage != "") {
-            echo $this->errMessage = '<div class="alert alert-error">' . $this->errMessage . '</div>';
-        }
-        ?>
+        <div class="alert alert-info alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4><?php echo $this->translate('Информация'); ?></h4>
+            <?php echo $this->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.'); ?>
+        </div>
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } ?>
         <?php echo $this->form; ?>
     </div>
 </div>
