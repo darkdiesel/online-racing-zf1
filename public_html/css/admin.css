@@ -82,6 +82,11 @@
         #article_type_page .article_type_item .article_type_descr{
             color:#898989;
         }
+        #article_type_page .article_type_item .article_type_controls{
+            float:right;
+            clear:both;
+            margin:5px 0;
+        }
 /* article type all page */
 #article_types_page{
     
@@ -133,7 +138,7 @@
             width:250px;
         }
         #article_type_edit_page #articleTypeEdit #description{
-            width:445px;
+            width:345px;
         }
 /* admin users page */
 #admin_users_page{

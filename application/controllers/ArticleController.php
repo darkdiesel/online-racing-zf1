@@ -109,6 +109,14 @@ class ArticleController extends App_Controller_FirstBootController {
             $this->view->headTitle($this->view->translate('Статья не существует'));
             return;
         } else {
+            
+            $mapper = new Application_Model_ArticleTypeMapper();
+            $article_types = $mapper->fetchAll();
+
+            foreach ($article_types as $type):
+                $form->article_type->addMultiOption($type->id, $type->name);
+            endforeach;
+            
             $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_data->title);
 
             $form->title->setvalue($article_data->title);

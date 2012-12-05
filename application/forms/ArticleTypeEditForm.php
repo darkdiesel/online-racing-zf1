@@ -10,7 +10,7 @@ class Application_Form_ArticleTypeEditForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/articletype/edit');
+        $this->setAction('/article-type/edit');
         $this->setName('articleTypeEdit');
         $this->setAttrib('class', 'white_box');
 
@@ -35,7 +35,7 @@ class Application_Form_ArticleTypeEditForm extends Zend_Form {
             'cols' => 60,
             'rows' => 10,
             'maxlength' => 500,
-            'required' => true,
+            'required' => false,
             'filters' => array('StringTrim'),
             'validators' => array('NotEmpty'),
             'decorators' => array(

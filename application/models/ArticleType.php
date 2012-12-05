@@ -5,6 +5,8 @@ class Application_Model_ArticleType {
     protected $_id;
     protected $_name;
     protected $_description;
+    protected $_date;
+    protected $_date_edit;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -64,6 +66,24 @@ class Application_Model_ArticleType {
 
     public function getDescription() {
         return $this->_description;
+    }
+    
+    public function setDate($date) {
+        $this->_date = $date;
+        return $this;
+    }
+
+    public function getDate() {
+        return $this->_date;
+    }
+    
+    public function setDate_edit($date_edit) {
+        $this->_date_edit = $date_edit;
+        return $this;
+    }
+
+    public function getDate_edit() {
+        return $this->_date_edit;
     }
 
 }

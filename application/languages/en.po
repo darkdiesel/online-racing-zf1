@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Online-Racing.net\n"
-"POT-Creation-Date: 2012-12-04 14:05+0300\n"
-"PO-Revision-Date: 2012-12-04 14:05+0300\n"
+"POT-Creation-Date: 2012-12-05 14:27+0300\n"
+"PO-Revision-Date: 2012-12-05 14:28+0300\n"
 "Last-Translator: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language-Team: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language: Russian\n"
@@ -33,7 +33,7 @@ msgstr ""
 "X-Poedit-SearchPath-8: d:\\dev\\localhost\\online-racing\\application\\views"
 "\\scripts\\pagers\n"
 "X-Poedit-SearchPath-9: d:\\dev\\localhost\\online-racing\\application\\views"
-"\\scripts\\articletype\n"
+"\\scripts\\article-type\n"
 
 #: d:\dev\localhost\online-racing\application\controllers/AdminController.php:11
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/index.phtml:2
@@ -73,16 +73,18 @@ msgid "Добавить контент"
 msgstr "Add content"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:112
-#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:90
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:94
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hd_user_toolbar.phtml:24
 #: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:23
 #: d:\dev\localhost\online-racing\application\views\scripts/article/edit.phtml:5
-#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/edit.phtml:5
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/edit.phtml:5
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/id.phtml:29
 #: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:23
 #: d:\dev\localhost\online-racing\application\views\scripts\article/edit.phtml:5
-#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/edit.phtml:5
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/edit.phtml:5
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/id.phtml:29
 msgid "Редактировать"
 msgstr "Edit"
 
@@ -93,32 +95,40 @@ msgid "Удалить статью"
 msgstr "Delete article"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:127
-#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:103
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:107
 msgid "Приносим свои извинения. Данный функционал еще не реализован!"
 msgstr ""
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:19
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:20
-#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:86
-#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:87
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:90
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:91
 msgid "Тип статьи не существует"
 msgstr "Article type not found"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:30
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:2
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:2
 msgid "Типы статей"
 msgstr "Arcticle types"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:39
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/add.phtml:2
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/add.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/add.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/add.phtml:2
 msgid "Добавить тип статьи"
 msgstr "Add article type"
 
-#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:101
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/delete.phtml:2
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/delete.phtml:2
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:53
+msgid "Исправте следующие ошибки для добавления типа статьи!"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:82
+msgid "Исправте следующие ошибки для изминения типа статьи!"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:105
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/delete.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/delete.phtml:2
 msgid "Удалить тип статьи"
 msgstr "Delete article type"
 
@@ -131,6 +141,15 @@ msgstr "Chat"
 #: d:\dev\localhost\online-racing\application\controllers/IndexController.php:13
 msgid "Портал Онлай Скорости"
 msgstr "Online-Racing portal"
+
+#: d:\dev\localhost\online-racing\application\controllers/LeagueController.php:10
+#: d:\dev\localhost\online-racing\application\views\scripts/league/add.phtml:2
+msgid "Добавить лигу"
+msgstr "Add league"
+
+#: d:\dev\localhost\online-racing\application\controllers/LeagueController.php:24
+msgid "Исправте следующие ошибки для добавления лиги!"
+msgstr ""
 
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:16
 #: d:\dev\localhost\online-racing\application\views\scripts\user/login.phtml:2
@@ -145,38 +164,42 @@ msgstr "Authorization"
 msgid "Регистрация"
 msgstr "Registration"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:165
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:164
 #: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:2
 #: d:\dev\localhost\online-racing\application\views\scripts/user/activate.phtml:2
 msgid "Активация пользователя"
 msgstr "User activation"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:248
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:247
 msgid "Восстановление пароля"
 msgstr "Password reminder"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:273
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:272
 msgid "Просмотр профиля"
 msgstr "Profile view"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:304
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:303
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hd_user_toolbar.phtml:22
 msgid "Сообщения"
 msgstr "Messages"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:309
-#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:23
-#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:23
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:308
+#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:2
+#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:2
 msgid "Настройки профиля"
 msgstr "Profile settings"
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:327
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:326
 #: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:2
 #: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:2
 msgid "Редактирование профиля"
 msgstr "Profile editing "
 
-#: d:\dev\localhost\online-racing\application\controllers/UserController.php:395
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:365
+msgid "Исправте следующие ошибки для сохранения изминений профиля!"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/UserController.php:394
 #: d:\dev\localhost\online-racing\application\views\scripts\user/all.phtml:2
 #: d:\dev\localhost\online-racing\application\layouts\scripts/ft_menu.phtml:5
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hd_main_menu.phtml:10
@@ -221,46 +244,50 @@ msgstr "Publish?"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:89
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:53
+#: d:\dev\localhost\online-racing\application\forms/LeagueAddForm.php:37
 msgid "Добавить"
 msgstr "Add"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleAddForm.php:99
 #: d:\dev\localhost\online-racing\application\forms/ArticleEditForm.php:100
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:63
-#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:63
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:59
+#: d:\dev\localhost\online-racing\application\forms/LeagueAddForm.php:47
 #: d:\dev\localhost\online-racing\application\forms/UserActivateForm.php:105
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:258
-#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:85
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:83
 #: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:130
 #: d:\dev\localhost\online-racing\application\forms/UserSettingsForm.php:54
 msgid "Сбросить"
 msgstr "Reset"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleEditForm.php:90
-#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:53
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:50
 msgid "Изменить"
 msgstr "Edit"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:18
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:19
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:17
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:18
-#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:19
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:14
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:14
+#: d:\dev\localhost\online-racing\application\forms/LeagueAddForm.php:18
+#: d:\dev\localhost\online-racing\application\forms/LeagueAddForm.php:19
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:14
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:14
 msgid "Название"
 msgstr "Name"
 
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:35
 #: d:\dev\localhost\online-racing\application\forms/ArticleTypeAddForm.php:36
-#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:35
-#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:36
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:33
+#: d:\dev\localhost\online-racing\application\forms/ArticleTypeEditForm.php:34
 msgid "Описание типа статьи"
 msgstr "Arcticle type description"
 
 #: d:\dev\localhost\online-racing\application\forms/UserActivateForm.php:37
 #: d:\dev\localhost\online-racing\application\forms/UserActivateForm.php:38
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:40
 #: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:41
-#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:42
 #: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:59
 #: d:\dev\localhost\online-racing\application\forms/UserRegisterForm.php:60
 msgid "Пароль"
@@ -293,22 +320,22 @@ msgstr "Clear"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:18
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:19
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:22
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:22
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:33
 msgid "Имя"
 msgstr "Name"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:32
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:33
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:26
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:26
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:37
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:37
 msgid "Фамилия"
 msgstr "Surname"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:46
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:47
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:30
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:30
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:41
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:41
 msgid "Дата рождения"
 msgstr "Date of birthday"
 
@@ -318,15 +345,15 @@ msgstr "Date fromat is yyyy-mm-dd (yyyy - year, mm - month, dd - day)"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:64
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:65
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:34
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:45
 msgid "Страна"
 msgstr "Country"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:78
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:79
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:38
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:38
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:49
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:49
 msgid "Город"
 msgstr "City"
 
@@ -337,57 +364,57 @@ msgstr "Gravatar"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:112
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:113
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:89
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:89
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:100
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:100
 msgid "Skype"
 msgstr "Skype"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:125
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:126
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:93
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:93
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:104
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:104
 msgid "ICQ"
 msgstr "ICQ"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:138
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:139
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:97
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:97
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:108
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:108
 msgid "Google Talk"
 msgstr "Google Talk"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:151
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:152
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:101
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:101
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:112
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:112
 msgid "www"
 msgstr "www"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:165
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:166
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:111
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:111
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:122
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:122
 msgid "Вконтакте"
 msgstr "VKontakte"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:178
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:179
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:115
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:115
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:126
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:126
 msgid "Facebook"
 msgstr "Facebook"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:191
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:192
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:119
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:119
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:130
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:130
 msgid "Twitter"
 msgstr "Twitter"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:204
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:205
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:123
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:123
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:134
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:134
 msgid "Google+"
 msgstr "Google+"
 
@@ -414,8 +441,8 @@ msgid "Контактная информация"
 msgstr "Contacts information"
 
 #: d:\dev\localhost\online-racing\application\forms/UserEditForm.php:314
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:52
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:52
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:63
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:63
 msgid "Социальные сети"
 msgstr "Social networks"
 
@@ -427,19 +454,19 @@ msgstr "Additional information"
 msgid "Введите свой электронный почтовый ящик. Пример: example@mail.com."
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:43
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:42
 msgid "Введите пароль от своей учетной записи."
-msgstr ""
+msgstr "Enter your user password."
 
-#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:60
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:58
 msgid "Запомнить меня"
 msgstr "Remember me"
 
-#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:61
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:59
 msgid "Отметьте поле, чтобы не авторизовываться при следующем посещении сайта."
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:75
+#: d:\dev\localhost\online-racing\application\forms/UserLoginForm.php:73
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hd_user_toolbar.phtml:33
 msgid "Войти"
 msgstr "Login"
@@ -487,8 +514,8 @@ msgid "Зарегестрировать"
 msgstr "Register"
 
 #: d:\dev\localhost\online-racing\application\forms/UserSettingsForm.php:20
-#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:12
-#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:12
+#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:20
+#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:20
 msgid "Язык"
 msgstr "Language"
 
@@ -497,18 +524,14 @@ msgid "Языковые настройки"
 msgstr "Language settings"
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts\user/login.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:86
 #: d:\dev\localhost\online-racing\application\views\scripts\user/restorepasswd.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:8
 #: d:\dev\localhost\online-racing\application\views\scripts/chat/index.phtml:8
 #: d:\dev\localhost\online-racing\application\views\scripts/user/activate.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts/user/login.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts/user/register.phtml:86
 #: d:\dev\localhost\online-racing\application\views\scripts/user/restorepasswd.phtml:7
-msgid "Информация"
-msgstr "Information"
+#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:8
+msgid "Информация!"
+msgstr "Information!"
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:8
 #: d:\dev\localhost\online-racing\application\views\scripts/user/activate.phtml:8
@@ -520,27 +543,82 @@ msgid ""
 msgstr ""
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/activate.phtml:13
-#: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:13
+#: d:\dev\localhost\online-racing\application\views\scripts\user/all.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:16
 #: d:\dev\localhost\online-racing\application\views\scripts\user/login.phtml:13
 #: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:92
 #: d:\dev\localhost\online-racing\application\views\scripts\user/restorepasswd.phtml:13
+#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:14
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:46
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:47
+#: d:\dev\localhost\online-racing\application\views\scripts/article/add.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:46
+#: d:\dev\localhost\online-racing\application\views\scripts/article/delete.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts/article/edit.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/article/edit.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/add.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/delete.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/edit.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/edit.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/id.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/id.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts/league/add.phtml:8
 #: d:\dev\localhost\online-racing\application\views\scripts/user/activate.phtml:13
-#: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:13
+#: d:\dev\localhost\online-racing\application\views\scripts/user/all.phtml:33
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:16
 #: d:\dev\localhost\online-racing\application\views\scripts/user/login.phtml:13
 #: d:\dev\localhost\online-racing\application\views\scripts/user/register.phtml:92
 #: d:\dev\localhost\online-racing\application\views\scripts/user/restorepasswd.phtml:13
-msgid "Ошибка"
-msgstr "Error"
+#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:14
+#: d:\dev\localhost\online-racing\application\views\scripts\article/add.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:46
+#: d:\dev\localhost\online-racing\application\views\scripts\article/delete.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts\article/edit.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\article/edit.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:46
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:47
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/add.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:45
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/delete.phtml:8
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/edit.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/edit.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/id.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/id.phtml:16
+msgid "Ошибка!"
+msgstr "Error!"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/all.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts/user/all.phtml:31
+#: d:\dev\localhost\online-racing\application\views\scripts\user/all.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:48
+#: d:\dev\localhost\online-racing\application\views\scripts/user/all.phtml:34
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:48
 msgid "Пользователи на сайте не найдены!"
 msgstr "Users not found on the site!"
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\user/login.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\user/register.phtml:86
+#: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/user/login.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/user/register.phtml:86
+msgid "Информация"
+msgstr "Information"
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:8
 #: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:8
 msgid "Введите новые данные и нажмите \"Сохранить\"."
 msgstr "Enter data and press \"Send\"."
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:13
+#: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:13
+msgid "Ошибка"
+msgstr "Error"
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:19
 #: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:19
@@ -553,9 +631,9 @@ msgid "Аватар"
 msgstr "Avatar"
 
 #: d:\dev\localhost\online-racing\application\views\scripts\user/edit.phtml:21
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:51
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:62
 #: d:\dev\localhost\online-racing\application\views\scripts/user/edit.phtml:21
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:51
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:62
 msgid "Контакты"
 msgstr "Contacts"
 
@@ -569,56 +647,56 @@ msgstr "Accounts"
 msgid "Дополнительно"
 msgstr "Additional"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:5
 #: d:\dev\localhost\online-racing\application\layouts\scripts/hd_user_toolbar.phtml:21
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:7
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:5
 msgid "Профиль"
 msgstr "Profile"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:42
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:53
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:17
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:42
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:53
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:17
 msgid "Последний визит"
 msgstr "Last visit"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:50
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:50
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:61
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:61
 msgid "Статистика сайта"
 msgstr "Site statistic"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:58
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:58
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:69
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:69
 msgid "Номер пользователя"
 msgstr "User number"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:62
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:62
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:73
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:73
 msgid "Времени на сайте"
 msgstr "Time on the site"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:66
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:66
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:77
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:77
 msgid "Лет"
 msgstr "Years"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:66
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:66
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:77
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:77
 msgid "Месяцев"
 msgstr "Months"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:66
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:66
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:77
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:77
 msgid "Дней"
 msgstr "Days"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:71
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:71
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:82
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:82
 msgid "Дней на сайте"
 msgstr "Days on the site"
 
-#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:79
-#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:79
+#: d:\dev\localhost\online-racing\application\views\scripts\user/info.phtml:90
+#: d:\dev\localhost\online-racing\application\views\scripts/user/info.phtml:90
 msgid "Дата регистрации"
 msgstr "Registration date"
 
@@ -695,6 +773,11 @@ msgid ""
 "Для востановления своего пароля введите e-mail адрес, указаный при "
 "регистрации, на который вам будут высланы данные для востановления пароля."
 msgstr ""
+
+#: d:\dev\localhost\online-racing\application\views\scripts\user/settings.phtml:9
+#: d:\dev\localhost\online-racing\application\views\scripts/user/settings.phtml:9
+msgid "Измините настройки и нажмите \"Сохранить\"."
+msgstr "Change settings and press \"Save\"."
 
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer.phtml:3
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer.phtml:5
@@ -792,7 +875,6 @@ msgstr "Forget password?"
 msgid "На подиум!"
 msgstr "To the podium!"
 
-#: d:\dev\localhost\online-racing\application\layouts\scripts/ls_count_down2_block.phtml:3
 #: d:\dev\localhost\online-racing\application\layouts\scripts/ls_count_down_block.phtml:3
 msgid "Ближайшее событие"
 msgstr ""
@@ -803,9 +885,9 @@ msgstr "User Map"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:15
 #: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:38
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:41
 #: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:38
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:41
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:15
 msgid "Автор"
 msgstr "Author"
@@ -817,45 +899,43 @@ msgstr "Date"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:18
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:18
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:16
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:18
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:18
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:16
 msgid "Действие"
 msgstr "Action"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:31
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:27
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:31
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:31
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:27
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:27
 msgid "Просм."
 msgstr "View"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:32
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:32
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:28
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:28
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:32
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:32
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:28
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:28
 msgid "Ред."
 msgstr "Edit"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:29
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:29
 #: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:29
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:29
 msgid "Удал."
 msgstr "Del"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:44
-#: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:44
-#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:45
-#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:45
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:44
-#: d:\dev\localhost\online-racing\application\views\scripts\admin/users.phtml:44
-msgid "Контент не найден на сайте!"
+#: d:\dev\localhost\online-racing\application\views\scripts/admin/articles.phtml:47
+#: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:47
+#: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:47
+#: d:\dev\localhost\online-racing\application\views\scripts\admin/articles.phtml:47
+msgid "Контент на сайте не найден!"
 msgstr "Content not found on the site!"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/users.phtml:15
@@ -891,42 +971,33 @@ msgid "Подробнее..."
 msgstr "More..."
 
 #: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:32
-#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:39
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:42
 #: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:32
-#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:39
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:42
 msgid "Просмотров"
 msgstr "Views"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:40
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:43
 #: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:33
-#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:40
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:43
 msgid "Опубликовано"
 msgstr "Published"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/article/all.phtml:35
-#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:42
+#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:45
 #: d:\dev\localhost\online-racing\application\views\scripts\article/all.phtml:35
-#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:42
+#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:45
 msgid "Последнее редактирование"
 msgstr "Last edited"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/article/edit.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/id.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts\article/edit.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts\article/id.phtml:7
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/id.phtml:7
-msgid "Ошибка!!!"
-msgstr "Error!!!"
-
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:15
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:15
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:15
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:15
 msgid "Описание"
 msgstr "Description"
 
-#: d:\dev\localhost\online-racing\application\views\scripts/articletype/all.phtml:42
-#: d:\dev\localhost\online-racing\application\views\scripts\articletype/all.phtml:42
+#: d:\dev\localhost\online-racing\application\views\scripts/article-type/all.phtml:46
+#: d:\dev\localhost\online-racing\application\views\scripts\article-type/all.phtml:46
 msgid "Типы статей на сайте не найдены!"
 msgstr "Article types not found on the site!"
 
@@ -935,8 +1006,8 @@ msgid "Введите сообщение в поле ввода и нажмит�
 msgstr "Enter your message to the input field and press \"Send\"."
 
 #: d:\dev\localhost\online-racing\application\views\scripts/chat/index.phtml:14
-msgid "Предупреждение"
-msgstr "Warning"
+msgid "Предупреждение!"
+msgstr "Warning!"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/chat/index.phtml:15
 msgid "Сообщения в чате могут оставлять только авторизованные пользователи."
@@ -1011,6 +1082,12 @@ msgstr "First"
 #: d:\dev\localhost\online-racing\application\views\scripts\pagers/user_all_pagination_control.phtml:40
 msgid "Последняя"
 msgstr "Last"
+
+#~ msgid "Контент не найден на сайте!"
+#~ msgstr "Content not found on the site!"
+
+#~ msgid "Ошибка!!!"
+#~ msgstr "Error!!!"
 
 #~ msgid "Добавление контента"
 #~ msgstr "Add content"

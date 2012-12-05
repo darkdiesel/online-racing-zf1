@@ -39,10 +39,13 @@
                 </table>
             </div>
             <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml'); ?>
-            <?php
-        } else {
-            echo $this->translate('Контент не найден на сайте!');
-        }
-        ?>
+        <?php } else {
+            ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->translate('Контент на сайте не найден!'); ?>
+            </div>
+        <?php } ?>
     </div>
 </div>

@@ -28,7 +28,10 @@ class Application_Model_ArticleTypeMapper {
         foreach ($resultSet as $row) {
             $entry = new Application_Model_ArticleType();
             $entry->setId($row->id)
-                    ->setName($row->name);
+                    ->setName($row->name)
+                    ->setDescription($row->description)
+                    ->setDate($row->date)
+                    ->setDate_edit($row->date_edit);
             $entries[] = $entry;
         }
         return $entries;
@@ -37,16 +40,20 @@ class Application_Model_ArticleTypeMapper {
     public function save(Application_Model_ArticleType $article_type, $action) {
         switch ($action) {
             case 'add':
+                $date = date('Y-m-d H:i:s');
                 $data = array(
                     'name' => $article_type->getName(),
-                    'description' => $article_type->getDescription()
+                    'description' => $article_type->getDescription(),
+                    'date' => $date,
+                    'date_edit' => $date,
                 );
                 break;
             case 'edit':
                 $data = array(
                     'id' => $article_type->getId(),
                     'name' => $article_type->getName(),
-                    'description' => $article_type->getDescription()
+                    'description' => $article_type->getDescription(),
+                    'date_edit' => date('Y-m-d H:i:s')
                 );
                 break;
             default:
@@ -69,14 +76,14 @@ class Application_Model_ArticleTypeMapper {
                         ->select()
                         ->from(array('a_t' => 'article_type'), 'id')
                         ->where('a_t.id = ?', $id)
-                        ->columns(array('id', 'name', 'description'));
+                        ->columns(array('id', 'name', 'description','date', 'date_edit'));
                 break;
             case 'edit':
                 $select = $this->getDbTable()
                         ->select()
                         ->from(array('a_t' => 'article_type'), 'id')
                         ->where('a_t.id = ?', $id)
-                        ->columns(array('id', 'name', 'description'));
+                        ->columns(array('id', 'name', 'description','date', 'date_edit'));
             default:
 
                 break;
@@ -98,7 +105,7 @@ class Application_Model_ArticleTypeMapper {
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
                                         ->select()
                                         ->from(array('a_t' => 'article_type'), 'id')
-                                        ->columns(array('id', 'name', 'description'))
+                                        ->columns(array('id', 'name', 'description','date', 'date_edit'))
                                         ->order('id ' . $order));
                 break;
         }

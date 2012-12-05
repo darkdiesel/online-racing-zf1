@@ -4,17 +4,19 @@
         if (!$this->errMessage != "") {
             echo $this->translate('Редактировать') . ' ➛ ' . $this->escape($this->form->title->getvalue());
         } else {
-            echo $this->translate('Ошибка!!!');
+            echo $this->translate('Ошибка!');
         }
         ?>
     </div>
     <div class="div_hr"></div>
     <div class="page_content">
-        <?php
-        if ($this->errMessage != "") {
-            echo $this->errMessage = '<div class="messages errors">' . $this->errMessage . '</div>';
-        }
-        ?>
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } ?>
         <?php echo $this->form; ?>
         <?php
             $this->ckeditor = 'ckeditor';

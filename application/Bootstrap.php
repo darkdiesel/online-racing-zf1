@@ -281,21 +281,57 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         
         $router->addRoute(
-                'articleTypeId', new Zend_Controller_Router_Route('articletype/id/:id',
+                'allAdminLeagues', new Zend_Controller_Router_Route('admin/leagues/:page',
                         array(
                             'module' => 'default',
-                            'controller' => 'articletype',
-                            'action' => 'id',
-                            'id' => 1)
+                            'controller' => 'admin',
+                            'action' => 'leagues',
+                            'page' => 1)
         ));
         
         $router->addRoute(
-                'articleTypeEdit', new Zend_Controller_Router_Route('articletype/edit/:id',
+                'articleTypeId', new Zend_Controller_Router_Route('article-type/id/:id',
                         array(
                             'module' => 'default',
-                            'controller' => 'articletype',
+                            'controller' => 'article-type',
+                            'action' => 'id',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'articleTypeEdit', new Zend_Controller_Router_Route('article-type/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'article-type',
                             'action' => 'edit',
-                            'id' => 1)
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'leagueId', new Zend_Controller_Router_Route('league/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'league',
+                            'action' => 'id',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'leagueEdit', new Zend_Controller_Router_Route('league/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'league',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'allLeagues', new Zend_Controller_Router_Route('league/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'league',
+                            'action' => 'all',
+                            'page' => 1)
         ));
 
         /*

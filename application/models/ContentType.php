@@ -4,6 +4,8 @@ class Application_Model_ContentType {
 
     protected $_id;
     protected $_name;
+    protected $_date;
+    protected $_date_edit;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -54,6 +56,24 @@ class Application_Model_ContentType {
 
     public function getName() {
         return $this->_name;
+    }
+    
+    public function setDate($date) {
+        $this->_date = $date;
+        return $this;
+    }
+
+    public function getDate() {
+        return $this->_date;
+    }
+    
+    public function setDate_edit($date_edit) {
+        $this->_date_edit = $date_edit;
+        return $this;
+    }
+
+    public function getDate_edit() {
+        return $this->_date_edit;
     }
 
 }

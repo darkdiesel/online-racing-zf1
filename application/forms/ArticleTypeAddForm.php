@@ -37,7 +37,7 @@ class Application_Form_ArticleTypeAddForm extends Zend_Form {
             'cols' => 60,
             'rows' => 10,
             'maxlength' => 500,
-            'required' => true,
+            'required' => false,
             'filters' => array('StringTrim'),
             'validators' => array('NotEmpty'),
             'decorators' => array(

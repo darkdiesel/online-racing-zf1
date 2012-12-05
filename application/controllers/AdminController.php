@@ -18,6 +18,14 @@ class AdminController extends App_Controller_FirstBootController {
         $mapper = new Application_Model_ArticleMapper();
         $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5, 1, 'admin_all', 'DESC');
     }
+    
+    public function leaguesAction() {
+        $this->view->headTitle($this->view->translate('Лиги'));
+
+        $request = $this->getRequest();
+        $mapper = new Application_Model_LeagueMapper();
+        $this->view->paginator = $mapper->getLeaguesPager(10, $request->getParam('page'), 5, 'admin_all', 'ASC');
+    }
 
     public function usersAction() {
         $this->view->headTitle($this->view->translate('Пользователи'));

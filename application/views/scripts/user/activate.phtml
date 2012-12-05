@@ -4,13 +4,13 @@
     <div class="page_content">
         <div class="alert alert-info alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4><?php echo $this->translate('Информация'); ?></h4>
+            <h4><?php echo $this->translate('Информация!'); ?></h4>
             <?php echo $this->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.<br/><strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.'); ?>
         </div>
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка'); ?></h4>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } ?>

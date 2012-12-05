@@ -19,14 +19,14 @@
                     <tbody>
                         <?php foreach ($this->paginator as $article_type): ?>
                             <tr>
-                                <td class="article_type_id"><span><a href="<?php echo $this->baseURL('articletype/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['id']) ?></a></span></td>
-                                <td class="article_type_name"><span><a href="<?php echo $this->baseURL('articletype/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['name']) ?></a></span></td>
+                                <td class="article_type_id"><span><a href="<?php echo $this->baseURL('article-type/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['id']) ?></a></span></td>
+                                <td class="article_type_name"><span><a href="<?php echo $this->baseURL('article-type/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['name']) ?></a></span></td>
                                 <td class="article_type_descr"><span><?php echo $this->truncate($this->escape($article_type['description']))->toLength(200); ?></span></td>
                                 <td class="article_type_action">
                                     <span>
-                                        <a href="<?php echo $this->baseUrl('articletype/id/' . $this->escape($article_type['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-                                        <a href="<?php echo $this->baseUrl('articletype/edit/' . $this->escape($article_type['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-                                        <a href="<?php echo $this->baseUrl('articletype/delete/' . $this->escape($article_type['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('article-type/id/' . $this->escape($article_type['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('article-type/edit/' . $this->escape($article_type['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('article-type/delete/' . $this->escape($article_type['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
                                     </span>
                                 </td>
                             </tr>
@@ -39,8 +39,12 @@
             ?>
             <?php
         } else {
-            echo $this->translate('Типы статей на сайте не найдены!');
-        }
-        ?>
+            ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->translate('Типы статей на сайте не найдены!'); ?>
+            </div>
+        <?php } ?>
     </div>
 </div>

@@ -8,41 +8,44 @@
             $bbcode = Zend_Markup::factory('Bbcode');
             ?>
 
-            <?php foreach ($this->paginator as $item): ?>
+            <?php foreach ($this->paginator as $article): ?>
                 <div class="article_item">
-                    <div class="article_title"><a href="<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>"><?php echo $this->escape($item['title']); ?></a></div>
-                    <?php if ($this->escape($item['image']) != '') { ?>
-                        <img class="img-polaroid article_image" src="<?php echo $this->escape($item['image']); ?>">
+                    <div class="article_title"><a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article['id'])) ?>"><?php echo $this->escape($article['title']); ?></a></div>
+                    <?php if ($this->escape($article['image']) != '') { ?>
+                        <img class="img-polaroid article_image" src="<?php echo $this->escape($article['image']); ?>">
                     <?php } ?>
-                    <div class="article_text"><?php echo $this->truncate($bbcode->render($this->escape($item['text'])))->toLength(1000); ?></div>
+                    <div class="article_text"><?php echo $this->truncate($bbcode->render($this->escape($article['text'])))->toLength(1000); ?></div>
                     <div class="article_controls">
                         <?php
                         if (Zend_Auth::getInstance()->hasIdentity()) {
-                            if (Zend_Auth::getInstance()->getStorage('online-racing')->read()->id == $item['user_id']) {
+                            if (Zend_Auth::getInstance()->getStorage('online-racing')->read()->id == $article['user_id']) {
                                 ?>
-                                <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                                <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($article['id'])) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
                                 <?php
                             }
                         }
                         ?>
-                        <a href = "<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
+                        <a href = "<?php echo $this->baseUrl('article/id/' . $this->escape($article['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="article_info">
-                        <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($item['user_id'])) ?>"><?php echo $item['login']; ?></a></div>
-                        <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($item['views']); ?></div>
-                        <div class="article_date article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($item['date']); ?></div>
-                        <?php if ($item['date'] != $item['date_edit']) { ?>
-                            <div class="article_date_edit article_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($item['date_edit']); ?></div>
+                        <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($article['user_id'])) ?>"><?php echo $article['login']; ?></a></div>
+                        <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($article['views']); ?></div>
+                        <div class="article_date article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($article['date']); ?></div>
+                        <?php if ($article['date'] != $article['date_edit']) { ?>
+                            <div class="article_date_edit article_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($article['date_edit']); ?></div>
                         <?php } ?>
                     </div>
                 </div>
                 <?php
             endforeach;
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+        } else {
             ?>
-            <?php
-        } else { ?>
-            <div class='alert alert-error'> <?php echo $this->translate('Контент не найден на сайте!'); ?></div>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->translate('Контент на сайте не найден!'); ?>
+            </div>
         <?php } ?>
     </div>
 </div>

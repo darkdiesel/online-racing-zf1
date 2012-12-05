@@ -4,7 +4,7 @@
         if (!$this->errMessage != "") {
             echo $this->escape($this->article_type->name);
         } else {
-            echo $this->translate('Ошибка!!!');
+            echo $this->translate('Ошибка!');
         }
         ?>
     </div>
@@ -13,7 +13,7 @@
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка'); ?></h4>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } else {
@@ -24,6 +24,11 @@
                 <br>
                 <span>Описание:</span>
                 <div class="article_type_descr"><?php echo $this->escape($this->article_type->description); ?></div>
+                <div class="article_type_controls">
+                    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+                        <a href = "<?php echo $this->baseUrl('article-type/edit/' . $this->escape($this->article_type->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                    <?php } ?>
+                </div>
             </div>
         <?php } ?>
     </div>

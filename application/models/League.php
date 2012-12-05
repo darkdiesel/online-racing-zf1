@@ -4,6 +4,10 @@ class Application_Model_League {
 
     protected $_id;
     protected $_name;
+    protected $_logo;
+    protected $_description;
+    protected $_date;
+    protected $_date_edit;
 
     public function __construct(array $options = null) {
         if (is_array($options)) {
@@ -54,6 +58,42 @@ class Application_Model_League {
 
     public function getName() {
         return $this->_name;
+    }
+    
+    public function setLogo($logo) {
+        $this->_logo = (string) $logo;
+        return $this;
+    }
+
+    public function getLogo() {
+        return $this->_logo;
+    }
+    
+    public function setDescription($description) {
+        $this->_description = (string) $description;
+        return $this;
+    }
+
+    public function getDescription() {
+        return $this->_description;
+    }
+
+    public function setDate($date) {
+        $this->_date = $date;
+        return $this;
+    }
+
+    public function getDate() {
+        return $this->_date;
+    }
+
+    public function setDate_edit($date_edit) {
+        $this->_date_edit = $date_edit;
+        return $this;
+    }
+
+    public function getDate_edit() {
+        return $this->_date_edit;
     }
 
 }

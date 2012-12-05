@@ -176,10 +176,10 @@ body iframe{
 			}
                         #content .page_title{
                             font-family:gill;
-                            color: #9A9A9A;
+                            color:#484848;
                             font-size: 35px;
                             line-height:35px;
-                            text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
+                            text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #141414;
                         }
                         #content .page_content{
                             background:none repeat scroll 0 0 #FFFFFF;

@@ -2,9 +2,16 @@
     <ul id="main_menu" class="main_menu">
         <li><a href="<?php echo $this->baseUrl("") ?>" class="current"><?php echo $this->translate('Главная') ?></a></li>
         <li class="expanded">
-            <a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Чемпионат') ?></a>
+            <a href="<?php echo $this->baseUrl("league/all") ?>"><?php echo $this->translate('Лиги') ?></a>
             <ul class="menu">
-                <li class="leaf"><a href="#" title=""><?php echo $this->translate('F1 Online Racing League') ?></a></li>
+                <?php
+                $mapper = new Application_Model_LeagueMapper();
+                $leagues = $mapper->fetchAll();
+
+                foreach ($leagues as $league):
+                    ?>
+                    <li class="leaf"><a href="<?php echo $this->baseUrl('league/id/' . $league->id) ?>" title="<?php echo $league->name; ?>"><?php echo $league->name; ?></a></li>
+                <?php endforeach; ?>
             </ul>
         </li>
         <li><a href="<?php echo $this->baseUrl("user/all") ?>"><?php echo $this->translate('Гонщики') ?></a></li>

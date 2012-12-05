@@ -52,6 +52,13 @@
     #user_info_page #tabs{
         clear:both;
     }
+        #user_info_page #tabs table td.header_column{
+            clear:both;
+            font-weight:bold;
+            vertical-align:middle;
+            font-size:15px;
+            width:180px;
+        }
     
 /* user edit page */
 #userEdit{

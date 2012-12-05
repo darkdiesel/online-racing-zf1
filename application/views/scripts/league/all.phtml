@@ -1,4 +1,49 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>League</b> and script/action name <b>all</b></p>
+<div id="leagues_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Лиги'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        if (count($this->paginator)) {
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+
+            foreach ($this->paginator as $league):
+                ?>
+                <div class="league_item">
+                    <div class="league_name"><a href="<?php echo $this->baseUrl('league/id/' . $this->escape($league['id'])) ?>"><?php echo $this->escape($league['name']); ?></a></div>
+                    <?php if ($this->escape($league['logo']) != '') { ?>
+                        <img class="img-polaroid league_logo" src="<?php echo $this->escape($league['logo']); ?>">
+                    <?php } ?>
+                    <div class="league_description"><?php echo $this->truncate($this->escape($league['description']))->toLength(200); ?></div>
+                    <div class="league_controls">
+                        <?php
+                        if (Zend_Auth::getInstance()->hasIdentity()) {
+                            $mapper = new Application_Model_UserMapper();
+                            $role_id = $mapper->getUserRole(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                            if ($role_id == 1) {
+                                ?>
+                                <a href = "<?php echo $this->baseUrl('league/edit/' . $this->escape($league['id'])) ?>" class = "btn btn-small btn-inverse league_edit"><?php echo $this->translate('Редактировать') ?></a>
+                                <?php
+                            }
+                        }
+                        ?>
+                        <a href = "<?php echo $this->baseUrl('league/id/' . $this->escape($league['id'])) ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
+                    </div>
+                    <div class="league_info">
+                        <div class="league_date league_info_item"><span><?php echo $this->translate('Создана') ?>: </span><?php echo $this->escape($league['date']); ?></div>
+                    </div>
+                </div>
+                <?php
+            endforeach;
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            ?>
+            <?php
+        } else {
+            ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->translate('Лиги на сайте не найдены!'); ?>
+            </div>
+        <?php } ?>
+    </div>
 </div>

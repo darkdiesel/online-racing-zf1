@@ -30,6 +30,36 @@ class Application_Form_LeagueAddForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
+        
+        $this->addElement('text', 'logo', array(
+            'label' => $this->translate('Логотип лиги'),
+            'placeholder' => $this->translate('Логотип лиги'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'class' => 'x_field',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+        
+        $this->addElement('textarea', 'description', array(
+            'label' => $this->translate('Описание лиги'),
+            'placeholder' => $this->translate('Описание лиги'),
+            'cols' => 60,
+            'rows' => 10,
+            'maxlength' => 500,
+            'required' => false,
+            'filters' => array('StringTrim'),
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'aboutTextArea_Label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+            )
+        ));
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,

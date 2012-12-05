@@ -48,7 +48,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
                 $mapper = new Application_Model_ArticleTypeMapper();
                 $mapper->save($article_type, 'add');
 
-                $this->_helper->redirector('all', 'articletype');
+                $this->_helper->redirector('all', 'article-type');
             } else {
                 $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления типа статьи!');
             }
@@ -64,7 +64,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
 
         // form
         $form = new Application_Form_ArticleTypeEditForm();
-        $form->setAction('/articletype/edit/' . $article_type_id);
+        $form->setAction('/article-type/edit/' . $article_type_id);
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -77,7 +77,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
                 $mapper = new Application_Model_ArticleTypeMapper();
                 $mapper->save($article, 'edit');
 
-                $this->redirect($this->view->baseUrl('articletype/id/' . $article_type_id));
+                $this->redirect($this->view->baseUrl('article-type/id/' . $article_type_id));
             } else {
                 $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа статьи!');
             }

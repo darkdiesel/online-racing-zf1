@@ -4,7 +4,7 @@
         if (!$this->errMessage != "") {
             echo $this->translate('Профиль') . ' ➛ ' . $this->user->login;
         } else {
-            echo $this->translate('Ошибка!!!');
+            echo $this->translate('Ошибка!');
         }
         ?>
     </div>
@@ -13,7 +13,7 @@
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка'); ?></h4>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } else { ?>
