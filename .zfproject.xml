@@ -50,6 +50,9 @@
           <actionMethod actionName="delete"/>
           <actionMethod actionName="all"/>
         </controllerFile>
+        <controllerFile controllerName="Championship">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false">
         <formFile formName="ArticleAdd"/>
@@ -181,6 +184,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="League">
             <viewScriptFile forActionName="all"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Championship">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

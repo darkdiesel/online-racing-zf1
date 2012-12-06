@@ -72,6 +72,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->ls_count_down_block = true; // count down block
         $view->ls_chat_block = true; // chat block
         $view->ls_user_map_block = true; // user map block
+        $view->ls_online_radio_block = true; // search block
         $view->ls_search_block = false; // search block
 
         /* [HEADER] */
@@ -332,6 +333,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'controller' => 'league',
                             'action' => 'all',
                             'page' => 1)
+        ));
+        
+        $router->addRoute(
+                'gameId', new Zend_Controller_Router_Route('game/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'game',
+                            'action' => 'id',
+                            'id' => 0)
         ));
 
         /*

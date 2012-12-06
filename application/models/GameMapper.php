@@ -17,7 +17,7 @@ class Application_Model_GameMapper {
 
     public function getDbTable() {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Application_Model_DbTable_Article');
+            $this->setDbTable('Application_Model_DbTable_Game');
         }
         return $this->_dbTable;
     }
@@ -29,11 +29,37 @@ class Application_Model_GameMapper {
             $entry = new Application_Model_Game();
             $entry->setId($row->id)
                     ->setName($row->name)
-                    ->setDescription($row->description)
                     ->setArticle_Id($row->article_id);
             $entries[] = $entry;
         }
         return $entries;
+    }
+    
+    public function save(Application_Model_Game $game, $action) {
+        switch ($action) {
+            case 'add':
+                $date = date('Y-m-d H:i:s');
+                $data = array(
+                    'name' => $game->getName(),
+                );
+                break;
+            case 'edit':
+                $data = array(
+                    'id' => $game->getId(),
+                    'name' => $game->getName(),
+                );
+                break;
+            default:
+                $data = array();
+                break;
+        }
+
+        if (null === ($id = $game->getId())) {
+            unset($data['id']);
+            return $this->getDbTable()->insert($data);
+        } else {
+            $this->getDbTable()->update($data, array('id = ?' => $id));
+        }
     }
 
 }

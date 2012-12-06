@@ -4,7 +4,6 @@ class Application_Model_Game {
 
     protected $_id;
     protected $_name;
-    protected $_description;
     protected $_article_id;
 
     public function __construct(array $options = null) {
@@ -56,15 +55,6 @@ class Application_Model_Game {
 
     public function getName() {
         return $this->_name;
-    }
-
-    public function setDescription($descrpt) {
-        $this->_description = (string) $descrpt;
-        return $this;
-    }
-
-    public function getDescription() {
-        return $this->_description;
     }
 
     public function setArticle_Id($id) {

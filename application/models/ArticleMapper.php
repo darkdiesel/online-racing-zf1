@@ -79,9 +79,9 @@ class Application_Model_ArticleMapper {
 
         if (null === ($id = $article->getId())) {
             unset($data['id']);
-            $this->getDbTable()->insert($data);
+            return $this->getDbTable()->insert($data);
         } else {
-            $this->getDbTable()->update($data, array('id = ?' => $id));
+            return $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
 
