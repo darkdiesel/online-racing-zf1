@@ -47,14 +47,14 @@ class Acl extends Zend_Acl {
                 $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
 		$this->add(new Zend_Acl_Resource('admin/index'),'admin_allow');
                 
-                $this->add(new Zend_Acl_Resource('articletype/id'),'admin_allow');
-                $this->add(new Zend_Acl_Resource('articletype/all'),'admin_allow');
+                $this->add(new Zend_Acl_Resource('article-type/id'),'admin_allow');
+                $this->add(new Zend_Acl_Resource('article-type/all'),'admin_allow');
 		
 // master resources
 		$this->add(new Zend_Acl_Resource('master_allow'));
-                $this->add(new Zend_Acl_Resource('articletype/add'),'master_allow');
-                $this->add(new Zend_Acl_Resource('articletype/edit'),'master_allow');
-                $this->add(new Zend_Acl_Resource('articletype/delete'),'master_allow');
+                $this->add(new Zend_Acl_Resource('article-type/add'),'master_allow');
+                $this->add(new Zend_Acl_Resource('article-type/edit'),'master_allow');
+                $this->add(new Zend_Acl_Resource('article-type/delete'),'master_allow');
                 
                 $this->add(new Zend_Acl_Resource('league/add'),'master_allow');
                 $this->add(new Zend_Acl_Resource('league/edit'),'master_allow');

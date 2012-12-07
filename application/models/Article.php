@@ -9,7 +9,7 @@ class Application_Model_Article {
     protected $_title;
     protected $_text;
     protected $_image;
-    protected $_date;
+    protected $_date_create;
     protected $_date_edit;
     protected $_views;
     protected $_publish;
@@ -111,13 +111,13 @@ class Application_Model_Article {
         return $this->_image;
     }
 
-    public function setDate($date) {
-        $this->_date = $date;
+    public function setDate_create($date_create) {
+        $this->_date_create = $date_create;
         return $this;
     }
 
-    public function getDate() {
-        return $this->_date;
+    public function getDate_create() {
+        return $this->_date_create;
     }
     
     public function setDate_edit($date_edit) {

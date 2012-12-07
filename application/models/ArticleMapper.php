@@ -31,7 +31,7 @@ class Application_Model_ArticleMapper {
                     ->setUser_id($row->user_id)
                     ->setTitle($row->title)
                     ->setText($row->text)
-                    ->setDate($row->date)
+                    ->setDate_create($row->date_create)
                     ->setViews($row->views)
                     ->setLast_ip($row->last_ip);
             $entries[] = $entry;
@@ -54,7 +54,7 @@ class Application_Model_ArticleMapper {
                     'title' => $article->getTitle(),
                     'text' => $article->getText(),
                     'image' => $article->getimage(),
-                    'date' => $date,
+                    'date_create' => $date,
                     'date_edit' => $date,
                     'views' => 0,
                     'publish' => $article->getPublish(),
@@ -105,7 +105,7 @@ class Application_Model_ArticleMapper {
                                         ->setIntegrityCheck(false)
                                         ->from(array('a' => 'article'), 'id')
                                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
-                                        ->columns(array('id', 'user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit'))
+                                        ->columns(array('id', 'user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit'))
                                         ->where('publish=1')
                                         ->order('id '.$order));
                 break;
@@ -116,7 +116,7 @@ class Application_Model_ArticleMapper {
                                         ->from(array('a' => 'article'), 'id')
                                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
                                         ->join(array('at' => 'article_type'), 'a.article_type_id = at.id', 'name')
-                                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id'))
+                                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit', 'article_type_id'))
                                         ->order('id '.$order));
                 break;
             default:
@@ -145,7 +145,7 @@ class Application_Model_ArticleMapper {
                         ->from(array('a' => 'article'), 'id')
                         ->where('a.id = ? and a.publish = 1', $id)
                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
-                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
+                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
                 break;
             case 'edit':
                 $select = $this->getDbTable()
@@ -154,7 +154,7 @@ class Application_Model_ArticleMapper {
                         ->from(array('a' => 'article'), 'id')
                         ->where('a.id = ?', $id)
                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
-                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
+                        ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'));
             default:
 
                 break;
@@ -195,7 +195,7 @@ class Application_Model_ArticleMapper {
                 ->from(array('a' => 'article'), 'id')
                 ->where('a.publish = 1')
                 ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
-                ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'))
+                ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit', 'article_type_id', 'last_ip', 'content_type_id', 'publish'))
                 ->order('id ' . $order);
 
         $result = $this->getDbTable()
