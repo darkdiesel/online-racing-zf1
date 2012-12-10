@@ -2,20 +2,28 @@
 
 class GameController extends App_Controller_FirstBootController {
 
+        public function init() {
+        parent::init();
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/articles.css"));
+    }
+    
     public function idAction() {
         $request = $this->getRequest();
         $game_id = (int) $request->getParam('id');
 
-        $mapper = new Application_Model_GameMapper();
-        $game_data = $mapper->getGameDataById($game_id, 'view');
-
+        $game_mapper = new Application_Model_GameMapper();
+        $game_data = $game_mapper->getGameDataById($game_id, 'view');
+        
+        $article_mapper = new Application_Model_ArticleMapper();
+        $article_data = $article_mapper->getArticleDataById($game_data->article_id, 'view');
+        
         if ($game_data == 'null') {
             $this->view->errMessage = $this->view->translate('Игра не существует');
             $this->view->headTitle($this->view->translate('Игра не существует'));
             return;
         } else {
-            $this->view->article_type = $game_data;
-            $this->view->headTitle($game_data->name);
+            $this->view->article = $article_data;
+            $this->view->headTitle($article_data->title);
         }
     }
 

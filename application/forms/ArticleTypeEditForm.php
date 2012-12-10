@@ -62,10 +62,22 @@ class Application_Form_ArticleTypeEditForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
+        
+        $this->addElement('button', 'cancel', array(
+            'ignore' => true,
+            'class' => 'btn',
+            'onClick' => "location.href='/article-type/all'",
+            'label' => $this->translate('Отмена'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
+            )
+        ));
 
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset')
+            $this->getElement('reset'),
+            $this->getElement('cancel')
                 ), 'form_actions', array());
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',

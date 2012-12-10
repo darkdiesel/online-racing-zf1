@@ -1,4 +1,4 @@
-<div id="article_page" class="page">
+<div id="article_page" class="page article">
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
@@ -32,6 +32,7 @@
                         if (Zend_Auth::getInstance()->getStorage('online-racing')->read()->id == $this->escape($this->article->user_id)) {
                             ?>
                             <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                            <a href = "<?php echo $this->baseUrl('article/delete/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
                             <?php
                         }
                     }
@@ -40,8 +41,8 @@
                 <div class="article_info">
                     <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($this->article->user_id)) ?>"><?php echo $this->escape($this->article->login); ?></a></div>
                     <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->article->views); ?></div>
-                    <div class="article_date article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article->date); ?></div>
-                    <?php if ($this->escape($this->article->date) != $this->escape($this->article->date_edit)) { ?>
+                    <div class="article_date_create article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article->date_create); ?></div>
+                    <?php if ($this->escape($this->article->date_create) != $this->escape($this->article->date_edit)) { ?>
                         <div class="article_date_edit article_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->article->date_edit); ?></div>
                     <?php } ?>
                 </div>

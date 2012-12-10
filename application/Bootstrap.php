@@ -255,6 +255,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         
         $router->addRoute(
+                'articleDelete', new Zend_Controller_Router_Route('article/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'article',
+                            'action' => 'delete',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
                 'allArticles', new Zend_Controller_Router_Route('article/all/:page',
                         array(
                             'module' => 'default',

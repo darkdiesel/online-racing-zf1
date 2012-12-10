@@ -486,6 +486,9 @@ form.white_box .form_actions_group{
     display:inline-block;
     clear:both;
 }
+    form.white_box .form_actions_group button{ 
+        height:27px;
+    }
 .soc_buttons {
     position: absolute;
     right:0;

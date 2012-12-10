@@ -63,7 +63,7 @@
             #articles_page .article_item .article_author a:hover{
                 color:#1F81C6;
             }
-        #articles_page .article_item .article_date{
+        #articles_page .article_item .article_date_create{
 
         }
         #articles_page .article_item .article_date_edit{
@@ -91,69 +91,69 @@
                     color:#4F4F4F;
                 }
 /* article detail page */
-#article_page{
+.article{
     
 }
-    #article_page .article_item{
+    .article .article_item{
         
     }
-        #article_page .article_item .article_image{
+        .article .article_item .article_image{
             margin:0 auto 20px;
             display:block;
             max-width:450px;
             max-height:280px;
         }
-        #article_page .article_item .article_text{
+        .article .article_item .article_text{
             margin:10px 0;
             color:#424242;
             font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
             padding:10px 20px;
         }
-            #article_page .article_item .article_text img{
+            .article .article_item .article_text img{
                 border:1px solid #D2D2D2;
                 border-radius:2px;
                 padding:4px;
                 background:#ffffff;
                 box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
             }
-        #article_page .article_item .article_controls{
+        .article .article_item .article_controls{
             float:right;
             clear:both;
             margin:5px 0;
         }
-        #article_page .article_item .article_author{
+        .article .article_item .article_author{
         
         }
-            #article_page .article_item .article_author a{
+            .article .article_item .article_author a{
                 
             }
-            #article_page .article_item .article_author a:hover{
+            .article .article_item .article_author a:hover{
                 color:#1F81C6;
             }
-        #article_page .article_item .article_date{
+        .article .article_item .article_date_create{
 
         }
-        #article_page .article_item .article_date_edit{
+        .article .article_item .article_date_edit{
         
         }
-        #article_page .article_item .article_views{
+        .article .article_item .article_views{
         
         }
-        #article_page .article_item .article_info{
+        .article .article_item .article_info{
             border-top:1px solid #E6E0E0;
             font-size:10px;
             color:#969696;
             text-align:right;
             clear:both;
         }
-            #article_page .article_item .article_info .article_info_item{
+            .article .article_item .article_info .article_info_item{
                 display:inline-block;
             }
-                #article_page .article_item .article_info .article_info_item:before{
+                .article .article_item .article_info .article_info_item:before{
                     content:"|";
                     margin:0 5px;
                 }
-                #article_page .article_item .article_info .article_info_item span{
+                .article .article_item .article_info .article_info_item span{
                     font-weight:bold;
                     color:#4F4F4F;
                 }

@@ -61,5 +61,22 @@ class Application_Model_GameMapper {
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
+    
+    public function getGameDataById($id) {
+        $select = $this->getDbTable()
+                        ->select()
+                        ->from(array('g' => 'game'), 'id')
+                        ->where('g.id = ?', $id)
+                        ->columns(array('id', 'name', 'article_id'));
+
+        $result = $this->getDbTable()
+                ->fetchRow($select);
+
+        if (0 == count($result)) {
+            return 'null';
+        }
+
+        return $result;
+    }
 
 }
