@@ -20,6 +20,9 @@ class Acl extends Zend_Acl {
                 
                 $this->add(new Zend_Acl_Resource('league/id'),'guest_allow');
                 $this->add(new Zend_Acl_Resource('league/all'),'guest_allow');
+                
+                $this->add(new Zend_Acl_Resource('game/all'),'guest_allow');
+                $this->add(new Zend_Acl_Resource('game/id'),'guest_allow');
 		
                 $this->allow('guest','user/register');
                 $this->allow('guest','user/activate');
@@ -43,14 +46,19 @@ class Acl extends Zend_Acl {
                 
                 $this->add(new Zend_Acl_Resource('article/add'), 'admin_allow');
                 $this->add(new Zend_Acl_Resource('article/edit'), 'admin_allow');
+                $this->add(new Zend_Acl_Resource('article/delete'), 'admin_allow');
                 
                 $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
 		$this->add(new Zend_Acl_Resource('admin/index'),'admin_allow');
                 
                 $this->add(new Zend_Acl_Resource('article-type/id'),'admin_allow');
                 $this->add(new Zend_Acl_Resource('article-type/all'),'admin_allow');
+                
+                $this->add(new Zend_Acl_Resource('game/add'),'admin_allow');
+                $this->add(new Zend_Acl_Resource('game/edit'),'admin_allow');
+                $this->add(new Zend_Acl_Resource('game/delete'),'admin_allow');
 		
-// master resources
+                // master resources
 		$this->add(new Zend_Acl_Resource('master_allow'));
                 $this->add(new Zend_Acl_Resource('article-type/add'),'master_allow');
                 $this->add(new Zend_Acl_Resource('article-type/edit'),'master_allow');

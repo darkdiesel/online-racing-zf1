@@ -10,7 +10,7 @@ class Application_Form_ArticleTypeAddForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/articletype/add');
+        $this->setAction('/article-type/add');
         $this->setName('articleTypeAdd');
         $this->setAttrib('class', 'white_box');
         

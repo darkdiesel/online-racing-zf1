@@ -23,10 +23,12 @@ class Application_Model_UserChatMapper {
     }
 
     public function savemessage(Application_Model_UserChat $message) {
+        $date = date('Y-m-d H:i:s');
         $data = array(
             'message' => $message->getMessage(),
             'user_id' => $message->getUser_id(),
-            'date' => date('Y-m-d H:i:s'),
+            'date_create' => $date,
+            'date_edit' => $date,
         );
 
         if (null === ($id = $message->getId())) {
@@ -44,7 +46,7 @@ class Application_Model_UserChatMapper {
                 ->from(array('uc' => 'user_chat'), 'id')
                 ->columns('*')
                 ->join(array('u' => 'user'), 'uc.user_id = u.id', 'login')
-                ->order('date DESC')
+                ->order('date_create DESC')
                 ->limit(50, 0);
 
 

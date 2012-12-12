@@ -13,7 +13,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
         $article_type_id = (int) $request->getParam('id');
 
         $mapper = new Application_Model_ArticleTypeMapper();
-        $article_type_data = $mapper->getArticleTypeDataById($article_type_id, 'view');
+        $article_type_data = $mapper->getArticleTypeDataById($article_type_id);
 
         if ($article_type_data == 'null') {
             $this->view->errMessage = $this->view->translate('Тип статьи не существует');
@@ -84,7 +84,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
         }
 
         $mapper = new Application_Model_ArticleTypeMapper();
-        $article_type_data = $mapper->getArticleTypeDataById($article_type_id, 'edit');
+        $article_type_data = $mapper->getArticleTypeDataById($article_type_id);
 
         if ($article_type_data == 'null') {
             $this->view->errMessage = $this->view->translate('Тип статьи не существует');

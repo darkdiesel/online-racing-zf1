@@ -34,7 +34,7 @@ class Application_Model_GameMapper {
         }
         return $entries;
     }
-    
+
     public function save(Application_Model_Game $game, $action) {
         switch ($action) {
             case 'add':
@@ -61,13 +61,13 @@ class Application_Model_GameMapper {
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
-    
+
     public function getGameDataById($id) {
         $select = $this->getDbTable()
-                        ->select()
-                        ->from(array('g' => 'game'), 'id')
-                        ->where('g.id = ?', $id)
-                        ->columns(array('id', 'name', 'article_id'));
+                ->select()
+                ->from(array('g' => 'game'), 'id')
+                ->where('g.id = ?', $id)
+                ->columns(array('id', 'name', 'article_id'));
 
         $result = $this->getDbTable()
                 ->fetchRow($select);

@@ -2,29 +2,53 @@
 
 class GameController extends App_Controller_FirstBootController {
 
-        public function init() {
+    public function init() {
         parent::init();
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/articles.css"));
     }
-    
+
     public function idAction() {
         $request = $this->getRequest();
         $game_id = (int) $request->getParam('id');
 
-        $game_mapper = new Application_Model_GameMapper();
-        $game_data = $game_mapper->getGameDataById($game_id, 'view');
-        
-        $article_mapper = new Application_Model_ArticleMapper();
-        $article_data = $article_mapper->getArticleDataById($game_data->article_id, 'view');
-        
-        if ($game_data == 'null') {
+        $game = new Application_Model_DbTable_Game();
+        $game_data = $game->fetchRow(array('id = ?' => $game_id));
+
+        if (count($game_data) != 0) {
+
+            $article = new Application_Model_DbTable_Article();
+            $article_data = $article->get_published_article_data($game_data->article_id);
+
+            if (count($article_data) != 0) {
+                $this->view->article = $article_data;
+                $this->view->headTitle($article_data->title);
+                $this->view->article = $article_data;
+                $this->view->game = $game_data;
+            } else {
+                $this->view->errMessage = $this->view->translate('Контент для игры не найден');
+                $this->view->headTitle($this->view->translate('Контент для игры не найден'));
+                return;
+            }
+        } else {
             $this->view->errMessage = $this->view->translate('Игра не существует');
             $this->view->headTitle($this->view->translate('Игра не существует'));
             return;
-        } else {
-            $this->view->article = $article_data;
-            $this->view->headTitle($article_data->title);
         }
+    }
+
+    public function allAction() {
+        $article_type = new Application_Model_DbTable_ArticleType();
+        // pager settings
+        $page_count_items = 10;
+        $page_range = 5;
+        $article_type_id = $article_type->get_id('game');
+        $items_order = 'DESC';
+
+        $this->view->headTitle($this->view->translate('Игры'));
+        $page = $this->getRequest()->getParam('page');
+
+        $article = new Application_Model_DbTable_Article();
+        $this->view->paginator = $article->get_publish_article_pager($page_count_items, $page, $page_range, $article_type_id, $items_order);
     }
 
     public function addAction() {
@@ -39,30 +63,11 @@ class GameController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $mapper = new Application_Model_ArticleTypeMapper();
-                $article_type = $mapper->getArticleTypeDataById($form->getValue('article_type'), 'view');
-                if (strtolower($article_type->name) == 'game') {
-                    /* $article = new Application_Model_Article();
-                      $article->setUser_id(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
-                      $article->setArticle_Type_id($form->getValue('article_type'));
-                      $article->setContent_Type_id(0);
-                      $article->setTitle($form->getValue('title'));
-                      $article->setText($form->getValue('text'));
-                      $article->setImage($form->getValue('image'));
-                      $article->setPublish($form->getValue('publish'));
+                $article_type = new Application_Model_DbTable_ArticleType();
+                $article_type_name = $article_type->get_name($form->getValue('article_type'));
 
-                      $article_mapper = new Application_Model_ArticleMapper();
-                      $article_id = $article_mapper->save($article, 'add');
-
-                      $game = new Application_Model_Game();
-                      $game->setName($form->getValue('title'));
-                      $game->setArticle_Id($article_id);
-
-                      $game_mapper = new Application_Model_GameMapper();
-                      $game_id = $game_mapper->save($game, 'add'); */
-
+                if ($article_type_name == 'game') {
                     $date = date('Y-m-d H:i:s');
-
                     $article_data = array(
                         'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
                         'article_type_id' => $form->getValue('article_type'),
@@ -94,12 +99,12 @@ class GameController extends App_Controller_FirstBootController {
             }
         }
 
-        $mapper = new Application_Model_ArticleTypeMapper();
-        $game_types = $mapper->fetchAll();
+        $article_type = new Application_Model_DbTable_ArticleType();
+        $game_types = $article_type->fetchAll();
 
         foreach ($game_types as $type):
             $form->article_type->addMultiOption($type->id, $type->name);
-            if (strtolower($type->name) == 'game') {
+            if ($type->name == 'game') {
                 $form->article_type->setValue($type->id, $type->name);
             }
         endforeach;
@@ -113,52 +118,112 @@ class GameController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
         $game_id = (int) $request->getParam('id');
 
-        // form
-        $form = new Application_Form_ArticleEditForm();
-        $form->setAction('/game/edit/' . $game_id);
+        $game = new Application_Model_DbTable_Game();
+        $game_data = $game->fetchRow(array('id = ?' => $game_id));
 
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $game = new Application_Model_Article();
-                $game->setArticle_Type_id($form->getValue('article_type'));
-                $game->setContent_Type_id(0);
-                $game->setId($game_id);
-                $game->setTitle($form->getValue('title'));
-                $game->setText($form->getValue('text'));
-                $game->setImage($form->getValue('image'));
-                $game->setPublish($form->getValue('publish'));
+        if (count($game_data) != 0) {
+            $article = new Application_Model_DbTable_Article();
+            $article_data = $article->fetchRow($article->select()->where('id = ?', $game_data->article_id));
 
-                $mapper = new Application_Model_ArticleMapper();
-                $mapper->save($game, 'edit');
+            if (count($article_data) != 0) {
+                // form
+                $form = new Application_Form_ArticleEditForm();
+                $form->setAction('/game/edit/' . $game_id);
+                $form->cancel->setAttrib('onClick', 'location.href="/game/id/' . $game_id . '"');
 
-                $this->redirect($this->view->baseUrl('game/id/' . $game_id));
+                if ($this->getRequest()->isPost()) {
+                    if ($form->isValid($request->getPost())) {
+                        $article_data = array(
+                            'article_type_id' => $form->getValue('article_type'),
+                            'content_type_id' => 0,
+                            'title' => $form->getValue('title'),
+                            'text' => $form->getValue('text'),
+                            'image' => $form->getValue('image'),
+                            'publish' => $form->getValue('publish'),
+                            'date_edit' => date('Y-m-d H:i:s'),
+                        );
+                        $article_where = $game->getAdapter()->quoteInto('id = ?', $game_data->article_id);
+                        $article->update($article_data, $article_where);
+
+                        $game_data = array(
+                            'name' => $form->getValue('title'),
+                        );
+                        $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                        $game->update($game_data, $game_where);
+
+                        $this->redirect($this->view->baseUrl('game/id/' . $game_id));
+                    }
+                }
+
+                $article_types = new Application_Model_DbTable_ArticleType();
+                $article_types = $article_types->fetchAll();
+
+                foreach ($article_types as $type):
+                    $form->article_type->addMultiOption($type->id, $type->name);
+                endforeach;
+
+                $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_data->title);
+
+                $form->title->setvalue($article_data->title);
+                $form->text->setvalue($article_data->text);
+                $form->image->setvalue($article_data->image);
+                $form->publish->setvalue($article_data->publish);
+
+                $this->view->form = $form;
+                $this->view->article = $article_data;
+            } else {
+                $this->view->errMessage = $this->view->translate('Контент для игры не найден');
+                $this->view->headTitle($this->view->translate('Контент для игры не найден'));
+                return;
             }
-        }
-
-        $mapper = new Application_Model_ArticleMapper();
-        $game_data = $mapper->getArticleDataById($game_id, 'edit');
-
-        if ($game_data == 'null') {
+        } else {
             $this->view->errMessage = $this->view->translate('Игра не существует');
             $this->view->headTitle($this->view->translate('Игра не существует'));
             return;
+        }
+    }
+
+    public function deleteAction() {
+        $request = $this->getRequest();
+        $game_id = (int) $request->getParam('id');
+
+        $game = new Application_Model_DbTable_Game();
+        $game_data = $game->fetchRow(array('id = ?' => $game_id));
+
+        if (count($game_data) != 0) {
+            $article = new Application_Model_DbTable_Article();
+            $article_data = $article->get_article_data($game_data->article_id);
+
+            if (count($article_data) != 0) {
+                $form = new Application_Form_ArticleDeleteForm();
+                $form->setAction('/game/delete/' . $game_id);
+                $form->cancel->setAttrib('onClick', 'location.href="/game/id/' . $game_id . '"');
+
+                if ($this->getRequest()->isPost()) {
+                    if ($form->isValid($request->getPost())) {
+                        // delete article for this game
+                        $article_where = $game->getAdapter()->quoteInto('id = ?', $game_data->article_id);
+                        $article->delete($article_where);
+
+                        // delete game
+                        $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                        $game->delete($game_where);
+
+                        $this->redirect($this->view->baseUrl('game/all/'));
+                    }
+                }
+
+                $this->view->form = $form;
+                $this->view->article = $article_data;
+            } else {
+                $this->view->errMessage = $this->view->translate('Контент для игры не найден');
+                $this->view->headTitle($this->view->translate('Контент для игры не найден'));
+                return;
+            }
         } else {
-
-            $mapper = new Application_Model_ArticleTypeMapper();
-            $game_types = $mapper->fetchAll();
-
-            foreach ($game_types as $type):
-                $form->game_type->addMultiOption($type->id, $type->name);
-            endforeach;
-
-            $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $game_data->title);
-
-            $form->title->setvalue($game_data->title);
-            $form->text->setvalue($game_data->text);
-            $form->image->setvalue($game_data->image);
-            $form->publish->setvalue($game_data->publish);
-
-            $this->view->form = $form;
+            $this->view->errMessage = $this->view->translate('Игра не существует');
+            $this->view->headTitle($this->view->translate('Игра не существует'));
+            return;
         }
     }
 

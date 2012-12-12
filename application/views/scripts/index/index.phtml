@@ -1,104 +1,114 @@
-<div class="border_box">
-    <div class="box_skitter box_skitter_large">
-
+<div>
+    <div class="border_box">
+        <div class="box_skitter box_skitter_large">
+        </div>
     </div>
-</div>
-<script type="text/javascript">
-    // skitter slider plugin
-    jQuery(document).ready(function(){
-        var options = {};
+    <script type="text/javascript">
+        // skitter slider plugin
+        jQuery(document).ready(function(){
+            var options = {};
 
-        options['label'] = true;
-        options['numbers'] = true;
-        options['preview'] = true;
-        options['velocity'] = 2500;
-        options['dots'] = true;
-        //options['focus'] = true;
-        //options['focus_position'] = 'leftTop';
-        options['controls'] = true;
-        options['controls_position'] = 'rightTop';
-        options['hideTools'] = true;
-        options['animation'] = 'swapBarsBack';
-        //options['easing_default'] = 'random';
-        options['interval'] = 5000;
-        options['xml'] = '../xml/skitter_slider.xml';
+            options['label'] = true;
+            options['numbers'] = true;
+            options['preview'] = true;
+            options['velocity'] = 2500;
+            options['dots'] = true;
+            //options['focus'] = true;
+            //options['focus_position'] = 'leftTop';
+            options['controls'] = true;
+            options['controls_position'] = 'rightTop';
+            options['hideTools'] = true;
+            options['animation'] = 'swapBarsBack';
+            //options['easing_default'] = 'random';
+            options['interval'] = 5000;
+            options['xml'] = '../xml/skitter_slider.xml';
 
-        if (document.location.search) {
-            var array = document.location.search.split('=');
-            var param = array[0].replace('?', '');
-            var value = array[1];
+            if (document.location.search) {
+                var array = document.location.search.split('=');
+                var param = array[0].replace('?', '');
+                var value = array[1];
 
-            if (param == 'animation') {
-                options.animation = value;
-            }
-            else if (param == 'type_navigation') {
-                if (value == 'dots_preview') {
-                    $('.border_box').css({'marginBottom': '40px'});
-                    options['dots'] = true;
-                    options['preview'] = true;
-                } else {
-                    options[value] = true;
-                    if (value == 'dots')
+                if (param == 'animation') {
+                    options.animation = value;
+                }
+                else if (param == 'type_navigation') {
+                    if (value == 'dots_preview') {
                         $('.border_box').css({'marginBottom': '40px'});
+                        options['dots'] = true;
+                        options['preview'] = true;
+                    } else {
+                        options[value] = true;
+                        if (value == 'dots')
+                            $('.border_box').css({'marginBottom': '40px'});
+                    }
                 }
             }
-        }
 
-        $('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
-    });
-</script>
-<div class="page_title"><?php echo $this->translate('Последнее добавления') ?>:</div>
-<div class="div_hr"></div>
-<div id="articles_block">
-    <?php
-    $artiles = new Application_Model_ArticleMapper();
-    $artiles_data = $artiles->getLastArticlesData(10, 'DESC');
+            $('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
+        });
+    </script>
+    <div class="page_title"><?php echo $this->translate('Последнее добавления') ?>:</div>
+    <div class="div_hr"></div>
+    <div id="articles_block">
+        <?php
+        $artiles = new Application_Model_ArticleMapper();
+        $artiles_data = $artiles->getLastArticlesData(10, 'DESC');
 
-    $filter = new Zend_Filter();
-    $filter->addFilter(new Zend_Filter_StripTags())
-            ->addFilter(new Zend_Filter_StringTrim());
+        $filter = new Zend_Filter();
+        $filter->addFilter(new Zend_Filter_StripTags())
+                ->addFilter(new Zend_Filter_StringTrim());
 
-    $bbcode = Zend_Markup::factory('Bbcode');
-    ?>
-    <?php foreach ($artiles_data as $article) { ?>
-        <h6><a href="#"><?php echo $this->truncate($article->title)->toLength(100); ?></a></h6>
-        <div>
-            <p class="article_text">
-                <?php if (!$article->image == "") { ?>
-                    <img class ="article_image" src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
-                <?php } ?>
-                <?php echo $this->truncate($bbcode->render($filter->filter($article->text)))->toLength(1000); ?></p>
-            <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_more"><?php echo $this->translate("Подробнее...") ?></a>
-        </div>
-    <?php } ?>
+        $bbcode = Zend_Markup::factory('Bbcode');
+        ?>
+        <?php foreach ($artiles_data as $article) { ?>
+            <h6><a href="#"><?php echo $this->truncate($article->title)->toLength(100); ?></a></h6>
+            <div>
+                <p class="article_text">
+                    <?php if (!$article->image == "") { ?>
+                        <img class ="article_image" src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
+                    <?php } ?>
+                    <?php echo $this->truncate($bbcode->render($filter->filter($article->text)))->toLength(1000); ?>
+                </p>
+                <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_more"><?php echo $this->translate("Подробнее...") ?></a>
+            </div>
+        <?php } ?>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#articles_block").accordion({ header: "h6" });
+            $("#rss_block").accordion({ header: "h6" });
+        });
+    </script>
+    <div class="page_title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
+    <div class="div_hr"></div>
+    <div id="rss_block">
+        <?php
+        $url = 'http://www.f1news.ru/export/news.xml';
+
+        $xml = xml_parser_create();
+        xml_parser_set_option($xml, XML_OPTION_SKIP_WHITE, 1);
+        xml_parse_into_struct($xml, file_get_contents($url), $element, $index);
+        xml_parser_free($xml);
+
+        $count = 10;
+
+        for ($i = 1; $i < $count; $i++) {
+            ?>
+
+            <h6 class="rss_title">
+                <a href="#"><?php echo $element[$index["TITLE"][$i + 1]]["value"]; ?></a>
+            </h6>
+            <div class="rss_description">
+                <p class="rss_text">
+                    <?php echo $element[$index["DESCRIPTION"][$i]]["value"] ?>
+                </p>
+                <a class="rss_more btn btn-small btn-primary" href="<?php echo $element[$index["LINK"][$i + 1]]["value"]; ?>" target="_BLINK"><?php echo $this->translate("Подробнее на F1-News.ru") ?></a>
+            </div>
+        <?php } ?>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+        });
+    </script>
 </div>
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        $("#articles_block").accordion({ header: "h6" });
-    });
-</script>
-<div class="page_title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
-<div class="div_hr"></div>
-<div id="rss_block">
-    <?php
-    $url = 'http://www.f1news.ru/export/news.xml';
-
-    $xml = xml_parser_create();
-    xml_parser_set_option($xml, XML_OPTION_SKIP_WHITE, 1);
-    xml_parse_into_struct($xml, file_get_contents($url), $element, $index);
-    xml_parser_free($xml);
-
-    $count = 10;
-
-    for ($i = 1; $i < $count; $i++) {
-        echo '<div class="rss_item clearfix"><h6 class="rss_title">' . '<a href="#">' . $element[$index["TITLE"][$i + 1]]["value"] . '</a>' . '</h6>';
-        echo '<div class="rss_description">' . $element[$index["DESCRIPTION"][$i]]["value"];
-        echo '<a class="rss_more btn btn-small btn-primary" href="' . $element[$index["LINK"][$i + 1]]["value"] . '" target="_BLINK">' . $this->translate("Подробнее на F1-News.ru") . '</a></div></div>';
-    }
-    ?>
-</div>
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        $("#rss_block").accordion({ header: "h6" });
-    });
-</script>

@@ -31,7 +31,7 @@ class Application_Model_LeagueMapper {
                     ->setName($row->name)
                     ->setLogo($row->logo)
                     ->setDescription($row->description)
-                    ->setDate($row->date)
+                    ->setDate_create($row->date_create)
                     ->setDate_edit($row->date_edit);
             $entries[] = $entry;
         }
@@ -46,7 +46,7 @@ class Application_Model_LeagueMapper {
                     'name' => $league->getName(),
                     'logo' => $league->getLogo(),
                     'description' => $league->getDescription(),
-                    'date' => $date,
+                    'date_create' => $date,
                     'date_edit' => $date,
                 );
                 break;
@@ -79,14 +79,14 @@ class Application_Model_LeagueMapper {
                         ->select()
                         ->from(array('a_t' => 'league'), 'id')
                         ->where('a_t.id = ?', $id)
-                        ->columns(array('id', 'name', 'logo', 'description', 'date', 'date_edit'));
+                        ->columns(array('id', 'name', 'logo', 'description', 'date_create', 'date_edit'));
                 break;
             case 'edit':
                 $select = $this->getDbTable()
                         ->select()
                         ->from(array('a_t' => 'league'), 'id')
                         ->where('a_t.id = ?', $id)
-                        ->columns(array('id', 'name', 'logo', 'description', 'date', 'date_edit'));
+                        ->columns(array('id', 'name', 'logo', 'description', 'date_create', 'date_edit'));
             default:
 
                 break;
@@ -115,7 +115,7 @@ class Application_Model_LeagueMapper {
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
                                         ->select()
                                         ->from(array('a_t' => 'league'), 'id')
-                                        ->columns(array('id', 'name', 'logo', 'description', 'date', 'date_edit'))
+                                        ->columns(array('id', 'name', 'logo', 'description', 'date_create', 'date_edit'))
                                         ->order('id ' . $order));
                 break;
         }

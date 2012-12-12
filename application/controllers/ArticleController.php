@@ -140,9 +140,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
         $form = new Application_Form_ArticleDeleteForm();
         $form->setAction('/article/delete/' . $article_id);
-
         $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
-
 
         $article_mapper = new Application_Model_ArticleMapper();
         $article_data = $article_mapper->getArticleDataById($article_id, 'edit');
@@ -159,7 +157,7 @@ class ArticleController extends App_Controller_FirstBootController {
             if ($form->isValid($request->getPost())) {
                 $article_type_mapper = new Application_Model_ArticleTypeMapper();
 
-                $article_type = $article_type_mapper->getArticleTypeDataById($article_data->article_type_id, 'view');
+                $article_type = $article_type_mapper->getArticleTypeNameById($article_data->article_type_id);
 
                 switch (strtolower($article_type->name)) {
                     case 'game':

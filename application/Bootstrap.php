@@ -138,6 +138,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // Script for main menu
         $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.my.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/snowfall.min.jquery.js"));
 
         // Script for count down block
         if ($view->ls_count_down_block) {
@@ -351,6 +352,32 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'controller' => 'game',
                             'action' => 'id',
                             'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'gameEdit', new Zend_Controller_Router_Route('game/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'game',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'gameDelete', new Zend_Controller_Router_Route('game/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'game',
+                            'action' => 'delete',
+                            'id' => 0)
+        ));
+        $router->addRoute(
+                'gameAll', new Zend_Controller_Router_Route('game/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'game',
+                            'action' => 'all',
+                            'page' => 1)
         ));
 
         /*

@@ -14,22 +14,23 @@
                 <?php endforeach; ?>
             </ul>
         </li>
-        <li><a href="<?php echo $this->baseUrl("user/all") ?>"><?php echo $this->translate('Гонщики') ?></a></li>
+        <li><a href="<?php echo $this->baseUrl("user/all") ?>" title="<?php echo $this->translate('Гонщики'); ?>"><?php echo $this->translate('Гонщики') ?></a></li>
         <li class="expanded">
-            <a href="<?php echo $this->baseUrl("article/all") ?>"><?php echo $this->translate('Статьи') ?></a>
+            <a href="<?php echo $this->baseUrl("article/all") ?>" title="<?php echo $this->translate('Статьи'); ?>"><?php echo $this->translate('Статьи') ?></a>
             <ul class="menu">
                 <li class="leaf"><a href="#" title=""><?php echo $this->translate('Настройка болида') ?></a></li>
-                <li class="leaf"><a href="<?php echo $this->baseUrl("article/all") ?>" title=""><?php echo $this->translate('Все') ?></a></li>
+                <li class="leaf"><a href="<?php echo $this->baseUrl("article/all"); ?>" title=""><?php echo $this->translate('Все') ?></a></li>
             </ul>
         </li>
         <li class="expanded">
             <a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Файлы') ?></a>
             <ul class="menu">
-                <li class="leaf"><a href="#" title=""><?php echo $this->translate('Игры') ?></a></li>
-                <li class="leaf"><a href="#" title=""><?php echo $this->translate('Плагины') ?></a></li>
-                <li class="leaf"><a href="#" title=""><?php echo $this->translate('Мануалы') ?></a></li>
+                <li class="leaf"><a href="<?php echo $this->baseUrl("game/all"); ?>" title="<?php echo $this->translate('Игры'); ?>"><?php echo $this->translate('Игры') ?></a></li>
+                <li class="leaf"><a href="<?php echo $this->baseUrl("gamemod/all"); ?>" title="<?php echo $this->translate('Моды'); ?>"><?php echo $this->translate('Моды') ?></a></li>
+                <li class="leaf"><a href="#" title=""><?php echo $this->translate('Плагины'); ?></a></li>
+                <li class="leaf"><a href="#" title=""><?php echo $this->translate('Мануалы'); ?></a></li>
             </ul>
         </li>
-        <li><a href="http://f1orl.forum2x2.ru" target="_BLINK"><?php echo $this->translate('Форум') ?></a></li>
+        <li><a href="http://f1orl.forum2x2.ru" target="_BLINK"><?php echo $this->translate('Форум'); ?></a></li>
     </ul>
 </div>

@@ -71,6 +71,22 @@ class Application_Model_ArticleMapper {
                     'date_edit' => date('Y-m-d H:i:s')
                 );
                 break;
+            case 'game':
+                $date = date('Y-m-d H:i:s');
+                $data = array(
+                    'user_id' => $article->getUser_id(),
+                    'article_type_id' => $article->getArticle_Type_id(),
+                    'content_type_id' => $article->getContent_Type_id(),
+                    'title' => $article->getTitle(),
+                    'text' => $article->getText(),
+                    'image' => $article->getimage(),
+                    'date_create' => $date,
+                    'date_edit' => $date,
+                    'views' => 0,
+                    'publish' => $article->getPublish(),
+                    'last_ip' => ''
+                );
+                break;
             default:
                 $data = array(
                 );
@@ -79,11 +95,26 @@ class Application_Model_ArticleMapper {
 
         if (null === ($id = $article->getId())) {
             unset($data['id']);
-            return $this->getDbTable()->insert($data);
+            $article_id =  $this->getDbTable()->insert($data);
         } else {
-            return $this->getDbTable()->update($data, array('id = ?' => $id));
+            $article_id = $this->getDbTable()->update($data, array('id = ?' => $id));
         }
+
+        switch ($action) {
+            case 'game':
+                $game = new Application_Model_Game();
+                $game->setName($data['title']);
+                $game->setArticle_Id($article_id);
+
+                $game_mapper = new Application_Model_GameMapper();
+                $game_id = $game_mapper->save($game,'add');
+
+                break;
+        }
+        
+        return $article_id;
     }
+
 
     /*
      * Uses for controller: article, admin; action: view, articles
@@ -97,7 +128,7 @@ class Application_Model_ArticleMapper {
                                         ->from('article')
                                         //->join('user', 'user.id = article.user_id')
                                         ->where('publish=1 and article_type_id=' . $article_type)
-                                        ->order('id '.$order));
+                                        ->order('id ' . $order));
                 break;
             case 'all':
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
@@ -107,7 +138,7 @@ class Application_Model_ArticleMapper {
                                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
                                         ->columns(array('id', 'user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit'))
                                         ->where('publish=1')
-                                        ->order('id '.$order));
+                                        ->order('id ' . $order));
                 break;
             case 'admin_all':
                 $adapter = new Zend_Paginator_Adapter_DbTableSelect($this->getDbTable()
@@ -117,7 +148,7 @@ class Application_Model_ArticleMapper {
                                         ->join(array('u' => 'user'), 'a.user_id = u.id', 'login')
                                         ->join(array('at' => 'article_type'), 'a.article_type_id = at.id', 'name')
                                         ->columns(array('user_id', 'title', 'text', 'image', 'views', 'date_create', 'date_edit', 'article_type_id'))
-                                        ->order('id '.$order));
+                                        ->order('id ' . $order));
                 break;
             default:
 

@@ -6,7 +6,7 @@ class Application_Model_League {
     protected $_name;
     protected $_logo;
     protected $_description;
-    protected $_date;
+    protected $_date_create;
     protected $_date_edit;
 
     public function __construct(array $options = null) {
@@ -78,13 +78,13 @@ class Application_Model_League {
         return $this->_description;
     }
 
-    public function setDate($date) {
-        $this->_date = $date;
+    public function setDate_create($date_create) {
+        $this->_date_create = $date_create;
         return $this;
     }
 
-    public function getDate() {
-        return $this->_date;
+    public function getDate_create() {
+        return $this->_date_create;
     }
 
     public function setDate_edit($date_edit) {

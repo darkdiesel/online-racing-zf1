@@ -25,7 +25,7 @@
             echo ($order == 0) ? "even" : "odd";
             ($order == 0) ? $order = 1 : $order = 0
                 ?>">
-                    <div class="chat_mesage_date"><?php echo $this->escape($message->date) ?></div>
+                    <div class="chat_mesage_date"><?php echo $this->escape($message->date_create) ?></div>
                     <div class="chat_mesage_nickname">
                         <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($message->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();"><?php echo $message->login ?></a>
                     </div>

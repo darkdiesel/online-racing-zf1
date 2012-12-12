@@ -69,26 +69,30 @@ class Application_Model_ArticleTypeMapper {
         }
     }
 
-    public function getArticleTypeDataById($id, $action) {
-        switch ($action) {
-            case 'view':
-                $select = $this->getDbTable()
+    public function getArticleTypeDataById($id) {
+        $select = $this->getDbTable()
                         ->select()
                         ->from(array('a_t' => 'article_type'), 'id')
                         ->where('a_t.id = ?', $id)
                         ->columns(array('id', 'name', 'description','date', 'date_edit'));
-                break;
-            case 'edit':
-                $select = $this->getDbTable()
-                        ->select()
-                        ->from(array('a_t' => 'article_type'), 'id')
-                        ->where('a_t.id = ?', $id)
-                        ->columns(array('id', 'name', 'description','date', 'date_edit'));
-            default:
+        
+        $result = $this->getDbTable()
+                ->fetchRow($select);
 
-                break;
+        if (0 == count($result)) {
+            return 'null';
         }
 
+        return $result;
+    }
+    
+    public function getArticleTypeNameById($id) {
+        $select = $this->getDbTable()
+                        ->select()
+                        ->from(array('a_t' => 'article_type'), 'id')
+                        ->where('a_t.id = ?', $id)
+                        ->columns(array('id', 'name'));
+        
         $result = $this->getDbTable()
                 ->fetchRow($select);
 

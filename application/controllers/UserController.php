@@ -392,12 +392,19 @@ class UserController extends App_Controller_FirstBootController {
 
     public function allAction() {
         $this->view->headTitle($this->view->translate('Гонщики'));
+        // pager settings
+        $page_count_items = 10;
+        $page_range = 5;
+        $items_order = 'DESC';
+        
+        $page = $this->getRequest()->getParam('page');
 
-        $request = $this->getRequest();
+        $user = new Application_Model_DbTable_User();
+        $this->view->paginator = $user->get_users_pager($page_count_items, $page, $page_range, $items_order);
+        
+        /*$mapper = new Application_Model_UserMapper();
 
-        $mapper = new Application_Model_UserMapper();
-
-        $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5, 'all');
+        $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5, 'all');*/
     }
 
 }

@@ -1,5 +1,5 @@
 html, body {
-    height:100%;
+    
     margin:0;
     padding:0;
 }
@@ -555,13 +555,13 @@ div.shareblock{
             }
 /* RSS Block */
 #rss_block{
-    width:100%;
+    
 }
-    #rss_block .rss_item{
-        
+    #rss_block .rss_description{
+        clear:both;
     }
     #rss_block p{
-        margin:0;
+        
     }
     #rss_block img{
         float:left;

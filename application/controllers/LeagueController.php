@@ -1,6 +1,6 @@
 <?php
 
-class LeagueController extends Zend_Controller_Action {
+class LeagueController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
