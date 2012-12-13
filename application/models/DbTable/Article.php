@@ -55,5 +55,19 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
+    
+    public function get_last_publish_article($count, $order){
+        $model = new self;
+        
+        $select = $model
+                ->select()
+                ->from('article', 'id')
+                ->where('publish = 1')
+                ->columns(array('title', 'text', 'image', 'content_type_id'))
+                ->order('id ' . $order);
 
+        $result = $model->fetchAll($select);
+        
+        return $result;
+    }
 }

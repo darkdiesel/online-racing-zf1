@@ -66,18 +66,32 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
     public function activate_user($email, $password, $code_activate) {
         $model = new self;
 
-        $user = $model->fetchRow(array('email = ?' => $email, 'password = ?' => $password, 'code_activate = ?' => $code_activate));
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('email = ?', $email)
+                ->where('password = ?', $password)
+                ->columns(array('code_activate'));
+
+        $user = $model->fetchRow($select);
+        //$user = $model->fetchRow(array('email = ?' => $email, 'password = ?' => $password, 'code_activate = ?' => $code_activate));
 
         if (count($user) != 0) {
-            $user_data = array(
-                'code_activate' => ''
-            );
+            if ($user->code_activate == $code_activate) {
+                $user_data = array(
+                    'code_activate' => ''
+                );
 
-            $user_where = $model->getAdapter()->quoteInto('id = ?', $user->id);
-            $model->update($user_data, $user_where);
-            return true;
+                $user_where = $model->getAdapter()->quoteInto('id = ?', $user->id);
+                $model->update($user_data, $user_where);
+
+                return 'done';
+            } elseif ($user->code_activate == '') {
+                return 'activate';
+            } else {
+                return 'error';
+            }
         } else {
-            return false;
+            return 'notFound';
         }
     }
 
@@ -92,7 +106,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model->update($user_data, $user_where);
     }
 
-    public function restore_passwd($email, $code_restore, $password){
+    public function restore_passwd($email, $code_restore, $password) {
         $model = new self;
 
         $user = $model->fetchRow(array('email = ?' => $email, 'code_restore_pass = ?' => $code_restore));
@@ -107,7 +121,33 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             $model->update($user_data, $user_where);
             return true;
         } else {
+            $user = $model->fetchRow(array('email = ?' => $email));
             return false;
+        }
+    }
+
+    public function check_user_status($email) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('email = ?', $email)
+                ->columns(array('enable', 'code_activate'));
+
+        $user = $model->fetchRow($select);
+
+        if (count($user) != 0) {
+            if ($user->code_activate == '') {
+                if ($user->enable == 1) {
+                    return 'enable';
+                } else {
+                    return 'disable';
+                }
+            } else {
+                return 'notActivate';
+            }
+        } else {
+            return 'notFound';
         }
     }
 

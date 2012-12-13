@@ -26,7 +26,8 @@ class Application_Form_UserLoginForm extends Zend_Form {
             'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
-                array('StringLength', true, array('min' => 5, 'max' => 100))
+                array('StringLength', true, array('min' => 5, 'max' => 100)),
+                new App_Validate_DbRecordExists('user', 'email')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -86,12 +87,12 @@ class Application_Form_UserLoginForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
-        
+
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-        
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),

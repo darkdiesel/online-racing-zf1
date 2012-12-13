@@ -2,6 +2,12 @@
 
 class Application_Form_UserRestorePasswdForm extends Zend_Form {
 
+    protected function translate($str) {
+        $translate = new Zend_View_Helper_Translate();
+        $lang = Zend_Registry::get('Zend_Locale');
+        return $translate->translate($str, $lang);
+    }
+
     public function init() {
         // Set the method for the display form to POST
         $this->setMethod('post');
@@ -28,8 +34,8 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             )
         ));
         $this->addElement('text', 'confirmemail', array(
-            'label' => 'Подтвердите E-mail',
-            'placeholder' => 'Подтвердите E-mail',
+            'label' => $this->translate('Подтвердите E-mail'),
+            'placeholder' => $this->translate('Подтвердите E-mail'),
             'AllowEmpty' => false,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
@@ -69,7 +75,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => 'Востановить',
+            'label' => $this->translate('Востановить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
@@ -79,7 +85,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
-            'label' => 'Сбросить',
+            'label' => $this->translate('Сбросить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
@@ -90,7 +96,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-        
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),

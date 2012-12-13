@@ -221,10 +221,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $router = $frontController->getRouter();
 
         $router->addRoute(
-                'userInfo', new Zend_Controller_Router_Route('user/info/:id',
+                'userId', new Zend_Controller_Router_Route('user/id/:id',
                         array(
                             'controller' => 'user',
-                            'action' => 'info',
+                            'action' => 'id',
                             'id' => 0)
         ));
 

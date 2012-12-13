@@ -35,58 +35,58 @@ class Application_Form_UserSetRestorePasswdForm extends Zend_Form {
         ));
 
         $this->addElement('text', 'code_restore', array(
-                                                        'label' => $this->translate('Код востановления'),
-                                                        'placeholder' => $this->translate('Код востановления'),
-                                                        'required' => true,
-                                                        'AllowEmpty' => false,
-                                                        'class' => 'x_field',
-                                                        'filters' => array('StripTags', 'StringTrim'),
-                                                        'validators' => array('alnum',
-                                                            //array('regex', false, '/^[a-z]/i')
-                                                        ),
-                                                        'decorators' => array(
-                                                            'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                                                            array('Label', array('class' => 'element_label')),
-                                                            array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                                                            array('HtmlTag', array('class' => 'element_tag')),
-                                                        )
-                                                   ));
+            'label' => $this->translate('Код востановления'),
+            'placeholder' => $this->translate('Код востановления'),
+            'required' => true,
+            'AllowEmpty' => false,
+            'class' => 'x_field',
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array('alnum',
+            //array('regex', false, '/^[a-z]/i')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
 
         $this->addElement('password', 'password', array(
-                                                       'label' => $this->translate('Новый пароль'),
-                                                       'placeholder' => $this->translate('Новый пароль'),
-                                                       'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
-                                                       'required' => true,
-                                                       'class' => 'x_field tooltip_field',
-                                                       'filters' => array('StripTags', 'StringTrim'),
-                                                       'validators' => array(
-                                                           array('StringLength', true, array('min' => 6, 'max' => 25))
-                                                       ),
-                                                       'decorators' => array(
-                                                           'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                                                           array('Label', array('class' => 'control-label')),
-                                                           array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
-                                                           array('HtmlTag', array('class' => 'controls')),
-                                                       )
-                                                  ));
+            'label' => $this->translate('Новый пароль'),
+            'placeholder' => $this->translate('Новый пароль'),
+            'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
+            'required' => true,
+            'class' => 'x_field tooltip_field',
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array(
+                array('StringLength', true, array('min' => 6, 'max' => 25))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'control-label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
+                array('HtmlTag', array('class' => 'controls')),
+            )
+        ));
 
         $this->addElement('password', 'confirmpassword', array(
-                                                              'label' => $this->translate('Подтвердите пароль'),
-                                                              'placeholder' => $this->translate('Подтвердите пароль'),
-                                                              'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
-                                                              'AllowEmpty' => false,
-                                                              'class' => 'x_field tooltip_field',
-                                                              'filters' => array('StripTags', 'StringTrim'),
-                                                              'validators' => array(
-                                                                  new App_Validate_EqualInputs('password')
-                                                              ),
-                                                              'decorators' => array(
-                                                                  'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                                                                  array('Label', array('class' => 'control-label')),
-                                                                  array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
-                                                                  array('HtmlTag', array('class' => 'controls')),
-                                                              )
-                                                         ));
+            'label' => $this->translate('Подтвердите пароль'),
+            'placeholder' => $this->translate('Подтвердите пароль'),
+            'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
+            'AllowEmpty' => false,
+            'class' => 'x_field tooltip_field',
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array(
+                new App_Validate_EqualInputs('password')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'control-label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
+                array('HtmlTag', array('class' => 'controls')),
+            )
+        ));
 
         $this->addElement(
                 new Zend_Form_Element_Captcha('captcha', array(
@@ -113,7 +113,7 @@ class Application_Form_UserSetRestorePasswdForm extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => 'Востановить',
+            'label' => $this->translate('Востановить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
@@ -123,7 +123,7 @@ class Application_Form_UserSetRestorePasswdForm extends Zend_Form {
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
             'class' => 'btn',
-            'label' => 'Сбросить',
+            'label' => $this->translate('Сбросить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
@@ -134,7 +134,7 @@ class Application_Form_UserSetRestorePasswdForm extends Zend_Form {
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-        
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
