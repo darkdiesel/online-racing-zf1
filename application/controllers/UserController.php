@@ -91,6 +91,7 @@ class UserController extends App_Controller_FirstBootController {
         // page title
         $this->view->headTitle($this->view->translate('Регистрация'));
 
+        // jQuery validate script
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
 
         $request = $this->getRequest();
@@ -98,31 +99,41 @@ class UserController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-
-                $user = new Application_Model_User($form->getValues());
-
-                $mapper = new Application_Model_UserMapper();
-
+                
+                $user = new Application_Model_DbTable_User();
+                
+                $user_data = array();
+                
+                $user_data['login'] = $form->getValue('login');
+                $user_data['email'] = $form->getValue('email');
+                $user_data['user_role_id'] = 3;
+                $user_data['flag_id'] = 1;//!!!!!!!!!! доделать
+                $user_data['enabled'] = 1;
+                
                 Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
-                $user->activate = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
-
-                $mapper->save($user, 'register');
-
+                $user_data['code_activate'] = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
+                
+                $user_data['date_create'] =  date('Y-m-d H:i:s');
+                $user_data['password'] = sha1($form->getValue('password'));
+                
+                $newUser = $user->createRow($user_data);
+                $newUser->save();
+                
                 // load e-mail script (template) for user
                 $html = new Zend_View();
                 $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
                 // e-mail template values for user
-                $html->assign('login', $user->login);
+                $html->assign('login', $user_data['login']);
                 $html->assign('content', 'Спасибо за регистарцию на нашем портале.<br/>' .
                         'На <a href="http://online-racing.net/user/activate">странице</a> для подтверждения регистрации введите следующие данные:<br/><br/>' .
-                        'Логин: <strong>' . $user->login . '</strong><br/>' .
-                        'E-mail: <strong>' . $user->email . '</strong><br/>' .
-                        'Пароль: <strong>' . $user->password . '</strong><br/>' .
-                        'Код активации: <strong>' . $user->activate . '</strong><br/>');
+                        'Логин: <strong>' . $user_data['login'] . '</strong><br/>' .
+                        'E-mail: <strong>' . $user_data['email'] . '</strong><br/>' .
+                        'Пароль: <strong>' . $form->getValue('password') . '</strong><br/>' .
+                        'Код активации: <strong>' . $user_data['activate'] . '</strong><br/>');
                 // e-mail for user
                 $mail = new Zend_Mail('UTF-8');
                 $bodyText = $html->render('register_template.phtml');
-                $mail->addTo($user->email, $user->email);
+                $mail->addTo($user_data['email'], $user_data['email']);
                 $mail->setSubject('Online-Racing.net - Код подверждения регистрации.');
                 $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
                 $mail->setBodyHtml($bodyText);
@@ -135,8 +146,8 @@ class UserController extends App_Controller_FirstBootController {
                 $html->assign('login', "Глава сайта Online-racing.net");
                 $html->assign('content', 'На сайте появился новый пользователь.<br/>' .
                         'Регистрационные данные:<br/><br/>' .
-                        'Логин: <strong>' . $user->login . '</strong><br/>' .
-                        'E-mail: <strong>' . $user->email . '</strong><br/>');
+                        'Логин: <strong>' . $user_data['login'] . '</strong><br/>' .
+                        'E-mail: <strong>' . $user_data['email']. '</strong><br/>');
                 // e-mail for admin
                 $mail = new Zend_Mail('UTF-8');
                 $bodyText = $html->render('master_user_add_template.phtml');
@@ -148,7 +159,7 @@ class UserController extends App_Controller_FirstBootController {
 
                 return $this->_helper->redirector('activate', 'user');
             } else {
-                $this->view->errMessage .= "Исправте ошибки для корректной регистрации!";
+                $this->view->errMessage .= $this->view->translate('Исправте ошибки для корректной регистрации!');
             }
         }
 
@@ -168,37 +179,40 @@ class UserController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $mapper = new Application_Model_UserMapper();
-
-                $userEmail = $form->email->getValue();
-                $userPassword = sha1($form->password->getValue());
-                $userConfirmCode = $form->confirmCode->getValue();
-
-                if ($mapper->activateUserByCode($userEmail, $userPassword, $userConfirmCode) == 1) {
-
+                
+                $user = new Application_Model_DbTable_User();
+                $user_data = array(
+                    'email' => $form->email->getValue(),
+                    'password' => sha1($form->password->getValue()),
+                    'code_activate' => $form->code_activate->getValue(),
+                );
+                
+                $result = $user->activate_user($user_data['email'], $user_data['password'], $user_data['code_activate']);
+                
+                if ($result) {
                     // load e-mail script (template) for user
                     $html = new Zend_View();
                     $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
                     // e-mail template values for user
-                    $html->assign('login', $userEmail);
+                    $html->assign('login', $user_data['email']);
                     $html->assign('content', 'Ваш профиль активирован. Приятного время провождения на нашем портале.');
                     // e-mail for user
                     $mail = new Zend_Mail('UTF-8');
                     $bodyText = $html->render('activation_template.phtml');
                     $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
                     $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
-                    $mail->addTo($userEmail, $userEmail);
+                    $mail->addTo($user_data['email'], $user_data['email']);
                     $mail->setBodyHtml($bodyText);
                     $mail->send();
-
+                    
                     // load e-mail script (template) for admin
                     $html = new Zend_View();
                     $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
                     // e-mail template values for admin
-                    $html->assign('login', "Глава сайта Online-racing.net");
+                    $html->assign('login', "Админу Online-racing.net");
                     $html->assign('content', 'На сайте активирован новый пользователь.<br/>' .
                             'Данные пользователя:<br/><br/>' .
-                            'E-mail: <strong>' . $userEmail . '</strong><br/>');
+                            'E-mail: <strong>' . $user_data['email'] . '</strong><br/>');
                     // e-mail for admin
                     $mail = new Zend_Mail('UTF-8');
                     $bodyText = $html->render('master_user_activate_template.phtml');
@@ -207,7 +221,7 @@ class UserController extends App_Controller_FirstBootController {
                     $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
                     $mail->setBodyHtml($bodyText);
                     $mail->send();
-
+                    
                     $bootstrap = $this->getInvokeArg('bootstrap');
                     $auth = Zend_Auth::getInstance();
                     $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
@@ -216,34 +230,28 @@ class UserController extends App_Controller_FirstBootController {
                                     $adapter, 'user', 'email', 'password'
                     );
 
-                    $authAdapter->setIdentity($userEmail);
-                    $authAdapter->setCredential($userPassword);
+                    $authAdapter->setIdentity($user_data['email']);
+                    $authAdapter->setCredential($user_data['password']);
                     $result = $auth->authenticate($authAdapter);
 
-                    $mapper = new Application_Model_UserMapper();
                     $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-
                     $storage = $auth->getStorage('online-racing');
-                    //save date for last login
-                    $user = new Application_Model_User(array('id' => $storage_data->id));
-                    $mapper->save($user, 'last_login');
-
                     $storage->write($storage_data);
 
-                    return $this->_helper->redirector('login', 'user');
+                    return $this->_helper->redirector('index', 'index');
+                    
                 } else {
-                    $this->view->errMessage .= 'Введены неверные данные активации.<br>';
+                    $this->view->errMessage .= $this->view->translate('Введены неверные данные активации!');
                 }
             } else {
-                $this->view->errMessage .= "Исправте ошибки для корректной активации профиля!";
+                $this->view->errMessage .= $this->view->translate('Исправте ошибки для корректной активации профиля!');
             }
         }
 
         $this->view->form = $form;
     }
 
-    public function restorepasswdAction() {
-        // page title
+    public function restorePasswdAction() {
         $this->view->headTitle($this->view->translate('Восстановление пароля'));
 
         $request = $this->getRequest();
@@ -251,13 +259,101 @@ class UserController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $this->view->errMessage = $this->params['email'];
+                Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
+                $user_code_restore_pass = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
+
+                $user = new Application_Model_DbTable_User();
+                $user->set_restore_pass_code($form->getValue('email'), $user_code_restore_pass);
+                
+                // load e-mail script (template) for user
+                $html = new Zend_View();
+                $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                // e-mail template values for user
+                $html->assign('login',  $form->getValue('email'));
+                $html->assign('content', 'Уважаемый пользователь вы или кто-то другой запрасили код для создания нового пароля.<br/>' .
+                        'На <a href="http://online-racing.net/user/set-restore-passwd">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
+                        'E-mail: <strong>' . $form->getValue('email') . '</strong><br/>' .
+                        'Код востановления: <strong>' . $user_code_restore_pass . '</strong><br/>'.
+                        'Если это не вы запросили новый пароль, то просто проигнорируйте это сообщение.');
+                // e-mail for user
+                $mail = new Zend_Mail('UTF-8');
+                $bodyText = $html->render('restore_passwd_template.phtml');
+                $mail->addTo($form->getValue('email'), $form->getValue('email'));
+                $mail->setSubject('Online-Racing.net - Код востановления пароля.');
+                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                $mail->setBodyHtml($bodyText);
+                $mail->send();
+                
+                return $this->_helper->redirector('set-restore-passwd', 'user');
             } else {
-                $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!";
+                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для востановления пароля!');
             }
         }
 
         $this->view->form = $form;
+    }
+    
+    public function setRestorePasswdAction() {
+        $this->view->headTitle($this->view->translate('Создание нового пароля'));
+
+        $request = $this->getRequest();
+        $form = new Application_Form_UserSetRestorePasswdForm();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $user = new Application_Model_DbTable_User();
+
+                $user_data = array(
+                    'email' => $form->getValue('email'),
+                    'code_restore' => $form->getValue('code_restore'),
+                    'password' => sha1($form->getValue('password')),
+                );
+
+                $result = $user->restore_passwd($user_data['email'], $user_data['code_restore'], $user_data['password']);
+
+                if ($result){
+                    // load e-mail script (template) for user
+                    $html = new Zend_View();
+                    $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                    // e-mail template values for user
+                    $html->assign('login', $user_data['email']);
+                    $html->assign('content', 'Ваш пароль изменен. Приятного время провождения на нашем портале.');
+                    // e-mail for user
+                    $mail = new Zend_Mail('UTF-8');
+                    $bodyText = $html->render('set_restore_passwd_template.phtml');
+                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                    $mail->setSubject('Online-Racing.net - Ваш пароль изменен.');
+                    $mail->addTo($user_data['email'], $user_data['email']);
+                    $mail->setBodyHtml($bodyText);
+                    $mail->send();
+
+                    $bootstrap = $this->getInvokeArg('bootstrap');
+                    $auth = Zend_Auth::getInstance();
+                    $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+                    $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
+                    $authAdapter = new Zend_Auth_Adapter_DbTable(
+                        $adapter, 'user', 'email', 'password'
+                    );
+
+                    $authAdapter->setIdentity($user_data['email']);
+                    $authAdapter->setCredential($user_data['password']);
+                    $result = $auth->authenticate($authAdapter);
+
+                    $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
+                    $storage = $auth->getStorage('online-racing');
+                    $storage->write($storage_data);
+
+                    return $this->_helper->redirector('index', 'index');
+                } else {
+                    $this->view->errMessage .= $this->view->translate('Введены неверные данные для создания нового пароля!');
+                }
+            } else {
+                $this->view->errMessage .= $this->view->translate('Исправте ошибки для корректного создания пароля!');
+            }
+        }
+
+        $this->view->form = $form;
+
     }
 
     public function logoutAction() {

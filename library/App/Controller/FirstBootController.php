@@ -6,9 +6,7 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $user = new Application_Model_DbTable_User();
             $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
-            $user->set_last_activite($storage_data->id);
-            
-            $mapper->save($user, 'last_login');
+            $user->set_last_activity($storage_data->id);
         }
     }
 

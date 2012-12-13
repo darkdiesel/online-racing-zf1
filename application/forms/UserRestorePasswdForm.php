@@ -5,7 +5,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
     public function init() {
         // Set the method for the display form to POST
         $this->setMethod('post');
-        $this->setAction('/user/restorepasswd');
+        $this->setAction('/user/restore-passwd');
         $this->setName('userRestorePasswd');
         $this->setAttrib('class', 'white_box');
 
@@ -18,7 +18,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
-                new App_Validate_NoDbRecordExists('user', 'email')
+                new App_Validate_DbRecordExists('user', 'email')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',

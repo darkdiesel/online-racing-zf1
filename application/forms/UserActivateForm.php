@@ -50,9 +50,9 @@ class Application_Form_UserActivateForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'confirmCode', array(
-            'label' => $this->translate('Код подтверждения'),
-            'placeholder' => $this->translate('Код подтверждения'),
+        $this->addElement('text', 'code_activate', array(
+            'label' => $this->translate('Код активации'),
+            'placeholder' => $this->translate('Код активации'),
             'required' => true,
             'class' => 'x_field',
             'filters' => array('StripTags', 'StringTrim'),

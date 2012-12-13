@@ -133,12 +133,12 @@ class Application_Form_UserRegisterForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
-        
+
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-        
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
