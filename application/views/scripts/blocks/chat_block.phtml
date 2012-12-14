@@ -3,15 +3,15 @@
     <div class="sidebar_box_content">
         <div id="chat_messages_box">
             <?php
+            $user_chat = new Application_Model_DbTable_UserChat();
+            $user_chat_messages = $user_chat->fetchUserChatMsg();
             $bbcode = Zend_Markup::factory('Bbcode');
-            $messages = new Application_Model_UserChatMapper();
-            $chat_messages = $messages->fetchAll();
             $last_message_id = 0;
             ?>
 
-            <?php $order = count($chat_messages) % 2; ?>
+            <?php $order = count($user_chat_messages) % 2; ?>
 
-            <?php foreach ($chat_messages as $message): ?>
+            <?php foreach ($user_chat_messages as $message): ?>
                 <?php
                 if ($message->id > $last_message_id) {
                     $last_message_id = $message->id;
@@ -22,9 +22,9 @@
             echo ($order == 0) ? "even" : "odd";
             ($order == 0) ? $order = 1 : $order = 0
                 ?>">
-                    <div class="chat_mesage_date"><?php echo $this->escape($message->date) ?></div>
+                    <div class="chat_mesage_date"><?php echo $this->escape($message->date_create) ?></div>
                     <div class="chat_mesage_nickname">
-                        <a href="<?php echo $this->baseUrl('user/info/') . $this->escape($message->user_id) ?>" target="_BLINK"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();"><?php echo $message->login ?></a>
+                        <a href="<?php echo $this->baseUrl('user/id/') . $this->escape($message->user_id) ?>"><i class="icon-user icon-black"></i></a><a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], ');$('#chat #userChat #messageTextArea').focus();"><?php echo $message->user_login ?></a>
                     </div>
                     <div class="chat_mesage_message">
                         <?php echo $bbcode->render($message->message) ?>

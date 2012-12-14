@@ -1,102 +1,102 @@
 <?php
+
 class Acl extends Zend_Acl {
-	public function  __construct() {
-		//Добавляем роли
-		$this->addRole('guest');
-		$this->addRole('user', 'guest');
-		$this->addRole('admin', 'user');
-		$this->addRole('master', 'admin');
-		
-                // resources
-		$this->addResource(new Zend_Acl_Resource('user/register'));
-                $this->addResource(new Zend_Acl_Resource('user/activate'));
-                $this->addResource(new Zend_Acl_Resource('user/restorepasswd'));
-                
-		//Add resources
-		// guest resources
-		$this->add(new Zend_Acl_Resource('guest_allow'));
-		$this->add(new Zend_Acl_Resource('index/index'),'guest_allow');
-		$this->add(new Zend_Acl_Resource('user/login'),'guest_allow');
-                
-                $this->add(new Zend_Acl_Resource('league/id'),'guest_allow');
-                $this->add(new Zend_Acl_Resource('league/all'),'guest_allow');
-                
-                $this->add(new Zend_Acl_Resource('game/all'),'guest_allow');
-                $this->add(new Zend_Acl_Resource('game/id'),'guest_allow');
-		
-                $this->allow('guest','user/register');
-                $this->allow('guest','user/activate');
-                $this->allow('guest','user/restorepasswd');
 
-		// user resources
-		$this->add(new Zend_Acl_Resource('user_allow'));
-		$this->add(new Zend_Acl_Resource('user/view'), 'user_allow');
-                $this->add(new Zend_Acl_Resource('user/message'), 'user_allow');
-                $this->add(new Zend_Acl_Resource('user/settings'), 'user_allow');
-                $this->add(new Zend_Acl_Resource('user/edit'), 'user_allow');
-		$this->add(new Zend_Acl_Resource('user/logout'), 'user_allow');
-                $this->add(new Zend_Acl_Resource('chat/addmessage'), 'user_allow');
-                
-                $this->deny('user','user/register');
-                $this->deny('user','user/activate');
-                $this->deny('user','user/restorepasswd');
+    public function __construct() {
+        //Добавляем роли
+        $this->addRole('guest');
+        $this->addRole('user', 'guest');
+        $this->addRole('admin', 'user');
+        $this->addRole('master', 'admin');
 
-		// admin resources
-		$this->add(new Zend_Acl_Resource('admin_allow'));
-                
-                $this->add(new Zend_Acl_Resource('article/add'), 'admin_allow');
-                $this->add(new Zend_Acl_Resource('article/edit'), 'admin_allow');
-                $this->add(new Zend_Acl_Resource('article/delete'), 'admin_allow');
-                
-                $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
-		$this->add(new Zend_Acl_Resource('admin/index'),'admin_allow');
-                
-                $this->add(new Zend_Acl_Resource('article-type/id'),'admin_allow');
-                $this->add(new Zend_Acl_Resource('article-type/all'),'admin_allow');
-                
-                $this->add(new Zend_Acl_Resource('game/add'),'admin_allow');
-                $this->add(new Zend_Acl_Resource('game/edit'),'admin_allow');
-                $this->add(new Zend_Acl_Resource('game/delete'),'admin_allow');
-		
-                // master resources
-		$this->add(new Zend_Acl_Resource('master_allow'));
-                $this->add(new Zend_Acl_Resource('article-type/add'),'master_allow');
-                $this->add(new Zend_Acl_Resource('article-type/edit'),'master_allow');
-                $this->add(new Zend_Acl_Resource('article-type/delete'),'master_allow');
-                
-                $this->add(new Zend_Acl_Resource('league/add'),'master_allow');
-                $this->add(new Zend_Acl_Resource('league/edit'),'master_allow');
-                $this->add(new Zend_Acl_Resource('league/delete'),'master_allow');
+        // resources
+        $this->addResource(new Zend_Acl_Resource('user/register'));
+        $this->addResource(new Zend_Acl_Resource('user/activate'));
+        $this->addResource(new Zend_Acl_Resource('user/restorepasswd'));
 
-		//Выставляем права, по-умолчанию всё запрещено
-		//this->deny('user', 'user_deny', 'show');
-		$this->allow('guest', 'guest_allow', 'show');
-		$this->allow('user', 'user_allow', 'show');
-		$this->allow('admin','admin_allow', 'show');
-		$this->allow('master','master_allow', 'show');
-	}
+        //Add resources
+        // guest resources
+        $this->add(new Zend_Acl_Resource('guest_allow'));
+        $this->add(new Zend_Acl_Resource('index/index'), 'guest_allow');
+        $this->add(new Zend_Acl_Resource('user/login'), 'guest_allow');
 
-	public function can($privilege='show'){
-		//Инициируем ресурс
-		$request = Zend_Controller_Front::getInstance()->getRequest();
-		$resource = $request->getControllerName() . '/' . $request->getActionName();
-		//Если ресурс не найден закрываем доступ
-		if (!$this->has($resource))
-			return true;
-		
-                //Инициируем роль
-                if (Zend_Auth::getInstance()->hasIdentity()) {
-                    $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
-                    // get role_id from user table
-                    $mapper = new Application_Model_UserMapper();
-                    $role_id = $mapper->getUserRole($storage_data->id);
-                    // get role name from role table
-                    $mapper = new Application_Model_UserRoleMapper();
-                    $role = $mapper->getRoleName($role_id);
-                } else {
-                    $role = 'guest';
-                }
-                
-		return $this->isAllowed($role, $resource, $privilege);
-	}
+        $this->add(new Zend_Acl_Resource('league/id'), 'guest_allow');
+        $this->add(new Zend_Acl_Resource('league/all'), 'guest_allow');
+
+        $this->add(new Zend_Acl_Resource('game/all'), 'guest_allow');
+        $this->add(new Zend_Acl_Resource('game/id'), 'guest_allow');
+
+        $this->allow('guest', 'user/register');
+        $this->allow('guest', 'user/activate');
+        $this->allow('guest', 'user/restorepasswd');
+
+        // user resources
+        $this->add(new Zend_Acl_Resource('user_allow'));
+        $this->add(new Zend_Acl_Resource('user/view'), 'user_allow');
+        $this->add(new Zend_Acl_Resource('user/message'), 'user_allow');
+        $this->add(new Zend_Acl_Resource('user/settings'), 'user_allow');
+        $this->add(new Zend_Acl_Resource('user/edit'), 'user_allow');
+        $this->add(new Zend_Acl_Resource('user/logout'), 'user_allow');
+        $this->add(new Zend_Acl_Resource('chat/addmessage'), 'user_allow');
+
+        $this->deny('user', 'user/register');
+        $this->deny('user', 'user/activate');
+        $this->deny('user', 'user/restorepasswd');
+
+        // admin resources
+        $this->add(new Zend_Acl_Resource('admin_allow'));
+
+        $this->add(new Zend_Acl_Resource('article/add'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('article/edit'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('article/delete'), 'admin_allow');
+
+        $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('admin/index'), 'admin_allow');
+
+        $this->add(new Zend_Acl_Resource('article-type/id'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('article-type/all'), 'admin_allow');
+
+        $this->add(new Zend_Acl_Resource('game/add'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('game/edit'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('game/delete'), 'admin_allow');
+
+        // master resources
+        $this->add(new Zend_Acl_Resource('master_allow'));
+        $this->add(new Zend_Acl_Resource('article-type/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('article-type/edit'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('article-type/delete'), 'master_allow');
+
+        $this->add(new Zend_Acl_Resource('league/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('league/edit'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('league/delete'), 'master_allow');
+
+        //Выставляем права, по-умолчанию всё запрещено
+        //this->deny('user', 'user_deny', 'show');
+        $this->allow('guest', 'guest_allow', 'show');
+        $this->allow('user', 'user_allow', 'show');
+        $this->allow('admin', 'admin_allow', 'show');
+        $this->allow('master', 'master_allow', 'show');
+    }
+
+    public function can($privilege = 'show') {
+        //Инициируем ресурс
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $resource = $request->getControllerName() . '/' . $request->getActionName();
+        //Если ресурс не найден закрываем доступ
+        if (!$this->has($resource))
+            return true;
+
+        //Инициируем роль
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
+            // get role name for current user
+            $user = new Application_Model_DbTable_User();
+            $role = $user->getUserRoleName($storage_data->id);
+        } else {
+            $role = 'guest';
+        }
+
+        return $this->isAllowed($role, $resource, $privilege);
+    }
+
 }

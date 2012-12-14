@@ -75,7 +75,7 @@ class Application_Form_UserRestorePasswdForm extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Востановить'),
+            'label' => $this->translate('Восстановить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))

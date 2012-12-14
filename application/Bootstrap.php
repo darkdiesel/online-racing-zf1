@@ -138,7 +138,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // Script for main menu
         $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.my.js"));
-        $view->headScript()->appendFile($view->baseUrl("js/snowfall.min.jquery.js"));
+        //$view->headScript()->appendFile($view->baseUrl("js/snowfall.min.jquery.js"));
 
         // Script for count down block
         if ($view->ls_count_down_block) {

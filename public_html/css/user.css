@@ -16,10 +16,15 @@
     #user_info_page .user_info_avatar{
          margin:0 0 5px 0;
     }
+        #user_info_page .user_info_avatar img{
+            width:200px;
+        }
         #user_info_page .user_info_ava .nationality{
             text-align:center;
             text-transform:uppercase;
         }
+    
+        
     
     #user_info_page table{
         font-family:monospace;
@@ -61,63 +66,101 @@
         }
     
 /* user edit page */
-#userEdit{
+#user_edit_page{
     width:100%;
 }
-    #userEdit fieldset{
+    #user_edit_page fieldset{
     
     }
-    #userEdit fieldset legend{
+    #user_edit_page fieldset legend{
         font-size:22px;
     }
-    #userEdit fieldset .fieldset_inner_form{
+    #user_edit_page #table_avatar_type{
+            
+        }
+            #user_edit_page #table_avatar_type tr{
+                
+            }
+                #user_edit_page #table_avatar_type tr td{
+                    padding:2px;
+                    width: 200px;
+                    text-align:center;
+                }
+                    #user_edit_page #table_avatar_type tr td span{
+                        padding:8px;
+                        color:#828282;
+                        font-size:13px;
+                    }
+                    #user_edit_page #table_avatar_type tr td img{
+                        width:200px;
+                    }
+    #user_edit_page fieldset .fieldset_inner_form{
         border:1px solid #CACACA;
         background:none repeat scroll 0 0 #F9F9F9;
         padding:20px;
         margin:0;
         border-radius:7px;
     }
-        #userEdit fieldset .fieldset_inner_form .element_box{
+        #user_edit_page fieldset .fieldset_inner_form .element_box{
             clear:both;
+            margin:15px 0;
         }
-            #userEdit fieldset .fieldset_inner_form .element_box .element_label{
+        #user_edit_page fieldset .fieldset_inner_form .avatar_type{
+            
+        }
+            #user_edit_page fieldset .fieldset_inner_form .avatar_type .element_tag{
+                margin:0 auto !important;
+                float:none !important;
+                width:250px;
+                padding-left:50px;
+            }
+                #user_edit_page fieldset .fieldset_inner_form .avatar_type .element_tag input{
+                    margin:4px 5px 6px 0;
+                }
+            #user_edit_page fieldset .fieldset_inner_form .avatar_type label{
+                display:inline;
+                font-weight:normal !important;
+                color:#828282;
+                font-size:13px;
+            }
+            #user_edit_page fieldset .fieldset_inner_form .element_box .element_label{
                 display:inline-block;
                 text-align:right;
                 width:40%;
                 padding-top:5px;
                 font-weight:bold;
             }
-            #userEdit fieldset .fieldset_inner_form .element_box .element_tag{
+            #user_edit_page fieldset .fieldset_inner_form .element_box .element_tag{
                 float:right;
                 margin-right:140px;
             }
-            #userEdit fieldset .fieldset_inner_form .element_box p.hint{
+            #user_edit_page fieldset .fieldset_inner_form .element_box p.hint{
                 margin:10px auto;
                 width:80%;
                 text-align:center;
                 font-size:13px;
                 color:#828282;
             }
-    #userEdit .form_actions{
+    #user_edit_page .form_actions{
         margin-top:15px;
     }
-        #userEdit .form_actions fieldset .fieldset_inner_form{
+        #user_edit_page .form_actions fieldset .fieldset_inner_form{
             padding:15px;
             text-align:center;
         }
-            #userEdit .form_actions fieldset .fieldset_inner_form .form_actions_group{
+            #user_edit_page .form_actions fieldset .fieldset_inner_form .form_actions_group{
                 margin:0 15px;
             }
-    #userEdit label{
+    #user_edit_page label{
         font-weight:bold;
     }        
-    #userEdit .additional_Inf{
+    #user_edit_page .additional_Inf{
 
     }
-    #userEdit .additional_Inf .fieldset_inner_form{
+    #user_edit_page .additional_Inf .fieldset_inner_form{
     
     }
-        #userEdit .additional_Inf .fieldset_inner_form textarea{
+        #user_edit_page .additional_Inf .fieldset_inner_form textarea{
             resize:none;
             width:640px;
         }
@@ -147,6 +190,9 @@
         #users_page .user_item .user_image{
             text-align:center;
             margin:0 0 10px 0;
+        }
+        #users_page .user_item .user_image img{
+            width:165px;
         }
         #users_page .user_item .user_login{
             

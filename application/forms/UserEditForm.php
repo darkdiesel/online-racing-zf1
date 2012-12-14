@@ -88,16 +88,84 @@ class Application_Form_UserEditForm extends Zend_Form {
             )
         ));
 
-        // gravatar
-        $this->addElement('text', 'gravatar', array(
-            'label' => $this->translate('Gravatar'),
-            'placeholder' => $this->translate('Gravatar'),
+        $this->addElement('text', 'flag', array(
+            'label' => $this->translate('Флаг') . ' (' . $this->translate('Не реализованно!') . ')',
+            'placeholder' => $this->translate('Флаг'),
+            'filters' => array('StripTags', 'StringTrim'),
+            'maxlength' => 100,
+            'class' => 'x_field',
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        // avatar_type
+        $this->addElement('radio', 'avatar_type', array(
+            'label' => $this->translate('Выбрать аватар'),
+            'multiOptions' => array(
+                0 => $this->translate('Без аватара'),
+                1 => $this->translate('Загруженный') . ' (' . $this->translate('Не реализованно!') . ')',
+                2 => $this->translate('Ссылка с другого ресурса'),
+                3 => $this->translate('Gravatar'),
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'avatar_type element_box ')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        // avatar_load
+        $this->addElement('text', 'avatar_load', array(
+            'label' => $this->translate('Загрузить аватар'),
+            'placeholder' => $this->translate('Загрузить аватар'),
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
-            'description' => 'Зарегестрируйтесь в сервисе Gravatar (http://Gravatar.com) и введите регистрационный e-mail в поле выше.',
+            'description' => $this->translate('Загрузите аватар выбрав файл с компьютера.'),
             'class' => 'x_field',
             'validators' => array(
                 'EmailAddress',
-                array('StringLength', true, array('min' => 5, 'max' => 100))
+                array('StringLength', true, array('min' => 5, 'max' => 255))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors', 'Description',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        // avatar_load
+        $this->addElement('text', 'avatar_link', array(
+            'label' => $this->translate('Ссылка из другого ресурса'),
+            'placeholder' => $this->translate('Ссылка из другого ресурса'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
+            'description' => $this->translate('Зайди на другой сайт, скопируйте ссылку понравившейся картинки и вставте в это поле.'),
+            'class' => 'x_field',
+            'validators' => array(
+                array('StringLength', true, array('min' => 5, 'max' => 255))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors', 'Description',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        // gravatar
+        $this->addElement('text', 'avatar_gravatar_email', array(
+            'label' => $this->translate('Gravatar'),
+            'placeholder' => $this->translate('Gravatar'),
+            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
+            'description' => $this->translate('Зарегестрируйтесь в сервисе Gravatar (http://Gravatar.com) и введите регистрационный e-mail в поле выше.'),
+            'class' => 'x_field',
+            'validators' => array(
+                'EmailAddress',
+                array('StringLength', true, array('min' => 5, 'max' => 255))
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors', 'Description',
@@ -268,7 +336,8 @@ class Application_Form_UserEditForm extends Zend_Form {
             $this->getElement('surname'),
             $this->getElement('birthday'),
             $this->getElement('country'),
-            $this->getElement('city')
+            $this->getElement('city'),
+            $this->getElement('flag'),
                 ), 'personal_Inf', array('legend' => $this->translate('Личные данные')));
 
         $this->getDisplayGroup('personal_Inf')->setDecorators(array(
@@ -280,7 +349,10 @@ class Application_Form_UserEditForm extends Zend_Form {
 
         // avatar display group
         $this->addDisplayGroup(array(
-            $this->getElement('gravatar')
+            $this->getElement('avatar_type'),
+            $this->getElement('avatar_load'),
+            $this->getElement('avatar_link'),
+            $this->getElement('avatar_gravatar_email')
                 ), 'avatar', array('legend' => $this->translate('Изображение профиля')));
 
         $this->getDisplayGroup('avatar')->setDecorators(array(

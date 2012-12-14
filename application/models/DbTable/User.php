@@ -20,10 +20,10 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($model
                                 ->select()
-                                ->from(array('u' => 'user'), 'id')
-                                ->where('u.user_role_id != 1')
-                                ->columns(array('gravatar', 'login'))
-                                ->order('u.id ' . $order)
+                                ->from('user', 'id')
+                                ->where('user_role_id != 1 and enable = 1')
+                                ->columns(array('id', 'avatar_type', 'login'))
+                                ->order('id ' . $order)
         );
 
         $paginator = new Zend_Paginator($adapter);
@@ -56,7 +56,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model = new self;
 
         $user_data = array(
-            'date_last_active' => date('Y-m-d H:i:s')
+            'date_last_activity' => date('Y-m-d H:i:s')
         );
 
         $user_where = $model->getAdapter()->quoteInto('id = ?', $user_id);
@@ -73,7 +73,6 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 ->columns(array('code_activate'));
 
         $user = $model->fetchRow($select);
-        //$user = $model->fetchRow(array('email = ?' => $email, 'password = ?' => $password, 'code_activate = ?' => $code_activate));
 
         if (count($user) != 0) {
             if ($user->code_activate == $code_activate) {
@@ -106,7 +105,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model->update($user_data, $user_where);
     }
 
-    public function restore_passwd($email, $code_restore, $password) {
+    public function restore_new_passwd($email, $code_restore, $password) {
         $model = new self;
 
         $user = $model->fetchRow(array('email = ?' => $email, 'code_restore_pass = ?' => $code_restore));
@@ -119,10 +118,10 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
             $user_where = $model->getAdapter()->quoteInto('id = ?', $user->id);
             $model->update($user_data, $user_where);
-            return true;
+            return TRUE;
         } else {
             $user = $model->fetchRow(array('email = ?' => $email));
-            return false;
+            return FALSE;
         }
     }
 
@@ -148,6 +147,88 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             }
         } else {
             return 'notFound';
+        }
+    }
+
+    public function get_user_avatar_load($user_id) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('id = ?', $user_id)
+                ->columns(array('avatar_load'));
+
+        $avatar = $model->fetchRow($select);
+
+        if (count($avatar) != 0) {
+            if ($avatar->avatar_load != '') {
+                return $avatar->avatar_load;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function get_user_avatar_link($user_id) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('id = ?', $user_id)
+                ->columns(array('avatar_link'));
+
+        $avatar = $model->fetchRow($select);
+
+        if (count($avatar) != 0) {
+            if ($avatar->avatar_link != '') {
+                return $avatar->avatar_link;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function get_user_avatar_gravatar_email($user_id) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('id = ?', $user_id)
+                ->columns(array('avatar_gravatar_email'));
+
+        $avatar = $model->fetchRow($select);
+
+        if (count($avatar) != 0) {
+            if ($avatar->avatar_gravatar_email != '') {
+                return $avatar->avatar_gravatar_email;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function getUserRoleName($user_id) {
+        $model = new self;
+
+        $select = $model->select()
+                ->setIntegrityCheck(false)
+                ->from(array('u' => 'user'), 'u.id')
+                ->where('u.id = ?', $user_id)
+                ->join(array('u_r' => 'user_role'), 'u_r.id = u.user_role_id', array('user_role' => 'u_r.name'))
+                ->columns();
+
+        $user = $model->fetchRow($select);
+
+        if (count($user) != 0) {
+            return $user->user_role;
+        } else {
+            
         }
     }
 

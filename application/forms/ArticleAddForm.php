@@ -29,11 +29,12 @@ class Application_Form_ArticleAddForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         // artcile type
         $this->addElement('select', 'article_type', array(
-            'label' => $this->translate('Тип контента'),
+            'label' => $this->translate('Тип статьи'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'required' => true,
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -44,6 +45,21 @@ class Application_Form_ArticleAddForm extends Zend_Form {
             )
         ));
         
+        // artcile type
+        $this->addElement('select', 'content_type', array(
+            'label' => $this->translate('Тип контента'),
+            //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'required' => true,
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
         $this->addElement('text', 'image', array(
             'label' => $this->translate('Изображение'),
             'placeholder' => $this->translate('Изображение'),
@@ -58,6 +74,22 @@ class Application_Form_ArticleAddForm extends Zend_Form {
             )
         ));
         
+        $this->addElement('textarea', 'annotation', array(
+            'label' => $this->translate('Анотация статьи'),
+            'placeholder' => $this->translate('Анотация статьи'),
+            'cols' => 60,
+            'rows' => 10,
+            'maxlength' => 250,
+            'required' => true,
+            'filters' => array('StringTrim'),
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'aboutTextArea_Label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+            )
+        ));
+
         $this->addElement('textarea', 'text', array(
             'label' => $this->translate('Текст статьи'),
             'placeholder' => $this->translate('Текст статьи'),
@@ -73,7 +105,7 @@ class Application_Form_ArticleAddForm extends Zend_Form {
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
             )
         ));
-        
+
         $this->addElement('checkbox', 'publish', array(
             'label' => $this->translate('Опубликовать?'),
             'value' => 1,
@@ -81,7 +113,18 @@ class Application_Form_ArticleAddForm extends Zend_Form {
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
-                array('HtmlTag', array('tag' => 'span','class' => 'element_tag')),
+                array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
+            )
+        ));
+        
+        $this->addElement('checkbox', 'publish_to_slider', array(
+            'label' => $this->translate('Опубликовать в слайдер?'),
+            'value' => 1,
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
+                array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
             )
         ));
 
@@ -104,12 +147,12 @@ class Application_Form_ArticleAddForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
-        
+
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-        
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),

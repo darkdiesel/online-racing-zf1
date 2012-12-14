@@ -35,8 +35,8 @@ class Application_Form_UserSetRestorePasswdForm extends Zend_Form {
         ));
 
         $this->addElement('text', 'code_restore', array(
-            'label' => $this->translate('Код востановления'),
-            'placeholder' => $this->translate('Код востановления'),
+            'label' => $this->translate('Код восстановления'),
+            'placeholder' => $this->translate('Код восстановления'),
             'required' => true,
             'AllowEmpty' => false,
             'class' => 'x_field',
@@ -113,7 +113,7 @@ class Application_Form_UserSetRestorePasswdForm extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Востановить'),
+            'label' => $this->translate('Восстановить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))

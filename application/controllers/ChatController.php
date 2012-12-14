@@ -4,7 +4,6 @@ class ChatController extends App_Controller_FirstBootController {
 
     public function indexAction() {
         $this->view->headTitle($this->view->translate('Чат'));
-        
         $this->view->ls_chat_block = false;
     }
 
@@ -16,10 +15,18 @@ class ChatController extends App_Controller_FirstBootController {
             if ($this->getRequest()->isPost()) {
                 if (($request->getParam('ajax_action') == 'add_message') && ($request->getParam('message_text') != '')) {
                     $message_text = htmlspecialchars((trim($request->getParam('message_text'))));
-                    $message = new Application_Model_UserChat(array('message' => $message_text,
-                                'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
-                    $mapper = new Application_Model_UserChatMapper();
-                    $mapper->savemessage($message);
+
+                    $date = date('Y-m-d H:i:s');
+                    $user_chat_data = array(
+                        'message' => $message_text,
+                        'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
+                        'date_create' => $date,
+                        'date_edit' => $date,
+                    );
+
+                    $user_chat = new Application_Model_DbTable_UserChat();
+                    $newUser_chat_msg = $user_chat->createRow($user_chat_data);
+                    $newUser_chat_msg->save();
                 }
             }
         }
@@ -31,11 +38,13 @@ class ChatController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($request->getParam('ajax_action') == 'get_chat_messages') {
-                $messages = new Application_Model_UserChatMapper();
-                $chat_messages = $messages->fetchLast($request->getParam('last_act'));
+
+                $user_chat = new Application_Model_DbTable_UserChat();
+                $chat_messages = $user_chat->fetchLastMsg($request->getParam('last_act'));
+
                 $order = $request->getParam('last_act') % 2;
                 ($order == 0) ? $order = 'odd' : $order = 'even';
-                if ($chat_messages != 'null') {
+                if ($chat_messages) {
                     $last_message_id = 0;
 
                     $messages_html = '';
@@ -49,10 +58,10 @@ class ChatController extends App_Controller_FirstBootController {
                         //construct message html code
                         $messages_html .= '<div class="chat_message_box ' . $order . '">';
                         ($order == 'even') ? $order = 'odd' : $order = 'even';
-                        $messages_html .= '<div class="chat_mesage_date">' . $message->date . '</div>';
+                        $messages_html .= '<div class="chat_mesage_date">' . $message->date_create . '</div>';
                         $messages_html .= '<div class="chat_mesage_nickname">';
-                        $messages_html .= '<a href="' . 'user/info/' . $message->user_id . '" target="_BLINK"><i class="icon-user icon-black"></i></a>';
-                        $messages_html .= '<a href="javascript:void(' . "'Apply to'" . ')" class="nick" onClick="$(' . "'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()" . '">' . $message->login . '</a>';
+                        $messages_html .= '<a href="' . '/user/id/' . $message->user_id . '"><i class="icon-user icon-black"></i></a>';
+                        $messages_html .= '<a href="javascript:void(' . "'Apply to'" . ')" class="nick" onClick="$(' . "'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()" . '">' . $message->user_login . '</a>';
                         $messages_html .= '</div>';
                         $messages_html .= '<div class="chat_mesage_message">' . $bbcode->render($message->message) . '</div>';
                         $messages_html .= '</div>';

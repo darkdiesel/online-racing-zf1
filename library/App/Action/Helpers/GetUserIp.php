@@ -3,7 +3,7 @@
 class Zend_Controller_Action_Helper_GetUserIp extends Zend_Controller_Action_Helper_Abstract {
 
     /**
-     * Метод get_real_ip djpdhfoftn ip пользователя
+     * Метод get_real_ip возвращает ip пользователя
      * 
      * @param int $length
      */

@@ -6,21 +6,14 @@
         if (count($this->paginator)) {
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
 
-            foreach ($this->paginator as $item):
+            foreach ($this->paginator as $user):
                 ?>
                 <div class="user_item">
                     <div class="user_image">
-                        <?php
-                        echo $this->gravatar()
-                                ->setEmail($item['gravatar'])
-                                ->setImgSize(160)
-                                ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
-                                ->setSecure(true)
-                                ->setAttribs(array('class' => 'img-polaroid', 'title' => $item['login'] . " - profile avatar"));
-                        ?>
+                        <?php echo $this->setupUserAvatar($user['id'], $user['avatar_type']); ?>
                     </div>
                     <div class="user_flag"><img src="<?php echo $this->baseUrl('img/flags/eur_round_32.png'); ?>"></div>
-                    <div class="user_login"><a href="<?php echo $this->baseUrl('user/info/') . $item['id'] ?>"><?php echo $item['login']; ?></a></div>
+                    <div class="user_login"><a href="<?php echo $this->baseUrl('user/id/') . $user['id'] ?>"><?php echo $user['login']; ?></a></div>
                 </div>
                 <?php
             endforeach;

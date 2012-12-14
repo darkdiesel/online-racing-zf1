@@ -2,7 +2,7 @@
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
-            echo $this->translate('Профиль') . ' ➛ ' . $this->user->login;
+            echo $this->user->login;
         } else {
             echo $this->translate('Ошибка!');
         }
@@ -19,7 +19,7 @@
         <?php } else { ?>
             <div class="user_info_ava">
                 <div class="user_info_avatar">
-                    <?php echo $this->gravatar; ?>
+                    <?php echo $this->avatar; ?>
                 </div>
                 <div class="img-polaroid nationality">
                     <img src="<?php echo $this->baseUrl('img/flags/eur_glossy_wave_64.png'); ?>">
@@ -51,7 +51,7 @@
                         </tr>
                         <tr>
                             <td class="header_column"><?php echo $this->translate('Последний визит') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->last_login), 'H:i d.m.Y') ?></div></td>
+                            <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->date_last_activity), 'H:i d.m.Y') ?></div></td>
                         </tr>
                     </tbody>
                 </table>
@@ -74,7 +74,7 @@
                                 <td>
                                     <?php
                                     $d = new DateTime();
-                                    echo $d->diff(new DateTime($this->user->created))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
+                                    echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
                                     ?>
                                 </td>
                             </tr>
@@ -82,13 +82,13 @@
                                 <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
                                 <td>
                                     <?php
-                                    echo date_diff(new DateTime(), new DateTime($this->user->created))->days;
+                                    echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
                                     ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="header_column"><?php echo $this->translate('Дата регистрации') ?>:</td>
-                                <td><?php echo date_format(date_create($this->user->created), 'H:i d.m.Y') ?></td>
+                                <td><?php echo date_format(date_create($this->user->date_create), 'H:i d.m.Y') ?></td>
                             </tr>
                         </tbody>
                     </table>

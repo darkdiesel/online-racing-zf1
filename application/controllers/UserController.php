@@ -7,6 +7,29 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/user.css"));
     }
 
+    public function idAction() {
+        $request = $this->getRequest();
+        $user_id = $request->getParam('id');
+
+        $user = new Application_Model_DbTable_User();
+
+        $user_data = $user->fetchRow(array('id = ?' => $user_id));
+
+        if (count($user_data) != 0) {
+            $this->view->user = $user_data;
+
+            $this->view->headTitle($this->view->translate('Пилот') . ' → ' . $user_data->login);
+
+            //Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
+            //$this->view->avatar = $this->_helper->getHelper('GetUserAvatar')->get_image($user_data->id, 1);
+
+            $this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
+        } else {
+            $this->view->headTitle($this->view->translate('Ошибка! Пользователь не существует!'));
+            $this->view->errMessage = $this->view->translate("Пользователь не существует");
+        }
+    }
+
     public function loginAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');
@@ -51,8 +74,8 @@ class UserController extends App_Controller_FirstBootController {
                                 break;
                             default:
                                 $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
-                                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restorepasswd') . '">' . $this->view->translate('Забыди пароль?') . '</a></strong><br/>'
-                                        . '<strong><a href="' . $this->view->baseUrl('user/restorepasswd') . '">Зарегистрироваться?</a></strong>';
+                                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
+                                        . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
                                 break;
                         }
                         break;
@@ -65,13 +88,13 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                     case 'notFound':
                         $this->view->errMessage .= $this->view->translate('Пользователь с этими данными не найден!') . '<br/>';
-                        $this->view->errMessage .= '<a href="' . $this->view->baseUrl('user/restorepasswd') . '">' . $this->view->translate('Забыди пароль?') . '</a><br/>'
-                                . '<strong><a href="' . $this->view->baseUrl('user/restorepasswd') . '">Зарегистрироваться?</a></strong>';
+                        $this->view->errMessage .= '<a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a><br/>'
+                                . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
                         break;
                 }
             } else {
-                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restorepasswd') . '">' . $this->view->translate('Забыди пароль?') . '</a></strong><br/>'
-                        . '<strong><a href="' . $this->view->baseUrl('user/restorepasswd') . '">Зарегистрироваться?</a></strong>';
+                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
+                        . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
             }
         }
         $this->view->form = $form;
@@ -314,7 +337,7 @@ class UserController extends App_Controller_FirstBootController {
                     'password' => sha1($form->getValue('password')),
                 );
 
-                $result = $user->restore_passwd($user_data['email'], $user_data['code_restore'], $user_data['password']);
+                $result = $user->restore_new_passwd($user_data['email'], $user_data['code_restore'], $user_data['password']);
 
                 if ($result) {
                     // load e-mail script (template) for user
@@ -367,36 +390,109 @@ class UserController extends App_Controller_FirstBootController {
         return $this->_helper->redirector('login', 'user');
     }
 
-    public function idAction() {
+    public function editAction() {
         // page title
-        //$this->view->storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
-        $this->view->headTitle($this->view->translate('Просмотр профиля'));
+        $this->view->headTitle($this->view->translate('Редактирование профиля'));
 
         $request = $this->getRequest();
-        $user_id = $request->getParam('id');
+        $form = new Application_Form_UserEditForm();
 
-        if ($request->getParam('id') == 0) {
-            $this->view->errMessage = "Пользователь не существует";
-            return;
-        } else {
-            
+        $user = new Application_Model_DbTable_User();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+
+                $user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                $date = date('Y-m-d H:i:s');
+                switch ($request->getParam('tab_name')) {
+                    case 'avatar':
+                        $user_data = array(
+                            'avatar_type' => $form->getValue('avatar_type'),
+                            //'avatar_load' => $form->getValue('avatar_load'),
+                            'avatar_link' => $form->getValue('avatar_link'),
+                            'avatar_gravatar_email' => $form->getValue('avatar_gravatar_email'),
+                            'date_edit' => $user_data,
+                        );
+
+                        $user->update($user_data, $user_where);
+                        break;
+                    case 'personal_Inf':
+                        $user_data = array(
+                            'name' => $form->getValue('name'),
+                            'surname' => $form->getValue('surname'),
+                            'birthday' => $form->getValue('birthday'),
+                            'country' => $form->getValue('country'),
+                            'city' => $form->getValue('city'),
+                                //'flag' => $form->getValue('flag'),
+                            'date_edit' => $user_data,
+                        );
+
+                        $user->update($user_data, $user_where);
+                        break;
+                    case 'contacts_Inf':
+                        $user_data = array(
+                            'skype' => $form->getValue('skype'),
+                            'icq' => $form->getValue('icq'),
+                            'gtalk' => $form->getValue('gtalk'),
+                            'www' => $form->getValue('www'),
+                            'date_edit' => $user_data,
+                        );
+
+                        $user->update($user_data, $user_where);
+                        break;
+                    case 'additional_Inf':
+                        $user_data = array(
+                            'about' => $form->getValue('about'),
+                            'date_edit' => $user_data,
+                        );
+
+                        $user->update($user_data, $user_where);
+                        break;
+                    default:
+                        $this->view->errMessage .= $this->view->translate('Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.');
+                        break;
+                }
+            } else {
+                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для сохранения изминений профиля!');
+            }
         }
 
-        $mapper = new Application_Model_UserMapper();
-        $user_data = $mapper->getUserDataById($user_id);
+        $user_data = $user->fetchRow(array('id = ?' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
 
-        if ($user_data == 'null') {
-            $this->view->errMessage = "Пользователь не существует";
-            return;
+        if (count($user_data) != 0) {
+            $form->name->setValue($user_data->name);
+            $form->surname->setValue($user_data->surname);
+            $form->birthday->setValue($user_data->birthday);
+            $form->country->setValue($user_data->country);
+            $form->city->setValue($user_data->city);
+            $form->flag->setValue($user_data->flag_id);
+            $form->avatar_type->setValue($user_data->avatar_type);
+            $form->avatar_load->setValue($user_data->avatar_load);
+            $form->avatar_link->setValue($user_data->avatar_link);
+            $form->avatar_gravatar_email->setValue($user_data->avatar_gravatar_email);
+            $form->skype->setValue($user_data->skype);
+            $form->icq->setValue($user_data->icq);
+            $form->gtalk->setValue($user_data->gtalk);
+            $form->www->setValue($user_data->www);
+            $form->about->setValue($user_data->about);
+            $this->view->user_id = $user_data->id;
         } else {
-            $this->view->user = $user_data;
-            $this->view->gravatar = $this->view->gravatar()
-                    ->setEmail($user_data->gravatar)
-                    ->setImgSize(200)
-                    ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
-                    ->setSecure(true)
-                    ->setAttribs(array('class' => 'img-polaroid', 'title' => $user_data->login . " - profile avatar"));
+            $this->view->errMessage .= $this->view->translate('Произошла ошибка! Свяжитесь с администратором для ее устранения.');
         }
+
+        $this->view->form = $form;
+    }
+
+    public function allAction() {
+        $this->view->headTitle($this->view->translate('Гонщики'));
+        // pager settings
+        $page_count_items = 9;
+        $page = $this->getRequest()->getParam('page');
+        $page_range = 5;
+        $items_order = 'ASC';
+
+        $user = new Application_Model_DbTable_User();
+        $this->view->paginator = $user->get_users_pager($page_count_items, $page, $page_range, $items_order);
     }
 
     public function messageAction() {
@@ -420,92 +516,6 @@ class UserController extends App_Controller_FirstBootController {
         }
 
         $this->view->form = $form;
-    }
-
-    public function editAction() {
-        // page title
-        $this->view->headTitle($this->view->translate('Редактирование профиля'));
-
-        $request = $this->getRequest();
-        $form = new Application_Form_UserEditForm();
-
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $userMapper = new Application_Model_UserMapper();
-                $user = new Application_Model_User(array('id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
-
-                switch ($request->getParam('tab_name')) {
-                    case 'avatar':
-                        $user->setGravatar($form->gravatar->getValue());
-                        $userMapper->save($user, 'avatar');
-                        break;
-                    case 'personal_Inf':
-                        $user->setName($form->name->getValue());
-                        $user->setSurname($form->surname->getvalue());
-                        $user->setBirthday($form->birthday->getValue());
-                        $user->setCountry($form->country->getValue());
-                        $user->setCity($form->city->getValue());
-                        $userMapper->save($user, 'personal_Inf');
-                        break;
-                    case 'contacts_Inf':
-                        $user->setSkype($form->skype->getValue());
-                        $user->setIcq($form->icq->getValue());
-                        $user->setGtalk($form->gtalk->getValue());
-                        $user->setWww($form->www->getvalue());
-                        $userMapper->save($user, 'contacts_Inf');
-                        break;
-                    case 'additional_Inf':
-                        $user->setAbout($form->about->getValue());
-                        $userMapper->save($user, 'additional_Inf');
-                        break;
-                    default:
-                        $this->view->errMessage .= $form->gravatar->getValue() . "Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.";
-                        break;
-                }
-            } else {
-                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для сохранения изминений профиля!');
-            }
-        }
-
-        $mapper = new Application_Model_UserMapper();
-        $user_data = $mapper->getUserDataById(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
-
-        $form->name->setValue($user_data->name);
-        $form->surname->setValue($user_data->surname);
-        $form->birthday->setValue($user_data->birthday);
-        $form->country->setValue($user_data->country);
-        $form->city->setValue($user_data->city);
-        $form->gravatar->setValue($user_data->gravatar);
-        $form->skype->setValue($user_data->skype);
-        $form->icq->setValue($user_data->icq);
-        $form->gtalk->setValue($user_data->gtalk);
-        $form->www->setValue($user_data->www);
-        $form->about->setValue($user_data->about);
-
-        $this->view->form = $form;
-        $this->view->gravatar = $this->view->gravatar()
-                ->setEmail($user_data->gravatar)
-                ->setImgSize(200)
-                ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
-                ->setSecure(true)
-                ->setAttribs(array('class' => 'img-polaroid', 'title' => " - profile avatar"));
-    }
-
-    public function allAction() {
-        $this->view->headTitle($this->view->translate('Гонщики'));
-        // pager settings
-        $page_count_items = 10;
-        $page_range = 5;
-        $items_order = 'DESC';
-
-        $page = $this->getRequest()->getParam('page');
-
-        $user = new Application_Model_DbTable_User();
-        $this->view->paginator = $user->get_users_pager($page_count_items, $page, $page_range, $items_order);
-
-        /* $mapper = new Application_Model_UserMapper();
-
-          $this->view->paginator = $mapper->getUsersPager(9, $request->getParam('page'), 5, 'all'); */
     }
 
 }

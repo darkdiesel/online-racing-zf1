@@ -1,16 +1,16 @@
-<div id="user_activate_page" class="page">
+<div id="user_edit_page" class="page">
     <div class="page_title"><?php echo $this->translate('Редактирование профиля'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
         <div class="alert alert-info alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Информация');?></h4>
+            <h4><?php echo $this->translate('Информация'); ?></h4>
             <?php echo $this->translate('Введите новые данные и нажмите "Сохранить".'); ?>
         </div>
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка');?></h4>
+                <h4><?php echo $this->translate('Ошибка'); ?></h4>
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } ?>
@@ -22,7 +22,6 @@
                 <li><a href="#tabs-4"><?php echo $this->translate('Аккаунты'); ?></a></li>
                 <li><a href="#tabs-5"><?php echo $this->translate('Дополнительно'); ?></a></li>
             </ul>
-
             <div id="tabs-1">
                 <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-1" method="<?php echo $this->form->getMethod(); ?>">
                     <?php echo $this->form->getDisplayGroup('personal_Inf'); ?>
@@ -41,7 +40,20 @@
             </div>
             <div id="tabs-2">
                 <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-2" method="<?php echo $this->form->getMethod(); ?>">
-                    <?php echo $this->gravatar; ?>
+                    <table id="table_avatar_type" class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><?php echo $this->setupUserAvatar($this->user_id, 1); ?></td>
+                                <td><?php echo $this->setupUserAvatar($this->user_id, 2); ?></td>
+                                <td><?php echo $this->setupUserAvatar($this->user_id, 3); ?></td>
+                            </tr>
+                            <tr>
+                                <td><span><?php echo $this->translate('Загруженный'); ?></span><br /><span>(<?php echo $this->translate('Не реализованно!'); ?>)</span></td>
+                                <td><span><?php echo $this->translate('Ссылка с другого ресурса'); ?></span></td>
+                                <td><span><?php echo $this->translate('Gravatar'); ?></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <?php echo $this->form->getDisplayGroup('avatar'); ?>
                     <?php echo $this->form->tab_name->setvalue('avatar'); ?>
                     <?php echo $this->form->getDisplayGroup('form_actions'); ?>
@@ -69,7 +81,6 @@
                 </form>
             </div>
         </div>
-
         <script type = "text/javascript" >
             jQuery(document) . ready(function() {
                 $('#tabs') . tabs();
