@@ -5,8 +5,8 @@
             <a href="<?php echo $this->baseUrl("league/all") ?>"><?php echo $this->translate('Лиги') ?></a>
             <ul class="menu">
                 <?php
-                $mapper = new Application_Model_LeagueMapper();
-                $leagues = $mapper->fetchAll();
+                $league = new Application_Model_DbTable_League();
+                $leagues = $league->fetchAll();
 
                 foreach ($leagues as $league):
                     ?>
@@ -25,8 +25,7 @@
         <li class="expanded">
             <a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Файлы') ?></a>
             <ul class="menu">
-                <li class="leaf"><a href="<?php echo $this->baseUrl("game/all"); ?>" title="<?php echo $this->translate('Игры'); ?>"><?php echo $this->translate('Игры') ?></a></li>
-                <li class="leaf"><a href="<?php echo $this->baseUrl("gamemod/all"); ?>" title="<?php echo $this->translate('Моды'); ?>"><?php echo $this->translate('Моды') ?></a></li>
+                <li class="leaf"><a href="<?php echo $this->baseUrl("game/all"); ?>" title="<?php echo $this->translate('Игры и моды'); ?>"><?php echo $this->translate('Игры') ?></a></li>
                 <li class="leaf"><a href="#" title=""><?php echo $this->translate('Плагины'); ?></a></li>
                 <li class="leaf"><a href="#" title=""><?php echo $this->translate('Мануалы'); ?></a></li>
             </ul>

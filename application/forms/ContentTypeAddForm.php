@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_LeagueAddForm extends Zend_Form {
+class Application_Form_ContentTypeAddForm extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,10 +10,10 @@ class Application_Form_LeagueAddForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/league/add');
-        $this->setName('leagueAdd');
+        $this->setAction('/content-type/add');
+        $this->setName('contentTypeAdd');
         $this->setAttrib('class', 'white_box');
-
+        
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
@@ -31,38 +31,9 @@ class Application_Form_LeagueAddForm extends Zend_Form {
             )
         ));
         
-         // league administrator
-        $this->addElement('select', 'admin', array(
-            'label' => $this->translate('Администратор лиги'),
-            //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
-            'required' => true,
-            'registerInArrayValidator' => false,
-            'validators' => array('NotEmpty'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-        
-        $this->addElement('text', 'logo', array(
-            'label' => $this->translate('Логотип лиги'),
-            'placeholder' => $this->translate('Логотип лиги'),
-            'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field',
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-        
         $this->addElement('textarea', 'description', array(
-            'label' => $this->translate('Описание лиги'),
-            'placeholder' => $this->translate('Описание лиги'),
+            'label' => $this->translate('Описание типа контента'),
+            'placeholder' => $this->translate('Описание типа контента'),
             'cols' => 60,
             'rows' => 10,
             'maxlength' => 500,
@@ -75,7 +46,7 @@ class Application_Form_LeagueAddForm extends Zend_Form {
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
             )
         ));
-
+        
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
@@ -95,12 +66,12 @@ class Application_Form_LeagueAddForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
-
+        
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-
+        
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
@@ -110,3 +81,4 @@ class Application_Form_LeagueAddForm extends Zend_Form {
     }
 
 }
+

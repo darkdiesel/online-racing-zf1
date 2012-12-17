@@ -228,7 +228,24 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         if (count($user) != 0) {
             return $user->user_role;
         } else {
-            
+            return FALSE;
+        }
+    }
+
+    public function getUserByRole($role_id) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('user_role_id = ?', $role_id)
+                ->columns(array('id', 'login', 'name', 'surname'));
+
+        $user_data = $model->fetchAll($select);
+
+        if (count($user_data) != 0) {
+            return $user_data;
+        } else {
+            return FALSE;
         }
     }
 

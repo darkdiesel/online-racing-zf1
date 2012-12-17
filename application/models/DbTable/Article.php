@@ -35,7 +35,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         return $article;
     }
 
-    public function get_publish_article_pager($count, $page, $page_range, $article_type, $order) {
+    public function getPublishArticlePagerByType($count, $page, $page_range, $article_type, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
@@ -45,6 +45,27 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
                                 ->columns(array('a.id', 'a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
                                 ->where('publish=1 and article_type_id=' . $article_type)
+                                ->order('a.id ' . $order)
+        );
+
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage($count);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange($page_range);
+
+        return $paginator;
+    }
+    
+    public function getAllPublishArticlePager($count, $page, $page_range, $order) {
+        $model = new self;
+
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
+                                ->select()
+                                ->setIntegrityCheck(false)
+                                ->from(array('a' => 'article'), 'id')
+                                ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
+                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->where('publish=1')
                                 ->order('a.id ' . $order)
         );
 

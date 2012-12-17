@@ -44,7 +44,7 @@ class Application_Form_ArticleEditForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         // artcile type
         $this->addElement('select', 'content_type', array(
             'label' => $this->translate('Тип контента'),
@@ -73,7 +73,7 @@ class Application_Form_ArticleEditForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('textarea', 'annotation', array(
             'label' => $this->translate('Аннотация статьи'),
             'placeholder' => $this->translate('Аннотация статьи'),
@@ -116,7 +116,7 @@ class Application_Form_ArticleEditForm extends Zend_Form {
                 array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('checkbox', 'publish_to_slider', array(
             'label' => $this->translate('Опубликовать в слайдер?'),
             'value' => 1,

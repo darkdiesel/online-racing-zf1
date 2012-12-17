@@ -107,18 +107,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // master menu
         Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
         $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
-        $mapper = new Application_Model_UserMapper();
 
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            $logined_user_id = $mapper->getUserRole($storage_data->id);
-            if ($logined_user_id == 1) {
-                $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
-                $view->showMasterPanel = 1;
-            } elseif ($logined_user_id == 2) {
-                $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
-                $view->showMasterPanel = 2;
-            } else {
-                $view->showMasterPanel = 0;
+
+            $user = new Application_Model_DbTable_User();
+            $user_role = $user->getUserRoleName($storage_data->id);
+
+            switch ($user_role) {
+                case 'master':
+                    $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
+                    $view->showMasterPanel = 1;
+                    break;
+                case 'admin':
+                    $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
+                    $view->showMasterPanel = 2;
+                    break;
+                default :
+                    $view->showMasterPanel = 0;
+                    break;
             }
         }
 
@@ -315,6 +321,42 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'module' => 'default',
                             'controller' => 'article-type',
                             'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'articleTypeDelete', new Zend_Controller_Router_Route('article-type/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'article-type',
+                            'action' => 'delete',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'contentTypeId', new Zend_Controller_Router_Route('content-type/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'content-type',
+                            'action' => 'id',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'contentTypeEdit', new Zend_Controller_Router_Route('content-type/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'content-type',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'contentTypeDelete', new Zend_Controller_Router_Route('content-type/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'content-type',
+                            'action' => 'delete',
                             'id' => 0)
         ));
         

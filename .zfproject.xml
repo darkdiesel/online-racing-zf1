@@ -65,6 +65,7 @@
         <formFile formName="LeagueAddForm"/>
         <formFile formName="LeagueEditForm"/>
         <formFile formName="ArticleDeleteForm"/>
+        <formFile formName="ArticleTypeDeleteForm"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>

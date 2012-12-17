@@ -13,26 +13,33 @@ class ArticleController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
         $article_id = (int) $request->getParam('id');
 
-        $mapper = new Application_Model_ArticleMapper();
-        $article_data = $mapper->getArticleDataById($article_id, 'view');
+        $article = new Application_Model_DbTable_Article();
+        $article_data = $article->get_article_data($article_id);
 
-        if ($article_data == 'null') {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
-            return;
-        } else {
+        //$mapper = new Application_Model_ArticleMapper();
+        //$article_data = $mapper->getArticleDataById($article_id, 'view');
+
+        if (count($article_data) != 0) {
             $this->view->article = $article_data;
             $this->view->headTitle($article_data->title);
+        } else {
+            $this->view->errMessage = $this->view->translate('Статья не существует');
+            $this->view->headTitle($this->view->translate('Статья не существует'));
         }
     }
 
     // action for view all articles
     public function allAction() {
         $this->view->headTitle($this->view->translate('Контент сайта'));
+        
+        // pager settings
+        $page_count_items = 10;
+        $page_range = 5;
+        $items_order = 'ASC';
+        $page = $this->getRequest()->getParam('page');
 
-        $request = $this->getRequest();
-        $mapper = new Application_Model_ArticleMapper();
-        $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5, 1, 'all', 'DESC');
+        $article = new Application_Model_DbTable_Article();
+        $this->view->paginator = $article->getAllPublishArticlePager($page_count_items, $page, $page_range, $items_order);
     }
 
     // action for add new article
@@ -195,6 +202,9 @@ class ArticleController extends App_Controller_FirstBootController {
     // action for delete article
     public function deleteAction() {
         $this->view->headTitle($this->view->translate('Удалить статью'));
+        
+        $this->view->errMessage = $this->view->translate('Функционал не готово!');
+        return;
 
         $request = $this->getRequest();
         $article_id = (int) $request->getParam('id');

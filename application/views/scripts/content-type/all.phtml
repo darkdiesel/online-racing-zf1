@@ -1,0 +1,50 @@
+<div id="content_types_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Типы контента'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        if (count($this->paginator)) {
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            ?>
+            <div class="content_types_data img-polaroid">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td class="content_type_id"><span>#</span></td>
+                            <td class="content_type_name"><span><?php echo $this->translate('Название'); ?></span></td>
+                            <td class="content_type_descr"><span><?php echo $this->translate('Описание'); ?></span></td>
+                            <td class="content_type_action"><span><?php echo $this->translate('Действие'); ?></span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->paginator as $content_type): ?>
+                            <tr>
+                                <td class="content_type_id"><span><a href="<?php echo $this->baseURL('content-type/id/' . $this->escape($content_type['id'])) ?>"><?php echo $this->escape($content_type['id']) ?></a></span></td>
+                                <td class="content_type_name"><span><a href="<?php echo $this->baseURL('content-type/id/' . $this->escape($content_type['id'])) ?>"><?php echo $this->escape($content_type['name']) ?></a></span></td>
+                                <td class="content_type_descr"><span><?php echo $this->truncate($this->escape($content_type['description']))->toLength(200); ?></span></td>
+                                <td class="content_type_action">
+                                    <span>
+                                        <a href="<?php echo $this->baseUrl('content-type/id/' . $this->escape($content_type['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('content-type/edit/' . $this->escape($content_type['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('content-type/delete/' . $this->escape($content_type['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+                                    </span>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            ?>
+            <?php
+        } else {
+            ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->translate('Типы контента на сайте не найдены!'); ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>

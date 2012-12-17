@@ -37,14 +37,14 @@ class GameController extends App_Controller_FirstBootController {
     }
 
     public function allAction() {
+        $this->view->headTitle($this->view->translate('Игры'));
+
         $article_type = new Application_Model_DbTable_ArticleType();
         // pager settings
         $page_count_items = 10;
         $page_range = 5;
         $article_type_id = $article_type->get_id('game');
         $items_order = 'DESC';
-
-        $this->view->headTitle($this->view->translate('Игры'));
         $page = $this->getRequest()->getParam('page');
 
         $article = new Application_Model_DbTable_Article();
@@ -237,7 +237,9 @@ class GameController extends App_Controller_FirstBootController {
                         $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
                         $game->delete($game_where);
 
-                        $this->redirect($this->view->baseUrl('game/all/'));
+                        $this->_helper->redirector('all', 'game');
+                    } else {
+                        $this->view->errMessage = $this->view->translate("Произошла неожиданноя ошибка! Пожалуйста обратитесь к нам и сообщите о ней");
                     }
                 }
 

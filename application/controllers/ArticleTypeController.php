@@ -12,16 +12,17 @@ class ArticleTypeController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
         $article_type_id = (int) $request->getParam('id');
 
-        $mapper = new Application_Model_ArticleTypeMapper();
-        $article_type_data = $mapper->getArticleTypeDataById($article_type_id);
+        $article_type = new Application_Model_DbTable_ArticleType();
+        $article_type_data = $article_type->fetchRow(array('id = ?' => $article_type_id));
 
-        if ($article_type_data == 'null') {
-            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
-            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
+        if (count($article_type_data) != 0) {
+            $this->view->article_type = $article_type_data;
+            $this->view->headTitle($this->view->translate('Тип статьи'));
+            $this->view->headTitle($article_type_data->name);
             return;
         } else {
-            $this->view->article_type = $article_type_data;
-            $this->view->headTitle($article_type_data->name);
+            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
+            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
         }
     }
 
@@ -29,9 +30,15 @@ class ArticleTypeController extends App_Controller_FirstBootController {
     public function allAction() {
         $this->view->headTitle($this->view->translate('Типы статей'));
 
-        $request = $this->getRequest();
-        $mapper = new Application_Model_ArticleTypeMapper();
-        $this->view->paginator = $mapper->getArticleTypesPager(10, $request->getParam('page'), 5, 'all', 'ASC');
+        // pager settings
+        $page_count_items = 10;
+        $page_range = 5;
+        $items_order = 'ASC';
+        $page = $this->getRequest()->getParam('page');
+
+        $article_type = new Application_Model_DbTable_ArticleType();
+
+        $this->view->paginator = $article_type->get_article_type_pager($page_count_items, $page, $page_range, $items_order);
     }
 
     // action for add new article type
@@ -44,11 +51,19 @@ class ArticleTypeController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $article_type = new Application_Model_ArticleType($form->getValues());
-                $mapper = new Application_Model_ArticleTypeMapper();
-                $mapper->save($article_type, 'add');
+                $date = date('Y-m-d H:i:s');
+                $article_type_data = array(
+                    'name' => $form->getValue('name'),
+                    'description' => $form->getValue('description'),
+                    'date_create' => $date,
+                    'date_edit' => $date,
+                );
 
-                $this->_helper->redirector('all', 'article-type');
+                $article_type = new Application_Model_DbTable_ArticleType();
+                $newArticle_type = $article_type->createRow($article_type_data);
+                $newArticle_type->save();
+
+                $this->redirect($this->view->baseUrl('article-type/id/' . $newArticle_type->id));
             } else {
                 $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления типа статьи!');
             }
@@ -62,41 +77,40 @@ class ArticleTypeController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
         $article_type_id = $request->getParam('id');
 
-        // form
-        $form = new Application_Form_ArticleTypeEditForm();
-        $form->setAction('/article-type/edit/' . $article_type_id);
+        $article_type = new Application_Model_DbTable_ArticleType();
+        $article_type_data = $article_type->fetchRow(array('id = ?' => $article_type_id));
 
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
+        if (count($article_type_data) != 0) {
+            // form
+            $form = new Application_Form_ArticleTypeEditForm();
+            $form->setAction('/article-type/edit/' . $article_type_id);
 
-                $article = new Application_Model_ArticleType();
-                $article->setId($article_type_id);
-                $article->setName($form->getValue('name'));
-                $article->setDescription($form->getValue('description'));
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($request->getPost())) {
+                    $article_type_data = array(
+                        'name' => $form->getValue('name'),
+                        'description' => $form->getValue('description'),
+                        'date_edit' => date('Y-m-d H:i:s')
+                    );
 
-                $mapper = new Application_Model_ArticleTypeMapper();
-                $mapper->save($article, 'edit');
+                    $article_type_where = $article_type->getAdapter()->quoteInto('id = ?', $article_type_id);
+                    $article_type->update($article_type_data, $article_type_where);
 
-                $this->redirect($this->view->baseUrl('article-type/id/' . $article_type_id));
-            } else {
-                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа статьи!');
+                    $this->redirect($this->view->baseUrl('article-type/id/' . $article_type_id));
+                } else {
+                    $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа статьи!');
+                }
             }
-        }
-
-        $mapper = new Application_Model_ArticleTypeMapper();
-        $article_type_data = $mapper->getArticleTypeDataById($article_type_id);
-
-        if ($article_type_data == 'null') {
-            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
-            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
-            return;
-        } else {
-            $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_type_data->name);
+            $this->view->headTitle($this->view->translate('Редактировать'));
+            $this->view->headTitle($article_type_data->name);
 
             $form->name->setvalue($article_type_data->name);
             $form->description->setvalue($article_type_data->description);
 
             $this->view->form = $form;
+        } else {
+            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
+            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
         }
     }
 
@@ -104,7 +118,37 @@ class ArticleTypeController extends App_Controller_FirstBootController {
     public function deleteAction() {
         $this->view->headTitle($this->view->translate('Удалить тип статьи'));
 
-        $this->view->errMessage = $this->view->translate("Приносим свои извинения. Данный функционал еще не реализован!");
+        $request = $this->getRequest();
+        $article_type_id = (int) $request->getParam('id');
+
+        $article_type = new Application_Model_DbTable_ArticleType();
+        $article_type_data = $article_type->fetchRow(array('id = ?' => $article_type_id));
+
+        if (count($article_type_data) != 0) {
+            $this->view->headTitle($article_type_data->name);
+
+            $form = new Application_Form_ArticleTypeDeleteForm();
+            $form->setAction('/article-type/delete/' . $article_type_id);
+            $form->cancel->setAttrib('onClick', 'location.href="/article-type/id/' . $article_type_id . '"');
+
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($request->getPost())) {
+                    $article_type_where = $article_type->getAdapter()->quoteInto('id = ?', $article_type_id);
+                    $article_type->delete($article_type_where);
+
+                    $this->_helper->redirector('all', 'article-type');
+                } else {
+                    $this->view->errMessage = $this->view->translate("Произошла неожиданноя ошибка! Пожалуйста обратитесь к нам и сообщите о ней");
+                }
+            }
+
+            $this->view->form = $form;
+            $this->view->article_type = $article_type_data;
+        } else {
+            $this->view->errMessage = $this->view->translate('Тип статьи не существует');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle($this->view->translate('Тип статьи не существует'));
+        }
     }
 
 }
