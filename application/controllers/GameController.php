@@ -71,11 +71,13 @@ class GameController extends App_Controller_FirstBootController {
                     $article_data = array(
                         'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
                         'article_type_id' => $form->getValue('article_type'),
-                        'content_type_id' => 0,
+                        'content_type_id' => $form->getValue('content_type'),
                         'title' => $form->getValue('title'),
+                        'annotation' => $form->getValue('annotation'),
                         'text' => $form->getValue('text'),
                         'image' => $form->getValue('image'),
                         'publish' => $form->getValue('publish'),
+                        'publish_to_slider' => $form->getValue('publish'),
                         'date_create' => $date,
                         'date_edit' => $date,
                     );
@@ -100,13 +102,20 @@ class GameController extends App_Controller_FirstBootController {
         }
 
         $article_type = new Application_Model_DbTable_ArticleType();
-        $game_types = $article_type->fetchAll();
+        $article_types = $article_type->fetchAll();
 
-        foreach ($game_types as $type):
+        foreach ($article_types as $type):
             $form->article_type->addMultiOption($type->id, $type->name);
             if ($type->name == 'game') {
                 $form->article_type->setValue($type->id, $type->name);
             }
+        endforeach;
+
+        $content_type = new Application_Model_DbTable_ContentType();
+        $content_types = $content_type->fetchAll();
+
+        foreach ($content_types as $type):
+            $form->content_type->addMultiOption($type->id, $type->name);
         endforeach;
 
         $this->view->form = $form;
@@ -123,7 +132,7 @@ class GameController extends App_Controller_FirstBootController {
 
         if (count($game_data) != 0) {
             $article = new Application_Model_DbTable_Article();
-            $article_data = $article->fetchRow($article->select()->where('id = ?', $game_data->article_id));
+            $article_data = $article->fetchRow(array('id = ?' => $game_data->article_id));
 
             if (count($article_data) != 0) {
                 // form
@@ -133,25 +142,33 @@ class GameController extends App_Controller_FirstBootController {
 
                 if ($this->getRequest()->isPost()) {
                     if ($form->isValid($request->getPost())) {
-                        $article_data = array(
-                            'article_type_id' => $form->getValue('article_type'),
-                            'content_type_id' => 0,
-                            'title' => $form->getValue('title'),
-                            'text' => $form->getValue('text'),
-                            'image' => $form->getValue('image'),
-                            'publish' => $form->getValue('publish'),
-                            'date_edit' => date('Y-m-d H:i:s'),
-                        );
-                        $article_where = $game->getAdapter()->quoteInto('id = ?', $game_data->article_id);
-                        $article->update($article_data, $article_where);
+                        if ($article_data->article_type_id == $form->getValue('article_type')) {
+                            // article_type not changed
+                            $article_data = array(
+                                'article_type_id' => $form->getValue('article_type'),
+                                'content_type_id' => $form->getValue('content_type'),
+                                'annotation' => $form->getValue('annotation'),
+                                'title' => $form->getValue('title'),
+                                'text' => $form->getValue('text'),
+                                'image' => $form->getValue('image'),
+                                'publish' => $form->getValue('publish'),
+                                'publish_to_slider' => $form->getValue('publish_to_slider'),
+                                'date_edit' => date('Y-m-d H:i:s'),
+                            );
+                            $article_where = $game->getAdapter()->quoteInto('id = ?', $game_data->article_id);
+                            $article->update($article_data, $article_where);
 
-                        $game_data = array(
-                            'name' => $form->getValue('title'),
-                        );
-                        $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
-                        $game->update($game_data, $game_where);
+                            $game_data = array(
+                                'name' => $form->getValue('title'),
+                            );
+                            $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                            $game->update($game_data, $game_where);
 
-                        $this->redirect($this->view->baseUrl('game/id/' . $game_id));
+                            $this->redirect($this->view->baseUrl('game/id/' . $game_id));
+                        } else {
+                            //article type changed
+                            $this->view->errMessage = $this->view->translate('Нельзя менять тип статьи для игры! Тип статьи должен быть game!');
+                        }
                     }
                 }
 
@@ -162,12 +179,23 @@ class GameController extends App_Controller_FirstBootController {
                     $form->article_type->addMultiOption($type->id, $type->name);
                 endforeach;
 
+                $content_type = new Application_Model_DbTable_ContentType();
+                $content_types = $content_type->fetchAll();
+
+                foreach ($content_types as $type):
+                    $form->content_type->addMultiOption($type->id, $type->name);
+                endforeach;
+
                 $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_data->title);
 
                 $form->title->setvalue($article_data->title);
+                $form->article_type->setvalue($article_data->article_type);
+                $form->content_type->setvalue($article_data->content_type);
+                $form->annotation->setvalue($article_data->annotation);
                 $form->text->setvalue($article_data->text);
                 $form->image->setvalue($article_data->image);
                 $form->publish->setvalue($article_data->publish);
+                $form->publish_to_slider->setvalue($article_data->publish_to_slider);
 
                 $this->view->form = $form;
                 $this->view->article = $article_data;

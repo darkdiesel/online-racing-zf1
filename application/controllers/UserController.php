@@ -146,7 +146,7 @@ class UserController extends App_Controller_FirstBootController {
                         'Логин: <strong>' . $user_data['login'] . '</strong><br/>' .
                         'E-mail: <strong>' . $user_data['email'] . '</strong><br/>' .
                         'Пароль: <strong>' . $form->getValue('password') . '</strong><br/>' .
-                        'Код активации: <strong>' . $user_data['activate'] . '</strong><br/>');
+                        'Код активации: <strong>' . $user_data['code_activate'] . '</strong><br/>');
                 // e-mail for user
                 $mail = new Zend_Mail('UTF-8');
                 $bodyText = $html->render('register_template.phtml');
@@ -411,7 +411,7 @@ class UserController extends App_Controller_FirstBootController {
                             //'avatar_load' => $form->getValue('avatar_load'),
                             'avatar_link' => $form->getValue('avatar_link'),
                             'avatar_gravatar_email' => $form->getValue('avatar_gravatar_email'),
-                            'date_edit' => $user_data,
+                            'date_edit' => $date,
                         );
 
                         $user->update($user_data, $user_where);
@@ -424,7 +424,7 @@ class UserController extends App_Controller_FirstBootController {
                             'country' => $form->getValue('country'),
                             'city' => $form->getValue('city'),
                                 //'flag' => $form->getValue('flag'),
-                            'date_edit' => $user_data,
+                            'date_edit' => $date,
                         );
 
                         $user->update($user_data, $user_where);
@@ -435,7 +435,7 @@ class UserController extends App_Controller_FirstBootController {
                             'icq' => $form->getValue('icq'),
                             'gtalk' => $form->getValue('gtalk'),
                             'www' => $form->getValue('www'),
-                            'date_edit' => $user_data,
+                            'date_edit' => $date,
                         );
 
                         $user->update($user_data, $user_where);
@@ -443,7 +443,7 @@ class UserController extends App_Controller_FirstBootController {
                     case 'additional_Inf':
                         $user_data = array(
                             'about' => $form->getValue('about'),
-                            'date_edit' => $user_data,
+                            'date_edit' => $date,
                         );
 
                         $user->update($user_data, $user_where);

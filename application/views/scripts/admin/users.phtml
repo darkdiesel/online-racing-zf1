@@ -21,14 +21,14 @@
                     <tbody>
                         <?php foreach ($this->paginator as $user): ?>
                             <tr>
-                                <td class="user_id"><span><a href="<?php echo $this->baseURL('user/info/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
-                                <td class="user_login"><span><a href="<?php echo $this->baseURL('user/info/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
+                                <td class="user_id"><span><a href="<?php echo $this->baseURL('user/id/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
+                                <td class="user_login"><span><a href="<?php echo $this->baseURL('user/id/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
                                 <td class="user_activation"><span><?php echo $this->escape($user['activate']) ?></span></td>
                                 <td class="user_status"><span><?php echo ($this->escape($user['enabled']) == 1) ? $this->translate('Активный') : $this->translate('Забанен') ?></span></td>
                                 <td class="user_last_activity"><span><?php echo $this->escape($user['last_login']) ?></span></td>
                                 <td class="user_action">
                                     <span>
-                                        <a href="<?php echo $this->baseUrl('user/info/' . $this->escape($user['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('user/id/' . $this->escape($user['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
                                         <a href="<?php echo $this->baseUrl('user/edit/' . $this->escape($user['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
                                         <a href="<?php echo $this->baseUrl('user/ban/' . $this->escape($user['id'])) ?>"><i class="icon-ban-circle"></i> <?php echo $this->translate('Бан'); ?></a><br/>
                                     </span>

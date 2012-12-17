@@ -1,18 +1,26 @@
-/* article add page */
-#article_add_page{
+.article_form{
     
 }
-    #article_add_page #articleAdd{
+    .article_form form{
         width:650px;
     }
-        #article_add_page #articleAdd #text{
-            width:495px;
+    .article_form form .textTextArea_box{
+            margin:20px 0;
+        }
+        .article_form form #annotation{
+            width:595px;
             resize:none;
+            height:150px;
         }
-        #article_add_page #articleAdd #title{
+        .article_form form #text{
+            width:595px;
+            resize:none;
+            height:300px;
+        }
+        .article_form form #title{
             width:495px;
         }
-        #article_add_page #articleAdd #image{
+        .article_form form #image{
             width:380px;
         }
 /* article all page */
@@ -157,21 +165,3 @@
                     font-weight:bold;
                     color:#4F4F4F;
                 }
-/* article edit page */
-#article_edit_page{
-    
-}
-    #article_edit_page #articleEdit{
-        width:650px;
-    }
-    
-        #article_edit_page #articleEdit #text{
-            width:495px;
-            resize:none;
-        }
-        #article_edit_page #articleEdit #title{
-            width:495px;
-        }
-        #article_edit_page #articleEdit #image{
-            width:380px;
-        }

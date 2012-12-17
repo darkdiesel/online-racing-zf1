@@ -75,8 +75,8 @@ class Application_Form_ArticleAddForm extends Zend_Form {
         ));
         
         $this->addElement('textarea', 'annotation', array(
-            'label' => $this->translate('Анотация статьи'),
-            'placeholder' => $this->translate('Анотация статьи'),
+            'label' => $this->translate('Аннотация статьи'),
+            'placeholder' => $this->translate('Аннотация статьи'),
             'cols' => 60,
             'rows' => 10,
             'maxlength' => 250,

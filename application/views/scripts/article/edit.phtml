@@ -1,4 +1,4 @@
-<div id="article_edit_page" class="page">
+<div id="article_edit_page" class="page article_form">
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
@@ -19,8 +19,9 @@
         <?php } ?>
         <?php echo $this->form; ?>
         <?php
-            $this->ckeditor = 'ckeditor';
-            echo $this->setupBBCodeEditor('text');
+        $this->ckeditor = 'ckeditor';
+        echo $this->setupBBCodeEditor('annotation');
+        echo $this->setupBBCodeEditor('text');
         ?>
     </div>
 </div>

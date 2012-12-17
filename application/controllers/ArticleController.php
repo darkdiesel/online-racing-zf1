@@ -47,27 +47,61 @@ class ArticleController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $article = new Application_Model_Article();
-                $article->setUser_id(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
-                $article->setArticle_Type_id($form->getValue('article_type'));
-                $article->setContent_Type_id(0);
-                $article->setTitle($form->getValue('title'));
-                $article->setText($form->getValue('text'));
-                $article->setImage($form->getValue('image'));
-                $article->setPublish($form->getValue('publish'));
+                // save new article to db
+                $date = date('Y-m-d H:i:s');
+                $article_data = array(
+                    'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
+                    'article_type_id' => $form->getValue('article_type'),
+                    'content_type_id' => $form->getValue('content_type'),
+                    'title' => $form->getValue('title'),
+                    'annotation' => $form->getValue('annotation'),
+                    'text' => $form->getValue('text'),
+                    'image' => $form->getValue('image'),
+                    'publish' => $form->getValue('publish'),
+                    'publish_to_slider' => $form->getValue('publish'),
+                    'date_create' => $date,
+                    'date_edit' => $date,
+                );
 
-                $mapper = new Application_Model_ArticleMapper();
-                $mapper->save($article, 'add');
+                $article = new Application_Model_DbTable_Article();
+                $newArticle = $article->createRow($article_data);
+                $newArticle->save();
 
-                $this->_helper->redirector('all', 'article');
+                $article_type = new Application_Model_DbTable_ArticleType();
+                $article_type_name = $article_type->get_name($form->getValue('article_type'));
+
+                // save additional information corespondig article_type to db
+                switch ($article_type_name) {
+                    case 'game':
+                        $game = new Application_Model_DbTable_Game();
+                        $game_data = array(
+                            'name' => $form->getValue('title'),
+                            'article_id' => $newArticle->id
+                        );
+                        $newGame = $game->createRow($game_data);
+                        $newGame->save();
+
+                        $this->redirect($this->view->baseUrl('game/id/' . $newGame->id));
+                        break;
+                    default :
+                        $this->redirect($this->view->baseUrl('article/id/' . $newArticle->id));
+                        break;
+                }
             }
         }
 
-        $mapper = new Application_Model_ArticleTypeMapper();
-        $article_types = $mapper->fetchAll();
+        $article_type = new Application_Model_DbTable_ArticleType();
+        $article_types = $article_type->fetchAll();
 
         foreach ($article_types as $type):
             $form->article_type->addMultiOption($type->id, $type->name);
+        endforeach;
+
+        $content_type = new Application_Model_DbTable_ContentType();
+        $content_types = $content_type->fetchAll();
+
+        foreach ($content_types as $type):
+            $form->content_type->addMultiOption($type->id, $type->name);
         endforeach;
 
         $this->view->form = $form;
@@ -80,52 +114,79 @@ class ArticleController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
         $article_id = (int) $request->getParam('id');
 
-        // form
-        $form = new Application_Form_ArticleEditForm();
-        $form->setAction('/article/edit/' . $article_id);
+        $article = new Application_Model_DbTable_Article();
+        $article_data = $article->fetchRow(array('id = ?' => $article_id));
 
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $article = new Application_Model_Article();
-                $article->setArticle_Type_id($form->getValue('article_type'));
-                $article->setContent_Type_id(0);
-                $article->setId($article_id);
-                $article->setTitle($form->getValue('title'));
-                $article->setText($form->getValue('text'));
-                $article->setImage($form->getValue('image'));
-                $article->setPublish($form->getValue('publish'));
+        if (count($article_data) != 0) {
+            $form = new Application_Form_ArticleEditForm();
+            $form->setAction('/article/edit/' . $article_id);
+            $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
 
-                $mapper = new Application_Model_ArticleMapper();
-                $mapper->save($article, 'edit');
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($request->getPost())) {
 
-                $this->redirect($this->view->baseUrl('article/id/' . $article_id));
+                    if ($article_data->article_type_id == $form->getValue('article_type')) {
+                        // if article type not changed
+                        $article_data = array(
+                            'article_type_id' => $form->getValue('article_type'),
+                            'content_type_id' => $form->getValue('content_type'),
+                            'annotation' => $form->getValue('annotation'),
+                            'title' => $form->getValue('title'),
+                            'text' => $form->getValue('text'),
+                            'image' => $form->getValue('image'),
+                            'publish' => $form->getValue('publish'),
+                            'publish_to_slider' => $form->getValue('publish_to_slider'),
+                            'date_edit' => date('Y-m-d H:i:s'),
+                        );
+                        $article_where = $article->getAdapter()->quoteInto('id = ?', $article_id);
+                        $article->update($article_data, $article_where);
+
+                        $article_type = new Application_Model_DbTable_ArticleType();
+                        $article_type_name = $article_type->get_name($form->getValue('article_type'));
+
+                        // save additional information corespondig article_type to db
+                        switch ($article_type_name) {
+                            case 'game':
+                                $game_data = array(
+                                    'name' => $form->getValue('title'),
+                                );
+                                $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                                $game->update($game_data, $game_where);
+                                break;
+                        }
+
+                        $this->redirect($this->view->baseUrl('article/id/' . $article_id));
+                    } else {
+                        // if article type changed
+                        $this->view->errMessage = $this->view->translate('Функционал для смены типов статьи не готов.');
+                    }
+                }
             }
-        }
 
-        $mapper = new Application_Model_ArticleMapper();
-        $article_data = $mapper->getArticleDataById($article_id, 'edit');
-
-        if ($article_data == 'null') {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
-            return;
-        } else {
-
-            $mapper = new Application_Model_ArticleTypeMapper();
-            $article_types = $mapper->fetchAll();
+            $article_types = new Application_Model_DbTable_ArticleType();
+            $article_types = $article_types->fetchAll();
 
             foreach ($article_types as $type):
                 $form->article_type->addMultiOption($type->id, $type->name);
             endforeach;
 
-            $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
+            $content_type = new Application_Model_DbTable_ContentType();
+            $content_types = $content_type->fetchAll();
+
+            foreach ($content_types as $type):
+                $form->content_type->addMultiOption($type->id, $type->name);
+            endforeach;
 
             $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_data->title);
 
             $form->title->setvalue($article_data->title);
+            $form->article_type->setvalue($article_data->article_type_id);
+            $form->content_type->setvalue($article_data->content_type_id);
+            $form->annotation->setvalue($article_data->annotation);
             $form->text->setvalue($article_data->text);
             $form->image->setvalue($article_data->image);
             $form->publish->setvalue($article_data->publish);
+            $form->publish_to_slider->setvalue($article_data->publish_to_slider);
 
             $this->view->form = $form;
         }

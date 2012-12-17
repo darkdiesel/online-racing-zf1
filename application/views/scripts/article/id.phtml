@@ -39,7 +39,7 @@
                     ?>
                 </div>
                 <div class="article_info">
-                    <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/info/' . $this->escape($this->article->user_id)) ?>"><?php echo $this->escape($this->article->login); ?></a></div>
+                    <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($this->article->user_id)) ?>"><?php echo $this->escape($this->article->login); ?></a></div>
                     <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->article->views); ?></div>
                     <div class="article_date_create article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article->date_create); ?></div>
                     <?php if ($this->escape($this->article->date_create) != $this->escape($this->article->date_edit)) { ?>
