@@ -190,6 +190,9 @@
         #users_page .user_item .user_image{
             text-align:center;
             margin:0 0 10px 0;
+            width:175px;
+            height:175px;
+            overflow:hidden;
         }
         #users_page .user_item .user_image img{
             width:165px;

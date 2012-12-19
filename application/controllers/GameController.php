@@ -17,9 +17,9 @@ class GameController extends App_Controller_FirstBootController {
         if (count($game_data) != 0) {
 
             $article = new Application_Model_DbTable_Article();
-            $article_data = $article->get_published_article_data($game_data->article_id);
+            $article_data = $article->getArticleData($game_data->article_id);
 
-            if (count($article_data) != 0) {
+            if ($article_data) {
                 $this->view->article = $article_data;
                 $this->view->headTitle($article_data->title);
                 $this->view->article = $article_data;
@@ -43,12 +43,12 @@ class GameController extends App_Controller_FirstBootController {
         // pager settings
         $page_count_items = 10;
         $page_range = 5;
-        $article_type_id = $article_type->get_id('game');
+        $article_type_id = $article_type->getId('game');
         $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
 
         $article = new Application_Model_DbTable_Article();
-        $this->view->paginator = $article->get_publish_article_pager($page_count_items, $page, $page_range, $article_type_id, $items_order);
+        $this->view->paginator = $article->getPublishArticlePagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
     }
 
     public function addAction() {
@@ -64,7 +64,7 @@ class GameController extends App_Controller_FirstBootController {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $article_type = new Application_Model_DbTable_ArticleType();
-                $article_type_name = $article_type->get_name($form->getValue('article_type'));
+                $article_type_name = $article_type->getName($form->getValue('article_type'));
 
                 if ($article_type_name == 'game') {
                     $date = date('Y-m-d H:i:s');
@@ -220,9 +220,9 @@ class GameController extends App_Controller_FirstBootController {
 
         if (count($game_data) != 0) {
             $article = new Application_Model_DbTable_Article();
-            $article_data = $article->get_article_data($game_data->article_id);
+            $article_data = $article->getArticleData($game_data->article_id);
 
-            if (count($article_data) != 0) {
+            if ($article_data) {
                 $form = new Application_Form_ArticleDeleteForm();
                 $form->setAction('/game/delete/' . $game_id);
                 $form->cancel->setAttrib('onClick', 'location.href="/game/id/' . $game_id . '"');

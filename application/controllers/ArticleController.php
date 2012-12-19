@@ -14,16 +14,16 @@ class ArticleController extends App_Controller_FirstBootController {
         $article_id = (int) $request->getParam('id');
 
         $article = new Application_Model_DbTable_Article();
-        $article_data = $article->get_article_data($article_id);
+        $article_data = $article->getArticleData($article_id);
 
         //$mapper = new Application_Model_ArticleMapper();
         //$article_data = $mapper->getArticleDataById($article_id, 'view');
 
-        if (count($article_data) != 0) {
+        if ($article_data) {
             $this->view->article = $article_data;
             $this->view->headTitle($article_data->title);
         } else {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
+            $this->view->errMessage .= $this->view->translate('Статья не существует');
             $this->view->headTitle($this->view->translate('Статья не существует'));
         }
     }
@@ -35,7 +35,7 @@ class ArticleController extends App_Controller_FirstBootController {
         // pager settings
         $page_count_items = 10;
         $page_range = 5;
-        $items_order = 'ASC';
+        $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
 
         $article = new Application_Model_DbTable_Article();
@@ -75,7 +75,7 @@ class ArticleController extends App_Controller_FirstBootController {
                 $newArticle->save();
 
                 $article_type = new Application_Model_DbTable_ArticleType();
-                $article_type_name = $article_type->get_name($form->getValue('article_type'));
+                $article_type_name = $article_type->getName($form->getValue('article_type'));
 
                 // save additional information corespondig article_type to db
                 switch ($article_type_name) {
@@ -149,16 +149,20 @@ class ArticleController extends App_Controller_FirstBootController {
                         $article->update($article_data, $article_where);
 
                         $article_type = new Application_Model_DbTable_ArticleType();
-                        $article_type_name = $article_type->get_name($form->getValue('article_type'));
+                        $article_type_name = $article_type->getName($form->getValue('article_type'));
 
                         // save additional information corespondig article_type to db
                         switch ($article_type_name) {
                             case 'game':
+                                $game = new Application_Model_DbTable_Game();
                                 $game_data = array(
                                     'name' => $form->getValue('title'),
                                 );
                                 $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
                                 $game->update($game_data, $game_where);
+                                break;
+                            default :
+                                
                                 break;
                         }
 

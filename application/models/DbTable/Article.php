@@ -5,7 +5,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
     protected $_name = 'article';
     protected $_primary = 'id';
 
-    public function get_published_article_data($article_id) {
+    public function getPublishedArticleData($article_id) {
         $model = new self;
 
         $select = $model->select()
@@ -13,14 +13,29 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->from(array('a' => 'article'), 'a.id')
                 ->where('a.id = ? and a.publish = 1', $article_id)
                 ->join(array('u' => 'user'), 'a.user_id = u.id', array('user_login' => 'u.login'))
-                ->columns(array('a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create',
+                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create',
             'a.date_edit', 'a.article_type_id', 'a.last_ip', 'a.content_type_id', 'a.publish'));
 
         $article = $model->fetchRow($select);
-        return $article;
+
+        if (count($article) != 0) {
+            if ($article->last_ip != $_SERVER['REMOTE_ADDR']) {
+                $article_data = array(
+                    'views' => ($article->views + 1),
+                    'last_ip' => $_SERVER['REMOTE_ADDR']
+                );
+
+                $article_where = $model->getAdapter()->quoteInto('id = ?', $article_id);
+                $model->update($article_data, $article_where);
+            }
+
+            return $article;
+        } else {
+            return FALSE;
+        }
     }
 
-    public function get_article_data($article_id) {
+    public function getArticleData($article_id) {
         $model = new self;
 
         $select = $model->select()
@@ -32,7 +47,23 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
             'a.date_edit', 'a.article_type_id', 'a.last_ip', 'a.content_type_id', 'a.publish'));
 
         $article = $model->fetchRow($select);
-        return $article;
+
+        if (count($article) != 0) {
+            if ($article->last_ip != $_SERVER['REMOTE_ADDR']) {
+
+                $article_data = array(
+                    'views' => ($article->views = $article->views + 1),
+                    'last_ip' => $_SERVER['REMOTE_ADDR']
+                );
+
+                $article_where = $model->getAdapter()->quoteInto('id = ?', $article_id);
+                $model->update($article_data, $article_where);
+            }
+
+            return $article;
+        } else {
+            return FALSE;
+        }
     }
 
     public function getPublishArticlePagerByType($count, $page, $page_range, $article_type, $order) {
@@ -55,7 +86,43 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
+
+    public function getPublishArticleTitlesByType($article_type, $order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('article', 'id')
+                ->where('publish=1 and article_type_id=' . $article_type)
+                ->order('title ' . $order)
+                ->columns(array('id', 'title'));
+
+        $articles = $model->fetchAll($select);
+
+        if (count($articles) != 0) {
+            return $articles;
+        } else {
+            return FALSE;
+        }
+    }
     
+    public function getAllArticleTitlesByType($article_type, $order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('article', 'id')
+                ->where('article_type_id=' . $article_type)
+                ->order('title ' . $order)
+                ->columns(array('id', 'title'));
+
+        $articles = $model->fetchAll($select);
+
+        if (count($articles) != 0) {
+            return $articles;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function getAllPublishArticlePager($count, $page, $page_range, $order) {
         $model = new self;
 
@@ -76,10 +143,10 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
-    
-    public function get_last_publish_article($count, $order){
+
+    public function getLastPublishArticle($count, $order) {
         $model = new self;
-        
+
         $select = $model
                 ->select()
                 ->from('article', 'id')
@@ -88,7 +155,8 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->order('id ' . $order);
 
         $result = $model->fetchAll($select);
-        
+
         return $result;
     }
+
 }

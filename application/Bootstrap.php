@@ -76,7 +76,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->ls_search_block = false; // search block
 
         /* [HEADER] */
-        $view->hd_hot_lap_block = false; // hot lap block
+        $view->hd_hot_lap_block = true; // hot lap block
         $view->hd_moving_text_block = true; // moving text block
 
         /* [FOOTER] */

@@ -14,7 +14,7 @@ class IndexController extends App_Controller_FirstBootController {
         
         // get last publish articles
         $article = new Application_Model_DbTable_Article();
-        $artiles_data = $article->get_last_publish_article(10, 'DESC');
+        $artiles_data = $article->getLastPublishArticle(10, 'DESC');
         
         // get 10 rss news
         $url = 'http://www.f1news.ru/export/news.xml';
