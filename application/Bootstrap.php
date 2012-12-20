@@ -421,6 +421,41 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
+        
+         $router->addRoute(
+                'teamId', new Zend_Controller_Router_Route('team/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'team',
+                            'action' => 'id',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'teamEdit', new Zend_Controller_Router_Route('team/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'team',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'teamDelete', new Zend_Controller_Router_Route('team/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'team',
+                            'action' => 'delete',
+                            'id' => 0)
+        ));
+        $router->addRoute(
+                'teamAll', new Zend_Controller_Router_Route('team/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'team',
+                            'action' => 'all',
+                            'page' => 1)
+        ));
 
         /*
           Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');

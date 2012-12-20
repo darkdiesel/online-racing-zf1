@@ -1,0 +1,50 @@
+<div id="team_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Команды'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php
+        if (count($this->paginator)) {
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            ?>
+            <div class="team_data img-polaroid">
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td class="team_id"><span>#</span></td>
+                            <td class="team_name"><span><?php echo $this->translate('Название'); ?></span></td>
+                            <td class="team_descr"><span><?php echo $this->translate('Описание'); ?></span></td>
+                            <td class="team_action"><span><?php echo $this->translate('Действие'); ?></span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($this->paginator as $team): ?>
+                            <tr>
+                                <td class="team_id"><span><a href="<?php echo $this->baseURL('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['id']) ?></a></span></td>
+                                <td class="team_name"><span><a href="<?php echo $this->baseURL('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['name']) ?></a></span></td>
+                                <td class="team_descr"><span><?php echo $this->truncate($this->escape($team['description']))->toLength(200); ?></span></td>
+                                <td class="team_action">
+                                    <span>
+                                        <a href="<?php echo $this->baseUrl('team/id/' . $this->escape($team['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('team/edit/' . $this->escape($team['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+                                        <a href="<?php echo $this->baseUrl('team/delete/' . $this->escape($team['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+                                    </span>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            ?>
+            <?php
+        } else {
+            ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->translate('Команды на сайте не найдены!'); ?>
+            </div>
+        <?php } ?>
+    </div>
+</div>
