@@ -204,6 +204,9 @@
             display:inline-block;
             float:left;
         }
+            #users_page .user_item .user_flag img{
+                width:32px;
+            }
 /* user activate page */
 #user_activate_page{
     

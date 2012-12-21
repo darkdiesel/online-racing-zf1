@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_UserEditForm extends Zend_Form {
+class Application_Form_User_Edit extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -60,12 +60,14 @@ class Application_Form_UserEditForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'country', array(
+        
+        // artcile type
+        $this->addElement('select', 'country', array(
             'label' => $this->translate('Страна'),
-            'placeholder' => $this->translate('Страна'),
-            'filters' => array('StripTags', 'StringTrim'),
-            'maxlength' => 100,
-            'class' => 'x_field',
+            //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'required' => true,
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -73,24 +75,10 @@ class Application_Form_UserEditForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
+        
         $this->addElement('text', 'city', array(
             'label' => $this->translate('Город'),
             'placeholder' => $this->translate('Город'),
-            'filters' => array('StripTags', 'StringTrim'),
-            'maxlength' => 100,
-            'class' => 'x_field',
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-
-        $this->addElement('text', 'flag', array(
-            'label' => $this->translate('Флаг') . ' (' . $this->translate('Не реализованно!') . ')',
-            'placeholder' => $this->translate('Флаг'),
             'filters' => array('StripTags', 'StringTrim'),
             'maxlength' => 100,
             'class' => 'x_field',
@@ -337,7 +325,6 @@ class Application_Form_UserEditForm extends Zend_Form {
             $this->getElement('birthday'),
             $this->getElement('country'),
             $this->getElement('city'),
-            $this->getElement('flag'),
                 ), 'personal_Inf', array('legend' => $this->translate('Личные данные')));
 
         $this->getDisplayGroup('personal_Inf')->setDecorators(array(

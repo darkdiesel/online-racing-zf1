@@ -22,8 +22,8 @@
                     <?php echo $this->avatar; ?>
                 </div>
                 <div class="img-polaroid nationality">
-                    <img src="<?php echo $this->baseUrl('img/flags/eur_glossy_wave_64.png'); ?>">
-                    <div clas="break_word_wrap">EUR</div>
+                    <img src="<?php echo $this->user->country_url_image_glossy_wave ?>">
+                    <div clas="break_word_wrap"><?php echo $this->user->country_abbreviation?></div>
                 </div>
             </div>
             <div class="user_info_data img-polaroid">
@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <td class="header_column"><?php echo $this->translate('Страна') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo $this->user->country ?></div></td>
+                            <td><div class="break_word_wrap"><?php echo $this->user->country_name ?></div></td>
                         </tr>
                         <tr>
                             <td class="header_column"><?php echo $this->translate('Город') ?>:</td>

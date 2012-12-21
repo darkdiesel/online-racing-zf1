@@ -18,7 +18,7 @@ class Zend_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
                 //return '<div class="no_image">Not implemented</div>';
 
                 $user = new Application_Model_DbTable_User();
-                $avatar = $user->get_user_avatar_load($user_id);
+                $avatar = $user->getUserAvatarLoad($user_id);
 
                 if ($avatar) {
                     return '<img class="img-polaroid" src="' . $avatar . '" title="user avatar">';
@@ -36,7 +36,7 @@ class Zend_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
             case '2':
                 /* Avatar link */
                 $user = new Application_Model_DbTable_User();
-                $avatar = $user->get_user_avatar_link($user_id);
+                $avatar = $user->getUserAvatarLink($user_id);
 
                 if ($avatar) {
                     return '<img class="img-polaroid" src="' . $avatar . '" title="user avatar">';
@@ -54,7 +54,7 @@ class Zend_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
             case '3':
                 /* Avatar gravatar email */
                 $user = new Application_Model_DbTable_User();
-                $avatar = $user->get_user_avatar_gravatar_email($user_id);
+                $avatar = $user->getUserAvatarGravatarEmail($user_id);
 
                 if ($avatar) {
                     $avatar = $this->view->gravatar()

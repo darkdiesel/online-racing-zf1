@@ -13,9 +13,9 @@ class UserController extends App_Controller_FirstBootController {
 
         $user = new Application_Model_DbTable_User();
 
-        $user_data = $user->fetchRow(array('id = ?' => $user_id));
+        $user_data = $user->getUserData($user_id);
 
-        if (count($user_data) != 0) {
+        if ($user_data) {
             $this->view->user = $user_data;
 
             $this->view->headTitle($this->view->translate('Пилот') . ' → ' . $user_data->login);
@@ -44,7 +44,7 @@ class UserController extends App_Controller_FirstBootController {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $user = new Application_Model_DbTable_User();
-                $user_status = $user->check_user_status($form->loginemail->getValue());
+                $user_status = $user->checkUserStatus($form->loginemail->getValue());
 
                 switch ($user_status) {
                     case 'enable':
@@ -112,7 +112,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserRegisterForm();
+        $form = new Application_Form_User_Register();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -124,7 +124,7 @@ class UserController extends App_Controller_FirstBootController {
                 $user_data['login'] = $form->getValue('login');
                 $user_data['email'] = $form->getValue('email');
                 $user_data['user_role_id'] = 3;
-                $user_data['flag_id'] = 1; //!!!!!!!!!! доделать
+                $user_data['country_id'] = 1;
                 $user_data['enable'] = 1;
 
                 Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
@@ -395,7 +395,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Редактирование профиля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserEditForm();
+        $form = new Application_Form_User_Edit();
 
         $user = new Application_Model_DbTable_User();
 
@@ -421,9 +421,9 @@ class UserController extends App_Controller_FirstBootController {
                             'name' => $form->getValue('name'),
                             'surname' => $form->getValue('surname'),
                             'birthday' => $form->getValue('birthday'),
-                            'country' => $form->getValue('country'),
+                            'country_id' => $form->getValue('country'),
                             'city' => $form->getValue('city'),
-                                //'flag' => $form->getValue('flag'),
+                            //'flag' => $form->getValue('flag'),
                             'date_edit' => $date,
                         );
 
@@ -463,9 +463,7 @@ class UserController extends App_Controller_FirstBootController {
             $form->name->setValue($user_data->name);
             $form->surname->setValue($user_data->surname);
             $form->birthday->setValue($user_data->birthday);
-            $form->country->setValue($user_data->country);
             $form->city->setValue($user_data->city);
-            $form->flag->setValue($user_data->flag_id);
             $form->avatar_type->setValue($user_data->avatar_type);
             $form->avatar_load->setValue($user_data->avatar_load);
             $form->avatar_link->setValue($user_data->avatar_link);
@@ -476,6 +474,16 @@ class UserController extends App_Controller_FirstBootController {
             $form->www->setValue($user_data->www);
             $form->about->setValue($user_data->about);
             $this->view->user_id = $user_data->id;
+
+
+            $country = new Application_Model_DbTable_Country();
+            $countries = $country->fetchAll();
+
+            foreach ($countries as $country):
+                $form->country->addMultiOption($country->id, $country->name);
+            endforeach;
+
+            $form->country->setValue($user_data->country_id);
         } else {
             $this->view->errMessage .= $this->view->translate('Произошла ошибка! Свяжитесь с администратором для ее устранения.');
         }
@@ -492,7 +500,7 @@ class UserController extends App_Controller_FirstBootController {
         $items_order = 'ASC';
 
         $user = new Application_Model_DbTable_User();
-        $this->view->paginator = $user->get_users_pager($page_count_items, $page, $page_range, $items_order);
+        $this->view->paginator = $user->getSimpleEnableUsersPager($page_count_items, $page, $page_range, $items_order);
     }
 
     public function messageAction() {

@@ -5,23 +5,54 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
     protected $_name = 'user';
     protected $_primary = 'id';
 
-    public function get_login($user_id) {
+    public function getUserData($user_id) {
+        $model = new self;
+        $select = $model->select()
+                ->setIntegrityCheck(false)
+                ->from(array('u' => 'user'), 'u.id')
+                ->where('u.id = ? and u.enable = 1', $user_id)
+                ->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+                    'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+                    'country_name' => 'c.name'))
+                ->columns(array('login', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
+                    'icq', 'gtalk', 'www', ));
+
+        $user = $model->fetchRow($select);
+
+        if (count($user) != 0) {
+            return $user;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function getLogin($user_id) {
         $model = new self;
         $select = $model->select()
                 ->from(array('u' => $this->_name), 'id')
                 ->where('u.id = ?', $user_id)
                 ->columns(array('login'));
         $user = $model->fetchRow($select);
-        return $user->login;
+        
+        if(count($user) != 0){
+            return $user->login;
+        } else {
+            return FALSE;
+        }
     }
 
-    public function get_users_pager($count, $page, $page_range, $order) {
+    public function getSimpleEnableUsersPager($count, $page, $page_range, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($model
                                 ->select()
-                                ->from('user', 'id')
-                                ->where('user_role_id != 1 and enable = 1')
+                                ->setIntegrityCheck(false)
+                                ->from(array('u' => 'user'), 'u.id')
+                                ->where('u.user_role_id != 1 and u.enable = 1')
+                                ->join(array('c' => 'country'), 'u.country_id = c.id', array(
+                                    'country_url_image_round' => 'c.url_image_round',
+                                    'country_name' => 'c.name')
+                                )
                                 ->columns(array('id', 'avatar_type', 'login'))
                                 ->order('id ' . $order)
         );
@@ -34,7 +65,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
-    public function get_all_users_pager($count, $page, $page_range, $order) {
+    public function getAllUsersPager($count, $page, $page_range, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($model
@@ -52,7 +83,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
-    public function set_last_activity($user_id) {
+    public function setLastActivity($user_id) {
         $model = new self;
 
         $user_data = array(
@@ -63,7 +94,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model->update($user_data, $user_where);
     }
 
-    public function activate_user($email, $password, $code_activate) {
+    public function activateUser($email, $password, $code_activate) {
         $model = new self;
 
         $select = $model->select()
@@ -94,7 +125,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function set_restore_pass_code($email, $code_restore) {
+    public function setRestorePassCode($email, $code_restore) {
         $model = new self;
 
         $user_data = array(
@@ -105,7 +136,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model->update($user_data, $user_where);
     }
 
-    public function restore_new_passwd($email, $code_restore, $password) {
+    public function restoreNewPasswd($email, $code_restore, $password) {
         $model = new self;
 
         $user = $model->fetchRow(array('email = ?' => $email, 'code_restore_pass = ?' => $code_restore));
@@ -125,7 +156,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function check_user_status($email) {
+    public function checkUserStatus($email) {
         $model = new self;
 
         $select = $model->select()
@@ -150,7 +181,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function get_user_avatar_load($user_id) {
+    public function getUserAvatarLoad($user_id) {
         $model = new self;
 
         $select = $model->select()
@@ -171,7 +202,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function get_user_avatar_link($user_id) {
+    public function getUserAvatarLink($user_id) {
         $model = new self;
 
         $select = $model->select()
@@ -192,7 +223,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function get_user_avatar_gravatar_email($user_id) {
+    public function getUserAvatarGravatarEmail($user_id) {
         $model = new self;
 
         $select = $model->select()
@@ -232,7 +263,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getUserByRole($role_id) {
+    public function getUsersByRole($role_id) {
         $model = new self;
 
         $select = $model->select()
