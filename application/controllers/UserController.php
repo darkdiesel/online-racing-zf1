@@ -204,7 +204,7 @@ class UserController extends App_Controller_FirstBootController {
                     'code_activate' => $form->code_activate->getValue(),
                 );
 
-                $result = $user->activate_user($user_data['email'], $user_data['password'], $user_data['code_activate']);
+                $result = $user->activateUser($user_data['email'], $user_data['password'], $user_data['code_activate']);
 
                 switch ($result) {
                     case 'done':
