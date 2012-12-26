@@ -33,7 +33,7 @@
                     <div class="article_type_name article_type_info_item"><?php echo $this->translate('Тип статьи'); ?></div>
                     <div class="article_type_date_create article_type_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article_type->date_create); ?></div>
                     <?php if ($this->escape($this->article_type->date_create) != $this->escape($this->article_type->date_edit)) { ?>
-                        <div class="article_type_date_edit article_type_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->article_type->date_edit); ?></div>
+                        <div class="article_type_date_edit article_type_info_item"><span><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->article_type->date_edit); ?></div>
                     <?php } ?>
                 </div>
             </div>

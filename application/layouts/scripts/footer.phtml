@@ -7,7 +7,7 @@
 <div class="footer_box footer_center">
     <?php
     if ($this->ft_menu) {
-        echo $this->render("ft_menu.phtml");
+        echo $this->render("footer/ft_menu.phtml");
     }
     ?>
 </div>
@@ -17,18 +17,18 @@
     </div>
     <?php
     if ($this->ft_socialNetworks_block) {
-        echo $this->render("ft_socialNetworks_block.phtml");
+        echo $this->render("footer/ft_socialNetworks_block.phtml");
     }
     ?>
 </div>
 <div class="footer_bootom">
     <div class="copyright">
-        <?php echo $this->translate('Версия сайта') ?> 0.6.7b<br>
+        <?php echo $this->translate('Версия сайта') ?> 0.7.8a<br>
         2012 © Online-Racing.net
     </div>
     <?php
     if ($this->ft_user_counters_block) {
-        echo $this->render("ft_user_counters_block.phtml");
+        echo $this->render("footer/ft_user_counters_block.phtml");
     }
     ?>
 </div>

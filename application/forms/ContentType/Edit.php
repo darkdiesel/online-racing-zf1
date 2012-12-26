@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_ContentTypeAddForm extends Zend_Form {
+class Application_Form_ContentType_Edit extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,12 +10,11 @@ class Application_Form_ContentTypeAddForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/content-type/add');
-        $this->setName('contentTypeAdd');
+        $this->setAction('/content-type/edit');
+        $this->setName('contentTypeEdit');
         $this->setAttrib('class', 'white_box');
-        
-        $this->addElement('text', 'name', array(
-            'label' => $this->translate('Название'),
+
+        $this->addElement('text', 'name', array('label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
@@ -30,9 +29,8 @@ class Application_Form_ContentTypeAddForm extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
-        $this->addElement('textarea', 'description', array(
-            'label' => $this->translate('Описание типа контента'),
+
+        $this->addElement('textarea', 'description', array('label' => $this->translate('Описание типа контента'),
             'placeholder' => $this->translate('Описание типа контента'),
             'cols' => 60,
             'rows' => 10,
@@ -46,19 +44,17 @@ class Application_Form_ContentTypeAddForm extends Zend_Form {
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
             )
         ));
-        
-        $this->addElement('submit', 'submit', array(
-            'ignore' => true,
+
+        $this->addElement('submit', 'submit', array('ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Добавить'),
+            'label' => $this->translate('Изменить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
             )
         ));
 
-        $this->addElement('reset', 'reset', array(
-            'ignore' => true,
+        $this->addElement('reset', 'reset', array('ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
@@ -67,11 +63,22 @@ class Application_Form_ContentTypeAddForm extends Zend_Form {
             )
         ));
         
+        $this->addElement('button', 'cancel', array(
+            'ignore' => true,
+            'class' => 'btn',
+            'onClick' => "location.href='/content-type/all'",
+            'label' => $this->translate('Отмена'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
+            )
+        ));
+
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset')
+            $this->getElement('reset'),
+            $this->getElement('cancel')
                 ), 'form_actions', array());
-        
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
@@ -81,4 +88,3 @@ class Application_Form_ContentTypeAddForm extends Zend_Form {
     }
 
 }
-

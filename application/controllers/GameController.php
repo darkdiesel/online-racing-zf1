@@ -48,7 +48,7 @@ class GameController extends App_Controller_FirstBootController {
         $page = $this->getRequest()->getParam('page');
 
         $article = new Application_Model_DbTable_Article();
-        $this->view->paginator = $article->getPublishArticlePagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
+        $this->view->paginator = $article->getAllArticlesPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
     }
 
     public function addAction() {
@@ -58,7 +58,7 @@ class GameController extends App_Controller_FirstBootController {
 
         $request = $this->getRequest();
         // form
-        $form = new Application_Form_ArticleAddForm();
+        $form = new Application_Form_Article_Add();
         $form->setAction('/game/add');
 
         if ($this->getRequest()->isPost()) {
@@ -136,7 +136,7 @@ class GameController extends App_Controller_FirstBootController {
 
             if (count($article_data) != 0) {
                 // form
-                $form = new Application_Form_ArticleEditForm();
+                $form = new Application_Form_Article_Edit();
                 $form->setAction('/game/edit/' . $game_id);
                 $form->cancel->setAttrib('onClick', 'location.href="/game/id/' . $game_id . '"');
 
@@ -223,7 +223,7 @@ class GameController extends App_Controller_FirstBootController {
             $article_data = $article->getArticleData($game_data->article_id);
 
             if ($article_data) {
-                $form = new Application_Form_ArticleDeleteForm();
+                $form = new Application_Form_Article_Delete();
                 $form->setAction('/game/delete/' . $game_id);
                 $form->cancel->setAttrib('onClick', 'location.href="/game/id/' . $game_id . '"');
 
@@ -246,13 +246,13 @@ class GameController extends App_Controller_FirstBootController {
                 $this->view->form = $form;
                 $this->view->article = $article_data;
             } else {
-                $this->view->errMessage = $this->view->translate('Контент для игры не найден');
-                $this->view->headTitle($this->view->translate('Контент для игры не найден'));
+                $this->view->errMessage = $this->view->translate('Контент для игры не найден!');
+                $this->view->headTitle($this->view->translate('Контент для игры не найден!'));
                 return;
             }
         } else {
-            $this->view->errMessage = $this->view->translate('Игра не существует');
-            $this->view->headTitle($this->view->translate('Игра не существует'));
+            $this->view->errMessage = $this->view->translate('Игра не найдена!');
+            $this->view->headTitle($this->view->translate('Игра не найдена!'));
             return;
         }
     }

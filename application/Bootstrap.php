@@ -69,7 +69,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->lo_back_to_top = true; // back to top block
 
         /* [LEFT SIDEBAR] */
-        $view->ls_count_down_block = true; // count down block
+        $view->ls_next_event_block = true; // count down block
         $view->ls_chat_block = true; // chat block
         $view->ls_user_map_block = true; // user map block
         $view->ls_online_radio_block = true; // search block
@@ -147,7 +147,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         //$view->headScript()->appendFile($view->baseUrl("js/snowfall.min.jquery.js"));
 
         // Script for count down block
-        if ($view->ls_count_down_block) {
+        if ($view->ls_next_event_block) {
             $view->headScript()->appendFile($view->baseUrl("js/jquery.countdown.min.js"));
             $view->headScript()->appendFile($view->baseUrl("js/jquery.countdown-ru.js"));
             $view->headLink()->appendStylesheet($view->baseUrl("css/jquery.countdown.css"));

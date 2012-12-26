@@ -5,6 +5,7 @@ class LeagueController extends App_Controller_FirstBootController {
     public function init() {
         parent::init();
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/league.css"));
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/articles.css"));
     }
 
     public function idAction() {
@@ -30,7 +31,7 @@ class LeagueController extends App_Controller_FirstBootController {
 
         $request = $this->getRequest();
         // form
-        $form = new Application_Form_LeagueAddForm();
+        $form = new Application_Form_League_Add();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -87,7 +88,7 @@ class LeagueController extends App_Controller_FirstBootController {
             $this->view->headTitle($league_data->name);
 
             // form
-            $form = new Application_Form_LeagueEditForm();
+            $form = new Application_Form_League_Edit();
             $form->setAction('/league/edit/' . $league_id);
             $form->cancel->setAttrib('onClick', 'location.href="/league/id/' . $league_id . '"');
 

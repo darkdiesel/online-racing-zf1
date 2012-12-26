@@ -23,7 +23,7 @@
                 $bbcode = Zend_Markup::factory('Bbcode');
                 if ($this->article->image != '') {
                     ?>
-                    <img class="img-polaroid article_image" src="<?php echo $this->escape($this->article->image); ?>">
+                    <img class="img-polaroid article_center_image" src="<?php echo $this->escape($this->article->image); ?>">
                 <?php } ?>
                 <div class="article_text"><?php echo $bbcode->render($this->escape($this->article->text)); ?></div>
                 <div class="article_controls">

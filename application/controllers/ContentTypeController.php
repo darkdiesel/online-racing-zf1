@@ -21,14 +21,14 @@ class ContentTypeController extends App_Controller_FirstBootController {
             $this->view->headTitle($content_type_data->name);
             return;
         } else {
-            $this->view->errMessage = $this->view->translate('Тип контента не существует');
-            $this->view->headTitle($this->view->translate('Тип контента не существует'));
+            $this->view->errMessage = $this->view->translate('Тип контента не найден!');
+            $this->view->headTitle($this->view->translate('Тип контента не найден!'));
         }
     }
 
     // action for view all content types
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Типы статей'));
+        $this->view->headTitle($this->view->translate('Типы контента'));
 
         // pager settings
         $page_count_items = 10;
@@ -38,16 +38,16 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
         $content_type = new Application_Model_DbTable_ContentType();
 
-        $this->view->paginator = $content_type->get_content_type_pager($page_count_items, $page, $page_range, $items_order);
+        $this->view->paginator = $content_type->getContentTypePager($page_count_items, $page, $page_range, $items_order);
     }
 
     // action for add new content type
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Добавить тип статьи'));
+        $this->view->headTitle($this->view->translate('Добавить тип контента'));
 
         $request = $this->getRequest();
         // form
-        $form = new Application_Form_ContentTypeAddForm();
+        $form = new Application_Form_ContentType_Add();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -82,7 +82,7 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
         if (count($content_type_data) != 0) {
             // form
-            $form = new Application_Form_ContentTypeEditForm();
+            $form = new Application_Form_ContentType_Edit();
             $form->setAction('/content-type/edit/' . $content_type_id);
 
             if ($this->getRequest()->isPost()) {
@@ -101,7 +101,7 @@ class ContentTypeController extends App_Controller_FirstBootController {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа контента!');
                 }
             }
-            $this->view->headTitle($this->view->translate('Редактировать'));
+            $this->view->headTitle($this->view->translate('Редактирование'));
             $this->view->headTitle($content_type_data->name);
 
             $form->name->setvalue($content_type_data->name);
@@ -109,14 +109,14 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
             $this->view->form = $form;
         } else {
-            $this->view->errMessage = $this->view->translate('Тип контента не существует');
-            $this->view->headTitle($this->view->translate('Тип контента не существует'));
+            $this->view->errMessage = $this->view->translate('Тип контента не найден!');
+            $this->view->headTitle($this->view->translate('Тип контента не найден!'));
         }
     }
 
     // action for delete content type
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удалить тип статьи'));
+        $this->view->headTitle($this->view->translate('Удаление типа контента'));
 
         $request = $this->getRequest();
         $content_type_id = (int) $request->getParam('id');
@@ -127,7 +127,7 @@ class ContentTypeController extends App_Controller_FirstBootController {
         if (count($content_type_data) != 0) {
             $this->view->headTitle($content_type_data->name);
 
-            $form = new Application_Form_ArticleTypeDeleteForm();
+            $form = new Application_Form_ArticleType_Delete();
             $form->setAction('/content-type/delete/' . $content_type_id);
             $form->cancel->setAttrib('onClick', 'location.href="/content-type/id/' . $content_type_id . '"');
 
@@ -138,16 +138,16 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
                     $this->_helper->redirector('all', 'content-type');
                 } else {
-                    $this->view->errMessage = $this->view->translate("Произошла неожиданноя ошибка! Пожалуйста обратитесь к нам и сообщите о ней");
+                    $this->view->errMessage = $this->view->translate("Произошла неожиданноя ошибка! Пожалуйста обратитесь к нам и сообщите о ней.");
                 }
             }
 
             $this->view->form = $form;
             $this->view->content_type = $content_type_data;
         } else {
-            $this->view->errMessage = $this->view->translate('Тип контента не существует');
+            $this->view->errMessage = $this->view->translate('Тип контента не найден!');
             $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Тип контента не существует'));
+            $this->view->headTitle($this->view->translate('Тип контента не найден!'));
         }
     }
 

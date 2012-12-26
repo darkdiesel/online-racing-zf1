@@ -36,29 +36,6 @@
         background:none repeat scroll 0 0 #F5F5F5;
         overflow:auto;
     }
-        #leagues_page .league_item .league_controls{
-            float:right;
-            clear:both;
-            margin:5px 0;
-        }
-        #leagues_page .league_item .league_logo{
-            float:left;
-            margin:0 15px 15px 0;
-            width:250px;
-        }
-        #leagues_page .league_item .league_name{
-            border-bottom:1px solid #E6E0E0;
-            margin-bottom:5px;
-        }
-            #leagues_page .league_item .league_name a{
-                color:#636262;
-                text-decoration:none;
-                font: 24px/30px sans-serif;
-                text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
-            }
-                #leagues_page .league_item .league_name a:hover{
-                    color:#D33B3D;
-                }
         #leagues_page .league_item .league_description{
             margin:10px 0;
             color:#424242;
@@ -67,24 +44,6 @@
         #leagues_page .league_item .league_date{
 
         }
-        #leagues_page .league_item .league_info{
-            border-top:1px solid #E6E0E0;
-            font-size:10px;
-            color:#969696;
-            text-align:right;
-            clear:both;
-        }
-            #leagues_page .league_item .league_info .league_info_item{
-                display:inline-block;
-            }
-                #leagues_page .league_item .league_info .league_info_item:before{
-                    content:"|";
-                    margin:0 5px;
-                }
-                #leagues_page .league_item .league_info .league_info_item span{
-                    font-weight:bold;
-                    color:#4F4F4F;
-                }
 /* league detail page */
 #league_page{
     
@@ -112,29 +71,3 @@
                 background:#ffffff;
                 box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
             }
-        #league_page .league_item .league_controls{
-            float:right;
-            clear:both;
-            margin:5px 0;
-        }
-        #league_page .league_item .league_date{
-
-        }
-        #league_page .league_item .league_info{
-            border-top:1px solid #E6E0E0;
-            font-size:10px;
-            color:#969696;
-            text-align:right;
-            clear:both;
-        }
-            #league_page .league_item .league_info .league_info_item{
-                display:inline-block;
-            }
-                #league_page .league_item .league_info .league_info_item:before{
-                    content:"|";
-                    margin:0 5px;
-                }
-                #league_page .league_item .league_info .league_info_item span{
-                    font-weight:bold;
-                    color:#4F4F4F;
-                }

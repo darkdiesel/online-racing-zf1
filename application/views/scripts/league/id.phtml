@@ -17,14 +17,14 @@
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } else { ?>
-            <div class="league_item">
+            <div class="league_item article_item">
                 <?php
                 if ($this->league->logo != '') {
                     ?>
-                    <img class="img-polaroid league_logo" src="<?php echo $this->escape($this->league->logo); ?>">
+                    <img class="img-polaroid league_logo article_logo" src="<?php echo $this->escape($this->league->logo); ?>">
                 <?php } ?>
-                <div class="league_descr"><?php echo $this->escape($this->league->description); ?></div>
-                <div class="league_controls">
+                <div class="league_descr article_descr"><?php echo $this->escape($this->league->description); ?></div>
+                <div class="league_controls article_controls">
                     <?php
                     if (Zend_Auth::getInstance()->hasIdentity()) {
                         $user = new Application_Model_DbTable_User();
@@ -32,14 +32,14 @@
 
                         if ($user_role_name == 'master') {
                             ?>
-                            <a href = "<?php echo $this->baseUrl('league/edit/' . $this->escape($this->league->id)) ?>" class = "btn btn-small btn-inverse league_edit"><?php echo $this->translate('Редактировать') ?></a>
+                            <a href = "<?php echo $this->baseUrl('league/edit/' . $this->escape($this->league->id)) ?>" class = "btn btn-small btn-inverse league_edit article_edit"><?php echo $this->translate('Редактировать') ?></a>
                             <?php
                         }
                     }
                     ?>
                 </div>
-                <div class="league_info">
-                    <div class="league_date league_info_item"><span><?php echo $this->translate('Создана') ?>: </span><?php echo $this->escape($this->league->date_create); ?></div>
+                <div class="article_info">
+                    <div class="league_date article_date article_info_item article_info_item"><span class="bold_text"><?php echo $this->translate('Создана') ?>: </span><?php echo $this->escape($this->league->date_create); ?></div>
                 </div>
             </div>
         <?php } ?>

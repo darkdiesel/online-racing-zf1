@@ -1,5 +1,5 @@
 <div id="article_add_page" class="page article_form">
-    <div class="page_title"><?php echo $this->translate('Добавить контент'); ?></div>
+    <div class="page_title"><?php echo $this->translate('Добавление контента'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
         <?php if ($this->errMessage != "") { ?>
@@ -11,8 +11,6 @@
         <?php } ?>
         <?php echo $this->form; ?>
         <?php
-        $this->ckeditor = 'ckeditor';
-        echo $this->setupBBCodeEditor('annotation');
         echo $this->setupBBCodeEditor('text');
         ?>
     </div>

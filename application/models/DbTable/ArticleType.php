@@ -51,5 +51,22 @@ class Application_Model_DbTable_ArticleType extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
+    
+    public function getArticleTypesName($order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from($this->_name, 'name')
+                ->columns(array('id', 'name'))
+                ->order('name ' . $order);
+
+        $countries = $model->fetchAll($select);
+
+        if (count($countries) != 0) {
+            return $countries;
+        } else {
+            return FALSE;
+        }
+    }
 
 }

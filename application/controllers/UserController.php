@@ -39,7 +39,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Авторизация'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserLoginForm();
+        $form = new Application_Form_User_Login();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -192,7 +192,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Активация пользователя'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserActivateForm();
+        $form = new Application_Form_User_Activate();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -283,7 +283,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Восстановление пароля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserRestorePasswdForm();
+        $form = new Application_Form_User_RestorePasswd();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -325,7 +325,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Создание нового пароля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserSetRestorePasswdForm();
+        $form = new Application_Form_User_SetRestorePasswd();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -477,7 +477,7 @@ class UserController extends App_Controller_FirstBootController {
 
 
             $country = new Application_Model_DbTable_Country();
-            $countries = $country->fetchAll();
+            $countries = $country->getCountriesName('ASC');
 
             foreach ($countries as $country):
                 $form->country->addMultiOption($country->id, $country->name);
@@ -513,7 +513,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Настройки профиля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_UserSettingsForm();
+        $form = new Application_Form_User_Settings();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {

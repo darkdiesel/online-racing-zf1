@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_LeagueEditForm extends Zend_Form {
+class Application_Form_Championship_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,17 +10,17 @@ class Application_Form_LeagueEditForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/league/edit');
-        $this->setName('leagueEdit');
+        $this->setAction('/championship/add');
+        $this->setName('championshipAdd');
         $this->setAttrib('class', 'white_box');
 
-        $this->addElement('text', 'name', array('label' => $this->translate('Название'),
+        $this->addElement('text', 'title', array(
+            'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
             'class' => 'x_field',
-            'width' => '400px',
             'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -30,9 +30,24 @@ class Application_Form_LeagueEditForm extends Zend_Form {
             )
         ));
 
-        // league administrator
-        $this->addElement('select', 'admin', array(
-            'label' => $this->translate('Администратор лиги'),
+        // artcile type
+        $this->addElement('select', 'league', array(
+            'label' => $this->translate('Лига'),
+            //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'required' => true,
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+        
+        // artcile type
+        $this->addElement('select', 'reglament', array(
+            'label' => $this->translate('Регламент'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
             'registerInArrayValidator' => false,
@@ -45,45 +60,54 @@ class Application_Form_LeagueEditForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'logo', array(
-            'label' => $this->translate('Логотип лиги'),
-            'placeholder' => $this->translate('Логотип лиги'),
-            'maxlength' => 255,
+        $this->addElement('text', 'date_start', array(
+            'label' => $this->translate('Дата начала'),
+            'placeholder' => $this->translate('Дата начала'),
+            'description' => $this->translate('Формат даты yyyy-mm-dd (yyyy - год, mm - месяц, dd - день)'),
             'filters' => array('StripTags', 'StringTrim'),
             'class' => 'x_field',
+            'validators' => array(
+                array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
+                array('StringLength', true, array('min' => 10, 'max' => 10)),
+            ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                'ViewHelper', 'HtmlTag', 'label', 'Errors', 'description',
                 array('Label', array('class' => 'element_label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
-        $this->addElement('textarea', 'description', array('label' => $this->translate('Описание лиги'),
-            'placeholder' => $this->translate('Описание лиги'),
-            'cols' => 60,
-            'rows' => 10,
-            'maxlength' => 500,
-            'required' => false,
-            'filters' => array('StringTrim'),
-            'validators' => array('NotEmpty'),
+        $this->addElement('text', 'date_end', array(
+            'label' => $this->translate('Дата окончания'),
+            'placeholder' => $this->translate('Дата окончания'),
+            'description' => $this->translate('Формат даты yyyy-mm-dd (yyyy - год, mm - месяц, dd - день)'),
+            'filters' => array('StripTags', 'StringTrim'),
+            'class' => 'x_field',
+            'validators' => array(
+                array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
+                array('StringLength', true, array('min' => 10, 'max' => 10)),
+            ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+                'ViewHelper', 'HtmlTag', 'label', 'Errors', 'description',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
-        $this->addElement('submit', 'submit', array('ignore' => true,
+        $this->addElement('submit', 'submit', array(
+            'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Изменить'),
+            'label' => $this->translate('Создать'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
             )
         ));
 
-        $this->addElement('reset', 'reset', array('ignore' => true,
+        $this->addElement('reset', 'reset', array(
+            'ignore' => true,
             'class' => 'btn',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
@@ -92,22 +116,11 @@ class Application_Form_LeagueEditForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('button', 'cancel', array(
-            'ignore' => true,
-            'class' => 'btn',
-            'onClick' => "location.href='/league/all'",
-            'label' => $this->translate('Отмена'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
-            )
-        ));
-
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset'),
-            $this->getElement('cancel'),
+            $this->getElement('reset')
                 ), 'form_actions', array());
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
@@ -117,3 +130,4 @@ class Application_Form_LeagueEditForm extends Zend_Form {
     }
 
 }
+

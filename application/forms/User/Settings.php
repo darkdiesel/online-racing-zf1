@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_UserSettingsForm extends Zend_Form
+class Application_Form_User_Settings extends Zend_Form
 {
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();

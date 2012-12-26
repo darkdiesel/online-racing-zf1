@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_UserActivateForm extends Zend_Form {
+class Application_Form_User_Login extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -11,19 +11,22 @@ class Application_Form_UserActivateForm extends Zend_Form {
     public function init() {
         // Set the method for the display form to POST
         $this->setMethod('post');
-        $this->setAction('/user/activate');
-        $this->setName('userActivate');
+        $this->setAction('/user/login');
+        $this->setName('userlogin');
         $this->setAttrib('class', 'white_box');
 
         // Add an email element
-        $this->addElement('text', 'email', array(
-            'label' => 'E-mail',
+        $this->addElement('text', 'loginemail', array(
+            'label' => 'E-mail:',
             'placeholder' => 'E-mail',
+            'title' => $this->translate('Введите свой электронный почтовый ящик. Пример: example@mail.com.'),
             'required' => true,
-            'class' => 'x_field',
-            'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
+            'class' => 'x_field tooltip_field',
+            'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
+            'maxlength' => 255,
             'validators' => array(
                 'EmailAddress',
+                array('StringLength', true, array('min' => 5, 'max' => 255)),
                 new App_Validate_DbRecordExists('user', 'email')
             ),
             'decorators' => array(
@@ -34,14 +37,16 @@ class Application_Form_UserActivateForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('password', 'password', array(
+        $this->addElement('password', 'loginpassword', array(
             'label' => $this->translate('Пароль'),
             'placeholder' => $this->translate('Пароль'),
+            'title' => $this->translate('Введите пароль от своей учетной записи.'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
+            'maxlength' => 25,
             'validators' => array(
-                array('StringLength', true, array('min' => 6, 'max' => 25))
+                array('StringLength', true, array('min' => 6))
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -51,49 +56,23 @@ class Application_Form_UserActivateForm extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'code_activate', array(
-            'label' => $this->translate('Код активации'),
-            'placeholder' => $this->translate('Код активации'),
-            'required' => true,
-            'class' => 'x_field',
-            'filters' => array('StripTags', 'StringTrim'),
-            'validators' => array('alnum',
-            //array('regex', false, '/^[a-z]/i')
-            ),
+        $this->addElement('checkbox', 'remember', array(
+            'label' => $this->translate('Запомнить меня'),
+            'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
+            'data-placeholder' => 'left',
+            'class' => 'tooltip_field',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
+                array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
             )
         ));
-
-        $this->addElement(
-                new Zend_Form_Element_Captcha('captcha', array(
-                    'ignore' => true, // игнорируем, чтобы не получать значение элемента при вызове
-                    // метода getValues() нашей формы
-                    'label' => 'captchaLabel',
-                    'captcha' => array(
-                        'captcha' => 'ReCaptcha',
-                        'pubKey' => '6LdvedYSAAAAALfZ46Sx1yYF75erQzJdkZ0OG2Kt', // для получения ключей, нужно зарегистроваться
-                        'privKey' => '6LdvedYSAAAAALTNnQNU_J4z_LYEE8A01CfFZa_D', // в сервисе ReCaptcha
-                    ),
-                    'captchaOptions' => array('theme' => 'white', // возможны варианты 'red' | 'white'
-                        // | 'blackglass' | 'clean' | 'custom'
-                        'lang' => 'ru'), // здесь также возможны 'en', 'nl',
-                    // 'fr', 'de', 'pt', 'ru', 'es', 'tr'
-                    // Captcha использует свой собственный декоратор, поэтому, для корректного ее отображения
-                    // декоратор должен быть задан примерно следующим образом:
-                    'decorators' => array(
-                        array('Captcha'),
-                        array('Errors'),
-                    )
-                )));
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Подвердить'),
+            'label' => $this->translate('Войти'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))

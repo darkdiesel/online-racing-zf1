@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_ArticleAddForm extends Zend_Form {
+class Application_Form_Article_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -119,7 +119,7 @@ class Application_Form_ArticleAddForm extends Zend_Form {
         
         $this->addElement('checkbox', 'publish_to_slider', array(
             'label' => $this->translate('Опубликовать в слайдер?'),
-            'value' => 1,
+            'value' => 0,
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),

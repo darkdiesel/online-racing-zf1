@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_ArticleTypeAddForm extends Zend_Form {
+class Application_Form_ArticleType_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();

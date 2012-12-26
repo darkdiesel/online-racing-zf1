@@ -16,22 +16,19 @@ class ArticleController extends App_Controller_FirstBootController {
         $article = new Application_Model_DbTable_Article();
         $article_data = $article->getArticleData($article_id);
 
-        //$mapper = new Application_Model_ArticleMapper();
-        //$article_data = $mapper->getArticleDataById($article_id, 'view');
-
         if ($article_data) {
             $this->view->article = $article_data;
             $this->view->headTitle($article_data->title);
         } else {
-            $this->view->errMessage .= $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
+            $this->view->errMessage .= $this->view->translate('Статья не найдена!');
+            $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
     }
 
     // action for view all articles
     public function allAction() {
         $this->view->headTitle($this->view->translate('Контент сайта'));
-        
+
         // pager settings
         $page_count_items = 10;
         $page_range = 5;
@@ -39,18 +36,18 @@ class ArticleController extends App_Controller_FirstBootController {
         $page = $this->getRequest()->getParam('page');
 
         $article = new Application_Model_DbTable_Article();
-        $this->view->paginator = $article->getAllPublishArticlePager($page_count_items, $page, $page_range, $items_order);
+        $this->view->paginator = $article->getPublishedArticlesPager($page_count_items, $page, $page_range, $items_order);
     }
 
     // action for add new article
     public function addAction() {
         // page title
-        $this->view->headTitle($this->view->translate('Добавить контент'));
+        $this->view->headTitle($this->view->translate('Добавление контента'));
         $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
         // form
-        $form = new Application_Form_ArticleAddForm();
+        $form = new Application_Form_Article_Add();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -65,7 +62,7 @@ class ArticleController extends App_Controller_FirstBootController {
                     'text' => $form->getValue('text'),
                     'image' => $form->getValue('image'),
                     'publish' => $form->getValue('publish'),
-                    'publish_to_slider' => $form->getValue('publish'),
+                    'publish_to_slider' => $form->getValue('publish_to_slider'),
                     'date_create' => $date,
                     'date_edit' => $date,
                 );
@@ -97,19 +94,31 @@ class ArticleController extends App_Controller_FirstBootController {
             }
         }
 
-        $article_type = new Application_Model_DbTable_ArticleType();
-        $article_types = $article_type->fetchAll();
+        // add article types to the form
+        $article_types = new Application_Model_DbTable_ArticleType();
+        $article_types = $article_types->getArticleTypesName('ASC');
 
-        foreach ($article_types as $type):
-            $form->article_type->addMultiOption($type->id, $type->name);
-        endforeach;
+        if ($article_types) {
+            foreach ($article_types as $type):
+                $form->article_type->addMultiOption($type->id, $type->name);
+            endforeach;
+        } else {
+            $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены.') . '<br/>'
+                    . '<a href=' . $this->baseURL('article-type/add') . '>' . $this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.') . '</a><br/>';
+        }
 
+        // add content types to the form
         $content_type = new Application_Model_DbTable_ContentType();
-        $content_types = $content_type->fetchAll();
+        $content_types = $content_type->getContentTypesName('ASC');
 
-        foreach ($content_types as $type):
-            $form->content_type->addMultiOption($type->id, $type->name);
-        endforeach;
+        if ($content_types) {
+            foreach ($content_types as $type):
+                $form->content_type->addMultiOption($type->id, $type->name);
+            endforeach;
+        } else {
+            $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены.') . '<br/>'
+                    . '<a href=' . $this->baseURL('content-type/add') . '>' . $this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.') . '</a><br/>';
+        }
 
         $this->view->form = $form;
     }
@@ -122,10 +131,10 @@ class ArticleController extends App_Controller_FirstBootController {
         $article_id = (int) $request->getParam('id');
 
         $article = new Application_Model_DbTable_Article();
-        $article_data = $article->fetchRow(array('id = ?' => $article_id));
+        $article_data = $article->getArticleData($article_id);
 
-        if (count($article_data) != 0) {
-            $form = new Application_Form_ArticleEditForm();
+        if ($article_data) {
+            $form = new Application_Form_Article_Edit();
             $form->setAction('/article/edit/' . $article_id);
             $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
 
@@ -133,7 +142,7 @@ class ArticleController extends App_Controller_FirstBootController {
                 if ($form->isValid($request->getPost())) {
 
                     if ($article_data->article_type_id == $form->getValue('article_type')) {
-                        // if article type not changed
+                        // if article type not changed do this code
                         $article_data = array(
                             'article_type_id' => $form->getValue('article_type'),
                             'content_type_id' => $form->getValue('content_type'),
@@ -162,33 +171,47 @@ class ArticleController extends App_Controller_FirstBootController {
                                 $game->update($game_data, $game_where);
                                 break;
                             default :
-                                
+
                                 break;
                         }
 
                         $this->redirect($this->view->baseUrl('article/id/' . $article_id));
                     } else {
                         // if article type changed
-                        $this->view->errMessage = $this->view->translate('Функционал для смены типов статьи не готов.');
+                        $this->view->errMessage .= $this->view->translate('Функционал для смены типов статьи не готов.') . '<br/>';
                     }
                 }
             }
 
+            // add article types to the form
             $article_types = new Application_Model_DbTable_ArticleType();
-            $article_types = $article_types->fetchAll();
+            $article_types = $article_types->getArticleTypesName('ASC');
 
-            foreach ($article_types as $type):
-                $form->article_type->addMultiOption($type->id, $type->name);
-            endforeach;
+            if ($article_types) {
+                foreach ($article_types as $type):
+                    $form->article_type->addMultiOption($type->id, $type->name);
+                endforeach;
+            } else {
+                $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены!') . '<br/>'
+                        . '<a href=' . $this->baseURL('article-type/add') . '>' . $this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.') . '</a><br/>';
+            }
 
+            // add content types to the form
             $content_type = new Application_Model_DbTable_ContentType();
-            $content_types = $content_type->fetchAll();
+            $content_types = $content_type->getContentTypesName('ASC');
 
-            foreach ($content_types as $type):
-                $form->content_type->addMultiOption($type->id, $type->name);
-            endforeach;
+            if ($content_types) {
+                foreach ($content_types as $type):
+                    $form->content_type->addMultiOption($type->id, $type->name);
+                endforeach;
+            } else {
+                $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены!') . '<br/>'
+                        . '<a href=' . $this->baseURL('content-type/add') . '>' . $this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.') . '</a><br/>';
+            }
 
-            $this->view->headTitle($this->view->translate('Редактировать') . ' → ' . $article_data->title);
+            //head titles
+            $this->view->headTitle($this->view->translate('Редактировать'));
+            $this->view->headTitle($article_data->title);
 
             $form->title->setvalue($article_data->title);
             $form->article_type->setvalue($article_data->article_type_id);
@@ -200,58 +223,96 @@ class ArticleController extends App_Controller_FirstBootController {
             $form->publish_to_slider->setvalue($article_data->publish_to_slider);
 
             $this->view->form = $form;
+        }  else {
+            $this->view->errMessage .= $this->view->translate('Статья не найдена!').'<br/>';
+            $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
     }
 
     // action for delete article
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удалить статью'));
-        
-        $this->view->errMessage = $this->view->translate('Функционал не готово!');
-        return;
+        $this->view->headTitle($this->view->translate('Удаление статьи'));
 
         $request = $this->getRequest();
         $article_id = (int) $request->getParam('id');
 
-        $form = new Application_Form_ArticleDeleteForm();
-        $form->setAction('/article/delete/' . $article_id);
-        $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
+        $article = new Application_Model_DbTable_Article();
+        $article_data = $article->getArticleData($article_id);
 
-        $article_mapper = new Application_Model_ArticleMapper();
-        $article_data = $article_mapper->getArticleDataById($article_id, 'edit');
+        if ($article_data) {
+            //page title
+            $this->view->headTitle($article_data->title);
 
-        if ($article_data == 'null') {
-            $this->view->errMessage = $this->view->translate('Статья не существует');
-            $this->view->headTitle($this->view->translate('Статья не существует'));
-            return;
-        } else {
-            $this->view->article = $article_data;
-        }
+            //create delete form
+            $form = new Application_Form_Article_Delete();
+            $form->setAction('/article/delete/' . $article_id);
+            $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
 
-        if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $article_type_mapper = new Application_Model_ArticleTypeMapper();
+            if ($this->getRequest()->isPost()) {
+                if ($form->isValid($request->getPost())) {
 
-                $article_type = $article_type_mapper->getArticleTypeNameById($article_data->article_type_id);
+                    $article_where = $article->getAdapter()->quoteInto('id = ?', $article_id);
+                    $article->delete($article_where);
 
-                switch (strtolower($article_type->name)) {
-                    case 'game':
-                        $game_model = new Application_Model_DbTable_Game();
-                        $game_model->fetchRow('article_id = ' . $article_id)->delete();
-                        $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
-                        break;
-                    case 'news':
-                        $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
-                        break;
-                    default :
-                        $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
-                        break;
+                    $article_type = new Application_Model_DbTable_ArticleType();
+                    $article_type->getName($article_data->article_type_id);
+
+                    switch ($article_type->name) {
+                        case 'game':
+                            $game = new Application_Model_DbTable_Game();
+                            $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                            $game->delete($game_where);
+                            break;
+                        case 'news':
+                            break;
+                        default :
+                            break;
+                    }
+                    
+                    $this->_helper->redirector('all', 'article');
                 }
-                $this->redirect($this->view->baseUrl('article/all/'));
             }
+
+            $this->view->article = $article_data;
+            $this->view->form = $form;
+        } else {
+            $this->view->errMessage .= $this->view->translate('Статья не найдена!').'<br/>';
+            $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
 
-        $this->view->form = $form;
+        /*
+          if ($article_data == 'null') {
+          $this->view->errMessage = $this->view->translate('Статья не существует');
+          $this->view->headTitle($this->view->translate('Статья не существует'));
+          return;
+          } else {
+          $this->view->article = $article_data;
+          }
+
+          if ($this->getRequest()->isPost()) {
+          if ($form->isValid($request->getPost())) {
+          $article_type_mapper = new Application_Model_ArticleTypeMapper();
+
+          $article_type = $article_type_mapper->getArticleTypeNameById($article_data->article_type_id);
+
+          switch (strtolower($article_type->name)) {
+          case 'game':
+          $game_model = new Application_Model_DbTable_Game();
+          $game_model->fetchRow('article_id = ' . $article_id)->delete();
+          $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
+          break;
+          case 'news':
+          $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
+          break;
+          default :
+          $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
+          break;
+          }
+          $this->redirect($this->view->baseUrl('article/all/'));
+          }
+          } */
+
+        
     }
 
 }

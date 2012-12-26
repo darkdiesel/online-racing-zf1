@@ -4,17 +4,17 @@
 </div>
 
 <!-- User ToolBar -->
-<?php echo $this->partial('hd_user_toolbar.phtml'); ?>
+<?php echo $this->partial('header/hd_user_toolbar.phtml'); ?>
 
 <!-- Main Menu -->
-<?php echo $this->partial('hd_main_menu.phtml'); ?>
+<?php echo $this->partial('header/hd_main_menu.phtml'); ?>
 
 <!-- Moving text-->
 <?php if ($this->hd_moving_text_block) {
-  echo $this->partial('hd_mooving_text_block.phtml');  
+  echo $this->partial('header/hd_mooving_text_block.phtml');  
 }?>
 
 <!-- Hot Lap -->
 <?php if ($this->hd_hot_lap_block) {
-  echo $this->partial('hd_hot_lap_block.phtml');  
+  echo $this->partial('header/hd_hot_lap_block.phtml');  
 }?>

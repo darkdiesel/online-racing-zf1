@@ -37,7 +37,7 @@
             <div id="chat_textarea_count" class="chat_buttons">500</div>
             <div id="chat_ajax_img" class="chat_buttons"><img src="<?php echo $this->baseUrl('img/ajax_chat_loader.gif'); ?>"></div>
                 <?php
-                $form = new Application_Form_UserChatForm();
+                $form = new Application_Form_UserChat_AddMessage();
                 $form->last_load->setvalue($last_message_id);
                 echo $form;
             }

@@ -10,15 +10,17 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
 
         $select = $model->select()
                 ->setIntegrityCheck(false)
-                ->from(array('a' => 'article'), 'a.id')
-                ->where('a.id = ? and a.publish = 1', $article_id)
+                ->from(array('a' => $this->_name), 'a.id')
+                ->where('a.id = ?', $article_id)
+                ->where('a.publish = 1')
                 ->join(array('u' => 'user'), 'a.user_id = u.id', array('user_login' => 'u.login'))
-                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create',
-            'a.date_edit', 'a.article_type_id', 'a.last_ip', 'a.content_type_id', 'a.publish'));
+                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                ->columns('*');
 
         $article = $model->fetchRow($select);
 
         if (count($article) != 0) {
+            // update count of views
             if ($article->last_ip != $_SERVER['REMOTE_ADDR']) {
                 $article_data = array(
                     'views' => ($article->views + 1),
@@ -40,15 +42,16 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
 
         $select = $model->select()
                 ->setIntegrityCheck(false)
-                ->from(array('a' => 'article'), 'a.id')
+                ->from(array('a' => $this->_name), 'a.id')
                 ->where('a.id = ' . $article_id)
                 ->join(array('u' => 'user'), 'a.user_id = u.id', array('user_login' => 'u.login'))
-                ->columns(array('a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create',
-            'a.date_edit', 'a.article_type_id', 'a.last_ip', 'a.content_type_id', 'a.publish'));
+                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                ->columns('*');
 
         $article = $model->fetchRow($select);
 
         if (count($article) != 0) {
+            // update count of views
             if ($article->last_ip != $_SERVER['REMOTE_ADDR']) {
 
                 $article_data = array(
@@ -66,32 +69,11 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getPublishArticlePagerByType($count, $page, $page_range, $article_type, $order) {
-        $model = new self;
-
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
-                                ->select()
-                                ->setIntegrityCheck(false)
-                                ->from(array('a' => 'article'), 'id')
-                                ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
-                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
-                                ->where('publish=1 and article_type_id=' . $article_type)
-                                ->order('a.id ' . $order)
-        );
-
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setItemCountPerPage($count);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setPageRange($page_range);
-
-        return $paginator;
-    }
-
     public function getPublishArticleTitlesByType($article_type, $order) {
         $model = new self;
 
         $select = $model->select()
-                ->from('article', 'id')
+                ->from($this->_name, 'id')
                 ->where('publish=1 and article_type_id=' . $article_type)
                 ->order('title ' . $order)
                 ->columns(array('id', 'title'));
@@ -104,12 +86,12 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
-    
+
     public function getAllArticleTitlesByType($article_type, $order) {
         $model = new self;
 
         $select = $model->select()
-                ->from('article', 'id')
+                ->from($this->_name, 'id')
                 ->where('article_type_id=' . $article_type)
                 ->order('title ' . $order)
                 ->columns(array('id', 'title'));
@@ -123,16 +105,61 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getAllPublishArticlePager($count, $page, $page_range, $order) {
+    public function getPublishedArticlesPager($count, $page, $page_range, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
                                 ->select()
                                 ->setIntegrityCheck(false)
-                                ->from(array('a' => 'article'), 'id')
+                                ->from(array('a' => $this->_name), 'id')
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
-                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
-                                ->where('publish=1')
+                                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->where('publish = 1')
+                                ->order('a.id ' . $order)
+        );
+
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage($count);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange($page_range);
+
+        return $paginator;
+    }
+    
+     public function getAllArticlesPager($count, $page, $page_range, $order) {
+        $model = new self;
+
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
+                                ->select()
+                                ->setIntegrityCheck(false)
+                                ->from(array('a' => $this->_name), 'id')
+                                ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
+                                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->order('a.id ' . $order)
+        );
+
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage($count);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange($page_range);
+
+        return $paginator;
+    }
+
+    public function getAllArticlesPagerByType($count, $page, $page_range, $article_type, $order) {
+        $model = new self;
+
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
+                                ->select()
+                                ->setIntegrityCheck(false)
+                                ->from(array('a' => $this->_name), 'id')
+                                ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
+                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->where('article_type_id=' . $article_type)
+                                ->where('publish = 1')
                                 ->order('a.id ' . $order)
         );
 
@@ -149,9 +176,9 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
 
         $select = $model
                 ->select()
-                ->from('article', 'id')
+                ->from($this->_name, 'id')
                 ->where('publish = 1')
-                ->columns(array('title', 'text', 'image', 'content_type_id'))
+                ->columns(array('title', 'annotation', 'text', 'image', 'content_type_id'))
                 ->order('id ' . $order);
 
         $result = $model->fetchAll($select);

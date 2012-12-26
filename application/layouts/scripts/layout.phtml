@@ -11,9 +11,9 @@
     <body>
         <?php
         if ($this->showMasterPanel == 1) {
-            echo $this->render("hd_master_toolbar.phtml");
+            echo $this->render("header/hd_master_toolbar.phtml");
         } elseif ($this->showMasterPanel == 2) {
-            echo $this->render("hd_admin_toolbar.phtml");
+            echo $this->render("header/hd_admin_toolbar.phtml");
         }
         ?>
         <div id="page_wrapper">

@@ -14,7 +14,7 @@ class ChampionshipController extends App_Controller_FirstBootController
         
         $request = $this->getRequest();
         // form
-        $form = new Application_Form_ChampionshipAddForm();
+        $form = new Application_Form_Championship_Add();
         
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {

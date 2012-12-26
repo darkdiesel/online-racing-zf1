@@ -65,7 +65,14 @@
                         <?php if (!$article->image == "") { ?>
                             <img class ="article_image" src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
                         <?php } ?>
-                        <?php echo $this->truncate($bbcode->render($filter->filter($article->text)))->toLength(1000); ?>
+
+                        <?php
+                        if ($article->annotation != '') {
+                            echo $this->escape($article->annotation);
+                        } else {
+                            echo $bbcode->render((string) ($this->truncate($this->escape($article->text))->toLength(250)));
+                        }
+                        ?>
                     </p>
                     <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_more"><?php echo $this->translate("Подробнее...") ?></a>
                 </div>

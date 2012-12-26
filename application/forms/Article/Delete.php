@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_ContentTypeDeleteForm extends Zend_Form {
+class Application_Form_Article_Delete extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_ContentTypeDeleteForm extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/content-type/delete');
-        $this->setName('contentTypeDelete');
+        $this->setAction('/article/delete');
+        $this->setName('articleDelete');
         $this->setAttrib('class', 'white_box');
 
         $this->addElement('submit', 'submit', array(
@@ -27,7 +27,7 @@ class Application_Form_ContentTypeDeleteForm extends Zend_Form {
         $this->addElement('button', 'cancel', array(
             'ignore' => true,
             'class' => 'btn',
-            'onClick' => "location.href='/content-type/all'",
+            'onClick' => "location.href='/article/all'",
             'label' => $this->translate('Отмена'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
