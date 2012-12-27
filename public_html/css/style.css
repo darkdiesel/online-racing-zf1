@@ -418,6 +418,21 @@ form.white_box{
     overflow:hidden;
     width:400px;
 }
+    form.white_box .element_box{
+        margin:5px 0;
+    }
+    form.white_box p.hint{
+        color:#828282;
+        font-size:13px;
+        margin:2px 0;
+        padding-left:15px;
+        width:95%;
+        text-align:left;
+    }
+    form.white_box textarea{
+        width:95%;
+        resize:none;
+    }
 form.white_box:after{
     background:url("../img/shadow_sprite.png") no-repeat 0 -74px;
     display:block;
@@ -426,6 +441,9 @@ form.white_box:after{
     margin:0 auto;
     width:280px;
 }
+    form.white_box label{
+        font-weight:bold;
+    }
     form.white_box label.required:after{
         content:" *";
         color:red;

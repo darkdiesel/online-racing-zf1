@@ -45,17 +45,20 @@ class Application_Form_League_Edit extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'logo', array(
+        $this->addElement('file', 'logo', array(
             'label' => $this->translate('Логотип лиги'),
-            'placeholder' => $this->translate('Логотип лиги'),
-            'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field',
+            'required' => true,
+            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/leagues/',
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                'File', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
                 array('HtmlTag', array('class' => 'element_tag')),
+            ),
+            'validators' => array(
+                array('Size', false, 102400),
+                array('Extension', false, 'jpg,png,gif'),
+                array('Count', false, 1)
             )
         ));
 

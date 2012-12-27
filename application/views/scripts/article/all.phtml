@@ -24,16 +24,6 @@
                         ?>
                     </div>
                     <div class="article_controls">
-                        <?php
-                        if (Zend_Auth::getInstance()->hasIdentity()) {
-                            if (Zend_Auth::getInstance()->getStorage('online-racing')->read()->id == $article['user_id']) {
-                                ?>
-                                <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($article['id'])) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
-                                <a href = "<?php echo $this->baseUrl('article/delete/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
-                                <?php
-                            }
-                        }
-                        ?>
                         <a href = "<?php echo $this->baseUrl('article/id/' . $this->escape($article['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="article_info">

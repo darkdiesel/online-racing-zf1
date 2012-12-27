@@ -456,6 +456,41 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
+        
+        $router->addRoute(
+                'championshipId', new Zend_Controller_Router_Route('championship/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'championship',
+                            'action' => 'id',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'championshipEdit', new Zend_Controller_Router_Route('championship/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'championship',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+        
+        $router->addRoute(
+                'championshipDelete', new Zend_Controller_Router_Route('championship/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'championship',
+                            'action' => 'delete',
+                            'id' => 0)
+        ));
+        $router->addRoute(
+                'championshipAll', new Zend_Controller_Router_Route('championship/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'championship',
+                            'action' => 'all',
+                            'page' => 1)
+        ));
 
         /*
           Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');

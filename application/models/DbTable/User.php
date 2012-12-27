@@ -263,18 +263,39 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getUsersByRole($role_id) {
+    public function getUsersByRoleId($role_id, $order) {
         $model = new self;
 
         $select = $model->select()
                 ->from('user', 'id')
                 ->where('user_role_id = ?', $role_id)
-                ->columns(array('id', 'login', 'name', 'surname'));
+                ->columns(array('id', 'login', 'name', 'surname'))
+                ->order('surname ' . $order);
 
         $user_data = $model->fetchAll($select);
 
         if (count($user_data) != 0) {
             return $user_data;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function getUsersByRoleName($role_name, $order) {
+        $model = new self;
+        $user_role = new Application_Model_DbTable_UserRole();
+        $user_role_id = $user_role->getId($role_name);
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->where('user_role_id = ?', $user_role_id)
+                ->columns(array('id', 'login', 'name', 'surname'))
+                ->order('surname ' . $order);
+
+        $users = $model->fetchAll($select);
+
+        if (count($users) != 0) {
+            return $users;
         } else {
             return FALSE;
         }

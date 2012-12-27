@@ -20,7 +20,7 @@ class LeagueController extends App_Controller_FirstBootController {
             $this->view->league = $league_data;
             $this->view->headTitle($league_data->name);
         } else {
-            $this->view->errMessage = $this->view->translate('Лига не существует');
+            $this->view->errMessage .= $this->view->translate('Лига не существует').'<br />';
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Лига не существует'));
         }
@@ -49,30 +49,23 @@ class LeagueController extends App_Controller_FirstBootController {
                 $newLeague = $league->createRow($league_data);
                 $newLeague->save();
 
-                $this->redirect('/league/id/' . $newLeague->id);
+                $this->redirect($this->view->baseUrl('league/id/' . $newLeague->id));
             } else {
-                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления лиги!');
+                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления лиги!').'<br />';
             }
         }
 
-        $user_role = new Application_Model_DbTable_UserRole();
-        $admin_role_id = $user_role->get_id('admin');
+        $user = new Application_Model_DbTable_User();
 
-        if ($admin_role_id) {
-            $user = new Application_Model_DbTable_User();
+        $users_data = $user->getUsersByRoleName('admin', 'ASC');
 
-            $users_data = $user->getUserByRole($admin_role_id);
-
-            if ($users_data) {
-                foreach ($users_data as $user) {
-                    $form->admin->addMultiOption($user->id, $user->login . ' (' . $user->name . '' . $user->surname . ')');
-                }
-                $this->view->form = $form;
-            } else {
-                $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы создать лигу.');
+        if ($users_data) {
+            foreach ($users_data as $user) {
+                $form->admin->addMultiOption($user->id, $user->surname . ' ' . $user->name . ' (' . $user->login . ')');
             }
+            $this->view->form = $form;
         } else {
-            $this->view->errMessage .= $this->view->translate('Роль администратора на сайте не найдена! Создайте роль администратора и самого администратора, чтобы создать лигу.');
+            $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы создать лигу.').'<br />';
         }
     }
 
@@ -108,38 +101,30 @@ class LeagueController extends App_Controller_FirstBootController {
 
                     $this->redirect($this->view->baseUrl('league/id/' . $league_id));
                 } else {
-                    $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения лиги!');
+                    $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения лиги!').'<br />';
                 }
             }
 
-            $user_role = new Application_Model_DbTable_UserRole();
-            $admin_role_id = $user_role->get_id('admin');
+            $user = new Application_Model_DbTable_User();
 
-            if ($admin_role_id) {
-                $user = new Application_Model_DbTable_User();
+            $users_data = $user->getUsersByRoleName('admin', 'ASC');
 
-                $users_data = $user->getUserByRole($admin_role_id);
-
-                if ($users_data) {
-                    foreach ($users_data as $user) {
-                        $form->admin->addMultiOption($user->id, $user->login . ' (' . $user->name . '' . $user->surname . ')');
-                    }
-                    $this->view->form = $form;
-                } else {
-                    $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы редактировать лигу.');
+            if ($users_data) {
+                foreach ($users_data as $user) {
+                    $form->admin->addMultiOption($user->id, $user->surname . ' ' . $user->name . ' (' . $user->login . ')');
                 }
+                $this->view->form = $form;
             } else {
-                $this->view->errMessage .= $this->view->translate('Роль администратора на сайте не найдена! Создайте роль администратора и самого администратора, чтобы редактировать лигу.');
+                $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы редактировать лигу.').'<br />';
             }
 
             $form->name->setvalue($league_data->name);
-            $form->logo->setvalue($league_data->logo);
             $form->description->setvalue($league_data->description);
             $form->admin->setvalue($league_data->user_id);
 
             $this->view->form = $form;
         } else {
-            $this->view->errMessage = $this->view->translate('Лига не существует');
+            $this->view->errMessage .= $this->view->translate('Лига не существует').'<br />';
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Лига не существует'));
         }

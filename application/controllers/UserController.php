@@ -25,7 +25,8 @@ class UserController extends App_Controller_FirstBootController {
 
             $this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
         } else {
-            $this->view->headTitle($this->view->translate('Ошибка! Пользователь не существует!'));
+            $this->view->headTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle($this->view->translate('Пользователь не существует!'));
             $this->view->errMessage = $this->view->translate("Пользователь не существует");
         }
     }
@@ -265,7 +266,7 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                     case 'activate':
                         $this->view->errMessage .= $this->view->translate('Пользователь уже активирован!') . ' <strong><a href="' . $this->view->baseURL('user/login') . '">'
-                                . $this->view->translate('Авторизоваться!') . '</a></strong>';
+                                . $this->view->translate('Авторизоваться?') . '</a></strong>';
                         break;
                     case 'notFound':
                         $this->view->errMessage .= $this->view->translate('Пользователь на сайте не найден!');
@@ -280,6 +281,9 @@ class UserController extends App_Controller_FirstBootController {
     }
 
     public function restorePasswdAction() {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_helper->redirector('index', 'index');
+        }
         $this->view->headTitle($this->view->translate('Восстановление пароля'));
 
         $request = $this->getRequest();
@@ -322,6 +326,10 @@ class UserController extends App_Controller_FirstBootController {
     }
 
     public function setRestorePasswdAction() {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_helper->redirector('index', 'index');
+        }
+        
         $this->view->headTitle($this->view->translate('Создание нового пароля'));
 
         $request = $this->getRequest();

@@ -53,7 +53,7 @@ class ContentTypeController extends App_Controller_FirstBootController {
             if ($form->isValid($request->getPost())) {
                 $date = date('Y-m-d H:i:s');
                 $content_type_data = array(
-                    'name' => $form->getValue('name'),
+                    'name' => strtolower($form->getValue('name')),
                     'description' => $form->getValue('description'),
                     'date_create' => $date,
                     'date_edit' => $date,
@@ -88,7 +88,7 @@ class ContentTypeController extends App_Controller_FirstBootController {
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
                     $content_type_data = array(
-                        'name' => $form->getValue('name'),
+                        'name' => strtolower($form->getValue('name')),
                         'description' => $form->getValue('description'),
                         'date_edit' => date('Y-m-d H:i:s')
                     );

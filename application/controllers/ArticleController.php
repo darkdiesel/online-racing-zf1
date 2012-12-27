@@ -103,7 +103,7 @@ class ArticleController extends App_Controller_FirstBootController {
                 $form->article_type->addMultiOption($type->id, $type->name);
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены.') . '<br/>'
+            $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены!') . '<br/>'
                     . '<a href=' . $this->baseURL('article-type/add') . '>' . $this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.') . '</a><br/>';
         }
 
@@ -116,7 +116,7 @@ class ArticleController extends App_Controller_FirstBootController {
                 $form->content_type->addMultiOption($type->id, $type->name);
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены.') . '<br/>'
+            $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены!') . '<br/>'
                     . '<a href=' . $this->baseURL('content-type/add') . '>' . $this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.') . '</a><br/>';
         }
 
@@ -223,8 +223,8 @@ class ArticleController extends App_Controller_FirstBootController {
             $form->publish_to_slider->setvalue($article_data->publish_to_slider);
 
             $this->view->form = $form;
-        }  else {
-            $this->view->errMessage .= $this->view->translate('Статья не найдена!').'<br/>';
+        } else {
+            $this->view->errMessage .= $this->view->translate('Статья не найдена!') . '<br/>';
             $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
     }
@@ -268,7 +268,7 @@ class ArticleController extends App_Controller_FirstBootController {
                         default :
                             break;
                     }
-                    
+
                     $this->_helper->redirector('all', 'article');
                 }
             }
@@ -276,43 +276,9 @@ class ArticleController extends App_Controller_FirstBootController {
             $this->view->article = $article_data;
             $this->view->form = $form;
         } else {
-            $this->view->errMessage .= $this->view->translate('Статья не найдена!').'<br/>';
+            $this->view->errMessage .= $this->view->translate('Статья не найдена!') . '<br/>';
             $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
-
-        /*
-          if ($article_data == 'null') {
-          $this->view->errMessage = $this->view->translate('Статья не существует');
-          $this->view->headTitle($this->view->translate('Статья не существует'));
-          return;
-          } else {
-          $this->view->article = $article_data;
-          }
-
-          if ($this->getRequest()->isPost()) {
-          if ($form->isValid($request->getPost())) {
-          $article_type_mapper = new Application_Model_ArticleTypeMapper();
-
-          $article_type = $article_type_mapper->getArticleTypeNameById($article_data->article_type_id);
-
-          switch (strtolower($article_type->name)) {
-          case 'game':
-          $game_model = new Application_Model_DbTable_Game();
-          $game_model->fetchRow('article_id = ' . $article_id)->delete();
-          $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
-          break;
-          case 'news':
-          $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
-          break;
-          default :
-          $this->article_model->fetchRow($this->article_model->select()->where('id = ?', $article_id))->delete();
-          break;
-          }
-          $this->redirect($this->view->baseUrl('article/all/'));
-          }
-          } */
-
-        
     }
 
 }

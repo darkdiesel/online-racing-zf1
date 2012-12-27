@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Championship_Add extends Zend_Form {
+class Application_Form_Championship_Edit extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_Championship_Add extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/championship/add');
-        $this->setName('championshipAdd');
+        $this->setAction('/championship/edit');
+        $this->setName('championshipEdit');
         $this->setAttrib('class', 'white_box');
 
         $this->addElement('text', 'name', array(
@@ -35,7 +35,7 @@ class Application_Form_Championship_Add extends Zend_Form {
         
         $this->addElement('file', 'logo', array(
             'label' => $this->translate('Логотип соревнований'),
-            'required' => true,
+            'required' => false,
             'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/championships/',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',
@@ -183,10 +183,22 @@ class Application_Form_Championship_Add extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
+        
+        $this->addElement('button', 'cancel', array(
+            'ignore' => true,
+            'class' => 'btn',
+            'onClick' => "location.href='/championship/all'",
+            'label' => $this->translate('Отмена'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
+            )
+        ));
 
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset')
+            $this->getElement('reset'),
+            $this->getElement('cancel'),
                 ), 'form_actions', array());
 
         $this->getDisplayGroup('form_actions')->setDecorators(array(

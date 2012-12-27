@@ -21,5 +21,22 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
+    
+    public function getLeaguesName($order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from($this->_name, 'name')
+                ->columns(array('id', 'name'))
+                ->order('name ' . $order);
+
+        $leagues = $model->fetchAll($select);
+
+        if (count($leagues) != 0) {
+            return $leagues;
+        } else {
+            return FALSE;
+        }
+    }
 
 }

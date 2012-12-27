@@ -60,10 +60,10 @@ class Application_Model_DbTable_ArticleType extends Zend_Db_Table_Abstract {
                 ->columns(array('id', 'name'))
                 ->order('name ' . $order);
 
-        $countries = $model->fetchAll($select);
+        $article_types = $model->fetchAll($select);
 
-        if (count($countries) != 0) {
-            return $countries;
+        if (count($article_types) != 0) {
+            return $article_types;
         } else {
             return FALSE;
         }

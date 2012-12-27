@@ -39,9 +39,10 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('user/logout'), 'user_allow');
         $this->add(new Zend_Acl_Resource('chat/addmessage'), 'user_allow');
 
-        $this->deny('user', 'user/register');
-        $this->deny('user', 'user/activate');
-        $this->deny('user', 'user/restorepasswd');
+        //$this->deny('user', 'user/register');
+        //$this->deny('user', 'user/activate');
+        //$this->deny('user', 'user/restore-passwd');
+        //$this->deny('user', 'user/set-restore-passwd');
 
         // admin resources
         $this->add(new Zend_Acl_Resource('admin_allow'));
@@ -76,6 +77,8 @@ class Acl extends Zend_Acl {
         
         $this->add(new Zend_Acl_Resource('country/id'), 'master_allow');
         $this->add(new Zend_Acl_Resource('country/add'), 'master_allow');
+        
+        $this->add(new Zend_Acl_Resource('championship/add'), 'master_allow');
 
         //Выставляем права, по-умолчанию всё запрещено
         //this->deny('user', 'user_deny', 'show');

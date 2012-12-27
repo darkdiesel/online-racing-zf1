@@ -1,11 +1,24 @@
 <?php
-    // application/models/DbTable/Game.php
-     
-    /**
-    * This is the DbTable class for the role table.
-    */
-    class Application_Model_DbTable_Game extends Zend_Db_Table_Abstract
-    {
-        /** Table name */
-        protected $_name    = 'game';
+
+class Application_Model_DbTable_Game extends Zend_Db_Table_Abstract {
+
+    protected $_name = 'game';
+
+    public function getGameNames($order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from($this->_name, 'name')
+                ->columns(array('id', 'name'))
+                ->order('name ' . $order);
+
+        $games = $model->fetchAll($select);
+
+        if (count($games) != 0) {
+            return $games;
+        } else {
+            return FALSE;
+        }
     }
+
+}
