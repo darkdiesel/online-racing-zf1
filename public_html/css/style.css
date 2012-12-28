@@ -443,6 +443,7 @@ form.white_box:after{
 }
     form.white_box label{
         font-weight:bold;
+        color:#5E5E5E;
     }
     form.white_box label.required:after{
         content:" *";
@@ -494,6 +495,7 @@ form.white_box .checkbox{
 }
 form.white_box .checkbox label{
     display:inline;
+    font-size:12px;
 }
 form.white_box .form_actions{
     margin:10px 0;

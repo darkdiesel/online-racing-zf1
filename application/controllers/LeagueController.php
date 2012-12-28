@@ -14,11 +14,21 @@ class LeagueController extends App_Controller_FirstBootController {
 
         $league = new Application_Model_DbTable_League();
 
-        $league_data = $league->fetchRow(array('id = ?' => $league_id));
+        $league_data = $league->getLeagueData($league_id);
 
-        if (count($league_data) != 0) {
+        if ($league_data) {
             $this->view->league = $league_data;
             $this->view->headTitle($league_data->name);
+            
+            $championship = new Application_Model_DbTable_Championship();
+            
+            $page_count_items = 5;
+            $page_range = 5;
+            $items_order = 'DESC';
+            $page = $request->getParam('page');
+            
+            $this->view->paginator = $championship->getChampionshipsPagerByLeague($page_count_items, $page, $page_range, $items_order, $league_id);
+            
         } else {
             $this->view->errMessage .= $this->view->translate('Лига не существует').'<br />';
             $this->view->headTitle($this->view->translate('Ошибка!'));

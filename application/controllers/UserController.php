@@ -69,7 +69,7 @@ class UserController extends App_Controller_FirstBootController {
                                 $storage->write($storage_data);
 
                                 if ($form->remember->getValue() == 1) {
-                                    Zend_Session::rememberMe(60 * 60 * 24 * 2);
+                                    Zend_Session::rememberMe(60 * 60 * 24 * 5);
                                 }
                                 $this->_helper->redirector('index', 'index');
                                 break;

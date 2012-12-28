@@ -361,12 +361,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         
         $router->addRoute(
-                'leagueId', new Zend_Controller_Router_Route('league/id/:id',
+                'leagueId', new Zend_Controller_Router_Route('league/id/:id/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'league',
                             'action' => 'id',
-                            'id' => 0)
+                            'id' => 0,
+                            'page' => 1)
         ));
         
         $router->addRoute(

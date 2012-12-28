@@ -27,6 +27,60 @@ class Application_Form_User_Settings extends Zend_Form
             )
         ));
         
+        $this->addElement('password', 'oldpassword', array(
+            'label' => $this->translate('Старый пароль'),
+            'placeholder' => $this->translate('Старый пароль'),
+            'title' => $this->translate('Введите старый пароль, чтобы подвердить свою личность.'),
+            'required' => true,
+            'class' => 'x_field tooltip_field',
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array(
+                array('StringLength', true, array('min' => 6))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'control-label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
+                array('HtmlTag', array('class' => 'controls')),
+            )
+        ));
+        
+        $this->addElement('password', 'newpassword', array(
+            'label' => $this->translate('Новый пароль'),
+            'placeholder' => $this->translate('Новый пароль'),
+            'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
+            'required' => true,
+            'class' => 'x_field tooltip_field',
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array(
+                array('StringLength', true, array('min' => 6))
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'control-label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
+                array('HtmlTag', array('class' => 'controls')),
+            )
+        ));
+
+        $this->addElement('password', 'newconfirmpassword', array(
+            'label' => $this->translate('Подтвердите новый пароль'),
+            'placeholder' => $this->translate('Подтвердите новый пароль'),
+            'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
+            'AllowEmpty' => false,
+            'class' => 'x_field tooltip_field',
+            'filters' => array('StripTags', 'StringTrim'),
+            'validators' => array(
+                new App_Validate_EqualInputs('password')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'control-label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
+                array('HtmlTag', array('class' => 'controls')),
+            )
+        ));
+        
         // element for saving tab name
         $this->addElement('hidden','tab_name', array(
             'value' => '',
@@ -64,6 +118,20 @@ class Application_Form_User_Settings extends Zend_Form
                 ), 'lang_settings', array('legend' => $this->translate('Языковые настройки')));
 
         $this->getDisplayGroup('lang_settings')->setDecorators(array(
+            'FormElements',
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'lang_settings display_group')),
+        ));
+        
+        // lang display group
+        $this->addDisplayGroup(array(
+            $this->getElement('oldpassword'),
+            $this->getElement('newpassword'),
+            $this->getElement('newconfirmpassword'),
+                ), 'change_password', array('legend' => $this->translate('Смена пароля')));
+
+        $this->getDisplayGroup('change_password')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
             'Fieldset',

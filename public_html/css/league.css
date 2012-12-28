@@ -44,30 +44,20 @@
         #leagues_page .league_item .league_date{
 
         }
-/* league detail page */
-#league_page{
-    
-}
-    #league_page .league_item{
-        
+/* leagues */
+    .league_item{
+        overflow:auto;
     }
-        #league_page .league_item .league_logo{
+        .league_logo{
             margin:0 auto 20px;
             display:block;
             max-width:450px;
             max-height:280px;
             min-width:250px;
         }
-        #league_page .league_item .league_descr{
-            margin:10px 0;
-            color:#424242;
-            font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
-            padding:10px 20px;
+        .league_controls{
+            margin:15px 0 !important;
         }
-            #league_page .league_item .league_descr img{
-                border:1px solid #D2D2D2;
-                border-radius:2px;
-                padding:4px;
-                background:#ffffff;
-                box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
-            }
+        .league_descr{
+            color:#605D5D !important;
+        }

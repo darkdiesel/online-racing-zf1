@@ -7,10 +7,10 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 
     public function getLeaguePager($count, $page, $page_range, $order) {
         $model = new self;
-        
+
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
                                 ->select()
-                                ->from('league', 'id')
+                                ->from($this->_name, 'id')
                                 ->columns(array('id', 'name', 'logo', 'description', 'date_create', 'date_edit'))
                                 ->order('id ' . $order));
 
@@ -21,7 +21,7 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
-    
+
     public function getLeaguesName($order) {
         $model = new self;
 
@@ -34,6 +34,25 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 
         if (count($leagues) != 0) {
             return $leagues;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function getLeagueData($id) {
+        $model = new self;
+
+        $select = $model->select()
+                ->setIntegrityCheck(false)
+                ->from(array('l' => $this->_name), 'l.id')
+                ->where('l.id')
+                ->join(array('u' => 'user'), 'l.user_id = u.id', array('user_login' => 'u.login'))
+                ->columns('*');
+
+        $league = $model->fetchRow($select);
+
+        if (count($league) != 0) {
+            return $league;
         } else {
             return FALSE;
         }

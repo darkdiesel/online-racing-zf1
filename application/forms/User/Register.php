@@ -45,7 +45,7 @@ class Application_Form_User_Register extends Zend_Form {
             'validators' => array(
                 'EmailAddress',
                 new App_Validate_NoDbRecordExists('user', 'email'),
-                array('StringLength', true, array('min' => 5, 'max' => 100))
+                array('StringLength', true, array('min' => 5))
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -63,7 +63,7 @@ class Application_Form_User_Register extends Zend_Form {
             'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
-                array('StringLength', true, array('min' => 6, 'max' => 25))
+                array('StringLength', true, array('min' => 6))
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
