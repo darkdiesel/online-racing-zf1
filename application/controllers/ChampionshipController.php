@@ -20,7 +20,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
     }
 
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Добавить чемпионат'));
+        $this->view->headTitle($this->view->translate('Создание чемпионата'));
 
         $request = $this->getRequest();
         // form

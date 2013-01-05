@@ -13,7 +13,7 @@ class Application_Form_User_Activate extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/user/activate');
         $this->setName('userActivate');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_m');
 
         // Add an email element
         $this->addElement('text', 'email', array(

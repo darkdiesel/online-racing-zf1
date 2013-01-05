@@ -79,7 +79,11 @@
                             ?>
                         </div>
                         <div class="article_controls">
-                            <a href = "<?php echo $this->baseUrl('championship/id/' . $this->escape($championship['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
+                            <a href = "<?php echo $this->baseUrl('championship/id/' . $this->escape($championship['id'])) ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
+                            <a href = "<?php echo $this->baseUrl('championship/id/' . $this->escape($championship['id'])) ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Кубок конструкторов') ?>"><?php echo $this->translate('КК') ?></a>
+                            <a href = "<?php echo $this->baseUrl('championship/id/' . $this->escape($championship['id'])) ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Составы команд') ?>"><?php echo $this->translate('Составы') ?></a>
+                            <a href = "<?php echo $this->baseUrl('article/id/' . $this->escape($championship['article_id'])) ?>" class = "btn btn-small btn-danger article_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
+                            <a href = "<?php echo $this->baseUrl('championship/id/' . $this->escape($championship['id'])) ?>" class = "btn btn-small btn-inverse article_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
                         </div>
                         <div class="article_info">
                             <div class="championship_author article_info_item"><span class="bold_text"><?php echo $this->translate('Администратор чемпионата') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($championship['user_id'])) ?>"><?php echo $this->escape($championship['user_login']); ?></a></div>

@@ -1,0 +1,184 @@
+form.white_box{
+    display:block;
+    margin:0 auto;
+    overflow:hidden;
+    width:400px;
+}
+    form.white_box:after{
+        background:url("../img/shadow_sprite.png") no-repeat 0 -74px;
+        display:block;
+        height:20px;
+        content:"";
+        margin:0 auto;
+        width:280px;
+    }
+/* width for forms */
+    form.white_box_size_s{
+        width:270px;
+    }
+    form.white_box_size_m{
+        width:360px;
+    }
+    form.white_box_size_l{
+        width:400px;
+    }
+    form.white_box_size_xl{
+        width:600px;
+    }
+    form.white_box_size_xxl{
+        width:650px;
+    }
+    form.white_box_size_xxxl{
+        width:700px;
+    }
+/* end width */    
+    form.white_box .element_box{
+        margin:15px 0;
+    }
+    /* size for white_box form */
+    form.white_box .element_box .white_box_el_size_s{
+        width:215px;
+    }
+    form.white_box .element_box .white_box_el_size_m{
+        width:305px;
+    }
+    form.white_box .element_box .white_box_el_size_l{
+        width:345px;
+    }
+    form.white_box .element_box .white_box_el_size_xl{
+        width:545px;
+    }
+    form.white_box .element_box .white_box_el_size_xxl{
+        width:595px;
+    }
+    form.white_box .element_box .white_box_el_size_xxxl{
+        width:645px;
+    }
+    /* end size for white_box form */
+    form.white_box p.hint{
+        color:#828282;
+        font-size:13px;
+        margin:2px 0;
+        padding-left:15px;
+        width:95%;
+        text-align:left;
+    }
+    form.white_box textarea{
+        width:95%;
+        resize:none;
+    }
+
+    form.white_box label{
+        font-weight:bold;
+        color:#5E5E5E;
+    }
+    form.white_box label.required:after{
+        content:" *";
+        color:red;
+    }
+    form.white_box label.error{
+        /*position:absolute;*/
+    }
+    form.white_box label.valid{
+        position:absolute;
+    }
+    form.white_box dl{
+        border:1px solid #CACACA;
+        background:none repeat scroll 0 0 #FBFBFB;
+        padding:20px;
+        margin:0;
+        border-radius:7px;
+    }
+    form ul.errors{
+        margin:10px auto;
+        clear:both;
+        overflow:hidden;
+        word-wrap:break-word;
+    }
+        form ul.errors li{
+            color:#BE3838;
+            font-family:serif;
+            font-size:14px;
+            line-height:17px;
+            text-align:left;
+            margin-left:15px;
+        }
+    /* styles for checkbox element */
+    form.white_box .checkbox{
+        margin:15px 0;
+    }
+        form.white_box .checkbox label{
+            display:inline;
+            font-size:12px;
+        }
+        
+    form.white_box .form_actions{
+        margin:10px 0;
+        text-align:center;
+    }
+    form.white_box .form_actions_group{
+        margin-right:10px;
+        display:inline-block;
+        clear:both;
+    }
+        form.white_box .form_actions_group button{ 
+            height:27px;
+        }
+/* forms with fieldset */        
+form.fieldset_white_box{
+
+}
+    form.fieldset_white_box fieldset{
+
+    }
+        form.fieldset_white_box fieldset legend{
+            font-size:22px;
+        }
+        form.fieldset_white_box fieldset .fieldset_inner_form{
+            border:1px solid #CACACA;
+            background:none repeat scroll 0 0 #F9F9F9;
+            padding:20px;
+            margin:0;
+            border-radius:7px;
+        }
+        form.fieldset_white_box fieldset .fieldset_inner_form .element_box{
+            clear:both;
+            margin:15px 0;
+        }
+            /* labels for form elements */
+            form.fieldset_white_box fieldset .fieldset_inner_form .element_box .element_label{
+                display:inline-block;
+                text-align:right;
+                width:40%;
+                padding-top:5px;
+            }
+                form.fieldset_white_box fieldset label{
+                    font-weight:bold;
+                }
+            /* form elements */
+            form.fieldset_white_box fieldset .fieldset_inner_form .element_box .element_tag{
+                float:right;
+                margin-right:140px;
+            }
+            /* description for form elements */
+            form.fieldset_white_box fieldset .fieldset_inner_form .element_box p.hint{
+                margin:10px auto;
+                width:80%;
+                text-align:center;
+                font-size:13px;
+                color:#828282;
+            }
+            form.fieldset_white_box .fieldset_inner_form .element_box textarea{
+                resize:none;
+                width:610px;
+            }
+        /* fieldset form actions */
+        form.fieldset_white_box .form_actions{
+            margin-top:15px;
+        }
+            form.fieldset_white_box .form_actions fieldset .fieldset_inner_form{
+                text-align:center;
+            }
+                form.fieldset_white_box .form_actions fieldset .fieldset_inner_form .form_actions_group{
+                    margin:0 15px;
+                }

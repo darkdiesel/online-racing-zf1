@@ -24,8 +24,6 @@
             text-transform:uppercase;
         }
     
-        
-    
     #user_info_page table{
         font-family:monospace;
     }
@@ -67,14 +65,8 @@
     
 /* user edit page */
 #user_edit_page{
-    width:100%;
-}
-    #user_edit_page fieldset{
     
-    }
-    #user_edit_page fieldset legend{
-        font-size:22px;
-    }
+}
     #user_edit_page #table_avatar_type{
             
         }
@@ -94,17 +86,7 @@
                     #user_edit_page #table_avatar_type tr td img{
                         width:200px;
                     }
-    #user_edit_page fieldset .fieldset_inner_form{
-        border:1px solid #CACACA;
-        background:none repeat scroll 0 0 #F9F9F9;
-        padding:20px;
-        margin:0;
-        border-radius:7px;
-    }
-        #user_edit_page fieldset .fieldset_inner_form .element_box{
-            clear:both;
-            margin:15px 0;
-        }
+        
         #user_edit_page fieldset .fieldset_inner_form .avatar_type{
             
         }
@@ -123,48 +105,6 @@
                 color:#828282;
                 font-size:13px;
             }
-            #user_edit_page fieldset .fieldset_inner_form .element_box .element_label{
-                display:inline-block;
-                text-align:right;
-                width:40%;
-                padding-top:5px;
-                font-weight:bold;
-            }
-            #user_edit_page fieldset .fieldset_inner_form .element_box .element_tag{
-                float:right;
-                margin-right:140px;
-            }
-            #user_edit_page fieldset .fieldset_inner_form .element_box p.hint{
-                margin:10px auto;
-                width:80%;
-                text-align:center;
-                font-size:13px;
-                color:#828282;
-            }
-    #user_edit_page .form_actions{
-        margin-top:15px;
-    }
-        #user_edit_page .form_actions fieldset .fieldset_inner_form{
-            padding:15px;
-            text-align:center;
-        }
-            #user_edit_page .form_actions fieldset .fieldset_inner_form .form_actions_group{
-                margin:0 15px;
-            }
-    #user_edit_page label{
-        font-weight:bold;
-    }        
-    #user_edit_page .additional_Inf{
-
-    }
-    #user_edit_page .additional_Inf .fieldset_inner_form{
-    
-    }
-        #user_edit_page .additional_Inf .fieldset_inner_form textarea{
-            resize:none;
-            width:640px;
-        }
-
 /* User settings page*/
 #user_settings_page{
     

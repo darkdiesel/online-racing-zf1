@@ -13,7 +13,7 @@ class Application_Form_User_Login extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/user/login');
         $this->setName('userlogin');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_s');
 
         // Add an email element
         $this->addElement('text', 'loginemail', array(

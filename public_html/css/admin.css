@@ -50,32 +50,6 @@
                     word-wrap:break-word;
                     display:block;
                 }
-/* article type add page */
-#article_type_add_page{
-    
-}
-    #article_type_add_page #articleTypeAdd{
-
-    }
-        #article_type_add_page #articleTypeAdd #name{
-            width:250px;
-        }
-        #article_type_add_page #articleTypeAdd #description{
-            width:345px;
-        }
-/* content type add page */
-#content_type_add_page{
-    
-}
-    #content_type_add_page #contentTypeAdd{
-
-    }
-        #content_type_add_page #contentTypeAdd #name{
-            width:250px;
-        }
-        #content_type_add_page #contentTypeAdd #description{
-            width:345px;
-        }
 /* article type id page */
 #article_type_page{
     
@@ -306,32 +280,6 @@
                     word-wrap:break-word;
                     display:block;
                 }
-/* article type edit page */
-#article_type_edit_page{
-    
-}
-    #article_type_edit_page #articleTypeEdit{
-
-    }
-        #article_type_edit_page #articleTypeEdit #name{
-            width:250px;
-        }
-        #article_type_edit_page #articleTypeEdit #description{
-            width:345px;
-        }
-/* content type edit page */
-#content_type_edit_page{
-    
-}
-    #content_type_edit_page #contentTypeEdit{
-
-    }
-        #content_type_edit_page #contentTypeEdit #name{
-            width:250px;
-        }
-        #content_type_edit_page #contentTypeEdit #description{
-            width:345px;
-        }
 /* admin users page */
 #admin_users_page{
     

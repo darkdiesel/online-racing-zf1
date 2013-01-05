@@ -329,7 +329,7 @@ class UserController extends App_Controller_FirstBootController {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');
         }
-        
+
         $this->view->headTitle($this->view->translate('Создание нового пароля'));
 
         $request = $this->getRequest();
@@ -521,17 +521,50 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Настройки профиля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_User_Settings();
+        $form_lang = new Application_Form_User_Settings_SiteLang();
+        $form_password = new Application_Form_User_Settings_NewPasswd();
+
+        $user = new Application_Model_DbTable_User();
 
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                
+            if ($form_lang->isValid($request->getPost())) {
+                switch ($request->getParam('tab_name')) {
+                    case 'lang_settings ':
+
+                        break;
+                    default :
+
+                        break;
+                }
             } else {
-                $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!";
+                $this->view->errMessage .= "Исправте следующие ошибки для смены языка!" . '<br />';
+            }
+            if ($form_password->isValid($request->getPost())) {
+                switch ($request->getParam('tab_name')) {
+                    case 'change_password':
+                        if ($form_password->getValue('newpassword') == $form_password->getValue('confirmnewpassword') && ($form_password->getValue('newpassword') != '')) {
+                            $result = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id, $form_password->getValue('oldpassword'), $form_password->getValue('newpassword'));
+
+                            if (!$result) {
+                                $this->view->errMessage .= "Старый пароль введен не верно!" . '<br />';
+                            } else {
+                                $this->view->errMessage .= "Пароль успешно изменен." . '<br />';
+                            }
+                        } else {
+                            $this->view->errMessage .= "Поля нового пароля должны содержать одинаковые значения и не должны быть пустыми!" . '<br />';
+                        }
+                        break;
+                    default :
+
+                        break;
+                }
+            } else {
+                $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!" . '<br />';
             }
         }
 
-        $this->view->form = $form;
+        $this->view->form_lang = $form_lang;
+        $this->view->form_password = $form_password;
     }
 
 }

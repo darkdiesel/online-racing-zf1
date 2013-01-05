@@ -12,6 +12,7 @@ class Application_Form_User_Edit extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/user/edit');
         $this->setName('userEdit');
+        $this->setAttrib('class', 'fieldset_white_box');
 
         // user info
         $this->addElement('text', 'name', array(
@@ -60,7 +61,7 @@ class Application_Form_User_Edit extends Zend_Form {
             )
         ));
 
-        
+
         // artcile type
         $this->addElement('select', 'country', array(
             'label' => $this->translate('Страна'),
@@ -75,7 +76,7 @@ class Application_Form_User_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('text', 'city', array(
             'label' => $this->translate('Город'),
             'placeholder' => $this->translate('Город'),
@@ -102,7 +103,7 @@ class Application_Form_User_Edit extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'avatar_type element_box ')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box avatar_type ')),
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
@@ -283,7 +284,7 @@ class Application_Form_User_Edit extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'aboutTextArea_box')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box aboutTextArea_box')),
             )
         ));
 

@@ -12,14 +12,15 @@ class Application_Form_League_Edit extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/league/edit');
         $this->setName('leagueEdit');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_l');
 
-        $this->addElement('text', 'name', array('label' => $this->translate('Название'),
+        $this->addElement('text', 'name', array(
+            'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field white_box_el_size_m',
             'width' => '400px',
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -29,8 +30,8 @@ class Application_Form_League_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
-        // league administrator
+        
+         // league administrator
         $this->addElement('select', 'admin', array(
             'label' => $this->translate('Администратор лиги'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
@@ -44,7 +45,7 @@ class Application_Form_League_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
+        
         $this->addElement('file', 'logo', array(
             'label' => $this->translate('Логотип лиги'),
             'required' => true,
@@ -61,11 +62,13 @@ class Application_Form_League_Edit extends Zend_Form {
                 array('Count', false, 1)
             )
         ));
-
-        $this->addElement('textarea', 'description', array('label' => $this->translate('Описание лиги'),
+        
+        $this->addElement('textarea', 'description', array(
+            'label' => $this->translate('Описание лиги'),
             'placeholder' => $this->translate('Описание лиги'),
             'cols' => 60,
             'rows' => 10,
+            'class' => 'white_box_el_size_l',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),
@@ -73,7 +76,7 @@ class Application_Form_League_Edit extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
 

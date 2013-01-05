@@ -88,10 +88,11 @@ class Application_Form_Country_Add extends Zend_Form {
         ));
 
         $this->addElement('textarea', 'description', array(
-            'label' => $this->translate('Описание команды'),
-            'placeholder' => $this->translate('Описание команды'),
+            'label' => $this->translate('Описание страны'),
+            'placeholder' => $this->translate('Описание страны'),
             'cols' => 60,
             'rows' => 10,
+            'class' => 'white_box_el_size_l',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),
@@ -99,11 +100,9 @@ class Application_Form_Country_Add extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
-
-
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,

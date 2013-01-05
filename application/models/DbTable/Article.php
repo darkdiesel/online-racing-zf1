@@ -59,7 +59,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                     'last_ip' => $_SERVER['REMOTE_ADDR']
                 );
 
-                $article_where = $model->getAdapter()->quoteInto('id = ?', $article_id);
+                $article_where = $model->getAdapter()->quoteInto('id = ?', $id);
                 $model->update($article_data, $article_where);
             }
 
@@ -179,6 +179,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->from($this->_name, 'id')
                 ->where('publish = 1')
                 ->columns(array('title', 'annotation', 'text', 'image', 'content_type_id'))
+                ->limit($count, 0)
                 ->order('id ' . $order);
 
         $result = $model->fetchAll($select);

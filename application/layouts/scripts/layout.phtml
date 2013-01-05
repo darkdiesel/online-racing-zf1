@@ -10,10 +10,13 @@
     </head>
     <body>
         <?php
-        if ($this->showMasterPanel == 1) {
-            echo $this->render("header/hd_master_toolbar.phtml");
-        } elseif ($this->showMasterPanel == 2) {
-            echo $this->render("header/hd_admin_toolbar.phtml");
+        switch ($this->showPanel) {
+            case 'master':
+                echo $this->render("header/hd_master_toolbar.phtml");
+                break;
+            case 'admin':
+                echo $this->render("header/hd_admin_toolbar.phtml");
+                break;
         }
         ?>
         <div id="page_wrapper">

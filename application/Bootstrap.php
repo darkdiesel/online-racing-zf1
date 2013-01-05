@@ -12,7 +12,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function _initNameSpace(){
         Zend_Loader_Autoloader::getInstance()->registerNamespace('App');
     }
-
+    /*
     protected function _initDb() {
         try {
             $config = $this->getOptions();
@@ -23,13 +23,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
         Zend_Registry::set('db', $db);
         return $db;
-    }
+    }*/
 
     protected function _initDoctype() {
         $this->bootstrap('view');
         $view = $this->getResource('view');
-        //$view->doctype('XHTML1_STRICT');
-        $view->doctype('HTML5');
+        $view->doctype('XHTML1_STRICT');
+        //$view->doctype('HTML5');
     }
 
     protected function _initView() {
@@ -39,7 +39,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         /* [MAIN SITE TITLE SETTINGS] */
         $view->headTitle('Online-Racing.net')
-                ->setSeparator(' → '); // setting a separator string for segments
+                ->setSeparator(' :: '); // setting a separator string for segments
 
         /* [HEAD META SETTINGS] */
         $view->headMeta()
@@ -103,33 +103,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         if ($view->ls_chat_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
         }
-
-        // master menu
-        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
-        $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
-
-        if (Zend_Auth::getInstance()->hasIdentity()) {
-
-            $user = new Application_Model_DbTable_User();
-            $user_role = $user->getUserRoleName($storage_data->id);
-
-            switch ($user_role) {
-                case 'master':
-                    $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
-                    $view->showMasterPanel = 1;
-                    break;
-                case 'admin':
-                    $view->headLink()->appendStylesheet($view->baseUrl("css/master_toolbar.css"));
-                    $view->showMasterPanel = 2;
-                    break;
-                default :
-                    $view->showMasterPanel = 0;
-                    break;
-            }
-        }
+        
+        //add css
+        $view->headLink()->appendStylesheet($view->baseUrl("css/forms.css"));
 
         /* [GOOGLE FONTS] */
-        $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
+        //$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
 
         /* [JQUERY JS] */
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.8.3.min.js"));

@@ -44,7 +44,10 @@ class ArticleController extends App_Controller_FirstBootController {
         // page title
         $this->view->headTitle($this->view->translate('Добавление контента'));
         $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
-
+        
+        //add css
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/forms.css"));
+        
         $request = $this->getRequest();
         // form
         $form = new Application_Form_Article_Add();

@@ -12,7 +12,7 @@ class Application_Form_Article_Edit extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/article/edit');
         $this->setName('articleEdit');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_xxl');
 
         $this->addElement('text', 'title', array(
             'label' => $this->translate('Заголовок'),
@@ -20,7 +20,7 @@ class Application_Form_Article_Edit extends Zend_Form {
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field white_box_el_size_xxl',
             'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -44,7 +44,7 @@ class Application_Form_Article_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
+        
         // artcile type
         $this->addElement('select', 'content_type', array(
             'label' => $this->translate('Тип контента'),
@@ -65,7 +65,7 @@ class Application_Form_Article_Edit extends Zend_Form {
             'placeholder' => $this->translate('Изображение'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field',
+            'class' => 'x_field white_box_el_size_l',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -73,12 +73,13 @@ class Application_Form_Article_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
+        
         $this->addElement('textarea', 'annotation', array(
             'label' => $this->translate('Аннотация статьи'),
             'placeholder' => $this->translate('Аннотация статьи'),
             'cols' => 60,
             'rows' => 10,
+            'class' => 'white_box_el_size_xxl',
             'maxlength' => 250,
             'required' => true,
             'filters' => array('StringTrim'),
@@ -86,7 +87,7 @@ class Application_Form_Article_Edit extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
 
@@ -95,6 +96,7 @@ class Application_Form_Article_Edit extends Zend_Form {
             'placeholder' => $this->translate('Текст статьи'),
             'cols' => 60,
             'rows' => 10,
+            'class' => 'white_box_el_size_xxl',
             'maxlength' => 10000,
             'required' => true,
             'filters' => array('StringTrim'),
@@ -102,7 +104,7 @@ class Application_Form_Article_Edit extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
 
@@ -116,10 +118,10 @@ class Application_Form_Article_Edit extends Zend_Form {
                 array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
             )
         ));
-
+        
         $this->addElement('checkbox', 'publish_to_slider', array(
             'label' => $this->translate('Опубликовать в слайдер?'),
-            'value' => 1,
+            'value' => 0,
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),

@@ -56,9 +56,10 @@ body iframe{
                         #header .moving_text marquee .header_news li{
                             display:inline-block;
                             margin:0 40px 0 0;
-                            font-family:"Press Start 2P";
-                            font-size:11px;
-                            line-height:11px;
+                            font-weight:bold;
+                            font-family:Verdana,Arial,Helvetica,sans-serif;
+                            font-size:14px;
+                            line-height:14px;
                             list-style-type:none;
                         }
                         #header .moving_text marquee .header_news li:before{
@@ -144,7 +145,7 @@ body iframe{
                             font-weight:bold;
                             padding:10px 6px;
                             line-height:12px;
-                            box-shadow:0 8px 9px 5px #6D6D6D inset;
+                            box-shadow:0px 7px 8px 2px #5C5A5A inset;
                             text-shadow:3px -2px 4px #000;
                         }
                             #left_sidebar .sidebar_box .sidebar_box_title a{
@@ -403,112 +404,7 @@ body iframe{
     height:0;
     visibility:hidden;
 }
-/*forms*/
-fieldset.form_white_box{
 
-}
-    fieldset.form_white_box legend{
-        font-family:gill;
-        font-size:35px;
-        position:relative;
-    }
-form.white_box{
-    display:block;
-    margin:0 auto;
-    overflow:hidden;
-    width:400px;
-}
-    form.white_box .element_box{
-        margin:5px 0;
-    }
-    form.white_box p.hint{
-        color:#828282;
-        font-size:13px;
-        margin:2px 0;
-        padding-left:15px;
-        width:95%;
-        text-align:left;
-    }
-    form.white_box textarea{
-        width:95%;
-        resize:none;
-    }
-form.white_box:after{
-    background:url("../img/shadow_sprite.png") no-repeat 0 -74px;
-    display:block;
-    height:20px;
-    content:"";
-    margin:0 auto;
-    width:280px;
-}
-    form.white_box label{
-        font-weight:bold;
-        color:#5E5E5E;
-    }
-    form.white_box label.required:after{
-        content:" *";
-        color:red;
-    }
-    form.white_box label.error{
-        /*position:absolute;*/
-    }
-    form.white_box label.valid{
-        position:absolute;
-    }
-    form.white_box dl{
-        border:1px solid #CACACA;
-        background:none repeat scroll 0 0 #FBFBFB;
-        padding:20px;
-        margin:0;
-        border-radius:7px;
-    }
-    form ul.errors{
-        margin:10px auto;
-        clear:both;
-        overflow:hidden;
-        word-wrap:break-word;
-    }
-        form ul.errors li{
-            color:#BE3838;
-            font-family:serif;
-            font-size:14px;
-            line-height:17px;
-            text-align:left;
-            margin-left:15px;
-        }
-/* Width for white form */
-form#userlogin{
-    width:270px;
-}
-form#userRegister{
-    width:360px;
-}
-form#userConfirm{
-    width:290px;
-}
-form#userRestorePasswd{
-    width:360px;  
-}
-/* form white_box class */
-form.white_box .checkbox{
-    margin:15px 0;
-}
-form.white_box .checkbox label{
-    display:inline;
-    font-size:12px;
-}
-form.white_box .form_actions{
-    margin:10px 0;
-    text-align:center;
-}
-form.white_box .form_actions_group{
-    margin-right:10px;
-    display:inline-block;
-    clear:both;
-}
-    form.white_box .form_actions_group button{ 
-        height:27px;
-    }
 .soc_buttons {
     position: absolute;
     right:0;

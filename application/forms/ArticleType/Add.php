@@ -12,15 +12,15 @@ class Application_Form_ArticleType_Add extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/article-type/add');
         $this->setName('articleTypeAdd');
-        $this->setAttrib('class', 'white_box');
-        
+        $this->setAttrib('class', 'white_box white_box_size_m');
+
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field white_box_el_size_s',
             'width' => '400px',
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -30,12 +30,13 @@ class Application_Form_ArticleType_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание типа статьи'),
             'placeholder' => $this->translate('Описание типа статьи'),
             'cols' => 60,
             'rows' => 10,
+            'class' => 'element_box white_box_el_size_m',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),
@@ -43,10 +44,10 @@ class Application_Form_ArticleType_Add extends Zend_Form {
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'aboutTextArea_Label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'textTextArea_box')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
-        
+
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
@@ -66,12 +67,12 @@ class Application_Form_ArticleType_Add extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
-        
+
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-        
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),

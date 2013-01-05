@@ -13,7 +13,7 @@ class Application_Form_User_Register extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/user/register');
         $this->setName('userRegister');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_m');
 
         $this->addElement('text', 'login', array(
             'label' => $this->translate('Логин'),

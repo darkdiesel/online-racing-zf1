@@ -15,7 +15,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                     'country_name' => 'c.name'))
                 ->columns(array('login', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
-                    'icq', 'gtalk', 'www', ));
+            'icq', 'gtalk', 'www',));
 
         $user = $model->fetchRow($select);
 
@@ -33,8 +33,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 ->where('u.id = ?', $user_id)
                 ->columns(array('login'));
         $user = $model->fetchRow($select);
-        
-        if(count($user) != 0){
+
+        if (count($user) != 0) {
             return $user->login;
         } else {
             return FALSE;
@@ -244,6 +244,30 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
+    public function getUserStatus($id) {
+        $model = new self;
+
+        $select = $model
+                ->select()
+                ->setIntegrityCheck(false)
+                ->from(array('u' => $this->_name), 'u.id')
+                ->where('u.id = ?', $id)
+                ->join(array('u_r' => 'user_role'), 'u_r.id = u.user_role_id', array('user_role' => 'u_r.name'))
+                ->columns(array('code_activate', 'enable'));
+
+        $user = $model->fetchRow($select);
+
+        if (count($user) != 0) {
+            if ($user->enable == '1'){
+                return $user->user_role;
+            } else {
+                return 'DISABLE';
+            }
+        } else {
+            return FALSE;
+        }
+    }
+
     public function getUserRoleName($user_id) {
         $model = new self;
 
@@ -280,7 +304,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
-    
+
     public function getUsersByRoleName($role_name, $order) {
         $model = new self;
         $user_role = new Application_Model_DbTable_UserRole();
@@ -296,6 +320,23 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         if (count($users) != 0) {
             return $users;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    public function setNewUserPassword($id, $oldPassword, $newPassword){
+        $model = new self;
+        
+        $select = $model
+                ->select()
+                ->from($this->_name, 'id')
+                ->where('id = ?', $id)
+                ->where('password = ?', sha1($oldPassword));
+        $user = $model->fetchRow($select);
+        
+        if (count($user) != 0){
+            return TRUE;
         } else {
             return FALSE;
         }

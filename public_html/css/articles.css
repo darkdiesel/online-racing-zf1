@@ -1,28 +1,4 @@
-.article_form{
-    
-}
-    .article_form form{
-        width:650px;
-    }
-    .article_form form .textTextArea_box{
-            margin:20px 0;
-        }
-        .article_form form #annotation{
-            width:595px;
-            resize:none;
-            height:150px;
-        }
-        .article_form form #text{
-            width:595px;
-            resize:none;
-            height:300px;
-        }
-        .article_form form #title{
-            width:495px;
-        }
-        .article_form form #image{
-            width:380px;
-        }
+
 /* Common class for article */
 .article_item{
     border:1px solid #CACACA;

@@ -13,7 +13,7 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/user/restore-passwd');
         $this->setName('userRestorePasswd');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_m');
 
         // Add an email element
         $this->addElement('text', 'email', array(

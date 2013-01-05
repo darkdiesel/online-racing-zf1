@@ -12,14 +12,15 @@ class Application_Form_Team_Edit extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/team/edit');
         $this->setName('teamEdit');
-        $this->setAttrib('class', 'white_box');
+        $this->setAttrib('class', 'white_box white_box_size_m');
 
-        $this->addElement('text', 'name', array('label' => $this->translate('Название'),
+        $this->addElement('text', 'name', array(
+            'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field white_box_el_size_s',
             'width' => '400px',
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -29,11 +30,13 @@ class Application_Form_Team_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
-        $this->addElement('textarea', 'description', array('label' => $this->translate('Описание команды'),
+        
+        $this->addElement('textarea', 'description', array(
+            'label' => $this->translate('Описание команды'),
             'placeholder' => $this->translate('Описание команды'),
             'cols' => 60,
             'rows' => 10,
+            'class' => 'white_box_el_size_m',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),

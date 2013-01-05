@@ -40,7 +40,9 @@ class Application_Model_DbTable_Championship extends Zend_Db_Table_Abstract {
                     ->join(array('a' => 'article'), 'c.article_id = a.id', array('rule_name' => 'a.title'))
                     ->join(array('g' => 'game'), 'c.game_id = g.id', array('game_name' => 'g.name'))
                     ->join(array('u' => 'user'), 'c.user_id = u.id', array('user_login' => 'u.login'))
-                    ->columns('*'));
+                    ->columns('*')
+                    ->order('c.id ' . $order)
+                );
 
         $paginator = new Zend_Paginator($adapter);
         $paginator->setItemCountPerPage($count);
