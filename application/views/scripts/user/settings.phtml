@@ -15,23 +15,30 @@
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } ?>  
+        <?php if ($this->succMessage != "") { ?>
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Успех!'); ?></h4>
+                <?php echo $this->succMessage; ?>
+            </div>
+        <?php } ?> 
         <div id="tabs">
             <ul>
                 <li><a href="#tabs-1"><?php echo $this->translate('Язык'); ?></a></li>
                 <li><a href="#tabs-2"><?php echo $this->translate('Пароль'); ?></a></li>
             </ul>
             <div id="tabs-1">
-                <form id="<?php echo $this->form_lang->getName(); ?>" action="<?php echo $this->form_lang->getAction(); ?>#tabs-1" method="<?php echo $this->form_lang->getMethod(); ?>" class="<?php echo $this->form_lang->getAttrib('class'); ?>">
-                    <?php echo $this->form_lang->getDisplayGroup('lang_settings'); ?>
-                    <?php echo $this->form_lang->tab_name->setvalue('lang_settings'); ?>
-                    <?php echo $this->form_lang->getDisplayGroup('form_actions'); ?>
+                <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-1" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>">
+                    <?php echo $this->form->getDisplayGroup('lang_settings'); ?>
+                    <?php echo $this->form->tab_name->setvalue('lang_settings'); ?>
+                    <?php echo $this->form->getDisplayGroup('form_actions'); ?>
                 </form>
             </div>
             <div id="tabs-2">
-                <form id="<?php echo $this->form_password->getName(); ?>" action="<?php echo $this->form_password->getAction(); ?>#tabs-2" method="<?php echo $this->form_password->getMethod(); ?>" class="<?php echo $this->form_password->getAttrib('class'); ?>">
-                    <?php echo $this->form_password->getDisplayGroup('change_password'); ?>
-                    <?php echo $this->form_password->tab_name->setvalue('change_password'); ?>
-                    <?php echo $this->form_password->getDisplayGroup('form_actions'); ?>
+                <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-2" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>">
+                    <?php echo $this->form->getDisplayGroup('change_password'); ?>
+                    <?php echo $this->form->tab_name->setvalue('change_password'); ?>
+                    <?php echo $this->form->getDisplayGroup('form_actions'); ?>
                 </form>
             </div>
         </div>

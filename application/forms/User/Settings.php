@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_User_Settings_NewPasswd extends Zend_Form {
+class Application_Form_User_Settings extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -14,13 +14,24 @@ class Application_Form_User_Settings_NewPasswd extends Zend_Form {
         $this->setAction('/user/settings');
         $this->setName('userSettingsNewPasswd');
         $this->setAttrib('class', 'fieldset_white_box');
+        
+        // lang
+        $this->addElement('select', 'lang', array(
+            'label' => $this->translate('Язык'),
+            'multiOptions' => array('Русский', 'English'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
 
         $this->addElement('password', 'oldpassword', array(
             'label' => $this->translate('Старый пароль'),
             'placeholder' => $this->translate('Старый пароль'),
             'title' => $this->translate('Введите старый пароль, чтобы подвердить свою личность.'),
             'class' => 'x_field tooltip_field',
-            'required' => true,
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
@@ -38,7 +49,6 @@ class Application_Form_User_Settings_NewPasswd extends Zend_Form {
             'placeholder' => $this->translate('Новый пароль'),
             'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
             'class' => 'x_field tooltip_field',
-            'required' => true,
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
@@ -57,10 +67,9 @@ class Application_Form_User_Settings_NewPasswd extends Zend_Form {
             'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
             'AllowEmpty' => false,
             'class' => 'x_field tooltip_field',
-            'required' => true,
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
-                new App_Validate_EqualInputs('password')
+                //new App_Validate_EqualInputs('password')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -99,6 +108,18 @@ class Application_Form_User_Settings_NewPasswd extends Zend_Form {
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'span', 'class' => 'reset form_actions_group'))
             )
+        ));
+        
+        // lang display group
+        $this->addDisplayGroup(array(
+            $this->getElement('lang')
+                ), 'lang_settings', array('legend' => $this->translate('Языковые настройки')));
+
+        $this->getDisplayGroup('lang_settings')->setDecorators(array(
+            'FormElements',
+            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
+            'Fieldset',
+            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'lang_settings display_group')),
         ));
 
         // Change password

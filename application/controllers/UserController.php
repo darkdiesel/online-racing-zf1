@@ -407,20 +407,41 @@ class UserController extends App_Controller_FirstBootController {
 
         $user = new Application_Model_DbTable_User();
 
+        $form->isValid($request->getPost());
+
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
+            if ($form->isValidPartial($request->getPost())) {
 
                 $user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
                 $date = date('Y-m-d H:i:s');
                 switch ($request->getParam('tab_name')) {
                     case 'avatar':
-                        $user_data = array(
-                            'avatar_type' => $form->getValue('avatar_type'),
-                            //'avatar_load' => $form->getValue('avatar_load'),
-                            'avatar_link' => $form->getValue('avatar_link'),
-                            'avatar_gravatar_email' => $form->getValue('avatar_gravatar_email'),
-                            'date_edit' => $date,
-                        );
+                        if ($form->getValue('avatar_load')) {
+                            if ($form->avatar_load->receive()) {
+                                $file = $form->avatar_load->getFileInfo();
+                                $ext = pathinfo($file['avatar_load']['name'], PATHINFO_EXTENSION);
+                                $newName = Date('Y-m-d_H-i-s') . strtolower('_avatar' . '.' . $ext);
+
+                                $filterRename = new Zend_Filter_File_Rename(array('target'
+                                            => $file['avatar_load']['destination'] . '/' . $newName, 'overwrite' => true));
+
+                                $filterRename->filter($file['avatar_load']['destination'] . '/' . $file['avatar_load']['name']);
+
+                                $user_data = array(
+                                    'avatar_load' => '/img/data/users/avatars/' . $newName,
+                                );
+
+                                $user_avatar_file = $user->getUserAvatarLoad(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                                if ($user_avatar_file) {
+                                    unlink(APPLICATION_PATH . '/../public_html' . $user_avatar_file);
+                                }
+                            }
+                        }
+
+                        $user_data['avatar_type'] = $form->getValue('avatar_type');
+                        $user_data['avatar_link'] = $form->getValue('avatar_link');
+                        $user_data['avatar_gravatar_email'] = $form->getValue('avatar_gravatar_email');
+                        $user_data['date_edit'] = $date;
 
                         $user->update($user_data, $user_where);
                         break;
@@ -473,7 +494,7 @@ class UserController extends App_Controller_FirstBootController {
             $form->birthday->setValue($user_data->birthday);
             $form->city->setValue($user_data->city);
             $form->avatar_type->setValue($user_data->avatar_type);
-            $form->avatar_load->setValue($user_data->avatar_load);
+            //$form->avatar_load->setValue($user_data->avatar_load);
             $form->avatar_link->setValue($user_data->avatar_link);
             $form->avatar_gravatar_email->setValue($user_data->avatar_gravatar_email);
             $form->skype->setValue($user_data->skype);
@@ -521,34 +542,42 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Настройки профиля'));
 
         $request = $this->getRequest();
-        $form_lang = new Application_Form_User_Settings_SiteLang();
-        $form_password = new Application_Form_User_Settings_NewPasswd();
+        $form = new Application_Form_User_Settings();
 
         $user = new Application_Model_DbTable_User();
 
         if ($this->getRequest()->isPost()) {
-            if ($form_lang->isValid($request->getPost())) {
+            if ($form->isValid($request->getPost())) {
                 switch ($request->getParam('tab_name')) {
                     case 'lang_settings ':
-
+                        $this->view->errMessage .= "Сожалеем, но данный функционал пока не доступен." . '<br />';
                         break;
-                    default :
-
-                        break;
-                }
-            } else {
-                $this->view->errMessage .= "Исправте следующие ошибки для смены языка!" . '<br />';
-            }
-            if ($form_password->isValid($request->getPost())) {
-                switch ($request->getParam('tab_name')) {
                     case 'change_password':
-                        if ($form_password->getValue('newpassword') == $form_password->getValue('confirmnewpassword') && ($form_password->getValue('newpassword') != '')) {
-                            $result = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id, $form_password->getValue('oldpassword'), $form_password->getValue('newpassword'));
+                        if ($form->getValue('newpassword') == $form->getValue('confirmnewpassword') && ($form->getValue('newpassword') != '')) {
+                            $user_data = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id, $form->getValue('oldpassword'), $form->getValue('newpassword'));
 
-                            if (!$result) {
-                                $this->view->errMessage .= "Старый пароль введен не верно!" . '<br />';
+                            if (!$user_data) {
+                                $this->view->errMessage .= "Старый пароль введен не верно! Повторите ввод." . '<br />';
                             } else {
-                                $this->view->errMessage .= "Пароль успешно изменен." . '<br />';
+                                $this->view->succMessage .= "Пароль успешно изменен." . '<br />';
+
+                                $user_data = $user->getUserData(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+
+                                // load e-mail script (template) for user
+                                $html = new Zend_View();
+                                $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                                // e-mail template values for user
+                                $html->assign('login', $user_data['login']);
+                                $html->assign('password', $form->getValue('newpassword'));
+                                $html->assign('user_id', Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                                // e-mail for user
+                                $mail = new Zend_Mail('UTF-8');
+                                $bodyText = $html->render('new_user_password_template.phtml');
+                                $mail->addTo($user_data['email'], $user_data['email']);
+                                $mail->setSubject('Online-Racing.net - Пароль учетной записи был изминен.');
+                                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                                $mail->setBodyHtml($bodyText);
+                                $mail->send();
                             }
                         } else {
                             $this->view->errMessage .= "Поля нового пароля должны содержать одинаковые значения и не должны быть пустыми!" . '<br />';
@@ -559,12 +588,11 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                 }
             } else {
-                $this->view->errMessage .= "Исправте следующие ошибки для востановления пароля!" . '<br />';
+                $this->view->errMessage .= "Исправте следующие ошибки для смены настроек!" . '<br />';
             }
         }
 
-        $this->view->form_lang = $form_lang;
-        $this->view->form_password = $form_password;
+        $this->view->form = $form;
     }
 
 }

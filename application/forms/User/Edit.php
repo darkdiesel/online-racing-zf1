@@ -13,6 +13,7 @@ class Application_Form_User_Edit extends Zend_Form {
         $this->setAction('/user/edit');
         $this->setName('userEdit');
         $this->setAttrib('class', 'fieldset_white_box');
+        $this->setEnctype('multipart/form-data');
 
         // user info
         $this->addElement('text', 'name', array(
@@ -51,7 +52,7 @@ class Application_Form_User_Edit extends Zend_Form {
             'class' => 'x_field',
             'validators' => array(
                 array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
-                array('StringLength', true, array('min' => 10, 'max' => 10)),
+                //array('StringLength', true, array('min' => 10, 'max' => 10)),
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors', 'description',
@@ -66,9 +67,8 @@ class Application_Form_User_Edit extends Zend_Form {
         $this->addElement('select', 'country', array(
             'label' => $this->translate('Страна'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
-            'required' => true,
             'registerInArrayValidator' => false,
-            'validators' => array('NotEmpty'),
+            //'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -96,7 +96,7 @@ class Application_Form_User_Edit extends Zend_Form {
             'label' => $this->translate('Выбрать аватар'),
             'multiOptions' => array(
                 0 => $this->translate('Без аватара'),
-                1 => $this->translate('Загруженный') . ' (' . $this->translate('Не реализованно!') . ')',
+                1 => $this->translate('Загруженный'),
                 2 => $this->translate('Ссылка с другого ресурса'),
                 3 => $this->translate('Gravatar'),
             ),
@@ -108,7 +108,25 @@ class Application_Form_User_Edit extends Zend_Form {
             )
         ));
 
-        // avatar_load
+        $this->addElement('file', 'avatar_load', array(
+            'label' => $this->translate('Выбрать на компьютере'),
+            //'required' => true,
+            'class' => 'white_box_el_size_m',
+            'destination' => APPLICATION_PATH . '/../public_html/img/data/users/avatars/',
+            'decorators' => array(
+                'File', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            ),
+            'validators' => array(
+                array('Size', false, array('max' => (150 * 10240))),
+                array('Extension', false, 'jpg,jpeg,png,gif'),
+                array('Count', false, 1)
+            )
+        ));
+        
+        /* // avatar_load
         $this->addElement('text', 'avatar_load', array(
             'label' => $this->translate('Загрузить аватар'),
             'placeholder' => $this->translate('Загрузить аватар'),
@@ -125,9 +143,9 @@ class Application_Form_User_Edit extends Zend_Form {
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
                 array('HtmlTag', array('class' => 'element_tag')),
             )
-        ));
+        ));*/
 
-        // avatar_load
+        // avatar_link
         $this->addElement('text', 'avatar_link', array(
             'label' => $this->translate('Ссылка из другого ресурса'),
             'placeholder' => $this->translate('Ссылка из другого ресурса'),

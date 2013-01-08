@@ -5,16 +5,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
     protected $_name = 'user';
     protected $_primary = 'id';
 
-    public function getUserData($user_id) {
+    public function getUserData($id) {
         $model = new self;
         $select = $model->select()
                 ->setIntegrityCheck(false)
-                ->from(array('u' => 'user'), 'u.id')
-                ->where('u.id = ? and u.enable = 1', $user_id)
+                ->from(array('u' => $this->_name), 'u.id')
+                ->where('u.id = ? and u.enable = 1', $id)
                 ->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                     'country_name' => 'c.name'))
-                ->columns(array('login', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
+                ->columns(array('login', 'email', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
             'icq', 'gtalk', 'www',));
 
         $user = $model->fetchRow($select);
@@ -26,11 +26,11 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getLogin($user_id) {
+    public function getLogin($id) {
         $model = new self;
         $select = $model->select()
                 ->from(array('u' => $this->_name), 'id')
-                ->where('u.id = ?', $user_id)
+                ->where('u.id = ?', $id)
                 ->columns(array('login'));
         $user = $model->fetchRow($select);
 
@@ -40,7 +40,23 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
+    
+    public function getEmail($id) {
+        $model = new self;
+        $select = $model->select()
+                ->from(array('u' => $this->_name), 'id')
+                ->where('u.id = ?', $id)
+                ->columns(array('email'));
+        
+        $user = $model->fetchRow($select);
 
+        if (count($user) != 0) {
+            return $user->email;
+        } else {
+            return FALSE;
+        }
+    }
+    
     public function getSimpleEnableUsersPager($count, $page, $page_range, $order) {
         $model = new self;
 
@@ -181,12 +197,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getUserAvatarLoad($user_id) {
+    public function getUserAvatarLoad($id) {
         $model = new self;
 
         $select = $model->select()
                 ->from('user', 'id')
-                ->where('id = ?', $user_id)
+                ->where('id = ?', $id)
                 ->columns(array('avatar_load'));
 
         $avatar = $model->fetchRow($select);
@@ -336,6 +352,12 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $user = $model->fetchRow($select);
         
         if (count($user) != 0){
+            $user_where = $model->getAdapter()->quoteInto('id = ?', $id);
+            $user_data = array(
+                'password' => sha1($newPassword)
+            );
+            
+            $model->update($user_data, $user_where);
             return TRUE;
         } else {
             return FALSE;

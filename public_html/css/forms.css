@@ -126,7 +126,7 @@ form.white_box{
         }
 /* forms with fieldset */        
 form.fieldset_white_box{
-
+    width:665px;
 }
     form.fieldset_white_box fieldset{
 
@@ -151,14 +151,15 @@ form.fieldset_white_box{
                 text-align:right;
                 width:40%;
                 padding-top:5px;
+                float:left;
+                margin-right:20px;
             }
                 form.fieldset_white_box fieldset label{
                     font-weight:bold;
                 }
             /* form elements */
             form.fieldset_white_box fieldset .fieldset_inner_form .element_box .element_tag{
-                float:right;
-                margin-right:140px;
+                
             }
             /* description for form elements */
             form.fieldset_white_box fieldset .fieldset_inner_form .element_box p.hint{
