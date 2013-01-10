@@ -60,6 +60,10 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('game/add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('game/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('game/delete'), 'admin_allow');
+        
+        $this->add(new Zend_Acl_Resource('event/add'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('event/edit'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('event/delete'), 'admin_allow');
 
         // master resources
         $this->add(new Zend_Acl_Resource('master_allow'));
@@ -97,6 +101,7 @@ class Acl extends Zend_Acl {
             return true;
 
         //Инициируем роль
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
             // get role name for current user
@@ -105,7 +110,8 @@ class Acl extends Zend_Acl {
         } else {
             $role = 'guest';
         }
-
+        
+//        /$role = 'guest';
         return $this->isAllowed($role, $resource, $privilege);
     }
 

@@ -295,7 +295,7 @@ class UserController extends App_Controller_FirstBootController {
                 $user_code_restore_pass = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
 
                 $user = new Application_Model_DbTable_User();
-                $user->set_restore_pass_code($form->getValue('email'), $user_code_restore_pass);
+                $user->setRestorePassCode($form->getValue('email'), $user_code_restore_pass);
 
                 // load e-mail script (template) for user
                 $html = new Zend_View();
@@ -345,7 +345,7 @@ class UserController extends App_Controller_FirstBootController {
                     'password' => sha1($form->getValue('password')),
                 );
 
-                $result = $user->restore_new_passwd($user_data['email'], $user_data['code_restore'], $user_data['password']);
+                $result = $user->restoreNewPasswd($user_data['email'], $user_data['code_restore'], $user_data['password']);
 
                 if ($result) {
                     // load e-mail script (template) for user

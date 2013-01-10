@@ -8,28 +8,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $config->setReadOnly();
         Zend_Registry::set('config', $config);
     }
-    
-    protected function _initNameSpace(){
+
+    protected function _initNameSpace() {
         Zend_Loader_Autoloader::getInstance()->registerNamespace('App');
     }
+
     /*
-    protected function _initDb() {
-        try {
-            $config = $this->getOptions();
-            $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
-            Zend_Db_Table::setDefaultAdapter($db);
-        } catch (Exception $e) {
-            exit($e->getMessage());
-        }
-        Zend_Registry::set('db', $db);
-        return $db;
-    }*/
+      protected function _initDb() {
+      try {
+      $config = $this->getOptions();
+      $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
+      Zend_Db_Table::setDefaultAdapter($db);
+      } catch (Exception $e) {
+      exit($e->getMessage());
+      }
+      Zend_Registry::set('db', $db);
+      return $db;
+      } */
 
     protected function _initDoctype() {
         $this->bootstrap('view');
         $view = $this->getResource('view');
         $view->doctype('XHTML1_STRICT');
         //$view->doctype('HTML5');
+    }
+
+    // Initialisation Authorisation
+    public function _initAuth() {
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
     }
 
     protected function _initView() {
@@ -103,7 +109,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         if ($view->ls_chat_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
         }
-        
+
         //add css
         $view->headLink()->appendStylesheet($view->baseUrl("css/forms.css"));
 
@@ -124,7 +130,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // Script for main menu
         $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.my.js"));
         //$view->headScript()->appendFile($view->baseUrl("js/snowfall.min.jquery.js"));
-
         // Script for count down block
         if ($view->ls_next_event_block) {
             $view->headScript()->appendFile($view->baseUrl("js/jquery.countdown.min.js"));
@@ -134,6 +139,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         // All Common scripts
         $view->headScript()->appendFile($view->baseUrl("js/my_js.js"));
+
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
 
         if ((Zend_Auth::getInstance()->hasIdentity()) && ($view->ls_chat_block)) {
             //chat script
@@ -147,11 +154,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $viewRenderer->setView($view);
 
         return $view;
-    }
-
-    // Initialisation Authorisation
-    public function _initAuth() {
-        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
     }
 
     public function _initAcl() {
@@ -230,7 +232,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'articleEdit', new Zend_Controller_Router_Route('article/id/:id',
                         array(
@@ -239,7 +241,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'id',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'articleDelete', new Zend_Controller_Router_Route('article/delete/:id',
                         array(
@@ -248,7 +250,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'delete',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'allArticles', new Zend_Controller_Router_Route('article/all/:page',
                         array(
@@ -257,7 +259,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'allAdminArticles', new Zend_Controller_Router_Route('admin/articles/:page',
                         array(
@@ -266,7 +268,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'articles',
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'allAdminUsers', new Zend_Controller_Router_Route('admin/users/:page',
                         array(
@@ -275,7 +277,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'users',
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'allAdminLeagues', new Zend_Controller_Router_Route('admin/leagues/:page',
                         array(
@@ -284,7 +286,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'leagues',
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'articleTypeId', new Zend_Controller_Router_Route('article-type/id/:id',
                         array(
@@ -293,7 +295,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'id',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'articleTypeEdit', new Zend_Controller_Router_Route('article-type/edit/:id',
                         array(
@@ -302,7 +304,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'articleTypeDelete', new Zend_Controller_Router_Route('article-type/delete/:id',
                         array(
@@ -311,7 +313,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'delete',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'contentTypeId', new Zend_Controller_Router_Route('content-type/id/:id',
                         array(
@@ -320,7 +322,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'id',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'contentTypeEdit', new Zend_Controller_Router_Route('content-type/edit/:id',
                         array(
@@ -329,7 +331,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'contentTypeDelete', new Zend_Controller_Router_Route('content-type/delete/:id',
                         array(
@@ -338,7 +340,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'delete',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'leagueId', new Zend_Controller_Router_Route('league/id/:id/:page',
                         array(
@@ -348,7 +350,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'id' => 0,
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'leagueEdit', new Zend_Controller_Router_Route('league/edit/:id',
                         array(
@@ -357,7 +359,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'allLeagues', new Zend_Controller_Router_Route('league/all/:page',
                         array(
@@ -366,7 +368,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'gameId', new Zend_Controller_Router_Route('game/id/:id',
                         array(
@@ -375,7 +377,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'id',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'gameEdit', new Zend_Controller_Router_Route('game/edit/:id',
                         array(
@@ -384,7 +386,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'gameDelete', new Zend_Controller_Router_Route('game/delete/:id',
                         array(
@@ -401,8 +403,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
-        
-         $router->addRoute(
+
+        $router->addRoute(
                 'teamId', new Zend_Controller_Router_Route('team/id/:id',
                         array(
                             'module' => 'default',
@@ -410,7 +412,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'id',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'teamEdit', new Zend_Controller_Router_Route('team/edit/:id',
                         array(
@@ -419,7 +421,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'teamDelete', new Zend_Controller_Router_Route('team/delete/:id',
                         array(
@@ -436,7 +438,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'all',
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'championshipId', new Zend_Controller_Router_Route('championship/id/:id',
                         array(
@@ -445,7 +447,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'id',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'championshipEdit', new Zend_Controller_Router_Route('championship/edit/:id',
                         array(
@@ -454,7 +456,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'action' => 'edit',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'championshipDelete', new Zend_Controller_Router_Route('championship/delete/:id',
                         array(
@@ -468,6 +470,41 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         array(
                             'module' => 'default',
                             'controller' => 'championship',
+                            'action' => 'all',
+                            'page' => 1)
+        ));
+
+        $router->addRoute(
+                'eventId', new Zend_Controller_Router_Route('event/id/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'event',
+                            'action' => 'id',
+                            'id' => 0)
+        ));
+
+        $router->addRoute(
+                'eventEdit', new Zend_Controller_Router_Route('event/edit/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'event',
+                            'action' => 'edit',
+                            'id' => 0)
+        ));
+
+        $router->addRoute(
+                'eventDelete', new Zend_Controller_Router_Route('event/delete/:id',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'event',
+                            'action' => 'delete',
+                            'id' => 0)
+        ));
+        $router->addRoute(
+                'eventAll', new Zend_Controller_Router_Route('event/all/:page',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'event',
                             'action' => 'all',
                             'page' => 1)
         ));

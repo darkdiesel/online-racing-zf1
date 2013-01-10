@@ -10,6 +10,10 @@ class AdminController extends App_Controller_FirstBootController {
     public function indexAction() {
         $this->view->headTitle($this->view->translate('Панель управления сайтом'));
     }
+    
+    public function adminAction(){
+        $this->view->headTitle($this->view->translate('Панель управления сайтом для администратора'));
+    }
 
     public function articlesAction() {
         $this->view->headTitle($this->view->translate('Контент'));

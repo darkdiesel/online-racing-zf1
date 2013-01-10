@@ -36,7 +36,7 @@ class Application_Form_ContentType_Edit extends Zend_Form {
             'placeholder' => $this->translate('Описание типа контента'),
             'cols' => 60,
             'rows' => 10,
-            'class' => 'element_box white_box_el_size_m',
+            'class' => 'white_box_el_size_m',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),

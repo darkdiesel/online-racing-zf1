@@ -130,6 +130,7 @@ body iframe{
             	#left_sidebar .sidebar_box{
                     margin:0px 0 5px 0;
                     border-radius: 5px 5px 0 0;
+                    
             	}
             	#left_sidebar .sidebar_box:after{
                     background:url("../img/shadow_sprite.png") no-repeat 0 -29px;
@@ -137,32 +138,36 @@ body iframe{
                     height:20px;
                     content:"";
             	}
-                        #left_sidebar .sidebar_box .sidebar_box_title{
-                            background:url("../img/vert_sprite.png") repeat-x #0D0C0C;
-                            border-radius:5px 5px 0 0;
-                            color:#DCDCDC;
-                            font-size:12px;
-                            font-weight:bold;
-                            padding:10px 6px;
-                            line-height:12px;
-                            box-shadow:0px 7px 8px 2px #5C5A5A inset;
-                            text-shadow:3px -2px 4px #000;
+                    #left_sidebar .sidebar_box .sidebar_box_title, #left_sidebar .sidebar_box .sidebar_box_title > a{
+                        color:#555555;
+                        font-family:Verdana;
+                        font-size:18px;
+                        text-shadow:0px 2px 5px #767676;
+                    }
+                    #left_sidebar .sidebar_box .sidebar_box_title{
+                        border:1px solid #CACACA;
+                        border-bottom:none;
+                        border-radius:10px 10px 0 0;
+                        padding:10px 10px 3px;
+                        background:none repeat scroll 0 0 #FBFBFB;
+                        box-shadow:0px 7px 8px 2px #DDDDDD inset;
+                    }
+                        #left_sidebar .sidebar_box .sidebar_box_title i{
+                            text-shadow:0px 2px 5px #767676;
                         }
-                            #left_sidebar .sidebar_box .sidebar_box_title a{
-                                color:#DCDCDC;
-                            }
-            		#left_sidebar .sidebar_box .sidebar_box_content{
-                            padding:5px 10px;
-                            border:2px solid #CACACA;
-                            border-top:none;
-                            background:none repeat scroll 0 0 #FBFBFB;
-                            border-radius:0 0 7px 7px;
-                            overflow:hidden;
-                            word-wrap: break-word;
-            		}
-                        #left_sidebar #user_earth_map .sidebar_box_content{
-                            padding:3px 3px;
+                        #left_sidebar .sidebar_box .sidebar_box_title:after{
+                            display:block;
+                            content:"";
+                            border:1px solid #EAE8E8;
+                            margin-top:5px;
                         }
+                    #left_sidebar .sidebar_box .sidebar_box_content{
+                        padding:3px 3px;
+                        border:1px solid #CACACA;
+                        border-top:none;
+                        background:none repeat scroll 0 0 #FBFBFB;
+                        box-shadow:0 -10px 12px #DDDDDD inset;
+                    }
 			#content{
                             word-wrap: break-word;
                             margin-left:255px;
@@ -177,10 +182,11 @@ body iframe{
 			}
                         #content .page_title{
                             font-family:gill;
-                            color:#484848;
+                            color:#5E5E5E;
                             font-size: 35px;
                             line-height:35px;
                             text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #141414;
+                            text-align:left;
                         }
                         #content .page_content{
                             background:none repeat scroll 0 0 #FFFFFF;
@@ -533,4 +539,10 @@ label.valid {
     height:24px;
     text-indent:-9999px;
     width:24px;
+}
+.breadcrumb{
+    background-color:#FFFFFF;
+    border:1px solid #CDCACA;
+    border-radius:0;
+    margin:5px 0px;
 }

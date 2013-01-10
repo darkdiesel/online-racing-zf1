@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Country_Add extends Zend_Form {
+class Application_Form_Event_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,9 +10,9 @@ class Application_Form_Country_Add extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/country/add');
-        $this->setName('teamAdd');
-        $this->setAttrib('class', 'white_box');
+        $this->setAction('/event/add');
+        $this->setName('eventAdd');
+        $this->setAttrib('class', 'white_box white_box_size_m');
 
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Название'),
@@ -24,7 +24,6 @@ class Application_Form_Country_Add extends Zend_Form {
             'width' => '400px',
             'validators' => array(
                 'NotEmpty',
-                new App_Validate_NoDbRecordExists('country', 'name')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -34,17 +33,36 @@ class Application_Form_Country_Add extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'abbreviation', array(
-            'label' => $this->translate('Аббревиатура'),
-            'placeholder' => $this->translate('Аббревиатура'),
-            'maxlength' => 5,
-            'filters' => array('StripTags', 'StringTrim'),
+        $this->addElement('text', 'date_event', array(
+            'label' => $this->translate('Дата события'),
+            'placeholder' => $this->translate('Дата события'),
+            'description' => $this->translate('Формат даты должен быть yyyy-mm-dd hh:mm:ss') . '. ' . $this->translate('Пример') . ': ' . date('Y-m-d H:i:s'),
+            'title' => $this->translate('Формат даты yyyy-mm-dd hh:mm:ss (yyyy - год, mm - месяц, dd - день, hh - часы (24), mm - минуты, ss - секунды)'),
             'required' => true,
+            'filters' => array('StripTags', 'StringTrim'),
+            'class' => 'x_field tooltip_field',
+            'validators' => array(
+                //array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
+                array('StringLength', true, array('min' => 19, 'max' => 19)),
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors', 'description',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        $this->addElement('text', 'url_event', array(
+            'label' => $this->translate('Ссылка на событие'),
+            'placeholder' => $this->translate('Ссылка на событие'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'required' => false,
             'class' => 'x_field',
             'width' => '400px',
             'validators' => array(
                 'NotEmpty',
-                new App_Validate_NoDbRecordExists('country', 'abbreviation')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -54,36 +72,20 @@ class Application_Form_Country_Add extends Zend_Form {
             )
         ));
 
-        $this->addElement('file', 'image_round', array(
-            'label' => $this->translate('Круговая картинка флага (32х24)'),
-            'required' => true,
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/flags/',
+        $this->addElement('textarea', 'description', array(
+            'label' => $this->translate('Описание события'),
+            'placeholder' => $this->translate('Описание события'),
+            'cols' => 60,
+            'rows' => 10,
+            'class' => 'white_box_el_size_m',
+            'maxlength' => 500,
+            'required' => false,
+            'filters' => array('StringTrim'),
+            'validators' => array('NotEmpty'),
             'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 102400),
-                array('Extension', false, 'jpg,png,gif'),
-                array('Count', false, 1)
-            )
-        ));
-
-        $this->addElement('file', 'image_glossy_wave', array(
-            'label' => $this->translate('Волнистая картинка флага (64х48)'),
-            'required' => true,
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/flags/',
-            'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 102400),
-                array('Extension', false, 'jpg,png,gif')
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'aboutTextArea_Label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
 

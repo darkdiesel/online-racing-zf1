@@ -1,4 +1,4 @@
-<div id="admin_toolbar">
+<!--<div id="admin_toolbar">
     <ul id="admin_menu">
         <li class="home"><a href="<?php echo $this->baseUrl(''); ?>">Home</a></li>
         <li class="expanded">
@@ -16,4 +16,55 @@
         </li>
         <li class="name"><a href="<?php echo $this->baseUrl('admin'); ?>">Online-Racing Admin</a></li>
     </ul>
+</div>-->
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner ">
+        <ul class="nav">
+            <li class="active"><a href="<?php echo $this->baseUrl(''); ?>">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Контент
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="<?php echo $this->baseUrl('article/add'); ?>">Добавить</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Панель администратора</li>
+                    <li>
+                        <a href="<?php echo $this->baseUrl('admin/articles'); ?>">Просмотреть</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Сайт</li>
+                    <li>
+                        <a href="<?php echo $this->baseUrl('article/all'); ?>">Просмотреть</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Пользователи
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="nav-header">Панель администратора</li>
+                    <li>
+                        <a href="<?php echo $this->baseUrl('admin/users'); ?>">Просмотреть</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="nav-header">Сайт</li>
+                    <li>
+                        <a href="<?php echo $this->baseUrl('user/all'); ?>">Просмотреть</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li class="divider-vertical"></li>
+            <li>
+                <a class="brand" href="<?php echo $this->baseUrl('admin'); ?>">Online-Racing Admin</a>
+            </li>
+        </ul>
+    </div>
 </div>

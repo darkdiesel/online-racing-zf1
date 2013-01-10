@@ -1,52 +1,52 @@
 /* jQuery Countdown styles 1.6.0. */
 .hasCountdown {
-	
+
 }
 .countdown_rtl {
-	direction: rtl;
+    direction: rtl;
 }
 .countdown_holding span {
-	color: #888;
+    color: #888;
 }
 .countdown_row {
-	clear: both;
-	width: 100%;
-	padding: 0px 2px;
-	text-align: center;
+    clear: both;
+    width: 100%;
+    padding: 0px 2px;
+    text-align: center;
 }
 .countdown_show1 .countdown_section {
-	width: 98%;
+    width: 98%;
 }
 .countdown_show2 .countdown_section {
-	width: 48%;
+    width: 48%;
 }
 .countdown_show3 .countdown_section {
-	width: 32.5%;
+    width: 32.5%;
 }
 .countdown_show4 .countdown_section {
-	width: 24.5%;
-        width:50px;
+    width: 24.5%;
+    width:50px;
 }
 .countdown_show5 .countdown_section {
-	width: 19.5%;
-        width:52px;
+    width: 19.5%;
+    width:52px;
 }
 .countdown_show6 .countdown_section {
-	width: 16.25%;
+    width: 16.25%;
 }
 .countdown_show7 .countdown_section {
-	width: 14%;
+    width: 14%;
 }
 .countdown_section {
-	display: inline-block;
-	font-size: 75%;
-	text-align: center;
-        margin:5px 5px;
-        box-shadow:0 0 7px #000;
-        border:2px solid #777;
-        border-radius:5px;
-        font-weight:bold;
-        background-color:#F4F4F4;
+    display: inline-block;
+    font-size: 75%;
+    text-align: center;
+    margin:5px 5px;
+    box-shadow:0 0 7px #000;
+    border:2px solid #777;
+    border-radius:5px;
+    font-weight:bold;
+    background-color:#F4F4F4;
 }
 .countdown_amount {
     font-size:200%;
@@ -61,11 +61,12 @@
     background-color:#fff;
 }
 .countdown_descr {
-	display: block;
-	width: 190px;
-        margin:10px auto 0;
-        color:#5e5e55;
-        border: 1px solid #ccc;
-	background-color: #F5F5F5;
-        border-radius:10px;
+    display: block;
+    width: 180px;
+    margin:10px auto 0;
+    color:#5e5e55;
+    border: 1px solid #ccc;
+    background-color: #F5F5F5;
+    border-radius:10px;
+    padding:5px 10px;
 }

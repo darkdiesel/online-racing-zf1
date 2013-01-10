@@ -24,7 +24,7 @@ class Application_Form_Championship_Add extends Zend_Form {
             'validators' => array(
                 'NotEmpty',
                 new App_Validate_NoDbRecordExists('championship', 'name')
-                ),
+            ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -32,7 +32,7 @@ class Application_Form_Championship_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('file', 'logo', array(
             'label' => $this->translate('Логотип соревнований'),
             'required' => true,
@@ -67,7 +67,7 @@ class Application_Form_Championship_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         // artcile type
         $this->addElement('select', 'rule', array(
             'label' => $this->translate('Регламент'),
@@ -83,7 +83,7 @@ class Application_Form_Championship_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         // artcile type
         $this->addElement('select', 'game', array(
             'label' => $this->translate('Игра для проведения'),
@@ -114,7 +114,6 @@ class Application_Form_Championship_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
 
         $this->addElement('text', 'date_start', array(
             'label' => $this->translate('Дата начала'),
@@ -153,7 +152,7 @@ class Application_Form_Championship_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('textarea', 'desription', array(
             'label' => $this->translate('Описание чемпионата'),
             'placeholder' => $this->translate('Описание чемпионата'),

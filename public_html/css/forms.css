@@ -33,7 +33,7 @@ form.white_box{
     }
 /* end width */    
     form.white_box .element_box{
-        margin:15px 0;
+        margin:10px 0;
     }
     /* size for white_box form */
     form.white_box .element_box .white_box_el_size_s{
@@ -85,7 +85,7 @@ form.white_box{
     form.white_box dl{
         border:1px solid #CACACA;
         background:none repeat scroll 0 0 #FBFBFB;
-        padding:20px;
+        padding:10px 20px;
         margin:0;
         border-radius:7px;
     }

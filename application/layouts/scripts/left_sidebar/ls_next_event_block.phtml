@@ -1,15 +1,29 @@
-<div class="sidebar_box">
-    <div class="sidebar_box_title">
-        <i class="icon-plane icon-white"></i> <?php echo $this->translate('Ближайшее событие') ?>
+<?php
+$event = new Application_Model_DbTable_Event();
+$event_data = $event->getNext();
+
+if ($event_data) {
+    ?>
+    <div class="sidebar_box">
+        <div class="sidebar_box_title">
+            <i class="icon-plane icon-black"></i> <?php echo $this->translate('Ближайшее событие') ?>
+        </div>
+        <div class="sidebar_box_content">
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    var newYear = new Date(); 
+                    newYear = new Date(
+                        <?php echo date_format(date_create($event_data->date_event), 'Y') ?>, 
+                        <?php echo date_format(date_create($event_data->date_event), 'm') ?> - 1,
+                        <?php echo date_format(date_create($event_data->date_event), 'd') ?>, 
+                        <?php echo date_format(date_create($event_data->date_event), 'H') ?>, 
+                        <?php echo date_format(date_create($event_data->date_event), 'i') ?>,
+                        <?php echo date_format(date_create($event_data->date_event), 's') ?>
+                    ); 
+            $('#countdown_dashboard').countdown({until: newYear, format: 'ODHMS', description: '<?php echo $event_data->name; ?>'});
+        });
+            </script>
+            <div id="countdown_dashboard"></div>
+        </div>
     </div>
-    <div class="sidebar_box_content">
-        <script type="text/javascript">
-            $(document).ready(function(){
-                var newYear = new Date(); 
-                newYear = new Date(2013, 01 - 1 ,06, 14, 30, 00); 
-                $('#countdown_dashboard').countdown({until: newYear, format: 'ODHMS', description: 'Гран-При Малайзии!'});
-            });
-        </script>
-        <div id="countdown_dashboard"></div>
-    </div>
-</div>
+<?php } ?>

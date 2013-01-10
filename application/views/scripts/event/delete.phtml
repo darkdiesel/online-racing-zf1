@@ -1,0 +1,47 @@
+<div id="event_delete_page" class="page">
+    <div class="page_title">
+        <?php
+        if (!$this->errMessage != "") {
+            echo $this->translate('Удалить событие') . ' ➛ ' . $this->escape($this->event->name);
+        } else {
+            echo $this->translate('Ошибка!');
+        }
+        ?>
+    </div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Предупреждение!'); ?></h4>
+                <?php echo $this->translate('Вы действительно хотите удалить событие ') . '"' . $this->escape($this->event->name) . '"?'; ?>
+            </div>
+            <?php echo $this->form; ?>
+            <div class="content_type_item">
+                <span><?php echo $this->translate('Название'); ?>:</span>
+                <div class="content_type_name"><?php echo $this->escape($this->event->name); ?></div>
+                <br>
+                <span><?php echo $this->translate('Описание'); ?>:</span>
+                <div class="content_type_descr"><?php echo $this->escape($this->event->description); ?></div>
+                <br>
+                <span><?php echo $this->translate('Дата события'); ?>:</span>
+                <div class="content_type_date_event"><?php echo $this->escape($this->event->date_event); ?></div>
+                <br>
+                <span><?php echo $this->translate('Ссылка на событие'); ?>:</span>
+                <div class="content_type_url_event"><?php echo $this->escape($this->event->url_event); ?></div>
+                <div class="content_type_info">
+                    <div class="content_type_date_create content_type_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->event->date_create); ?></div>
+                    <?php if ($this->escape($this->event->date_create) != $this->escape($this->event->date_edit)) { ?>
+                        <div class="content_type_date_edit content_type_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->event->date_edit); ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
