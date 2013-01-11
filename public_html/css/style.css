@@ -110,7 +110,7 @@ body iframe{
                         }
         #main_wrapper{
             position:relative;
-            background:#F0F0F0;
+            background:#E1E1E1;
         }
 		#main{
 			width:1024px;
@@ -141,16 +141,17 @@ body iframe{
                     #left_sidebar .sidebar_box .sidebar_box_title, #left_sidebar .sidebar_box .sidebar_box_title > a{
                         color:#555555;
                         font-family:Verdana;
-                        font-size:18px;
+                        font-size:14px;
                         text-shadow:0px 2px 5px #767676;
+                        font-weight:bold;
                     }
                     #left_sidebar .sidebar_box .sidebar_box_title{
                         border:1px solid #CACACA;
                         border-bottom:none;
                         border-radius:10px 10px 0 0;
                         padding:10px 10px 3px;
-                        background:none repeat scroll 0 0 #FBFBFB;
-                        box-shadow:0px 7px 8px 2px #DDDDDD inset;
+                        background:none repeat scroll 0 0 #fff;
+                        box-shadow:0px 7px 8px 2px #EAEAEA inset;
                     }
                         #left_sidebar .sidebar_box .sidebar_box_title i{
                             text-shadow:0px 2px 5px #767676;
@@ -165,8 +166,8 @@ body iframe{
                         padding:3px 3px;
                         border:1px solid #CACACA;
                         border-top:none;
-                        background:none repeat scroll 0 0 #FBFBFB;
-                        box-shadow:0 -10px 12px #DDDDDD inset;
+                        background:none repeat scroll 0 0 #fff;
+                        box-shadow:0 -10px 12px #EAEAEA inset;
                     }
 			#content{
                             word-wrap: break-word;
@@ -541,7 +542,7 @@ label.valid {
     width:24px;
 }
 .breadcrumb{
-    background-color:#FFFFFF;
+    background-color:#F5F5F5;
     border:1px solid #CDCACA;
     border-radius:0;
     margin:5px 0px;
