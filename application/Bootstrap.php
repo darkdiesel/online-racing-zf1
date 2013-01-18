@@ -102,7 +102,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         /* [JQUERY UI CSS] */
         $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.9.1.custom.min.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/main_menu.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
 
         /* [CHAT CSS] */
@@ -128,8 +127,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         }
 
         // Script for main menu
-        $view->headScript()->appendFile($view->baseUrl("js/jquery.lavalamp.my.js"));
-        //$view->headScript()->appendFile($view->baseUrl("js/snowfall.min.jquery.js"));
         // Script for count down block
         if ($view->ls_next_event_block) {
             $view->headScript()->appendFile($view->baseUrl("js/jquery.countdown.min.js"));

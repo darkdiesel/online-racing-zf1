@@ -23,8 +23,8 @@
                             <tr>
                                 <td class="article_id"><span><a href="<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>"><?php echo $this->escape($item['id']); ?></a></span></td>
                                 <td class="article_title"><span><a href="<?php echo $this->baseUrl('article/id/' . $this->escape($item['id'])) ?>"><?php echo $this->escape($item['title']); ?></a></span></td>
-                                <td class="article_author"><span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($item['user_id'])) ?>"><?php echo $item['login']; ?></a></span></td>
-                                <td class="article_type"><span><a href="<?php echo $this->baseUrl('articletype/id/' . $this->escape($item['article_type_id'])) ?>"><?php echo $this->escape($this->escape($item['name'])); ?></a></span></td>
+                                <td class="article_author"><span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($item['user_id'])) ?>"><?php echo $item['user_login']; ?></a></span></td>
+                                <td class="article_type"><span><a href="<?php echo $this->baseUrl('articletype/id/' . $this->escape($item['article_type_id'])) ?>"><?php echo $this->escape($this->escape($item['article_type_name'])); ?></a></span></td>
                                 <td class="article_date"><span><?php echo $this->escape($this->escape($item['date_edit'])); ?></span></td>
                                 <td class="article_action">
                                     <span>

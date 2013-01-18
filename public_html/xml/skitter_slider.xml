@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <skitter>
 	<slide>
-		<link>#</link>
-		<image type="cubeSize">../img/slider/post/debelopming.gif</image>
-		<label><![CDATA[<p>Идет активная разработка сайта. Нам нужна ваша помощь!</p>]]></label>
+		<link>/</link>
+		<image type="cubeSize">../img/data/slider_posts/post_2.jpg</image>
+		<label><![CDATA[<p>Добро пожаловать на Online-Racing.Net!</p>]]></label>
 	</slide>
 	<slide>
-		<link>/user/register</link>
-		<image type="cubeSize">../img/slider/post/oursite.jpg</image>
-		<label><![CDATA[<p>Хотите получить море адреналина? <a href="/user/register">Присоеденяйтесь!</a></p>]]></label>
+		<link>/</link>
+		<image type="cubeSize">../img/data/slider_posts/post_1.jpg</image>
+		<label><![CDATA[<p>На нашем портале вы гарантировано получите самые острые ощущение, море адреналина и захватывающей борьбы.</p>]]></label>
 	</slide>
-        <slide>
-		<link>/chat</link>
-		<image type="cubeSize">../img/slider/post/chat.jpg</image>
-		<label><![CDATA[<p>На сайт добавлен чат. <a href="/chat">Общайтесь!</a></p>]]></label>
+	<slide>
+		<link>/championship/id/1</link>
+		<image type="cubeSize">../img/data/slider_posts/post_8.jpg</image>
+		<label><![CDATA[<p>Winter Season 2012-2013. Первый турнир нашего портала. <a href="http://f1orl.forum2x2.ru/f13-forum">Регистрируйтесь</a></p>]]></label>
 	</slide>
-        <slide>
-		<link></link>
-		<image type="cubeSize">http://rewalls.com/pic/201012/800x600/reWalls.com-12161.jpg</image>
-		<label><![CDATA[<p>Уже совсем скоро! Старт зимнего турнира.</p>]]></label>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_6.jpg</image>
+		<label><![CDATA[<p>Хотите стать частью нашего портала? Присоеденяйтесь, мы всегда рады новым людям.</p>]]></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_3.jpg</image>
+		<label></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_4.jpg</image>
+		<label></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_5.jpg</image>
+		<label></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_7.jpg</image>
+		<label></label>
 	</slide>
 </skitter>

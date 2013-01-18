@@ -19,8 +19,9 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
         $this->addElement('text', 'email', array(
             'label' => 'E-mail',
             'placeholder' => 'E-mail',
+            'title' => $this->translate('Введи e-mail адрес, на который зарегестрирован ваш пользователь.'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -36,8 +37,9 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
         $this->addElement('text', 'confirmemail', array(
             'label' => $this->translate('Подтвердите E-mail'),
             'placeholder' => $this->translate('Подтвердите E-mail'),
+            'title' => $this->translate('Повторите e-mail.'),
             'AllowEmpty' => false,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 new App_Validate_EqualInputs('email')
@@ -50,7 +52,7 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
             )
         ));
 
-        /*$this->addElement(
+        $this->addElement(
                 new Zend_Form_Element_Captcha('captcha', array(
                     'ignore' => true, // игнорируем, чтобы не получать значение элемента при вызове
                     // метода getValues() нашей формы
@@ -70,7 +72,7 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
                         array('Captcha'),
                         array('Errors'),
                     )
-                )));*/
+                )));
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,

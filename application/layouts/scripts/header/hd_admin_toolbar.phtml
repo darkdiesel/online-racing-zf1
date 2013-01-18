@@ -1,61 +1,42 @@
-<!--<div id="admin_toolbar">
-    <ul id="admin_menu">
-        <li class="home"><a href="<?php echo $this->baseUrl(''); ?>">Home</a></li>
-        <li class="expanded">
-            <a href="<?php echo $this->baseUrl('admin/articles'); ?>">Контент</a>
-            <ul class="menu">
-                <li><a href="<?php echo $this->baseUrl('admin/articles'); ?>">Просмотр</a></li>
-                <li><a href="<?php echo $this->baseUrl('article/add'); ?>">Добавить</a></li>
-            </ul>
-        </li>
-        <li class="expanded">
-            <a href="<?php echo $this->baseUrl('admin/users'); ?>">Пользователи</a>
-            <ul class="menu">
-                <li><a href="<?php echo $this->baseUrl('admin/users'); ?>">Просмотр</a></li>
-            </ul>
-        </li>
-        <li class="name"><a href="<?php echo $this->baseUrl('admin'); ?>">Online-Racing Admin</a></li>
-    </ul>
-</div>-->
 <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner ">
         <ul class="nav">
             <li class="active"><a href="<?php echo $this->baseUrl(''); ?>"><?php echo $this->translate('Главная') ?></a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Контент
+                    <?php echo $this->translate('Контент') ?>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="<?php echo $this->baseUrl('article/add'); ?>">Добавить</a>
+                        <a href="<?php echo $this->baseUrl('article/add'); ?>"><?php echo $this->translate('Добавить') ?></a>
                     </li>
                     <li class="divider"></li>
-                    <li class="nav-header">Панель администратора</li>
+                    <li class="nav-header"><?php echo $this->translate('Панель администратора') ?></li>
                     <li>
-                        <a href="<?php echo $this->baseUrl('admin/articles'); ?>">Просмотреть</a>
+                        <a href="<?php echo $this->baseUrl('admin/articles'); ?>"><?php echo $this->translate('Просмотреть') ?></a>
                     </li>
                     <li class="divider"></li>
-                    <li class="nav-header">Сайт</li>
+                    <li class="nav-header"><?php echo $this->translate('Сайт') ?></li>
                     <li>
-                        <a href="<?php echo $this->baseUrl('article/all'); ?>">Просмотреть</a>
+                        <a href="<?php echo $this->baseUrl('article/all'); ?>"><?php echo $this->translate('Просмотреть') ?></a>
                     </li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    Пользователи
+                    <?php echo $this->translate('Пользователи') ?>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="nav-header">Панель администратора</li>
+                    <li class="nav-header"><?php echo $this->translate('Панель администратора') ?></li>
                     <li>
-                        <a href="<?php echo $this->baseUrl('admin/users'); ?>">Просмотреть</a>
+                        <a href="<?php echo $this->baseUrl('admin/users'); ?>"><?php echo $this->translate('Просмотреть') ?></a>
                     </li>
                     <li class="divider"></li>
-                    <li class="nav-header">Сайт</li>
+                    <li class="nav-header"><?php echo $this->translate('Сайт') ?></li>
                     <li>
-                        <a href="<?php echo $this->baseUrl('user/all'); ?>">Просмотреть</a>
+                        <a href="<?php echo $this->baseUrl('user/all'); ?>"><?php echo $this->translate('Просмотреть') ?></a>
                     </li>
                 </ul>
             </li>
@@ -63,7 +44,7 @@
         <ul class="nav pull-right">
             <li class="divider-vertical"></li>
             <li>
-                <a class="brand" href="<?php echo $this->baseUrl('admin'); ?>">Online-Racing Admin</a>
+                <a class="brand" href="<?php echo $this->baseUrl('admin'); ?>"><?php echo $this->translate('Администратор Online-Racing.Net') ?></a>
             </li>
         </ul>
     </div>

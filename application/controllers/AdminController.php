@@ -10,19 +10,24 @@ class AdminController extends App_Controller_FirstBootController {
     public function indexAction() {
         $this->view->headTitle($this->view->translate('Панель управления сайтом'));
     }
-    
-    public function adminAction(){
+
+    public function adminAction() {
         $this->view->headTitle($this->view->translate('Панель управления сайтом для администратора'));
     }
 
     public function articlesAction() {
-        $this->view->headTitle($this->view->translate('Контент'));
+        $this->view->headTitle($this->view->translate('Контент сайта'));
 
-        $request = $this->getRequest();
-        $mapper = new Application_Model_ArticleMapper();
-        $this->view->paginator = $mapper->getArticlesPager(10, $request->getParam('page'), 5, 1, 'admin_all', 'DESC');
+        // pager settings
+        $page_count_items = 10;
+        $page_range = 5;
+        $items_order = 'DESC';
+        $page = $this->getRequest()->getParam('page');
+
+        $article = new Application_Model_DbTable_Article();
+        $this->view->paginator = $article->getAllArticlesPager($page_count_items, $page, $page_range, $items_order);
     }
-    
+
     public function leaguesAction() {
         $this->view->headTitle($this->view->translate('Лиги'));
 
@@ -32,12 +37,15 @@ class AdminController extends App_Controller_FirstBootController {
     }
 
     public function usersAction() {
-        $this->view->headTitle($this->view->translate('Пользователи'));
+        $this->view->headTitle($this->view->translate('Гонщики'));
+        // pager settings
+        $page_count_items = 9;
+        $page = $this->getRequest()->getParam('page');
+        $page_range = 5;
+        $items_order = 'ASC';
 
-        $request = $this->getRequest();
-        $mapper = new Application_Model_UserMapper();
-
-        $this->view->paginator = $mapper->getUsersPager(10, $request->getParam('page'), 5, 'admin_all', 'DESC');
+        $user = new Application_Model_DbTable_User();
+        $this->view->paginator = $user->getAllUsersPager($page_count_items, $page, $page_range, $items_order);
     }
 
 }

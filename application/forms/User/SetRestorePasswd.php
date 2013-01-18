@@ -19,8 +19,9 @@ class Application_Form_User_SetRestorePasswd extends Zend_Form {
         $this->addElement('text', 'email', array(
             'label' => 'E-mail',
             'placeholder' => 'E-mail',
+            'title' => $this->translate('Введи e-mail адрес, на который зарегестрирован ваш пользователь.'),
             'required' => true,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -37,9 +38,10 @@ class Application_Form_User_SetRestorePasswd extends Zend_Form {
         $this->addElement('text', 'code_restore', array(
             'label' => $this->translate('Код восстановления'),
             'placeholder' => $this->translate('Код восстановления'),
+            'title' => $this->translate('Введи код восстановления высланный вам для подтверждения на e-mail.'),
             'required' => true,
             'AllowEmpty' => false,
-            'class' => 'x_field',
+            'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array('alnum',
             //array('regex', false, '/^[a-z]/i')

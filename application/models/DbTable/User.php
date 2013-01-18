@@ -40,14 +40,14 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
-    
+
     public function getEmail($id) {
         $model = new self;
         $select = $model->select()
                 ->from(array('u' => $this->_name), 'id')
                 ->where('u.id = ?', $id)
                 ->columns(array('email'));
-        
+
         $user = $model->fetchRow($select);
 
         if (count($user) != 0) {
@@ -56,7 +56,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
-    
+
     public function getSimpleEnableUsersPager($count, $page, $page_range, $order) {
         $model = new self;
 
@@ -86,9 +86,15 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($model
                                 ->select()
-                                ->from(array('u' => 'user'), 'id')
-                                ->columns(array('gravatar', 'login'))
-                                ->order('u.id ' . $order)
+                                ->setIntegrityCheck(false)
+                                ->from(array('u' => 'user'), 'u.id')
+                                ->where('u.user_role_id != 1 and u.enable = 1')
+                                ->join(array('c' => 'country'), 'u.country_id = c.id', array(
+                                    'country_url_image_round' => 'c.url_image_round',
+                                    'country_name' => 'c.name')
+                                )
+                                ->columns('*')
+                                ->order('id ' . $order)
         );
 
         $paginator = new Zend_Paginator($adapter);
@@ -274,7 +280,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $user = $model->fetchRow($select);
 
         if (count($user) != 0) {
-            if ($user->enable == '1'){
+            if ($user->enable == '1') {
                 return $user->user_role;
             } else {
                 return 'DISABLE';
@@ -340,23 +346,23 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
-    
-    public function setNewUserPassword($id, $oldPassword, $newPassword){
+
+    public function setNewUserPassword($id, $oldPassword, $newPassword) {
         $model = new self;
-        
+
         $select = $model
                 ->select()
                 ->from($this->_name, 'id')
                 ->where('id = ?', $id)
                 ->where('password = ?', sha1($oldPassword));
         $user = $model->fetchRow($select);
-        
-        if (count($user) != 0){
+
+        if (count($user) != 0) {
             $user_where = $model->getAdapter()->quoteInto('id = ?', $id);
             $user_data = array(
                 'password' => sha1($newPassword)
             );
-            
+
             $model->update($user_data, $user_where);
             return TRUE;
         } else {

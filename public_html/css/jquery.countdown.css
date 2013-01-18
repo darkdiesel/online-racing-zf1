@@ -38,35 +38,36 @@
     width: 14%;
 }
 .countdown_section {
-    display: inline-block;
-    font-size: 75%;
-    text-align: center;
-    margin:5px 5px;
-    box-shadow:0 0 7px #000;
-    border:2px solid #777;
-    border-radius:5px;
-    font-weight:bold;
     background-color:#F4F4F4;
+    border:3px solid #C1C1C1;
+    border-radius:5px 5px 5px 5px;
+    box-shadow:4px 4px 4px #636363;
+    display:inline-block;
+    font-size:75%;
+    font-weight:bold;
+    margin:5px;
+    padding:1px;
+    text-align:center;
 }
 .countdown_amount {
-    font-size:200%;
-    font:bold 13pt Verdana;
+    background-color:#FFFFFF;
+    border:2px solid #808080;
+    border-radius:5px 5px 5px 5px;
     display:inline-block;
-    border:1px solid #5e5e55;
-    border-radius:5px;
-    width:40px;
+    font:bold 13pt verdana;
+    margin:4px 3px 2px 3px;
     padding:0;
-    margin:2px auto;
     text-align:center;
-    background-color:#fff;
+    width:40px;
 }
 .countdown_descr {
-    display: block;
-    width: 180px;
+    display:block;
+    width:180px;
     margin:10px auto 0;
     color:#5e5e55;
-    border: 1px solid #ccc;
+    border:2px solid #ccc;
     background-color: #F5F5F5;
     border-radius:10px;
     padding:5px 10px;
+    box-shadow:4px 4px 4px #636363;
 }

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    jQuery(function($){
+    /*jQuery(function($){
         // lavalamp main menu plugin
         $(function() {
             $("#header #box_main_menu #main_menu").lavaLamp({
@@ -7,7 +7,7 @@ $(document).ready(function(){
                 speed: 600
             });
         });
-    });
+    });*/
 
     // Clear button for .x_field field
     jQuery(function($) {
