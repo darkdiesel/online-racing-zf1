@@ -1,8 +1,8 @@
-<div id="article_edit_page" class="page article_form">
+<div id="article_edit_page" class="page">
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
-            echo $this->translate('Редактировать') . ' ➛ ' . $this->escape($this->form->title->getvalue());
+            echo $this->translate('Редактировать статью') . ' :: ' . $this->escape($this->form->title->getvalue());
         } else {
             echo $this->translate('Ошибка!');
         }

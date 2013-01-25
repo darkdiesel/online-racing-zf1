@@ -97,7 +97,7 @@ class Application_Form_Article_Add extends Zend_Form {
             'cols' => 60,
             'rows' => 10,
             'class' => 'white_box_el_size_xxl',
-            'maxlength' => 10000,
+            'maxlength' => 50000,
             'required' => true,
             'filters' => array('StringTrim'),
             'validators' => array('NotEmpty'),

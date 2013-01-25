@@ -18,7 +18,8 @@ class UserController extends App_Controller_FirstBootController {
         if ($user_data) {
             $this->view->user = $user_data;
 
-            $this->view->headTitle($this->view->translate('Пилот') . ' → ' . $user_data->login);
+            $this->view->headTitle($this->view->translate('Пилот'));
+            $this->view->headTitle($user_data->login);
 
             //Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
             //$this->view->avatar = $this->_helper->getHelper('GetUserAvatar')->get_image($user_data->id, 1);

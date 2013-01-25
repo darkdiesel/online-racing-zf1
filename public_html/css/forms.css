@@ -71,6 +71,7 @@ form.white_box{
     form.white_box label{
         font-weight:bold;
         color:#5E5E5E;
+        font-size:12px;
     }
     form.white_box label.required:after{
         content:" *";
@@ -113,7 +114,7 @@ form.white_box{
         }
         
     form.white_box .form_actions{
-        margin:10px 0;
+        margin:20px 0 10px 0;
         text-align:center;
     }
     form.white_box .form_actions_group{
@@ -156,6 +157,7 @@ form.fieldset_white_box{
             }
                 form.fieldset_white_box fieldset label{
                     font-weight:bold;
+                    font-size:12px;
                 }
             /* form elements */
             form.fieldset_white_box fieldset .fieldset_inner_form .element_box .element_tag{
@@ -183,3 +185,9 @@ form.fieldset_white_box{
                 form.fieldset_white_box .form_actions fieldset .fieldset_inner_form .form_actions_group{
                     margin:0 15px;
                 }
+
+/*forms elements*/
+select, input[type="file"] {
+    height:auto;
+    line-height:auto;
+}

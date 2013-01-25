@@ -5,6 +5,7 @@ class EventController extends App_Controller_FirstBootController {
     public function init() {
         parent::init();
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/admin.css"));
+        $this->view->headTitle($this->view->translate('Событие'));
     }
 
     // action for view content type
@@ -17,23 +18,23 @@ class EventController extends App_Controller_FirstBootController {
 
         if ($event_data) {
             $this->view->event = $event_data;
-            $this->view->headTitle($this->view->translate('Событие'));
             $this->view->headTitle($event_data->name);
             return;
         } else {
             $this->view->errMessage = $this->view->translate('Событие не найдено!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Событие не найдено!'));
         }
     }
 
     // action for view all content types
     public function allAction() {
-        $this->view->headTitle($this->view->translate('События'));
+        $this->view->headTitle($this->view->translate('Просмотреть все'));
 
         // pager settings
         $page_count_items = 10;
         $page_range = 5;
-        $items_order = 'ASC';
+        $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
 
         $content_type = new Application_Model_DbTable_Event();
@@ -43,7 +44,7 @@ class EventController extends App_Controller_FirstBootController {
 
     // action for add new content type
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Добавления события'));
+        $this->view->headTitle($this->view->translate('Добавить'));
 
         // css and js for date time picker script
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.css"));
@@ -80,6 +81,8 @@ class EventController extends App_Controller_FirstBootController {
 
     // action for edit content type
     public function editAction() {
+        $this->view->headTitle($this->view->translate('Редактировать'));
+
         $request = $this->getRequest();
         $event_id = $request->getParam('id');
 
@@ -113,7 +116,7 @@ class EventController extends App_Controller_FirstBootController {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения события!');
                 }
             }
-            $this->view->headTitle($this->view->translate('Редактирование события'));
+
             $this->view->headTitle($event_data->name);
 
             $form->name->setvalue($event_data->name);
@@ -124,13 +127,14 @@ class EventController extends App_Controller_FirstBootController {
             $this->view->form = $form;
         } else {
             $this->view->errMessage = $this->view->translate('Событие не найдено!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Событие не найдено!'));
         }
     }
 
     // action for delete content type
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удаление события'));
+        $this->view->headTitle($this->view->translate('Удалить'));
 
         $request = $this->getRequest();
         $event_id = (int) $request->getParam('id');

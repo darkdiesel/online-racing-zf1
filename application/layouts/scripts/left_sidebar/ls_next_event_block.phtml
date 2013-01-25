@@ -6,7 +6,7 @@ if ($event_data) {
     ?>
     <div class="sidebar_box">
         <div class="sidebar_box_title">
-            <i class="icon-plane icon-black"></i> <?php echo $this->translate('Ближайшее событие') ?>
+            <i class="icon-plane icon-white"></i> <a href="<?php echo $this->baseUrl('event/id/'.$event_data->id); ?>"><?php echo $this->translate('Ближайшее событие') ?></a>
         </div>
         <div class="sidebar_box_content">
             <script type="text/javascript">
@@ -20,7 +20,7 @@ if ($event_data) {
                         <?php echo date_format(date_create($event_data->date_event), 'i') ?>,
                         <?php echo date_format(date_create($event_data->date_event), 's') ?>
                     ); 
-            $('#countdown_dashboard').countdown({until: newYear, format: 'ODHMS', description: '<?php echo $event_data->name; ?>'});
+            $('#countdown_dashboard').countdown({until: newYear, format: 'ODHMS', timezone: +2, description: '<?php echo $event_data->name; ?>'});
         });
             </script>
             <div id="countdown_dashboard"></div>

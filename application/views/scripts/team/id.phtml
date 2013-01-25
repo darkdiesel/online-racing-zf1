@@ -2,7 +2,7 @@
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
-            echo $this->escape($this->team->name);
+            echo $this->translate('Команда') . ' :: ' . $this->escape($this->team->name);
         } else {
             echo $this->translate('Ошибка!');
         }
@@ -19,22 +19,38 @@
         <?php } else {
             ?>
             <div class="team_item">
-                <span><?php echo $this->translate('Название');?>:</span>
-                <div class="team_name"><?php echo $this->escape($this->team->name); ?></div>
-                <br>
-                <span><?php echo $this->translate('Описание');?>:</span>
-                <div class="team_descr"><?php echo $this->escape($this->team->description); ?></div>
-                <div class="team_controls">
-                    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-                        <a href = "<?php echo $this->baseUrl('team/edit/' . $this->escape($this->team->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
-                        <a href = "<?php echo $this->baseUrl('team/delete/' . $this->escape($this->team->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
-                    <?php } ?>
-                </div>
-                <div class="team_info">
-                    <div class="team_name team_info_item"><?php echo $this->translate('Тип статьи'); ?></div>
-                    <div class="team_date_create team_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->team->date_create); ?></div>
+                <table class="table table-striped table-bordered article_table">
+                    <tbody>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->team->name); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->team->description); ?></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php
+                $edit_access = $this->checkUserAccess('team/edit');
+                $delete_access = $this->checkUserAccess('team/delete');
+
+                if ($edit_access || $delete_access) {
+                    ?>
+                    <div class="article_controls">
+                        <?php if ($edit_access) { ?>
+                            <a href = "<?php echo $this->baseUrl('team/edit/' . $this->escape($this->team->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                        <?php } ?>
+                        <?php if ($delete_access) { ?>
+                            <a href = "<?php echo $this->baseUrl('team/delete/' . $this->escape($this->team->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <div class="article_info">
+                    <div class="team_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Команда'); ?></div>
+                    <div class="team_date_create article_info_item"><span class="bold_text""><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->team->date_create); ?></div>
                     <?php if ($this->escape($this->team->date_create) != $this->escape($this->team->date_edit)) { ?>
-                        <div class="team_date_edit team_info_item"><span><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->team->date_edit); ?></div>
+                        <div class="team_date_edit article_info_item"><span class="bold_text""><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->team->date_edit); ?></div>
                     <?php } ?>
                 </div>
             </div>

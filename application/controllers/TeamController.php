@@ -4,7 +4,7 @@ class TeamController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/admin.css"));
+        $this->view->headTitle($this->view->translate('Команда'));
     }
 
     // action for view article type
@@ -17,18 +17,19 @@ class TeamController extends App_Controller_FirstBootController {
 
         if (count($team_data) != 0) {
             $this->view->team = $team_data;
-            $this->view->headTitle($this->view->translate('Команда'));
+
             $this->view->headTitle($team_data->name);
             return;
         } else {
             $this->view->errMessage = $this->view->translate('Команда не существует');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Команда не существует'));
         }
     }
 
     // action for view all article types
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Команды'));
+        $this->view->headTitle($this->view->translate('Просмотреть все'));
 
         // pager settings
         $page_count_items = 10;
@@ -43,7 +44,7 @@ class TeamController extends App_Controller_FirstBootController {
 
     // action for add new article type
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Добавить тип статьи'));
+        $this->view->headTitle($this->view->translate('Добавить'));
 
         $request = $this->getRequest();
         // form
@@ -74,6 +75,8 @@ class TeamController extends App_Controller_FirstBootController {
 
     // action for edit article type
     public function editAction() {
+        $this->view->headTitle($this->view->translate('Редактировать'));
+
         $request = $this->getRequest();
         $team_id = $request->getParam('id');
 
@@ -101,7 +104,7 @@ class TeamController extends App_Controller_FirstBootController {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для редактирования команды!');
                 }
             }
-            $this->view->headTitle($this->view->translate('Редактировать'));
+
             $this->view->headTitle($team_data->name);
 
             $form->name->setvalue($team_data->name);
@@ -110,13 +113,14 @@ class TeamController extends App_Controller_FirstBootController {
             $this->view->form = $form;
         } else {
             $this->view->errMessage = $this->view->translate('Команда не существует');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Команда не существует'));
         }
     }
 
     // action for delete article type
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удалить команду'));
+        $this->view->headTitle($this->view->translate('Удалить'));
 
         $request = $this->getRequest();
         $team_id = (int) $request->getParam('id');
@@ -127,7 +131,7 @@ class TeamController extends App_Controller_FirstBootController {
         if (count($team_data) != 0) {
             $this->view->headTitle($team_data->name);
 
-            $form = new Application_Form_ArticleTypeDeleteForm();
+            $form = new Application_Form_Team_Delete();
             $form->setAction('/team/delete/' . $team_id);
             $form->cancel->setAttrib('onClick', 'location.href="/team/id/' . $team_id . '"');
 

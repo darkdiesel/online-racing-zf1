@@ -7,7 +7,10 @@ RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
+
 RewriteRule ^.*$ index.php [NC,L]
+DirectoryIndex index.php
+
 #DirectoryIndex index.html
 #RewriteRule ^.*$ index.html [NC,L]
 
@@ -16,3 +19,4 @@ RewriteRule ^.*$ index.php [NC,L]
 #AuthUserFile /home/onlinera/domains/online-racing.net/.htpasswd/.protected.list
 #AuthGroupFile /dev/null
 #require valid-user
+#AddHandler application/x-httpd-php54 .php .inc .phtml # phpvs v5

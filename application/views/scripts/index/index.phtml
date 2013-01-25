@@ -47,6 +47,16 @@
             $('.box_skitter_large').css({width: 731, height: 300}).skitter(options);
         });
     </script>
+    <div class="hero-unit img-polaroid">
+        <h1><?php echo $this->translate('Добро пожаловать');?></h1>
+        <p>Добро пожаловать в увлекательный мир онлайновый авто-гонок. Наш портал <strong>Online-Racing.Net</strong> поможет окунаться вам в него с головой. Вступайте в наши ряды.</p>
+        <p>
+            <a class="btn btn-primary btn-large" href="<?php echo $this->baseUrl('user/register')?>">
+                <?php echo $this->translate('Присоедениться');?>
+            </a>
+        </p>
+    </div>
+
     <div class="page_title"><?php echo $this->translate('Последния добавления') ?>:</div>
     <div class="div_hr"></div>
     <?php if (count($this->last_articles) != 0) { ?>
@@ -61,9 +71,9 @@
                 ?>
                 <h6><a href="#"><?php echo $this->truncate($article->title)->toLength(100); ?></a></h6>
                 <div>
-                    <p class="article_text">
+                    <p class="article_block_text">
                         <?php if (!$article->image == "") { ?>
-                            <img class ="article_image" src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_image'>
+                            <img src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_block_image'>
                         <?php } ?>
 
                         <?php
@@ -74,7 +84,7 @@
                         }
                         ?>
                     </p>
-                    <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_more"><?php echo $this->translate("Подробнее...") ?></a>
+                    <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
                 </div>
             <?php } ?>
         </div>

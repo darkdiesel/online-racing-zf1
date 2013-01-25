@@ -1,0 +1,57 @@
+<div id="country_delete_page" class="page">
+    <div class="page_title">
+        <?php
+        if (!$this->errMessage != "") {
+            echo $this->translate('Удалить страну') . ' :: ' . $this->escape($this->country->name);
+        } else {
+            echo $this->translate('Ошибка!');
+        }
+        ?>
+    </div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } else { ?>
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Предупреждение!'); ?></h4>
+                <?php echo $this->translate('Вы действительно хотите удалить страну ') . '"' . $this->escape($this->country->name) . '"?'; ?>
+            </div>
+            <?php echo $this->form; ?>
+            <div class="country_item">
+                <table class="table table-striped table-bordered article_table">
+                    <tbody>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->country->name); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Аббревиатура'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->country->abbreviation); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Круговая картинка'); ?></span></td>
+                            <td><span><img src="<?php echo $this->escape($this->country->url_image_round); ?>"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Волнистая картинка'); ?></span></td>
+                            <td><span><img src="<?php echo $this->escape($this->country->url_image_glossy_wave); ?>"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="article_info">
+                    <div class="country_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Страна'); ?></div>
+                    <div class="country_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->country->date_create); ?></div>
+                    <?php if ($this->escape($this->country->date_create) != $this->escape($this->country->date_edit)) { ?>
+                        <div class="country_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->country->date_edit); ?></div>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>

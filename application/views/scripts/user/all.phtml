@@ -6,12 +6,22 @@
         if (count($this->paginator)) {
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
 
+            $date1 = new Zend_Date();
             foreach ($this->paginator as $user):
                 ?>
                 <div class="user_item">
+                    <?php
+                    $date2 = new Zend_Date($user['date_last_activity']);
+                    if (($date1->toValue() - $date2->toValue()) <= 420) {
+                        ?>
+                        <img src="/img/user_online.png" class="user_light_status img-polaroid">
+                    <?php } else { ?>
+                        <img src="/img/user_ofline.png" class="user_light_status img-polaroid">
+                    <?php } ?>
                     <div class="user_image">
                         <?php echo $this->setupUserAvatar($user['id'], $user['avatar_type']); ?>
                     </div>
+
                     <div class="user_flag"><img src="<?php echo $user['country_url_image_round']; ?>" title="<?php echo $user['country_name']; ?>"></div>
                     <div class="user_login"><a href="<?php echo $this->baseUrl('user/id/') . $user['id'] ?>"><?php echo $user['login']; ?></a></div>
                 </div>

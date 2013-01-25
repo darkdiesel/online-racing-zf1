@@ -167,7 +167,7 @@ body iframe{
             	#left_sidebar .sidebar_box{
                     margin:0px 0 40px 0;
                     border-radius:5px 5px 0 0;
-                    box-shadow:8px 13px 13px #989696;
+                    box-shadow:8px 13px 13px #686868;
             	}
             	#left_sidebar .sidebar_box:after1{
                     background:url("../img/shadow_sprite.png") no-repeat 0 -29px;
@@ -176,32 +176,25 @@ body iframe{
                     content:"";
             	}
                     #left_sidebar .sidebar_box .sidebar_box_title, #left_sidebar .sidebar_box .sidebar_box_title > a{
-                        color:#555555;
+                        color:#CDCDCD;
                         font-family:Verdana;
                         font-size:14px;
                         text-shadow:0px 2px 5px #767676;
                         font-weight:bold;
                     }
                     #left_sidebar .sidebar_box .sidebar_box_title{
-                        border:4px solid #CACACA;
+                        border:2px solid #444444 ;
                         border-bottom:none;
                         border-radius:10px 10px 0 0;
-                        padding:10px 10px 3px;
-                        background:none repeat scroll 0 0 #fff;
-                        box-shadow:0px 7px 8px 2px #EAEAEA inset;
+                        padding:10px 10px 10px;
+                        background:#444444;
+                        background-image:linear-gradient(to bottom, #444444, #111111);
                     }
                         #left_sidebar .sidebar_box .sidebar_box_title i{
-                            text-shadow:0px 2px 5px #767676;
-                        }
-                        #left_sidebar .sidebar_box .sidebar_box_title:after{
-                            display:block;
-                            content:"";
-                            border:2px solid #EAE8E8;
-                            margin-top:5px;
                         }
                     #left_sidebar .sidebar_box .sidebar_box_content{
                         padding:3px 3px;
-                        border:4px solid #CACACA;
+                        border:4px solid #444444;
                         border-top:none;
                         background:none repeat scroll 0 0 #fff;
                         box-shadow:0 -10px 12px #EAEAEA inset;
@@ -488,30 +481,27 @@ div.shareblock{
 #articles_block{
     
 }
-    #articles_block .article_image{
+    #articles_block .article_block_image{
         float:left;
         margin-right:10px;
     }
-    #articles_block .article_text{
+    #articles_block .article_block_text{
 
     }
-        #articles_block .article_text img{
+        #articles_block .article_block_text img{
             border:1px solid #D2D2D2;
             border-radius:2px;
             padding:4px;
             background:#ffffff;
             box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
+            width:150px;
         }
-        #articles_block .article_more_box{
-            overflow:auto;
-            margin-top:10px;
-        }
-        #articles_block .article_more{
+        #articles_block .article_block_more{
             color:#fff;
             
             float:right;
         }
-            #articles_block .article_more:hover{
+            #articles_block .article_block_more:hover{
                 text-decoration:none;
             }
 /* RSS Block */
@@ -584,4 +574,11 @@ label.valid {
     border:1px solid #CDCACA;
     border-radius:0;
     margin:5px 0px;
+}
+.user_light_status{
+    height:20px;
+    float:right;
+    position:absolute;
+    right:7px;
+    top:163px;
 }

@@ -2,12 +2,6 @@
 
 class ArticleController extends App_Controller_FirstBootController {
 
-    public function init() {
-        parent::init();
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/articles.css"));
-        $this->article_model = new Application_Model_DbTable_Article();
-    }
-
     // action for view article
     public function idAction() {
         $request = $this->getRequest();
@@ -43,11 +37,11 @@ class ArticleController extends App_Controller_FirstBootController {
     public function addAction() {
         // page title
         $this->view->headTitle($this->view->translate('Добавление контента'));
-        $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
-        
+        $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
+
         //add css
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/forms.css"));
-        
+
         $request = $this->getRequest();
         // form
         $form = new Application_Form_Article_Add();
@@ -128,7 +122,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
     // action for edit article
     public function editAction() {
-        $this->view->headScript()->appendFile($this->view->baseUrl("includes/ckeditor/ckeditor.js"));
+        $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
         $article_id = (int) $request->getParam('id');
@@ -146,7 +140,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
                     if ($article_data->article_type_id == $form->getValue('article_type')) {
                         // if article type not changed do this code
-                        $article_data = array(
+                        $new_article_data = array(
                             'article_type_id' => $form->getValue('article_type'),
                             'content_type_id' => $form->getValue('content_type'),
                             'annotation' => $form->getValue('annotation'),
@@ -158,7 +152,7 @@ class ArticleController extends App_Controller_FirstBootController {
                             'date_edit' => date('Y-m-d H:i:s'),
                         );
                         $article_where = $article->getAdapter()->quoteInto('id = ?', $article_id);
-                        $article->update($article_data, $article_where);
+                        $article->update($new_article_data, $article_where);
 
                         $article_type = new Application_Model_DbTable_ArticleType();
                         $article_type_name = $article_type->getName($form->getValue('article_type'));
@@ -213,7 +207,7 @@ class ArticleController extends App_Controller_FirstBootController {
             }
 
             //head titles
-            $this->view->headTitle($this->view->translate('Редактировать'));
+            $this->view->headTitle($this->view->translate('Редактировать статью'));
             $this->view->headTitle($article_data->title);
 
             $form->title->setvalue($article_data->title);
@@ -228,6 +222,7 @@ class ArticleController extends App_Controller_FirstBootController {
             $this->view->form = $form;
         } else {
             $this->view->errMessage .= $this->view->translate('Статья не найдена!') . '<br/>';
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
     }

@@ -5,51 +5,68 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
     protected $_name = 'country';
     protected $_primary = 'id';
 
-    public function getName($country_id) {
+    public function getCountryData($id) {
         $model = new self;
         $select = $model->select()
-                ->from(array('c' => $this->_name), 'c.id')
-                ->where('с_t.id = ?', $country_id)
-                ->columns(array('c.name'));
-        $country = $model->fetchRow($select);
+                ->from($this->_name, 'id')
+                ->where('id = ?', $id)
+                ->columns('*');
 
-        if (count($country) != 0) {
-            return $country->name;
+        $country_data = $model->fetchRow($select);
+
+        if (count($country_data) != 0) {
+            return $country_data;
         } else {
             return FALSE;
         }
     }
 
-    public function getId($country_name) {
+    public function checkExistCountryName($country_name) {
         $model = new self;
         $select = $model->select()
-                ->from(array('с' => $this->_name), 'c.name')
-                ->where('с.name = ?', $country_name)
-                ->columns(array('c.id'));
-        $country = $model->fetchRow($select);
+                ->from($this->_name, 'id')
+                ->where('name = ?', $country_name)
+                ->columns('id');
 
-        if (count($country) != 0) {
-            return $country->id;
+        $country_data = $model->fetchRow($select);
+
+        if (count($country_data) != 0) {
+            return $country_data->id;
         } else {
             return FALSE;
         }
     }
 
-    public function getCountryPager($count, $page, $page_range, $order) {
+    public function checkExistCountryAbbreviation($country_abbreviation) {
         $model = new self;
+        $select = $model->select()
+                ->from($this->_name, 'id')
+                ->where('abbreviation = ?', $country_abbreviation)
+                ->columns('id');
 
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
-                                ->select()
-                                ->from($this->_name, 'id')
-                                ->columns(array('id', 'name', 'description', 'date_create', 'date_edit'))
-                                ->order('id ' . $order));
+        $country_data = $model->fetchRow($select);
 
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setItemCountPerPage($count);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setPageRange($page_range);
+        if (count($country_data) != 0) {
+            return $country_data->id;
+        } else {
+            return FALSE;
+        }
+    }
 
-        return $paginator;
+    public function getCountryName($id) {
+        $model = new self;
+        $select = $model->select()
+                ->from($this->_name, 'id')
+                ->where('id = ?', $id)
+                ->columns(array('name'));
+
+        $country_data = $model->fetchRow($select);
+
+        if (count($country_data) != 0) {
+            return $country_data->name;
+        } else {
+            return FALSE;
+        }
     }
 
     public function getCountriesName($order) {
@@ -67,6 +84,39 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
         } else {
             return FALSE;
         }
+    }
+
+    public function getCountryId($country_name) {
+        $model = new self;
+        $select = $model->select()
+                ->from($this->_name, 'name')
+                ->where('name = ?', $country_name)
+                ->columns(array('id'));
+
+        $country_data = $model->fetchRow($select);
+
+        if (count($country_data) != 0) {
+            return $country_data->id;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public function getCountriesPager($count, $page, $page_range, $order) {
+        $model = new self;
+
+        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
+                                ->select()
+                                ->from($this->_name, 'id')
+                                ->columns('*')
+                                ->order('id ' . $order));
+
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setItemCountPerPage($count);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange($page_range);
+
+        return $paginator;
     }
 
 }

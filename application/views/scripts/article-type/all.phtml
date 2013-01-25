@@ -6,34 +6,32 @@
         if (count($this->paginator)) {
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
             ?>
-            <div class="article_types_data img-polaroid">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
+            <table class="table table-bordered table-hover table-striped articles_table">
+                <thead>
+                    <tr>
+                        <th class="article_type_id"><span>#</span></th>
+                        <th class="article_type_name"><span><?php echo $this->translate('Название'); ?></span></th>
+                        <th class="article_type_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+                        <th class="article_type_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->paginator as $article_type): ?>
                         <tr>
-                            <td class="article_type_id"><span>#</span></td>
-                            <td class="article_type_name"><span><?php echo $this->translate('Название'); ?></span></td>
-                            <td class="article_type_descr"><span><?php echo $this->translate('Описание'); ?></span></td>
-                            <td class="article_type_action"><span><?php echo $this->translate('Действие'); ?></span></td>
+                            <td class="article_type_id"><span><a href="<?php echo $this->baseURL('article-type/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['id']) ?></a></span></td>
+                            <td class="article_type_name"><span><a href="<?php echo $this->baseURL('article-type/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['name']) ?></a></span></td>
+                            <td class="article_type_descr"><span><?php echo $this->truncate($this->escape($article_type['description']))->toLength(200); ?></span></td>
+                            <td class="article_type_action articles_table_action">
+                                <span>
+                                    <a href="<?php echo $this->baseUrl('article-type/id/' . $this->escape($article_type['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+                                    <a href="<?php echo $this->baseUrl('article-type/edit/' . $this->escape($article_type['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+                                    <a href="<?php echo $this->baseUrl('article-type/delete/' . $this->escape($article_type['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+                                </span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($this->paginator as $article_type): ?>
-                            <tr>
-                                <td class="article_type_id"><span><a href="<?php echo $this->baseURL('article-type/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['id']) ?></a></span></td>
-                                <td class="article_type_name"><span><a href="<?php echo $this->baseURL('article-type/id/' . $this->escape($article_type['id'])) ?>"><?php echo $this->escape($article_type['name']) ?></a></span></td>
-                                <td class="article_type_descr"><span><?php echo $this->truncate($this->escape($article_type['description']))->toLength(200); ?></span></td>
-                                <td class="article_type_action">
-                                    <span>
-                                        <a href="<?php echo $this->baseUrl('article-type/id/' . $this->escape($article_type['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-                                        <a href="<?php echo $this->baseUrl('article-type/edit/' . $this->escape($article_type['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-                                        <a href="<?php echo $this->baseUrl('article-type/delete/' . $this->escape($article_type['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
-                                    </span>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
             <?php
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
             ?>

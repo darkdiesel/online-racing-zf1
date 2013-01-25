@@ -21,7 +21,7 @@
                 <?php
                 if ($this->league->logo != '') {
                     ?>
-                    <img class="img-polaroid league_logo article_logo" src="<?php echo $this->escape($this->league->logo); ?>">
+                    <img class="img-polaroid league_logo article_center_image" src="<?php echo $this->escape($this->league->logo); ?>">
                 <?php } ?>
                 <div class="article_text league_descr">
                     <?php
@@ -30,21 +30,24 @@
                     ?>
                 </div>
                 <?php
-                if (Zend_Auth::getInstance()->hasIdentity()) {
-                    $user = new Application_Model_DbTable_User();
-                    $user_role_name = $user->getUserRoleName(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                $add_access = $this->checkUserAccess('championship/add');
+                $edit_access = $this->checkUserAccess('league/edit');
+                $delete_access = $this->checkUserAccess('league/delete');
 
-                    if ($user_role_name == 'master') {
-                        ?>
-                        <div class="article_controls">
+                if ($add_access || $edit_access || $delete_access) {
+                    ?>
+                    <div class="article_controls">
+                        <?php if ($add_access) { ?>
                             <a href = "<?php echo $this->baseUrl('championship/add') ?>" class = "btn btn-small btn-inverse league_edit article_edit"><?php echo $this->translate('Добавить чемпионат') ?></a>
+                        <?php } ?>
+                        <?php if ($edit_access) { ?>
                             <a href = "<?php echo $this->baseUrl('league/edit/' . $this->escape($this->league->id)) ?>" class = "btn btn-small btn-inverse league_edit article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                        <?php } ?>
+                        <?php if ($delete_access) { ?>
                             <a href = "<?php echo $this->baseUrl('league/delete/' . $this->escape($this->league->id)) ?>" class = "btn btn-small btn-inverse league_edit article_edit"><?php echo $this->translate('Удалить') ?></a>
-                        </div>
-                        <?php
-                    }
-                }
-                ?>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
                 <div class="league_info article_info">
                     <div class="league_admin league_info_item article_info_item">
                         <span class="bold_text"><?php echo $this->translate('Администратор лиги') ?>: </span>

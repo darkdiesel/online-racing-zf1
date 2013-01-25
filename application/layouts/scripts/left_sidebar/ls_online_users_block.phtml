@@ -1,0 +1,14 @@
+<!-- end user_map block -->
+<div class="sidebar_box" id="user_earth_map">
+    <div class="sidebar_box_title">
+         <i class="icon-user icon-white"></i> <?php echo $this->translate("Онлайн пользователи")?>
+    </div>
+    <div class="sidebar_box_content">
+        Cейчас на сайте: 
+        <?php 
+            $user = new Application_Model_DbTable_User();
+            echo $user->getCountOnlineUsers();
+        ?>
+    </div>
+</div>
+<!-- start user_map block -->

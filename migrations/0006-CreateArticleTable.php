@@ -11,7 +11,7 @@ class CreateArticleTable extends Akrabat_Db_Schema_AbstractChange {
                   `content_type_id` int(11) NOT NULL,
                   `title` varchar(255) NOT NULL,
                   `annotation` varchar(255) NOT NULL,
-                  `text` varchar(10000) NOT NULL,
+                  `text` varchar(50000) NOT NULL,
                   `image` varchar(255) NOT NULL,
                   `date_create` datetime NOT NULL,
                   `date_edit` datetime NOT NULL,

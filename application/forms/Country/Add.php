@@ -11,14 +11,14 @@ class Application_Form_Country_Add extends Zend_Form {
     public function init() {
         $this->setMethod('post');
         $this->setAction('/country/add');
-        $this->setName('teamAdd');
+        $this->setName('countryAdd');
         $this->setAttrib('class', 'white_box');
 
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim'),
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
             'required' => true,
             'class' => 'x_field',
             'width' => '400px',
@@ -38,7 +38,7 @@ class Application_Form_Country_Add extends Zend_Form {
             'label' => $this->translate('Аббревиатура'),
             'placeholder' => $this->translate('Аббревиатура'),
             'maxlength' => 5,
-            'filters' => array('StripTags', 'StringTrim'),
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_AllToUpper()),
             'required' => true,
             'class' => 'x_field',
             'width' => '400px',

@@ -110,9 +110,26 @@ class Acl extends Zend_Acl {
         } else {
             $role = 'guest';
         }
-        
-//        /$role = 'guest';
         return $this->isAllowed($role, $resource, $privilege);
+    }
+    
+    public function checkUserAccess($resource){
+        if (!$this->has($resource))
+            return true;
+        
+        $privilege = 'show';
+        
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
+            // get role name for current user
+            $user = new Application_Model_DbTable_User();
+            $role = $user->getUserRoleName($storage_data->id);
+        } else {
+            $role = 'guest';
+        }
+        return $this->isAllowed($role, $resource, $privilege);
+        
     }
 
 }

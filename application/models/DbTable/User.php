@@ -69,7 +69,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                                     'country_url_image_round' => 'c.url_image_round',
                                     'country_name' => 'c.name')
                                 )
-                                ->columns(array('id', 'avatar_type', 'login'))
+                                ->columns(array('id', 'avatar_type', 'login', 'date_last_activity'))
                                 ->order('id ' . $order)
         );
 
@@ -368,6 +368,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         } else {
             return FALSE;
         }
+    }
+
+    public function getCountOnlineUsers() {
+        $model = new self;
+
+        $date = new Zend_Date();
+        $date->sub(7, Zend_Date::MINUTE);
+        $date = $date->toString('yyyy-MM-dd HH:mm:ss');
+
+        return $model->fetchAll(array('date_last_activity >= ?' => $date))->count();
     }
 
 }

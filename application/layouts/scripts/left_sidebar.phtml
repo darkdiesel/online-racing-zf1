@@ -1,15 +1,25 @@
-<?php if ($this->ls_next_event_block) {
+<?php
+if ($this->ls_next_event_block) {
     echo $this->partial("left_sidebar/ls_next_event_block.phtml");
-}?>
-<?php if ($this->ls_search_block) {
-    echo $this->partial("left_sidebar/ls_search_block.phtml");
-}?>
-<?php if ($this->ls_chat_block) {
+}
+?>
+<?php
+if ($this->ls_chat_block) {
     echo $this->partial("left_sidebar/ls_chat_block.phtml");
-}?>
-<?php if ($this->ls_user_map_block) {
+}
+?>
+<?php
+if ($this->ls_user_map_block) {
     echo $this->partial("left_sidebar/ls_user_map_block.phtml");
-}?>
-<?php if ($this->ls_online_radio_block) {
+}
+?>
+<?php
+if ($this->ls_online_radio_block) {
     echo $this->partial("left_sidebar/ls_online_radio_block.phtml");
-}?>
+}
+?>
+
+<?php
+echo $this->partial("left_sidebar/ls_online_users_block.phtml");
+?>
+

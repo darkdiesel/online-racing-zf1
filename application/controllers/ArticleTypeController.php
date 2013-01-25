@@ -4,7 +4,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/admin.css"));
+        $this->view->headTitle($this->view->translate('Тип статьи'));
     }
 
     // action for view article type
@@ -17,18 +17,18 @@ class ArticleTypeController extends App_Controller_FirstBootController {
 
         if (count($article_type_data) != 0) {
             $this->view->article_type = $article_type_data;
-            $this->view->headTitle($this->view->translate('Тип статьи'));
             $this->view->headTitle($article_type_data->name);
             return;
         } else {
             $this->view->errMessage = $this->view->translate('Тип статьи не найден!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
         }
     }
 
     // action for view all article types
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Типы статей'));
+        $this->view->headTitle($this->view->translate('Просмотреть все'));
 
         // pager settings
         $page_count_items = 10;
@@ -43,7 +43,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
 
     // action for add new article type
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Добавление типа статьи'));
+        $this->view->headTitle($this->view->translate('Добавить'));
 
         $request = $this->getRequest();
         // form
@@ -74,6 +74,8 @@ class ArticleTypeController extends App_Controller_FirstBootController {
 
     // action for edit article type
     public function editAction() {
+        $this->view->headTitle($this->view->translate('Редактировать'));
+
         $request = $this->getRequest();
         $article_type_id = $request->getParam('id');
 
@@ -101,7 +103,7 @@ class ArticleTypeController extends App_Controller_FirstBootController {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа статьи!');
                 }
             }
-            $this->view->headTitle($this->view->translate('Редактирование'));
+
             $this->view->headTitle($article_type_data->name);
 
             $form->name->setvalue($article_type_data->name);
@@ -110,13 +112,14 @@ class ArticleTypeController extends App_Controller_FirstBootController {
             $this->view->form = $form;
         } else {
             $this->view->errMessage = $this->view->translate('Тип статьи не найден!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
         }
     }
 
     // action for delete article type
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удаление типа статьи'));
+        $this->view->headTitle($this->view->translate('Удалить'));
 
         $request = $this->getRequest();
         $article_type_id = (int) $request->getParam('id');

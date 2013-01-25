@@ -2,7 +2,7 @@
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
-            echo $this->translate('Удалить тип статьи') . ' ➛ ' . $this->escape($this->article_type->name);
+            echo $this->translate('Удалить тип статьи') . ' :: ' . $this->escape($this->article_type->name);
         } else {
             echo $this->translate('Ошибка!');
         }
@@ -24,16 +24,23 @@
             </div>
             <?php echo $this->form; ?>
             <div class="article_type_item">
-                <span><?php echo $this->translate('Название'); ?>:</span>
-                <div class="article_type_name"><?php echo $this->escape($this->article_type->name); ?></div>
-                <br>
-                <span><?php echo $this->translate('Описание'); ?>:</span>
-                <div class="article_type_descr"><?php echo $this->escape($this->article_type->description); ?></div>
-                <div class="article_type_info">
-                    <div class="article_type_name article_type_info_item"><?php echo $this->translate('Тип статьи'); ?></div>
-                    <div class="article_type_date_create article_type_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article_type->date_create); ?></div>
+                <table class="table table-striped table-bordered article_table">
+                    <tbody>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->article_type->name); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->article_type->description); ?></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="article_info">
+                    <div class="article_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Тип статьи'); ?></div>
+                    <div class="article_type_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article_type->date_create); ?></div>
                     <?php if ($this->escape($this->article_type->date_create) != $this->escape($this->article_type->date_edit)) { ?>
-                        <div class="article_type_date_edit article_type_info_item"><span><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->article_type->date_edit); ?></div>
+                        <div class="article_type_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->article_type->date_edit); ?></div>
                     <?php } ?>
                 </div>
             </div>

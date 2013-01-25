@@ -17,6 +17,20 @@
                 <?php echo $this->errMessage; ?>
             </div>
         <?php } else { ?>
+            <?php
+            $date1 = new Zend_Date();
+            $date2 = new Zend_Date($this->user->date_last_activity);
+
+            if (($date1->toValue() - $date2->toValue()) <= 420) {
+                ?>
+                <div class="alert alert-success">
+                    <strong><?php echo $this->translate("Online") ?></strong>
+                </div>
+            <?php } else { ?>
+                <div class="alert alert-warningr">
+                    <strong><?php echo $this->translate("Ofline") ?></strong>
+                </div>
+            <?php } ?>
             <div class="user_info_ava">
                 <div class="user_info_avatar">
                     <?php echo $this->avatar; ?>
@@ -73,8 +87,18 @@
                                 <td class="header_column"><?php echo $this->translate('Времени на сайте') ?>:</td>
                                 <td>
                                     <?php
-                                    $d = new DateTime();
-                                    echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
+                                    $dateCreate = new Zend_Date($this->user->date_create);
+                                    $dateNow = new Zend_Date(Date('d.m.Y'));
+
+                                    if ($dateNow->compare($dateCreate) > 0)
+                                        $diff = $dateNow->toValue() - $dateCreate->toValue();
+                                    elseif ($dateNow->compare($date) < 0)
+                                        $diff = $dateCreate->toValue() - $dateNow->toValue();
+                                    else
+                                        $diff = 0;
+
+                                    //$d = new DateTime();
+                                    //echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
                                     ?>
                                 </td>
                             </tr>
@@ -82,7 +106,8 @@
                                 <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
                                 <td>
                                     <?php
-                                    echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
+                                    echo round($diff / 60 / 60 / 24);
+                                    //echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
                                     ?>
                                 </td>
                             </tr>

@@ -4,7 +4,7 @@ class LeagueController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/league.css"));
+        //$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/league.css"));
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/articles.css"));
     }
 

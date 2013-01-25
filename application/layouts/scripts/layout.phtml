@@ -35,6 +35,11 @@
                         <div id="left_sidebar">
                             <?php echo $this->render("left_sidebar.phtml") ?>
                         </div>
+                        <script>
+                            $(function() {
+                                $( "#left_sidebar" ).sortable();
+                            });
+                        </script>
                     </div>
                 </div>
                 <div id="footer">

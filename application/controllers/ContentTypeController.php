@@ -4,7 +4,7 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/admin.css"));
+        $this->view->headTitle($this->view->translate('Тип контента'));
     }
 
     // action for view content type
@@ -17,18 +17,18 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
         if (count($content_type_data) != 0) {
             $this->view->content_type = $content_type_data;
-            $this->view->headTitle($this->view->translate('Тип контента'));
             $this->view->headTitle($content_type_data->name);
             return;
         } else {
             $this->view->errMessage = $this->view->translate('Тип контента не найден!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Тип контента не найден!'));
         }
     }
 
     // action for view all content types
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Типы контента'));
+        $this->view->headTitle($this->view->translate('Просмотреть все'));
 
         // pager settings
         $page_count_items = 10;
@@ -37,13 +37,12 @@ class ContentTypeController extends App_Controller_FirstBootController {
         $page = $this->getRequest()->getParam('page');
 
         $content_type = new Application_Model_DbTable_ContentType();
-
         $this->view->paginator = $content_type->getContentTypePager($page_count_items, $page, $page_range, $items_order);
     }
 
     // action for add new content type
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Добавить тип контента'));
+        $this->view->headTitle($this->view->translate('Добавить'));
 
         $request = $this->getRequest();
         // form
@@ -74,6 +73,8 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
     // action for edit content type
     public function editAction() {
+        $this->view->headTitle($this->view->translate('Редактировать'));
+
         $request = $this->getRequest();
         $content_type_id = $request->getParam('id');
 
@@ -101,7 +102,6 @@ class ContentTypeController extends App_Controller_FirstBootController {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения типа контента!');
                 }
             }
-            $this->view->headTitle($this->view->translate('Редактирование'));
             $this->view->headTitle($content_type_data->name);
 
             $form->name->setvalue($content_type_data->name);
@@ -110,13 +110,14 @@ class ContentTypeController extends App_Controller_FirstBootController {
             $this->view->form = $form;
         } else {
             $this->view->errMessage = $this->view->translate('Тип контента не найден!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Тип контента не найден!'));
         }
     }
 
     // action for delete content type
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удаление типа контента'));
+        $this->view->headTitle($this->view->translate('Удалить'));
 
         $request = $this->getRequest();
         $content_type_id = (int) $request->getParam('id');

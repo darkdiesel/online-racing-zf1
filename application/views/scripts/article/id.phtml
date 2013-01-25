@@ -26,18 +26,22 @@
                     <img class="img-polaroid article_center_image" src="<?php echo $this->escape($this->article->image); ?>">
                 <?php } ?>
                 <div class="article_text"><?php echo $bbcode->render($this->escape($this->article->text)); ?></div>
-                <div class="article_controls">
-                    <?php
-                    if (Zend_Auth::getInstance()->hasIdentity()) {
-                        if (Zend_Auth::getInstance()->getStorage('online-racing')->read()->id == $this->escape($this->article->user_id)) {
-                            ?>
-                            <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
-                            <a href = "<?php echo $this->baseUrl('article/delete/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
-                            <?php
-                        }
-                    }
+
+                <?php
+                $edit_access = $this->checkUserAccess('article/edit');
+                $delete_access = $this->checkUserAccess('article/delete');
+
+                if ($edit_access || $delete_access) {
                     ?>
-                </div>
+                    <div class="article_controls">
+                        <?php if ($edit_access) { ?>
+                            <a href = "<?php echo $this->baseUrl('article/edit/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                        <?php } ?>
+                        <?php if ($delete_access) { ?>
+                            <a href = "<?php echo $this->baseUrl('article/delete/' . $this->escape($this->article->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
                 <div class="article_info">
                     <div class="article_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Тип статьи') ?>: </span><?php echo $this->escape($this->article->article_type_name); ?></div>
                     <div class="article_author article_info_item"><span class="bold_text"><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($this->article->user_id)) ?>"><?php echo $this->escape($this->article->user_login); ?></a></div>
