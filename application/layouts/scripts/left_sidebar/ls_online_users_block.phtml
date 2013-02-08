@@ -1,14 +1,20 @@
 <!-- end user_map block -->
 <div class="sidebar_box" id="user_earth_map">
     <div class="sidebar_box_title">
-         <i class="icon-user icon-white"></i> <?php echo $this->translate("Онлайн пользователи")?>
+        <i class="icon-user icon-white"></i> <?php echo $this->translate("Гонщики в паддоке") ?>
     </div>
     <div class="sidebar_box_content">
-        Cейчас на сайте: 
-        <?php 
-            $user = new Application_Model_DbTable_User();
-            echo $user->getCountOnlineUsers();
-        ?>
+        <i><?php echo $this->translate('Cейчас в паддоке'); ?>:</i>
+        <span>
+            <strong>
+                <?php
+                $user = new Application_Model_DbTable_User();
+                echo $user->getCountOnlineUsers();
+                ?>
+            </strong>
+            <?php echo $this->translate('гонщик(-а, -ов)'); ?>
+        </span>
+
     </div>
 </div>
 <!-- start user_map block -->

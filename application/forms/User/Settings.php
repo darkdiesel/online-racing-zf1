@@ -30,7 +30,7 @@ class Application_Form_User_Settings extends Zend_Form {
         $this->addElement('password', 'oldpassword', array(
             'label' => $this->translate('Старый пароль'),
             'placeholder' => $this->translate('Старый пароль'),
-            'title' => $this->translate('Введите старый пароль, чтобы подвердить свою личность.'),
+            'title' => $this->translate('Введите старый пароль, чтобы подтвердить свою личность.'),
             'class' => 'x_field tooltip_field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(

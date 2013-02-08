@@ -32,5 +32,12 @@ class IndexController extends App_Controller_FirstBootController {
         
         $this->view->last_articles = $artiles_data;
     }
+    
+    public function sitemapAction()
+    {
+        $this->view->layout()->disableLayout();
+        $this->_helper->viewRender->setNoRender(true);
+        echo $this->view->navigation()->sitemap();
+    }
 
 }

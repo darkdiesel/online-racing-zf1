@@ -23,21 +23,26 @@
 	<slide>
 		<link>#</link>
 		<image type="cubeSize">../img/data/slider_posts/post_3.jpg</image>
-		<label></label>
+		<label><![CDATA[<p>Вас ждем увлекательный чемпионат в Formula-1 в этом году!</p>]]></label>
 	</slide>
 	<slide>
 		<link>#</link>
 		<image type="cubeSize">../img/data/slider_posts/post_4.jpg</image>
-		<label></label>
-	</slide>
-	<slide>
-		<link>#</link>
-		<image type="cubeSize">../img/data/slider_posts/post_5.jpg</image>
-		<label></label>
+		<label><![CDATA[<p>Подать заявку на участие в новом сезоне может любой. <a href="http://f1orl.forum2x2.ru/t218-topic">Регистрация</a></p>]]></label>
 	</slide>
 	<slide>
 		<link>#</link>
 		<image type="cubeSize">../img/data/slider_posts/post_7.jpg</image>
-		<label></label>
+		<label><![CDATA[<p>В новом сезоне F1 ORL 2013 гонки будут проходить с изменчивой погодой!</p>]]></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_5.jpg</image>
+		<label><![CDATA[<p>В новом сезоне будут транслироваться гонки нашего чемпионата!</p>]]></label>
+	</slide>
+	<slide>
+		<link>#</link>
+		<image type="cubeSize">../img/data/slider_posts/post_9.jpg</image>
+		<label><![CDATA[<p>Включитесь в борьбу за чемпионский титул вместе с нами!</p>]]></label>
 	</slide>
 </skitter>

@@ -3,6 +3,27 @@
 class App_Controller_FirstBootController extends Zend_Controller_Action {
 
     public function init() {
+        // configure main menu
+        $uri = $this->_request->getPathInfo();
+        $activeNav = $this->view->navigation($this->view->menu)->findByUri($uri);
+        if ($activeNav != NULL) {
+            $activeNav->active = true;
+        }
+
+        // configure breadcrumb
+        if (($this->_request->getControllerName() . '/' . $this->_request->getActionName()) == "index/index") {
+            Zend_Registry::set('breadcrumb', array('show' => FALSE));
+        } else {
+            Zend_Registry::set('breadcrumb', array('show' => TRUE));
+
+            $activeNav = $this->view->navigation($this->view->breadcrumb)->findByUri($uri);
+            if ($activeNav != NULL) {
+                $activeNav->active = true;
+            }
+        }
+
+
+
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $user = new Application_Model_DbTable_User();
 

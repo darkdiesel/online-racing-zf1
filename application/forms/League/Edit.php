@@ -57,7 +57,7 @@ class Application_Form_League_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             ),
             'validators' => array(
-                array('Size', false, 102400),
+                array('Size', false, 1024*700),
                 array('Extension', false, 'jpg,png,gif'),
                 array('Count', false, 1)
             )

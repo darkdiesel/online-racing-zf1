@@ -1,7 +1,12 @@
 <div id="box_main_menu">
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <ul class="nav">
+            <?php
+                            $partial = array('menu_layout/main_menu.phtml', 'default');
+                            $this->navigation()->menu($this->menu)->setPartial($partial);
+                            echo $this->navigation()->menu()->render();
+                            ?>
+            <!--<ul class="nav">
                 <li class="active"><a href="<?php echo $this->baseUrl(''); ?>" title="<?php echo $this->translate('Главная'); ?>"><?php echo $this->translate('Главная') ?></a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -18,7 +23,7 @@
                             <li class="leaf"><a href="<?php echo $this->baseUrl('league/id/' . $league->id) ?>" title="<?php echo $league->name; ?>"><?php echo $league->name; ?></a></li>
                         <?php endforeach; ?>
                         <li class="divider"></li>
-                        <li><a href="<?php echo $this->baseUrl("league/all") ?>" title="<?php echo $this->translate('Просмотреть все'); ?>"><?php echo $this->translate('Просмотреть все') ?></a></li>
+                        <li><a href="<?php echo $this->baseUrl("league/all") ?>" title="<?php echo $this->translate('Все лиги'); ?>"><?php echo $this->translate('Все лиги') ?></a></li>
                     </ul>
                 </li>
                 <li ><a href="<?php echo $this->baseUrl('user/all'); ?>" title="<?php echo $this->translate('Гонщики'); ?>"><?php echo $this->translate('Гонщики') ?></a></li>
@@ -35,7 +40,7 @@
                     </ul>
                 </li>
                 <li ><a href="http://f1orl.forum2x2.ru" title="<?php echo $this->translate('Форум'); ?>"><?php echo $this->translate('Форум') ?></a></li>
-            </ul>
+            </ul>-->
             <form class="navbar-search pull-right">
                 <input type="text" class="search-query" placeholder="<?php echo $this->translate('Поиск'); ?>">
             </form>

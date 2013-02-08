@@ -10,8 +10,10 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
                                 ->select()
-                                ->from($this->_name, 'id')
-                                ->columns(array('id', 'name', 'logo', 'description', 'date_create', 'date_edit'))
+                                ->setIntegrityCheck(false)
+                                ->from(array('l' => $this->_name), 'l.id')
+                                ->columns(array('l.id', 'l.name', 'l.url_logo', 'l.description', 'l.date_create', 'l.date_edit', 'l.user_id'))
+                                ->join(array('u' => 'user'), 'l.user_id = u.id', array('user_login' => 'u.login'))
                                 ->order('id ' . $order));
 
         $paginator = new Zend_Paginator($adapter);
@@ -45,7 +47,7 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
         $select = $model->select()
                 ->setIntegrityCheck(false)
                 ->from(array('l' => $this->_name), 'l.id')
-                ->where('l.id')
+                ->where('l.id = ?', $id)
                 ->join(array('u' => 'user'), 'l.user_id = u.id', array('user_login' => 'u.login'))
                 ->columns('*');
 

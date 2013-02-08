@@ -70,6 +70,12 @@ class UserController extends App_Controller_FirstBootController {
                                 $storage->write($storage_data);
 
                                 if ($form->remember->getValue() == 1) {
+                                    // Получить объект Zend_Session_Namespace
+                                    require_once('Zend/Session/Namespace.php');
+                                    $session = new Zend_Session_Namespace('Zend_Auth');
+                                    // Установить время действия залогинености
+                                    $session->setExpirationSeconds(60 * 60 * 24 * 5);
+                                    
                                     Zend_Session::rememberMe(60 * 60 * 24 * 5);
                                 }
                                 $this->_helper->redirector('index', 'index');

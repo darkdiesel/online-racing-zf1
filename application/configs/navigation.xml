@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <nav>
+        <main>
+            <label>Главная</label>
+            <uri>/</uri>
+        </main>
+        <leagues>
+            <label>Лиги</label>
+            <uri>/league/all</uri>
+            <class>dropdown-toggle</class>
+            <pages>
+                <league1>
+                    <label>F1 Online-Racing League </label>
+                    <uri>/league/id/1</uri>
+                </league1>
+                <leagueall>
+                    <label>Все лиги</label>
+                    <uri>/league/all</uri>
+                </leagueall>
+            </pages>
+        </leagues>
+        <user>
+            <label>Гонщики</label>
+            <uri>/user/all</uri>
+            <!--<pages>
+                <userid>
+                    <label>Id</label>
+                    <uri>/user/id</uri>
+                </userid>
+                <usersettings>
+                    <label>Настройки</label>
+                    <uri>/user/settings</uri>
+                </usersettings>
+                <useredit>
+                    <label>Редактировать</label>
+                    <uri>/user/edit</uri>
+                </useredit>
+            </pages>-->
+        </user>
+        <article>
+            <label>Статьи</label>
+            <uri>/article/all</uri>
+        </article>
+        <files>
+            <label>Файлы</label>
+            <uri>#</uri>
+            <pages>
+                <gameandmods>
+                    <label>Игры и моды</label>
+                    <uri>/game/all</uri>
+                </gameandmods>
+            </pages>
+        </files>
+        <forum>
+            <label>Форум</label>
+            <uri>http://f1orl.forum2x2.ru/</uri>
+        </forum>
+    </nav>
+</configdata>

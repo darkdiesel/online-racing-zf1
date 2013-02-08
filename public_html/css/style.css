@@ -219,6 +219,7 @@ body iframe{
                             line-height:35px;
                             text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #141414;
                             text-align:left;
+                            margin-bottom:10px;
                         }
                         #content .page_content{
                             background:none repeat scroll 0 0 #FFFFFF;
@@ -574,6 +575,7 @@ label.valid {
     border:1px solid #CDCACA;
     border-radius:0;
     margin:5px 0px;
+    color:gray;
 }
 .user_light_status{
     height:20px;

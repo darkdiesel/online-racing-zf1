@@ -28,7 +28,7 @@
                     </div>
                     <div class="article_info">
                         <div class="article_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Тип статьи') ?>: </span><?php echo $this->escape($article['article_type_name']); ?></div>
-                        <div class="article_author article_info_item"><span class="bold_text"><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($article['user_id'])) ?>"><?php echo $article['user_login']; ?></a></div>
+                        <div class="article_author article_info_item"><span class="bold_text"><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($article['user_id'])) ?>" target="_blank"><?php echo $article['user_login']; ?></a></div>
                         <div class="article_views article_info_item"><span class="bold_text"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($article['views']); ?></div>
                         <div class="article_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($article['date_create']); ?></div>
                         <?php if ($article['date_create'] != $article['date_edit']) { ?>

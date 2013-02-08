@@ -116,7 +116,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         //$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
 
         /* [JQUERY JS] */
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-1.9.0.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-1.9.1.min.js"));
         /* [JQUERY UI JS] */
         $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.10.0.custom.min.js"));
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
@@ -213,7 +213,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allUsers', new Zend_Controller_Router_Route('user/all/:page',
+                'userAll', new Zend_Controller_Router_Route('user/all/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'user',
@@ -222,7 +222,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //article controller routers
         $router->addRoute(
-                'articleView', new Zend_Controller_Router_Route('article/edit/:id',
+                'articleEdit', new Zend_Controller_Router_Route('article/edit/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
@@ -231,7 +231,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'articleEdit', new Zend_Controller_Router_Route('article/id/:id',
+                'articleId', new Zend_Controller_Router_Route('article/id/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
@@ -249,7 +249,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allArticles', new Zend_Controller_Router_Route('article/all/:page',
+                'articleAll', new Zend_Controller_Router_Route('article/all/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
@@ -258,7 +258,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //admin controller routers
         $router->addRoute(
-                'allAdminArticles', new Zend_Controller_Router_Route('admin/articles/:page',
+                'adminArticleAll', new Zend_Controller_Router_Route('admin/articles/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'admin',
@@ -267,7 +267,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allAdminUsers', new Zend_Controller_Router_Route('admin/users/:page',
+                'adminUserAll', new Zend_Controller_Router_Route('admin/users/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'admin',
@@ -276,7 +276,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allAdminLeagues', new Zend_Controller_Router_Route('admin/leagues/:page',
+                'adminLeagueAll', new Zend_Controller_Router_Route('admin/leagues/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'admin',
@@ -358,7 +358,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allLeagues', new Zend_Controller_Router_Route('league/all/:page',
+                'leagueAll', new Zend_Controller_Router_Route('league/all/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'league',
@@ -534,7 +534,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'allArticles', new Zend_Controller_Router_Route('country/all/:page',
+                'countryAll', new Zend_Controller_Router_Route('country/all/:page',
                         array(
                             'module' => 'default',
                             'controller' => 'country',
@@ -601,6 +601,195 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
           array('lang' => ':lang')
           )
           ); */
+    }
+
+    public function _initNavigation() {
+        $this->bootstrap('layout');
+        $view = $this->getResource('layout')->getView();
+
+        $main_menu_pages = array(
+            array(
+                // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
+                'label' => _('Главная'),
+                'uri' => '/',
+            ),
+            array(
+                'label' => _('Лиги'),
+                'title' => _('Лиги'),
+                'controller' => 'league',
+                'action' => 'all',
+                'route' => 'leagueAll',
+                'pages' => array(
+                    array(
+                        'label' => _('F1 Online-Racing League'),
+                        'title' => _('F1 Online-Racing League'),
+                        'controller' => 'league',
+                        'action' => 'id',
+                        'route' => 'leagueId',
+                        'params' => array(
+                            'id' => '1'
+                        ),
+                    ),
+                    array(
+                        'label' => _('Все лиги'),
+                        'title' => _('Все лиги нашего портала'),
+                        'controller' => 'league',
+                        'action' => 'all',
+                        'route' => 'leagueAll',
+                    )
+                )
+            ),
+            array(
+                'label' => _('Гонщики'),
+                'title' => _('Все гонщики нашего портала'),
+                'controller' => 'user',
+                'action' => 'all',
+                'route' => 'userAll',
+            ),
+            array(
+                'label' => _('Статьи'),
+                'title' => _('Все статьи опубликованные на нашем портале'),
+                'controller' => 'article',
+                'action' => 'all',
+                'route' => 'articleAll',
+            ),
+            array(
+                'label' => _('Файлы'),
+                'title' => _('Файлы'),
+                'uri' => '#',
+                'pages' => array(
+                    array(
+                        'label' => _('Игры и Моды'),
+                        'title' => _('Игры и Моды'),
+                        'controller' => 'game',
+                        'action' => 'all',
+                        'route' => 'gameAll',
+                    ),
+                )
+            ),
+            array(
+                'label' => _('Форум'),
+                'title' => _('Форум'),
+                'uri' => 'http://f1orl.forum2x2.ru/',
+            ),
+        );
+
+        $breadcrumbs_pages = array(
+            array(
+                // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
+                'label' => _('Главная'),
+                'uri' => '/',
+                'pages' => array(
+                    array(
+                        'label' => _('Лиги'),
+                        'title' => _('Лиги'),
+                        'controller' => 'league',
+                        'action' => 'all',
+                        'route' => 'leagueAll',
+                        'pages' => array(
+                            array(
+                                'label' => _('F1 Online-Racing League'),
+                                'title' => _('F1 Online-Racing League'),
+                                'controller' => 'league',
+                                'action' => 'id',
+                                'route' => 'leagueId',
+                                'params' => array(
+                                    'id' => '1'
+                                ),
+                            ),
+                            array(
+                                'label' => _('Все лиги'),
+                                'title' => _('Все лиги'),
+                                'controller' => 'league',
+                                'action' => 'all',
+                                'route' => 'leagueAll',
+                            )
+                        )
+                    ),
+                    array(
+                        'controller' => 'user',
+                        'action' => 'all',
+                        'label' => _('Гонщики'),
+                        'title' => _('Гонщики'),
+                        'route' => 'userAll',
+                        'pages' => array(
+                            array(
+                                'label' => _('Пользователь'),
+                                'title' => _('Пользователь'),
+                                'controller' => 'user',
+                                'action' => 'id',
+                                'route' => 'userId',
+                                'params' => array(
+                                )
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => _('Статьи'),
+                        'title' => _('Статьи'),
+                        'controller' => 'article',
+                        'action' => 'all',
+                        'route' => 'articleAll',
+                        'pages' => array(
+                            array(
+                                'label' => _('Статья'),
+                                'title' => _('Статья'),
+                                'controller' => 'article',
+                                'action' => 'id',
+                                'route' => 'articleId',
+                                'params' => array()
+                            )
+                        )
+                    ),
+                    array(
+                        'label' => _('Файлы'),
+                        'title' => _('Файлы'),
+                        'uri' => '',
+                        'pages' => array(
+                            array(
+                                'label' => _('Игры и Моды'),
+                                'controller' => 'game',
+                                'action' => 'all',
+                                'route' => 'gameAll',
+                                'pages' => array(
+                                    array(
+                                        'label' => _('Игра'),
+                                        'title' => _('Игра'),
+                                        'controller' => 'game',
+                                        'action' => 'id',
+                                        'route' => 'gameId',
+                                        'params' => array()
+                                    )
+                                )
+                            ),
+                        )
+                    ),
+                    array(
+                        'label' => _('Форум'),
+                        'title' => _('Форум'),
+                        'uri' => 'http://f1orl.forum2x2.ru/',
+                    ),
+                )
+            ),
+        );
+
+
+
+        // Создаем новый контейнер на основе нашей структуры
+        $main_menu_container = new Zend_Navigation($main_menu_pages);
+        $breadcrumb_container = new Zend_Navigation($breadcrumbs_pages);
+        // Передаем контейнер в View
+        $view->menu = $main_menu_container;
+        $view->breadcrumb = $breadcrumb_container;
+
+        //return $main_menu_container;
+
+        /* $this->bootstrap('layout');
+          $view = $this->getResource('layout')->getView();
+
+          $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml' , 'nav');
+          $navigation = new Zend_Navigation($config);
+          $view->navigation($navigation); */
     }
 
 }

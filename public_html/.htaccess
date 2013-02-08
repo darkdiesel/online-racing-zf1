@@ -14,6 +14,8 @@ DirectoryIndex index.php
 #DirectoryIndex index.html
 #RewriteRule ^.*$ index.html [NC,L]
 
+SetEnv TZ Europe/Minsk
+
 #AuthName "Restricted Area"
 #AuthType Basic
 #AuthUserFile /home/onlinera/domains/online-racing.net/.htpasswd/.protected.list

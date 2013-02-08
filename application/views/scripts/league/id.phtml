@@ -19,14 +19,18 @@
         <?php } else { ?>
             <div class="league_item article_item">
                 <?php
-                if ($this->league->logo != '') {
+                if ($this->league->url_logo != '') {
                     ?>
-                    <img class="img-polaroid league_logo article_center_image" src="<?php echo $this->escape($this->league->logo); ?>">
+                    <img class="img-polaroid league_logo article_center_image" src="<?php echo $this->escape($this->league->url_logo); ?>">
                 <?php } ?>
                 <div class="article_text league_descr">
                     <?php
-                    $bbcode = Zend_Markup::factory('Bbcode');
-                    echo $bbcode->render((string) ($this->escape($this->league->description)));
+                    if ($this->league->description != "") {
+                        $bbcode = Zend_Markup::factory('Bbcode');
+                        echo $bbcode->render((string) ($this->escape($this->league->description)));
+                    } else {
+                        echo $this->translate("Нет описания.");
+                    }
                     ?>
                 </div>
                 <?php
@@ -49,9 +53,13 @@
                     </div>
                 <?php } ?>
                 <div class="league_info article_info">
+                    <div class="event_name article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span>
+                        <?php echo $this->translate('Лига'); ?>
+                    </div>
                     <div class="league_admin league_info_item article_info_item">
                         <span class="bold_text"><?php echo $this->translate('Администратор лиги') ?>: </span>
-                        <a href="<?php echo $this->baseUrl('user/id/' . $this->escape($this->league->user_id)) ?>"><?php echo $this->escape($this->league->user_login); ?></a>
+                        <a target="_blank" href="<?php echo $this->baseUrl('user/id/' . $this->escape($this->league->user_id)) ?>"><?php echo $this->escape($this->league->user_login); ?></a>
                     </div>
                     <div class="league_date league_info_item article_info_item">
                         <span class="bold_text"><?php echo $this->translate('Создана') ?>: </span>
@@ -89,7 +97,14 @@
                             <a href = "<?php echo $this->baseUrl('championship/id/' . $this->escape($championship['id'])) ?>" class = "btn btn-small btn-inverse article_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
                         </div>
                         <div class="article_info">
-                            <div class="championship_author article_info_item"><span class="bold_text"><?php echo $this->translate('Администратор чемпионата') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($championship['user_id'])) ?>"><?php echo $this->escape($championship['user_login']); ?></a></div>
+                            <div class="event_name article_info_item">
+                                <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span>
+                                <?php echo $this->translate('Чемпионат'); ?>
+                            </div>
+                            <div class="championship_author article_info_item">
+                                <span class="bold_text"><?php echo $this->translate('Администратор') ?>: </span>
+                                <a href="<?php echo $this->baseUrl('user/id/' . $this->escape($championship['user_id'])) ?>" target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
+                            </div>
                             <div class="championshipe_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Создан') ?>: </span><?php echo $this->escape($championship['date_create']); ?></div>
                         </div>
                     </div>

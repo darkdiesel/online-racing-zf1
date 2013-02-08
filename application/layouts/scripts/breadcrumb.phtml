@@ -1,4 +1,6 @@
-<ul class="breadcrumb">
-    <li><a href="<?php echo $this->baseUrl("") ?>"><?php echo $this->translate('Главная') ?></a> <span class="divider">/</span></li>
-    <li class="active"><?php echo $this->translate('Страница') ?></li>
-</ul>
+<div class="breadcrumb">
+<?php 
+    $breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
+    echo ($breadcrumb); 
+?>
+</div>

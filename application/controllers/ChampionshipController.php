@@ -2,8 +2,12 @@
 
 class ChampionshipController extends App_Controller_FirstBootController {
 
-    public function idAction() {
+    public function init() {
+        parent::init();
         $this->view->headTitle($this->view->translate('Чемпионат'));
+    }
+    
+    public function idAction() {
         $request = $this->getRequest();
         $championship_id = (int) $request->getParam('id');
 
@@ -15,12 +19,13 @@ class ChampionshipController extends App_Controller_FirstBootController {
             $this->view->headTitle($championship_data->name);
         } else {
             $this->view->errMessage .= $this->view->translate('Чемпионат не найден!');
-            $this->view->headTitle($this->view->translate('Чемпионат не найдена!'));
+            $this->view->headTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
         }
     }
 
     public function addAction() {
-        $this->view->headTitle($this->view->translate('Создание чемпионата'));
+        $this->view->headTitle($this->view->translate('Добавить'));
 
         $request = $this->getRequest();
         // form
@@ -109,6 +114,13 @@ class ChampionshipController extends App_Controller_FirstBootController {
         }
 
         $this->view->form = $form;
+    }
+    
+    public function editAction() {
+        $this->view->headTitle($this->view->translate('Редактировать'));
+
+        $request = $this->getRequest();
+        $event_id = $request->getParam('id');
     }
 
 }

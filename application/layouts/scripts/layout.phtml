@@ -26,7 +26,14 @@
                 </div>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">
-                        <?php echo $this->render("breadcrumb.phtml") ?>
+                        <?php
+                        $breadcrumb = Zend_Registry::get('breadcrumb');
+                        if ($breadcrumb['show']) {
+                            echo $this->render("breadcrumb.phtml");
+                        }
+                        ?>
+                        <div id="menu">
+                        </div>
                         <!-- Content -->
                         <div id="content">
                             <?php echo $this->layout()->content ?>
@@ -35,11 +42,6 @@
                         <div id="left_sidebar">
                             <?php echo $this->render("left_sidebar.phtml") ?>
                         </div>
-                        <script>
-                            $(function() {
-                                $( "#left_sidebar" ).sortable();
-                            });
-                        </script>
                     </div>
                 </div>
                 <div id="footer">
