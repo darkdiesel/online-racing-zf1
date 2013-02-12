@@ -27,6 +27,9 @@ class ChatController extends App_Controller_FirstBootController {
                     $user_chat = new Application_Model_DbTable_UserChat();
                     $newUser_chat_msg = $user_chat->createRow($user_chat_data);
                     $newUser_chat_msg->save();
+
+                    $data_str = array('Result' => TRUE);
+                    echo json_encode($data_str);
                 }
             }
         }

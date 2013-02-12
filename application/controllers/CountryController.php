@@ -16,7 +16,7 @@ class CountryController extends App_Controller_FirstBootController {
 
         if ($country_data) {
             $this->view->country = $country_data;
-            $this->view->headTitle($country_data->name);
+            $this->view->headTitle($country_data->native_name);
         } else {
             $this->view->errMessage .= $this->view->translate('Страна не найдена!');
             $this->view->headTitle($this->view->translate('Ошибка!'));
@@ -82,7 +82,8 @@ class CountryController extends App_Controller_FirstBootController {
                 }
 
                 $date = date('Y-m-d H:i:s');
-                $country_data['name'] = $form->getValue('name');
+                $country_data['native_name'] = $form->getValue('native_name');
+                $country_data['english_name'] = $form->getValue('english_name');
                 $country_data['abbreviation'] = $form->getValue('abbreviation');
                 $country_data['date_create'] = $date;
                 $country_data['date_edit'] = $date;
@@ -116,11 +117,11 @@ class CountryController extends App_Controller_FirstBootController {
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
 
-                    $exist_country_name = $country->checkExistCountryName($form->getValue('name'));
+                    $exist_country_native_name = $country->checkExistCountryNativeName($form->getValue('native_name'));
                     $exist_country_abbreviation = $country->checkExistCountryAbbreviation($form->getValue('abbreviation'));
 
-                    if ($exist_country_name) {
-                        if ($exist_country_name == $country_id) {
+                    if ($exist_country_native_name) {
+                        if ($exist_country_native_name == $country_id) {
                             $update = TRUE;
                         } else {
                             $update = FALSE;
@@ -184,7 +185,8 @@ class CountryController extends App_Controller_FirstBootController {
                         }
 
                         $date = date('Y-m-d H:i:s');
-                        $new_country_data['name'] = $form->getValue('name');
+                        $new_country_data['native_name'] = $form->getValue('native_name');
+                        $new_country_data['english_name'] = $form->getValue('english_name');
                         $new_country_data['abbreviation'] = $form->getValue('abbreviation');
                         $new_country_data['date_edit'] = $date;
 
@@ -199,10 +201,11 @@ class CountryController extends App_Controller_FirstBootController {
             }
 
             //head titles
-            $this->view->headTitle($country_data->name);
+            $this->view->headTitle($country_data->native_name . " ({$country_data->english_name})");
 
             //form values
-            $form->name->setvalue($country_data->name);
+            $form->native_name->setvalue($country_data->native_name);
+            $form->english_name->setvalue($country_data->english_name);
             $form->abbreviation->setvalue($country_data->abbreviation);
 
             //get form for views
@@ -225,7 +228,7 @@ class CountryController extends App_Controller_FirstBootController {
 
         if ($country_data) {
             //page title
-            $this->view->headTitle($country_data->name);
+            $this->view->headTitle($country_data->native_name . " ({$country_data->english_name})");
 
             //create delete form
             $form = new Application_Form_Country_Delete();

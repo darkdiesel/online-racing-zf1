@@ -2,7 +2,7 @@
     <div class="page_title">
         <?php
         if (!$this->errMessage != "") {
-            echo $this->translate('Редактировать страну') . ' :: ' . $this->escape($this->form->name->getvalue());
+            echo $this->translate('Редактировать страну') . ' :: ' . $this->escape($this->form->native_name->getvalue()) . " ({$this->escape($this->form->english_name->getvalue())})";
         } else {
             echo $this->translate('Ошибка!');
         }

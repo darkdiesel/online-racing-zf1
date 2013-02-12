@@ -21,11 +21,11 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function checkExistCountryName($country_name) {
+    public function checkExistCountryNativeName($country_name) {
         $model = new self;
         $select = $model->select()
                 ->from($this->_name, 'id')
-                ->where('name = ?', $country_name)
+                ->where('native_name = ?', $country_name)
                 ->columns('id');
 
         $country_data = $model->fetchRow($select);
@@ -58,12 +58,12 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
         $select = $model->select()
                 ->from($this->_name, 'id')
                 ->where('id = ?', $id)
-                ->columns(array('name'));
+                ->columns(array('native_name'));
 
         $country_data = $model->fetchRow($select);
 
         if (count($country_data) != 0) {
-            return $country_data->name;
+            return $country_data->native_name;
         } else {
             return FALSE;
         }
@@ -73,9 +73,9 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
         $model = new self;
 
         $select = $model->select()
-                ->from($this->_name, 'name')
-                ->columns(array('id', 'name'))
-                ->order('name ' . $order);
+                ->from($this->_name, 'native_name')
+                ->columns(array('id', 'native_name', 'english_name'))
+                ->order('native_name ' . $order);
 
         $countries = $model->fetchAll($select);
 
@@ -89,8 +89,8 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
     public function getCountryId($country_name) {
         $model = new self;
         $select = $model->select()
-                ->from($this->_name, 'name')
-                ->where('name = ?', $country_name)
+                ->from($this->_name, 'native_name')
+                ->where('native_name = ?', $country_name)
                 ->columns(array('id'));
 
         $country_data = $model->fetchRow($select);

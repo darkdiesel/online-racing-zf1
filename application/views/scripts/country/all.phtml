@@ -10,7 +10,8 @@
                 <thead>
                     <tr>
                         <th class="country_id"><span>#</span></th>
-                        <th class="country_name"><span><?php echo $this->translate('Название'); ?></span></th>
+                        <th class="country_name"><span><?php echo $this->translate('Родное название'); ?></span></th>
+                        <th class="country_name"><span><?php echo $this->translate('Английское название'); ?></span></th>
                         <th class="country_descr"><span><?php echo $this->translate('Аббревиация'); ?></span></th>
                         <th class="country_descr"><span><?php echo $this->translate('Круговая картинка'); ?></span></th>
                         <th class="country_descr"><span><?php echo $this->translate('Волнистая картинка'); ?></span></th>
@@ -21,15 +22,16 @@
                     <?php foreach ($this->paginator as $country): ?>
                         <tr>
                             <td class="country_id"><span><a href="<?php echo $this->baseURL('country/id/' . $this->escape($country['id'])) ?>"><?php echo $this->escape($country['id']) ?></a></span></td>
-                            <td class="country_name"><span><a href="<?php echo $this->baseURL('country/id/' . $this->escape($country['id'])) ?>"><?php echo $this->escape($country['name']) ?></a></span></td>
+                            <td class="country_name"><span><a href="<?php echo $this->baseURL('country/id/' . $this->escape($country['id'])) ?>"><?php echo $this->escape($country['native_name']) ?></a></span></td>
+                            <td class="country_name"><span><a href="<?php echo $this->baseURL('country/id/' . $this->escape($country['id'])) ?>"><?php echo $this->escape($country['english_name']) ?></a></span></td>
                             <td class="country_name"><span><a href="<?php echo $this->baseURL('country/id/' . $this->escape($country['id'])) ?>"><?php echo $this->escape($country['abbreviation']) ?></a></span></td>
                             <td class="country_descr"><span><img src="<?php echo $this->escape($country['url_image_round']); ?>"></span></td>
                             <td class="country_descr"><span><img src="<?php echo $this->escape($country['url_image_glossy_wave']); ?>"></span></td>
                             <td class="country_action articles_table_action">
                                 <span>
-                                    <a href="<?php echo $this->baseUrl('country/id/' . $this->escape($country['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-                                    <a href="<?php echo $this->baseUrl('country/edit/' . $this->escape($country['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-                                    <a href="<?php echo $this->baseUrl('country/delete/' . $this->escape($country['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+                                    <a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'id', 'id' => $this->escape($country['id'])), 'country', true); ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+                                    <a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'edit', 'id' => $this->escape($country['id'])), 'country', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+                                    <a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'delete', 'id' => $this->escape($country['id'])), 'country', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
                                 </span>
                             </td>
                         </tr>

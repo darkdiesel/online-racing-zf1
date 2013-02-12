@@ -14,9 +14,9 @@ class Application_Form_Country_Add extends Zend_Form {
         $this->setName('countryAdd');
         $this->setAttrib('class', 'white_box');
 
-        $this->addElement('text', 'name', array(
-            'label' => $this->translate('Название'),
-            'placeholder' => $this->translate('Название'),
+        $this->addElement('text', 'native_name', array(
+            'label' => $this->translate('Родное название'),
+            'placeholder' => $this->translate('Родное название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
             'required' => true,
@@ -24,7 +24,27 @@ class Application_Form_Country_Add extends Zend_Form {
             'width' => '400px',
             'validators' => array(
                 'NotEmpty',
-                new App_Validate_NoDbRecordExists('country', 'name')
+                new App_Validate_NoDbRecordExists('country', 'native_name')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+        
+        $this->addElement('text', 'english_name', array(
+            'label' => $this->translate('Английское название'),
+            'placeholder' => $this->translate('Английское название'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
+            'required' => true,
+            'class' => 'x_field',
+            'width' => '400px',
+            'validators' => array(
+                'NotEmpty',
+                new App_Validate_NoDbRecordExists('country', 'english_name')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',

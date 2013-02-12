@@ -472,31 +472,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //event controller routers
         $router->addRoute(
-                'eventId', new Zend_Controller_Router_Route('event/id/:id',
+                'event', new Zend_Controller_Router_Route('event/:action/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'event',
-                            'action' => 'id',
                             'id' => 0)
         ));
 
-        $router->addRoute(
-                'eventEdit', new Zend_Controller_Router_Route('event/edit/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'event',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'eventDelete', new Zend_Controller_Router_Route('event/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'event',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
         $router->addRoute(
                 'eventAll', new Zend_Controller_Router_Route('event/all/:page',
                         array(
@@ -507,32 +489,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //country controller routers
         $router->addRoute(
-                'countryView', new Zend_Controller_Router_Route('country/edit/:id',
+                'country', new Zend_Controller_Router_Route('country/:action/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'country',
-                            'action' => 'edit',
                             'id' => 0)
         ));
-
-        $router->addRoute(
-                'countryEdit', new Zend_Controller_Router_Route('country/id/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'country',
-                            'action' => 'id',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'countryDelete', new Zend_Controller_Router_Route('country/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'country',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
-
+        
         $router->addRoute(
                 'countryAll', new Zend_Controller_Router_Route('country/all/:page',
                         array(
@@ -714,8 +677,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'route' => 'userAll',
                         'pages' => array(
                             array(
-                                'label' => _('Пользователь'),
-                                'title' => _('Пользователь'),
+                                'label' => _('Пилот'),
+                                'title' => _('Пилот'),
                                 'controller' => 'user',
                                 'action' => 'id',
                                 'route' => 'userId',

@@ -75,7 +75,7 @@ class UserController extends App_Controller_FirstBootController {
                                     $session = new Zend_Session_Namespace('Zend_Auth');
                                     // Установить время действия залогинености
                                     $session->setExpirationSeconds(60 * 60 * 24 * 5);
-                                    
+
                                     Zend_Session::rememberMe(60 * 60 * 24 * 5);
                                 }
                                 $this->_helper->redirector('index', 'index');
@@ -516,7 +516,7 @@ class UserController extends App_Controller_FirstBootController {
             $countries = $country->getCountriesName('ASC');
 
             foreach ($countries as $country):
-                $form->country->addMultiOption($country->id, $country->name);
+                $form->country->addMultiOption($country->id, $country->native_name . " ({$country->english_name})");
             endforeach;
 
             $form->country->setValue($user_data->country_id);

@@ -57,7 +57,7 @@
                         </tr>
                         <tr>
                             <td class="header_column"><?php echo $this->translate('Страна') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo $this->user->country_name ?></div></td>
+                            <td><div class="break_word_wrap"><?php echo $this->user->country_native_name . " ({$this->user->country_english_name})" ?></div></td>
                         </tr>
                         <tr>
                             <td class="header_column"><?php echo $this->translate('Город') ?>:</td>
@@ -87,18 +87,8 @@
                                 <td class="header_column"><?php echo $this->translate('Времени на сайте') ?>:</td>
                                 <td>
                                     <?php
-                                    $dateCreate = new Zend_Date($this->user->date_create);
-                                    $dateNow = new Zend_Date(Date('d.m.Y'));
-
-                                    if ($dateNow->compare($dateCreate) > 0)
-                                        $diff = $dateNow->toValue() - $dateCreate->toValue();
-                                    elseif ($dateNow->compare($date) < 0)
-                                        $diff = $dateCreate->toValue() - $dateNow->toValue();
-                                    else
-                                        $diff = 0;
-
-                                    //$d = new DateTime();
-                                    //echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
+                                    $d = new DateTime();
+                                    echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
                                     ?>
                                 </td>
                             </tr>
@@ -106,8 +96,7 @@
                                 <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
                                 <td>
                                     <?php
-                                    echo round($diff / 60 / 60 / 24);
-                                    //echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
+                                    echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
                                     ?>
                                 </td>
                             </tr>

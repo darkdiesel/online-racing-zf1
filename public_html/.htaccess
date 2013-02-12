@@ -22,3 +22,9 @@ SetEnv TZ Europe/Minsk
 #AuthGroupFile /dev/null
 #require valid-user
 #AddHandler application/x-httpd-php54 .php .inc .phtml # phpvs v5
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?online-racing\.net/ [nc]
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?google\.com/ [nc]
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?yandex\.ru/ [nc]
+RewriteRule .*\.(gif|jpe?g|png|bmp|pdf|zip|rar|mp3|js)$ http://online-racing/img/index.jpg [nc]

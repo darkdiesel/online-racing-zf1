@@ -13,7 +13,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 ->where('u.id = ? and u.enable = 1', $id)
                 ->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-                    'country_name' => 'c.name'))
+                    'country_native_name' => 'c.native_name',
+                    'country_english_name' => 'c.english_name',))
                 ->columns(array('login', 'email', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
             'icq', 'gtalk', 'www',));
 
@@ -67,7 +68,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                                 ->where('u.user_role_id != 1 and u.enable = 1')
                                 ->join(array('c' => 'country'), 'u.country_id = c.id', array(
                                     'country_url_image_round' => 'c.url_image_round',
-                                    'country_name' => 'c.name')
+                                    'country_name' => 'c.native_name')
                                 )
                                 ->columns(array('id', 'avatar_type', 'login', 'date_last_activity'))
                                 ->order('id ' . $order)

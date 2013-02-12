@@ -187,7 +187,7 @@ form.fieldset_white_box{
                 }
 
 /*forms elements*/
-select, input[type="file"] {
+input[type="file"] {
     height:auto;
     line-height:auto;
 }

@@ -54,7 +54,6 @@ $(document).ready(function(){
                         get_chat_messages();
                     }
                 });
-                
             }
             
             return false;
