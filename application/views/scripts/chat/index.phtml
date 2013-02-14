@@ -13,7 +13,10 @@
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4><?php echo $this->translate('Предупреждение!'); ?></h4>
                 <?php echo $this->translate('Сообщения в чате могут оставлять только авторизованные пользователи.'); ?>
-                <a href="<?php echo $this->baseURL('user/login') ?>"><?php echo $this->translate('Авторизуйтесь'); ?></a> <?php echo $this->translate('или') ?> <a href="<?php echo $this->baseURL('user/login') ?>"><?php echo $this->translate('Зарегистрируйтесь'); ?></a> <?php echo $this->translate('на сайте.'); ?>
+                <a class="btn btn-warning" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true) ?>"><?php echo $this->translate('Авторизуйтесь'); ?></a>
+                <?php echo $this->translate('или') ?>
+                <a class="btn btn-danger" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true) ?>"><?php echo $this->translate('Зарегистрируйтесь'); ?></a>
+                <?php echo $this->translate('на сайте.'); ?>
             </div>
         <?php } ?>
         <?php echo $this->render("blocks/chat_block.phtml"); ?>

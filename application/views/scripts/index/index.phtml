@@ -18,8 +18,9 @@
             options['controls'] = false;
             options['controls_position'] = 'rightTop';
             options['hideTools'] = true;
-            options['animation'] = 'swapBarsBack';
-            //options['easing_default'] = 'random';
+            //options['animation'] = 'swapBarsBack';
+            options['animation'] = 'random';
+            options['easing_default'] = 'random';
             options['interval'] = 5000;
             options['xml'] = '../xml/skitter_slider.xml';
 
@@ -51,13 +52,13 @@
         <h1><?php echo $this->translate('Добро пожаловать');?></h1>
         <p>Добро пожаловать в увлекательный мир онлайновый авто-гонок. Наш портал <strong>Online-Racing.Net</strong> поможет окунаться вам в него с головой. Вступайте в наши ряды.</p>
         <p>
-            <a class="btn btn-primary btn-large" href="<?php echo $this->baseUrl('user/register')?>">
+            <a class="btn btn-primary btn-large" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true)?>">
                 <?php echo $this->translate('Присоедениться');?>
             </a>
         </p>
     </div>
 
-    <div class="page_title"><?php echo $this->translate('Последния добавления') ?>:</div>
+    <div class="page_title"><?php echo $this->translate('Новости нашего портала') ?>:</div>
     <div class="div_hr"></div>
     <?php if (count($this->last_articles) != 0) { ?>
         <div id="articles_block">
@@ -84,7 +85,7 @@
                         }
                         ?>
                     </p>
-                    <a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article->id)) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
+                    <a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($article->id)), 'article', true) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
                 </div>
             <?php } ?>
         </div>

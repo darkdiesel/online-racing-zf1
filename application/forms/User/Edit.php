@@ -147,8 +147,8 @@ class Application_Form_User_Edit extends Zend_Form {
 
         // avatar_link
         $this->addElement('text', 'avatar_link', array(
-            'label' => $this->translate('Ссылка из другого ресурса'),
-            'placeholder' => $this->translate('Ссылка из другого ресурса'),
+            'label' => $this->translate('Ссылка с другого ресурса'),
+            'placeholder' => $this->translate('Ссылка с другого ресурса'),
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'description' => $this->translate('Зайди на другой сайт, скопируйте ссылку понравившейся картинки и вставте в это поле.'),
             'class' => 'x_field',

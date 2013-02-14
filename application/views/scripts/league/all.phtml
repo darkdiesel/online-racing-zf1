@@ -9,24 +9,25 @@
             foreach ($this->paginator as $league):
                 ?>
                 <div class="league_item article_item">
-                    <div class="league_name article_title"><a href="<?php echo $this->baseUrl('league/id/' . $this->escape($league['id'])) ?>"><?php echo $this->escape($league['name']); ?></a></div>
+                    <div class="league_name article_title">
+                        <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>"><?php echo $this->escape($league['name']); ?></a>
+                    </div>
                     <?php if ($this->escape($league['url_logo']) != '') { ?>
                         <img class="img-polaroid article_image league_logo" src="<?php echo $this->escape($league['url_logo']); ?>">
                     <?php } ?>
                     <div class="league_description article_text"><?php echo $this->truncate($this->escape($league['description']))->toLength(200); ?></div>
                     <div class="league_controls article_controls">
-                        
-                        <a href = "<?php echo $this->baseUrl('league/id/' . $this->escape($league['id'])) ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="league_info article_info">
                         <div class="event_name article_info_item">
-                        <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span>
-                        <?php echo $this->translate('Лига'); ?>
-                    </div>
-                    <div class="league_admin league_info_item article_info_item">
-                        <span class="bold_text"><?php echo $this->translate('Администратор лиги') ?>: </span>
-                        <a target="_blank" href="<?php echo $this->baseUrl('user/id/' . $this->escape($league['user_id'])) ?>"><?php echo $this->escape($league['user_login']); ?></a>
-                    </div>
+                            <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span>
+                            <?php echo $this->translate('Лига'); ?>
+                        </div>
+                        <div class="league_admin league_info_item article_info_item">
+                            <span class="bold_text"><?php echo $this->translate('Администратор лиги') ?>: </span>
+                            <a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $this->escape($league['user_id'])), 'user', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
+                        </div>
                         <div class="league_date league_info_item article_info_item"><span class="bold_text"><?php echo $this->translate('Создана') ?>: </span><?php echo $this->escape($league['date_create']); ?></div>
                     </div>
                 </div>

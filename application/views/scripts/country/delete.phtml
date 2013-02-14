@@ -20,7 +20,7 @@
             <div class="alert alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <h4><?php echo $this->translate('Предупреждение!'); ?></h4>
-                <?php echo $this->translate('Вы действительно хотите удалить страну ') . '"' .$this->escape($this->country->native_name) . " ({$this->escape($this->country->english_name)}) ". '"?'; ?>
+                <?php echo $this->translate('Вы действительно хотите удалить страну ') . '"' . $this->escape($this->country->native_name) . " ({$this->escape($this->country->english_name)}) " . '"?'; ?>
             </div>
             <?php echo $this->form; ?>
             <div class="country_item">
@@ -40,19 +40,25 @@
                         </tr>
                         <tr>
                             <td class="header_column"><span><?php echo $this->translate('Круговая картинка'); ?></span></td>
-                            <td><span><img src="<?php echo $this->escape($this->country->url_image_round); ?>"></span></td>
+                            <td><span><img src="<?php echo $this->baseUrl($this->escape($this->country->url_image_round)); ?>"></span></td>
                         </tr>
                         <tr>
                             <td class="header_column"><span><?php echo $this->translate('Волнистая картинка'); ?></span></td>
-                            <td><span><img src="<?php echo $this->escape($this->country->url_image_glossy_wave); ?>"></span></td>
+                            <td><span><img src="<?php echo $this->baseUrl($this->escape($this->country->url_image_glossy_wave)); ?>"></span></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="article_info">
-                    <div class="country_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Страна'); ?></div>
-                    <div class="country_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->country->date_create); ?></div>
+                    <div class="country_name article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Страна'); ?>
+                    </div>
+                    <div class="country_date_create article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->country->date_create); ?>
+                    </div>
                     <?php if ($this->escape($this->country->date_create) != $this->escape($this->country->date_edit)) { ?>
-                        <div class="country_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->country->date_edit); ?></div>
+                        <div class="country_date_edit article_info_item">
+                            <span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->country->date_edit); ?>
+                        </div>
                     <?php } ?>
                 </div>
             </div>

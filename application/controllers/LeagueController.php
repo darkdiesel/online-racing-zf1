@@ -74,7 +74,7 @@ class LeagueController extends App_Controller_FirstBootController {
                 $newLeague = $league->createRow($league_data);
                 $newLeague->save();
 
-                $this->redirect($this->view->baseUrl('league/id/' . $newLeague->id));
+                $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'id' => $newLeague->id), 'leagueId', true));
             } else {
                 $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления лиги!') . '<br />';
             }
@@ -108,7 +108,7 @@ class LeagueController extends App_Controller_FirstBootController {
             // form
             $form = new Application_Form_League_Edit();
             $form->setAction('/league/edit/' . $league_id);
-            $form->cancel->setAttrib('onClick', 'location.href="/league/id/' . $league_id . '"');
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'id' => $league_id), 'leagueId', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -124,7 +124,7 @@ class LeagueController extends App_Controller_FirstBootController {
                     $league_where = $league->getAdapter()->quoteInto('id = ?', $league_id);
                     $league->update($league_data, $league_where);
 
-                    $this->redirect($this->view->baseUrl('league/id/' . $league_id));
+                    $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'id' => $league_id), 'leagueId', true));
                 } else {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения лиги!') . '<br />';
                 }

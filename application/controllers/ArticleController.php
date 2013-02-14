@@ -81,11 +81,11 @@ class ArticleController extends App_Controller_FirstBootController {
                         );
                         $newGame = $game->createRow($game_data);
                         $newGame->save();
-
-                        $this->redirect($this->view->baseUrl('game/id/' . $newGame->id));
+                        
+                        $this->redirect($this->view->url(array('controller' => 'game', 'action' => 'id', 'id' => $newGame->id), 'game', true));
                         break;
                     default :
-                        $this->redirect($this->view->baseUrl('article/id/' . $newArticle->id));
+                        $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $newArticle->id), 'article', true));
                         break;
                 }
             }
@@ -101,7 +101,7 @@ class ArticleController extends App_Controller_FirstBootController {
             endforeach;
         } else {
             $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены!') . '<br/>'
-                    . '<a href=' . $this->baseURL('article-type/add') . '>' . $this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.') . '</a><br/>';
+                    . "<a href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.')}</a><br/>";
         }
 
         // add content types to the form
@@ -114,7 +114,7 @@ class ArticleController extends App_Controller_FirstBootController {
             endforeach;
         } else {
             $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены!') . '<br/>'
-                    . '<a href=' . $this->baseURL('content-type/add') . '>' . $this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.') . '</a><br/>';
+                    . "<a href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.')}</a><br/>";
         }
 
         $this->view->form = $form;
@@ -132,8 +132,8 @@ class ArticleController extends App_Controller_FirstBootController {
 
         if ($article_data) {
             $form = new Application_Form_Article_Edit();
-            $form->setAction('/article/edit/' . $article_id);
-            $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
+            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'id' => $article_id), 'article', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $article_id), 'article', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -172,7 +172,7 @@ class ArticleController extends App_Controller_FirstBootController {
                                 break;
                         }
 
-                        $this->redirect($this->view->baseUrl('article/id/' . $article_id));
+                        $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $article_id), 'article', true));
                     } else {
                         // if article type changed
                         $this->view->errMessage .= $this->view->translate('Функционал для смены типов статьи не готов.') . '<br/>';
@@ -190,7 +190,7 @@ class ArticleController extends App_Controller_FirstBootController {
                 endforeach;
             } else {
                 $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены!') . '<br/>'
-                        . '<a href=' . $this->baseURL('article-type/add') . '>' . $this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.') . '</a><br/>';
+                    . "<a href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.')}</a><br/>";
             }
 
             // add content types to the form
@@ -203,7 +203,7 @@ class ArticleController extends App_Controller_FirstBootController {
                 endforeach;
             } else {
                 $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены!') . '<br/>'
-                        . '<a href=' . $this->baseURL('content-type/add') . '>' . $this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.') . '</a><br/>';
+                    . "<a href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.')}</a><br/>";
             }
 
             //head titles
@@ -243,8 +243,8 @@ class ArticleController extends App_Controller_FirstBootController {
 
             //create delete form
             $form = new Application_Form_Article_Delete();
-            $form->setAction('/article/delete/' . $article_id);
-            $form->cancel->setAttrib('onClick', 'location.href="/article/id/' . $article_id . '"');
+            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'id' => $article_id), 'article', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $article_id), 'article', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {

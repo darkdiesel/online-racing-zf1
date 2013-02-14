@@ -203,14 +203,35 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     public function _initRoutes() {
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
-        //user controller routers
-        $router->addRoute(
-                'userId', new Zend_Controller_Router_Route('user/id/:id',
+
+        /*$router->addRoute(
+                'default', new Zend_Controller_Router_Route_Regex(('(\w*)/(\w*)\.html'),
                         array(
+                            'module' => 'default'
+                        ),
+                        array(
+                            'controller' => 1,
+                            'action' => 2
+                        ),
+                        '%s/%s.html'
+                        )
+                
+                );*/
+
+        $router->addRoute(
+                'user', new Zend_Controller_Router_Route_Regex('user/(\w*)/(\d+)\.html',
+                        array(
+                            'module' => 'default',
                             'controller' => 'user',
-                            'action' => 'id',
-                            'id' => 0)
-        ));
+                            2 => 0
+                        ),
+                        array(
+                            'action' => 1,
+                            'id' => 2
+                        ),
+                        'user/%s/%s.html'
+                )
+        );
 
         $router->addRoute(
                 'userAll', new Zend_Controller_Router_Route('user/all/:page',
@@ -222,31 +243,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //article controller routers
         $router->addRoute(
-                'articleEdit', new Zend_Controller_Router_Route('article/edit/:id',
+                'article', new Zend_Controller_Router_Route_Regex('article/(\w*)/(\d+)\.html',
                         array(
                             'module' => 'default',
                             'controller' => 'article',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'articleId', new Zend_Controller_Router_Route('article/id/:id',
+                            2 => 0
+                        ),
                         array(
-                            'module' => 'default',
-                            'controller' => 'article',
-                            'action' => 'id',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'articleDelete', new Zend_Controller_Router_Route('article/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'article',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
+                            'action' => 1,
+                            'id' => 2
+                        ),
+                        "article/%s/%s.html"
+                )
+        );
+        
 
         $router->addRoute(
                 'articleAll', new Zend_Controller_Router_Route('article/all/:page',
@@ -285,58 +295,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //article-type controller routers
         $router->addRoute(
-                'articleTypeId', new Zend_Controller_Router_Route('article-type/id/:id',
+                'articleTypeId', new Zend_Controller_Router_Route('article-type/:action/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'article-type',
-                            'action' => 'id',
                             'id' => 0)
         ));
 
-        $router->addRoute(
-                'articleTypeEdit', new Zend_Controller_Router_Route('article-type/edit/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'article-type',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'articleTypeDelete', new Zend_Controller_Router_Route('article-type/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'article-type',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
         //content type controller routers
         $router->addRoute(
-                'contentTypeId', new Zend_Controller_Router_Route('content-type/id/:id',
+                'contentTypeId', new Zend_Controller_Router_Route('content-type/:action/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'content-type',
-                            'action' => 'id',
                             'id' => 0)
         ));
 
-        $router->addRoute(
-                'contentTypeEdit', new Zend_Controller_Router_Route('content-type/edit/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'content-type',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'contentTypeDelete', new Zend_Controller_Router_Route('content-type/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'content-type',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
         //league controller routers
         $router->addRoute(
                 'leagueId', new Zend_Controller_Router_Route('league/id/:id/:page',
@@ -347,15 +321,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'id' => 0,
                             'page' => 1)
         ));
-
+        
         $router->addRoute(
-                'leagueEdit', new Zend_Controller_Router_Route('league/edit/:id',
+                'league', new Zend_Controller_Router_Route_Regex('league/(\w*)/(\d+)\.html',
                         array(
                             'module' => 'default',
                             'controller' => 'league',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
+                        ),
+                        array(
+                            'action' => 1,
+                            'id' => 2
+                        ),
+                        "league/%s/%s.html"
+                )
+        );
 
         $router->addRoute(
                 'leagueAll', new Zend_Controller_Router_Route('league/all/:page',
@@ -367,31 +346,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //game controller routers
         $router->addRoute(
-                'gameId', new Zend_Controller_Router_Route('game/id/:id',
+                'game', new Zend_Controller_Router_Route('game/:action/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'game',
-                            'action' => 'id',
                             'id' => 0)
         ));
 
-        $router->addRoute(
-                'gameEdit', new Zend_Controller_Router_Route('game/edit/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'game',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'gameDelete', new Zend_Controller_Router_Route('game/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'game',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
         $router->addRoute(
                 'gameAll', new Zend_Controller_Router_Route('game/all/:page',
                         array(
@@ -402,31 +363,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //team controller routers
         $router->addRoute(
-                'teamId', new Zend_Controller_Router_Route('team/id/:id',
+                'team', new Zend_Controller_Router_Route('team/:action/:id',
                         array(
                             'module' => 'default',
                             'controller' => 'team',
-                            'action' => 'id',
                             'id' => 0)
         ));
 
-        $router->addRoute(
-                'teamEdit', new Zend_Controller_Router_Route('team/edit/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'team',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'teamDelete', new Zend_Controller_Router_Route('team/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'team',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
         $router->addRoute(
                 'teamAll', new Zend_Controller_Router_Route('team/all/:page',
                         array(
@@ -437,31 +380,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //championship controller routers
         $router->addRoute(
-                'championshipId', new Zend_Controller_Router_Route('championship/id/:id',
+                'championship', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)\.html',
                         array(
                             'module' => 'default',
                             'controller' => 'championship',
-                            'action' => 'id',
-                            'id' => 0)
-        ));
+                            2 => 0,
+                        ),
+                        array(
+                            'action' => 1,
+                            'id' => 2
+                        ),
+                        "championship/%s/%s.html"
+                )
+        );
 
-        $router->addRoute(
-                'championshipEdit', new Zend_Controller_Router_Route('championship/edit/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            'action' => 'edit',
-                            'id' => 0)
-        ));
-
-        $router->addRoute(
-                'championshipDelete', new Zend_Controller_Router_Route('championship/delete/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            'action' => 'delete',
-                            'id' => 0)
-        ));
         $router->addRoute(
                 'championshipAll', new Zend_Controller_Router_Route('championship/all/:page',
                         array(
@@ -495,7 +427,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'controller' => 'country',
                             'id' => 0)
         ));
-        
+
         $router->addRoute(
                 'countryAll', new Zend_Controller_Router_Route('country/all/:page',
                         array(
@@ -595,7 +527,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     ),
                     array(
                         'label' => _('Все лиги'),
-                        'title' => _('Все лиги нашего портала'),
+                        'title' => _('Все лиги портала'),
                         'controller' => 'league',
                         'action' => 'all',
                         'route' => 'leagueAll',
@@ -681,7 +613,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                                 'title' => _('Пилот'),
                                 'controller' => 'user',
                                 'action' => 'id',
-                                'route' => 'userId',
+                                'route' => 'user',
                                 'params' => array(
                                 )
                             )
@@ -699,7 +631,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                                 'title' => _('Статья'),
                                 'controller' => 'article',
                                 'action' => 'id',
-                                'route' => 'articleId',
+                                'route' => 'article',
                                 'params' => array()
                             )
                         )
@@ -720,7 +652,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                                         'title' => _('Игра'),
                                         'controller' => 'game',
                                         'action' => 'id',
-                                        'route' => 'gameId',
+                                        'route' => 'game',
                                         'params' => array()
                                     )
                                 )
@@ -732,11 +664,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'title' => _('Форум'),
                         'uri' => 'http://f1orl.forum2x2.ru/',
                     ),
+                    array(
+                        'label' => _('Админ. панель'),
+                        'title' => _('Панель администратора'),
+                        'controller' => 'admin',
+                        'action' => 'index',
+                        'pages' => array(
+                        )
+                    )
                 )
             ),
         );
-
-
 
         // Создаем новый контейнер на основе нашей структуры
         $main_menu_container = new Zend_Navigation($main_menu_pages);

@@ -30,16 +30,27 @@
                 $bbcode = Zend_Markup::factory('Bbcode');
                 if ($this->article->image != '') {
                     ?>
-                    <img class="img-polaroid article_image" src="<?php echo $this->escape($this->article->image); ?>">
+                    <img class="img-polaroid article_image" src="<?php echo $this->baseUrl($this->escape($this->article->image)); ?>">
                 <?php } ?>
                 <div class="article_text"><?php echo $bbcode->render($this->escape($this->article->text)); ?></div>
                 <div class="article_info">
-                    <div class="article_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Тип статьи') ?>: </span><?php echo $this->escape($this->article->article_type_name); ?></div>
-                    <div class="article_author article_info_item"><span><?php echo $this->translate('Автор') ?>: </span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($this->article->user_id)) ?>" target="_blank"><?php echo $this->escape($this->article->user_login); ?></a></div>
-                    <div class="article_views article_info_item"><span><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->article->views); ?></div>
-                    <div class="article_date_create article_info_item"><span><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article->date_create); ?></div>
+                    <div class="article_type_name article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Тип статьи') ?>: </span><?php echo $this->escape($this->article->article_type_name); ?>
+                    </div>
+                    <div class="article_author article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Автор') ?>: </span>
+                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $this->escape($this->article->user_id)), 'user', true) ?>" target="_blank"><?php echo $this->escape($this->article->user_login); ?></a>
+                    </div>
+                    <div class="article_views article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->article->views); ?>
+                    </div>
+                    <div class="article_date_create article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->article->date_create); ?>
+                    </div>
                     <?php if ($this->escape($this->article->date_create) != $this->escape($this->article->date_edit)) { ?>
-                        <div class="article_date_edit article_info_item"><span><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->article->date_edit); ?></div>
+                        <div class="article_date_edit article_info_item">
+                            <span class="bold_text"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->article->date_edit); ?>
+                        </div>
                     <?php } ?>
                 </div>
             </div>

@@ -28,7 +28,7 @@ class UserController extends App_Controller_FirstBootController {
         } else {
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Пользователь не существует!'));
-            $this->view->errMessage = $this->view->translate("Пользователь не существует");
+            $this->view->errMessage = $this->view->translate("Пользователь не существует!");
         }
     }
 

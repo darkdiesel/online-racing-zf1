@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="user_flag"><img src="<?php echo $user['country_url_image_round']; ?>" title="<?php echo $user['country_name']; ?>"></div>
-                    <div class="user_login"><a href="<?php echo $this->baseUrl('user/id/') . $user['id'] ?>"><?php echo $user['login']; ?></a></div>
+                    <div class="user_login"><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $user['id']), 'user', true) ?>"><?php echo $user['login']; ?></a></div>
                 </div>
                 <?php
             endforeach;

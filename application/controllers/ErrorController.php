@@ -6,9 +6,19 @@ class ErrorController extends App_Controller_FirstBootController {
         $errors = $this->_getParam('error_handler');
 
         if (!$errors || !$errors instanceof ArrayObject) {
-            $this->view->message = 'You have reached the error page';
+            switch ($errors['type']) {
+                case "access_denied":
+                    $this->view->message = $this->view->translate('Доступ запрещен');
+                    break;
+                default:
+                    $this->view->message = 'You have reached the error page';
+                    break;
+            }
             return;
         }
+
+        //$requets = $this->getRequest();
+        //echo $requets->getParam('message');
 
         switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
@@ -17,13 +27,13 @@ class ErrorController extends App_Controller_FirstBootController {
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
                 $priority = Zend_Log::NOTICE;
-                $this->view->message = 'Error 404. Page not found';
+                $this->view->message = $this->view->translate('Ошибка 404. Страница не найдена');
                 break;
             default:
                 // application error
                 $this->getResponse()->setHttpResponseCode(500);
                 $priority = Zend_Log::CRIT;
-                $this->view->message = 'Error 500. Application error';
+                $this->view->message = 'Ошибка 500. Ошибка приложения';
                 break;
         }
 

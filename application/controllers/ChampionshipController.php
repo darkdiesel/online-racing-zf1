@@ -6,7 +6,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
         parent::init();
         $this->view->headTitle($this->view->translate('Чемпионат'));
     }
-    
+
     public function idAction() {
         $request = $this->getRequest();
         $championship_id = (int) $request->getParam('id');
@@ -60,8 +60,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $championship = new Application_Model_DbTable_Championship();
                 $newChampionship = $championship->createRow($championship_data);
                 $newChampionship->save();
-
-                $this->redirect('/championship/id/' . $newChampionship->id);
+                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'id', 'id' => $newChampionship->id), 'championship', true));
             }
         }
         // add leagues
@@ -115,12 +114,23 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
         $this->view->form = $form;
     }
-    
+
     public function editAction() {
         $this->view->headTitle($this->view->translate('Редактировать'));
 
         $request = $this->getRequest();
-        $event_id = $request->getParam('id');
+        $championship_id = $request->getParam('id');
+    }
+
+    public function deleteAction() {
+        $this->view->headTitle($this->view->translate('Удалить'));
+
+        $request = $this->getRequest();
+        $championship_id = $request->getParam('id');
+    }
+
+    public function allAction() {
+        $this->view->headTitle($this->view->translate('Все'));
     }
 
 }
