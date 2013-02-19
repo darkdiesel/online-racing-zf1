@@ -35,10 +35,10 @@
                     ?>
                     <div class="article_controls">
                         <?php if ($edit_access) { ?>
-                            <a href = "<?php echo $this->baseUrl('championship/edit/' . $this->escape($this->championship->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'edit', 'id' => $this->escape($this->championship->id)),'championship', true);?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
                         <?php } ?>
                         <?php if ($delete_access) { ?>
-                            <a href = "<?php echo $this->baseUrl('championship/delete/' . $this->escape($this->championship->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'delete', 'id' => $this->escape($this->championship->id)),'championship', true); ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
                         <?php } ?>
                     </div>
                 <?php } ?>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="championship_author article_info_item">
                         <span class="bold_text"><?php echo $this->translate('Админ') ?>: </span>
-                        <a href="<?php echo $this->baseUrl('user/id/' . $this->escape($this->championship->user_id)) ?>" target="_blank"><?php echo $this->escape($this->championship->user_login); ?></a>
+                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $this->escape($this->championship->user_id)),'user', true) ?>" target="_blank"><?php echo $this->escape($this->championship->user_login); ?></a>
                     </div>
                     <div class="championshipe_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Создан') ?>: </span><?php echo $this->escape($this->championship->date_create); ?></div>
                 </div>

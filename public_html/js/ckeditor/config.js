@@ -29,4 +29,15 @@ CKEDITOR.editorConfig = function( config ) {
 	// Remove some buttons, provided by the standard plugins, which we don't
 	// need to have in the Standard(s) toolbar.
 	config.removeButtons = 'Underline,Subscript,Superscript';
+        
+        config.smiley_columns = 6;
+        config.smiley_path = 'http://online-racing.net/img/smileys/';
+        
+        config.smiley_images=['blum1.gif', 'biggrin.gif', 'smile.gif', 'sad.gif'];
+        
+        config.smiley_descriptions = [
+            'blum', 'biggrin', 'smiley', 'sad'
+        ];
 };
+
+        

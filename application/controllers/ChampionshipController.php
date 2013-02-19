@@ -33,29 +33,38 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                //receive and rename logo
-                $file = $form->logo->getFileInfo();
-                $ext = pathinfo($file['logo']['name'], PATHINFO_EXTENSION);
-                $newName = strtolower($form->name->getValue()) . '_logo' . '.' . $ext;
-                $form->logo->addFilter(new Zend_Filter_File_Rename(array('target'
-                            => $file['logo']['destination'] . '/' . $newName, 'overwrite' => true)));
-                $form->logo->receive();
+                
+                $championship_data = array();
+                
+                //receive and rename logo file
+                if ($form->getValue('logo')) {
+                    if ($form->logo->receive()) {
+                        $file = $form->logo->getFileInfo();
+                        $ext = pathinfo($file['logo']['name'], PATHINFO_EXTENSION);
+                        $newName = Date('Y-m-d_H-i-s') . strtolower('_logo' . '.' . $ext);
+
+                        $filterRename = new Zend_Filter_File_Rename(array('target'
+                                    => $file['logo']['destination'] . '/' . $newName, 'overwrite' => true));
+
+                        $filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
+
+                        $championship_data['url_logo'] = '/img/data/logos/championships/' . $newName;
+                    }
+                }
 
                 // save new article to db
                 $date = date('Y-m-d H:i:s');
-                $championship_data = array(
-                    'name' => $form->getValue('name'),
-                    'url_logo' => '/img/data/logos/championships/' . $newName,
-                    'league_id' => $form->getValue('league'),
-                    'article_id' => $form->getValue('rule'),
-                    'game_id' => $form->getValue('game'),
-                    'user_id' => $form->getValue('admin'),
-                    'date_start' => $form->getValue('date_start'),
-                    'date_end' => $form->getValue('date_end'),
-                    'description' => $form->getValue('description'),
-                    'date_create' => $date,
-                    'date_edit' => $date,
-                );
+                
+                $championship_data['name'] = $form->getValue('name');
+                $championship_data['league_id'] = $form->getValue('league');
+                $championship_data['article_id'] = $form->getValue('rule');
+                $championship_data['game_id'] = $form->getValue('game');
+                $championship_data['user_id'] = $form->getValue('admin');
+                $championship_data['date_start'] = $form->getValue('date_start');
+                $championship_data['date_end'] = $form->getValue('date_end');
+                $championship_data['description'] = $form->getValue('description');
+                $championship_data['date_create'] = $date;
+                $championship_data['date_edit'] = $date;
 
                 $championship = new Application_Model_DbTable_Championship();
                 $newChampionship = $championship->createRow($championship_data);
@@ -86,7 +95,6 @@ class ChampionshipController extends App_Controller_FirstBootController {
         } else {
             $this->view->errMessage .= $this->view->translate('Регламенты на сайте не найдены. Добавьте регламент, чтобы создать чемпионат!') . '<br />';
         }
-
 
         // add games
         $game = new Application_Model_DbTable_Game();
@@ -120,6 +128,19 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
         $request = $this->getRequest();
         $championship_id = $request->getParam('id');
+        
+        $championship = new Application_Model_DbTable_Championship();
+        $championship_data = $championship->getChampionshipData($championship_id);
+
+        if ($championship_data) {
+            $form = new Application_Form_Championship_Edit();
+            
+            $this->view->form = $form;
+        } else {
+            $this->view->errMessage .= $this->view->translate('Чемпионат не найден!') . '<br/>';
+            $this->view->headTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
+        }
     }
 
     public function deleteAction() {

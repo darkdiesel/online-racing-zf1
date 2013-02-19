@@ -10,6 +10,11 @@ class ChatController extends App_Controller_FirstBootController {
     public function addmessageAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->layout->disableLayout();
+            
+            /*
+             * $this->view->layout()->disableLayout();
+             * $this->_helper->viewRender->setNoRender(true);
+             */
             $request = $this->getRequest();
 
             if ($this->getRequest()->isPost()) {

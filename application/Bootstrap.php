@@ -506,7 +506,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
                 'label' => _('Главная'),
-                'uri' => '/',
+                'controller' => 'index',
+                'action' => 'index',
+                'route' => 'default',
             ),
             array(
                 'label' => _('Лиги'),
@@ -573,7 +575,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
                 'label' => _('Главная'),
-                'uri' => '/',
+                'controller' => 'index',
+                'action' => 'index',
+                'route' => 'default',
                 'pages' => array(
                     array(
                         'label' => _('Лиги'),
@@ -669,6 +673,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'title' => _('Панель администратора'),
                         'controller' => 'admin',
                         'action' => 'index',
+                        'route' => 'default',
                         'pages' => array(
                         )
                     )

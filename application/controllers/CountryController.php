@@ -92,7 +92,7 @@ class CountryController extends App_Controller_FirstBootController {
                 $newCountry = $country->createRow($country_data);
                 $newCountry->save();
 
-                $this->redirect($this->view->baseURL('country/id/' . $newCountry->id));
+                $this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $newCountry->id),'country', true));
             }
         }
 
@@ -111,8 +111,8 @@ class CountryController extends App_Controller_FirstBootController {
         if ($country_data) {
             //create form and set some parameters
             $form = new Application_Form_Country_Edit();
-            $form->setAction('/country/edit/' . $country_id);
-            $form->cancel->setAttrib('onClick', 'location.href="/country/id/' . $country_id . '"');
+            $form->setAction($this->view->url(array('controller' => 'contry', 'action' => 'edit', 'id' => $country_id), 'country', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $country_id),'country', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -193,7 +193,7 @@ class CountryController extends App_Controller_FirstBootController {
                         $country_where = $country->getAdapter()->quoteInto('id = ?', $country_id);
                         $country->update($new_country_data, $country_where);
 
-                        $this->redirect($this->view->baseUrl('country/id/' . $country_id));
+                        $this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $country_id),'country', true));
                     } else {
                         $this->view->errMessage .= $this->view->translate('Меняемое имя страны или аббревиация уже существуют в базе данных!') . '<br/>';
                     }
@@ -232,8 +232,8 @@ class CountryController extends App_Controller_FirstBootController {
 
             //create delete form
             $form = new Application_Form_Country_Delete();
-            $form->setAction('/country/delete/' . $country_id);
-            $form->cancel->setAttrib('onClick', 'location.href="/country/id/' . $country_id . '"');
+            $form->setAction($this->view->url(array('controller' => 'contry', 'action' => 'delete', 'id' => $country_id), 'country', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $country_id),'country', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
