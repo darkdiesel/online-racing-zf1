@@ -195,7 +195,8 @@ class CountryController extends App_Controller_FirstBootController {
 
                         $this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $country_id),'country', true));
                     } else {
-                        $this->view->errMessage .= $this->view->translate('Меняемое имя страны или аббревиация уже существуют в базе данных!') . '<br/>';
+                        $this->view->errMessage .= $this->view->translate('Неверное имя страны или аббревиация!') . ": {$form->getValue('native_name')} , {$form->getValue('abbreviation')}<br/>";
+                        $this->view->errMessage .= $this->view->translate('Имя страны или аббревиатура уже существуют в базе данных!') . '<br/>';
                     }
                 }
             }

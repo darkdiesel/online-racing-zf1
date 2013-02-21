@@ -23,7 +23,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'class' => 'x_field white_box_el_size_l',
             'validators' => array(
                 'NotEmpty',
-                new App_Validate_NoDbRecordExists('championship', 'name')
+                //new App_Validate_NoDbRecordExists('championship', 'name')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -34,8 +34,8 @@ class Application_Form_Championship_Edit extends Zend_Form {
         ));
 
         $this->addElement('file', 'logo', array(
-            'label' => $this->translate('Логотип соревнований'),
-            'required' => true,
+            'label' => $this->translate('Логотип чемпионата'),
+            'required' => false,
             'height' => '30px',
             'class' => 'white_box_el_size_m',
             'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/championships/',
@@ -154,7 +154,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             )
         ));
 
-        $this->addElement('textarea', 'desription', array(
+        $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание чемпионата'),
             'placeholder' => $this->translate('Описание чемпионата'),
             'cols' => 60,
@@ -174,7 +174,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Создать'),
+            'label' => $this->translate('Редактировать'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))

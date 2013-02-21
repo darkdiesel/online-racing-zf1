@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Online-Racing.net\n"
-"POT-Creation-Date: 2013-02-14 15:00+0300\n"
-"PO-Revision-Date: 2013-02-14 15:01+0300\n"
+"POT-Creation-Date: 2013-02-20 14:41+0300\n"
+"PO-Revision-Date: 2013-02-20 14:42+0300\n"
 "Last-Translator: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language-Team: Igor Peshkov <Igor.Peshkov@gmail.com>\n"
 "Language: Russian\n"
@@ -68,10 +68,10 @@ msgstr "Site content"
 
 #: d:\dev\localhost\online-racing\application\controllers/AdminController.php:32
 #: d:\dev\localhost\online-racing\application\controllers/LeagueController.php:163
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:512
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:513
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:579
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:580
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:514
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:515
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:583
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:584
 #: d:\dev\localhost\online-racing\application/controllers/AdminController.php:32
 #: d:\dev\localhost\online-racing\application/controllers/LeagueController.php:163
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer/ft_menu.phtml:4
@@ -91,9 +91,9 @@ msgstr "Leagues"
 
 #: d:\dev\localhost\online-racing\application\controllers/AdminController.php:40
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:531
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:538
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:607
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:608
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:540
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:611
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:612
 #: d:\dev\localhost\online-racing\application/controllers/AdminController.php:40
 #: d:\dev\localhost\online-racing\application/controllers/UserController.php:531
 #: d:\dev\localhost\online-racing\application\views\scripts\user/all.phtml:2
@@ -162,21 +162,21 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\views\scripts/article/edit.phtml:5
 #: d:\dev\localhost\online-racing\application\views\scripts\article/edit.phtml:5
 #: d:\dev\localhost\online-racing\application/views/scripts/article/edit.phtml:5
-#, fuzzy
 msgid "Редактировать статью"
-msgstr "Edit"
+msgstr "Edit article"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleController.php:225
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:24
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:115
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:152
 #: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:22
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:271
 #: d:\dev\localhost\online-racing\application\controllers/ContentTypeController.php:24
 #: d:\dev\localhost\online-racing\application\controllers/ContentTypeController.php:113
 #: d:\dev\localhost\online-racing\application\controllers/ContentTypeController.php:150
 #: d:\dev\localhost\online-racing\application\controllers/CountryController.php:22
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:215
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:250
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:216
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:251
 #: d:\dev\localhost\online-racing\application\controllers/EventController.php:25
 #: d:\dev\localhost\online-racing\application\controllers/EventController.php:130
 #: d:\dev\localhost\online-racing\application\controllers/EventController.php:167
@@ -191,12 +191,13 @@ msgstr "Edit"
 #: d:\dev\localhost\online-racing\application/controllers/ArticleTypeController.php:115
 #: d:\dev\localhost\online-racing\application/controllers/ArticleTypeController.php:152
 #: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:22
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:271
 #: d:\dev\localhost\online-racing\application/controllers/ContentTypeController.php:24
 #: d:\dev\localhost\online-racing\application/controllers/ContentTypeController.php:113
 #: d:\dev\localhost\online-racing\application/controllers/ContentTypeController.php:150
 #: d:\dev\localhost\online-racing\application/controllers/CountryController.php:22
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:215
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:250
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:216
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:251
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:25
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:130
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:167
@@ -257,6 +258,7 @@ msgstr "Edit"
 #: d:\dev\localhost\online-racing\application\views\scripts/country/edit.phtml:16
 #: d:\dev\localhost\online-racing\application\views\scripts/country/id.phtml:7
 #: d:\dev\localhost\online-racing\application\views\scripts/country/id.phtml:16
+#: d:\dev\localhost\online-racing\application\views\scripts/error/error.phtml:7
 #: d:\dev\localhost\online-racing\application\views\scripts/event/add.phtml:8
 #: d:\dev\localhost\online-racing\application\views\scripts/event/all.phtml:47
 #: d:\dev\localhost\online-racing\application\views\scripts/event/delete.phtml:7
@@ -360,6 +362,7 @@ msgstr "Edit"
 #: d:\dev\localhost\online-racing\application/views/scripts/country/edit.phtml:16
 #: d:\dev\localhost\online-racing\application/views/scripts/country/id.phtml:7
 #: d:\dev\localhost\online-racing\application/views/scripts/country/id.phtml:16
+#: d:\dev\localhost\online-racing\application/views/scripts/error/error.phtml:7
 #: d:\dev\localhost\online-racing\application/views/scripts/event/add.phtml:8
 #: d:\dev\localhost\online-racing\application/views/scripts/event/all.phtml:47
 #: d:\dev\localhost\online-racing\application/views/scripts/event/delete.phtml:7
@@ -471,9 +474,8 @@ msgstr "Article type not found on the site!"
 #: d:\dev\localhost\online-racing\application/controllers/CountryController.php:28
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:32
 #: d:\dev\localhost\online-racing\application/controllers/TeamController.php:32
-#, fuzzy
 msgid "Просмотреть все"
-msgstr "Views"
+msgstr "View all"
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:46
 #: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:28
@@ -516,22 +518,24 @@ msgid "Исправте следующие ошибки для добавлен�
 msgstr ""
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:77
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:119
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:127
 #: d:\dev\localhost\online-racing\application\controllers/ContentTypeController.php:76
 #: d:\dev\localhost\online-racing\application\controllers/CountryController.php:103
 #: d:\dev\localhost\online-racing\application\controllers/EventController.php:84
 #: d:\dev\localhost\online-racing\application\controllers/GameController.php:189
 #: d:\dev\localhost\online-racing\application\controllers/LeagueController.php:105
 #: d:\dev\localhost\online-racing\application\controllers/TeamController.php:78
+#: d:\dev\localhost\online-racing\application\forms/Championship/Edit.php:177
 #: d:\dev\localhost\online-racing\application\forms/Country/Edit.php:113
 #: d:\dev\localhost\online-racing\application/controllers/ArticleTypeController.php:77
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:119
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:127
 #: d:\dev\localhost\online-racing\application/controllers/ContentTypeController.php:76
 #: d:\dev\localhost\online-racing\application/controllers/CountryController.php:103
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:84
 #: d:\dev\localhost\online-racing\application/controllers/GameController.php:189
 #: d:\dev\localhost\online-racing\application/controllers/LeagueController.php:105
 #: d:\dev\localhost\online-racing\application/controllers/TeamController.php:78
+#: d:\dev\localhost\online-racing\application/forms/Championship/Edit.php:177
 #: d:\dev\localhost\online-racing\application/forms/Country/Edit.php:113
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_user_toolbar.phtml:24
 #: d:\dev\localhost\online-racing\application\views\scripts/article/id.phtml:39
@@ -566,9 +570,9 @@ msgid "Исправте следующие ошибки для изминени�
 msgstr ""
 
 #: d:\dev\localhost\online-racing\application\controllers/ArticleTypeController.php:122
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:126
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:277
 #: d:\dev\localhost\online-racing\application\controllers/ContentTypeController.php:120
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:221
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:222
 #: d:\dev\localhost\online-racing\application\controllers/EventController.php:137
 #: d:\dev\localhost\online-racing\application\controllers/TeamController.php:123
 #: d:\dev\localhost\online-racing\application\forms/Article/Delete.php:20
@@ -579,9 +583,9 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\forms/Event/Delete.php:20
 #: d:\dev\localhost\online-racing\application\forms/Team/Delete.php:20
 #: d:\dev\localhost\online-racing\application/controllers/ArticleTypeController.php:122
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:126
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:277
 #: d:\dev\localhost\online-racing\application/controllers/ContentTypeController.php:120
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:221
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:222
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:137
 #: d:\dev\localhost\online-racing\application/controllers/TeamController.php:123
 #: d:\dev\localhost\online-racing\application/forms/Article/Delete.php:20
@@ -635,37 +639,58 @@ msgstr "Championship"
 
 #: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:21
 #: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:23
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:270
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:272
 #: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:21
 #: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:23
-#, fuzzy
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:270
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:272
 msgid "Чемпионат не найден!"
-msgstr "Article types not found on the site!"
+msgstr "Championship not found!"
 
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:75
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:75
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:84
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:217
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:84
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:217
 msgid "Лиги не найдены"
 msgstr "Leagues not found!"
 
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:87
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:87
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:96
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:231
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:96
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:231
 msgid ""
 "Регламенты на сайте не найдены. Добавьте регламент, чтобы создать чемпионат!"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:100
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:100
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:108
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:245
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:108
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:245
 msgid "Игры не найдены"
 msgstr "Games not found!"
 
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:112
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:112
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:120
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:259
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:120
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:259
 msgid ""
 "Администраторы на сайте не найдены! Создайте администратора, чтобы добавить "
 "чемпионат."
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:133
-#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:133
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:199
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:199
+msgid "Неверное название"
+msgstr "Wrong name"
+
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:200
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:200
+msgid "Название чемпионата уже существуют в базе данных!"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/ChampionshipController.php:284
+#: d:\dev\localhost\online-racing\application/controllers/ChampionshipController.php:284
 msgid "Все"
 msgstr "All"
 
@@ -738,22 +763,37 @@ msgid "Страна"
 msgstr "Country"
 
 #: d:\dev\localhost\online-racing\application\controllers/CountryController.php:21
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:214
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:216
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:249
-#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:251
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:215
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:217
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:250
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:252
 #: d:\dev\localhost\online-racing\application/controllers/CountryController.php:21
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:214
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:216
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:249
-#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:251
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:215
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:217
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:250
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:252
 msgid "Страна не найдена!"
 msgstr "Country not found!"
 
 #: d:\dev\localhost\online-racing\application\controllers/CountryController.php:198
 #: d:\dev\localhost\online-racing\application/controllers/CountryController.php:198
-msgid "Меняемое имя страны или аббревиация уже существуют в базе данных!"
+msgid "Неверное имя страны или аббревиация!"
 msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/CountryController.php:199
+#: d:\dev\localhost\online-racing\application/controllers/CountryController.php:199
+msgid "Имя страны или аббревиатура уже существуют в базе данных!"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\controllers/ErrorController.php:11
+#: d:\dev\localhost\online-racing\application/controllers/ErrorController.php:11
+msgid "Доступ запрещен"
+msgstr "Access denied"
+
+#: d:\dev\localhost\online-racing\application\controllers/ErrorController.php:30
+#: d:\dev\localhost\online-racing\application/controllers/ErrorController.php:30
+msgid "Ошибка 404. Страница не найдена"
+msgstr "Error 404. Page not found"
 
 #: d:\dev\localhost\online-racing\application\controllers/EventController.php:8
 #: d:\dev\localhost\online-racing\application/controllers/EventController.php:8
@@ -852,9 +892,8 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\controllers/GameController.php:250
 #: d:\dev\localhost\online-racing\application/controllers/GameController.php:249
 #: d:\dev\localhost\online-racing\application/controllers/GameController.php:250
-#, fuzzy
 msgid "Контент для игры не найден!"
-msgstr "Content not found on the site!"
+msgstr "Content not found for the game!"
 
 #: d:\dev\localhost\online-racing\application\controllers/GameController.php:254
 #: d:\dev\localhost\online-racing\application\controllers/GameController.php:255
@@ -885,9 +924,8 @@ msgstr "League"
 #: d:\dev\localhost\online-racing\application\controllers/LeagueController.php:33
 #: d:\dev\localhost\online-racing\application/controllers/LeagueController.php:31
 #: d:\dev\localhost\online-racing\application/controllers/LeagueController.php:33
-#, fuzzy
 msgid "Лига не существует!"
-msgstr "League not found"
+msgstr "League not found!"
 
 #: d:\dev\localhost\online-racing\application\controllers/LeagueController.php:79
 #: d:\dev\localhost\online-racing\application/controllers/LeagueController.php:79
@@ -957,8 +995,8 @@ msgid "Исправте следующие ошибки для редактир�
 msgstr ""
 
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:21
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:612
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:613
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:616
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:617
 #: d:\dev\localhost\online-racing\application/controllers/UserController.php:21
 msgid "Пилот"
 msgstr "Pilot"
@@ -967,9 +1005,8 @@ msgstr "Pilot"
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:31
 #: d:\dev\localhost\online-racing\application/controllers/UserController.php:30
 #: d:\dev\localhost\online-racing\application/controllers/UserController.php:31
-#, fuzzy
 msgid "Пользователь не существует!"
-msgstr "Article not found"
+msgstr "User not found!"
 
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:41
 #: d:\dev\localhost\online-racing\application/controllers/UserController.php:41
@@ -1094,9 +1131,8 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\views\scripts\user/set-restore-passwd.phtml:2
 #: d:\dev\localhost\online-racing\application\views\scripts/user/set-restore-passwd.phtml:2
 #: d:\dev\localhost\online-racing\application/views/scripts/user/set-restore-passwd.phtml:2
-#, fuzzy
 msgid "Создание нового пароля"
-msgstr "Password reminder"
+msgstr "Creating new password"
 
 #: d:\dev\localhost\online-racing\application\controllers/UserController.php:391
 #: d:\dev\localhost\online-racing\application/controllers/UserController.php:391
@@ -1412,8 +1448,8 @@ msgstr "Arcticle type description"
 #: d:\dev\localhost\online-racing\application/forms/Championship/Add.php:37
 #: d:\dev\localhost\online-racing\application/forms/Championship/Edit.php:37
 #, fuzzy
-msgid "Логотип соревнований"
-msgstr "Last edited"
+msgid "Логотип чемпионата"
+msgstr "Leagues and championships"
 
 #: d:\dev\localhost\online-racing\application\forms/Championship/Add.php:73
 #: d:\dev\localhost\online-racing\application\forms/Championship/Edit.php:73
@@ -1488,9 +1524,7 @@ msgid "Описание чемпионата"
 msgstr "Arcticle type description"
 
 #: d:\dev\localhost\online-racing\application\forms/Championship/Add.php:176
-#: d:\dev\localhost\online-racing\application\forms/Championship/Edit.php:177
 #: d:\dev\localhost\online-racing\application/forms/Championship/Add.php:176
-#: d:\dev\localhost\online-racing\application/forms/Championship/Edit.php:177
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/index.phtml:63
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/index.phtml:98
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/index.phtml:133
@@ -2167,7 +2201,7 @@ msgid "Очистить"
 msgstr "Clear"
 
 #: d:\dev\localhost\online-racing\application/Bootstrap.php:508
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:575
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:577
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header.phtml:3
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer/ft_menu.phtml:3
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_admin_toolbar.phtml:4
@@ -2181,34 +2215,33 @@ msgstr "Clear"
 msgid "Главная"
 msgstr "Main"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:519
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:520
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:586
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:587
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:521
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:522
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:590
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:591
 #, fuzzy
 msgid "F1 Online-Racing League"
 msgstr "F1 Online Racing League"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:529
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:596
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:597
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:531
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:600
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:601
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_main_menu.phtml:26
 #: d:\dev\localhost\online-racing\application/layouts/scripts/header/hd_main_menu.phtml:26
 msgid "Все лиги"
 msgstr "All leagues"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:530
-#, fuzzy
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:532
 msgid "Все лиги портала"
 msgstr "All leagues of the portal"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:539
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:541
 msgid "Все гонщики нашего портала"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:545
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:623
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:624
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:547
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:627
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:628
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer/ft_menu.phtml:6
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_main_menu.phtml:30
 #: d:\dev\localhost\online-racing\application/layouts/scripts/footer/ft_menu.phtml:6
@@ -2216,14 +2249,14 @@ msgstr ""
 msgid "Статьи"
 msgstr "Articles"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:546
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:548
 msgid "Все статьи опубликованные на нашем портале"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:552
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:553
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:640
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:641
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:554
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:555
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:644
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:645
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer/ft_menu.phtml:7
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_main_menu.phtml:33
 #: d:\dev\localhost\online-racing\application/layouts/scripts/footer/ft_menu.phtml:7
@@ -2231,16 +2264,17 @@ msgstr ""
 msgid "Файлы"
 msgstr "Files"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:557
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:558
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:645
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:559
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:560
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:649
 msgid "Игры и Моды"
 msgstr "Games and Mods"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:566
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:567
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:663
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:664
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:568
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:569
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:667
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:668
+#: d:\dev\localhost\online-racing\application/modules/forum/controllers/IndexController.php:9
 #: d:\dev\localhost\online-racing\application\layouts\scripts/footer/ft_menu.phtml:8
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_main_menu.phtml:42
 #: d:\dev\localhost\online-racing\application/layouts/scripts/footer/ft_menu.phtml:8
@@ -2248,23 +2282,22 @@ msgstr "Games and Mods"
 msgid "Форум"
 msgstr "Forum"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:630
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:631
-#, fuzzy
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:634
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:635
 msgid "Статья"
-msgstr "Articles"
+msgstr "Article"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:651
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:652
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:655
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:656
 msgid "Игра"
 msgstr "Game"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:668
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:672
 #, fuzzy
 msgid "Админ. панель"
 msgstr "Administrator"
 
-#: d:\dev\localhost\online-racing\application/Bootstrap.php:669
+#: d:\dev\localhost\online-racing\application/Bootstrap.php:673
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_admin_toolbar.phtml:15
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_admin_toolbar.phtml:32
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_master_toolbar.phtml:15
@@ -2636,9 +2669,8 @@ msgstr "Content"
 #: d:\dev\localhost\online-racing\application/views/scripts/admin/index.phtml:333
 #: d:\dev\localhost\online-racing\application/views/scripts/admin/index.phtml:385
 #: d:\dev\localhost\online-racing\application/views/scripts/admin/index.phtml:420
-#, fuzzy
 msgid "Просмотреть"
-msgstr "Views"
+msgstr "View"
 
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_admin_toolbar.phtml:20
 #: d:\dev\localhost\online-racing\application\layouts\scripts/header/hd_admin_toolbar.phtml:37
@@ -2923,9 +2955,8 @@ msgstr "Content not found on the site!"
 #: d:\dev\localhost\online-racing\application/views/scripts/admin/index.phtml:323
 #: d:\dev\localhost\online-racing\application/views/scripts/admin/index.phtml:375
 #: d:\dev\localhost\online-racing\application/views/scripts/admin/index.phtml:410
-#, fuzzy
 msgid "Действия"
-msgstr "Action"
+msgstr "Actions"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/index.phtml:27
 #: d:\dev\localhost\online-racing\application\views\scripts/admin/index.phtml:67
@@ -3284,8 +3315,8 @@ msgstr "Add content"
 #: d:\dev\localhost\online-racing\application\views\scripts/championship/edit.phtml:2
 #: d:\dev\localhost\online-racing\application/views/scripts/championship/edit.phtml:2
 #, fuzzy
-msgid "Редактирование соревнования"
-msgstr "Profile editing "
+msgid "Редактировать чемпионат"
+msgstr "Delete content type"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/championship/id.phtml:51
 #: d:\dev\localhost\online-racing\application/views/scripts/championship/id.phtml:51
@@ -3416,11 +3447,21 @@ msgstr "Add content"
 msgid "Редактировать страну"
 msgstr "Edit"
 
+#: d:\dev\localhost\online-racing\application\views\scripts/error/error.phtml:2
+#: d:\dev\localhost\online-racing\application/views/scripts/error/error.phtml:2
+msgid "Произошла ошибка"
+msgstr ""
+
+#: d:\dev\localhost\online-racing\application\views\scripts/error/error.phtml:12
+#: d:\dev\localhost\online-racing\application/views/scripts/error/error.phtml:12
+#, fuzzy
+msgid "Информация об ошибке"
+msgstr "Information"
+
 #: d:\dev\localhost\online-racing\application\views\scripts/event/add.phtml:2
 #: d:\dev\localhost\online-racing\application/views/scripts/event/add.phtml:2
-#, fuzzy
 msgid "Добавить событие"
-msgstr "Add content"
+msgstr "Add event"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/event/all.phtml:2
 #: d:\dev\localhost\online-racing\application/views/scripts/event/all.phtml:2
@@ -3554,25 +3595,23 @@ msgstr "No description"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/league/id.phtml:95
 #: d:\dev\localhost\online-racing\application/views/scripts/league/id.phtml:95
-#, fuzzy
 msgid "Личный зачет"
-msgstr "Personal information"
+msgstr "Driver standings"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/league/id.phtml:95
 #: d:\dev\localhost\online-racing\application/views/scripts/league/id.phtml:95
-#, fuzzy
 msgid "ЛЗ"
-msgstr "Years"
+msgstr "DS"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/league/id.phtml:96
 #: d:\dev\localhost\online-racing\application/views/scripts/league/id.phtml:96
-msgid "Кубок конструкторов"
-msgstr ""
+msgid "Командный зачет"
+msgstr "Team standings"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/league/id.phtml:96
 #: d:\dev\localhost\online-racing\application/views/scripts/league/id.phtml:96
-msgid "КК"
-msgstr ""
+msgid "КЗ"
+msgstr "TS"
 
 #: d:\dev\localhost\online-racing\application\views\scripts/league/id.phtml:97
 #: d:\dev\localhost\online-racing\application/views/scripts/league/id.phtml:97
@@ -3678,6 +3717,14 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application/views/scripts/team/edit.phtml:5
 msgid "Редактировать команду"
 msgstr "Edit team"
+
+#, fuzzy
+#~ msgid "Логотип соревнований"
+#~ msgstr "Last edited"
+
+#, fuzzy
+#~ msgid "Редактирование соревнования"
+#~ msgstr "Profile editing "
 
 #, fuzzy
 #~ msgid "Аббревиация"

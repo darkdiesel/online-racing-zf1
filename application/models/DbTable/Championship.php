@@ -51,6 +51,22 @@ class Application_Model_DbTable_Championship extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
+    
+    public function checkExistChampionshipName($championship_name) {
+        $model = new self;
+        $select = $model->select()
+                ->from($this->_name, 'id')
+                ->where('name = ?', $championship_name)
+                ->columns('id');
+
+        $championship_data = $model->fetchRow($select);
+
+        if (count($championship_data) != 0) {
+            return $championship_data->id;
+        } else {
+            return FALSE;
+        }
+    }
 
 }
 

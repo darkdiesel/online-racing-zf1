@@ -61,6 +61,9 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('game/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('game/delete'), 'admin_allow');
         
+        $this->add(new Zend_Acl_Resource('championship/edit'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('championship/delete'), 'admin_allow');
+        
         $this->add(new Zend_Acl_Resource('event/add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('event/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('event/delete'), 'admin_allow');
@@ -83,6 +86,7 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('country/add'), 'master_allow');
         
         $this->add(new Zend_Acl_Resource('championship/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('championship/addTeam'), 'master_allow');
 
         //Выставляем права, по-умолчанию всё запрещено
         //this->deny('user', 'user_deny', 'show');

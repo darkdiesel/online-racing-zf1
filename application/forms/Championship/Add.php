@@ -34,7 +34,7 @@ class Application_Form_Championship_Add extends Zend_Form {
         ));
 
         $this->addElement('file', 'logo', array(
-            'label' => $this->translate('Логотип соревнований'),
+            'label' => $this->translate('Логотип чемпионата'),
             'required' => true,
             'height' => '30px',
             'class' => 'white_box_el_size_m',
@@ -153,7 +153,7 @@ class Application_Form_Championship_Add extends Zend_Form {
             )
         ));
 
-        $this->addElement('textarea', 'desription', array(
+        $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание чемпионата'),
             'placeholder' => $this->translate('Описание чемпионата'),
             'cols' => 60,
