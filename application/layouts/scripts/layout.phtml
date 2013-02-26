@@ -26,16 +26,17 @@
                 </div>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">
-                        <?php
-                        $breadcrumb = Zend_Registry::get('breadcrumb');
-                        if ($breadcrumb['show']) {
-                            echo $this->render("breadcrumb.phtml");
-                        }
-                        ?>
+                        
                         <div id="menu">
                         </div>
                         <!-- Content -->
                         <div id="content">
+	                        <?php
+	                        $breadcrumb = Zend_Registry::get('breadcrumb');
+	                        if ($breadcrumb['show']) {
+	                            echo $this->render("breadcrumb.phtml");
+	                        }
+	                        ?>
                             <?php echo $this->layout()->content ?>
                         </div>
                         <!-- Left sidebar -->

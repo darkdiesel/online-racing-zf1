@@ -177,7 +177,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         if (isset($config['locales'][$lang])) {
             $zl->setLocale($config['locales'][$lang]);
         } else {
-            $zf->setLocale('ru_RU');
+            $zl->setLocale('ru_RU');
         }
         Zend_Registry::set('Zend_Locale', $zl);
 

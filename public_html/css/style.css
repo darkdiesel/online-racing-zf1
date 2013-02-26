@@ -23,18 +23,18 @@ body iframe{
         #unheader{
             position:relative;
             height:100px;
-            top:145px;
+            top:185px;
         }
         #header{
             width:1024px;
-            height:240px;
+            height:280px;
             background:url("../img/lines_bg.png");
             position:relative;
         }
             #logo_box{
                 position:absolute;
-                padding: 20px 0 0 5px;
-                left:-10px;
+                padding:0;
+                left:20px;
             }
                 #logo{
 
@@ -571,12 +571,17 @@ label.valid {
     width:24px;
 }
 .breadcrumb{
-    background-color:#F5F5F5;
-    border:1px solid #CDCACA;
-    border-radius:0;
-    margin:5px 0px;
     color:gray;
+	padding:0;
 }
+	.breadcrumb:AFTER{
+		content:"";
+		display:block;
+		border:1px solid #D9D9D9;
+		height:2px;
+		background-color:#D9D9D9;
+		margin-top:5px;
+	}
 .user_light_status{
     height:20px;
     float:right;
