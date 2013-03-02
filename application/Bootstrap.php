@@ -97,7 +97,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         /* [CSS SETTINGS] */
         /* [BOOTSTRAP CSS] */
-        $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.css"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.min.css"));
         /* [JQUERY UI CSS] */
         $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.0.custom.min.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
@@ -204,19 +204,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
 
-        /*$router->addRoute(
-                'default', new Zend_Controller_Router_Route_Regex(('(\w*)/(\w*)\.html'),
-                        array(
-                            'module' => 'default'
-                        ),
-                        array(
-                            'controller' => 1,
-                            'action' => 2
-                        ),
-                        '%s/%s.html'
-                        )
-                
-                );*/
+        /* $router->addRoute(
+          'default', new Zend_Controller_Router_Route_Regex(('(\w*)/(\w*)\.html'),
+          array(
+          'module' => 'default'
+          ),
+          array(
+          'controller' => 1,
+          'action' => 2
+          ),
+          '%s/%s.html'
+          )
+
+          ); */
 
         $router->addRoute(
                 'user', new Zend_Controller_Router_Route_Regex('user/(\w*)/(\d+)\.html',
@@ -256,7 +256,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         "article/%s/%s.html"
                 )
         );
-        
+
 
         $router->addRoute(
                 'articleAll', new Zend_Controller_Router_Route('article/all/:page',
@@ -321,7 +321,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'id' => 0,
                             'page' => 1)
         ));
-        
+
         $router->addRoute(
                 'league', new Zend_Controller_Router_Route_Regex('league/(\w*)/(\d+)\.html',
                         array(
@@ -393,24 +393,42 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         "championship/%s/%s.html"
                 )
         );
-        
+
         $router->addRoute(
-                'championshipAddTeam', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)/(\w*)\.html',
+                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)/(\w*)/(\d+)\.html',
                         array(
                             'module' => 'default',
                             'controller' => 'championship',
-                            'action' => 'addTeam',
+                            1 => 'id',
                             2 => 0,
-                            1 => 'id'
+                            4 => 0
                         ),
                         array(
+                            'championship_id' => 2,
                             'action' => 3,
-                            'id' => 2
-                            
+                            'team_id' => 4
+                        ),
+                        "championship/%s/%s/%s/%s.html"
+                )
+        );
+        
+        $router->addRoute(
+                'championshipTeamDefault', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)/(\w*)\.html',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'championship',
+                            'action' => 'teamAdd',
+                            1 => 'id',
+                            2 => 0,
+                        ),
+                        array(
+                            'championship_id' => 2,
+                            'action' => 3,
                         ),
                         "championship/%s/%s/%s.html"
                 )
         );
+
 
         $router->addRoute(
                 'championshipAll', new Zend_Controller_Router_Route('championship/all/:page',

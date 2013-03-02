@@ -22,6 +22,7 @@ class Application_Form_User_Login extends Zend_Form {
             'title' => $this->translate('Введите свой электронный почтовый ящик. Пример: example@mail.com.'),
             'required' => true,
             'class' => 'x_field tooltip_field',
+            'data-placement' => 'bottom',
             'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
             'maxlength' => 255,
             'validators' => array(
@@ -43,6 +44,7 @@ class Application_Form_User_Login extends Zend_Form {
             'title' => $this->translate('Введите пароль от своей учетной записи.'),
             'required' => true,
             'class' => 'x_field tooltip_field',
+            'data-placement' => 'bottom',
             'filters' => array('StripTags', 'StringTrim'),
             'maxlength' => 25,
             'validators' => array(
@@ -61,6 +63,7 @@ class Application_Form_User_Login extends Zend_Form {
             'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
             'data-placeholder' => 'left',
             'class' => 'tooltip_field',
+            'data-placement' => 'bottom',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),

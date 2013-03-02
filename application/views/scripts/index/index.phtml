@@ -49,8 +49,9 @@
         });
     </script>
     <div class="hero-unit img-polaroid">
-        <h1><?php echo $this->translate('Добро пожаловать');?></h1>
-        <p>Добро пожаловать в увлекательный мир онлайновый авто-гонок. Наш портал <strong>Online-Racing.Net</strong> поможет окунаться вам в него с головой. Вступайте в наши ряды.</p>
+        <img src="<?php echo $this->baseUrl('img/logo_large.png')?>">
+        <h1><?php echo $this->translate('Присоединяйся!');?></h1>
+        <p>Добро пожаловать в увлекательный мир онлайновый авто-гонок. <strong>Online-Racing.Net</strong> поможет окунуться вам в него с головой. Вступайте в наши ряды.</p>
         <p>
             <a class="btn btn-primary btn-large" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true)?>">
                 <?php echo $this->translate('Присоедениться');?>

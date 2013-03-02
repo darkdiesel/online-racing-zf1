@@ -4,8 +4,9 @@
     <div class="page_content">
         <?php
         if (count($this->paginator)) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
-
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');?>
+            <div class="div_hr"></div>
+            <?php
             $date1 = new Zend_Date();
             foreach ($this->paginator as $user):
                 ?>
@@ -26,9 +27,9 @@
                     <div class="user_login"><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $user['id']), 'user', true) ?>"><?php echo $user['login']; ?></a></div>
                 </div>
                 <?php
-            endforeach;
-
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/user_all_pagination_control.phtml');
+            endforeach;?>
+            <div class="div_hr"></div>
+            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
         } else {
             ?>
             <div class="alert alert-error alert-block">

@@ -1,0 +1,24 @@
+<div id="chmpionship_team_all_page" class="page">
+    <div class="page_title"><?php echo $this->translate('Гонищки'); ?></div>
+    <div class="div_hr"></div>
+    <div class="page_content">
+        <?php if ($this->errMessage != "") { ?>
+            <div class="alert alert-error alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+                <?php echo $this->errMessage; ?>
+            </div>
+        <?php } else { ?>
+            <?php foreach ($this->championshipTeams as $team): ?>
+                <div class="article_item">
+                    <div class="article_title">
+                        <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true) ?>"><?php echo $this->escape($team['name']); ?></a>
+                    </div>
+                    <?php if ($this->escape($team['url_logo']) != '') { ?>
+                        <img class="img-polaroid article_image" src="<?php echo $this->escape($team['url_logo']); ?>">
+                    <?php } ?>
+                </div>
+            <?php endforeach; ?>
+        <?php } ?>
+    </div>
+</div>

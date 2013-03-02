@@ -51,5 +51,22 @@ class Application_Model_DbTable_Team extends Zend_Db_Table_Abstract {
 
         return $paginator;
     }
+    
+    public function getTeamNames($order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from($this->_name, 'name')
+                ->columns(array('id', 'name'))
+                ->order('name ' . $order);
+
+        $teams = $model->fetchAll($select);
+
+        if (count($teams) != 0) {
+            return $teams;
+        } else {
+            return FALSE;
+        }
+    }
 
 }

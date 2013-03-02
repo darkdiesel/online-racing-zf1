@@ -52,7 +52,7 @@ class Application_Model_DbTable_ArticleType extends Zend_Db_Table_Abstract {
         return $paginator;
     }
     
-    public function getArticleTypesName($order) {
+    public function getArticleTypeNames($order) {
         $model = new self;
 
         $select = $model->select()

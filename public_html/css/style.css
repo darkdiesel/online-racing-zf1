@@ -23,11 +23,11 @@ body iframe{
         #unheader{
             position:relative;
             height:100px;
-            top:185px;
+            top:170px;
         }
         #header{
             width:1024px;
-            height:280px;
+            height:265px;
             background:url("../img/lines_bg.png");
             position:relative;
         }
@@ -588,4 +588,8 @@ label.valid {
     position:absolute;
     right:7px;
     top:163px;
+}
+/* Fix bootstrap */
+.tooltip{
+    white-space:normal;
 }

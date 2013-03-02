@@ -25,8 +25,11 @@
                     ?>
                     <img class="img-polaroid article_center_image" src="<?php echo $this->escape($this->championship->url_logo); ?>">
                 <?php } ?>
-                <div class="article_text"><?php //echo $bbcode->render($this->escape($this->article->text));          ?></div>
-
+                <div class="article_text"><?php //echo $bbcode->render($this->escape($this->article->text));           ?></div>
+                <div><a class="btn" href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'teams', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true);?>"><?php echo $this->translate('Гонщики') ?></a></div>
+                <div><a class="btn" href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true);?>"><?php echo $this->translate('ЛЗ') ?></a></div>
+                <div><a class="btn" href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true);?>"><?php echo $this->translate('КЗ') ?></a></div>
+                
                 <?php
                 $edit_access = $this->checkUserAccess('championship/edit');
                 $delete_access = $this->checkUserAccess('championship/delete');
@@ -35,8 +38,8 @@
                 if ($add_team_access || $delete_access || $add_team_access) {
                     ?>
                     <div class="article_controls">
-                        <?php if ($edit_access) { ?>
-                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'addTeam', 'id' => $this->escape($this->championship->id)), 'championshipAddTeam', true); ?>" class = "btn btn-small btn-info article_edit"><?php echo $this->translate('Добавить команду') ?></a>
+                        <?php if ($add_team_access) { ?>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'addTeam', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_edit"><?php echo $this->translate('Добавить команду') ?></a>
                         <?php } ?>
                         <?php if ($edit_access) { ?>
                             <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'edit', 'id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>

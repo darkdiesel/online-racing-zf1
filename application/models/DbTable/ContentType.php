@@ -52,7 +52,7 @@ class Application_Model_DbTable_ContentType extends Zend_Db_Table_Abstract {
         return $paginator;
     }
     
-    public function getContentTypesName($order) {
+    public function getContentTypeNames($order) {
         $model = new self;
 
         $select = $model->select()
