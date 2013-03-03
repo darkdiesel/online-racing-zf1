@@ -368,6 +368,114 @@ class ChampionshipController extends App_Controller_FirstBootController {
             $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
         }
     }
+    
+    public function editteamAction() {
+    	$this->view->headTitle($this->view->translate('Редактировать команду'));
+    	
+    	$request = $this->getRequest();
+    	$championship_id = $request->getParam('championship_id');
+    	
+    	$championship = new Application_Model_DbTable_Championship();
+    	
+    	if ($championship->checkExistChampionshipById($championship_id)) {
+    		$team_id = $request->getParam('team_id');
+    		
+    		$championship_team = new Application_Model_DbTable_ChampionshipTeam();
+    		$championship_team_data = $championship_team->getData($team_id, $championship_id);
+    		
+    		if ($championship_team_data) {
+    			$form = new Application_Form_Championship_Editteam();
+    			$form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'editteam', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+    			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true)}\"");
+
+    			$form->name->setValue($championship_team_data->name);
+    			
+    			// add teams
+    			$team = new Application_Model_DbTable_Team();
+    			$teams = $team->getTeamNames('ASC');
+    			
+    			if ($teams) {
+    				foreach ($teams as $team):
+    				$form->team->addMultiOption($team->id, $team->name);
+    				endforeach;
+    			} else {
+    				$this->view->errMessage .= $this->view->translate('Команды не найдены') . '<br />';
+    			}
+    			
+    			$form->team->setValue($championship_team_data->team_id);
+   			
+    			if ($this->getRequest()->isPost()) {
+    				if ($form->isValid($request->getPost())) {
+    					//saving new data to DB
+    					$new_championship_team_data = array();
+    			
+    					//receive and rename logo file
+    					if ($form->getValue('logo')) {
+    						if ($form->logo->receive()) {
+    							$file = $form->logo->getFileInfo();
+    							$ext = pathinfo($file['logo']['name'], PATHINFO_EXTENSION);
+    							$newName = Date('Y-m-d_H-i-s') . strtolower('_logo_team' . '.' . $ext);
+    			
+    							$filterRename = new Zend_Filter_File_Rename(array('target'
+    									=> $file['logo']['destination'] . '/' . $newName, 'overwrite' => true));
+    			
+    							$filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
+    			
+    							$new_championship_team_data['url_logo'] = '/img/data/logos/teams/logo/' . $newName;
+    							
+    							if ($new_championship_team_data['url_logo'] != $championship_team_data['url_logo']) {
+    								unlink(APPLICATION_PATH . '/../public_html' . $championship_team_data['url_logo']);
+    							}
+    						}
+    					}
+    			
+    					//receive and rename logo file
+    					if ($form->getValue('logo_team')) {
+    						if ($form->logo->receive()) {
+    							$file = $form->logo_team->getFileInfo();
+    							$ext = pathinfo($file['logo_team']['name'], PATHINFO_EXTENSION);
+    							$newName = Date('Y-m-d_H-i-s') . strtolower('_logo_car' . '.' . $ext);
+    			
+    							$filterRename = new Zend_Filter_File_Rename(array('target'
+    									=> $file['logo_team']['destination'] . '/' . $newName, 'overwrite' => true));
+    			
+    							$filterRename->filter($file['logo_team']['destination'] . '/' . $file['logo_team']['name']);
+    			
+    							$new_championship_team_data['url_logo_car'] = '/img/data/logos/teams/car/' . $newName;
+    							
+    							if ($new_championship_team_data['url_logo_car'] != $championship_team_data['url_logo_car']) {
+    								unlink(APPLICATION_PATH . '/../public_html' . $championship_team_data['url_logo_car']);
+    							}
+    						}
+    					}
+    			
+    					// save new article to db
+    					$date = date('Y-m-d H:i:s');
+    			
+    					$new_championship_team_data['name'] = $form->getValue('name');
+    					$new_championship_team_data['team_id'] = $form->getValue('team');
+    					$new_championship_team_data['date_edit'] = $date;
+    			
+    					$championship_team_where = $championship_team->getAdapter()->quoteInto("championship_id = {$championship_id} and team_id = {$team_id}");
+    					$championship_team->update($new_championship_team_data, $championship_team_where);
+    			
+    					$this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+    				}
+    			}
+    			
+    			$this->view->form = $form;
+    		} else {
+    			$this->view->errMessage .= $this->view->translate('Команда не найдена!') . '<br/>';
+    			$this->view->headTitle($this->view->translate('Ошибка!'));
+    			$this->view->headTitle($this->view->translate('Команда не найдена не найдена!'));
+    		}
+    		
+    	} else {
+            $this->view->errMessage .= $this->view->translate('Чемпионат не найден!') . '<br/>';
+            $this->view->headTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
+        }
+    }
 
     public function teamsAction() {
         $this->view->headTitle($this->view->translate('Команды и Гонщики'));

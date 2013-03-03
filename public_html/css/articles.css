@@ -118,4 +118,30 @@
             font-weight:bold;
             vertical-align:middle;
         }
-        
+/* teams */        
+.article_team_car_image{
+	clear:both;
+    max-width:500px;
+    margin:10px auto;
+    display:block;
+    max-height:240px;
+}
+.article_team_logo_image{
+	
+}
+/* article team title */
+.article_team_title{
+    margin:5px;
+	text-align:center;
+	text-transform:uppercase;
+}
+    .article_team_title a{
+    	font-weight:bold;
+        color:#636262;
+        text-decoration:none;
+        font: bold 24px/30px sans-serif;
+        text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
+    }
+       .article_team_title a:hover{
+            color:#D33B3D;
+        }

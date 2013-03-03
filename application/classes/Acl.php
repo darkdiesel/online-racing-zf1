@@ -87,6 +87,7 @@ class Acl extends Zend_Acl {
         
         $this->add(new Zend_Acl_Resource('championship/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('championship/addteam'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('championship/editteam'), 'master_allow');
 
         //Выставляем права, по-умолчанию всё запрещено
         //this->deny('user', 'user_deny', 'show');

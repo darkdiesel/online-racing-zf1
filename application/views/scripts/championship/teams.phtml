@@ -1,5 +1,5 @@
 <div id="chmpionship_team_all_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Гонищки'); ?></div>
+    <div class="page_title"><?php echo $this->translate('Гонщики'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
         <?php if ($this->errMessage != "") { ?>
@@ -11,12 +11,25 @@
         <?php } else { ?>
             <?php foreach ($this->championshipTeams as $team): ?>
                 <div class="article_item">
-                    <div class="article_title">
+                	<div class="article_team_title">
                         <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true) ?>"><?php echo $this->escape($team['name']); ?></a>
                     </div>
-                    <?php if ($this->escape($team['url_logo']) != '') { ?>
-                        <img class="img-polaroid article_image" src="<?php echo $this->escape($team['url_logo']); ?>">
+                	<?php if ($this->escape($team['url_logo_car']) != '') { ?>
+                		<img class="img-polaroid article_team_car_image" src="<?php echo $this->escape($team['url_logo_car']); ?>">
                     <?php } ?>
+                    <table class="table">
+                    	<tbody>
+                    		<tr>
+                    			<td>
+                    				<?php if ($this->escape($team['url_logo']) != '') { ?>
+				                        <img class="img-polaroid article_team_logo_image" src="<?php echo $this->escape($team['url_logo']); ?>">
+				                    <?php } ?>
+                    			</td>
+                    			<td>Пилот 1</td>
+                    			<td>Пилот 2</td>
+                    		</tr>
+                    	</tbody>
+                    </table>
                 </div>
             <?php endforeach; ?>
         <?php } ?>

@@ -39,7 +39,7 @@
                     ?>
                     <div class="article_controls">
                         <?php if ($add_team_access) { ?>
-                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'addTeam', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_edit"><?php echo $this->translate('Добавить команду') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'addteam', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_edit"><?php echo $this->translate('Добавить команду') ?></a>
                         <?php } ?>
                         <?php if ($edit_access) { ?>
                             <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'edit', 'id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>

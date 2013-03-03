@@ -93,7 +93,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
         // add article types to the form
         $article_types = new Application_Model_DbTable_ArticleType();
-        $article_types = $article_types->getArticleTypesName('ASC');
+        $article_types = $article_types->getArticleTypeNames('ASC');
 
         if ($article_types) {
             foreach ($article_types as $type):
@@ -106,7 +106,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
         // add content types to the form
         $content_type = new Application_Model_DbTable_ContentType();
-        $content_types = $content_type->getContentTypesName('ASC');
+        $content_types = $content_type->getContentTypeNames('ASC');
 
         if ($content_types) {
             foreach ($content_types as $type):
@@ -182,7 +182,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
             // add article types to the form
             $article_types = new Application_Model_DbTable_ArticleType();
-            $article_types = $article_types->getArticleTypesName('ASC');
+            $article_types = $article_types->getArticleTypeNames('ASC');
 
             if ($article_types) {
                 foreach ($article_types as $type):
@@ -195,7 +195,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
             // add content types to the form
             $content_type = new Application_Model_DbTable_ContentType();
-            $content_types = $content_type->getContentTypesName('ASC');
+            $content_types = $content_type->getContentTypeNames('ASC');
 
             if ($content_types) {
                 foreach ($content_types as $type):

@@ -283,3 +283,353 @@ Stack trace:
 #2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #4 {main}
+02-03-2013 20:00:20 NOTICE (5): Error 404. Page not found
+02-03-2013 20:00:20 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => championships
+    [module] => default
+)
+
+02-03-2013 20:00:20 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:00:21 NOTICE (5): Error 404. Page not found
+02-03-2013 20:00:21 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => championships
+    [module] => default
+)
+
+02-03-2013 20:00:21 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:00:25 CRIT (2): Ошибка 500. Ошибка приложения
+02-03-2013 20:00:25 CRIT (2): Request params: Array
+(
+    [1] => id
+    [championship_id] => 1
+    [action] => teams
+    [module] => default
+    [controller] => championship
+)
+
+02-03-2013 20:00:25 CRIT (2): exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'online-racing.championship_team' doesn't exist' in D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 D:\Dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#2 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('DESCRIBE `champ...', Array)
+#4 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Mysql.php(169): Zend_Db_Adapter_Pdo_Abstract->query('DESCRIBE `champ...')
+#5 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(836): Zend_Db_Adapter_Pdo_Mysql->describeTable('championship_te...', NULL)
+#6 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(858): Zend_Db_Table_Abstract->_setupMetadata()
+#7 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(898): Zend_Db_Table_Abstract->_getCols()
+#8 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(983): Zend_Db_Table_Abstract->_setupPrimaryKey()
+#9 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Select.php(100): Zend_Db_Table_Abstract->info()
+#10 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Select.php(78): Zend_Db_Table_Select->setTable(Object(Application_Model_DbTable_ChampionshipTeam))
+#11 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1019): Zend_Db_Table_Select->__construct(Object(Application_Model_DbTable_ChampionshipTeam))
+#12 D:\Dev\localhost\online-racing\application\models\DbTable\ChampionshipTeam.php(34): Zend_Db_Table_Abstract->select()
+#13 D:\Dev\localhost\online-racing\application\controllers\ChampionshipController.php(383): Application_Model_DbTable_ChampionshipTeam->getAllData('1')
+#14 D:\Dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChampionshipController->teamsAction()
+#15 D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('teamsAction')
+#16 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#17 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#18 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#19 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#20 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'online-racing.championship_team' doesn't exist' in D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:234
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('DESCRIBE `champ...', Array)
+#3 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Mysql.php(169): Zend_Db_Adapter_Pdo_Abstract->query('DESCRIBE `champ...')
+#4 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(836): Zend_Db_Adapter_Pdo_Mysql->describeTable('championship_te...', NULL)
+#5 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(858): Zend_Db_Table_Abstract->_setupMetadata()
+#6 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(898): Zend_Db_Table_Abstract->_getCols()
+#7 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(983): Zend_Db_Table_Abstract->_setupPrimaryKey()
+#8 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Select.php(100): Zend_Db_Table_Abstract->info()
+#9 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Select.php(78): Zend_Db_Table_Select->setTable(Object(Application_Model_DbTable_ChampionshipTeam))
+#10 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1019): Zend_Db_Table_Select->__construct(Object(Application_Model_DbTable_ChampionshipTeam))
+#11 D:\Dev\localhost\online-racing\application\models\DbTable\ChampionshipTeam.php(34): Zend_Db_Table_Abstract->select()
+#12 D:\Dev\localhost\online-racing\application\controllers\ChampionshipController.php(383): Application_Model_DbTable_ChampionshipTeam->getAllData('1')
+#13 D:\Dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChampionshipController->teamsAction()
+#14 D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('teamsAction')
+#15 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#16 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#17 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#18 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#19 {main}
+02-03-2013 20:02:43 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:43 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-43-08_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:43 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:44 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:44 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-44-49_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:44 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:45 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:45 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-45-35_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:45 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:47 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:47 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-44-18_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:47 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:48 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:48 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-47-24_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:48 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:49 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:49 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-48-22_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:49 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:51 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:51 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-49-06_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:51 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:52 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:52 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-49-52_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:52 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:53 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:53 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-50-40_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:53 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+02-03-2013 20:02:55 NOTICE (5): Error 404. Page not found
+02-03-2013 20:02:55 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [logos] => teams
+    [logo] => 2013-03-01_17-51-35_logo_team.png
+    [module] => default
+)
+
+02-03-2013 20:02:55 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+03-03-2013 01:43:11 CRIT (2): Ошибка 500. Ошибка приложения
+03-03-2013 01:43:11 CRIT (2): Request params: Array
+(
+    [1] => id
+    [championship_id] => 2
+    [action] => editteam
+    [team_id] => 3
+    [module] => default
+    [controller] => championship
+)
+
+03-03-2013 01:43:11 CRIT (2): exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'championship_team.id' in 'field list'' in D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 D:\Dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#2 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#4 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1575): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#5 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1437): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#6 D:\Dev\localhost\online-racing\application\models\DbTable\ChampionshipTeam.php(35): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#7 D:\Dev\localhost\online-racing\application\controllers\ChampionshipController.php(384): Application_Model_DbTable_ChampionshipTeam->getData('3', '2')
+#8 D:\Dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChampionshipController->editteamAction()
+#9 D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editteamAction')
+#10 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#11 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#12 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#13 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#14 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'championship_team.id' in 'field list'' in D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:234
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query(Object(Zend_Db_Table_Select), Array)
+#3 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1575): Zend_Db_Adapter_Pdo_Abstract->query(Object(Zend_Db_Table_Select))
+#4 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1437): Zend_Db_Table_Abstract->_fetch(Object(Zend_Db_Table_Select))
+#5 D:\Dev\localhost\online-racing\application\models\DbTable\ChampionshipTeam.php(35): Zend_Db_Table_Abstract->fetchRow(Object(Zend_Db_Table_Select))
+#6 D:\Dev\localhost\online-racing\application\controllers\ChampionshipController.php(384): Application_Model_DbTable_ChampionshipTeam->getData('3', '2')
+#7 D:\Dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChampionshipController->editteamAction()
+#8 D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editteamAction')
+#9 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}
+03-03-2013 02:07:20 CRIT (2): Ошибка 500. Ошибка приложения
+03-03-2013 02:07:20 CRIT (2): Request params: Array
+(
+    [1] => id
+    [championship_id] => 1
+    [action] => editteam
+    [team_id] => 3
+    [module] => default
+    [controller] => championship
+    [name] => Mild Seven Renault F1 Team
+    [team] => 11
+    [MAX_FILE_SIZE] => 2097152
+    [submit] => Edit
+)
+
+03-03-2013 02:07:20 CRIT (2): exception 'PDOException' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'chmapionship_id' in 'where clause'' in D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:228
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php(228): PDOStatement->execute(Array)
+#1 D:\Dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#2 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#3 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `champio...', Array)
+#4 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `champio...', Array)
+#5 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1133): Zend_Db_Adapter_Abstract->update('championship_te...', Array, 'chmapionship_id...')
+#6 D:\Dev\localhost\online-racing\application\controllers\ChampionshipController.php(460): Zend_Db_Table_Abstract->update(Array, 'chmapionship_id...')
+#7 D:\Dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChampionshipController->editteamAction()
+#8 D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editteamAction')
+#9 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#10 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#11 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#12 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#13 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with message 'SQLSTATE[42S22]: Column not found: 1054 Unknown column 'chmapionship_id' in 'where clause'' in D:\Dev\localhost\online-racing\library\Zend\Db\Statement\Pdo.php:234
+Stack trace:
+#0 D:\Dev\localhost\online-racing\library\Zend\Db\Statement.php(303): Zend_Db_Statement_Pdo->_execute(Array)
+#1 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(479): Zend_Db_Statement->execute(Array)
+#2 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Pdo\Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `champio...', Array)
+#3 D:\Dev\localhost\online-racing\library\Zend\Db\Adapter\Abstract.php(634): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `champio...', Array)
+#4 D:\Dev\localhost\online-racing\library\Zend\Db\Table\Abstract.php(1133): Zend_Db_Adapter_Abstract->update('championship_te...', Array, 'chmapionship_id...')
+#5 D:\Dev\localhost\online-racing\application\controllers\ChampionshipController.php(460): Zend_Db_Table_Abstract->update(Array, 'chmapionship_id...')
+#6 D:\Dev\localhost\online-racing\library\Zend\Controller\Action.php(516): ChampionshipController->editteamAction()
+#7 D:\Dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php(308): Zend_Controller_Action->dispatch('editteamAction')
+#8 D:\Dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#9 D:\Dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#10 D:\Dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#11 D:\Dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#12 {main}

@@ -8,6 +8,17 @@
                 <h4><?php echo $this->translate('Ошибка!'); ?></h4>
                 <?php echo $this->errMessage; ?>
             </div>
+        <?php } else { ?>
+			<?php 
+			$edit_team_access = $this->checkUserAccess('championship/editteam');
+				
+			if ($edit_team_access) { ?>
+				<div class="article_controls">
+					<?php if ($edit_team_access) { ?>
+                    	<a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'editteam', ), 'championshipTeam', true )?>"class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                    <?php } ?>
+				</div>
+           	<?php } ?>
         <?php } ?>
     </div>
 </div>
