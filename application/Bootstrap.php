@@ -81,7 +81,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->ls_online_radio_block = true; // search block
 
         /* [HEADER] */
-        $view->hd_hot_lap_block = true; // hot lap block
+        $view->hd_hot_lap_block = false; // hot lap block
         $view->hd_moving_text_block = true; // moving text block
 
         /* [FOOTER] */
@@ -113,7 +113,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headLink()->appendStylesheet($view->baseUrl("css/articles.css"));
 
         /* [GOOGLE FONTS] */
-        //$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Press+Start+2P&subset=latin,cyrillic", "screen, print");
+        $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
 
         /* [JQUERY JS] */
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.9.1.min.js"));
@@ -388,7 +388,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         ),
                         array(
                             'action' => 1,
-                            'id' => 2
+                            'championship_id' => 2
                         ),
                         "championship/%s/%s.html"
                 )

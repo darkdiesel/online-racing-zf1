@@ -215,9 +215,9 @@ body iframe{
                         #content .page_title{
                             font-family:gill;
                             color:#5E5E5E;
-                            font-size: 35px;
-                            line-height:35px;
-                            text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #141414;
+                            font-size:30px;
+                            line-height:30px;
+                            text-shadow:1px 1px 0 #FFFFFF, 0 1px 3px #141414;
                             text-align:left;
                             margin-bottom:10px;
                         }

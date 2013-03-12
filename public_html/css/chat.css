@@ -62,10 +62,10 @@
             #chat #chat_messages_box .chat_message_box .chat_mesage_nickname{
                 font-weight:bold;
                 color:#0073EA;
-                padding:0 4px;
+                padding:0 2px;
             }
                 #chat #chat_messages_box .chat_message_box .chat_mesage_nickname .nick{
-                
+                    padding:1px 0;
                 }
             #chat #chat_messages_box .chat_message_box .chat_mesage_message{
                 padding:3px 4px;
