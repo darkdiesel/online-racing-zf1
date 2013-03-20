@@ -13,7 +13,7 @@
                         <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>"><?php echo $this->escape($league['name']); ?></a>
                     </div>
                     <?php if ($this->escape($league['url_logo']) != '') { ?>
-                        <img class="img-polaroid article_image league_logo" src="<?php echo $this->escape($league['url_logo']); ?>">
+                        <img class="img-polaroid article_image league_logo pull-left" src="<?php echo $this->escape($league['url_logo']); ?>">
                     <?php } ?>
                     <div class="league_description article_text"><?php echo $this->truncate($this->escape($league['description']))->toLength(200); ?></div>
                     <div class="league_controls article_controls">

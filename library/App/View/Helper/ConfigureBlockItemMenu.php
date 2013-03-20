@@ -4,11 +4,13 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
 
     private $_menu_html;
     private $_menu_empty;
-    private $_links = array();
+    private $_links;
 
     public function ConfigureBlockItemMenu() {
-        $this->_menu_empty = "";
-
+    	$this->_links = array();
+    	$this->_menu_empty = "";
+    	$this->_menu_html = "";
+    	
         $this->_menu_html = "<div class=\"congigure_block_item_links\">";
         $this->_menu_html .= "<a class=\"dropdown-toggle contextual-links-trigger\" href=\"#\" data-toggle=\"dropdown\">";
         $this->_menu_html .= "<i class=\"icon-cog icon-black\"></i>";

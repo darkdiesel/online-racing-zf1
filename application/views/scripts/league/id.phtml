@@ -79,7 +79,7 @@
                     <div class="article_item">
                         <div class="article_title"><a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>"><?php echo $this->escape($championship['name']); ?></a></div>
                         <?php if ($this->escape($championship['url_logo']) != '') { ?>
-                            <img class="img-polaroid article_image" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
+                            <img class="img-polaroid article_image pull-left" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
                         <?php } ?>
                         <div class="article_text">
                             <?php
