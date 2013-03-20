@@ -4,13 +4,13 @@
     <div class="page_content">
         <?php
         if (count($this->paginator)) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
             $bbcode = Zend_Markup::factory('Bbcode');
             ?>
 
             <?php foreach ($this->paginator as $article): ?>
                 <div class="article_item">
-                    <div class="article_title"><a href="<?php echo $this->baseUrl('article/id/' . $this->escape($article['id'])) ?>"><?php echo $this->escape($article['title']); ?></a></div>
+                    <div class="article_title"><a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($article['id'])), 'article', true) ?>"><?php echo $this->escape($article['title']); ?></a></div>
                     <?php if ($this->escape($article['image']) != '') { ?>
                         <img class="img-polaroid article_image" src="<?php echo $this->escape($article['image']); ?>">
                     <?php } ?>
@@ -24,7 +24,7 @@
                         ?>
                     </div>
                     <div class="article_controls">
-                        <a href = "<?php echo $this->baseUrl('article/id/' . $this->escape($article['id'])) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($article['id'])), 'article', true) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="article_info">
                         <div class="article_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Тип статьи') ?>: </span><?php echo $this->escape($article['article_type_name']); ?></div>
@@ -38,7 +38,7 @@
                 </div>
                 <?php
             endforeach;
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/article_all_pagination_control.phtml');
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
         } else {
             ?>
             <div class="alert alert-error alert-block">

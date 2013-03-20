@@ -8,7 +8,9 @@ $(document).ready(function(){
             });
         });
     });*/
-
+    
+    
+    
     // Clear button for .x_field field
     jQuery(function($) {
         $.fn.addXbtn = (function (e) {
@@ -115,6 +117,22 @@ $(document).ready(function(){
     
     $(function(){
         $('.tooltip_field').tooltip();
+    });
+    
+    $(".congigure_block_item_links").hover(function(o) {
+        $(this).parent(".block_item").children(".block_item_content").css({
+            "border" : "1px dashed red"
+        });
+    }, function(o) {
+        $(this).parent(".block_item").children(".block_item_content").css({
+            "border" : "none"
+        });
+    });
+    
+    $(".block_item").hover(function(o) {
+        $(this).children(".congigure_block_item_links").show();
+    }, function(o) {
+        $(this).children(".congigure_block_item_links").hide();
     });
 
 });

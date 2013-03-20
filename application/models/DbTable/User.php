@@ -327,6 +327,23 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
+    
+    public function getAllUsers($order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from('user', 'id')
+                ->columns(array('id', 'login', 'name', 'surname'))
+                ->order('surname ' . $order);
+
+        $user_data = $model->fetchAll($select);
+
+        if (count($user_data) != 0) {
+            return $user_data;
+        } else {
+            return FALSE;
+        }
+    }
 
     public function getUsersByRoleName($role_name, $order) {
         $model = new self;

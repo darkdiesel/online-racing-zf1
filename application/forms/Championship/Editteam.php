@@ -48,6 +48,23 @@ class Application_Form_Championship_Editteam extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
+        
+        $this->addElement('text', 'team_number', array(
+            'label' => $this->translate('Номер команды'),
+            'placeholder' => $this->translate('Номер команды'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'required' => true,
+            'class' => 'x_field white_box_el_size_s',
+            'validators' => array(
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
 
         $this->addElement('file', 'logo', array(
             'label' => $this->translate('Логотип команды'),

@@ -111,6 +111,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         //add css
         $view->headLink()->appendStylesheet($view->baseUrl("css/forms.css"));
         $view->headLink()->appendStylesheet($view->baseUrl("css/articles.css"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/items.css"));
+        $view->headLink()->appendStylesheet($view->baseUrl("css/user.css"));
 
         /* [GOOGLE FONTS] */
         $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
@@ -151,6 +153,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $viewRenderer->setView($view);
 
         return $view;
+    }
+    
+    public function _initHelpers(){
+        //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
+        $this->bootstrap('layout');
+        $view = $this->getResource('layout')->getView();
+        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
     }
 
     public function _initAcl() {
@@ -395,40 +404,56 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         );
 
         $router->addRoute(
-                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)/(\w*)/(\d+)\.html',
+                'championshipTeamDriver', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/(\w*)\.html',
                         array(
                             'module' => 'default',
                             'controller' => 'championship',
-                            1 => 'id',
-                            2 => 0,
-                            4 => 0
+                            1 => 0,
+                            2 => 'team',
+                            3 => 0,
                         ),
                         array(
-                            'championship_id' => 2,
-                            'action' => 3,
-                            'team_id' => 4
+                            'championship_id' => 1,
+                            'team_id' => 3,
+                            'action' => 4,
+                            
                         ),
                         "championship/%s/%s/%s/%s.html"
                 )
         );
         
         $router->addRoute(
-                'championshipTeamDefault', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)/(\w*)\.html',
+                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)\.html',
                         array(
                             'module' => 'default',
                             'controller' => 'championship',
-                            'action' => 'teamAdd',
-                            1 => 'id',
-                            2 => 0,
+                            1 => 0,
+                            3 => 0
                         ),
                         array(
-                            'championship_id' => 2,
-                            'action' => 3,
+                            'championship_id' => 1,
+                            'action' => 2,
+                            'team_id' => 3
                         ),
                         "championship/%s/%s/%s.html"
                 )
         );
-
+        
+        $router->addRoute(
+                'championshipTeamDefault', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)\.html',
+                        array(
+                            'module' => 'default',
+                            'controller' => 'championship',
+                            'action' => 'teamAdd',
+                            1 => 0,
+                        ),
+                        array(
+                            'championship_id' => 1,
+                            'action' => 2,
+                        ),
+                        "championship/%s/%s.html"
+                )
+        );
 
         $router->addRoute(
                 'championshipAll', new Zend_Controller_Router_Route('championship/all/:page',
@@ -537,7 +562,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     public function _initNavigation() {
         $this->bootstrap('layout');
         $view = $this->getResource('layout')->getView();
-
+        
         $main_menu_pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а

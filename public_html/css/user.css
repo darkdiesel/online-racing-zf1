@@ -1,7 +1,4 @@
 /* user info page */
-#user_info_page{
-    
-}
     #user_info_page .user_info_ava{
         float:right;
         margin:0 0 20px 20px;
@@ -105,15 +102,7 @@
                 color:#828282;
                 font-size:13px;
             }
-/* User settings page*/
-#user_settings_page{
-    
-}
-
 /* All users page */
-#users_page{
-    
-}
     #users_page .pagination{
         clear:both;
     }
@@ -127,30 +116,73 @@
         background:none repeat scroll 0 0 #F5F5F5;
         border-radius:3px;
     }
-    #users_page .user_item:hover{
+    .user_item:hover{
         background:none repeat scroll 0 0 #fff;
     }
-        #users_page .user_item .user_image{
+        .user_item .user_image{
             text-align:center;
             margin:0 0 10px 0;
             width:175px;
             height:175px;
             overflow:hidden;
         }
-        #users_page .user_item .user_image img{
+        .user_item .user_image img{
             width:165px;
         }
-        #users_page .user_item .user_login{
+        .user_item .user_login{
             
         }
-        #users_page .user_item .user_flag{
+        .user_item .user_flag{
             display:inline-block;
             float:left;
         }
-            #users_page .user_item .user_flag img{
+            .user_item .user_flag img{
                 width:32px;
             }
-/* user activate page */
-#user_activate_page{
-    
+.user_item{
+        border:1px solid #CACACA;
+        padding:9px;
+        display:inline-block;
+        position:relative;
+        background:none repeat scroll 0 0 #F5F5F5;
+        border-radius:3px;
+        font-size:12px;
+    }
+.user_full_item{
+    border:1px solid #CACACA;
+    background:none repeat scroll 0 0 #EDEDED;
+    display:block;
+    border-radius:3px;
+    border:2px solid #CACACA;
+    margin:20px 0;
+}
+    .user_full_item .user_image{
+        margin:0 10px 10px 0;
+        width:175px;
+        height:175px;
+        overflow:hidden;
+    }
+        .user_full_item .user_image img{
+            width:165px;
+        }
+.teams_driver_info{
+    margin-left:10px;
+    width:125px;
+    word-wrap:break-word;
+}
+.team_item .user_item{
+    width:310px;
+    margin:0 7px;
+}
+.team_driver_block{
+    border-top:4px solid #D9D9D9;
+    padding-top:10px;
+}
+.team_driver_number{
+    width:20px;
+    text-align:center;
+    margin-bottom:6px;
+    font-weight:bold;
+    font-size:15px;
+    padding:5px;
 }

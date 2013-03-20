@@ -224,9 +224,8 @@ body iframe{
                         #content .page_content{
                             background:none repeat scroll 0 0 #FFFFFF;
                             border:1px solid #CACACA;
-                            padding:10px;
+                            padding:5px;
                             border-radius:3px;
-                            overflow:auto;
                         }
                         #content .page:after{
                             background:url("../img/shadow_sprite.png") no-repeat scroll 0 -54px transparent;
@@ -592,4 +591,7 @@ label.valid {
 /* Fix bootstrap */
 .tooltip{
     white-space:normal;
+}
+.no_width{
+    width:auto!important;
 }

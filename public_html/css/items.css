@@ -1,0 +1,26 @@
+/* Common class for item_block */
+.block_item{
+    position:relative;
+    padding:10px;
+}
+
+/* configure block */    
+.congigure_block_item_links{
+    position:absolute;
+    right:5px;
+    top:0px;
+    display:none;
+}
+    .congigure_block_item_links ul{
+        margin:0;
+    }
+    .congigure_block_item_links .contextual-links-trigger{
+        color:gray;
+        opacity:0.5;
+    }
+        .congigure_block_item_links .contextual-links-trigger .caret{
+            color:black;
+        }
+.block_item_content{
+    overflow:auto;
+}

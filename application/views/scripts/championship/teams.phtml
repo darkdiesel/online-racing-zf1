@@ -10,26 +10,45 @@
             </div>
         <?php } else { ?>
             <?php foreach ($this->championshipTeams as $team): ?>
-                <div class="article_item">
-                	<div class="article_team_title">
+                <div class="article_item team_item">
+                    <div class="article_team_title">
                         <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true) ?>"><?php echo $this->escape($team['name']); ?></a>
                     </div>
-                	<?php if ($this->escape($team['url_logo_car']) != '') { ?>
-                		<img class="img-polaroid article_team_car_image" src="<?php echo $this->escape($team['url_logo_car']); ?>">
+
+                    <?php if ($this->escape($team['url_logo_car']) != '') { ?>
+                        <img class="img-polaroid article_team_car_image" src="<?php echo $this->escape($team['url_logo_car']); ?>">
                     <?php } ?>
-                    <table class="table">
-                    	<tbody>
-                    		<tr>
-                    			<td>
-                    				<?php if ($this->escape($team['url_logo']) != '') { ?>
-				                        <img class="img-polaroid article_team_logo_image" src="<?php echo $this->escape($team['url_logo']); ?>">
-				                    <?php } ?>
-                    			</td>
-                    			<td>Пилот 1</td>
-                    			<td>Пилот 2</td>
-                    		</tr>
-                    	</tbody>
-                    </table>
+                    <?php if ($this->escape($team['url_logo']) != '') { ?>
+                        <img class="img-polaroid article_team_logo_image" src="<?php echo $this->escape($team['url_logo']); ?>">
+                    <?php } ?>
+                    <div class="team_driver_block">
+                        <?php
+                        $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
+                        $championship_team_drivers_data = $championship_team_driver->getChampionshipTeamDrivers($this->escape($team->championship_id), $this->escape($team->team_id));
+                        if ($championship_team_drivers_data) {
+                            foreach ($championship_team_drivers_data as $driver):
+                                ?>
+
+                                <div class="user_item">
+                                    <div class="user_image pull-left">
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank"><?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?></a>
+                                    </div>
+                                    <div class="teams_driver_info pull-right">
+                                        <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
+                                        <div><span class="bold_text">Имя: </span><?php echo $this->escape($driver->user_name) ?></div>
+                                        <div><span class="bold_text">Фамилия: </span><?php echo $this->escape($driver->user_surname) ?></div>
+                                        <div><span class="bold_text">Ник: </span><?php echo $this->escape($driver->user_login) ?></div>
+                                    </div>
+
+                                </div>
+
+                                <?php
+                            endforeach;
+                        } else {
+                            echo "<div class=\"user_item\">Место свобоно!</div><div class=\"user_item\">Место свобоно!</div>";
+                        }
+                        ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php } ?>

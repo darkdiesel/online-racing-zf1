@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Championship_Addteam extends Zend_Form {
+class Application_Form_Championship_Adddriver extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,35 +10,16 @@ class Application_Form_Championship_Addteam extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/championship/addteam');
-        $this->setName('championshipAddTeam');
-        $this->setAttrib('class', 'white_box white_box_size_l');
+        $this->setAction('/championship/adddriver');
+        $this->setName('championshipAddTeamDriver');
+        $this->setAttrib('class', 'white_box white_box_size_m');
 
-        $this->addElement('text', 'name', array(
-            'label' => $this->translate('Название'),
-            'placeholder' => $this->translate('Название'),
-            'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim'),
-            'required' => true,
-            'class' => 'x_field white_box_el_size_l',
-            'validators' => array(
-                'NotEmpty',
-                new App_Validate_NoDbRecordExists('championship', 'name')
-            ),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-        
         // artcile type
-        $this->addElement('select', 'team', array(
-            'label' => $this->translate('Команда'),
+        $this->addElement('select', 'driver', array(
+            'label' => $this->translate('Гонщик'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
-            'class' => 'white_box_el_size_s',
+            'class' => 'white_box_el_size_m',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -49,9 +30,25 @@ class Application_Form_Championship_Addteam extends Zend_Form {
             )
         ));
         
-        $this->addElement('text', 'team_number', array(
-            'label' => $this->translate('Номер команды'),
-            'placeholder' => $this->translate('Номер команды'),
+        // artcile type
+        $this->addElement('select', 'driver_team_role', array(
+            'label' => $this->translate('Роль в команде'),
+            //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'required' => false,
+            'class' => 'white_box_el_size_m',
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+        
+        $this->addElement('text', 'driver_number', array(
+            'label' => $this->translate('Номер в команде'),
+            'placeholder' => $this->translate('Номер в команде'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
@@ -63,44 +60,6 @@ class Application_Form_Championship_Addteam extends Zend_Form {
                 array('Label', array('class' => 'element_label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
                 array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-
-        $this->addElement('file', 'logo', array(
-            'label' => $this->translate('Логотип команды'),
-            'required' => true,
-            'height' => '30px',
-            'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/teams/logo',
-            'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 5120000),
-                array('Extension', false, 'jpg,png,gif'),
-                array('Count', false, 1)
-            )
-        ));
-        
-        $this->addElement('file', 'logo_team', array(
-            'label' => $this->translate('Изображение болида (вид с боку)'),
-            'required' => true,
-            'height' => '30px',
-            'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/teams/car',
-            'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 5120000),
-                array('Extension', false, 'jpg,png,gif'),
-                array('Count', false, 1)
             )
         ));
 
@@ -123,10 +82,22 @@ class Application_Form_Championship_Addteam extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
+        
+        $this->addElement('button', 'cancel', array(
+            'ignore' => true,
+            'class' => 'btn',
+            'onClick' => "location.href='/championship/all'",
+            'label' => $this->translate('Отмена'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag',
+                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
+            )
+        ));
 
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset')
+            $this->getElement('reset'),
+            $this->getElement('cancel')
                 ), 'form_actions', array());
 
         $this->getDisplayGroup('form_actions')->setDecorators(array(

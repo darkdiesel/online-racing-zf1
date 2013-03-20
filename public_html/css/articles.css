@@ -1,11 +1,11 @@
 
 /* Common class for article */
 .article_item{
-    border:1px solid #CACACA;
+    border:2px solid #CACACA;
     border-radius:7px;
     margin:20px 0;
     padding:10px;
-    background:none repeat scroll 0 0 #FBFBFB;
+    background:none repeat scroll 0 0 #EDEDED;
     overflow:auto;
 }
 /* article info footer */
@@ -48,7 +48,6 @@
 }
 
 .article_image{
-    float:left;
     margin:0 15px 15px 0;
     width:250px;
 }
@@ -120,14 +119,22 @@
         }
 /* teams */        
 .article_team_car_image{
-	clear:both;
-    max-width:500px;
+    clear:both;
+    max-width:425px;
     margin:10px auto;
-    display:block;
     max-height:240px;
 }
+.article_team_car_image_x{
+    clear:both;
+    max-width:690px;
+    margin:10px auto;
+    max-height:240px;
+    display:block;
+}
 .article_team_logo_image{
-	
+    max-width:240px;
+    margin:10px 0;
+    display:inline-block;
 }
 /* article team title */
 .article_team_title{
