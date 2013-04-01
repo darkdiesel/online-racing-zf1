@@ -3,7 +3,9 @@
     position:relative;
     padding:10px;
 }
-
+    .block_item_content{
+        overflow:auto;
+    }
 /* configure block */    
 .congigure_block_item_links{
     position:absolute;
@@ -21,6 +23,3 @@
         .congigure_block_item_links .contextual-links-trigger .caret{
             color:black;
         }
-.block_item_content{
-    overflow:auto;
-}

@@ -595,3 +595,13 @@ label.valid {
 .no_width{
     width:auto!important;
 }
+#liveracers_block{
+    position:absolute;
+    left:400px;
+    top:60px;
+    opacity:0.5;
+    width:300px;
+}
+    #liveracers_block:hover{
+        opacity:1;
+    }

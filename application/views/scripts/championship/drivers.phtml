@@ -18,9 +18,7 @@
                     <?php if ($this->escape($team['url_logo_car']) != '') { ?>
                         <img class="img-polaroid article_team_car_image" src="<?php echo $this->escape($team['url_logo_car']); ?>">
                     <?php } ?>
-                    <?php if ($this->escape($team['url_logo']) != '') { ?>
-                        <img class="img-polaroid article_team_logo_image" src="<?php echo $this->escape($team['url_logo']); ?>">
-                    <?php } ?>
+
                     <div class="team_driver_block">
                         <?php
                         $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
@@ -28,26 +26,32 @@
                         if ($championship_team_drivers_data) {
                             foreach ($championship_team_drivers_data as $driver):
                                 ?>
-
-                                <div class="user_item">
-                                    <div class="user_image pull-left">
-                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank"><?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?></a>
+                                <div class="user_item pull-left">
+                                    <div class="user_image user_image_x pull-left">
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank">
+                                            <?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
+                                        </a>
                                     </div>
                                     <div class="teams_driver_info pull-right">
                                         <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
-                                        <div><span class="bold_text">Имя: </span><?php echo $this->escape($driver->user_name) ?></div>
-                                        <div><span class="bold_text">Фамилия: </span><?php echo $this->escape($driver->user_surname) ?></div>
-                                        <div><span class="bold_text">Ник: </span><?php echo $this->escape($driver->user_login) ?></div>
+                                        <img class="user_flag_s" src="<?php echo $driver->country_url_image_round ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
+                                        <div><span class="bold_text"><?php echo $this->translate("Имя"); ?>: </span><?php echo $this->escape($driver->user_name) ?></div>
+                                        <div><span class="bold_text"><?php echo $this->translate("Фамилия"); ?>: </span><?php echo $this->escape($driver->user_surname) ?></div>
+                                        <div><span class="bold_text"><?php echo $this->translate("Ник-нэйм"); ?>: </span><?php echo $this->escape($driver->user_login) ?></div>
                                     </div>
-
                                 </div>
-
                                 <?php
                             endforeach;
+                            if (count($championship_team_drivers_data) == 1) {
+                                ?>
+                                <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
+                                <?php
+                            }
                         } else {
-                            echo "<div class=\"user_item\">Место свобоно!</div><div class=\"user_item\">Место свобоно!</div>";
-                        }
-                        ?>
+                            ?>
+                            <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
+                            <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
+                        <?php } ?>
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -56,7 +56,7 @@
     border-bottom:1px solid #E6E0E0;
     margin-bottom:5px;
 }
-    .article_title a{
+    .article_title, .article_title a{
         color:#636262;
         text-decoration:none;
         font: 24px/30px sans-serif;
@@ -123,6 +123,7 @@
     max-width:425px;
     margin:10px auto;
     max-height:240px;
+    display:block;
 }
 .article_team_car_image_x{
     clear:both;

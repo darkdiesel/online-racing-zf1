@@ -5,31 +5,8 @@ class Application_Model_DbTable_ChampionshipTeam extends Zend_Db_Table_Abstract 
     protected $_name = 'championship_team';
     protected $_primary = 'championship_id';
 
-    //get data for championship team and it drivers
-    public function getFullTeamData($championship_id, $team_id) {
-        $model = new self;
-
-        $select = $model->select()
-                ->from(array('CT' => $this->_name))
-                ->setIntegrityCheck(false)
-                ->where('CT.championship_id = ?', $championship_id)
-                ->where('CT.team_id = ?', $team_id)
-                ->join(array('C' => 'championship'), 'C.id = CT.championship_id', array(
-                    'championship_name' => 'C.name',
-                ))
-                ->columns('*');
-
-        $team_data = $model->fetchRow($select);
-
-        if (count($team_data) != 0) {
-            return $team_data;
-        } else {
-            return FALSE;
-        }
-    }
-
     // get data for one team at championship
-    public function getTeamData($team_id, $championship_id) {
+    public function getTeamData($championship_id, $team_id) {
         $model = new self;
 
         $select = $model->select()
@@ -47,8 +24,8 @@ class Application_Model_DbTable_ChampionshipTeam extends Zend_Db_Table_Abstract 
         }
     }
 
-    // get data for all team at championship
-    public function getAllTeamData($championship_id) {
+    // get data for all teams at championship
+    public function getAllTeamsData($championship_id) {
         $model = new self;
 
         $select = $model->select()

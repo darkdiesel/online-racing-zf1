@@ -84,4 +84,20 @@ class Application_Model_DbTable_Championship extends Zend_Db_Table_Abstract {
         }
     }
 
+    public function getChampionshipNameById($id) {
+        $model = new self;
+        $select = $model->select()
+                ->from($this->_name)
+                ->where('id = ?', $id)
+                ->columns('name');
+
+        $championship_data = $model->fetchRow($select);
+
+        if (count($championship_data) != 0) {
+            return $championship_data;
+        } else {
+            return FALSE;
+        }
+    }
+
 }

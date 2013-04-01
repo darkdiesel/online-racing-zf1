@@ -1,6 +1,6 @@
 form.white_box{
     display:block;
-    margin:0 auto;
+    margin:10px auto;
     width:400px;
 }
     form.white_box:after{

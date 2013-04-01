@@ -27,7 +27,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                     'last_ip' => $_SERVER['REMOTE_ADDR']
                 );
 
-                $article_where = $model->getAdapter()->quoteInto('id = ?', $article_id);
+                $article_where = $model->getAdapter()->quoteInto('id = ?', $id);
                 $model->update($article_data, $article_where);
             }
 
@@ -46,6 +46,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->where('a.id = ' . $id)
                 ->join(array('u' => 'user'), 'a.user_id = u.id', array('user_login' => 'u.login'))
                 ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                ->join(array('c_t' => 'content_type'), 'c_t.id = a.content_type_id', array('content_type_name' => 'c_t.name'))
                 ->columns('*');
 
         $article = $model->fetchRow($select);

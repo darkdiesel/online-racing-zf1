@@ -57,8 +57,10 @@ class Application_Model_DbTable_ChampionshipTeamDriver extends Zend_Db_Table_Abs
                     'user_surname' => 'u.surname',
                     'user_avatar_type' => 'u.avatar_type',
                     'user_country_id' => 'u.country_id'))
-                ->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+                ->join(array('c' => 'country'), 'u.country_id = c.id', array(
+                    'country_abbreviation' => 'c.abbreviation',
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+                    'country_url_image_round' => 'c.url_image_round',
                     'country_native_name' => 'c.native_name',
                     'country_english_name' => 'c.english_name',))
                 ->columns('CTD.driver_number')

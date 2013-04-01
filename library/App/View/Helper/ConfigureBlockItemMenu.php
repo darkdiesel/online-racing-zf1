@@ -6,30 +6,46 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
     private $_menu_empty;
     private $_links;
 
-    public function ConfigureBlockItemMenu() {
-    	$this->_links = array();
-    	$this->_menu_empty = "";
-    	$this->_menu_html = "";
-    	
+    public function ConfigureBlockItemMenu($menu_type) {
+        $this->_links = array();
+        $this->_menu_empty = "";
+        $this->_menu_html = "";
+
         $this->_menu_html = "<div class=\"congigure_block_item_links\">";
         $this->_menu_html .= "<a class=\"dropdown-toggle contextual-links-trigger\" href=\"#\" data-toggle=\"dropdown\">";
         $this->_menu_html .= "<i class=\"icon-cog icon-black\"></i>";
         $this->_menu_html .= "<b class=\"icon-chevron-down\"></b>";
         $this->_menu_html .= "</a>";
         $this->_menu_html .= "<ul class=\"dropdown-menu\">";
+        $this->_menu_html .= "<li class=\"nav-header\">{$menu_type}</li>";
+        $this->_menu_html .= "<li class=\"divider\"></li>";
 
         return $this;
     }
 
     public function championship_team_menu($championship_id, $team_id) {
-        if ($this->view->checkUserAccess('championship/editteam')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'editteam', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true);
+        if ($this->view->checkUserAccess('championship/team-edit')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-edit', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
         }
 
-        if ($this->view->checkUserAccess('championship/editteam')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'adddriver', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeamDriver', true);
+        if ($this->view->checkUserAccess('championship/driver-add')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-add', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeamAction', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить гонщика')}</a>");
+        }
+
+        return $this;
+    }
+
+    public function championship_team_driver_menu($championship_id, $team_id, $user_id) {
+        if ($this->view->checkUserAccess('championship/driver-edit')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-edit', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать гонщика')}</a>");
+        }
+
+        if ($this->view->checkUserAccess('championship/driver-delete')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-delete', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить гонщика')}</a>");
         }
 
         return $this;

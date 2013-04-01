@@ -34,49 +34,78 @@
                 text-shadow:1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
             }
             div.hotlaps caption.track {
-                color:#767070;
+                color:#fff;
                 font-size:20px;
                 font-weight: bold;
-                text-transform: uppercase;
-                text-decoration:underline;
-                margin-bottom:10px;
-                font-family:gill;               
-                text-shadow:1px 1px 0 #000000, 0 1px 3px #00FC9C;
+                text-transform:uppercase;
+                text-decoration:none;
+                margin-bottom:0px;
+                font-family:gill;
+                background:#7B0606;
+                border-radius:10px 10px 0 0;
+                padding:5px 0;
+                font-family:monospace;
             }
             div.hotlaps tr.header {
                 color: #FFFFFF;
                 font-size:18px;
+                background:#252525;
             }
+                div.hotlaps tr.header th{
+                    margin:10px 0;
+                    padding:10px;
+                    border-bottom:5px solid #000;
+                }
             div.hotlaps tr.detaileven {
                 color:#FFFFFF;
                 font-size:18px;
                 font-weight:bold;
+                background:#252525;
             }
-            div.hotlaps tr.detaileven td{
-                border-top:1px solid #DDDDDD;
+            div.hotlaps tr.detaileven:hover{
+                background:#343434;
+                color:#953535;
             }
+                div.hotlaps tr.detaileven td{
+                    
+                    padding:2px 10px;
+                }
             div.hotlaps tr.detailodd {
                 color: #828282;
                 font-size:18px;
                 font-weight:bold;
+                background:#303030;
             }
-            div.hotlaps tr.detailodd td{
-                border-top:1px solid #DDDDDD;
+            div.hotlaps tr.detailodd:hover{
+                background:#343434;
+                color:#953535;
             }
+                div.hotlaps tr.detailodd td{
+                    
+                    padding:2px 10px;
+                }
             div.hotlaps tr.highlight {
-                color:#AE4B27;
+                color:#C1C52A;
                 font-size:18px;
                 font-weight:bold;
+                background:#252525;
             }
-            div.hotlaps tr.highlight td{
-                border-top:1px solid #DDDDDD;
+            div.hotlaps tr.highlight:hover{
+                background:#343434;
+                color:#953535;
             }
-            table table{
-                border:2px solid #434340;
-                border-radius:10px;
-                padding:5px;
+                div.hotlaps tr.highlight td{
+                    
+                    padding:2px 10px;
+                }
+            div.hotlaps table{
+                /*
+                border:2px solid #434340;*/
+                border-radius:0 0 10px 10px;
+                padding:5px 2px;
                 margin:5px;
-		box-shadow:0 0 50px #000000
+		box-shadow:5px 5px 50px #000000;
+                background:#000;
             }
             table table tr,table table tr td{
                 margin:0;
@@ -108,7 +137,6 @@
             </p>
             <span class="hotlap_title">Online-Racing.Net Records</span>
             <p><img src="rFactorHotlaps/cartime.png"></p>
-            <p><img src="rFactorHotlaps/f1.png"></p>
             <table width="75%"><tr><td align="center">
                         <!--@TABLE-->
                     </td></tr></table>

@@ -5,7 +5,7 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
     public function init() {
         // configure main menu
         $uri = $this->_request->getPathInfo();
-        $activeNav = $this->view->navigation($this->view->menu)->findByUri($uri);
+        $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
         if ($activeNav != NULL) {
             $activeNav->active = true;
         }
@@ -22,9 +22,8 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
             }
         }
 
-
-
         if (Zend_Auth::getInstance()->hasIdentity()) {
+            echo "idencity";
             $user = new Application_Model_DbTable_User();
 
             //save last activity time

@@ -19,7 +19,7 @@
                     <div class="article_text">
                         <?php
                         if ($article['annotation'] != '') {
-                            echo $this->escape($article['annotation']);
+                            echo $this->RenderContentTypeText($this->escape($article['annotation']), 'bbcode');
                         } else {
                             echo $bbcode->render((string) ($this->truncate($this->escape($article['text']))->toLength(250)));
                         }

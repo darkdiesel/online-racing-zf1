@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Championship_Editteam extends Zend_Form {
+class Application_Form_Championship_Team_Edit extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();

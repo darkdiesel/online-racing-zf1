@@ -3,9 +3,9 @@
 class Zend_View_Helper_SetupBBCodeEditor extends Zend_View_Helper_Abstract {
 
     function setupBBCodeEditor($textareaId) {
-        return "<script type=\"text/javascript\">
+        return "
                 CKEDITOR.replace('{$textareaId}', {
-                    extraPlugins : 'bbcode,font,smiley,find,selectall,colorbutton',
+                    extraPlugins : 'bbcode,font,smiley,find,selectall,colorbutton,wordcount,limitcharcount',
 		removePlugins: 'bidi,dialogadvtab,div,filebrowser,flash,forms,horizontalrule,iframe,justify,liststyle,pagebreak,showborders,stylescombo,table,tabletools,templates',
         // Width and height are not supported in the BBCode format, so object resizing is disabled.
         disableObjectResizing: true,
@@ -22,10 +22,10 @@ class Zend_View_Helper_SetupBBCodeEditor extends Zend_View_Helper_Abstract {
           [ 'TextColor' ],
           [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
           [ 'Maximize' ],
-          [ 'About' ]
+          [ 'About' , 'LimitCharCount' ]
         ],
                     });
-                </script>";
+                ";
     }
 
 }

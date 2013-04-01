@@ -81,8 +81,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->ls_online_radio_block = true; // search block
 
         /* [HEADER] */
-        $view->hd_hot_lap_block = false; // hot lap block
+        $view->hd_hot_lap_block = true; // hot lap block
         $view->hd_moving_text_block = true; // moving text block
+        $view->hd_liveracers_block = true; // liveracers block (Liveracers.info)
 
         /* [FOOTER] */
         $view->ft_menu = true; // footer menu
@@ -154,8 +155,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         return $view;
     }
-    
-    public function _initHelpers(){
+
+    public function _initHelpers() {
         //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
         $this->bootstrap('layout');
         $view = $this->getResource('layout')->getView();
@@ -191,11 +192,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Registry::set('Zend_Locale', $zl);
 
         $translate = new Zend_Translate(
-                        array(
-                            'adapter' => 'gettext',
-                            'content' => APPLICATION_PATH . '/languages/' . $lang . '.mo',
-                            'locale' => $locale
-                        )
+                array(
+            'adapter' => 'gettext',
+            'content' => APPLICATION_PATH . '/languages/' . $lang . '.mo',
+            'locale' => $locale
+                )
         );
 
         Zend_Registry::set('Zend_Translate', $translate);
@@ -213,289 +214,250 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $frontController = Zend_Controller_Front::getInstance();
         $router = $frontController->getRouter();
 
-        /* $router->addRoute(
-          'default', new Zend_Controller_Router_Route_Regex(('(\w*)/(\w*)\.html'),
-          array(
-          'module' => 'default'
-          ),
-          array(
-          'controller' => 1,
-          'action' => 2
-          ),
-          '%s/%s.html'
-          )
-
-          ); */
-
         $router->addRoute(
-                'user', new Zend_Controller_Router_Route_Regex('user/(\w*)/(\d+)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'user',
-                            2 => 0
-                        ),
-                        array(
-                            'action' => 1,
-                            'id' => 2
-                        ),
-                        'user/%s/%s.html'
+                'user', new Zend_Controller_Router_Route_Regex('user/(\w*)/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'user',
+            2 => 0
+                ), array(
+            'action' => 1,
+            'id' => 2
+                ), 'user/%s/%s.html'
                 )
         );
 
         $router->addRoute(
-                'userAll', new Zend_Controller_Router_Route('user/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'user',
-                            'action' => 'all',
-                            'page' => 1)
+                'userAll', new Zend_Controller_Router_Route('user/all/:page', array(
+            'module' => 'default',
+            'controller' => 'user',
+            'action' => 'all',
+            'page' => 1)
         ));
         //article controller routers
         $router->addRoute(
-                'article', new Zend_Controller_Router_Route_Regex('article/(\w*)/(\d+)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'article',
-                            2 => 0
-                        ),
-                        array(
-                            'action' => 1,
-                            'id' => 2
-                        ),
-                        "article/%s/%s.html"
+                'article', new Zend_Controller_Router_Route_Regex('article/(\w*)/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'article',
+            2 => 0
+                ), array(
+            'action' => 1,
+            'id' => 2
+                ), "article/%s/%s.html"
                 )
         );
 
 
         $router->addRoute(
-                'articleAll', new Zend_Controller_Router_Route('article/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'article',
-                            'action' => 'all',
-                            'page' => 1)
+                'articleAll', new Zend_Controller_Router_Route('article/all/:page', array(
+            'module' => 'default',
+            'controller' => 'article',
+            'action' => 'all',
+            'page' => 1)
         ));
         //admin controller routers
         $router->addRoute(
-                'adminArticleAll', new Zend_Controller_Router_Route('admin/articles/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'admin',
-                            'action' => 'articles',
-                            'page' => 1)
+                'adminArticleAll', new Zend_Controller_Router_Route('admin/articles/:page', array(
+            'module' => 'default',
+            'controller' => 'admin',
+            'action' => 'articles',
+            'page' => 1)
         ));
 
         $router->addRoute(
-                'adminUserAll', new Zend_Controller_Router_Route('admin/users/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'admin',
-                            'action' => 'users',
-                            'page' => 1)
+                'adminUserAll', new Zend_Controller_Router_Route('admin/users/:page', array(
+            'module' => 'default',
+            'controller' => 'admin',
+            'action' => 'users',
+            'page' => 1)
         ));
 
         $router->addRoute(
-                'adminLeagueAll', new Zend_Controller_Router_Route('admin/leagues/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'admin',
-                            'action' => 'leagues',
-                            'page' => 1)
+                'adminLeagueAll', new Zend_Controller_Router_Route('admin/leagues/:page', array(
+            'module' => 'default',
+            'controller' => 'admin',
+            'action' => 'leagues',
+            'page' => 1)
         ));
         //article-type controller routers
         $router->addRoute(
-                'articleTypeId', new Zend_Controller_Router_Route('article-type/:action/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'article-type',
-                            'id' => 0)
+                'articleTypeId', new Zend_Controller_Router_Route('article-type/:action/:id', array(
+            'module' => 'default',
+            'controller' => 'article-type',
+            'id' => 0)
         ));
 
         //content type controller routers
         $router->addRoute(
-                'contentTypeId', new Zend_Controller_Router_Route('content-type/:action/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'content-type',
-                            'id' => 0)
+                'contentTypeId', new Zend_Controller_Router_Route('content-type/:action/:id', array(
+            'module' => 'default',
+            'controller' => 'content-type',
+            'id' => 0)
         ));
 
         //league controller routers
         $router->addRoute(
-                'leagueId', new Zend_Controller_Router_Route('league/id/:id/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'league',
-                            'action' => 'id',
-                            'id' => 0,
-                            'page' => 1)
+                'leagueId', new Zend_Controller_Router_Route('league/id/:id/:page', array(
+            'module' => 'default',
+            'controller' => 'league',
+            'action' => 'id',
+            'id' => 0,
+            'page' => 1)
         ));
 
         $router->addRoute(
-                'league', new Zend_Controller_Router_Route_Regex('league/(\w*)/(\d+)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'league',
-                        ),
-                        array(
-                            'action' => 1,
-                            'id' => 2
-                        ),
-                        "league/%s/%s.html"
+                'league', new Zend_Controller_Router_Route_Regex('league/(\w*)/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'league',
+                ), array(
+            'action' => 1,
+            'id' => 2
+                ), "league/%s/%s.html"
                 )
         );
 
         $router->addRoute(
-                'leagueAll', new Zend_Controller_Router_Route('league/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'league',
-                            'action' => 'all',
-                            'page' => 1)
+                'leagueAll', new Zend_Controller_Router_Route('league/all/:page', array(
+            'module' => 'default',
+            'controller' => 'league',
+            'action' => 'all',
+            'page' => 1)
         ));
         //game controller routers
         $router->addRoute(
-                'game', new Zend_Controller_Router_Route('game/:action/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'game',
-                            'id' => 0)
+                'game', new Zend_Controller_Router_Route('game/:action/:id', array(
+            'module' => 'default',
+            'controller' => 'game',
+            'id' => 0)
         ));
 
         $router->addRoute(
-                'gameAll', new Zend_Controller_Router_Route('game/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'game',
-                            'action' => 'all',
-                            'page' => 1)
+                'gameAll', new Zend_Controller_Router_Route('game/all/:page', array(
+            'module' => 'default',
+            'controller' => 'game',
+            'action' => 'all',
+            'page' => 1)
         ));
         //team controller routers
         $router->addRoute(
-                'team', new Zend_Controller_Router_Route('team/:action/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'team',
-                            'id' => 0)
+                'team', new Zend_Controller_Router_Route('team/:action/:id', array(
+            'module' => 'default',
+            'controller' => 'team',
+            'id' => 0)
         ));
 
         $router->addRoute(
-                'teamAll', new Zend_Controller_Router_Route('team/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'team',
-                            'action' => 'all',
-                            'page' => 1)
+                'teamAll', new Zend_Controller_Router_Route('team/all/:page', array(
+            'module' => 'default',
+            'controller' => 'team',
+            'action' => 'all',
+            'page' => 1)
         ));
         //championship controller routers
         $router->addRoute(
-                'championship', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            2 => 0,
-                        ),
-                        array(
-                            'action' => 1,
-                            'championship_id' => 2
-                        ),
-                        "championship/%s/%s.html"
-                )
-        );
-
-        $router->addRoute(
-                'championshipTeamDriver', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/(\w*)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            1 => 0,
-                            2 => 'team',
-                            3 => 0,
-                        ),
-                        array(
-                            'championship_id' => 1,
-                            'team_id' => 3,
-                            'action' => 4,
-                            
-                        ),
-                        "championship/%s/%s/%s/%s.html"
+                'championship', new Zend_Controller_Router_Route_Regex('championship/(\w*)/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            2 => 0,
+                ), array(
+            'action' => 1,
+            'championship_id' => 2
+                ), "championship/%s/%s.html"
                 )
         );
         
         $router->addRoute(
-                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            1 => 0,
-                            3 => 0
-                        ),
-                        array(
-                            'championship_id' => 1,
-                            'action' => 2,
-                            'team_id' => 3
-                        ),
-                        "championship/%s/%s/%s.html"
-                )
-        );
-        
-        $router->addRoute(
-                'championshipTeamDefault', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)\.html',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            'action' => 'teamAdd',
-                            1 => 0,
-                        ),
-                        array(
-                            'championship_id' => 1,
-                            'action' => 2,
-                        ),
-                        "championship/%s/%s.html"
+                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            1 => 0,
+            3 => 0
+                ), array(
+            'championship_id' => 1,
+            'action' => 2,
+            'team_id' => 3
+                ), "championship/%s/%s/%s.html"
                 )
         );
 
         $router->addRoute(
-                'championshipAll', new Zend_Controller_Router_Route('championship/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'championship',
-                            'action' => 'all',
-                            'page' => 1)
+            'championshipTeamAction', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/([^\/]+)\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            1 => 0,
+            2 => 'team',
+            3 => 0,
+                ), array(
+            'championship_id' => 1,
+            'team_id' => 3,
+            'action' => 4,
+                ), "championship/%s/%s/%s/%s.html"
+                )
+        );
+        
+        $router->addRoute(
+                'championshipTeamDriverId', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/?([^\/]+)?/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            1 => 0,
+            2 => 'team',
+            3 => 0,
+                ), array(
+            'championship_id' => 1,
+            'team_id' => 3,
+            'action' => 4,
+            'user_id' => 5,
+                ), "championship/%s/%s/%s/%s/%s.html"
+                )
+        );
+
+        $router->addRoute(
+                'championshipTeamDefault', new Zend_Controller_Router_Route_Regex('championship/(\d+)/?([^\/]+)?\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            1 => 0,
+                ), array(
+            'championship_id' => 1,
+            'action' => 2,
+                ), "championship/%s/%s.html"
+                )
+        );
+
+        $router->addRoute(
+                'championshipAll', new Zend_Controller_Router_Route('championship/all/:page', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            'action' => 'all',
+            'page' => 1)
         ));
         //event controller routers
         $router->addRoute(
-                'event', new Zend_Controller_Router_Route('event/:action/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'event',
-                            'id' => 0)
+                'event', new Zend_Controller_Router_Route('event/:action/:id', array(
+            'module' => 'default',
+            'controller' => 'event',
+            'id' => 0)
         ));
 
         $router->addRoute(
-                'eventAll', new Zend_Controller_Router_Route('event/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'event',
-                            'action' => 'all',
-                            'page' => 1)
+                'eventAll', new Zend_Controller_Router_Route('event/all/:page', array(
+            'module' => 'default',
+            'controller' => 'event',
+            'action' => 'all',
+            'page' => 1)
         ));
         //country controller routers
         $router->addRoute(
-                'country', new Zend_Controller_Router_Route('country/:action/:id',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'country',
-                            'id' => 0)
+                'country', new Zend_Controller_Router_Route('country/:action/:id', array(
+            'module' => 'default',
+            'controller' => 'country',
+            'id' => 0)
         ));
 
         $router->addRoute(
-                'countryAll', new Zend_Controller_Router_Route('country/all/:page',
-                        array(
-                            'module' => 'default',
-                            'controller' => 'country',
-                            'action' => 'all',
-                            'page' => 1)
+                'countryAll', new Zend_Controller_Router_Route('country/all/:page', array(
+            'module' => 'default',
+            'controller' => 'country',
+            'action' => 'all',
+            'page' => 1)
         ));
         /*
           Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');
@@ -562,7 +524,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     public function _initNavigation() {
         $this->bootstrap('layout');
         $view = $this->getResource('layout')->getView();
-        
+
         $main_menu_pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
@@ -605,7 +567,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 'route' => 'userAll',
             ),
             array(
-                'label' => _('Статьи'),
+                'label' => _('Новости'),
                 'title' => _('Все статьи опубликованные на нашем портале'),
                 'controller' => 'article',
                 'action' => 'all',
@@ -685,8 +647,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         )
                     ),
                     array(
-                        'label' => _('Статьи'),
-                        'title' => _('Статьи'),
+                        'label' => _('Новости'),
+                        'title' => _('Новости'),
                         'controller' => 'article',
                         'action' => 'all',
                         'route' => 'articleAll',
@@ -746,7 +708,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $main_menu_container = new Zend_Navigation($main_menu_pages);
         $breadcrumb_container = new Zend_Navigation($breadcrumbs_pages);
         // Передаем контейнер в View
-        $view->menu = $main_menu_container;
+        $view->main_menu = $main_menu_container;
         $view->breadcrumb = $breadcrumb_container;
 
         //return $main_menu_container;

@@ -2,49 +2,13 @@
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <?php
-                            $partial = array('menu_layout/main_menu.phtml', 'default');
-                            $this->navigation()->menu($this->menu)->setPartial($partial);
-                            echo $this->navigation()->menu()->render();
-                            ?>
-            <!--<ul class="nav">
-                <li class="active"><a href="<?php echo $this->baseUrl(''); ?>" title="<?php echo $this->translate('Главная'); ?>"><?php echo $this->translate('Главная') ?></a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $this->translate('Лиги') ?>
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <?php
-                        $league = new Application_Model_DbTable_League();
-                        $leagues = $league->fetchAll();
-
-                        foreach ($leagues as $league):
-                            ?>
-                            <li class="leaf"><a href="<?php echo $this->baseUrl('league/id/' . $league->id) ?>" title="<?php echo $league->name; ?>"><?php echo $league->name; ?></a></li>
-                        <?php endforeach; ?>
-                        <li class="divider"></li>
-                        <li><a href="<?php echo $this->baseUrl("league/all") ?>" title="<?php echo $this->translate('Все лиги'); ?>"><?php echo $this->translate('Все лиги') ?></a></li>
-                    </ul>
-                </li>
-                <li ><a href="<?php echo $this->baseUrl('user/all'); ?>" title="<?php echo $this->translate('Гонщики'); ?>"><?php echo $this->translate('Гонщики') ?></a></li>
-                <li ><a href="<?php echo $this->baseUrl('article/all'); ?>" title="<?php echo $this->translate('Статьи'); ?>"><?php echo $this->translate('Статьи') ?></a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <?php echo $this->translate('Файлы') ?>
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="leaf">
-                            <a href="<?php echo $this->baseUrl("game/all"); ?>" title="<?php echo $this->translate('Игры и моды'); ?>"><?php echo $this->translate('Игры и моды') ?></a>
-                        </li>
-                    </ul>
-                </li>
-                <li ><a href="http://f1orl.forum2x2.ru" title="<?php echo $this->translate('Форум'); ?>"><?php echo $this->translate('Форум') ?></a></li>
-            </ul>-->
+            $partial = array('menu_layout/main_menu.phtml', 'default');
+            $this->navigation()->menu($this->main_menu)->setPartial($partial);
+            echo $this->navigation()->menu()->render();
+            ?>
             <form class="navbar-search pull-right">
                 <input type="text" class="search-query" placeholder="<?php echo $this->translate('Поиск'); ?>">
             </form>
         </div>
     </div>
 </div>
-

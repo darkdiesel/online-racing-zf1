@@ -30,20 +30,20 @@
                 <div class="article_controls">
                     <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
                     <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
-                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'teams', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
+                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
                     <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($this->championship->article_id)), 'article', true); ?>" target="_blank" class = "btn btn-small btn-danger article_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
                 </div>
 
                 <?php
                 $edit_access = $this->checkUserAccess('championship/edit');
                 $delete_access = $this->checkUserAccess('championship/delete');
-                $add_team_access = $this->checkUserAccess('championship/addteam');
+                $add_team_access = $this->checkUserAccess('championship/add-team');
 
                 if ($add_team_access || $delete_access || $add_team_access) {
                     ?>
                     <div class="article_controls">
                         <?php if ($add_team_access) { ?>
-                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'addteam', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_edit"><?php echo $this->translate('Добавить команду') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_edit"><?php echo $this->translate('Добавить команду') ?></a>
                         <?php } ?>
                         <?php if ($edit_access) { ?>
                             <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'edit', 'id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>

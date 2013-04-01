@@ -126,8 +126,15 @@
             height:175px;
             overflow:hidden;
         }
-        .user_item .user_image img{
-            width:165px;
+            .user_item .user_image img{
+                width:165px;
+            }
+       .user_item .user_image_x{
+           width:145px;
+           height:145px;
+       }
+        .user_item .user_image_x img{
+            width:135px;
         }
         .user_item .user_login{
             
@@ -139,6 +146,12 @@
             .user_item .user_flag img{
                 width:32px;
             }
+        .user_flag_s{
+            width:32px;
+        }
+        .user_flag_x{
+            width:48px;
+        }
 .user_item{
         border:1px solid #CACACA;
         padding:9px;
@@ -167,9 +180,20 @@
         }
 .teams_driver_info{
     margin-left:10px;
-    width:125px;
+    width:150px;
     word-wrap:break-word;
+    font-size:13px;
+    font-family:monospace;
 }
+    .teams_driver_info div{
+        border-top:1px solid #DDDDDD;
+    }
+    .teams_driver_info table{
+        width:450px;
+    }
+        .teams_driver_info table tr td{
+            vertical-align:middle;
+        }
 .team_item .user_item{
     width:310px;
     margin:0 7px;

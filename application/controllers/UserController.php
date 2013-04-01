@@ -68,7 +68,7 @@ class UserController extends App_Controller_FirstBootController {
                                 $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
                                 $storage = $auth->getStorage('online-racing');
                                 $storage->write($storage_data);
-
+                                
                                 if ($form->remember->getValue() == 1) {
                                     // Получить объект Zend_Session_Namespace
                                     require_once('Zend/Session/Namespace.php');
