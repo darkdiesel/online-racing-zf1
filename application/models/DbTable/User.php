@@ -71,7 +71,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                                     'country_name' => 'c.native_name')
                                 )
                                 ->columns(array('id', 'avatar_type', 'login', 'date_last_activity'))
-                                ->order('id ' . $order)
+                                ->order('date_last_activity ' . $order)
         );
 
         $paginator = new Zend_Paginator($adapter);

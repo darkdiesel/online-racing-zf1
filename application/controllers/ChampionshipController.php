@@ -616,23 +616,25 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
                 if ($this->getRequest()->isPost()) {
                     if ($form->isValid($request->getPost())) {
-                        //saving new data to DB
-                        $new_championship_team_driver_data = array();
+                        if (!$championship_team_driver->checkChampionshipDriverExist($championship_id, $user->id)) {
+                            //saving new data to DB
+                            $new_championship_team_driver_data = array();
 
-                        // save new article to db
-                        $date = date('Y-m-d H:i:s');
+                            // save new article to db
+                            $date = date('Y-m-d H:i:s');
 
-                        $new_championship_team_driver_data['championship_id'] = $championship_id;
-                        $new_championship_team_driver_data['team_id'] = $team_id;
-                        $new_championship_team_driver_data['user_id'] = $form->getValue('driver');
-                        $new_championship_team_driver_data['driver_number'] = $form->getValue('driver_number');
-                        $new_championship_team_driver_data['date_create'] = $date;
-                        $new_championship_team_driver_data['date_edit'] = $date;
+                            $new_championship_team_driver_data['championship_id'] = $championship_id;
+                            $new_championship_team_driver_data['team_id'] = $team_id;
+                            $new_championship_team_driver_data['user_id'] = $form->getValue('driver');
+                            $new_championship_team_driver_data['driver_number'] = $form->getValue('driver_number');
+                            $new_championship_team_driver_data['date_create'] = $date;
+                            $new_championship_team_driver_data['date_edit'] = $date;
 
-                        $newChampionshipTeamDriver = $championship_team_driver->createRow($new_championship_team_driver_data);
-                        $newChampionshipTeamDriver->save();
+                            $newChampionshipTeamDriver = $championship_team_driver->createRow($new_championship_team_driver_data);
+                            $newChampionshipTeamDriver->save();
 
-                        $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                            $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                        }
                     }
                 }
                 $this->view->form = $form;
@@ -670,27 +672,41 @@ class ChampionshipController extends App_Controller_FirstBootController {
             $championship_team = new Application_Model_DbTable_ChampionshipTeam();
             if ($championship_team->checkTeamExist($championship_id, $team_id)) {
                 $championship_team_data = $championship_team->getTeamData($championship_id, $team_id);
+                $this->view->team_data = $championship_team_data;
+
                 //head title
                 $this->view->headTitle($this->view->translate('Команда'));
                 $this->view->headTitle($championship_team_data->name);
                 $this->view->headTitle($this->view->translate('Удалить гонщика'));
 
-                $form = new Application_Form_Championship_Driver_Delete();
-                $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'driver-delete', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true));
-                $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true)}\"");
-
                 $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
                 
-                if ($this->getRequest()->isPost()) {
-                    if ($form->isValid($request->getPost())) {
-                        $championship_team_driver_where = $championship_team_driver->getAdapter()->quoteInto("championship_id = {$championship_id} and team_id = {$team_id} and user_id = {$user_id}");
-                        $championship_team_driver->delete($championship_team_driver_where);
-                        
-                        $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
-                    }
-                }
+                //get data for deleting driver
+                $championship_team_driver_data = $championship_team_driver->getChampionshipTeamDriver($championship_id, $team_id, $user_id);
+                
+                if ($championship_team_driver_data) {
+                    $form = new Application_Form_Championship_Driver_Delete();
+                    $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'driver-delete', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true));
+                    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true)}\"");
 
-                $this->view->form = $form;
+                    if ($this->getRequest()->isPost()) {
+                        if ($form->isValid($request->getPost())) {
+                            //remove driver from the team
+                            $championship_team_driver_where = $championship_team_driver->getAdapter()->quoteInto("championship_id = {$championship_id} and team_id = {$team_id} and user_id = {$user_id}");
+                            $championship_team_driver->delete($championship_team_driver_where);
+
+                            $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                        }
+                    }
+                    $this->view->team_driver_data = $championship_team_driver_data;
+                    $this->view->form = $form;
+                } else {
+                    //error message if driver in the team for this championship not found
+                    $this->view->errMessage .= $this->view->translate('Гонщик в команде не найден!') . '<br/>';
+                    
+                    $this->view->headTitle($this->view->translate('Ошибка!'));
+                    $this->view->headTitle($this->view->translate('Гонщик не найден!'));
+                }
             } else {
                 //error message if team for this championship not found
                 $this->view->errMessage .= $this->view->translate('Команда в чемпионате не найдена!') . '<br/>';

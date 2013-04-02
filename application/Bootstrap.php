@@ -13,18 +13,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Loader_Autoloader::getInstance()->registerNamespace('App');
     }
 
-    /*
-      protected function _initDb() {
-      try {
-      $config = $this->getOptions();
-      $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
-      Zend_Db_Table::setDefaultAdapter($db);
-      } catch (Exception $e) {
-      exit($e->getMessage());
-      }
-      Zend_Registry::set('db', $db);
-      return $db;
-      } */
+    protected function _initDb() {
+        try {
+            $config = $this->getOptions();
+            $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
+            Zend_Db_Table::setDefaultAdapter($db);
+            
+            $registry = Zend_Registry::getInstance();
+            $registry->configuration = $config;
+            $registry->dbAdapter  = $db;
+            $registry->session = new Zend_Session_Namespace();
+        } catch (Exception $e) {
+            exit($e->getMessage());
+        }
+        
+        Zend_Registry::set('db', $db);
+        return $db;
+    }
 
     protected function _initDoctype() {
         $this->bootstrap('view');
@@ -364,7 +369,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), "championship/%s/%s.html"
                 )
         );
-        
+
         $router->addRoute(
                 'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)\.html', array(
             'module' => 'default',
@@ -380,7 +385,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         );
 
         $router->addRoute(
-            'championshipTeamAction', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/([^\/]+)\.html', array(
+                'championshipTeamAction', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/([^\/]+)\.html', array(
             'module' => 'default',
             'controller' => 'championship',
             1 => 0,
@@ -393,7 +398,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), "championship/%s/%s/%s/%s.html"
                 )
         );
-        
+
         $router->addRoute(
                 'championshipTeamDriverId', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)/?([^\/]+)?/(\d+)\.html', array(
             'module' => 'default',

@@ -9,7 +9,7 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
         if ($activeNav != NULL) {
             $activeNav->active = true;
         }
-
+		
         // configure breadcrumb
         if (($this->_request->getControllerName() . '/' . $this->_request->getActionName()) == "index/index") {
             Zend_Registry::set('breadcrumb', array('show' => FALSE));
@@ -23,7 +23,6 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
         }
 
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            echo "idencity";
             $user = new Application_Model_DbTable_User();
 
             //save last activity time
@@ -32,7 +31,7 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
 
             //checked role
             $user_role = $user->getUserStatus($storage_data->id);
-
+            
             switch ($user_role) {
                 case 'DISABLE':
                     Zend_Auth::getInstance()->clearIdentity();

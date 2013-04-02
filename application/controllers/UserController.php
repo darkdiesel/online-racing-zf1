@@ -52,15 +52,21 @@ class UserController extends App_Controller_FirstBootController {
                     case 'enable':
                         $bootstrap = $this->getInvokeArg('bootstrap');
                         $auth = Zend_Auth::getInstance();
+
+                        //set storage for saving logined user data
                         $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
                         $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
 
+                        //create auth adapter
                         $authAdapter = new Zend_Auth_Adapter_DbTable(
-                                        $adapter, 'user', 'email', 'password'
+                                $adapter, 'user', 'email', 'password'
                         );
 
+                        //set user credential for authentication
                         $authAdapter->setIdentity($form->getValue('loginemail'));
                         $authAdapter->setCredential(sha1($form->getValue('loginpassword')));
+
+                        //get result from authntication
                         $result = $auth->authenticate($authAdapter);
 
                         switch ($result->getCode()) {
@@ -68,19 +74,22 @@ class UserController extends App_Controller_FirstBootController {
                                 $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
                                 $storage = $auth->getStorage('online-racing');
                                 $storage->write($storage_data);
-                                
+
                                 if ($form->remember->getValue() == 1) {
                                     // Получить объект Zend_Session_Namespace
                                     require_once('Zend/Session/Namespace.php');
                                     $session = new Zend_Session_Namespace('Zend_Auth');
-                                    // Установить время действия залогинености
+                                    // set 
                                     $session->setExpirationSeconds(60 * 60 * 24 * 5);
 
                                     Zend_Session::rememberMe(60 * 60 * 24 * 5);
+                                } else {
+                                    Zend_Session::forgetMe();
                                 }
                                 $this->_helper->redirector('index', 'index');
                                 break;
                             default:
+                                $form->populate($request->getPost());
                                 $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
                                 $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
                                         . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
@@ -253,7 +262,7 @@ class UserController extends App_Controller_FirstBootController {
                         $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
                         $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
                         $authAdapter = new Zend_Auth_Adapter_DbTable(
-                                        $adapter, 'user', 'email', 'password'
+                                $adapter, 'user', 'email', 'password'
                         );
 
                         $authAdapter->setIdentity($user_data['email']);
@@ -375,7 +384,7 @@ class UserController extends App_Controller_FirstBootController {
                     $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
                     $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
                     $authAdapter = new Zend_Auth_Adapter_DbTable(
-                                    $adapter, 'user', 'email', 'password'
+                            $adapter, 'user', 'email', 'password'
                     );
 
                     $authAdapter->setIdentity($user_data['email']);
@@ -402,6 +411,7 @@ class UserController extends App_Controller_FirstBootController {
     public function logoutAction() {
         Zend_Auth::getInstance()->clearIdentity();
         Zend_Session::forgetMe();
+        Zend_Session::expireSessionCookie();
         return $this->_helper->redirector('login', 'user');
     }
 
@@ -430,7 +440,7 @@ class UserController extends App_Controller_FirstBootController {
                                 $newName = Date('Y-m-d_H-i-s') . strtolower('_avatar' . '.' . $ext);
 
                                 $filterRename = new Zend_Filter_File_Rename(array('target'
-                                            => $file['avatar_load']['destination'] . '/' . $newName, 'overwrite' => true));
+                                    => $file['avatar_load']['destination'] . '/' . $newName, 'overwrite' => true));
 
                                 $filterRename->filter($file['avatar_load']['destination'] . '/' . $file['avatar_load']['name']);
 
@@ -533,7 +543,7 @@ class UserController extends App_Controller_FirstBootController {
         $page_count_items = 9;
         $page = $this->getRequest()->getParam('page');
         $page_range = 5;
-        $items_order = 'ASC';
+        $items_order = 'DESC';
 
         $user = new Application_Model_DbTable_User();
         $this->view->paginator = $user->getSimpleEnableUsersPager($page_count_items, $page, $page_range, $items_order);
