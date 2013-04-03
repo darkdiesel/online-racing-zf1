@@ -5,7 +5,12 @@
         <?php echo $this->headMeta() ?>
         <?php echo $this->headLink() ?>
         <?php echo $this->headStyle() ?>
-        <?php //echo $this->minifyHeadLink() ?>
+        <?php
+            /*echo $this->minifyHeadLink()
+                    ->prependStylesheet('/css/style.css')
+                    ->prependStylesheet('/css/bootstrap.min.css')
+                    ->prependStylesheet('/css/jquery-ui-1.10.0.custom.min.css')*/
+        ?>
         <?php echo $this->headScript() ?>
     </head>
     <body>
@@ -26,17 +31,14 @@
                 </div>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">
-                        
-                        <div id="menu">
-                        </div>
                         <!-- Content -->
                         <div id="content">
-	                        <?php
-	                        $breadcrumb = Zend_Registry::get('breadcrumb');
-	                        if ($breadcrumb['show']) {
-	                            echo $this->render("breadcrumb.phtml");
-	                        }
-	                        ?>
+                            <?php
+                            $breadcrumb = Zend_Registry::get('breadcrumb');
+                            if ($breadcrumb['show']) {
+                                echo $this->render("breadcrumb.phtml");
+                            }
+                            ?>
                             <?php echo $this->layout()->content ?>
                         </div>
                         <!-- Left sidebar -->
@@ -66,9 +68,12 @@
             _gaq.push(['_trackPageview']);
 
             (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
             })();
         </script>
     </body>

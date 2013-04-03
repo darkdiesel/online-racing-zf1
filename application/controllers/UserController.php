@@ -144,7 +144,6 @@ class UserController extends App_Controller_FirstBootController {
                 $user_data['country_id'] = 1;
                 $user_data['enable'] = 1;
 
-                Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
                 $user_data['code_activate'] = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
 
                 $user_data['date_create'] = date('Y-m-d H:i:s');

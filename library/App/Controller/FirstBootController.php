@@ -3,6 +3,9 @@
 class App_Controller_FirstBootController extends Zend_Controller_Action {
 
     public function init() {
+    	//setup global variables
+    	$this->messageManager = $this->_helper->getHelper('MessageManager');
+    	
         // configure main menu
         $uri = $this->_request->getPathInfo();
         $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);

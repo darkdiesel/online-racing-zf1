@@ -273,10 +273,41 @@ class ArticleController extends App_Controller_FirstBootController {
 
             $this->view->article = $article_data;
             $this->view->form = $form;
-        } else {
+        } else {        	
             $this->view->errMessage .= $this->view->translate('Статья не найдена!') . '<br/>';
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Статья не найдена!'));
         }
+    }
+    
+    public function allByTypeAction(){
+    	$this->messageManager->addError( $this->view->translate( "There is already an account with this user name." ) );
+    	$this->view->headTitle($this->view->translate('Весь контерт типа статьи'));
+    	
+    	$request = $this->getRequest();
+    	$article_type_id = (int) $request->getParam('article_type_id');
+    	
+    	$article_type = new Application_Model_DbTable_ArticleType();
+    	$article_type_data = $article_type->getName($article_type_id);
+    	
+    	if ($article_type_data) {
+    		// setup pager settings
+    		$page_count_items = 10;
+    		$page_range = 5;
+    		$items_order = 'DESC';
+    		$page = $this->getRequest()->getParam('page');
+    		
+    		$article = new Application_Model_DbTable_Article();
+    		$this->view->paginator = $article->getAllArticlesPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
+    		$this->view->article_type_name = $article_type_data;
+    	} else {
+    		$this->view->errMessage .= $this->view->translate('Тип статьи не найден!') . '<br/>';
+    		$this->view->headTitle($this->view->translate('Ошибка!'));
+    		$this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+    	}
+    	
+
+        
     }
 
 }

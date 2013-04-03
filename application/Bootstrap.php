@@ -18,15 +18,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $config = $this->getOptions();
             $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
             Zend_Db_Table::setDefaultAdapter($db);
-            
+
             $registry = Zend_Registry::getInstance();
             $registry->configuration = $config;
-            $registry->dbAdapter  = $db;
+            $registry->dbAdapter = $db;
             $registry->session = new Zend_Session_Namespace();
         } catch (Exception $e) {
             exit($e->getMessage());
         }
-        
+
         Zend_Registry::set('db', $db);
         return $db;
     }
@@ -161,11 +161,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         return $view;
     }
 
-    public function _initHelpers() {
+    public function _initViewHelpers() {
         //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
         $this->bootstrap('layout');
         $view = $this->getResource('layout')->getView();
         $view->addHelperPath('App/View/Helper', 'App_View_Helper');
+    }
+
+    public function _initActionHelpers() {
+        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
     }
 
     public function _initAcl() {
@@ -259,6 +263,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'action' => 'all',
             'page' => 1)
         ));
+
+        $router->addRoute(
+                'articleAllByType', new Zend_Controller_Router_Route('article/all-by-type/:article_type_id/:page', array(
+            'module' => 'default',
+            'controller' => 'article',
+            'action' => 'all-by-type',
+            'article_type_id' => 0,
+            'page' => 1)
+        ));
+
         //admin controller routers
         $router->addRoute(
                 'adminArticleAll', new Zend_Controller_Router_Route('admin/articles/:page', array(
@@ -327,21 +341,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'action' => 'all',
             'page' => 1)
         ));
-        //game controller routers
-        $router->addRoute(
-                'game', new Zend_Controller_Router_Route('game/:action/:id', array(
-            'module' => 'default',
-            'controller' => 'game',
-            'id' => 0)
-        ));
 
-        $router->addRoute(
-                'gameAll', new Zend_Controller_Router_Route('game/all/:page', array(
-            'module' => 'default',
-            'controller' => 'game',
-            'action' => 'all',
-            'page' => 1)
-        ));
+
         //team controller routers
         $router->addRoute(
                 'team', new Zend_Controller_Router_Route('team/:action/:id', array(
@@ -586,9 +587,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     array(
                         'label' => _('Игры и Моды'),
                         'title' => _('Игры и Моды'),
-                        'controller' => 'game',
-                        'action' => 'all',
-                        'route' => 'gameAll',
+                        'controller' => 'article',
+                        'action' => 'all-by-type',
+                        'route' => 'articleAllByType',
+                        'params' => array(
+                            'article_type_id' => '3'
+                        ),
                     ),
                 )
             ),
@@ -675,16 +679,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'pages' => array(
                             array(
                                 'label' => _('Игры и Моды'),
-                                'controller' => 'game',
-                                'action' => 'all',
-                                'route' => 'gameAll',
+                                'controller' => 'article',
+                                'action' => 'all-by-type',
+                                'route' => 'articleAllByType',
+                                'params' => array(
+                                    'article_type_id' => '3'
+                                ),
                                 'pages' => array(
                                     array(
                                         'label' => _('Игра'),
                                         'title' => _('Игра'),
-                                        'controller' => 'game',
+                                        'controller' => 'article',
                                         'action' => 'id',
-                                        'route' => 'game',
+                                        'route' => 'article',
                                         'params' => array()
                                     )
                                 )
