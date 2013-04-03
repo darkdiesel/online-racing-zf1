@@ -226,10 +226,12 @@ class App_View_Helper_MinifyHeadScript extends Zend_View_Helper_HeadScript {
     
     protected function _generateMinifyItem(array $scripts)
     {
-		$baseUrl = $this->getBaseUrl();
+		/*$baseUrl = $this->getBaseUrl();
 		if (substr($baseUrl, 0, 1) == '/') {
 			$baseUrl = substr($baseUrl, 1);
-		}        
+		} */      
+		// dark_diesel edit
+    	$baseUrl = '';
         $minScript = new stdClass();
         $minScript->type = 'text/javascript';
         if (is_null($baseUrl) || $baseUrl == '') {

@@ -48,11 +48,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        /* [MAIN SITE TITLE SETTINGS] */
+        // [MAIN SITE TITLE SETTINGS]
         $view->headTitle('Online-Racing.net')
                 ->setSeparator(' :: '); // setting a separator string for segments
+        
+        $view->addHelperPath(APPLICATION_PATH . '/../library/App/View/Helper/', "App_View_Helper");
 
-        /* [HEAD META SETTINGS] */
+        // [HEAD META SETTINGS]
         $view->headMeta()
                 ->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
                 ->setHttpEquiv('X-UA-Compatible', 'IE=edge')
@@ -101,34 +103,41 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->uc_rambler100_block = true; // rambler 100 user counter block
         $view->uc_yandex_block = true; // yandex user counter block
 
-        /* [CSS SETTINGS] */
-        /* [BOOTSTRAP CSS] */
+        // CSS setups
+        // [BOOTSTRAP CSS]
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.min.css"));
-        /* [JQUERY UI CSS] */
-        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.0.custom.min.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
-
-        /* [CHAT CSS] */
+        // [JQUERY UI CSS]
+        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.0.custom.min.css"));        
+        // [CHAT CSS]
         if ($view->ls_chat_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
         }
-
-        //add css
-        $view->headLink()->appendStylesheet($view->baseUrl("css/forms.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/articles.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/items.css"));
-        $view->headLink()->appendStylesheet($view->baseUrl("css/user.css"));
-
-        /* [GOOGLE FONTS] */
+        // [CSS Minify]
+        $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/style.css'));
+        $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/user_toolbar.css'));
+        $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/forms.css'));
+        $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/articles.css'));
+        $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/items.css'));
+        $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/user.css'));
+        // [COMMON CSS]
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/forms.css"));
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/articles.css"));
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/items.css"));
+        //$view->headLink()->appendStylesheet($view->baseUrl("css/user.css"));
+        // [GOOGLE FONTS]
         $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
 
-        /* [JQUERY JS] */
+        // [JQUERY JS]
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.9.1.min.js"));
-        /* [JQUERY UI JS] */
+        // [JQUERY UI JS]
         $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.10.0.custom.min.js"));
+        // [BOOTSTRAP JS]
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
 
+        $view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
+        
         // Share block script
         if ($view->lo_share_block) {
             $view->headScript()->appendFile($view->baseUrl("js/share.js"));
@@ -141,9 +150,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $view->headScript()->appendFile($view->baseUrl("js/jquery.countdown-ru.js"));
             $view->headLink()->appendStylesheet($view->baseUrl("css/jquery.countdown.css"));
         }
-
-        // All Common scripts
-        $view->headScript()->appendFile($view->baseUrl("js/my_js.js"));
 
         Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
 
@@ -160,18 +166,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         return $view;
     }
-
+    
     public function _initViewHelpers() {
-        //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
-        $this->bootstrap('layout');
-        $view = $this->getResource('layout')->getView();
-        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
+    	//$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
+    	$this->bootstrap('layout');
+    	$view = $this->getResource('layout')->getView();
+    	$view->addHelperPath('App/View/Helper', 'App_View_Helper');
     }
-
+    
     public function _initActionHelpers() {
-        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
+    	Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
     }
-
     public function _initAcl() {
         Zend_Loader::loadClass('Acl');
         Zend_Loader::loadClass('CheckAccess');
