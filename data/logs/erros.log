@@ -40328,3 +40328,387 @@ Stack trace:
 #2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
 #3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
 #4 {main}
+04-04-2013 12:45:15 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:15 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 12:45:15 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 12:45:15 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:15 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => rus_image_round.png
+    [module] => default
+)
+
+04-04-2013 12:45:15 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 12:45:15 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:15 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 12:45:15 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 12:45:16 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:16 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => blr_image_round.png
+    [module] => default
+)
+
+04-04-2013 12:45:16 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 12:45:16 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:16 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => ussr_image_round.png
+    [module] => default
+)
+
+04-04-2013 12:45:16 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 12:45:16 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:16 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 12:45:16 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 12:45:16 NOTICE (5): Error 404. Page not found
+04-04-2013 12:45:16 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => 2013-02-12_13-06-35_image_round.png
+    [module] => default
+)
+
+04-04-2013 12:45:16 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:05 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:05 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => rus_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:08:05 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:05 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:05 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:08:05 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:05 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:05 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => blr_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:08:05 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:05 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:05 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:08:05 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:06 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:06 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => 2013-02-12_13-06-35_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:08:06 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:06 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:06 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:08:06 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:06 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:06 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:08:06 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:06 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:06 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:08:06 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:06 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:06 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => ussr_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:08:06 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:08:07 NOTICE (5): Error 404. Page not found
+04-04-2013 15:08:07 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => ussr_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:08:07 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:47 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:47 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => blr_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:27:47 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:47 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:47 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:27:47 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:47 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:47 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:27:47 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:47 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:47 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [users] => avatars
+    [module] => default
+)
+
+04-04-2013 15:27:47 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:48 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:48 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => rus_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:27:48 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:48 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:48 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => ussr_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:27:48 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}
+04-04-2013 15:27:48 NOTICE (5): Error 404. Page not found
+04-04-2013 15:27:48 NOTICE (5): Request params: Array
+(
+    [controller] => img
+    [action] => data
+    [flags] => 2013-02-12_13-06-35_image_round.png
+    [module] => default
+)
+
+04-04-2013 15:27:48 NOTICE (5): exception 'Zend_Controller_Dispatcher_Exception' with message 'Invalid controller specified (img)' in D:\dev\localhost\online-racing\library\Zend\Controller\Dispatcher\Standard.php:248
+Stack trace:
+#0 D:\dev\localhost\online-racing\library\Zend\Controller\Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Object(Zend_Controller_Request_Http), Object(Zend_Controller_Response_Http))
+#1 D:\dev\localhost\online-racing\library\Zend\Application\Bootstrap\Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#2 D:\dev\localhost\online-racing\library\Zend\Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#3 D:\dev\localhost\online-racing\public_html\index.php(27): Zend_Application->run()
+#4 {main}

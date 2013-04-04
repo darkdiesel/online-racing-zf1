@@ -135,8 +135,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.10.0.custom.min.js"));
         // [BOOTSTRAP JS]
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
+        // [COMMON JS]
+        $view->headScript()->appendFile($view->baseUrl("js/app.js"));
 
-        $view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
+        //$view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
         
         // Share block script
         if ($view->lo_share_block) {

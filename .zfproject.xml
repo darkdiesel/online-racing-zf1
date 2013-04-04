@@ -53,6 +53,12 @@
         <controllerFile controllerName="Championship">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Track">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Race">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false">
         <formFile formName="ArticleAdd"/>
@@ -213,6 +219,12 @@
             <viewScriptFile forActionName="all"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Championship">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Track">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Race">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
