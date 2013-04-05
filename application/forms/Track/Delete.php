@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Championship_Driver_Delete extends Zend_Form {
+class Application_Form_Track_Delete extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_Championship_Driver_Delete extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/championship/deletedriver');
-        $this->setName('championshipTeamDriverDelete');
+        $this->setAction('/country/delete');
+        $this->setName('countryDelete');
         $this->setAttrib('class', 'white_box');
 
         $this->addElement('submit', 'submit', array(
@@ -27,7 +27,7 @@ class Application_Form_Championship_Driver_Delete extends Zend_Form {
         $this->addElement('button', 'cancel', array(
             'ignore' => true,
             'class' => 'btn',
-            'onClick' => "location.href='/championship/teams'",
+            'onClick' => "location.href='/country/all'",
             'label' => $this->translate('Отмена'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

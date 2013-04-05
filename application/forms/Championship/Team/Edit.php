@@ -11,7 +11,7 @@ class Application_Form_Championship_Team_Edit extends Zend_Form {
     public function init() {
         $this->setMethod('post');
         $this->setAction('/championship/editteam');
-        $this->setName('championshipEditTeam');
+        $this->setName('championshipTeamEdit');
         $this->setAttrib('class', 'white_box white_box_size_l');
 
         $this->addElement('text', 'name', array(

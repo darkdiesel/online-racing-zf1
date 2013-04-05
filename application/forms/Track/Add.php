@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Championship_Team_Add extends Zend_Form {
+class Application_Form_Track_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,20 +10,19 @@ class Application_Form_Championship_Team_Add extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/championship/addteam');
-        $this->setName('championshipTeamAdd');
-        $this->setAttrib('class', 'white_box white_box_size_l');
+        $this->setAction('/track/add');
+        $this->setName('trackAdd');
+        $this->setAttrib('class', 'white_box');
 
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Название'),
             'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim'),
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
             'required' => true,
-            'class' => 'x_field white_box_el_size_l',
+            'class' => 'x_field white_box_el_size_m',
             'validators' => array(
                 'NotEmpty',
-                new App_Validate_NoDbRecordExists('championship', 'name')
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -32,13 +31,29 @@ class Application_Form_Championship_Team_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
+        $this->addElement('file', 'track_scheme', array(
+            'label' => $this->translate('Схема трассы (32х24)'),
+            'required' => true,
+            'destination' => APPLICATION_PATH . '/../public_html/img/data/track_schemes/',
+            'decorators' => array(
+                'File', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            ),
+            'validators' => array(
+                array('Size', false, 102400),
+                array('Extension', false, 'jpg,png,gif'),
+                array('Count', false, 1)
+            )
+        ));
+
         // artcile type
-        $this->addElement('select', 'team', array(
-            'label' => $this->translate('Команда'),
+        $this->addElement('select', 'country', array(
+            'label' => $this->translate('Страна'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
-            'class' => 'white_box_el_size_s',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -48,15 +63,16 @@ class Application_Form_Championship_Team_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
-        $this->addElement('text', 'team_number', array(
-            'label' => $this->translate('Номер команды'),
-            'placeholder' => $this->translate('Номер команды'),
+
+        $this->addElement('text', 'track_year', array(
+            'label' => $this->translate('Год трассы'),
+            'placeholder' => $this->translate('Год трассы'),
             'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim'),
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
             'required' => true,
             'class' => 'x_field white_box_el_size_s',
             'validators' => array(
+                'NotEmpty',
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -65,42 +81,21 @@ class Application_Form_Championship_Team_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-
-        $this->addElement('file', 'logo', array(
-            'label' => $this->translate('Логотип команды'),
-            'required' => true,
-            'height' => '30px',
-            'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/teams/logo',
-            'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 5120000),
-                array('Extension', false, 'jpg,png,gif'),
-                array('Count', false, 1)
-            )
-        ));
         
-        $this->addElement('file', 'logo_team', array(
-            'label' => $this->translate('Изображение болида (вид с боку)'),
+        $this->addElement('textarea', 'text', array(
+            'label' => $this->translate('Описание трассы'),
+            'placeholder' => $this->translate('Описание трассы'),
+            'cols' => 60,
+            'rows' => 10,
+            'class' => 'white_box_el_size_l',
+            'maxlength' => 1000,
             'required' => true,
-            'height' => '30px',
-            'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/teams/car',
+            'filters' => array('StringTrim'),
+            'validators' => array('NotEmpty'),
             'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 5120000),
-                array('Extension', false, 'jpg,png,gif'),
-                array('Count', false, 1)
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'aboutTextArea_Label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
 
@@ -138,4 +133,3 @@ class Application_Form_Championship_Team_Add extends Zend_Form {
     }
 
 }
-

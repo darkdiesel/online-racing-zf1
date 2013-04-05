@@ -11,7 +11,7 @@ class Application_Form_Championship_Driver_Add extends Zend_Form {
     public function init() {
         $this->setMethod('post');
         $this->setAction('/championship/adddriver');
-        $this->setName('championshipAddTeamDriver');
+        $this->setName('championshipTeamDriverAdd');
         $this->setAttrib('class', 'white_box white_box_size_m');
 
         // artcile type
