@@ -26,7 +26,9 @@
                     <img class="img-polaroid article_center_image" src="<?php echo $this->escape($this->championship->url_logo); ?>">
                 <?php } ?>
                 <div class="article_text"><?php //echo $bbcode->render($this->escape($this->article->text));    ?></div>
-
+                
+                <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($this->championship->game_id)), 'article', true); ?>" target="_blank" class = "btn btn-small btn-primary article_more" title="<?php echo $this->translate('Игра для проведения') ?>"><?php echo $this->translate('Игра') ?></a>
+                
                 <div class="article_controls">
                     <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
                     <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>

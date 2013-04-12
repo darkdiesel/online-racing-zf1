@@ -102,7 +102,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
         if ($games) {
             foreach ($games as $game):
-                $form->game->addMultiOption($game->id, $game->name);
+                $form->game->addMultiOption($game->article_id, $game->name);
             endforeach;
         } else {
             $this->view->errMessage .= $this->view->translate('Игры не найдены') . '<br />';
@@ -239,7 +239,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
             if ($games) {
                 foreach ($games as $game):
-                    $form->game->addMultiOption($game->id, $game->name);
+                    $form->game->addMultiOption($game->article_id, $game->name);
                 endforeach;
             } else {
                 $this->view->errMessage .= $this->view->translate('Игры не найдены') . '<br />';

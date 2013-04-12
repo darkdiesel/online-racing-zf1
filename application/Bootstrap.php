@@ -107,7 +107,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // [BOOTSTRAP CSS]
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.min.css"));
         // [JQUERY UI CSS]
-        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.0.custom.min.css"));        
+        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.2.custom.min.css"));        
         // [CHAT CSS]
         if ($view->ls_chat_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
@@ -132,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // [JQUERY JS]
         $view->headScript()->appendFile($view->baseUrl("js/jquery-1.9.1.min.js"));
         // [JQUERY UI JS]
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.10.0.custom.min.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.10.2.custom.min.js"));
         // [BOOTSTRAP JS]
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
         // [COMMON JS]

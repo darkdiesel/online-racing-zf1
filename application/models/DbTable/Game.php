@@ -9,7 +9,7 @@ class Application_Model_DbTable_Game extends Zend_Db_Table_Abstract {
 
         $select = $model->select()
                 ->from($this->_name, 'name')
-                ->columns(array('id', 'name'))
+                ->columns(array('id', 'name', 'article_id'))
                 ->order('name ' . $order);
 
         $games = $model->fetchAll($select);
