@@ -8,10 +8,10 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
     	
         // configure main menu
         $uri = $this->_request->getPathInfo();
-        $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
+        /*$activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
         if ($activeNav != NULL) {
             $activeNav->active = true;
-        }
+        }*/
 		
         // configure breadcrumb
         if (($this->_request->getControllerName() . '/' . $this->_request->getActionName()) == "index/index") {
@@ -19,10 +19,10 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
         } else {
             Zend_Registry::set('breadcrumb', array('show' => TRUE));
 
-            $activeNav = $this->view->navigation($this->view->breadcrumb)->findByUri($uri);
+            /*$activeNav = $this->view->navigation($this->view->breadcrumb)->findByUri($uri);
             if ($activeNav != NULL) {
                 $activeNav->active = true;
-            }
+            }*/
         }
 
         if (Zend_Auth::getInstance()->hasIdentity()) {

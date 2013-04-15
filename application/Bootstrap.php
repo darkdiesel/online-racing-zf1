@@ -19,10 +19,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
             Zend_Db_Table::setDefaultAdapter($db);
 
-            $registry = Zend_Registry::getInstance();
+            /*$registry = Zend_Registry::getInstance();
             $registry->configuration = $config;
             $registry->dbAdapter = $db;
-            $registry->session = new Zend_Session_Namespace();
+            $registry->session = new Zend_Session_Namespace();*/
         } catch (Exception $e) {
             exit($e->getMessage());
         }

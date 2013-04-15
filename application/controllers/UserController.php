@@ -78,7 +78,7 @@ class UserController extends App_Controller_FirstBootController {
                                 if ($form->remember->getValue() == 1) {
                                     // Получить объект Zend_Session_Namespace
                                     require_once('Zend/Session/Namespace.php');
-                                    $session = new Zend_Session_Namespace('Zend_Auth');
+                                    $session = new Zend_Session_Namespace('online-racing');
                                     // set 
                                     $session->setExpirationSeconds(60 * 60 * 24 * 5);
 
