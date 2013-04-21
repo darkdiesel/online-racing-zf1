@@ -1,32 +1,14 @@
-<!-- Site Logo -->
-<div id="logo_box">
-    <a id="logo" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>"><img src="<?php echo $this->baseUrl('img/logo.png'); ?>" alt="<?php echo $this->translate('Главная') ?>" /></a>
-</div>
-
+<!-- Main Menu -->
+<?php echo $this->render('header/hd_main_menu.phtml'); ?>
+<!-- Moving text-->
 <?php
-if ($this->hd_liveracers_block) {
-    echo $this->partial('header/liveracers_block.phtml');
+if ($this->hd_moving_text_block) {
+    echo $this->partial('header/hd_mooving_text_block.phtml');
 }
 ?>
-
-<!-- User ToolBar -->
-<?php echo $this->partial('header/hd_user_toolbar.phtml'); ?>
-
-
-
-<div id="unheader">
-    <!-- Main Menu -->
-    <?php echo $this->render('header/hd_main_menu.phtml'); ?>
-    <!-- Moving text-->
-    <?php
-    if ($this->hd_moving_text_block) {
-        echo $this->partial('header/hd_mooving_text_block.phtml');
-    }
-    ?>
-    <!-- Hot Lap -->
-    <?php
-    if ($this->hd_hot_lap_block) {
-        echo $this->partial('header/hd_hot_lap_block.phtml');
-    }
-    ?>
-</div>
+<!-- Hot Lap -->
+<?php
+if ($this->hd_hot_lap_block) {
+    echo $this->partial('header/hd_hot_lap_block.phtml');
+}
+?>

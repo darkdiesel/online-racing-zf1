@@ -11,11 +11,6 @@
 		<label><![CDATA[<p>На нашем портале вы гарантировано получите самые острые ощущение, море адреналина и захватывающей борьбы.</p>]]></label>
 	</slide>
 	<slide>
-		<link>/championship/id/1</link>
-		<image type="cubeSize">../img/data/slider_posts/post_8.jpg</image>
-		<label><![CDATA[<p>Winter Season 2012-2013. Первый турнир нашего портала. <a href="http://f1orl.forum2x2.ru/f13-forum">Регистрируйтесь</a></p>]]></label>
-	</slide>
-	<slide>
 		<link>#</link>
 		<image type="cubeSize">../img/data/slider_posts/post_6.jpg</image>
 		<label><![CDATA[<p>Хотите стать частью нашего портала? Присоеденяйтесь, мы всегда рады новым людям.</p>]]></label>
@@ -39,10 +34,5 @@
 		<link>#</link>
 		<image type="cubeSize">../img/data/slider_posts/post_5.jpg</image>
 		<label><![CDATA[<p>В новом сезоне будут транслироваться гонки нашего чемпионата!</p>]]></label>
-	</slide>
-	<slide>
-		<link>#</link>
-		<image type="cubeSize">../img/data/slider_posts/post_9.jpg</image>
-		<label><![CDATA[<p>Включитесь в борьбу за чемпионский титул вместе с нами!</p>]]></label>
 	</slide>
 </skitter>

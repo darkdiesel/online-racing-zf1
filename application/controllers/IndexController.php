@@ -7,7 +7,7 @@ class IndexController extends App_Controller_FirstBootController {
         //$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.easing.1.3.js"));
         //$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.animate_colors.min.js"));
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.skitter.min.js"));
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/skitter.styles.css"));
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/skitter.styles.min.css"));
 
         // page title
         $this->view->headTitle($this->view->translate('Портал Онлай Скорости'));

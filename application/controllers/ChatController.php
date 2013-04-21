@@ -66,13 +66,21 @@ class ChatController extends App_Controller_FirstBootController {
                         //construct message html code
                         $messages_html .= '<div class="chat_message_box ' . $order . '">';
                         ($order == 'even') ? $order = 'odd' : $order = 'even';
-                        $messages_html .= '<div class="chat_mesage_date">' . $message->date_create . '</div>';
-                        $messages_html .= '<div class="chat_mesage_nickname">';
+                        $messages_html .= "<div class=\"chat_mesage_header\">";
+                        
+                        $messages_html .= "<div class=\"chat_mesage_user_avatar\">";
                         $messages_html .= "<a href=\"{$this->view->url(array('controller' => 'user', 'action' => 'id', 'id' => $message->user_id), 'user', true)}\" target=\"_blank\"><i class=\"icon-user icon-black\"></i></a>";
+                        $messages_html .= '</div>';
+                        
+                        $messages_html .= '<div class="chat_mesage_user_nickname">';
                         $messages_html .= '<a href="javascript:void(' . "'Apply to'" . ')" class="nick" onClick="$(' . "'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()" . '">' . $message->user_login . '</a>';
-                        $messages_html .= '</div>';
+                        $messages_html .= "</div>";
+                        
+                        $messages_html .= '<div class="chat_mesage_date">' . $message->date_create . '</div>';
+                        $messages_html .= "</div>";
+                        
                         $messages_html .= '<div class="chat_mesage_message">' . $bbcode->render($message->message) . '</div>';
-                        $messages_html .= '</div>';
+                        $messages_html .= "</div>";
                     endforeach;
 
                     $data_str = array('message_html' => $messages_html, 'last_act' => $last_message_id);

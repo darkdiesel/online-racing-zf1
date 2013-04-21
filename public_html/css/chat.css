@@ -41,30 +41,53 @@
         font-size:11px;
         line-height:12px;
         font-family:verdana,arial,helvetica;
-        padding:3px 0;
+        padding:0;
         overflow-y:scroll;
     }
         #chat #chat_messages_box .chat_message_box{
-            border-bottom:1px solid #CCCCCC;
+            border:1px solid #8F8F8F;
+            margin:3px 2px;
+            border-radius:3px;
         }
         #chat #chat_messages_box .odd{
             background:#FFFFFF;
         }
         #chat #chat_messages_box .even{
-            background:#FBFBFB;
+            background:#F8F8F8;
         }
+            #chat #chat_messages_box .chat_message_box .chat_mesage_header{
+                
+            }
+            
+            #chat #chat_messages_box .chat_message_box .chat_mesage_header:after{
+                content:"";
+                display:block;
+                border-bottom:1px solid #BBBBBB;
+                width: 90%;
+                margin:3px auto 0;
+            }
+            
             #chat #chat_messages_box .chat_message_box .chat_mesage_date{
                 font-style:italic;
-                float:right;
                 font-size:8px;
                 padding-right:3px;
+                color:#767373;
             }
-            #chat #chat_messages_box .chat_message_box .chat_mesage_nickname{
+            #chat #chat_messages_box .chat_message_box .chat_mesage_user_avatar {
+                border:1px solid #B8B8B8;
+                border-radius:3px 3px 3px 3px;
+                color:#0073EA;
+                float:left;
+                font-weight:bold;
+                margin:2px 5px 2px 3px;
+                padding:2px 3px;
+            }
+            #chat #chat_messages_box .chat_message_box .chat_mesage_user_nickname{
                 font-weight:bold;
                 color:#0073EA;
                 padding:0 2px;
             }
-                #chat #chat_messages_box .chat_message_box .chat_mesage_nickname .nick{
+                #chat #chat_messages_box .chat_message_box .chat_mesage__user_nickname .nick{
                     padding:1px 0;
                 }
             #chat #chat_messages_box .chat_message_box .chat_mesage_message{

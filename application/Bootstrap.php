@@ -379,7 +379,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         );
 
         $router->addRoute(
-                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\d+)\.html', array(
+                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/([^\/]+)/(\d+)\.html', array(
             'module' => 'default',
             'controller' => 'championship',
             1 => 0,

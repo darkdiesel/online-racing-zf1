@@ -15,8 +15,8 @@
     <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
         <div class="user">
             <div class="btn-group dropdown">
-                <a class="btn btn-primary" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Выход') ?></a>
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <a class="btn btn-primary btn-small" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Выход') ?></a>
+                <a class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $storage_data->id), 'user', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
                     <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>

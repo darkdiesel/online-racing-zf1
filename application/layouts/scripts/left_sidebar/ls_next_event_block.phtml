@@ -20,10 +20,16 @@ if ($event_data) {
                         <?php echo date_format(date_create($event_data->date_event), 'i') ?>,
                         <?php echo date_format(date_create($event_data->date_event), 's') ?>
                     ); 
-            $('#countdown_dashboard').countdown({until: newYear, format: 'ODHMS', timezone: +2, description: '<?php echo $event_data->name; ?>'});
+            $('#countdown_dashboard').countdown({
+                            until: newYear,
+                            format: 'DHMS',
+                            timeSeparator: ':',
+                            compact: true,
+                            timezone: +3 ,
+                            });
         });
             </script>
-            <div id="countdown_dashboard"></div>
+            <div id="countdown_dashboard" class="tooltip_field" data-placement="right" data-original-title="<?php echo $event_data->name; ?>"></div>
         </div>
     </div>
 <?php } ?>

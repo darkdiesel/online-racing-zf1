@@ -1,8 +1,8 @@
 #user_toolbar{
     position:absolute;
-    right:0;
+    right:10px;
     display:inline-block;
-    padding:5px 25px 0 0;
+    padding:5px 5px 0 0;
 }
 	#user_toolbar #user_menu{
             margin:0;
@@ -15,8 +15,8 @@
                     list-style-type:none;
                     display:inline-block;
                     color:#F7F7F7;
-                    margin-left:-5px;
-                    padding:7px 10px 0 0;
+                    margin-left:px;
+                    padding:4px 5px 0 0;
                     height:16px;
                     font: bold 12px arial;
 		}

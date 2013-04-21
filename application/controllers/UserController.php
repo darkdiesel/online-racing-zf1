@@ -77,16 +77,16 @@ class UserController extends App_Controller_FirstBootController {
 
                                 if ($form->remember->getValue() == 1) {
                                     // Получить объект Zend_Session_Namespace
-                                    require_once('Zend/Session/Namespace.php');
-                                    $session = new Zend_Session_Namespace('online-racing');
+                                    //require_once('Zend/Session/Namespace.php');
+                                    //$session = new Zend_Session_Namespace('online-racing');
                                     // set 
-                                    $session->setExpirationSeconds(60 * 60 * 24 * 5);
+                                    //$session->setExpirationSeconds(60 * 60 * 24 * 5);
 
                                     Zend_Session::rememberMe(60 * 60 * 24 * 5);
                                 } else {
                                     Zend_Session::forgetMe();
                                 }
-                                $this->_helper->redirector('index', 'index');
+                                $this->_helper->redirector('index', 'index');$session = new Zend_Session_Namespace('online-racing');
                                 break;
                             default:
                                 $form->populate($request->getPost());

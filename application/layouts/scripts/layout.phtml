@@ -12,14 +12,22 @@
     <body>
         <?php
         switch ($this->showPanel) {
-            case 'master':
+            case 'master1':
                 echo $this->render("header/hd_master_toolbar.phtml");
                 break;
-            case 'admin':
+            case 'admin1':
                 echo $this->render("header/hd_admin_toolbar.phtml");
                 break;
         }
         ?>
+        <?php
+        $main_slider = Zend_Registry::get('slider');
+        if ($main_slider['show']) {
+            echo $this->render("slider.phtml");
+        }
+        ?>
+        <!-- HeadLine -->
+        <?php echo $this->render("head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
                 <div id="header">

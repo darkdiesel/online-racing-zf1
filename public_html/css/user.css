@@ -203,10 +203,10 @@
     padding-top:10px;
 }
 .team_driver_number{
-    width:20px;
+    min-width:20px;
     text-align:center;
     margin-bottom:6px;
     font-weight:bold;
     font-size:15px;
-    padding:5px;
+    padding:5px 7px;
 }

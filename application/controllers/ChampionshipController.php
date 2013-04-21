@@ -433,10 +433,11 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
             if ($championship_team_data) {
                 $form = new Application_Form_Championship_Team_Edit();
-                $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'editteam', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'team-edit', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
                 $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true)}\"");
 
                 $form->name->setValue($championship_team_data->name);
+                $form->team_number->setValue($championship_team_data->team_number);
 
                 // add teams
                 $team = new Application_Model_DbTable_Team();
@@ -616,7 +617,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
                 if ($this->getRequest()->isPost()) {
                     if ($form->isValid($request->getPost())) {
-                        if (!$championship_team_driver->checkChampionshipDriverExist($championship_id, $user->id)) {
+                        if (!$championship_team_driver->checkChampionshipDriverExist($championship_id, $form->getValue('driver'))) {
                             //saving new data to DB
                             $new_championship_team_driver_data = array();
 
@@ -626,6 +627,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                             $new_championship_team_driver_data['championship_id'] = $championship_id;
                             $new_championship_team_driver_data['team_id'] = $team_id;
                             $new_championship_team_driver_data['user_id'] = $form->getValue('driver');
+                            //$new_championship_team_driver_data['team_role_id'] = $form->getValue('team_role_id');
                             $new_championship_team_driver_data['driver_number'] = $form->getValue('driver_number');
                             $new_championship_team_driver_data['date_create'] = $date;
                             $new_championship_team_driver_data['date_edit'] = $date;
@@ -680,10 +682,10 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $this->view->headTitle($this->view->translate('Удалить гонщика'));
 
                 $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
-                
+
                 //get data for deleting driver
                 $championship_team_driver_data = $championship_team_driver->getChampionshipTeamDriver($championship_id, $team_id, $user_id);
-                
+
                 if ($championship_team_driver_data) {
                     $form = new Application_Form_Championship_Driver_Delete();
                     $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'driver-delete', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true));
@@ -703,7 +705,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 } else {
                     //error message if driver in the team for this championship not found
                     $this->view->errMessage .= $this->view->translate('Гонщик в команде не найден!') . '<br/>';
-                    
+
                     $this->view->headTitle($this->view->translate('Ошибка!'));
                     $this->view->headTitle($this->view->translate('Гонщик не найден!'));
                 }
