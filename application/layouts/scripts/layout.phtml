@@ -10,26 +10,16 @@
         <?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
-        <?php
-        switch ($this->showPanel) {
-            case 'master1':
-                echo $this->render("header/hd_master_toolbar.phtml");
-                break;
-            case 'admin1':
-                echo $this->render("header/hd_admin_toolbar.phtml");
-                break;
-        }
-        ?>
-        <?php
-        $main_slider = Zend_Registry::get('slider');
-        if ($main_slider['show']) {
-            echo $this->render("slider.phtml");
-        }
-        ?>
         <!-- HeadLine -->
         <?php echo $this->render("head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
+                <?php
+                $main_slider = Zend_Registry::get('slider');
+                if ($main_slider['show']) {
+                    echo $this->render("slider.phtml");
+                }
+                ?>
                 <div id="header">
                     <?php echo $this->render("header.phtml") ?>
                 </div>
@@ -66,8 +56,7 @@
             }
             ?>
         </div>
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
+        <script type="text/javascript">             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-32674101-2']);
             _gaq.push(['_trackPageview']);
 

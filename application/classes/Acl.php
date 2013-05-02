@@ -43,7 +43,6 @@ class Acl extends Zend_Acl {
         //$this->deny('user', 'user/activate');
         //$this->deny('user', 'user/restore-passwd');
         //$this->deny('user', 'user/set-restore-passwd');
-
         // admin resources
         $this->add(new Zend_Acl_Resource('admin_allow'));
 
@@ -60,16 +59,16 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('game/add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('game/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('game/delete'), 'admin_allow');
-        
+
         $this->add(new Zend_Acl_Resource('championship/edit'), 'admin_allow');
-        
+
         $this->add(new Zend_Acl_Resource('event/add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('event/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('event/delete'), 'admin_allow');
-        
+
         $this->add(new Zend_Acl_Resource('championship/driver-add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('championship/driver-delete'), 'admin_allow');
-        
+
         // master resources
         $this->add(new Zend_Acl_Resource('master_allow'));
         $this->add(new Zend_Acl_Resource('article-type/add'), 'master_allow');
@@ -79,14 +78,14 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('league/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('league/edit'), 'master_allow');
         $this->add(new Zend_Acl_Resource('league/delete'), 'master_allow');
-        
+
         $this->add(new Zend_Acl_Resource('team/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('team/edit'), 'master_allow');
         $this->add(new Zend_Acl_Resource('team/delete'), 'master_allow');
-        
+
         $this->add(new Zend_Acl_Resource('country/id'), 'master_allow');
         $this->add(new Zend_Acl_Resource('country/add'), 'master_allow');
-        
+
         $this->add(new Zend_Acl_Resource('championship/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('championship/delete'), 'master_allow');
         $this->add(new Zend_Acl_Resource('championship/driver-edit'), 'master_allow');
@@ -110,9 +109,8 @@ class Acl extends Zend_Acl {
             return true;
 
         //Инициируем роль
-        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
+            $storage_data = Zend_Auth::getInstance()->getStorage()->read();
             // get role name for current user
             $user = new Application_Model_DbTable_User();
             $role = $user->getUserRoleName($storage_data->id);
@@ -121,16 +119,15 @@ class Acl extends Zend_Acl {
         }
         return $this->isAllowed($role, $resource, $privilege);
     }
-    
-    public function checkUserAccess($resource){
+
+    public function checkUserAccess($resource) {
         if (!$this->has($resource))
             return true;
-        
+
         $privilege = 'show';
-        
-        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read();
+            $storage_data = Zend_Auth::getInstance()->getStorage()->read();
             // get role name for current user
             $user = new Application_Model_DbTable_User();
             $role = $user->getUserRoleName($storage_data->id);
@@ -138,7 +135,6 @@ class Acl extends Zend_Acl {
             $role = 'guest';
         }
         return $this->isAllowed($role, $resource, $privilege);
-        
     }
 
 }

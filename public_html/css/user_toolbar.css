@@ -46,7 +46,6 @@
                 color:#fff;
             }
                 #user_toolbar .dropdown-menu{
-                    box-shadow:0 0 30px #4D95EB;
                     z-index:999;
                 }
                 #user_toolbar .login .dropdown-menu{

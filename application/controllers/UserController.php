@@ -50,29 +50,46 @@ class UserController extends App_Controller_FirstBootController {
 
                 switch ($user_status) {
                     case 'enable':
-                        $bootstrap = $this->getInvokeArg('bootstrap');
                         $auth = Zend_Auth::getInstance();
 
-                        //set storage for saving logined user data
-                        $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
-                        $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
-
                         //create auth adapter
-                        $authAdapter = new Zend_Auth_Adapter_DbTable(
-                                $adapter, 'user', 'email', 'password'
-                        );
+                        $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
 
                         //set user credential for authentication
+                        $authAdapter->setTableName('user')
+	                ->setIdentityColumn('email')
+	                ->setCredentialColumn('password');
+                        
                         $authAdapter->setIdentity($form->getValue('loginemail'));
                         $authAdapter->setCredential(sha1($form->getValue('loginpassword')));
 
                         //get result from authntication
                         $result = $auth->authenticate($authAdapter);
+                        
+                        if ($result->isValid()){
+                            $storage = $auth->getStorage();
+                            $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
+                            
+                            if ($form->remember->getValue() == 1) {
+                                    Zend_Session::rememberMe(60 * 60 * 24 * 5);
+                                } else {
+                                    Zend_Session::forgetMe();
+                                }
+                                
+                            $storage->write($storage_data);
+                            
+                            $this->_helper->redirector('index', 'index');
+                        } else {
+                            $form->populate($request->getPost());
+                                $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
+                                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
+                                        . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
+                        }
 
-                        switch ($result->getCode()) {
+                        /*switch ($result->getCode()) {
                             case Zend_Auth_Result::SUCCESS:
                                 $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                                $storage = $auth->getStorage('online-racing');
+                                $storage = $auth->getStorage();
                                 $storage->write($storage_data);
 
                                 if ($form->remember->getValue() == 1) {
@@ -86,7 +103,7 @@ class UserController extends App_Controller_FirstBootController {
                                 } else {
                                     Zend_Session::forgetMe();
                                 }
-                                $this->_helper->redirector('index', 'index');$session = new Zend_Session_Namespace('online-racing');
+                                $this->_helper->redirector('index', 'index');
                                 break;
                             default:
                                 $form->populate($request->getPost());
@@ -94,7 +111,7 @@ class UserController extends App_Controller_FirstBootController {
                                 $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
                                         . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
                                 break;
-                        }
+                        }*/
                         break;
                     case 'disable':
                         $this->view->errMessage .= $this->view->translate('Пользователь с этими данными заблокирован! Абротитесь к администрации сайта для разблокировки.');
@@ -258,7 +275,6 @@ class UserController extends App_Controller_FirstBootController {
 
                         $bootstrap = $this->getInvokeArg('bootstrap');
                         $auth = Zend_Auth::getInstance();
-                        $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
                         $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
                         $authAdapter = new Zend_Auth_Adapter_DbTable(
                                 $adapter, 'user', 'email', 'password'
@@ -269,7 +285,7 @@ class UserController extends App_Controller_FirstBootController {
                         $result = $auth->authenticate($authAdapter);
 
                         $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                        $storage = $auth->getStorage('online-racing');
+                        $storage = $auth->getStorage();
                         $storage->write($storage_data);
 
                         return $this->_helper->redirector('index', 'index');
@@ -380,7 +396,6 @@ class UserController extends App_Controller_FirstBootController {
 
                     $bootstrap = $this->getInvokeArg('bootstrap');
                     $auth = Zend_Auth::getInstance();
-                    $auth->setStorage(new Zend_Auth_Storage_Session('online-racing'));
                     $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
                     $authAdapter = new Zend_Auth_Adapter_DbTable(
                             $adapter, 'user', 'email', 'password'
@@ -391,7 +406,7 @@ class UserController extends App_Controller_FirstBootController {
                     $result = $auth->authenticate($authAdapter);
 
                     $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                    $storage = $auth->getStorage('online-racing');
+                    $storage = $auth->getStorage();
                     $storage->write($storage_data);
 
                     return $this->_helper->redirector('index', 'index');
@@ -428,7 +443,7 @@ class UserController extends App_Controller_FirstBootController {
         if ($this->getRequest()->isPost()) {
             if ($form->isValidPartial($request->getPost())) {
 
-                $user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                $user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage()->read()->id);
                 $date = date('Y-m-d H:i:s');
                 switch ($request->getParam('tab_name')) {
                     case 'avatar':
@@ -447,7 +462,7 @@ class UserController extends App_Controller_FirstBootController {
                                     'avatar_load' => '/img/data/users/avatars/' . $newName,
                                 );
 
-                                $user_avatar_file = $user->getUserAvatarLoad(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                                $user_avatar_file = $user->getUserAvatarLoad(Zend_Auth::getInstance()->getStorage()->read()->id);
                                 if ($user_avatar_file) {
                                     unlink(APPLICATION_PATH . '/../public_html' . $user_avatar_file);
                                 }
@@ -502,7 +517,7 @@ class UserController extends App_Controller_FirstBootController {
             }
         }
 
-        $user_data = $user->fetchRow(array('id = ?' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id));
+        $user_data = $user->fetchRow(array('id = ?' => Zend_Auth::getInstance()->getStorage()->read()->id));
 
         if (count($user_data) != 0) {
             $form->name->setValue($user_data->name);
@@ -570,14 +585,14 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                     case 'change_password':
                         if ($form->getValue('newpassword') == $form->getValue('confirmnewpassword') && ($form->getValue('newpassword') != '')) {
-                            $user_data = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id, $form->getValue('oldpassword'), $form->getValue('newpassword'));
+                            $user_data = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage()->read()->id, $form->getValue('oldpassword'), $form->getValue('newpassword'));
 
                             if (!$user_data) {
                                 $this->view->errMessage .= "Старый пароль введен не верно! Повторите ввод." . '<br />';
                             } else {
                                 $this->view->succMessage .= "Пароль успешно изменен." . '<br />';
 
-                                $user_data = $user->getUserData(Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                                $user_data = $user->getUserData(Zend_Auth::getInstance()->getStorage()->read()->id);
 
                                 // load e-mail script (template) for user
                                 $html = new Zend_View();
@@ -585,7 +600,7 @@ class UserController extends App_Controller_FirstBootController {
                                 // e-mail template values for user
                                 $html->assign('login', $user_data['login']);
                                 $html->assign('password', $form->getValue('newpassword'));
-                                $html->assign('user_id', Zend_Auth::getInstance()->getStorage('online-racing')->read()->id);
+                                $html->assign('user_id', Zend_Auth::getInstance()->getStorage()->read()->id);
                                 // e-mail for user
                                 $mail = new Zend_Mail('UTF-8');
                                 $bodyText = $html->render('new_user_password_template.phtml');

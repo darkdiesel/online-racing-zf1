@@ -40,7 +40,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     // Initialisation Authorisation
     public function _initAuth() {
-        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+        //Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
     }
 
     protected function _initView() {
@@ -153,7 +153,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $view->headLink()->appendStylesheet($view->baseUrl("css/jquery.countdown.css"));
         }
 
-        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session('online-racing'));
+        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
 
         if ((Zend_Auth::getInstance()->hasIdentity()) && ($view->ls_chat_block)) {
             //chat script

@@ -5,7 +5,7 @@
         </li>
         <li>
             <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-                <?php $storage_data = Zend_Auth::getInstance()->getStorage('online-racing')->read(); ?>
+                <?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
                 <span><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $storage_data->id), 'user', true) ?>"><?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?></a></span>
             <?php } else { ?>
                 <span><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><?php echo $this->translate('Гость') ?></a></span>
@@ -30,8 +30,8 @@
     <?php } else { ?>
         <div class="login">
             <div class="btn-group dropdown">
-                <a class="btn btn-primary" href="<?php echo$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Войти') ?></a>
-                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <a class="btn btn-primary btn-small" href="<?php echo$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Войти') ?></a>
+                <a class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li>
                         <?php

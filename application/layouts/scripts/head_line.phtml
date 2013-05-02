@@ -3,8 +3,14 @@
         <!-- User ToolBar -->
         <?php echo $this->partial('header/hd_user_toolbar.phtml'); ?>
         <!-- Site Logo -->
-        <div id="logo_box">
-            <a id="logo" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>"><img src="<?php echo $this->baseUrl('img/logo.png'); ?>" alt="<?php echo $this->translate('Главная') ?>" /></a>
+        <div id="logo">
+            <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>">
+                <img src="<?php echo $this->baseUrl('img/site_logo_04.png'); ?>" alt="<?php echo $this->translate('Главная') ?>" />
+                <span class="logo_title">
+                    <span class="logo_title_main">Online-<span class="logo_title_red">Racing</span>.Net</span>
+                    <span class="logo_title_subline"><span class="logo_title_red">sim</span>-racing <span>portal</span></span>
+                </span>
+            </a>
         </div>
     </div>
 </div>
