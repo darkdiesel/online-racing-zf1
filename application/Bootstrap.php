@@ -78,8 +78,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         /* [BLOCK DISPLAY SETTINGS] */
 
         /* [LAYOUT] */
-        $view->lo_share_block = true; // share block
-        $view->lo_back_to_top = true; // back to top block
+        $view->share_block = true; // share block
+        $view->back_to_top_btn = true; // back to top block
+        $view->slide_out_tabs_block = true; // back to top block
 
         /* [LEFT SIDEBAR] */
         $view->ls_next_event_block = true; // count down block
@@ -109,9 +110,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // [JQUERY UI CSS]
         $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.2.custom.min.css"));        
         // [CHAT CSS]
-        if ($view->ls_chat_block) {
+        if ($view->share_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
         }
+        if ($view->slide_out_tabs_block) {
+            $view->headLink()->appendStylesheet($view->baseUrl("css/slide_out_tabs_block.css"));
+        }
+        
         // [CSS Minify]
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/style.css'));
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/user_toolbar.css'));
@@ -137,11 +142,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
         // [COMMON JS]
         $view->headScript()->appendFile($view->baseUrl("js/app.js"));
+        $view->headScript()->appendFile($view->baseUrl("js/jquery-tabSlideOut-1.3.js"));
+        
+        if ($view->slide_out_tabs_block) {
+            $view->headScript()->appendFile($view->baseUrl("js/slide_out_tabs_block.js"));
+        }
 
         //$view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
         
         // Share block script
-        if ($view->lo_share_block) {
+        if ($view->share_block) {
             $view->headScript()->appendFile($view->baseUrl("js/share.js"));
         }
 

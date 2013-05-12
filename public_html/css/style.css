@@ -4,7 +4,7 @@ html, body {
 }
 body{
     background:url("../img/main_bgr.png") fixed;
-    padding-top:67px!important;
+    padding-top:62px!important;
 }
 body iframe{
     display:inline;
@@ -26,7 +26,7 @@ body iframe{
             margin-bottom:0;
             z-index:1030;
             position:fixed;
-            height:65px;
+            height:60px;
             background:#1B1B1B;
             background-image:linear-gradient(to bottom, #222222, #111111);
             border-bottom:2px solid #8C8C8C;
@@ -55,29 +55,29 @@ body iframe{
             border:1px solid #373A3A;
             border-radius:7px;
         }
-            #logo{
+            #site_logo{
                 position:absolute;
                 padding:0;
                 left:0;
                 top:0;
             }
-                #logo a{
+                #site_logo a{
                    text-decoration:none;
                 }
-                    #logo a img{
+                    #site_logo a img{
                         float:left;
                         margin-right:10px;
                     }
-                    #logo .logo_title{
+                    #site_logo .logo_title{
                         font-family:'Faster One';
                         color:#fff;
                         font-size:27px;
                         display:none;
                     }
-                        #logo .logo_title .logo_title_red{
+                        #site_logo .logo_title .logo_title_red{
                             color:#881B1B;
                         }
-                        #logo .logo_title .logo_title_subline{
+                        #site_logo .logo_title .logo_title_subline{
                             font-size:17px;
                             display:block;
                             text-align:center;

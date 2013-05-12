@@ -46,16 +46,22 @@
                 </div>
             </div>
             <?php
-            if ($this->lo_back_to_top) {
-                echo $this->render("lo_back_to_top.phtml");
+            if ($this->back_to_top_btn) {
+                echo $this->render("blocks/back_to_top_btn.phtml");
             }
             ?>
             <?php
-            if ($this->lo_share_block) {
-                echo $this->render("lo_share_block.phtml");
+            if ($this->share_block) {
+                echo $this->render("blocks/share_block.phtml");
             }
             ?>
+            
         </div>
+        <?php
+            if ($this->slide_out_tabs_block) {
+                echo $this->render("blocks/slide_out_tabs_block.phtml");
+            }
+            ?>
         <script type="text/javascript">             var _gaq = _gaq || [];
             _gaq.push(['_setAccount', 'UA-32674101-2']);
             _gaq.push(['_trackPageview']);
