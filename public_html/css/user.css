@@ -161,23 +161,7 @@
         border-radius:3px;
         font-size:12px;
     }
-.user_full_item{
-    border:1px solid #CACACA;
-    background:none repeat scroll 0 0 #EDEDED;
-    display:block;
-    border-radius:3px;
-    border:2px solid #CACACA;
-    margin:20px 0;
-}
-    .user_full_item .user_image{
-        margin:0 10px 10px 0;
-        width:175px;
-        height:175px;
-        overflow:hidden;
-    }
-        .user_full_item .user_image img{
-            width:165px;
-        }
+
 .teams_driver_info{
     margin-left:10px;
     width:150px;

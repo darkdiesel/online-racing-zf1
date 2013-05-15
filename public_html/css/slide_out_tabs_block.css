@@ -1,18 +1,17 @@
 /* Page Vertical tabs */
 #list_sliding_tabs{
-position: fixed; margin: 0px; padding: 0px; top: 200px; right: 0px; list-style: none; z-index:9999;
+position:fixed; margin:0px; padding:0px; top:200px; right:0px; list-style:none; z-index:9999;font-family:Verdana;
 }
         #list_sliding_tabs .sliding_tab_item{
             width:260px;
             margin:5px 0;
             display:block;
-            position:relative;
+            position:absolute;
             z-index:999;
-            height:330px;
         }
         #list_sliding_tabs .sliding_tab_item .list_vertical_item_wraper{
         }
-            #list_sliding_tabs .sliding_tab_item .sliding_tab_item_header{
+            #list_sliding_tabs .sliding_tab_item .sliding_tab_item_icon{
                  background:url("/img/backg-wrapper.png");
                  height:50px;
                  padding:5px 0 5px 5px;
@@ -22,6 +21,10 @@ position: fixed; margin: 0px; padding: 0px; top: 200px; right: 0px; list-style: 
                  left:-59px;
                  color:#fff;
             }
+                #list_sliding_tabs .sliding_tab_item .sliding_tab_item_icon img{
+                    max-width:50px;
+                    max-height:50px;
+                }
             #list_sliding_tabs .sliding_tab_item .sliding_tab_item_content{
                 background:#3B3B3B;
                 border:2px solid #373A3A;
@@ -30,9 +33,10 @@ position: fixed; margin: 0px; padding: 0px; top: 200px; right: 0px; list-style: 
                 border-radius:0 0 5px 5px;
                 color:#fff;
                 padding:10px 5px;
-                height:250px;
+                max-height:250px;
                 overflow:auto;
                 z-index:9999;
+                font-size:12px;
             }
                  #list_sliding_tabs .sliding_tab_item .sliding_tab_item_content a{
                      color:#fff;

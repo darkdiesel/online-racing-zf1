@@ -19,10 +19,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $db = Zend_Db::factory($config['resources']['db']['adapter'], $config['resources']['db']['params']);
             Zend_Db_Table::setDefaultAdapter($db);
 
-            /*$registry = Zend_Registry::getInstance();
-            $registry->configuration = $config;
-            $registry->dbAdapter = $db;
-            $registry->session = new Zend_Session_Namespace();*/
+            /* $registry = Zend_Registry::getInstance();
+              $registry->configuration = $config;
+              $registry->dbAdapter = $db;
+              $registry->session = new Zend_Session_Namespace(); */
         } catch (Exception $e) {
             exit($e->getMessage());
         }
@@ -51,7 +51,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // [MAIN SITE TITLE SETTINGS]
         $view->headTitle('Online-Racing.net')
                 ->setSeparator(' :: '); // setting a separator string for segments
-        
+
         $view->addHelperPath(APPLICATION_PATH . '/../library/App/View/Helper/', "App_View_Helper");
 
         // [HEAD META SETTINGS]
@@ -78,7 +78,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         /* [BLOCK DISPLAY SETTINGS] */
 
         /* [LAYOUT] */
-        $view->share_block = true; // share block
+        $view->share_block = false; // share block
         $view->back_to_top_btn = true; // back to top block
         $view->slide_out_tabs_block = true; // back to top block
 
@@ -103,20 +103,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->uc_mail_ru_block = true; // mail.ru user counter block
         $view->uc_rambler100_block = true; // rambler 100 user counter block
         $view->uc_yandex_block = true; // yandex user counter block
-
         // CSS setups
         // [BOOTSTRAP CSS]
         $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.min.css"));
         // [JQUERY UI CSS]
-        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.2.custom.min.css"));        
+        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.2.custom.min.css"));
         // [CHAT CSS]
-        if ($view->share_block) {
+        if ($view->ls_chat_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
         }
         if ($view->slide_out_tabs_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/slide_out_tabs_block.css"));
         }
-        
+
         // [CSS Minify]
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/style.css'));
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/user_toolbar.css'));
@@ -142,14 +141,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
         // [COMMON JS]
         $view->headScript()->appendFile($view->baseUrl("js/app.js"));
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-tabSlideOut-1.3.js"));
-        
+
         if ($view->slide_out_tabs_block) {
             $view->headScript()->appendFile($view->baseUrl("js/slide_out_tabs_block.js"));
         }
 
         //$view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
-        
         // Share block script
         if ($view->share_block) {
             $view->headScript()->appendFile($view->baseUrl("js/share.js"));
@@ -178,17 +175,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         return $view;
     }
-    
+
     public function _initViewHelpers() {
-    	//$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
-    	$this->bootstrap('layout');
-    	$view = $this->getResource('layout')->getView();
-    	$view->addHelperPath('App/View/Helper', 'App_View_Helper');
+        //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
+        $this->bootstrap('layout');
+        $view = $this->getResource('layout')->getView();
+        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
     }
-    
+
     public function _initActionHelpers() {
-    	Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
+        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
     }
+
     public function _initAcl() {
         Zend_Loader::loadClass('Acl');
         Zend_Loader::loadClass('CheckAccess');
@@ -574,6 +572,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         ),
                     ),
                     array(
+                                'label' => _('F1 RFT League'),
+                                'title' => _('F1 RFT League'),
+                                'controller' => 'league',
+                                'action' => 'id',
+                                'route' => 'leagueId',
+                                'params' => array(
+                                    'id' => '2'
+                                ),
+                            ),
+                    array(
                         'label' => _('Все лиги'),
                         'title' => _('Все лиги портала'),
                         'controller' => 'league',
@@ -643,6 +651,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                                 'route' => 'leagueId',
                                 'params' => array(
                                     'id' => '1'
+                                ),
+                            ),
+                            array(
+                                'label' => _('F1 RFT League'),
+                                'title' => _('F1 RFT League'),
+                                'controller' => 'league',
+                                'action' => 'id',
+                                'route' => 'leagueId',
+                                'params' => array(
+                                    'id' => '2'
                                 ),
                             ),
                             array(

@@ -11,8 +11,8 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         $this->_menu_empty = "";
         $this->_menu_html = "";
 
-        $this->_menu_html = "<div class=\"congigure_block_item_links\">";
-        $this->_menu_html .= "<a class=\"dropdown-toggle contextual-links-trigger\" href=\"#\" data-toggle=\"dropdown\">";
+        $this->_menu_html = "<div class=\"configure_block_item_links\">";
+        $this->_menu_html .= "<a class=\"configure_block_item_link\" data-toggle=\"dropdown\" href=\"#\" >";
         $this->_menu_html .= "<i class=\"icon-cog icon-black\"></i>";
         $this->_menu_html .= "<b class=\"icon-chevron-down\"></b>";
         $this->_menu_html .= "</a>";
@@ -48,6 +48,15 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить гонщика')}</a>");
         }
 
+        return $this;
+    }
+    
+    public function league_menu($league_id) {
+        if ($this->view->checkUserAccess('championship/add')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'add'), 'default', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить чемпионат')}</a>");
+        }
+        
         return $this;
     }
 

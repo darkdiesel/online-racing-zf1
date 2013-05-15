@@ -6,20 +6,66 @@
     .block_item_content{
         overflow:auto;
     }
+
+/* UI for blocks*/
+.block_ui_gray{
+    border:1px solid #CACACA;
+    background:none repeat scroll 0 0 #EDEDED;
+    display:block;
+    border-radius:3px;
+    border:2px solid #CACACA;
+    margin:20px 0;
+    padding:10px;
+}
+
+/* Images */
+.image_logo_250{
+    width:250px;
+}
+    
 /* configure block */    
-.congigure_block_item_links{
+.configure_block_item_links{
     position:absolute;
     right:5px;
     top:0px;
     display:none;
 }
-    .congigure_block_item_links ul{
-        margin:0;
+    .configure_block_item_links .configure_block_item_link{
+        opacity:0.5;
     }
-    .congigure_block_item_links .contextual-links-trigger{
+    .configure_block_item_links ul{
+        margin:0;
+        right:5px;
+        left:auto;
+        opacity:1;
+    }
+    .configure_block_item_links .contextual-links-trigger{
         color:gray;
         opacity:0.5;
     }
-        .congigure_block_item_links .contextual-links-trigger .caret{
+        .configure_block_item_links .contextual-links-trigger .caret{
             color:black;
+        }
+        
+        
+/* League */
+.league_wrapper_logo_250{
+    width:250px;
+    max-height:250px;
+    margin:0 15px 15px 0;
+    overflow:hidden;
+}
+
+/* team_user */
+.team_user_full_info_item{
+    
+}
+    .team_user_full_info_item .user_image{
+        margin:0 10px 10px 0;
+        width:175px;
+        max-height:175px;
+        overflow:hidden;
+    }
+        .team_user_full_info_item .user_image img{
+            width:165px;
         }

@@ -119,20 +119,27 @@ $(document).ready(function(){
         $('.tooltip_field').tooltip();
     });
     
-    $(".congigure_block_item_links").hover(function(o) {
-        $(this).parent(".block_item").children(".block_item_content").css({
-            "border" : "1px dashed red"
+    $(".configure_block_item_links").hover(function(o) {
+        $(this).parent(".block_item").css({
+            "outline" : "1px dashed red"
         });
     }, function(o) {
-        $(this).parent(".block_item").children(".block_item_content").css({
-            "border" : "none"
+        $(this).parent(".block_item").css({
+            "outline" : "none"
         });
     });
     
+    $(".configure_block_item_links .configure_block_item_link").click(function(o){
+        $(this).parent(".configure_block_item_links").children(".dropdown-menu").slideDown();
+    });
+    
     $(".block_item").hover(function(o) {
-        $(this).children(".congigure_block_item_links").show();
+        $(this).children(".configure_block_item_links").show();
     }, function(o) {
-        $(this).children(".congigure_block_item_links").hide();
+        $('ul',$(this)).hide();
+        $(this).children(".configure_block_item_links").hide();
+        
+         
     });
 
 });

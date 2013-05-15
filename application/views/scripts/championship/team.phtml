@@ -37,12 +37,12 @@
                 if ($this->team_driver_data) {
                     foreach ($this->team_driver_data as $driver):
                         ?>
-                        <div class="user_full_item block_item">
+                        <div class="team_user_full_info_item block_ui_gray block_item">
                             <?php
                             echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
                             ?>
                             <div class="block_item_content">
-                                <div class="article_title">
+                                <div class="article_title team_user_full_info_name">
                                     <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
                                     <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank">
                                         <?php echo $this->escape($driver->user_name) ?>
