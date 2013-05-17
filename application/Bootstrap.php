@@ -325,16 +325,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 'contentTypeId', new Zend_Controller_Router_Route('content-type/:action/:id', array(
             'module' => 'default',
             'controller' => 'content-type',
-            'id' => 0)
+            'league_id' => 0)
         ));
 
         //league controller routers
         $router->addRoute(
-                'leagueId', new Zend_Controller_Router_Route('league/id/:id/:page', array(
+                'leagueId', new Zend_Controller_Router_Route('league/id/:league_id/:page', array(
             'module' => 'default',
             'controller' => 'league',
             'action' => 'id',
-            'id' => 0,
+            'league_id' => 0,
             'page' => 1)
         ));
 
@@ -344,7 +344,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'controller' => 'league',
                 ), array(
             'action' => 1,
-            'id' => 2
+            'league_id' => 2
                 ), "league/%s/%s.html"
                 )
         );
@@ -568,19 +568,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'action' => 'id',
                         'route' => 'leagueId',
                         'params' => array(
-                            'id' => '1'
+                            'league_id' => '1'
                         ),
                     ),
                     array(
-                                'label' => _('F1 RFT League'),
-                                'title' => _('F1 RFT League'),
-                                'controller' => 'league',
-                                'action' => 'id',
-                                'route' => 'leagueId',
-                                'params' => array(
-                                    'id' => '2'
-                                ),
-                            ),
+                        'label' => _('F1 RFT League'),
+                        'title' => _('F1 RFT League'),
+                        'controller' => 'league',
+                        'action' => 'id',
+                        'route' => 'leagueId',
+                        'params' => array(
+                            'league_id' => '2'
+                        ),
+                    ),
                     array(
                         'label' => _('Все лиги'),
                         'title' => _('Все лиги портала'),
@@ -650,7 +650,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                                 'action' => 'id',
                                 'route' => 'leagueId',
                                 'params' => array(
-                                    'id' => '1'
+                                    'league_id' => '1'
                                 ),
                             ),
                             array(
@@ -660,7 +660,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                                 'action' => 'id',
                                 'route' => 'leagueId',
                                 'params' => array(
-                                    'id' => '2'
+                                    'league_id' => '2'
                                 ),
                             ),
                             array(
@@ -737,6 +737,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'label' => _('Форум'),
                         'title' => _('Форум'),
                         'uri' => 'http://f1orl.forum2x2.ru/',
+                    ),
+                    array(
+                        'label' => _('Чат'),
+                        'title' => _('Чат'),
+                        'controller' => 'chat',
+                        'action' => 'index',
+                        'route' => 'default',
                     ),
                     array(
                         'label' => _('Админ. панель'),

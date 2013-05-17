@@ -4,6 +4,7 @@ class ChatController extends App_Controller_FirstBootController {
 
     public function indexAction() {
         $this->view->headTitle($this->view->translate('Чат'));
+        $this->view->pageTitle($this->view->translate('Чат'));
         $this->view->ls_chat_block = false;
     }
 

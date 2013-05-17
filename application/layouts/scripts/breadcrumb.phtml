@@ -1,6 +1,10 @@
-<div class="breadcrumb">
-<?php 
-    $breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
-    echo ($breadcrumb); 
-?>
-</div>
+<?php
+$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
+
+if ($breadcrumb != '') {
+    ?>
+    <div class="breadcrumb">
+        <?php echo($breadcrumb); ?>
+    </div>
+
+<?php } ?>

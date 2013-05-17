@@ -143,7 +143,7 @@ form.fieldset_white_box{
         }
         form.fieldset_white_box fieldset .fieldset_inner_form .element_box{
             clear:both;
-            margin:15px 0;
+            margin:5px 0;
         }
             /* labels for form elements */
             form.fieldset_white_box fieldset .fieldset_inner_form .element_box .element_label{
@@ -164,11 +164,12 @@ form.fieldset_white_box{
             }
             /* description for form elements */
             form.fieldset_white_box fieldset .fieldset_inner_form .element_box p.hint{
-                margin:10px auto;
+                margin:-5px auto 10px;
                 width:80%;
                 text-align:center;
                 font-size:13px;
-                color:#828282;
+                color:#AE4444;
+                font-style:italic;
             }
             form.fieldset_white_box .fieldset_inner_form .element_box textarea{
                 resize:none;

@@ -6,7 +6,7 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
     private $_menu_empty;
     private $_links;
 
-    public function ConfigureBlockItemMenu($menu_type) {
+    public function configureBlockItemMenu($menu_type) {
         $this->_links = array();
         $this->_menu_empty = "";
         $this->_menu_html = "";
@@ -55,6 +55,16 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         if ($this->view->checkUserAccess('championship/add')) {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'add'), 'default', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить чемпионат')}</a>");
+        }
+        
+        if ($this->view->checkUserAccess('league/edit')) {
+            $link = $this->view->url(array('controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'league', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+        }
+        
+        if ($this->view->checkUserAccess('league/delete')) {
+            $link = $this->view->url(array('controller' => 'league', 'action' => 'delete', 'league_id' => $league_id), 'league', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
         }
         
         return $this;

@@ -1,14 +1,4 @@
 <div id="user_info_page" class="page">
-    <div class="page_title">
-        <?php
-        if (!$this->errMessage != "") {
-            echo $this->user->login;
-        } else {
-            echo $this->translate('Ошибка!');
-        }
-        ?>
-    </div>
-    <div class="div_hr"></div>
     <div class="page_content">
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">
@@ -153,7 +143,7 @@
                 </div>
             </div>
             <script type="text/javascript">
-                jQuery(document).ready(function(){
+                jQuery(document).ready(function() {
                     $('#tabs').tabs();
                 });
             </script>

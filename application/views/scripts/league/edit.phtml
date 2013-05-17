@@ -1,14 +1,4 @@
 <div id="league_edit_page" class="page">
-    <div class="page_title">
-        <?php
-        if (!$this->errMessage != "") {
-            echo $this->translate('Редактировать лигу') . ' :: ' . $this->form->name->getvalue();
-        } else {
-            echo $this->translate('Ошибка!');
-        }
-        ?>
-    </div>
-    <div class="div_hr"></div>
     <div class="page_content">
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">

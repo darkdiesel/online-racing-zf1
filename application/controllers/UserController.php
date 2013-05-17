@@ -20,15 +20,17 @@ class UserController extends App_Controller_FirstBootController {
 
             $this->view->headTitle($this->view->translate('Пилот'));
             $this->view->headTitle($user_data->login);
-
-            //Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
-            //$this->view->avatar = $this->_helper->getHelper('GetUserAvatar')->get_image($user_data->id, 1);
+            
+            $this->view->pageTitle($user_data->login);
 
             $this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
         } else {
+            $this->view->errMessage = $this->view->translate("Пользователь не существует!");
+            
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Пользователь не существует!'));
-            $this->view->errMessage = $this->view->translate("Пользователь не существует!");
+            
+            $this->view->pageTitle($this->view->translate('Ошибка!'));
         }
     }
 
@@ -553,6 +555,7 @@ class UserController extends App_Controller_FirstBootController {
 
     public function allAction() {
         $this->view->headTitle($this->view->translate('Гонщики'));
+        $this->view->pageTitle($this->view->translate('Гонщики'));
         // pager settings
         $page_count_items = 9;
         $page = $this->getRequest()->getParam('page');

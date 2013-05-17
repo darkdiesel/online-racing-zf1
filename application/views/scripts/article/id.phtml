@@ -1,14 +1,4 @@
 <div id="article_page" class="page article">
-    <div class="page_title">
-        <?php
-        if (!$this->errMessage != "") {
-            echo $this->escape($this->article->title);
-        } else {
-            echo $this->translate('Ошибка!');
-        }
-        ?>
-    </div>
-    <div class="div_hr"></div>
     <div class="page_content">
         <?php if ($this->errMessage != "") { ?>
             <div class="alert alert-error alert-block">
@@ -25,10 +15,21 @@
                     <img class="img-polaroid article_center_image" src="<?php echo $this->escape($this->article->image); ?>">
                 <?php } ?>
                 <div class="article_text">
-                    <?php 
-                        echo $this->RenderContentTypeText($this->article->text, $this->article->content_type_name);
+                    <?php
+                    echo $this->RenderContentTypeText($this->article->text, $this->article->content_type_name);
                     ?>
                 </div>
+
+                <!-- VK Like -->
+                <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?47"></script>
+                <script type="text/javascript">
+                    VK.init({apiId: 3649896, onlyWidgets: true});
+                </script>
+                <div id="vk_like"></div>
+                <script type="text/javascript">
+                    VK.Widgets.Like("vk_like", {type: "button", pageTitle: '<?php echo strip_tags($this->headtitle()) ?>', pageDescription: '<?php echo strip_tags($this->headtitle()) ?>', pageUrl: '<?php echo $this->url() ?>', pageImage: '<?php echo $this->article->image ?>'});
+                </script> 
+                <!-- VK Like END -->
 
                 <?php
                 $edit_access = $this->checkUserAccess('article/edit');
@@ -44,8 +45,10 @@
                         <?php if ($delete_access) { ?>
                             <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'delete', 'id' => $this->escape($this->article->id)), 'article', true) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
                         <?php } ?>
+
                     </div>
                 <?php } ?>
+
                 <div class="article_info">
                     <div class="article_type_name article_info_item">
                         <span class="bold_text"><?php echo $this->translate('Тип статьи') ?>: </span><?php echo $this->escape($this->article->article_type_name); ?>

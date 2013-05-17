@@ -13,15 +13,19 @@ class ArticleController extends App_Controller_FirstBootController {
         if ($article_data) {
             $this->view->article = $article_data;
             $this->view->headTitle($article_data->title);
+            $this->view->pageTitle($article_data->title);
         } else {
             $this->view->errMessage .= $this->view->translate('Статья не найдена!');
+            $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Статья не найдена!'));
+            $this->view->pageTitle($this->view->translate('Ошибка!'));
         }
     }
 
     // action for view all articles
     public function allAction() {
         $this->view->headTitle($this->view->translate('Контент сайта'));
+        $this->view->pageTitle($this->view->translate('Контент сайта'));
 
         // pager settings
         $page_count_items = 10;
@@ -37,6 +41,7 @@ class ArticleController extends App_Controller_FirstBootController {
     public function addAction() {
         // page title
         $this->view->headTitle($this->view->translate('Добавление контента'));
+        $this->view->pageTitle($this->view->translate('Добавление контента'));
         $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
 
         //add css

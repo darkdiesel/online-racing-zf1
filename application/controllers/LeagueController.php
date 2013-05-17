@@ -9,7 +9,7 @@ class LeagueController extends App_Controller_FirstBootController {
 
     public function idAction() {
         $request = $this->getRequest();
-        $league_id = (int) $request->getParam('id');
+        $league_id = (int) $request->getParam('league_id');
 
         $league = new Application_Model_DbTable_League();
 
@@ -18,6 +18,7 @@ class LeagueController extends App_Controller_FirstBootController {
         if ($league_data) {
             $this->view->league = $league_data;
             $this->view->headTitle($league_data->name);
+            $this->view->pageTitle($league_data->name);
 
             $championship = new Application_Model_DbTable_Championship();
 
@@ -31,11 +32,13 @@ class LeagueController extends App_Controller_FirstBootController {
             $this->view->errMessage .= $this->view->translate('Лига не существует!') . '<br />';
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Лига не существует!'));
+            $this->view->pageTitle($this->view->translate('Ошибка!'));
         }
     }
 
     public function addAction() {
         $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить лигу'));
 
         $request = $this->getRequest();
         // form
@@ -96,7 +99,7 @@ class LeagueController extends App_Controller_FirstBootController {
 
     public function editAction() {
         $request = $this->getRequest();
-        $league_id = $request->getParam('id');
+        $league_id = $request->getParam('league_id');
 
         $league = new Application_Model_DbTable_League();
         $league_data = $league->fetchRow(array('id = ?' => $league_id));
@@ -104,11 +107,13 @@ class LeagueController extends App_Controller_FirstBootController {
         if (count($league_data) != 0) {
             $this->view->headTitle($this->view->translate('Редактировать'));
             $this->view->headTitle($league_data->name);
+            
+            $this->view->pageTitle($this->view->translate('Редактировать лигу'). '::' . $league_data->name);
 
             // form
             $form = new Application_Form_League_Edit();
-            $form->setAction('/league/edit/' . $league_id);
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'id' => $league_id), 'leagueId', true)}\"");
+            $form->setAction($this->view->url(array('controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'league', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueid', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -124,7 +129,7 @@ class LeagueController extends App_Controller_FirstBootController {
                     $league_where = $league->getAdapter()->quoteInto('id = ?', $league_id);
                     $league->update($league_data, $league_where);
 
-                    $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'id' => $league_id), 'leagueId', true));
+                    $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueId', true));
                 } else {
                     $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения лиги!') . '<br />';
                 }
@@ -152,6 +157,8 @@ class LeagueController extends App_Controller_FirstBootController {
             $this->view->errMessage .= $this->view->translate('Лига не существует') . '<br />';
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Лига не существует'));
+            
+            $this->view->pageTitle($this->view->translate('Ошибка!'));
         }
     }
 
@@ -161,6 +168,7 @@ class LeagueController extends App_Controller_FirstBootController {
 
     public function allAction() {
         $this->view->headTitle($this->view->translate('Лиги'));
+        $this->view->pageTitle($this->view->translate('Лиги'));
 
         // pager settings
         $page_count_items = 10;

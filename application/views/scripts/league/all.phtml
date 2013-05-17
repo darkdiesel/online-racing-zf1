@@ -1,6 +1,4 @@
 <div id="leagues_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Лиги'); ?></div>
-    <div class="div_hr"></div>
     <div class="page_content">
         <?php
         if (count($this->paginator)) {
@@ -14,16 +12,16 @@
                     ?>
                     <div class="block_item_content">
                         <div class="league_name article_title">
-                            <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>"><?php echo $this->escape($league['name']); ?></a>
+                            <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>"><?php echo $this->escape($league['name']); ?></a>
                         </div>
                         <?php if ($this->escape($league['url_logo']) != '') { ?>
-                            <div class="league_wrapper_logo_250 img-polaroid pull-left">
-                                <img class="league_logo_250 image_logo_250 pull-left" src="<?php echo $this->escape($league['url_logo']); ?>">
+                            <div class="league_logo_wrapper_250_250 image_logo_wrapper_250_250 img-polaroid pull-left overflow-hide">
+                                <img class="league_logo_250 image_logo_250" src="<?php echo $this->escape($league['url_logo']); ?>">
                             </div>
                         <?php } ?>
-                        <div class="league_description article_text"><?php echo $this->truncate($this->escape($league['description']))->toLength(200); ?></div>
+                        <div class="league_description article_text"><?php echo $this->truncate($this->escape($league['description']))->toLength(500); ?></div>
                         <div class="league_controls article_controls">
-                            <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
                         </div>
                         <div class="league_info article_info">
                             <div class="event_name article_info_item">
