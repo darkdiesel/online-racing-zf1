@@ -48,7 +48,7 @@ class Application_Form_League_Edit extends Zend_Form {
         
         $this->addElement('file', 'logo', array(
             'label' => $this->translate('Логотип лиги'),
-            'required' => true,
+            'required' => false,
             'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/leagues/',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',

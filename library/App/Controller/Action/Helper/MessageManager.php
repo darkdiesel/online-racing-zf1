@@ -27,7 +27,11 @@ class App_Controller_Action_Helper_MessageManager extends Zend_Controller_Action
 		$this->addMessage ( $message, 'success' );
 	}
 	
-	public function addNotice($message) {
-		$this->addMessage ( $message, 'notice' );
+	public function addInfo($message) {
+		$this->addMessage ( $message, 'info' );
+	}
+        
+        public function addWarning($message) {
+		$this->addMessage ( $message, 'warning' );
 	}
 }

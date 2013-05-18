@@ -18,7 +18,6 @@ class App_View_Helper_pageTitle extends Zend_View_Helper_Abstract {
         } else {
             return '';
         }
-        
     }
 
     public function __toString() {

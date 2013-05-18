@@ -8,11 +8,26 @@ class TrackController extends App_Controller_FirstBootController {
     }
 
     public function idAction() {
-        // action body
+        $request = $this->getRequest();
+        $track_id = (int) $request->getParam('track_id');
+
+        $track = new Application_Model_DbTable_Track();
+        $track_data = $track->getTrackData($track_id);
+
+        if ($track_data) {
+            $this->view->track = $track_data;
+            $this->view->headTitle($track_data->name);
+            $this->view->pageTitle("{$this->view->translate('Трасса')} :: {$track_data->name}");
+        } else {
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемая трасса не существует!')}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Трасса не существует!')");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Трасса не существует!')");
+        }
     }
 
     public function addAction() {
         $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить трассу'));
 
         $request = $this->getRequest();
         // form
@@ -21,52 +36,40 @@ class TrackController extends App_Controller_FirstBootController {
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
 
-                $country_data = array();
+                $track_data = array();
 
                 //receive and rename image_round file
-                if ($form->getValue('image_round')) {
-                    if ($form->image_round->receive()) {
-                        $file = $form->image_round->getFileInfo();
-                        $ext = pathinfo($file['image_round']['name'], PATHINFO_EXTENSION);
-                        $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
+                if ($form->getValue('track_scheme')) {
+                    if ($form->track_scheme->receive()) {
+                        $file = $form->track_scheme->getFileInfo();
+                        $ext = pathinfo($file['track_scheme']['name'], PATHINFO_EXTENSION);
+                        $newName = Date('Y-m-d_H-i-s') . strtolower('_track_scheme' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                            => $file['image_round']['destination'] . '/' . $newName, 'overwrite' => true));
+                            => $file['track_scheme']['destination'] . '/' . $newName, 'overwrite' => true));
 
-                        $filterRename->filter($file['image_round']['destination'] . '/' . $file['image_round']['name']);
+                        $filterRename->filter($file['track_scheme']['destination'] . '/' . $file['track_scheme']['name']);
 
-                        $country_data['url_image_round'] = '/img/data/flags/' . $newName;
-                    }
-                }
-
-                //receive and rename image_glossy_wave file
-                if ($form->getValue('image_glossy_wave')) {
-                    if ($form->image_glossy_wave->receive()) {
-                        $file = $form->image_glossy_wave->getFileInfo();
-                        $ext = pathinfo($file['image_glossy_wave']['name'], PATHINFO_EXTENSION);
-                        $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
-
-                        $filterRename = new Zend_Filter_File_Rename(array('target'
-                            => $file['image_glossy_wave']['destination'] . '/' . $newName, 'overwrite' => true));
-
-                        $filterRename->filter($file['image_glossy_wave']['destination'] . '/' . $file['image_glossy_wave']['name']);
-
-                        $country_data['url_image_glossy_wave'] = '/img/data/flags/' . $newName;
+                        $track_data['url_track_scheme'] = '/img/data/track_schemes/' . $newName;
                     }
                 }
 
                 $date = date('Y-m-d H:i:s');
-                $country_data['native_name'] = $form->getValue('native_name');
-                $country_data['english_name'] = $form->getValue('english_name');
-                $country_data['abbreviation'] = $form->getValue('abbreviation');
-                $country_data['date_create'] = $date;
-                $country_data['date_edit'] = $date;
+                $track_data['name'] = $form->getValue('name');
+                $track_data['city'] = $form->getValue('city');
+                $track_data['country_id'] = $form->getValue('country');
+                $track_data['year_track'] = $form->getValue('year_track');
+                $track_data['description'] = $form->getValue('description');
+                $track_data['date_create'] = $date;
+                $track_data['date_edit'] = $date;
 
-                $country = new Application_Model_DbTable_Country();
-                $newCountry = $country->createRow($country_data);
-                $newCountry->save();
+                $country = new Application_Model_DbTable_Track();
+                $newTrack = $country->createRow($track_data);
+                $newTrack->save();
 
-                $this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $newCountry->id), 'country', true));
+                $this->redirect($this->view->url(array('controller' => 'track', 'action' => 'id', 'id' => $newTrack->id), 'track', true));
+            } else {
+                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -79,6 +82,30 @@ class TrackController extends App_Controller_FirstBootController {
 
         $this->view->form = $form;
     }
+
+    public function allAction() {
+        $this->messageManager->addError("{$this->view->translate('" Все трассы" Функционал не доделан!')}");
+        
+        $this->view->headTitle($this->view->translate('Все трассы'));
+        $this->view->pageTitle($this->view->translate('Все трассы'));
+
+        // pager settings
+        $page_count_items = 10;
+        $page_range = 5;
+        $items_order = 'DESC';
+        $page = $this->getRequest()->getParam('page');
+
+        $track = new Application_Model_DbTable_Track();
+        $paginator = $track->getTracksPager($page_count_items, $page, $page_range, $items_order);
+        
+         if (count($paginator)){
+            $this->view->paginator = $paginator;
+        } else {
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+        }
+    }
+    
+    
 
 }
 

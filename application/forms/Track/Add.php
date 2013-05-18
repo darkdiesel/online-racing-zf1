@@ -43,9 +43,27 @@ class Application_Form_Track_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             ),
             'validators' => array(
-                array('Size', false, 102400),
+                array('Size', false, 1024*500),
                 array('Extension', false, 'jpg,png,gif'),
                 array('Count', false, 1)
+            )
+        ));
+        
+        $this->addElement('text', 'city', array(
+            'label' => $this->translate('Город'),
+            'placeholder' => $this->translate('Город'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
+            'required' => true,
+            'class' => 'x_field white_box_el_size_m',
+            'validators' => array(
+                'NotEmpty',
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
 
@@ -64,7 +82,7 @@ class Application_Form_Track_Add extends Zend_Form {
             )
         ));
 
-        $this->addElement('text', 'track_year', array(
+        $this->addElement('text', 'year_track', array(
             'label' => $this->translate('Год трассы'),
             'placeholder' => $this->translate('Год трассы'),
             'maxlength' => 255,
@@ -82,14 +100,14 @@ class Application_Form_Track_Add extends Zend_Form {
             )
         ));
         
-        $this->addElement('textarea', 'text', array(
+        $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание трассы'),
             'placeholder' => $this->translate('Описание трассы'),
             'cols' => 60,
             'rows' => 10,
             'class' => 'white_box_el_size_l',
             'maxlength' => 1000,
-            'required' => true,
+            'required' => false,
             'filters' => array('StringTrim'),
             'validators' => array('NotEmpty'),
             'decorators' => array(

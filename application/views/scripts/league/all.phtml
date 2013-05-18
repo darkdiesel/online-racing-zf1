@@ -1,7 +1,7 @@
 <div id="leagues_page" class="page">
     <div class="page_content">
         <?php
-        if (count($this->paginator)) {
+        if ($this->paginator) {
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
 
             foreach ($this->paginator as $league):
@@ -15,23 +15,28 @@
                             <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>"><?php echo $this->escape($league['name']); ?></a>
                         </div>
                         <?php if ($this->escape($league['url_logo']) != '') { ?>
-                            <div class="league_logo_wrapper_250_250 image_logo_wrapper_250_250 img-polaroid pull-left overflow-hide">
-                                <img class="league_logo_250 image_logo_250" src="<?php echo $this->escape($league['url_logo']); ?>">
+                            <div class="league_all_logo_wrapper_250_250 image_logo_wrapper_250_250 img-polaroid pull-left overflow-hide">
+                                <img class="league_all_logo_250 image_logo_250" src="<?php echo $this->escape($league['url_logo']); ?>">
                             </div>
                         <?php } ?>
-                        <div class="league_description article_text"><?php echo $this->truncate($this->escape($league['description']))->toLength(500); ?></div>
+                        <div class="league_description article_text">
+                            <?php echo $this->truncate($this->escape($league['description']))->toLength(500); ?>
+                        </div>
                         <div class="league_controls article_controls">
                             <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueId', true); ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
                         </div>
-                        <div class="league_info article_info">
-                            <div class="event_name article_info_item">
-                                <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Лига'); ?>
+                        <div class="league_info block_item_info_bottom">
+                            <div class="content_category block_item_info_bottom_item">
+                                <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->translate('Лига'); ?>
                             </div>
-                            <div class="league_admin league_info_item article_info_item">
-                                <span class="bold_text"><?php echo $this->translate('Администратор лиги') ?>: </span>
+                            <div class="league_admin league_info_item block_item_info_bottom_item">
+                                <span class="font-bold font-color-black"><?php echo $this->translate('Администратор лиги') ?>: </span>
                                 <a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $this->escape($league['user_id'])), 'user', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
                             </div>
-                            <div class="league_date league_info_item article_info_item"><span class="bold_text"><?php echo $this->translate('Создана') ?>: </span><?php echo $this->escape($league['date_create']); ?></div>
+                            <div class="league_date league_info_item block_item_info_bottom_item">
+                                <span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
+                                </span><?php echo $this->escape($league['date_create']); ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,14 +44,7 @@
             endforeach;
             echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
             ?>
-            <?php
-        } else {
-            ?>
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->translate('Лиги на сайте не найдены!'); ?>
-            </div>
-        <?php } ?>
+        <?php }
+        ?>
     </div>
 </div>

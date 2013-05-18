@@ -1,4 +1,69 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Track</b> and script/action name <b>index</b></p>
+<div id="track_page" class="page">
+    <div class="page_content">
+        <?php if ($this->track) { ?>
+            <div class="track_item">
+                <table class="table table-striped table-bordered article_table">
+                    <tbody>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->track->name); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Год трассы'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->track->year_track); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Город'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->track->city); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Страна'); ?></span></td>
+                            <td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->track_url_image_round)); ?>"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
+                            <td><span><?php echo $this->escape($this->track->description); ?></span></td>
+                        </tr>
+                        <tr>
+                            <td class="header_column"><span><?php echo $this->translate('Схема'); ?></span></td>
+                            <td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->url_track_scheme)); ?>"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php
+                $edit_access = $this->checkUserAccess('track/edit');
+                $delete_access = $this->checkUserAccess('track/delete');
+
+                if ($edit_access || $delete_access) {
+                    ?>
+                    <div class="article_controls">
+                        <?php if ($edit_access) { ?>
+
+                            <a href = "<?php echo $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'track', true); ?>" class = "btn btn-small btn-inverse content_edit">
+                                <?php echo $this->translate('Редактировать') ?>
+                            </a>
+                        <?php } ?>
+                        <?php if ($delete_access) { ?>
+                            <a href = "<?php echo $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'track', true); ?>" class = "btn btn-small btn-inverse content_delete">
+                                <?php echo $this->translate('Удалить') ?>
+                            </a>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <div class="article_info">
+                    <div class="track_name article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Трасса'); ?>
+                    </div>
+                    <div class="track_date_create article_info_item">
+                        <span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->track->date_create); ?>
+                    </div>
+                    <?php if ($this->escape($this->track->date_create) != $this->escape($this->track->date_edit)) { ?>
+                        <div class="track_date_edit article_info_item">
+                            <span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->track->date_edit); ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
 </div>

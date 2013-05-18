@@ -29,7 +29,8 @@ class LeagueController extends App_Controller_FirstBootController {
 
             $this->view->paginator = $championship->getChampionshipsPagerByLeague($page_count_items, $page, $page_range, $items_order, $league_id);
         } else {
-            $this->view->errMessage .= $this->view->translate('Лига не существует!') . '<br />';
+            $this->messageManager->addError($this->view->translate('Лига не существует!'));
+
             $this->view->headTitle($this->view->translate('Ошибка!'));
             $this->view->headTitle($this->view->translate('Лига не существует!'));
             $this->view->pageTitle($this->view->translate('Ошибка!'));
@@ -56,7 +57,7 @@ class LeagueController extends App_Controller_FirstBootController {
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                                    => $file['logo']['destination'] . '/' . $newName, 'overwrite' => true));
+                            => $file['logo']['destination'] . '/' . $newName, 'overwrite' => true));
 
                         $filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
 
@@ -67,7 +68,6 @@ class LeagueController extends App_Controller_FirstBootController {
                 $date = date('Y-m-d H:i:s');
 
                 $league_data['name'] = $form->getValue('name');
-                $league_data['logo'] = $form->getValue('logo');
                 $league_data['description'] = $form->getValue('description');
                 $league_data['user_id'] = $form->getValue('admin');
                 $league_data['date_create'] = $date;
@@ -77,9 +77,9 @@ class LeagueController extends App_Controller_FirstBootController {
                 $newLeague = $league->createRow($league_data);
                 $newLeague->save();
 
-                $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'id' => $newLeague->id), 'leagueId', true));
+                $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $newLeague->id), 'leagueId', true));
             } else {
-                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для добавления лиги!') . '<br />';
+                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -93,7 +93,7 @@ class LeagueController extends App_Controller_FirstBootController {
             }
             $this->view->form = $form;
         } else {
-            $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы создать лигу.') . '<br />';
+            $this->messageManager->addError($this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы создать лигу.'));
         }
     }
 
@@ -107,31 +107,50 @@ class LeagueController extends App_Controller_FirstBootController {
         if (count($league_data) != 0) {
             $this->view->headTitle($this->view->translate('Редактировать'));
             $this->view->headTitle($league_data->name);
-            
-            $this->view->pageTitle($this->view->translate('Редактировать лигу'). '::' . $league_data->name);
+
+            $this->view->pageTitle($this->view->translate('Редактировать лигу') . '::' . $league_data->name);
 
             // form
             $form = new Application_Form_League_Edit();
             $form->setAction($this->view->url(array('controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'league', true));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueid', true)}\"");
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueId', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
 
-                    $league_data = array(
-                        'name' => $form->getValue('name'),
-                        'description' => $form->getValue('description'),
-                        'logo' => $form->getValue('logo'),
-                        'user_id' => $form->getValue('admin'),
-                        'date_edit' => date('Y-m-d H:i:s'),
-                    );
+                    $new_league_data = array();
+
+                    if ($form->getValue('logo')) {
+                        if ($form->logo->receive()) {
+                            $file = $form->logo->getFileInfo();
+                            $ext = pathinfo($file['logo']['name'], PATHINFO_EXTENSION);
+                            $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
+
+                            $filterRename = new Zend_Filter_File_Rename(array('target'
+                                => $file['logo']['destination'] . '/' . $newName, 'overwrite' => true));
+
+                            $filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
+
+                            $new_league_data['url_logo'] = '/img/data/logos/leagues/' . $newName;
+
+                            if ($new_league_data['url_logo'] != $league_data['url_logo']) {
+                                unlink(APPLICATION_PATH . '/../public_html' . $league_data['url_logo']);
+                            }
+                        }
+                    }
+
+                    $date = date('Y-m-d H:i:s');
+                    $new_league_data['name'] = $form->getValue('name');
+                    $new_league_data['description'] = $form->getValue('description');
+                    $new_league_data['user_id'] = $form->getValue('admin');
+                    $new_league_data['date_edit'] = $date;
 
                     $league_where = $league->getAdapter()->quoteInto('id = ?', $league_id);
-                    $league->update($league_data, $league_where);
+                    $league->update($new_league_data, $league_where);
 
                     $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueId', true));
                 } else {
-                    $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для изминения лиги!') . '<br />';
+                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
@@ -145,7 +164,7 @@ class LeagueController extends App_Controller_FirstBootController {
                 }
                 $this->view->form = $form;
             } else {
-                $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы редактировать лигу.') . '<br />';
+                $this->messageManager->addError($this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы редактировать лигу.'));
             }
 
             $form->name->setvalue($league_data->name);
@@ -154,11 +173,11 @@ class LeagueController extends App_Controller_FirstBootController {
 
             $this->view->form = $form;
         } else {
-            $this->view->errMessage .= $this->view->translate('Лига не существует') . '<br />';
+            $this->messageManager->addError($this->view->translate('Лига не существует!'));
             $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Лига не существует'));
-            
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle($this->view->translate('Лига не существует!'));
+
+            $this->view->pageTitle($this->view->translate('Ошибка! Лига не существует!'));
         }
     }
 
@@ -167,8 +186,8 @@ class LeagueController extends App_Controller_FirstBootController {
     }
 
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Лиги'));
-        $this->view->pageTitle($this->view->translate('Лиги'));
+        $this->view->headTitle($this->view->translate('Все Лиги'));
+        $this->view->pageTitle($this->view->translate('Все Лиги'));
 
         // pager settings
         $page_count_items = 10;
@@ -177,7 +196,13 @@ class LeagueController extends App_Controller_FirstBootController {
         $page = $this->getRequest()->getParam('page');
 
         $league = new Application_Model_DbTable_League();
-        $this->view->paginator = $league->getLeaguePager($page_count_items, $page, $page_range, $items_order);
+        $paginator = $league->getLeaguePager($page_count_items, $page, $page_range, $items_order);
+
+        if (count($paginator)) {
+            $this->view->paginator = $paginator;
+        } else {
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не существует!')}");
+        }
     }
 
 }

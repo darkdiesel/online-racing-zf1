@@ -1,29 +1,6 @@
 <div id="article_delete_page" class="page article">
-    <div class="page_title">
-        <?php
-        if (!$this->errMessage != "") {
-            echo $this->translate('Удаление статьи') . ' :: ' . $this->escape($this->article->title);
-        } else {
-            echo $this->translate('Ошибка!');
-        }
-        ?>
-    </div>
-    <div class="div_hr"></div>
     <div class="page_content">
-        <?php if ($this->errMessage != "") { ?>
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->errMessage; ?>
-            </div>
-        <?php } else {
-            ?>
-            <div class="alert alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Предупреждение!'); ?></h4>
-                <?php echo $this->translate('Вы действительно хотите удалить статью ') . '"' . $this->escape($this->article->title) . '"?'; ?>
-            </div>
-
+        <?php if ($this->article) { ?>
             <?php echo $this->form; ?>
             <div class="article_item">
                 <?php

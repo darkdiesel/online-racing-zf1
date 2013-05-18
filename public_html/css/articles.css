@@ -67,10 +67,9 @@
         }
 /* article text */
 .article_text{
-    margin:10px 0;
+    margin:7px 0;
     color:#424242;
     font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
-    padding:10px 20px;
 }
     .article_text img{
         border:1px solid #D2D2D2;

@@ -17,15 +17,17 @@ class ChampionshipController extends App_Controller_FirstBootController {
         if ($championship_data) {
             $this->view->championship = $championship_data;
             $this->view->headTitle($championship_data->name);
+            $this->view->pageTitle("{$this->view->translate('Чемпионат')} :: {$championship_data->name}");
         } else {
-            $this->view->errMessage .= $this->view->translate('Чемпионат не найден!');
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
+            $this->messageManager->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не найден!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не найден!')}");
         }
     }
 
     public function addAction() {
         $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить чемпионат'));
 
         $request = $this->getRequest();
         // form
@@ -69,7 +71,9 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $championship = new Application_Model_DbTable_Championship();
                 $newChampionship = $championship->createRow($championship_data);
                 $newChampionship->save();
-                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'id', 'id' => $newChampionship->id), 'championship', true));
+                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'id', 'champinship_id' => $newChampionship->id), 'championship_id', true));
+            } else {
+                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
         // add leagues
@@ -81,7 +85,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $form->league->addMultiOption($league->id, $league->name);
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Лиги не найдены') . '<br />';
+            $this->messageManager->addError("{$this->view->translate('Лиги не найдены!')}"
+            . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'league', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add reglaments
@@ -93,7 +98,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $form->rule->addMultiOption($article->id, $article->title);
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Регламенты на сайте не найдены. Добавьте регламент, чтобы создать чемпионат!') . '<br />';
+            $this->messageManager->addError("{$this->view->translate('Регламенты не найдены!')}"
+            . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'article', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add games
@@ -105,19 +111,20 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $form->game->addMultiOption($game->article_id, $game->name);
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Игры не найдены') . '<br />';
+            $this->messageManager->addError("{$this->view->translate('Игры не найдены!')}"
+            . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'article', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add admins
         $user = new Application_Model_DbTable_User();
         $users = $user->getUsersByRoleName('admin', 'ASC');
 
-        if ($users) {
+        if (!$users) {
             foreach ($users as $user) {
                 $form->admin->addMultiOption($user->id, $user->surname . ' ' . $user->name . ' (' . $user->login . ')');
             }
         } else {
-            $this->view->errMessage .= $this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы добавить чемпионат.');
+            $this->messageManager->addError("{$this->view->translate('Администраторы не найдены!')}");
         }
 
         $this->view->form = $form;
@@ -199,6 +206,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                         $this->view->errMessage .= $this->view->translate('Неверное название') . ": {$form->getValue('name')} <br/>";
                         $this->view->errMessage .= $this->view->translate('Название чемпионата уже существуют в базе данных!') . '<br/>';
                     }
+                } else {
+                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
@@ -337,7 +346,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
         if ($championship->checkExistChampionshipById($championship_id)) {
             $form = new Application_Form_Championship_Team_Add();
-            $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'addteam', 'championship_id' => $championship_id), 'championshipTeamDefault', true));
+            $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $championship_id), 'championshipTeamDefault', true));
             $this->view->form = $form;
 
             // add teams
@@ -408,6 +417,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                     $newChampionshipTeam->save();
 
                     $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $championship_id), 'championship', true));
+                } else {
+                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
         } else {
@@ -514,6 +525,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                         $championship_team->update($new_championship_team_data, $championship_team_where);
 
                         $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                    } else {
+                        $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                     }
                 }
 
@@ -637,6 +650,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
                             $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
                         }
+                    } else {
+                        $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                     }
                 }
                 $this->view->form = $form;
@@ -698,6 +713,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                             $championship_team_driver->delete($championship_team_driver_where);
 
                             $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                        } else {
+                            $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                         }
                     }
                     $this->view->team_driver_data = $championship_team_driver_data;

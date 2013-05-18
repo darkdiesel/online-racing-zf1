@@ -10,8 +10,8 @@ class Application_Form_Track_Delete extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/country/delete');
-        $this->setName('countryDelete');
+        $this->setAction('/track/delete');
+        $this->setName('trackDelete');
         $this->setAttrib('class', 'white_box');
 
         $this->addElement('submit', 'submit', array(
@@ -27,7 +27,7 @@ class Application_Form_Track_Delete extends Zend_Form {
         $this->addElement('button', 'cancel', array(
             'ignore' => true,
             'class' => 'btn',
-            'onClick' => "location.href='/country/all'",
+            'onClick' => "location.href='/track/all'",
             'label' => $this->translate('Отмена'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

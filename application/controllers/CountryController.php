@@ -9,7 +9,7 @@ class CountryController extends App_Controller_FirstBootController {
 
     public function idAction() {
         $request = $this->getRequest();
-        $country_id = (int) $request->getParam('id');
+        $country_id = (int) $request->getParam('country_id');
 
         $country = new Application_Model_DbTable_Country();
         $country_data = $country->getCountryData($country_id);
@@ -17,15 +17,17 @@ class CountryController extends App_Controller_FirstBootController {
         if ($country_data) {
             $this->view->country = $country_data;
             $this->view->headTitle($country_data->native_name);
+            $this->view->pageTitle("{$this->view->translate('Страна')} :: {$country_data->english_name} ({$country_data->native_name})");
         } else {
-            $this->view->errMessage .= $this->view->translate('Страна не найдена!');
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Статья не найдена!'));
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемая страна не существует!!')}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Страна не существует!')");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Страна не существует!')");
         }
     }
 
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Просмотреть все'));
+        $this->view->headTitle($this->view->translate('Все страны'));
+        $this->view->pageTitle($this->view->translate('Все страны'));
 
         // pager settings
         $page_count_items = 10;
@@ -33,8 +35,14 @@ class CountryController extends App_Controller_FirstBootController {
         $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
 
-        $article = new Application_Model_DbTable_Country();
-        $this->view->paginator = $article->getCountriesPager($page_count_items, $page, $page_range, $items_order);
+        $country = new Application_Model_DbTable_Country();
+        $paginator = $country->getCountriesPager($page_count_items, $page, $page_range, $items_order);
+        
+        if (count($paginator)){
+            $this->view->paginator = $paginator;
+        } else {
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+        }
     }
 
     public function addAction() {

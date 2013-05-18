@@ -265,7 +265,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             2 => 0
                 ), array(
             'action' => 1,
-            'id' => 2
+            'article_id' => 2
                 ), "article/%s/%s.html"
                 )
         );
@@ -467,16 +467,32 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
         //country controller routers
         $router->addRoute(
-                'country', new Zend_Controller_Router_Route('country/:action/:id', array(
+                'country', new Zend_Controller_Router_Route('country/:action/:country_id', array(
             'module' => 'default',
             'controller' => 'country',
-            'id' => 0)
+            'country_id' => 0)
         ));
 
         $router->addRoute(
                 'countryAll', new Zend_Controller_Router_Route('country/all/:page', array(
             'module' => 'default',
             'controller' => 'country',
+            'action' => 'all',
+            'page' => 1)
+        ));
+        
+        //country controller routers
+        $router->addRoute(
+                'track', new Zend_Controller_Router_Route('track/:action/:track_id', array(
+            'module' => 'default',
+            'controller' => 'track',
+            'track_id' => 0)
+        ));
+
+        $router->addRoute(
+                'trackAll', new Zend_Controller_Router_Route('track/all/:page', array(
+            'module' => 'default',
+            'controller' => 'track',
             'action' => 'all',
             'page' => 1)
         ));

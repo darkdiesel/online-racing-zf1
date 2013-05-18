@@ -10,21 +10,87 @@ class Application_Form_Track_Edit extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/country/edit');
-        $this->setName('countryEdit');
+        $this->setAction('/track/edit');
+        $this->setName('track');
         $this->setAttrib('class', 'white_box');
 
-        $this->addElement('text', 'native_name', array(
-            'label' => $this->translate('Родное название'),
-            'placeholder' => $this->translate('Родное название'),
+        $this->addElement('text', 'name', array(
+            'label' => $this->translate('Название'),
+            'placeholder' => $this->translate('Название'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
             'required' => true,
-            'class' => 'x_field',
-            'width' => '400px',
+            'class' => 'x_field white_box_el_size_m',
             'validators' => array(
                 'NotEmpty',
-            //new App_Validate_NoDbRecordExists('country', 'name')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        $this->addElement('file', 'track_scheme', array(
+            'label' => $this->translate('Схема трассы (32х24)'),
+            'required' => true,
+            'destination' => APPLICATION_PATH . '/../public_html/img/data/track_schemes/',
+            'decorators' => array(
+                'File', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            ),
+            'validators' => array(
+                array('Size', false, 1024*500),
+                array('Extension', false, 'jpg,png,gif'),
+                array('Count', false, 1)
+            )
+        ));
+        
+        $this->addElement('text', 'city', array(
+            'label' => $this->translate('Город'),
+            'placeholder' => $this->translate('Город'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
+            'required' => true,
+            'class' => 'x_field white_box_el_size_m',
+            'validators' => array(
+                'NotEmpty',
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        // artcile type
+        $this->addElement('select', 'country', array(
+            'label' => $this->translate('Страна'),
+            //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'required' => true,
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+
+        $this->addElement('text', 'year_track', array(
+            'label' => $this->translate('Год трассы'),
+            'placeholder' => $this->translate('Год трассы'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
+            'required' => true,
+            'class' => 'x_field white_box_el_size_s',
+            'validators' => array(
+                'NotEmpty',
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -34,83 +100,27 @@ class Application_Form_Track_Edit extends Zend_Form {
             )
         ));
         
-        $this->addElement('text', 'english_name', array(
-            'label' => $this->translate('Английское название'),
-            'placeholder' => $this->translate('Английское название'),
-            'maxlength' => 255,
-            'filters' => array('StripTags', 'StringTrim', new App_Filter_Upper()),
-            'required' => true,
-            'class' => 'x_field',
-            'width' => '400px',
-            'validators' => array(
-                'NotEmpty',
-            //new App_Validate_NoDbRecordExists('country', 'name')
-            ),
+        $this->addElement('textarea', 'description', array(
+            'label' => $this->translate('Описание трассы'),
+            'placeholder' => $this->translate('Описание трассы'),
+            'cols' => 60,
+            'rows' => 10,
+            'class' => 'white_box_el_size_l',
+            'maxlength' => 1000,
+            'required' => false,
+            'filters' => array('StringTrim'),
+            'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-
-        $this->addElement('text', 'abbreviation', array(
-            'label' => $this->translate('Аббревиатура'),
-            'placeholder' => $this->translate('Аббревиатура'),
-            'maxlength' => 5,
-            'filters' => array('StripTags', 'StringTrim', new App_Filter_AllToUpper()),
-            'required' => true,
-            'class' => 'x_field',
-            'width' => '400px',
-            'validators' => array(
-                'NotEmpty',
-            //new App_Validate_NoDbRecordExists('country', 'abbreviation')
-            ),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
-        ));
-
-        $this->addElement('file', 'image_round', array(
-            'label' => $this->translate('Круговая картинка флага (32х24)'),
-            'required' => false,
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/flags/',
-            'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 102400),
-                array('Extension', false, 'jpg,png,gif'),
-                array('Count', false, 1)
-            )
-        ));
-
-        $this->addElement('file', 'image_glossy_wave', array(
-            'label' => $this->translate('Волнистая картинка флага (64х48)'),
-            'required' => false,
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/flags/',
-            'decorators' => array(
-                'File', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            ),
-            'validators' => array(
-                array('Size', false, 102400),
-                array('Extension', false, 'jpg,png,gif')
+                array('Label', array('class' => 'aboutTextArea_Label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
             )
         ));
 
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Редактировать'),
+            'label' => $this->translate('Добавить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
@@ -127,21 +137,9 @@ class Application_Form_Track_Edit extends Zend_Form {
             )
         ));
 
-        $this->addElement('button', 'cancel', array(
-            'ignore' => true,
-            'class' => 'btn',
-            'onClick' => "location.href='/country/all'",
-            'label' => $this->translate('Отмена'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
-            )
-        ));
-
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset'),
-            $this->getElement('cancel'),
+            $this->getElement('reset')
                 ), 'form_actions', array());
 
         $this->getDisplayGroup('form_actions')->setDecorators(array(

@@ -23,6 +23,25 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         return $this;
     }
 
+    public function championship_menu($championship_id) {
+        if ($this->view->checkUserAccess('championship/team-add')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $championship_id), 'championshipTeamDefault', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить команду')}</a>");
+        }
+
+        if ($this->view->checkUserAccess('championship/edit')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'edit', 'championship_id' => $championship_id), 'championship', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+        }
+        
+        if ($this->view->checkUserAccess('championship/delete')) {
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'delete', 'championship_id' => $championship_id), 'championship', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
+        }
+
+        return $this;
+    }
+    
     public function championship_team_menu($championship_id, $team_id) {
         if ($this->view->checkUserAccess('championship/team-edit')) {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-edit', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true);
@@ -64,7 +83,7 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         
         if ($this->view->checkUserAccess('league/delete')) {
             $link = $this->view->url(array('controller' => 'league', 'action' => 'delete', 'league_id' => $league_id), 'league', true);
-            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')} (не реализовано)</a>");
         }
         
         return $this;

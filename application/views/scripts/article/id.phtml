@@ -1,13 +1,6 @@
 <div id="article_page" class="page article">
     <div class="page_content">
-        <?php if ($this->errMessage != "") { ?>
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->errMessage; ?>
-            </div>
-        <?php } else {
-            ?>
+        <?php if ($this->article) { ?>
             <div class="article_item">
                 <?php
                 if ($this->article->image != '') {

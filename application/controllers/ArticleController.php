@@ -2,10 +2,15 @@
 
 class ArticleController extends App_Controller_FirstBootController {
 
+    public function init() {
+        parent::init();
+        $this->view->headTitle($this->view->translate('Контент'));
+    }
+
     // action for view article
     public function idAction() {
         $request = $this->getRequest();
-        $article_id = (int) $request->getParam('id');
+        $article_id = (int) $request->getParam('article_id');
 
         $article = new Application_Model_DbTable_Article();
         $article_data = $article->getArticleData($article_id);
@@ -15,16 +20,15 @@ class ArticleController extends App_Controller_FirstBootController {
             $this->view->headTitle($article_data->title);
             $this->view->pageTitle($article_data->title);
         } else {
-            $this->view->errMessage .= $this->view->translate('Статья не найдена!');
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Статья не найдена!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->messageManager->addError($this->view->translate('Запрашиваемый контент не существует!'));
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
         }
     }
 
     // action for view all articles
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Контент сайта'));
+        $this->view->headTitle($this->view->translate('Весь контент сайта'));
         $this->view->pageTitle($this->view->translate('Контент сайта'));
 
         // pager settings
@@ -34,18 +38,21 @@ class ArticleController extends App_Controller_FirstBootController {
         $page = $this->getRequest()->getParam('page');
 
         $article = new Application_Model_DbTable_Article();
-        $this->view->paginator = $article->getPublishedArticlesPager($page_count_items, $page, $page_range, $items_order);
+        $paginator = $article->getPublishedArticlesPager($page_count_items, $page, $page_range, $items_order);
+
+        if (count($paginator)) {
+            $this->view->paginator = $paginator;
+        } else {
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+        }
     }
 
     // action for add new article
     public function addAction() {
         // page title
-        $this->view->headTitle($this->view->translate('Добавление контента'));
-        $this->view->pageTitle($this->view->translate('Добавление контента'));
+        $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить контент'));
         $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
-
-        //add css
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/forms.css"));
 
         $request = $this->getRequest();
         // form
@@ -91,7 +98,9 @@ class ArticleController extends App_Controller_FirstBootController {
                         break;
                 }
 
-                $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $newArticle->id), 'article', true));
+                $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $newArticle->id), 'article', true));
+            } else {
+                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -102,14 +111,14 @@ class ArticleController extends App_Controller_FirstBootController {
         if ($article_types) {
             foreach ($article_types as $type):
                 $form->article_type->addMultiOption($type->id, $type->name);
-                
+
                 if (strtolower($type->name) == 'game') {
                     $form->article_type->setvalue($type->id);
                 }
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены!') . '<br/>'
-                    . "<a href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.')}</a><br/>";
+            $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
+                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add content types to the form
@@ -121,8 +130,8 @@ class ArticleController extends App_Controller_FirstBootController {
                 $form->content_type->addMultiOption($type->id, $type->name);
             endforeach;
         } else {
-            $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены!') . '<br/>'
-                    . "<a href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.')}</a><br/>";
+            $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
+                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         $this->view->form = $form;
@@ -133,15 +142,15 @@ class ArticleController extends App_Controller_FirstBootController {
         $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
-        $article_id = (int) $request->getParam('id');
+        $article_id = (int) $request->getParam('article_id');
 
         $article = new Application_Model_DbTable_Article();
         $article_data = $article->getArticleData($article_id);
 
         if ($article_data) {
             $form = new Application_Form_Article_Edit();
-            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'id' => $article_id), 'article', true));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $article_id), 'article', true)}\"");
+            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'article_id' => $article_id), 'article', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -172,7 +181,7 @@ class ArticleController extends App_Controller_FirstBootController {
                                 $game_data = array(
                                     'name' => $form->getValue('title'),
                                 );
-                                $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                                $game_where = $game->getAdapter()->quoteInto('article_id = ?', $article_id);
                                 $game->update($game_data, $game_where);
                                 break;
                             default :
@@ -180,11 +189,13 @@ class ArticleController extends App_Controller_FirstBootController {
                                 break;
                         }
 
-                        $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $article_id), 'article', true));
+                        $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true));
                     } else {
                         // if article type changed
-                        $this->view->errMessage .= $this->view->translate('Функционал для смены типов статьи не готов.') . '<br/>';
+                        $this->messageManager->addError("{$this->view->translate('Функционал для смены типов статьи не готов.')}");
                     }
+                } else {
+                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
@@ -197,8 +208,8 @@ class ArticleController extends App_Controller_FirstBootController {
                     $form->article_type->addMultiOption($type->id, $type->name);
                 endforeach;
             } else {
-                $this->view->errMessage .= $this->view->translate('Типы статей на сайте не найдены!') . '<br/>'
-                        . "<a href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип статьи, чтобы добавлять контент на сайте.')}</a><br/>";
+                $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}" .
+                        "<br/><a href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
             // add content types to the form
@@ -210,13 +221,13 @@ class ArticleController extends App_Controller_FirstBootController {
                     $form->content_type->addMultiOption($type->id, $type->name);
                 endforeach;
             } else {
-                $this->view->errMessage .= $this->view->translate('Типы контента на сайте не найдены!') . '<br/>'
-                        . "<a href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создайте тип контента, чтобы добавлять контент на сайте.')}</a><br/>";
+                $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}" .
+                        "<br/><a href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
             //head titles
-            $this->view->headTitle($this->view->translate('Редактировать статью'));
-            $this->view->headTitle($article_data->title);
+            $this->view->headTitle("{$this->view->translate('Редактировать контент')} :: {$article_data->title}");
+            $this->view->pageTitle("{$this->view->translate('Редактировать контент')} :: {$article_data->title}");
 
             $form->title->setvalue($article_data->title);
             $form->article_type->setvalue($article_data->article_type_id);
@@ -229,9 +240,9 @@ class ArticleController extends App_Controller_FirstBootController {
 
             $this->view->form = $form;
         } else {
-            $this->view->errMessage .= $this->view->translate('Статья не найдена!') . '<br/>';
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Статья не найдена!'));
+            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент не существует!')}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
         }
     }
 
@@ -240,7 +251,7 @@ class ArticleController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Удаление статьи'));
 
         $request = $this->getRequest();
-        $article_id = (int) $request->getParam('id');
+        $article_id = (int) $request->getParam('article_id');
 
         $article = new Application_Model_DbTable_Article();
         $article_data = $article->getArticleData($article_id);
@@ -248,11 +259,14 @@ class ArticleController extends App_Controller_FirstBootController {
         if ($article_data) {
             //page title
             $this->view->headTitle($article_data->title);
+            $this->view->pageTitle("{$this->view->translate('Удаление статьи')} :: {$article_data->title}");
+
+            $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить статью')}. {$article_data->title}?");
 
             //create delete form
             $form = new Application_Form_Article_Delete();
-            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'id' => $article_id), 'article', true));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'id' => $article_id), 'article', true)}\"");
+            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'article_id' => $article_id), 'article', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -276,22 +290,21 @@ class ArticleController extends App_Controller_FirstBootController {
                     }
 
                     $this->_helper->redirector('all', 'article');
+                } else {
+                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
             $this->view->article = $article_data;
             $this->view->form = $form;
         } else {
-            $this->view->errMessage .= $this->view->translate('Статья не найдена!') . '<br/>';
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Статья не найдена!'));
+            $this->messageManager->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Контент не существует!')");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
         }
     }
 
     public function allByTypeAction() {
-        $this->messageManager->addError($this->view->translate("There is already an account with this user name."));
-        $this->view->headTitle($this->view->translate('Весь контерт типа статьи'));
-
         $request = $this->getRequest();
         $article_type_id = (int) $request->getParam('article_type_id');
 
@@ -299,6 +312,9 @@ class ArticleController extends App_Controller_FirstBootController {
         $article_type_data = $article_type->getName($article_type_id);
 
         if ($article_type_data) {
+            $this->view->headTitle("{$this->view->translate('Контент по типу')} :: {$article_type_data}");
+            $this->view->pageTitle("{$this->view->translate('Контент по типу')} :: {$article_type_data}");
+
             // setup pager settings
             $page_count_items = 10;
             $page_range = 5;
@@ -306,12 +322,20 @@ class ArticleController extends App_Controller_FirstBootController {
             $page = $this->getRequest()->getParam('page');
 
             $article = new Application_Model_DbTable_Article();
-            $this->view->paginator = $article->getAllArticlesPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
+            $paginator = $article->getAllArticlesPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
+
+            if (count($paginator)) {
+                $this->view->paginator = $paginator;
+            } else {
+                $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+            }
+
             $this->view->article_type_name = $article_type_data;
         } else {
-            $this->view->errMessage .= $this->view->translate('Тип статьи не найден!') . '<br/>';
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+            $this->messageManager->addError("{$this->view->translate('Зарпашиваемый тип контента не существует!')}");
+
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
         }
     }
 
