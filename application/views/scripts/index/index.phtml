@@ -32,7 +32,7 @@
                         }
                         ?>
                     </p>
-                    <a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($article->id)), 'article', true) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
+                    <a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $this->escape($article->id)), 'article', true) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
                 </div>
             <?php } ?>
         </div>
