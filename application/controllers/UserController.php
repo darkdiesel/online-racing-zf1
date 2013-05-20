@@ -21,7 +21,7 @@ class UserController extends App_Controller_FirstBootController {
 
             $this->view->headTitle($this->view->translate('Пилот'));
             $this->view->headTitle($user_data->login);
-            
+
             $this->view->pageTitle($user_data->login);
 
             $this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
@@ -40,7 +40,7 @@ class UserController extends App_Controller_FirstBootController {
         // page title
         $this->view->headTitle($this->view->translate('Авторизация'));
         $this->view->pageTitle($this->view->translate('Авторизация'));
-        
+
         $this->messageManager->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы авторизоваться на сайте.')}");
 
         $request = $this->getRequest();
@@ -60,78 +60,82 @@ class UserController extends App_Controller_FirstBootController {
 
                         //set user credential for authentication
                         $authAdapter->setTableName('user')
-	                ->setIdentityColumn('email')
-	                ->setCredentialColumn('password');
-                        
+                                ->setIdentityColumn('email')
+                                ->setCredentialColumn('password');
+
                         $authAdapter->setIdentity($form->getValue('loginemail'));
                         $authAdapter->setCredential(sha1($form->getValue('loginpassword')));
 
                         //get result from authntication
                         $result = $auth->authenticate($authAdapter);
-                        
-                        if ($result->isValid()){
+
+                        if ($result->isValid()) {
                             $storage = $auth->getStorage();
                             $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                            
+
                             if ($form->remember->getValue() == 1) {
-                                    Zend_Session::rememberMe(60 * 60 * 24 * 5);
-                                } else {
-                                    Zend_Session::forgetMe();
-                                }
-                                
+                                Zend_Session::rememberMe(60 * 60 * 24 * 5);
+                            } else {
+                                Zend_Session::forgetMe();
+                            }
+
                             $storage->write($storage_data);
                             
+                            $this->view->showMessages()->clearMessages();
+                            $this->messageManager->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
+
                             $this->_helper->redirector('index', 'index');
                         } else {
                             $form->populate($request->getPost());
-                                $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
-                                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
-                                        . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
+                            $this->messageManager->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
+                                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
+                                    . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
                         }
 
-                        /*switch ($result->getCode()) {
-                            case Zend_Auth_Result::SUCCESS:
-                                $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                                $storage = $auth->getStorage();
-                                $storage->write($storage_data);
+                        /* switch ($result->getCode()) {
+                          case Zend_Auth_Result::SUCCESS:
+                          $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
+                          $storage = $auth->getStorage();
+                          $storage->write($storage_data);
 
-                                if ($form->remember->getValue() == 1) {
-                                    // Получить объект Zend_Session_Namespace
-                                    //require_once('Zend/Session/Namespace.php');
-                                    //$session = new Zend_Session_Namespace('online-racing');
-                                    // set 
-                                    //$session->setExpirationSeconds(60 * 60 * 24 * 5);
+                          if ($form->remember->getValue() == 1) {
+                          // Получить объект Zend_Session_Namespace
+                          //require_once('Zend/Session/Namespace.php');
+                          //$session = new Zend_Session_Namespace('online-racing');
+                          // set
+                          //$session->setExpirationSeconds(60 * 60 * 24 * 5);
 
-                                    Zend_Session::rememberMe(60 * 60 * 24 * 5);
-                                } else {
-                                    Zend_Session::forgetMe();
-                                }
-                                $this->_helper->redirector('index', 'index');
-                                break;
-                            default:
-                                $form->populate($request->getPost());
-                                $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
-                                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
-                                        . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
-                                break;
-                        }*/
+                          Zend_Session::rememberMe(60 * 60 * 24 * 5);
+                          } else {
+                          Zend_Session::forgetMe();
+                          }
+                          $this->_helper->redirector('index', 'index');
+                          break;
+                          default:
+                          $form->populate($request->getPost());
+                          $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
+                          $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
+                          . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
+                          break;
+                          } */
                         break;
                     case 'disable':
-                        $this->view->errMessage .= $this->view->translate('Пользователь с этими данными заблокирован! Абротитесь к администрации сайта для разблокировки.');
+                        $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными заблокирован! Обротитесь к администрации сайта для разблокировки.')}");
                         break;
                     case 'notActivate':
-                        $this->view->errMessage .= $this->view->translate('Пользователь с этими данными не активирован!')
-                                . " <strong><a href=" . $this->view->baseUrl('user/activate') . ">" . $this->view->translate('Активировать?') . "</a></strong>";
+                        $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными не активирован!')}"
+                        . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'activate'), 'default', true)}\">{$this->view->translate('Активировать?')}</a>");
                         break;
                     case 'notFound':
-                        $this->view->errMessage .= $this->view->translate('Пользователь с этими данными не найден!') . '<br/>';
-                        $this->view->errMessage .= '<a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a><br/>'
-                                . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
+                        $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными не найден!')}"
+                        ."<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
+                        . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
                         break;
                 }
             } else {
-                $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
-                        . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
+                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messageManager->addError("<a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
+                        . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
             }
         }
         $this->view->form = $form;

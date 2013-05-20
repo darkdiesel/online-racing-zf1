@@ -81,7 +81,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
             $this->_messages_html .= "<h4><i class=\"icon-info-sign\"></i> {$this->view->translate('Успех!')}</h4>";
             $this->_messages_html .= "";
 
-            foreach ($this->_info_messages as $message) {
+            foreach ($this->_success_messages as $message) {
                 $this->_messages_html .= "<li>{$message}</li>";
             }
 
@@ -114,6 +114,13 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
         }
 
         return $this->_messages_html;
+    }
+
+    public function clearMessages() {
+        $this->_error_messages = "";
+        $this->_success_messages = "";
+        $this->_info_messages = "";
+        $this->_warning_messages = "";
     }
 
 }
