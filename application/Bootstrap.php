@@ -104,10 +104,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->uc_rambler100_block = true; // rambler 100 user counter block
         $view->uc_yandex_block = true; // yandex user counter block
         // CSS setups
-        // [BOOTSTRAP CSS]
-        $view->headLink()->appendStylesheet($view->baseUrl("css/bootstrap.min.css"));
-        // [JQUERY UI CSS]
-        $view->headLink()->appendStylesheet($view->baseUrl("css/jquery-ui-1.10.2.custom.min.css"));
+        // [JQUERY library]                             
+        $view->headScript()->appendFile($view->baseUrl("libraries/jquery/js/jquery-1.9.1.min.js"));
+        
+        // [JQUERY UI library]
+        $view->headLink()->appendStylesheet($view->baseUrl("libraries/jquery/css/flick/jquery-ui-1.10.3.custom.min.css"));
+        $view->headScript()->appendFile($view->baseUrl("libraries/jquery/js/jquery-ui-1.10.3.custom.min.js"));
+        
+        // [BOOTSTRAP library]
+        $view->headLink()->appendStylesheet($view->baseUrl("libraries/bootstrap/css/bootstrap.min.css"));
+        $view->headScript()->appendFile($view->baseUrl("libraries/bootstrap/js/bootstrap.min.js"));
+        
+        // [FONT-AWESOME library]
+        $view->headLink()->appendStylesheet($view->baseUrl("libraries/font-awesome/css/font-awesome.min.css"));
+        
         // [CHAT CSS]
         if ($view->ls_chat_block) {
             $view->headLink()->appendStylesheet($view->baseUrl("css/chat.css"));
@@ -133,12 +143,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         // [GOOGLE FONTS]
         $view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
 
-        // [JQUERY JS]
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-1.9.1.min.js"));
-        // [JQUERY UI JS]
-        $view->headScript()->appendFile($view->baseUrl("js/jquery-ui-1.10.2.custom.min.js"));
-        // [BOOTSTRAP JS]
-        $view->headScript()->appendFile($view->baseUrl("js/bootstrap.min.js"));
+        
+        
+        
         // [COMMON JS]
         $view->headScript()->appendFile($view->baseUrl("js/app.js"));
 
@@ -430,6 +437,33 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), "championship/%s/%s/%s/%s/%s.html"
                 )
         );
+        $router->addRoute(
+                'championshipRace', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\w*)\.html', array(
+            'module' => 'default',
+            1 => 0,
+            2 => 'team',
+                ), array(
+            'championship_id' => 1,
+            'controller' => 2,
+            'action' => 3,
+                ), "championship/%s/%s/%s.html"
+                )
+        );
+        
+        $router->addRoute(
+                'championshipRaceId', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)/(\w*)/(\d+)\.html', array(
+            'module' => 'default',
+            1 => 0,
+            2 => 'team',
+                ), array(
+            'championship_id' => 1,
+            'controller' => 2,
+            'action' => 3,
+            'race_id' => 4,
+                ), "championship/%s/%s/%s/%s.html"
+                )
+        );
+        
 
         $router->addRoute(
                 'championshipTeamDefault', new Zend_Controller_Router_Route_Regex('championship/(\d+)/?([^\/]+)?\.html', array(

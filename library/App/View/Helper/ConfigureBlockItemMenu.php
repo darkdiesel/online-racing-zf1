@@ -38,7 +38,17 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'delete', 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
         }
+        
+        if ($this->view->checkUserAccess('race/add')) {
+            $link = $this->view->url(array('controller' => 'race', 'action' => 'add', 'championship_id' => $championship_id), 'championshipRace', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить гонку')}</a>");
+        }
 
+        return $this;
+    }
+
+    public function championship_race_menu($race_id) {
+        
         return $this;
     }
     

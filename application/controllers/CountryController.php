@@ -47,6 +47,7 @@ class CountryController extends App_Controller_FirstBootController {
 
     public function addAction() {
         $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить страну'));
 
         $request = $this->getRequest();
         // form

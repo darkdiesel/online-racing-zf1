@@ -47,6 +47,23 @@ class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
+    public function getTracksName($order) {
+        $model = new self;
+
+        $select = $model->select()
+                ->from($this->_name, 'name')
+                ->columns(array('id', 'name'))
+                ->order('name ' . $order);
+
+        $tracks = $model->fetchAll($select);
+
+        if (count($tracks) != 0) {
+            return $tracks;
+        } else {
+            return FALSE;
+        }
+    }
+
     /*
       public function checkExistCountryNativeName($country_name) {
       $model = new self;

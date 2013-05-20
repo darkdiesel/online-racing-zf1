@@ -1,18 +1,27 @@
 <div id="championship_page" class="page article">
     <div class="page_content">
         <?php if ($this->championship) { ?>
-
             <div class="championship_item block_item block_ui_gray">
                 <?php
                 echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship->id));
                 ?>
                 <div class="block_item_content">
-                    <?php if ($this->championship->url_logo != '') {
-                        ?>
-                        <div class="pull-right img-polaroid league_id_logo_wrapper_250 image_logo_wrapper_250 overflow-hide">
-                            <img class="championship_id_logo image_logo_250" src="<?php echo $this->escape($this->championship->url_logo); ?>">
+                    <div class="pull-right">
+                        <?php if ($this->championship->url_logo != '') {
+                            ?>
+                            <div class="img-polaroid league_id_logo_wrapper_250 image_logo_wrapper_250 overflow-hide">
+                                <img class="championship_id_logo image_logo_250" src="<?php echo $this->escape($this->championship->url_logo); ?>">
+                            </div>
+                        <?php } ?>
+                        <div class="img-polaroid align-center">
+                            <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $this->escape($this->championship->game_id)), 'article', true); ?>" target="_blank" class = "btn btn-small btn-primary article_more" title="<?php echo $this->translate('Игра для проведения') ?>"><?php echo $this->translate('Игра') ?></a>
+                            <br/><br/>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
+                            <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $this->escape($this->championship->article_id)), 'article', true); ?>" target="_blank" class = "btn btn-small btn-danger article_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
                         </div>
-                    <?php } ?>
+                    </div>
 
                     <div class="img-polaroid championship_id_info_block">
                         <table class="table table-striped font-veradana font-size-11">
@@ -48,14 +57,8 @@
                             </tbody>
                         </table>
                     </div>
-
-                    <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($this->championship->game_id)), 'article', true); ?>" target="_blank" class = "btn btn-small btn-primary article_more" title="<?php echo $this->translate('Игра для проведения') ?>"><?php echo $this->translate('Игра') ?></a>
-
                     <div class="article_controls">
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $this->escape($this->championship->id)), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($this->championship->article_id)), 'article', true); ?>" target="_blank" class = "btn btn-small btn-danger article_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
+
                     </div>
                     <div class="block_item_info_bottom">
                         <div class="content_category block_item_info_bottom_item">
@@ -65,6 +68,58 @@
                     </div>
                 </div>
             </div>
+            <!-- Races start -->
+            <div class="page_title"><?php echo $this->translate('Гонки чемпионата') ?></div>
+            <?php if (count($this->paginator)) { ?>
+                <?php foreach ($this->paginator as $race): ?>
+                    <div class="race_item block_item block_ui_gray">
+                        <?php
+                        echo $this->ConfigureBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($race['id']));
+                        ?>
+                        <div class="block_item_content">
+                            <div class="race_name article_title">
+                                <a href="<?php echo $this->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $this->championship->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?></a>
+                            </div>
+                            <div class="championship_all_logo_wrapper_250_250 image_logo_wrapper_250_250 img-polaroid pull-left overflow-hide">
+                                <img class="image_logo_250" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_glossy_wave']));  ?>">
+                            </div>
+                            <div class="article_text">
+                                <?php
+                                if ($race['description'] != NULL) {
+                                    echo $this->RenderContentTypeText($race['description'], 'bbcode');
+                                } else {
+                                    echo $this->translate('Нет описания');
+                                }
+                                ?>
+                            </div>
+                            <div class="article_controls">
+                                <a href = "<?php echo $this->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $this->championship->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>" class = "btn btn-small btn-inverse article_more" title="<?php echo $this->translate('Детальная информация о гонке') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+                            </div>
+                            <div class="championship_block_item_info block_item_info_bottom">
+                                <div class="content_category block_item_info_bottom_item">
+                                    <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span>
+                                    <?php echo $this->translate('Гонка'); ?>
+                                </div>
+                                <div class="championship_date_create block_item_info_bottom_item">
+                                    <span class="font-bold font-color-black"><?php echo $this->translate('Создан') ?>: </span>
+                                    <?php echo $this->escape($race['date_create']); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div_hr"></div>
+                    <?php
+                endforeach;
+                echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            } else {
+                ?>
+                <div class="alert alert-info alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4><?php echo $this->translate('Информация!'); ?></h4>
+                    <?php echo $this->translate('Еще не создано ниодной гонки этом чемпионате!'); ?>
+                </div>
+            <?php } ?>
+            <!-- Races end -->
         <?php } ?>
     </div>
 </div>

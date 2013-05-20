@@ -1,12 +1,6 @@
 <div id="user_info_page" class="page">
     <div class="page_content">
-        <?php if ($this->errMessage != "") { ?>
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->errMessage; ?>
-            </div>
-        <?php } else { ?>
+        <?php if ($this->user) { ?>
             <?php
             $date1 = new Zend_Date();
             $date2 = new Zend_Date($this->user->date_last_activity);

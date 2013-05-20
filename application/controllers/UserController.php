@@ -5,6 +5,7 @@ class UserController extends App_Controller_FirstBootController {
     public function init() {
         parent::init();
         $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/user.css"));
+        $this->view->headTitle($this->view->translate('Пользователь'));
     }
 
     public function idAction() {
@@ -25,11 +26,8 @@ class UserController extends App_Controller_FirstBootController {
 
             $this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
         } else {
-            $this->view->errMessage = $this->view->translate("Пользователь не существует!");
-            
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Пользователь не существует!'));
-            
+            $this->messageManager->addError("{$this->view->translate("Пользователь не существует!")}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Пользователь не существует!')}");
             $this->view->pageTitle($this->view->translate('Ошибка!'));
         }
     }
@@ -41,6 +39,9 @@ class UserController extends App_Controller_FirstBootController {
 
         // page title
         $this->view->headTitle($this->view->translate('Авторизация'));
+        $this->view->pageTitle($this->view->translate('Авторизация'));
+        
+        $this->messageManager->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы авторизоваться на сайте.')}");
 
         $request = $this->getRequest();
         $form = new Application_Form_User_Login();

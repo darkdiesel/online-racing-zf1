@@ -52,7 +52,6 @@ class ArticleController extends App_Controller_FirstBootController {
         // page title
         $this->view->headTitle($this->view->translate('Добавить'));
         $this->view->pageTitle($this->view->translate('Добавить контент'));
-        $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
 
         $request = $this->getRequest();
         // form
@@ -139,8 +138,6 @@ class ArticleController extends App_Controller_FirstBootController {
 
     // action for edit article
     public function editAction() {
-        $this->view->headScript()->appendFile($this->view->baseUrl("js/ckeditor/ckeditor.js"));
-
         $request = $this->getRequest();
         $article_id = (int) $request->getParam('article_id');
 

@@ -18,6 +18,15 @@ class ChampionshipController extends App_Controller_FirstBootController {
             $this->view->championship = $championship_data;
             $this->view->headTitle($championship_data->name);
             $this->view->pageTitle("{$this->view->translate('Чемпионат')} :: {$championship_data->name}");
+            
+            $race = new Application_Model_DbTable_ChampionshipRace();
+
+            $page_count_items = 5;
+            $page_range = 5;
+            $items_order = 'DESC';
+            $page = $request->getParam('page');
+
+            $this->view->paginator = $race->getRacesPagerByChampionship($page_count_items, $page, $page_range, $items_order, $championship_id);
         } else {
             $this->messageManager->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не найден!')}");
@@ -71,7 +80,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $championship = new Application_Model_DbTable_Championship();
                 $newChampionship = $championship->createRow($championship_data);
                 $newChampionship->save();
-                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'id', 'champinship_id' => $newChampionship->id), 'championship_id', true));
+                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $newChampionship->id), 'championship', true));
             } else {
                 $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
@@ -119,7 +128,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
         $user = new Application_Model_DbTable_User();
         $users = $user->getUsersByRoleName('admin', 'ASC');
 
-        if (!$users) {
+        if ($users) {
             foreach ($users as $user) {
                 $form->admin->addMultiOption($user->id, $user->surname . ' ' . $user->name . ' (' . $user->login . ')');
             }

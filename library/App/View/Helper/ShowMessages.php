@@ -60,24 +60,53 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 
     public function __toString() {
         $this->_messages_html = '';
-        if (count($this->_error_messages)) {
-            $this->_messages_html .= "<div class=\"alert alert-error alert-block\">";
-            $this->_messages_html .= "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>";
-            $this->_messages_html .= "<h4>{$this->view->translate('Ошибка!')}</h4>";
+        $button = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>";
 
-            foreach ($this->_error_messages as $message) {
+        if (count($this->_info_messages)) {
+            $this->_messages_html .= "<div class=\"alert alert-info alert-block\">";
+            $this->_messages_html .= $button;
+            $this->_messages_html .= "<h4><i class=\"icon-info-sign\"></i> {$this->view->translate('Информация!')}</h4>";
+            $this->_messages_html .= "";
+
+            foreach ($this->_info_messages as $message) {
                 $this->_messages_html .= "<li>{$message}</li>";
             }
 
             $this->_messages_html .= "</div>";
         }
-        
+
+        if (count($this->_success_messages)) {
+            $this->_messages_html .= "<div class=\"alert alert-success alert-block\">";
+            $this->_messages_html .= $button;
+            $this->_messages_html .= "<h4><i class=\"icon-info-sign\"></i> {$this->view->translate('Успех!')}</h4>";
+            $this->_messages_html .= "";
+
+            foreach ($this->_info_messages as $message) {
+                $this->_messages_html .= "<li>{$message}</li>";
+            }
+
+            $this->_messages_html .= "</div>";
+        }
+
         if (count($this->_warning_messages)) {
             $this->_messages_html .= "<div class=\"alert alert-block\">";
-            $this->_messages_html .= "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>";
-            $this->_messages_html .= "<h4>{$this->view->translate('Предупреждение!')}</h4>";
+            $this->_messages_html .= $button;
+            $this->_messages_html .= "<h4><i class=\"icon-warning-sign\"></i> {$this->view->translate('Предупреждение!')}</h4>";
+            $this->_messages_html .= "";
 
             foreach ($this->_warning_messages as $message) {
+                $this->_messages_html .= "<li>{$message}</li>";
+            }
+
+            $this->_messages_html .= "</div>";
+        }
+
+        if (count($this->_error_messages)) {
+            $this->_messages_html .= "<div class=\"alert alert-error alert-block\">";
+            $this->_messages_html .= $button;
+            $this->_messages_html .= "<h4><i class=\"icon-exclamation-sign\"></i> {$this->view->translate('Ошибка!')}</h4>";
+
+            foreach ($this->_error_messages as $message) {
                 $this->_messages_html .= "<li>{$message}</li>";
             }
 

@@ -1,22 +1,5 @@
 <div id="user_chat_page" class="page">
     <div class="page_content">
-        <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-            <div class="alert alert-info alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Информация!'); ?></h4>
-                <?php echo $this->translate('Введите сообщение в поле ввода и нажмите "Отправить".'); ?>
-            </div>
-        <?php } else { ?>
-            <div class="alert alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Предупреждение!'); ?></h4>
-                <?php echo $this->translate('Сообщения в чате могут оставлять только авторизованные пользователи.'); ?>
-                <a class="btn btn-warning" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true) ?>"><?php echo $this->translate('Авторизуйтесь'); ?></a>
-                <?php echo $this->translate('или') ?>
-                <a class="btn btn-danger" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true) ?>"><?php echo $this->translate('Зарегистрируйтесь'); ?></a>
-                <?php echo $this->translate('на сайте.'); ?>
-            </div>
-        <?php } ?>
         <?php echo $this->render("blocks/chat_block.phtml"); ?>
     </div>
 </div>

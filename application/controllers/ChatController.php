@@ -5,13 +5,24 @@ class ChatController extends App_Controller_FirstBootController {
     public function indexAction() {
         $this->view->headTitle($this->view->translate('Чат'));
         $this->view->pageTitle($this->view->translate('Чат'));
+
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->messageManager->addInfo("{$this->view->translate('Введите сообщение в поле ввода и нажмите "Отправить".')}");
+        } else {
+            $this->messageManager->addWarning("{$this->view->translate('Сообщения в чате могут оставлять только авторизованные пользователи.')}"
+                    . "<br/><a class=\"btn btn-warning\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}\">{$this->view->translate('Авторизоваться')}</a>"
+                    . " {$this->view->translate('или')} "
+                    . "<a class=\"btn btn-danger\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться')}</a>"
+                    );
+        }
+
         $this->view->ls_chat_block = false;
     }
 
     public function addmessageAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->layout->disableLayout();
-            
+
             /*
              * $this->view->layout()->disableLayout();
              * $this->_helper->viewRender->setNoRender(true);
@@ -68,18 +79,18 @@ class ChatController extends App_Controller_FirstBootController {
                         $messages_html .= '<div class="chat_message_box ' . $order . '">';
                         ($order == 'even') ? $order = 'odd' : $order = 'even';
                         $messages_html .= "<div class=\"chat_mesage_header\">";
-                        
+
                         $messages_html .= "<div class=\"chat_mesage_user_avatar\">";
                         $messages_html .= "<a href=\"{$this->view->url(array('controller' => 'user', 'action' => 'id', 'id' => $message->user_id), 'user', true)}\" target=\"_blank\"><i class=\"icon-user icon-black\"></i></a>";
                         $messages_html .= '</div>';
-                        
+
                         $messages_html .= '<div class="chat_mesage_user_nickname">';
                         $messages_html .= '<a href="javascript:void(' . "'Apply to'" . ')" class="nick" onClick="$(' . "'#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]'+$(this).html()+'[/i], '); $('#chat #userChat #messageTextArea').focus()" . '">' . $message->user_login . '</a>';
                         $messages_html .= "</div>";
-                        
+
                         $messages_html .= '<div class="chat_mesage_date">' . $message->date_create . '</div>';
                         $messages_html .= "</div>";
-                        
+
                         $messages_html .= '<div class="chat_mesage_message">' . $bbcode->render($message->message) . '</div>';
                         $messages_html .= "</div>";
                     endforeach;
