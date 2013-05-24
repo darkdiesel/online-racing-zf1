@@ -78,7 +78,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
         if (count($this->_success_messages)) {
             $this->_messages_html .= "<div class=\"alert alert-success alert-block\">";
             $this->_messages_html .= $button;
-            $this->_messages_html .= "<h4><i class=\"icon-info-sign\"></i> {$this->view->translate('Успех!')}</h4>";
+            $this->_messages_html .= "<h4><i class=\"icon-ok-sign\"></i> {$this->view->translate('Успех!')}</h4>";
             $this->_messages_html .= "";
 
             foreach ($this->_success_messages as $message) {

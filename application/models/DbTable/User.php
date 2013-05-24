@@ -116,6 +116,17 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $user_where = $model->getAdapter()->quoteInto('id = ?', $user_id);
         $model->update($user_data, $user_where);
     }
+    
+    public function setLastLoginIP($user_id, $ip) {
+        $model = new self;
+
+        $user_data = array(
+            'last_login_ip' => $ip
+        );
+
+        $user_where = $model->getAdapter()->quoteInto('id = ?', $user_id);
+        $model->update($user_data, $user_where);
+    }
 
     public function activateUser($email, $password, $code_activate) {
         $model = new self;

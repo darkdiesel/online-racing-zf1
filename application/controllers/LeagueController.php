@@ -77,7 +77,7 @@ class LeagueController extends App_Controller_FirstBootController {
                 $newLeague = $league->createRow($league_data);
                 $newLeague->save();
 
-                $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $newLeague->id), 'leagueId', true));
+                $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $newLeague->id), 'leagueIdAll', true));
             } else {
                 $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
@@ -113,7 +113,7 @@ class LeagueController extends App_Controller_FirstBootController {
             // form
             $form = new Application_Form_League_Edit();
             $form->setAction($this->view->url(array('controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'league', true));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueId', true)}\"");
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueIdAll', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
@@ -148,7 +148,7 @@ class LeagueController extends App_Controller_FirstBootController {
                     $league_where = $league->getAdapter()->quoteInto('id = ?', $league_id);
                     $league->update($new_league_data, $league_where);
 
-                    $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueId', true));
+                    $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueIdAll', true));
                 } else {
                     $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }

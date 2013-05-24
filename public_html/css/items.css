@@ -30,24 +30,31 @@
 }
 
 /* Images and images wrapper */
-.image_logo_wrapper_250_250{
+.image_wrapper_250_250{
     width:250px;
     max-height:250px;
     margin:7px;
 }
-.image_logo_wrapper_250{
+.image_wrapper_250{
     width:250px;
     max-height:750px;
     margin:7px;
 }
-    .image_logo_250{
+    .image_size_250{
         width:250px;
     }
-    .image_logo_250_250{
+    .image_size_250_250{
         width:250px;
         max-height:250px;
     }
+    .image_size_40_40{
+         width:40px;
+        max-height:30px;
+    }
 /* configure block */    
+.block_item:hover .configure_block_item_links{
+    display:block;
+}
 .configure_block_item_links{
     position:absolute;
     right:5px;
@@ -56,6 +63,7 @@
 }
     .configure_block_item_links .configure_block_item_link{
         opacity:0.5;
+        color:#2F2F2F;
     }
     .configure_block_item_links ul{
         margin:0;

@@ -36,6 +36,7 @@
                     <li>
                         <?php
                         $form = new Application_Form_User_Login();
+                        $form->setAction("{$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
                         echo $form;
                         ?>
                         <hr style="margin:20px 0 10px 0">

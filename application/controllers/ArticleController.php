@@ -262,7 +262,7 @@ class ArticleController extends App_Controller_FirstBootController {
 
             //create delete form
             $form = new Application_Form_Article_Delete();
-            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'article_id' => $article_id), 'article', true));
+            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'delete', 'article_id' => $article_id), 'article', true));
             $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true)}\"");
 
             if ($this->getRequest()->isPost()) {
@@ -285,7 +285,10 @@ class ArticleController extends App_Controller_FirstBootController {
                         default :
                             break;
                     }
-
+                    
+                    $this->view->showMessages()->clearMessages();
+                    $this->messageManager->addSuccess("{$this->view->translate("Статья <strong>\"{$article_data->title}\"</strong> успешно удалена")}");
+                    
                     $this->_helper->redirector('all', 'article');
                 } else {
                     $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));

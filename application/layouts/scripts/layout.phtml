@@ -37,7 +37,11 @@
                                 ?>
                             </div>
                             <?php echo $this->showMessages(); ?>
-                            <?php echo $this->layout()->content ?>
+                            <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}");?>" class="page">
+                                <div class="page_content">
+                                    <?php echo $this->layout()->content ?>
+                                </div>
+                            </div>
                         </div>
                         <!-- Left sidebar -->
                         <div id="left_sidebar">

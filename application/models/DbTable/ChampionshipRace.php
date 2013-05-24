@@ -33,8 +33,13 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
                                 ->setIntegrityCheck(false)
                                 ->from(array('c_r' => $this->_name))
                                 ->where('c_r.championship_id = ?', $championship_id)
-                                ->join(array('t' => 'track'), 'c_r.track_id = t.id', array('track_name' => 't.name', 'track_country_id' => 't.country_id'))
-                                ->join(array('c' => 'country'), 'c.id = t.country_id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave'))
+                                ->join(array('t' => 'track'), 'c_r.track_id = t.id', 
+                                        array('track_name' => 't.name', 
+                                            'track_country_id' => 't.country_id',
+                                            'track_url_scheme' => 't.url_track_scheme'))
+                                ->join(array('c' => 'country'), 'c.id = t.country_id', 
+                                        array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+                                            'country_url_image_round' => 'c.url_image_round',))
                                 ->columns('*')
                                 ->order('c_r.id ' . $order)
         );

@@ -25,7 +25,7 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
 
     public function championship_menu($championship_id) {
         if ($this->view->checkUserAccess('championship/team-add')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $championship_id), 'championshipTeamDefault', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить команду')}</a>");
         }
 
@@ -33,12 +33,12 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'edit', 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
         }
-        
+
         if ($this->view->checkUserAccess('championship/delete')) {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'delete', 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
         }
-        
+
         if ($this->view->checkUserAccess('race/add')) {
             $link = $this->view->url(array('controller' => 'race', 'action' => 'add', 'championship_id' => $championship_id), 'championshipRace', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить гонку')}</a>");
@@ -48,10 +48,10 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
     }
 
     public function championship_race_menu($race_id) {
-        
+
         return $this;
     }
-    
+
     public function championship_team_menu($championship_id, $team_id) {
         if ($this->view->checkUserAccess('championship/team-edit')) {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-edit', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true);
@@ -59,7 +59,7 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         }
 
         if ($this->view->checkUserAccess('championship/driver-add')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-add', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeamAction', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-add', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить гонщика')}</a>");
         }
 
@@ -68,34 +68,34 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
 
     public function championship_team_driver_menu($championship_id, $team_id, $user_id) {
         if ($this->view->checkUserAccess('championship/driver-edit')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-edit', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-edit', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriver', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать гонщика')}</a>");
         }
 
         if ($this->view->checkUserAccess('championship/driver-delete')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-delete', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriverId', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'driver-delete', 'championship_id' => $championship_id, 'team_id' => $team_id, 'user_id' => $user_id), 'championshipTeamDriver', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить гонщика')}</a>");
         }
 
         return $this;
     }
-    
+
     public function league_menu($league_id) {
         if ($this->view->checkUserAccess('championship/add')) {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'add'), 'default', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить чемпионат')}</a>");
         }
-        
+
         if ($this->view->checkUserAccess('league/edit')) {
             $link = $this->view->url(array('controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'league', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
         }
-        
+
         if ($this->view->checkUserAccess('league/delete')) {
             $link = $this->view->url(array('controller' => 'league', 'action' => 'delete', 'league_id' => $league_id), 'league', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')} (не реализовано)</a>");
         }
-        
+
         return $this;
     }
 

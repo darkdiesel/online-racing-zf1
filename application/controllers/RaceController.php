@@ -7,7 +7,7 @@ class RaceController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Гонка'));
     }
 
-    public function idAction() {
+    public function showAction() {
         // action body
     }
 
@@ -48,7 +48,7 @@ class RaceController extends App_Controller_FirstBootController {
                     $race = new Application_Model_DbTable_ChampionshipRace();
                     $newRace = $race->createRow($race_data);
                     $newRace->save();
-                    $this->redirect($this->view->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'championshipRaceId', true));
+                    $this->redirect($this->view->url(array('controller' => 'race', 'action' => 'show', 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'championshipRaceId', true));
                 } else {
                     $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }

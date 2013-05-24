@@ -67,7 +67,7 @@ class TrackController extends App_Controller_FirstBootController {
                 $newTrack = $country->createRow($track_data);
                 $newTrack->save();
 
-                $this->redirect($this->view->url(array('controller' => 'track', 'action' => 'id', 'id' => $newTrack->id), 'track', true));
+                $this->redirect($this->view->url(array('controller' => 'track', 'action' => 'id', 'track_id' => $newTrack->id), 'track', true));
             } else {
                 $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }

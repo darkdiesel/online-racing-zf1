@@ -10,7 +10,7 @@
                     if ($this->league->url_logo != '') {
                         ?>
                         <div class="pull-right img-polaroid league_id_logo_wrapper_250 image_logo_wrapper_250 overflow-hide">
-                            <img class="league_id_logo image_logo_250" src="<?php echo $this->escape($this->league->url_logo); ?>">
+                            <img class="league_id_logo image_size_250" src="<?php echo $this->escape($this->league->url_logo); ?>">
                         </div>
                     <?php } ?>
                     <div class="img-polaroid league_id_info_block">
@@ -61,11 +61,11 @@
                         ?>
                         <div class="block_item_content">
                             <div class="championship_name article_title">
-                                <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
+                                <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'show', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
                             </div>
                             <?php if ($this->escape($championship['url_logo']) != '') { ?>
-                                <div class="championship_all_logo_wrapper_250_250 image_logo_wrapper_250_250 img-polaroid pull-left overflow-hide">
-                                    <img class="image_logo_250" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
+                                <div class="championship_all_logo_wrapper_250_250 image_wrapper_250_250 img-polaroid pull-left overflow-hide">
+                                    <img class="image_size_250" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
                                 </div>
                             <?php } ?>
                             <div class="article_text">
@@ -78,11 +78,11 @@
                                 ?>
                             </div>
                             <div class="article_controls">
-                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
-                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
-                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $this->escape($championship['id'])), 'championshipTeamDefault', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
-                                <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'id' => $this->escape($championship['article_id'])), 'article', true); ?>" target="_blank" class = "btn btn-small btn-danger article_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
-                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-inverse article_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-success article_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
+                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
+                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
+                                <a href = "<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $this->escape($championship['article_id'])), 'article', true); ?>" target="_blank" class = "btn btn-small btn-danger article_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
+                                <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'show', 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-inverse article_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
                             </div>
                             <div class="championship_block_item_info block_item_info_bottom">
                                 <div class="content_category block_item_info_bottom_item">

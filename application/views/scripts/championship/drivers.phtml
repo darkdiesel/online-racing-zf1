@@ -1,60 +1,54 @@
-<div id="chmpionship_team_all_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Гонщики'); ?></div>
-    <div class="div_hr"></div>
-    <div class="page_content">
-        <?php if ($this->errMessage != "") { ?>
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->errMessage; ?>
-            </div>
-        <?php } else { ?>
-            <?php foreach ($this->championshipTeams as $team): ?>
-                <div class="article_item team_item">
-                    <div class="article_team_title">
-                        <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'team', 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true) ?>"><?php echo $this->escape($team['name']); ?></a>
-                    </div>
-
-                    <?php if ($this->escape($team['url_logo_car']) != '') { ?>
-                        <img class="img-polaroid article_team_car_image" src="<?php echo $this->escape($team['url_logo_car']); ?>">
-                    <?php } ?>
-
-                    <div class="team_driver_block">
-                        <?php
-                        $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
-                        $championship_team_drivers_data = $championship_team_driver->getChampionshipTeamDrivers($this->escape($team->championship_id), $this->escape($team->team_id));
-                        if ($championship_team_drivers_data) {
-                            foreach ($championship_team_drivers_data as $driver):
-                                ?>
-                                <div class="user_item pull-left">
-                                    <div class="user_image user_image_x pull-left">
-                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank">
-                                            <?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
-                                        </a>
-                                    </div>
-                                    <div class="teams_driver_info pull-right">
-                                        <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
-                                        <img class="user_flag_s" src="<?php echo $driver->country_url_image_round ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
-                                        <div><span class="bold_text"><?php echo $this->translate("Имя"); ?>: </span><?php echo $this->escape($driver->user_name) ?></div>
-                                        <div><span class="bold_text"><?php echo $this->translate("Фамилия"); ?>: </span><?php echo $this->escape($driver->user_surname) ?></div>
-                                        <div><span class="bold_text"><?php echo $this->translate("Ник-нэйм"); ?>: </span><?php echo $this->escape($driver->user_login) ?></div>
-                                    </div>
-                                </div>
-                                <?php
-                            endforeach;
-                            if (count($championship_team_drivers_data) == 1) {
-                                ?>
-                                <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
-                                <?php
-                            }
-                        } else {
-                            ?>
-                            <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
-                            <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
-                        <?php } ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php } ?>
+<?php if ($this->errMessage != "") { ?>
+    <div class="alert alert-error alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+        <?php echo $this->errMessage; ?>
     </div>
-</div>
+<?php } else { ?>
+    <?php foreach ($this->championshipTeams as $team): ?>
+        <div class="article_item team_item">
+            <div class="article_team_title">
+                <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'team-show', 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true) ?>"><?php echo $this->escape($team['name']); ?></a>
+            </div>
+
+            <?php if ($this->escape($team['url_logo_car']) != '') { ?>
+                <img class="img-polaroid article_team_car_image" src="<?php echo $this->escape($team['url_logo_car']); ?>">
+            <?php } ?>
+
+            <div class="team_driver_block">
+                <?php
+                $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
+                $championship_team_drivers_data = $championship_team_driver->getChampionshipTeamDrivers($this->escape($team->championship_id), $this->escape($team->team_id));
+                if ($championship_team_drivers_data) {
+                    foreach ($championship_team_drivers_data as $driver):
+                        ?>
+                        <div class="user_item pull-left">
+                            <div class="user_image user_image_x pull-left">
+                                <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank">
+                                    <?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
+                                </a>
+                            </div>
+                            <div class="teams_driver_info pull-right">
+                                <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
+                                <img class="user_flag_s" src="<?php echo $driver->country_url_image_round ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
+                                <div><span class="bold_text"><?php echo $this->translate("Имя"); ?>: </span><?php echo $this->escape($driver->user_name) ?></div>
+                                <div><span class="bold_text"><?php echo $this->translate("Фамилия"); ?>: </span><?php echo $this->escape($driver->user_surname) ?></div>
+                                <div><span class="bold_text"><?php echo $this->translate("Ник-нэйм"); ?>: </span><?php echo $this->escape($driver->user_login) ?></div>
+                            </div>
+                        </div>
+                        <?php
+                    endforeach;
+                    if (count($championship_team_drivers_data) == 1) {
+                        ?>
+                        <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
+                        <?php
+                    }
+                } else {
+                    ?>
+                    <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
+                    <div class="user_item pull-left alert-error"><?php echo $this->translate("Место свободно"); ?></div>
+                <?php } ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php } ?>

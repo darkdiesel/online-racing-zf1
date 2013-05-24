@@ -34,6 +34,7 @@ class Application_Form_Championship_Driver_Add extends Zend_Form {
         $this->addElement('select', 'driver_team_role', array(
             'label' => $this->translate('Роль в команде'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+            'description' => $this->translate('Функционал не реализован'),
             'required' => false,
             'class' => 'white_box_el_size_m',
             'registerInArrayValidator' => false,

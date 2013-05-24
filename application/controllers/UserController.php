@@ -46,6 +46,20 @@ class UserController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
         $form = new Application_Form_User_Login();
 
+        if (!$request->getParam('returnUrl')) {
+            $user_url = $this->_helper->getHelper('UserServerData')->GetPreviousPage();
+
+            $config = Zend_Registry::get('config');
+
+            if (parse_url($user_url, PHP_URL_HOST) == parse_url($config->resources->frontController->baseUrl, PHP_URL_HOST)) {
+                $redirect_url = "?returnUrl=" . $user_url;
+            } else {
+                $redirect_url = "?returnUrl={$this->view->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}";
+            }
+
+            $form->setAction("{$this->view->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}$redirect_url");
+        }
+
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $user = new Application_Model_DbTable_User();
@@ -70,8 +84,14 @@ class UserController extends App_Controller_FirstBootController {
                         $result = $auth->authenticate($authAdapter);
 
                         if ($result->isValid()) {
-                            $storage = $auth->getStorage();
                             $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
+                            $auth->getStorage()->write($storage_data);
+
+                            // Receive Zend_Session_Namespace object
+                            require_once('Zend/Session/Namespace.php');
+                            $session = new Zend_Session_Namespace('Zend_Auth');
+                            // Set the time of user logged in
+                            $session->setExpirationSeconds(24 * 3600);
 
                             if ($form->remember->getValue() == 1) {
                                 Zend_Session::rememberMe(60 * 60 * 24 * 5);
@@ -79,12 +99,20 @@ class UserController extends App_Controller_FirstBootController {
                                 Zend_Session::forgetMe();
                             }
 
-                            $storage->write($storage_data);
-                            
+                            $user = new Application_Model_DbTable_User();
+
+                            $user_ip = $this->_helper->getHelper('UserServerData')->GetUserIp();
+
+                            $new_user_data['last_login_ip'] = $user_ip;
+                            $user_id = Zend_Auth::getInstance()->getStorage()->read()->id;
+
+                            $user_where = $user->getAdapter()->quoteInto('id = ?', $user_id);
+                            $user->update($new_user_data, $user_where);
+
                             $this->view->showMessages()->clearMessages();
                             $this->messageManager->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
-
-                            $this->_helper->redirector('index', 'index');
+                            
+                            $this->redirect($request->getParam('returnUrl'));
                         } else {
                             $form->populate($request->getPost());
                             $this->messageManager->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
@@ -124,12 +152,12 @@ class UserController extends App_Controller_FirstBootController {
                         break;
                     case 'notActivate':
                         $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными не активирован!')}"
-                        . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'activate'), 'default', true)}\">{$this->view->translate('Активировать?')}</a>");
+                                . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'activate'), 'default', true)}\">{$this->view->translate('Активировать?')}</a>");
                         break;
                     case 'notFound':
                         $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными не найден!')}"
-                        ."<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
-                        . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
+                                . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
+                                . " <a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
                         break;
                 }
             } else {
