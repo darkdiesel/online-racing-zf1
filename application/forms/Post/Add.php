@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Article_Edit extends Zend_Form {
+class Application_Form_Post_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_Article_Edit extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/article/edit');
-        $this->setName('articleEdit');
+        $this->setAction('/post/add');
+        $this->setName('postAdd');
         $this->setAttrib('class', 'white_box white_box_size_xxl');
 
         $this->addElement('text', 'title', array(
@@ -97,7 +97,7 @@ class Application_Form_Article_Edit extends Zend_Form {
             'cols' => 60,
             'rows' => 10,
             'class' => 'white_box_el_size_xxl',
-            'maxlength' => 10000,
+            'maxlength' => 50000,
             'required' => true,
             'filters' => array('StringTrim'),
             'validators' => array('NotEmpty'),
@@ -133,7 +133,7 @@ class Application_Form_Article_Edit extends Zend_Form {
         $this->addElement('submit', 'submit', array(
             'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Изменить'),
+            'label' => $this->translate('Добавить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
@@ -150,21 +150,9 @@ class Application_Form_Article_Edit extends Zend_Form {
             )
         ));
 
-        $this->addElement('button', 'cancel', array(
-            'ignore' => true,
-            'class' => 'btn',
-            'onClick' => "location.href='/article/all'",
-            'label' => $this->translate('Отмена'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
-            )
-        ));
-
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset'),
-            $this->getElement('cancel'),
+            $this->getElement('reset')
                 ), 'form_actions', array());
 
         $this->getDisplayGroup('form_actions')->setDecorators(array(

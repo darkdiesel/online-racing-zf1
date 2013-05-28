@@ -10,9 +10,9 @@ class IndexController extends App_Controller_FirstBootController {
         // page title
         $this->view->headTitle($this->view->translate('Портал Онлай Скорости'));
         
-        // get last publish articles
-        $article = new Application_Model_DbTable_Article();
-        $artiles_data = $article->getLastPublishArticle(10, 'DESC');
+        // get last publish posts
+        $post = new Application_Model_DbTable_Post();
+        $artiles_data = $post->getLastPublishPost(10, 'DESC');
         
         // get 10 rss news
         $url = 'http://www.f1news.ru/export/news.xml';
@@ -28,7 +28,7 @@ class IndexController extends App_Controller_FirstBootController {
         $this->view->rss_index = $index;
         $this->view->rss_element = $element;
         
-        $this->view->last_articles = $artiles_data;
+        $this->view->last_posts = $artiles_data;
     }
     
     public function sitemapAction()

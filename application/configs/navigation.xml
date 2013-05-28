@@ -38,10 +38,10 @@
                 </useredit>
             </pages>-->
         </user>
-        <article>
+        <post>
             <label>Статьи</label>
-            <uri>/article/all</uri>
-        </article>
+            <uri>/post/all</uri>
+        </post>
         <files>
             <label>Файлы</label>
             <uri>#</uri>

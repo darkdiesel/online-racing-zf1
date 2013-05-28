@@ -24,8 +24,8 @@ class AdminController extends App_Controller_FirstBootController {
         $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
 
-        $article = new Application_Model_DbTable_Article();
-        $this->view->paginator = $article->getAllArticlesPager($page_count_items, $page, $page_range, $items_order);
+        $post = new Application_Model_DbTable_Post();
+        $this->view->paginator = $post->getAllArticlesPager($page_count_items, $page, $page_range, $items_order);
     }
 
     public function leaguesAction() {

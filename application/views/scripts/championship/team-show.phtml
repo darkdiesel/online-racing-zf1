@@ -26,7 +26,7 @@
                     <div class="block_item_content">
                         <div class="article_title team_user_full_info_name">
                             <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
-                            <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank">
+                            <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
                                 <?php echo $this->escape($driver->user_name) ?>
                                 <?php echo $this->escape($driver->user_surname) ?>
                                 (<?php echo $driver->country_abbreviation ?>)
@@ -34,7 +34,7 @@
                             </a>
                         </div>
                         <div class="user_image pull-left">
-                            <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $driver->user_id), 'user', true) ?>" target="_blank">
+                            <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
                                 <?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
                             </a>
                         </div>

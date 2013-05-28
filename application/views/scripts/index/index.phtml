@@ -5,7 +5,7 @@
 </div>
 <div class="page_title"><?php echo $this->translate('Новости нашего портала') ?>:</div>
 <div class="div_hr"></div>
-<?php if (count($this->last_articles) != 0) { ?>
+<?php if (count($this->last_posts) != 0) { ?>
     <div id="articles_block">
         <?php
         $filter = new Zend_Filter();
@@ -13,24 +13,24 @@
                 ->addFilter(new Zend_Filter_StringTrim());
         $bbcode = Zend_Markup::factory('Bbcode');
 
-        foreach ($this->last_articles as $article) {
+        foreach ($this->last_posts as $post) {
             ?>
-            <h6><a href="#"><?php echo $this->truncate($article->title)->toLength(100); ?></a></h6>
+            <h6><a href="#"><?php echo $this->truncate($post->title)->toLength(100); ?></a></h6>
             <div>
                 <p class="article_block_text">
-                    <?php if (!$article->image == "") { ?>
-                        <img src='<?php echo $article->image; ?>' width="150px" height="100px" class='img-polaroid article_block_image'>
+                    <?php if (!$post->image == "") { ?>
+                        <img src='<?php echo $post->image; ?>' width="150px" height="100px" class='img-polaroid article_block_image'>
                     <?php } ?>
 
                     <?php
-                    if ($article->annotation != '') {
-                        echo $this->escape($article->annotation);
+                    if ($post->annotation != '') {
+                        echo $this->escape($post->annotation);
                     } else {
-                        echo $bbcode->render((string) ($this->truncate($this->escape($article->text))->toLength(250)));
+                        echo $bbcode->render((string) ($this->truncate($this->escape($post->text))->toLength(250)));
                     }
                     ?>
                 </p>
-                <a href="<?php echo $this->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $this->escape($article->id)), 'article', true) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
+                <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
             </div>
         <?php } ?>
     </div>

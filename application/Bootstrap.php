@@ -272,16 +272,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'action' => 'leagues',
             'page' => 1)
         ));
+        
+        // ADMIN ROUTES END
 
         $router->addRoute(
-                'user', new Zend_Controller_Router_Route_Regex('user/(\w*)/(\d+)\.html', array(
+                'userId', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html', array(
             'module' => 'default',
             'controller' => 'user',
-            2 => 0
+            'action' => 'id',
+            1 => 0
                 ), array(
-            'action' => 1,
-            'id' => 2
-                ), 'user/%s/%s.html'
+            'user_id' => 1,
+                ), 'user/%d.html'
+                )
+        );
+        
+        $router->addRoute(
+                'user', new Zend_Controller_Router_Route_Regex('user/(\d+)/(\w*)\.html', array(
+            'module' => 'default',
+            'controller' => 'user',
+            1 => 0
+                ), array(
+            'user_id' => 1,
+            'action' => 2,
+                ), 'user/%d/%s.html'
                 )
         );
 
@@ -296,41 +310,53 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), "user/all/%s.html"
         ));
 
-        //article controller routers
+        //post controller routers
         $router->addRoute(
-                'article', new Zend_Controller_Router_Route_Regex('article/(\w*)/(\d+)\.html', array(
+                'postId', new Zend_Controller_Router_Route_Regex('post/(\d+)\.html', array(
             'module' => 'default',
-            'controller' => 'article',
-            2 => 0
+            'controller' => 'post',
+            'action' => 'id',
+            1 => 0
                 ), array(
-            'action' => 1,
-            'article_id' => 2
-                ), "article/%s/%s.html"
+            'post_id' => 1,
+                ), "post/%d.html"
+                )
+        );
+        
+        $router->addRoute(
+                'post', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
+            'module' => 'default',
+            'controller' => 'post',
+            1 => 0
+                ), array(
+            'post_id' => 1,        
+            'action' => 2,
+                ), "post/%d/%s.html"
                 )
         );
 
         $router->addRoute(
-                'articleAll', new Zend_Controller_Router_Route_Regex('article/all/(\d+)\.html', array(
+                'postAll', new Zend_Controller_Router_Route_Regex('post/all/page/(\d+)\.html', array(
             'module' => 'default',
-            'controller' => 'article',
+            'controller' => 'post',
             'action' => 'all',
             1 => 1
                 ), array(
             'page' => 1,
-                ), "article/all/%s.html"
+                ), "post/all/page/%s.html"
         ));
 
         $router->addRoute(
-                'articleAllByType', new Zend_Controller_Router_Route_Regex('article/all-by-type/(\d+)/(\d+)\.html', array(
+                'postAllByType', new Zend_Controller_Router_Route_Regex('post/all-by-type/(\d+)/page/(\d+)\.html', array(
             'module' => 'default',
-            'controller' => 'article',
+            'controller' => 'post',
             'action' => 'all-by-type',
             1 => 0,
             2 => 1,
                 ), array(
             'article_type_id' => 1,
             'page' => 2,
-                ), "article/all-by-type/%s/%s.html"
+                ), "post/all-by-type/%s/page/%s.html"
         ));
 
         //article-type controller routers
@@ -403,71 +429,79 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         //championship controller routers
         $router->addRoute(
-                'championship', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)\.html', array(
-            'module' => 'default',
-            'controller' => 'championship',
-            1 => 0,
-                ), array(
-            'championship_id' => 1,
-            'action' => 2,
-                ), "championship/%d/%s.html"
-                )
-        );
-
-        $router->addRoute(
-                'championshipTeam', new Zend_Controller_Router_Route_Regex('championship/(\d+)/team/(\d+)/([^\/]+)\.html', array(
-            'module' => 'default',
-            'controller' => 'championship',
-            1 => 0,
-            2 => 0
-                ), array(
-            'championship_id' => 1,
-            'team_id' => 2,
-            'action' => 3,
-                ), "championship/%d/team/%d/%s.html"
-                )
-        );
-
-        $router->addRoute(
-                'championshipTeamDriver', new Zend_Controller_Router_Route_Regex('championship/(\d+)/team/(\d+)/driver/(\d+)/?([^\/]+)?\.html', array(
+                'championship', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/(\w*)\.html', array(
             'module' => 'default',
             'controller' => 'championship',
             1 => 0,
             2 => 0,
                 ), array(
-            'championship_id' => 1,
-            'team_id' => 2,
-            'user_id' => 3,
+            'league_id' => 1,
+            'championship_id' => 2,
+            'action' => 3,
+                ), "league/%d/championship/%d/%s.html"
+                )
+        );
+
+        $router->addRoute(
+                'championshipTeam', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/team/(\d+)/([^\/]+)\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            1 => 0,
+            2 => 0,
+            3 => 0
+                ), array(
+            'league_id' => 1,
+            'championship_id' => 2,
+            'team_id' => 3,
             'action' => 4,
-                ), "championship/%d/team/%d/driver/%d/%s.html"
+                ), "league/%d/championship/%d/team/%d/%s.html"
                 )
         );
 
         $router->addRoute(
-                'championshipRace', new Zend_Controller_Router_Route_Regex('championship/(\d+)/race/(\w*)\.html', array(
+                'championshipTeamDriver', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/team/(\d+)/driver/(\d+)/?([^\/]+)?\.html', array(
             'module' => 'default',
-            'controller' => 'race',
+            'controller' => 'championship',
             1 => 0,
-            2 => 'race',
+            2 => 0,
+            3 => 0,
                 ), array(
-            'championship_id' => 1,
-            'action' => 2,
-                ), "championship/%d/race/%s.html"
+            'league_id' => 1,        
+            'championship_id' => 2,
+            'team_id' => 3,
+            'user_id' => 4,
+            'action' => 5,
+                ), "league/%d/championship/%d/team/%d/driver/%d/%s.html"
                 )
         );
 
         $router->addRoute(
-                'championshipRaceId', new Zend_Controller_Router_Route_Regex('championship/(\d+)/race/(\d+)/(\w*)\.html', array(
+                'championshipRace', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\w*)\.html', array(
             'module' => 'default',
             'controller' => 'race',
             1 => 0,
             2 => 0,
-            3 => 'show',
                 ), array(
-            'championship_id' => 1,
-            'race_id' => 2,
+            'league_id' => 1,
+            'championship_id' => 2,
             'action' => 3,
-                ), "championship/%d/race/%d/%s.html"
+                ), "league/%d/championship/%d/race/%s.html"
+                )
+        );
+
+        $router->addRoute(
+                'championshipRaceId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)/(\w*)\.html', array(
+            'module' => 'default',
+            'controller' => 'race',
+            1 => 0,
+            2 => 0,
+            3 => 'id',
+                ), array(
+            'league_id' => 1,
+            'championship_id' => 2,
+            'race_id' => 3,
+            'action' => 4,
+                ), "league/%d/championship/%d/race/%d/%s.html"
                 )
         );
 
@@ -646,9 +680,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             array(
                 'label' => _('Новости'),
                 'title' => _('Все статьи опубликованные на нашем портале'),
-                'controller' => 'article',
+                'controller' => 'post',
                 'action' => 'all',
-                'route' => 'articleAll',
+                'route' => 'postAll',
             ),
             array(
                 'label' => _('Файлы'),
@@ -658,9 +692,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     array(
                         'label' => _('Игры и Моды'),
                         'title' => _('Игры и Моды'),
-                        'controller' => 'article',
+                        'controller' => 'post',
                         'action' => 'all-by-type',
-                        'route' => 'articleAllByType',
+                        'route' => 'postAllByType',
                         'params' => array(
                             'article_type_id' => '3'
                         ),
@@ -739,16 +773,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                     array(
                         'label' => _('Новости'),
                         'title' => _('Новости'),
-                        'controller' => 'article',
+                        'controller' => 'post',
                         'action' => 'all',
-                        'route' => 'articleAll',
+                        'route' => 'postAll',
                         'pages' => array(
                             array(
                                 'label' => _('Статья'),
                                 'title' => _('Статья'),
-                                'controller' => 'article',
+                                'controller' => 'post',
                                 'action' => 'id',
-                                'route' => 'article',
+                                'route' => 'post',
                                 'params' => array()
                             )
                         )
@@ -760,19 +794,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         'pages' => array(
                             array(
                                 'label' => _('Игры и Моды'),
-                                'controller' => 'article',
+                                'controller' => 'post',
                                 'action' => 'all-by-type',
-                                'route' => 'articleAllByType',
+                                'route' => 'postAllByType',
                                 'params' => array(
-                                    'article_type_id' => '3'
+                                    'post_type_id' => '3'
                                 ),
                                 'pages' => array(
                                     array(
                                         'label' => _('Игра'),
                                         'title' => _('Игра'),
-                                        'controller' => 'article',
+                                        'controller' => 'post',
                                         'action' => 'id',
-                                        'route' => 'article',
+                                        'route' => 'post',
                                         'params' => array()
                                     )
                                 )

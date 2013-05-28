@@ -1,0 +1,28 @@
+<div class="button-like-wrapper">
+                    <!-- VK Like -->
+                    <!-- Put this script tag to the <head> of your page -->
+                    <script type="text/javascript" src="//vk.com/js/api/openapi.js?96"></script>
+                    <script type="text/javascript">
+                        VK.init({apiId: 3649896, onlyWidgets: true});
+                    </script>
+
+                    <!-- Put this div tag to the place, where the Like block will be -->
+                    <div id="vk_like" class="button-like"></div>
+                    <script type="text/javascript">
+                        VK.Widgets.Like("vk_like", {type: "button"});
+                    </script>
+
+                    <!-- Facebook like-->
+                    <div id="fb-root" class="button-like"></div>
+                    <script>(function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id))
+                                return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+                    <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
+                    <!-- Facebook like END-->
+                </div>

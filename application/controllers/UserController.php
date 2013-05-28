@@ -10,7 +10,7 @@ class UserController extends App_Controller_FirstBootController {
 
     public function idAction() {
         $request = $this->getRequest();
-        $user_id = $request->getParam('id');
+        $user_id = $request->getParam('user_id');
 
         $user = new Application_Model_DbTable_User();
 
@@ -111,7 +111,7 @@ class UserController extends App_Controller_FirstBootController {
 
                             $this->view->showMessages()->clearMessages();
                             $this->messageManager->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
-                            
+
                             $this->redirect($request->getParam('returnUrl'));
                         } else {
                             $form->populate($request->getPost());

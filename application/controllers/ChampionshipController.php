@@ -8,7 +8,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
         $request = $this->getRequest();
     }
 
-    public function showAction() {
+    public function idAction() {
         $request = $this->getRequest();
         $championship_id = (int) $request->getParam('championship_id');
 
@@ -64,12 +64,12 @@ class ChampionshipController extends App_Controller_FirstBootController {
                     }
                 }
 
-                // save new article to db
+                // save new championship to db
                 $date = date('Y-m-d H:i:s');
 
                 $championship_data['name'] = $form->getValue('name');
                 $championship_data['league_id'] = $form->getValue('league');
-                $championship_data['article_id'] = $form->getValue('rule');
+                $championship_data['post_id'] = $form->getValue('rule');
                 $championship_data['game_id'] = $form->getValue('game');
                 $championship_data['user_id'] = $form->getValue('admin');
                 $championship_data['date_start'] = $form->getValue('date_start');
@@ -100,16 +100,16 @@ class ChampionshipController extends App_Controller_FirstBootController {
         }
 
         // add reglaments
-        $article = new Application_Model_DbTable_Article();
-        $articles = $article->getPublishArticleTitlesByTypeName('rule', 'ASC');
+        $post = new Application_Model_DbTable_Post();
+        $posts = $post->getPublishPostTitlesByTypeName('rule', 'ASC');
 
-        if ($articles) {
-            foreach ($articles as $article):
-                $form->rule->addMultiOption($article->id, $article->title);
+        if ($posts) {
+            foreach ($posts as $post):
+                $form->rule->addMultiOption($post->id, $post->title);
             endforeach;
         } else {
             $this->messageManager->addError("{$this->view->translate('Регламенты не найдены!')}"
-                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'article', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'post', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add games
@@ -118,11 +118,11 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
         if ($games) {
             foreach ($games as $game):
-                $form->game->addMultiOption($game->article_id, $game->name);
+                $form->game->addMultiOption($game->post_id, $game->name);
             endforeach;
         } else {
             $this->messageManager->addError("{$this->view->translate('Игры не найдены!')}"
-                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'article', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'post', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add admins
@@ -195,12 +195,12 @@ class ChampionshipController extends App_Controller_FirstBootController {
                             }
                         }
 
-                        // save new article to db
+                        // save new championship to db
                         $date = date('Y-m-d H:i:s');
 
                         $new_championship_data['name'] = $form->getValue('name');
                         $new_championship_data['league_id'] = $form->getValue('league');
-                        $new_championship_data['article_id'] = $form->getValue('rule');
+                        $new_championship_data['post_id'] = $form->getValue('rule');
                         $new_championship_data['game_id'] = $form->getValue('game');
                         $new_championship_data['user_id'] = $form->getValue('admin');
                         $new_championship_data['date_start'] = $form->getValue('date_start');
@@ -239,18 +239,18 @@ class ChampionshipController extends App_Controller_FirstBootController {
             $form->league->setValue($championship_data->league_id);
 
             // set reglament value
-            $article = new Application_Model_DbTable_Article();
-            $articles = $article->getPublishArticleTitlesByTypeName('rule', 'ASC');
+            $post = new Application_Model_DbTable_Post();
+            $posts = $post->getPublishPostTitlesByTypeName('rule', 'ASC');
 
-            if ($articles) {
-                foreach ($articles as $article):
-                    $form->rule->addMultiOption($article->id, $article->title);
+            if ($posts) {
+                foreach ($posts as $post):
+                    $form->rule->addMultiOption($post->id, $post->title);
                 endforeach;
             } else {
                 $this->view->errMessage .= $this->view->translate('Регламенты на сайте не найдены. Добавьте регламент, чтобы создать чемпионат!') . '<br />';
             }
 
-            $form->rule->setValue($championship_data->article_id);
+            $form->rule->setValue($championship_data->post_id);
 
             // set game value
             $game = new Application_Model_DbTable_Game();
@@ -258,7 +258,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
             if ($games) {
                 foreach ($games as $game):
-                    $form->game->addMultiOption($game->article_id, $game->name);
+                    $form->game->addMultiOption($game->post_id, $game->name);
                 endforeach;
             } else {
                 $this->view->errMessage .= $this->view->translate('Игры не найдены') . '<br />';
@@ -409,7 +409,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                         }
                     }
 
-                    // save new article to db
+                    // save new championship to db
                     $date = date('Y-m-d H:i:s');
 
                     $new_championship_team_data['name'] = $form->getValue('name');
@@ -522,7 +522,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                             }
                         }
 
-                        // save new article to db
+                        // save new championship to db
                         $date = date('Y-m-d H:i:s');
 
                         $new_championship_team_data['name'] = $form->getValue('name');

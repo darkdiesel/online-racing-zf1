@@ -23,6 +23,18 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         return $this;
     }
 
+    public function post_menu($post_id) {
+        if ($this->view->checkUserAccess('post/edit')) {
+            $link = $this->view->url(array('controller' => 'post', 'action' => 'edit', 'post_id' => $post_id), 'post', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+
+            $link = $this->view->url(array('controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'post', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
+        }
+
+        return $this;
+    }
+
     public function championship_menu($championship_id) {
         if ($this->view->checkUserAccess('championship/team-add')) {
             $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $championship_id), 'championship', true);

@@ -46,9 +46,9 @@ class Acl extends Zend_Acl {
         // admin resources
         $this->add(new Zend_Acl_Resource('admin_allow'));
 
-        $this->add(new Zend_Acl_Resource('article/add'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('article/edit'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('article/delete'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('post/add'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('post/edit'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('post/delete'), 'admin_allow');
 
         $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('admin/index'), 'admin_allow');

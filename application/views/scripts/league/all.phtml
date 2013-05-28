@@ -1,50 +1,46 @@
-<div id="leagues_page" class="page">
-    <div class="page_content">
-        <?php
-        if ($this->paginator) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+<?php
+if ($this->paginator) {
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
 
-            foreach ($this->paginator as $league):
-                ?>
-                <div class="league_item block_item block_ui_gray">
-                    <?php
-                    echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
-                    ?>
-                    <div class="block_item_content">
-                        <div class="league_name article_title">
-                            <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>"><?php echo $this->escape($league['name']); ?></a>
-                        </div>
-                        <?php if ($this->escape($league['url_logo']) != '') { ?>
-                            <div class="league_all_logo_wrapper_250_250 image_wrapper_250_250 img-polaroid pull-left overflow-hide">
-                                <img class="league_all_logo_250 image_size_250" src="<?php echo $this->baseURL($this->escape($league['url_logo'])); ?>">
-                            </div>
-                        <?php } ?>
-                        <div class="league_description article_text">
-                            <?php echo $this->truncate($this->escape($league['description']))->toLength(500); ?>
-                        </div>
-                        <div class="league_controls article_controls">
-                            <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
-                        </div>
-                        <div class="league_info block_item_info_bottom">
-                            <div class="content_category block_item_info_bottom_item">
-                                <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->translate('Лига'); ?>
-                            </div>
-                            <div class="league_admin league_info_item block_item_info_bottom_item">
-                                <span class="font-bold font-color-black"><?php echo $this->translate('Администратор лиги') ?>: </span>
-                                <a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'id' => $this->escape($league['user_id'])), 'user', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
-                            </div>
-                            <div class="league_date league_info_item block_item_info_bottom_item">
-                                <span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
-                                </span><?php echo $this->escape($league['date_create']); ?>
-                            </div>
-                        </div>
+    foreach ($this->paginator as $league):
+        ?>
+        <div class="league_item block_item block_ui_gray">
+            <?php
+            echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
+            ?>
+            <div class="block_item_content">
+                <div class="league_name article_title">
+                    <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>"><?php echo $this->escape($league['name']); ?></a>
+                </div>
+                <?php if ($this->escape($league['url_logo']) != '') { ?>
+                    <div class="league_all_logo_wrapper_250_250 image_wrapper_250_250 img-polaroid pull-left overflow-hide">
+                        <img class="league_all_logo_250 image_size_250" src="<?php echo $this->baseURL($this->escape($league['url_logo'])); ?>">
+                    </div>
+                <?php } ?>
+                <div class="league_description article_text">
+                    <?php echo $this->truncate($this->escape($league['description']))->toLength(500); ?>
+                </div>
+                <div class="league_controls article_controls">
+                    <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>" class = "btn btn-small btn-inverse league_more"><?php echo $this->translate('Подробнее...') ?></a>
+                </div>
+                <div class="league_info block_item_info_bottom">
+                    <div class="content_category block_item_info_bottom_item">
+                        <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->translate('Лига'); ?>
+                    </div>
+                    <div class="league_admin league_info_item block_item_info_bottom_item">
+                        <span class="font-bold font-color-black"><?php echo $this->translate('Администратор лиги') ?>: </span>
+                        <a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league['user_id'])), 'userId', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
+                    </div>
+                    <div class="league_date league_info_item block_item_info_bottom_item">
+                        <span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
+                        </span><?php echo $this->escape($league['date_create']); ?>
                     </div>
                 </div>
-                <?php
-            endforeach;
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
-            ?>
-        <?php }
-        ?>
-    </div>
-</div>
+            </div>
+        </div>
+        <?php
+    endforeach;
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+    ?>
+<?php }
+?>

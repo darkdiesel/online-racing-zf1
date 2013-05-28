@@ -1,24 +1,24 @@
 <?php
 
-class ArticleController extends App_Controller_FirstBootController {
+class PostController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
         $this->view->headTitle($this->view->translate('Контент'));
     }
 
-    // action for view article
+    // action for view post
     public function idAction() {
         $request = $this->getRequest();
-        $article_id = (int) $request->getParam('article_id');
+        $post_id = (int) $request->getParam('post_id');
 
-        $article = new Application_Model_DbTable_Article();
-        $article_data = $article->getArticleData($article_id);
+        $post = new Application_Model_DbTable_Post();
+        $post_data = $post->getPostData($post_id);
 
-        if ($article_data) {
-            $this->view->article = $article_data;
-            $this->view->headTitle($article_data->title);
-            $this->view->pageTitle($article_data->title);
+        if ($post_data) {
+            $this->view->post = $post_data;
+            $this->view->headTitle($post_data->title);
+            $this->view->pageTitle($post_data->title);
         } else {
             $this->messageManager->addError($this->view->translate('Запрашиваемый контент не существует!'));
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
@@ -26,7 +26,7 @@ class ArticleController extends App_Controller_FirstBootController {
         }
     }
 
-    // action for view all articles
+    // action for view all posts
     public function allAction() {
         $this->view->headTitle($this->view->translate('Весь контент сайта'));
         $this->view->pageTitle($this->view->translate('Контент сайта'));
@@ -37,8 +37,8 @@ class ArticleController extends App_Controller_FirstBootController {
         $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
 
-        $article = new Application_Model_DbTable_Article();
-        $paginator = $article->getPublishedArticlesPager($page_count_items, $page, $page_range, $items_order);
+        $post = new Application_Model_DbTable_Post();
+        $paginator = $post->getPublishedPostsPager($page_count_items, $page, $page_range, $items_order);
 
         if (count($paginator)) {
             $this->view->paginator = $paginator;
@@ -47,7 +47,7 @@ class ArticleController extends App_Controller_FirstBootController {
         }
     }
 
-    // action for add new article
+    // action for add new post
     public function addAction() {
         // page title
         $this->view->headTitle($this->view->translate('Добавить'));
@@ -55,13 +55,13 @@ class ArticleController extends App_Controller_FirstBootController {
 
         $request = $this->getRequest();
         // form
-        $form = new Application_Form_Article_Add();
+        $form = new Application_Form_Post_Add();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                // save new article to db
+                // save new post to db
                 $date = date('Y-m-d H:i:s');
-                $article_data = array(
+                $post_data = array(
                     'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
                     'article_type_id' => $form->getValue('article_type'),
                     'content_type_id' => $form->getValue('content_type'),
@@ -75,9 +75,9 @@ class ArticleController extends App_Controller_FirstBootController {
                     'date_edit' => $date,
                 );
 
-                $article = new Application_Model_DbTable_Article();
-                $newArticle = $article->createRow($article_data);
-                $newArticle->save();
+                $post = new Application_Model_DbTable_Post();
+                $newPost = $post->createRow($post_data);
+                $newPost->save();
 
                 $article_type = new Application_Model_DbTable_ArticleType();
                 $article_type_name = $article_type->getName($form->getValue('article_type'));
@@ -88,7 +88,7 @@ class ArticleController extends App_Controller_FirstBootController {
                         $game = new Application_Model_DbTable_Game();
                         $game_data = array(
                             'name' => $form->getValue('title'),
-                            'article_id' => $newArticle->id
+                            'post_id' => $newPost->id
                         );
                         $newGame = $game->createRow($game_data);
                         $newGame->save();
@@ -97,13 +97,13 @@ class ArticleController extends App_Controller_FirstBootController {
                         break;
                 }
 
-                $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $newArticle->id), 'article', true));
+                $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $newPost->id), 'postId', true));
             } else {
                 $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
-        // add article types to the form
+        // add post types to the form
         $article_types = new Application_Model_DbTable_ArticleType();
         $article_types = $article_types->getArticleTypeNames('ASC');
 
@@ -136,25 +136,26 @@ class ArticleController extends App_Controller_FirstBootController {
         $this->view->form = $form;
     }
 
-    // action for edit article
+    // action for edit post
     public function editAction() {
         $request = $this->getRequest();
-        $article_id = (int) $request->getParam('article_id');
+        $post_id = (int) $request->getParam('post_id');
+        $this->view->headTitle($this->view->translate('Редактировать'));
 
-        $article = new Application_Model_DbTable_Article();
-        $article_data = $article->getArticleData($article_id);
+        $post = new Application_Model_DbTable_Post();
+        $post_data = $post->getPostData($post_id);
 
-        if ($article_data) {
-            $form = new Application_Form_Article_Edit();
-            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'edit', 'article_id' => $article_id), 'article', true));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true)}\"");
+        if ($post_data) {
+            $form = new Application_Form_Post_Edit();
+            $form->setAction($this->view->url(array('controller' => 'post', 'action' => 'edit', 'post_id' => $post_id), 'post', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
 
-                    if ($article_data->article_type_id == $form->getValue('article_type')) {
+                    if ($post_data->article_type_id == $form->getValue('article_type')) {
                         // if article type not changed do this code
-                        $new_article_data = array(
+                        $new_post_data = array(
                             'article_type_id' => $form->getValue('article_type'),
                             'content_type_id' => $form->getValue('content_type'),
                             'annotation' => $form->getValue('annotation'),
@@ -165,8 +166,8 @@ class ArticleController extends App_Controller_FirstBootController {
                             'publish_to_slider' => $form->getValue('publish_to_slider'),
                             'date_edit' => date('Y-m-d H:i:s'),
                         );
-                        $article_where = $article->getAdapter()->quoteInto('id = ?', $article_id);
-                        $article->update($new_article_data, $article_where);
+                        $post_where = $post->getAdapter()->quoteInto('id = ?', $post_id);
+                        $post->update($new_post_data, $post_where);
 
                         $article_type = new Application_Model_DbTable_ArticleType();
                         $article_type_name = $article_type->getName($form->getValue('article_type'));
@@ -178,7 +179,7 @@ class ArticleController extends App_Controller_FirstBootController {
                                 $game_data = array(
                                     'name' => $form->getValue('title'),
                                 );
-                                $game_where = $game->getAdapter()->quoteInto('article_id = ?', $article_id);
+                                $game_where = $game->getAdapter()->quoteInto('post_id = ?', $post_id);
                                 $game->update($game_data, $game_where);
                                 break;
                             default :
@@ -186,9 +187,9 @@ class ArticleController extends App_Controller_FirstBootController {
                                 break;
                         }
 
-                        $this->redirect($this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true));
+                        $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true));
                     } else {
-                        // if article type changed
+                        // if post type changed
                         $this->messageManager->addError("{$this->view->translate('Функционал для смены типов статьи не готов.')}");
                     }
                 } else {
@@ -223,17 +224,17 @@ class ArticleController extends App_Controller_FirstBootController {
             }
 
             //head titles
-            $this->view->headTitle("{$this->view->translate('Редактировать контент')} :: {$article_data->title}");
-            $this->view->pageTitle("{$this->view->translate('Редактировать контент')} :: {$article_data->title}");
+            $this->view->headTitle("{$post_data->title}");
+            $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$post_data->title}");
 
-            $form->title->setvalue($article_data->title);
-            $form->article_type->setvalue($article_data->article_type_id);
-            $form->content_type->setvalue($article_data->content_type_id);
-            $form->annotation->setvalue($article_data->annotation);
-            $form->text->setvalue($article_data->text);
-            $form->image->setvalue($article_data->image);
-            $form->publish->setvalue($article_data->publish);
-            $form->publish_to_slider->setvalue($article_data->publish_to_slider);
+            $form->title->setvalue($post_data->title);
+            $form->article_type->setvalue($post_data->article_type_id);
+            $form->content_type->setvalue($post_data->content_type_id);
+            $form->annotation->setvalue($post_data->annotation);
+            $form->text->setvalue($post_data->text);
+            $form->image->setvalue($post_data->image);
+            $form->publish->setvalue($post_data->publish);
+            $form->publish_to_slider->setvalue($post_data->publish_to_slider);
 
             $this->view->form = $form;
         } else {
@@ -243,36 +244,36 @@ class ArticleController extends App_Controller_FirstBootController {
         }
     }
 
-    // action for delete article
+    // action for delete post
     public function deleteAction() {
-        $this->view->headTitle($this->view->translate('Удаление статьи'));
+        $this->view->headTitle($this->view->translate('Удалить'));
 
         $request = $this->getRequest();
-        $article_id = (int) $request->getParam('article_id');
+        $post_id = (int) $request->getParam('post_id');
 
-        $article = new Application_Model_DbTable_Article();
-        $article_data = $article->getArticleData($article_id);
+        $post = new Application_Model_DbTable_Post();
+        $post_data = $post->getPostData($post_id);
 
-        if ($article_data) {
+        if ($post_data) {
             //page title
-            $this->view->headTitle($article_data->title);
-            $this->view->pageTitle("{$this->view->translate('Удаление статьи')} :: {$article_data->title}");
+            $this->view->headTitle($post_data->title);
+            $this->view->pageTitle("{$this->view->translate('Удалить контент')} :: {$post_data->title}");
 
-            $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить статью')}. {$article_data->title}?");
+            $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить контент')} <strong>\"{$post_data->title}\"</strong> ?");
 
             //create delete form
-            $form = new Application_Form_Article_Delete();
-            $form->setAction($this->view->url(array('controller' => 'article', 'action' => 'delete', 'article_id' => $article_id), 'article', true));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'article', 'action' => 'id', 'article_id' => $article_id), 'article', true)}\"");
+            $form = new Application_Form_Post_Delete();
+            $form->setAction($this->view->url(array('controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'post', true));
+            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true)}\"");
 
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
 
-                    $article_where = $article->getAdapter()->quoteInto('id = ?', $article_id);
-                    $article->delete($article_where);
+                    $post_where = $post->getAdapter()->quoteInto('id = ?', $post_id);
+                    $post->delete($post_where);
 
                     $article_type = new Application_Model_DbTable_ArticleType();
-                    $article_type->getName($article_data->article_type_id);
+                    $article_type->getName($post_data->article_type_id);
 
                     switch ($article_type->name) {
                         case 'game':
@@ -285,17 +286,17 @@ class ArticleController extends App_Controller_FirstBootController {
                         default :
                             break;
                     }
-                    
+
                     $this->view->showMessages()->clearMessages();
-                    $this->messageManager->addSuccess("{$this->view->translate("Статья <strong>\"{$article_data->title}\"</strong> успешно удалена")}");
-                    
-                    $this->_helper->redirector('all', 'article');
+                    $this->messageManager->addSuccess("{$this->view->translate("Статья <strong>\"{$post_data->title}\"</strong> успешно удалена")}");
+
+                    $this->_helper->redirector('all', 'post');
                 } else {
                     $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
-            $this->view->article = $article_data;
+            $this->view->post = $post_data;
             $this->view->form = $form;
         } else {
             $this->messageManager->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
@@ -312,8 +313,8 @@ class ArticleController extends App_Controller_FirstBootController {
         $article_type_data = $article_type->getName($article_type_id);
 
         if ($article_type_data) {
-            $this->view->headTitle("{$this->view->translate('Контент по типу')} :: {$article_type_data}");
-            $this->view->pageTitle("{$this->view->translate('Контент по типу')} :: {$article_type_data}");
+            $this->view->headTitle("{$this->view->translate('Тип контента')} :: {$article_type_data}");
+            $this->view->pageTitle("{$this->view->translate('Тип контента')} :: {$article_type_data}");
 
             // setup pager settings
             $page_count_items = 10;
@@ -321,8 +322,8 @@ class ArticleController extends App_Controller_FirstBootController {
             $items_order = 'DESC';
             $page = $this->getRequest()->getParam('page');
 
-            $article = new Application_Model_DbTable_Article();
-            $paginator = $article->getAllArticlesPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
+            $post = new Application_Model_DbTable_Post();
+            $paginator = $post->getAllPostsPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
 
             if (count($paginator)) {
                 $this->view->paginator = $paginator;

@@ -1,11 +1,11 @@
 <?php
 
-class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
+class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
 
-    protected $_name = 'article';
+    protected $_name = 'post';
     protected $_primary = 'id';
 
-    public function getPublishedArticleData($id) {
+    public function getPublishedPostData($id) {
         $model = new self;
 
         $select = $model->select()
@@ -17,27 +17,27 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
                 ->columns('*');
 
-        $article = $model->fetchRow($select);
+        $post = $model->fetchRow($select);
 
-        if (count($article) != 0) {
+        if (count($post) != 0) {
             // update count of views
-            if ($article->last_ip != $_SERVER['REMOTE_ADDR']) {
-                $article_data = array(
-                    'views' => ($article->views + 1),
+            if ($post->last_ip != $_SERVER['REMOTE_ADDR']) {
+                $post_data = array(
+                    'views' => ($post->views + 1),
                     'last_ip' => $_SERVER['REMOTE_ADDR']
                 );
 
-                $article_where = $model->getAdapter()->quoteInto('id = ?', $id);
-                $model->update($article_data, $article_where);
+                $post_where = $model->getAdapter()->quoteInto('id = ?', $id);
+                $model->update($post_data, $post_where);
             }
 
-            return $article;
+            return $post;
         } else {
             return FALSE;
         }
     }
 
-    public function getArticleData($id) {
+    public function getPostData($id) {
         $model = new self;
 
         $select = $model->select()
@@ -49,28 +49,28 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->join(array('c_t' => 'content_type'), 'c_t.id = a.content_type_id', array('content_type_name' => 'c_t.name'))
                 ->columns('*');
 
-        $article = $model->fetchRow($select);
+        $post = $model->fetchRow($select);
 
-        if (count($article) != 0) {
+        if (count($post) != 0) {
             // update count of views
-            if ($article->last_ip != $_SERVER['REMOTE_ADDR']) {
+            if ($post->last_ip != $_SERVER['REMOTE_ADDR']) {
 
-                $article_data = array(
-                    'views' => ($article->views = $article->views + 1),
+                $post_data = array(
+                    'views' => ($post->views = $post->views + 1),
                     'last_ip' => $_SERVER['REMOTE_ADDR']
                 );
 
-                $article_where = $model->getAdapter()->quoteInto('id = ?', $id);
-                $model->update($article_data, $article_where);
+                $post_where = $model->getAdapter()->quoteInto('id = ?', $id);
+                $model->update($post_data, $post_where);
             }
 
-            return $article;
+            return $post;
         } else {
             return FALSE;
         }
     }
 
-    public function getPublishArticleTitlesByType($article_type, $order) {
+    public function getPublishPostTitlesByType($article_type, $order) {
         $model = new self;
 
         $select = $model->select()
@@ -79,16 +79,16 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->order('title ' . $order)
                 ->columns(array('id', 'title'));
 
-        $articles = $model->fetchAll($select);
+        $posts = $model->fetchAll($select);
 
-        if (count($articles) != 0) {
-            return $articles;
+        if (count($posts) != 0) {
+            return $posts;
         } else {
             return FALSE;
         }
     }
 
-    public function getAllArticleTitlesByType($article_type, $order) {
+    public function getAllPostTitlesByType($article_type, $order) {
         $model = new self;
 
         $select = $model->select()
@@ -97,16 +97,16 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                 ->order('title ' . $order)
                 ->columns(array('id', 'title'));
 
-        $articles = $model->fetchAll($select);
+        $posts = $model->fetchAll($select);
 
-        if (count($articles) != 0) {
-            return $articles;
+        if (count($posts) != 0) {
+            return $posts;
         } else {
             return FALSE;
         }
     }
 
-    public function getPublishedArticlesPager($count, $page, $page_range, $order) {
+    public function getPublishedPostsPager($count, $page, $page_range, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
@@ -128,7 +128,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
-    public function getAllArticlesPager($count, $page, $page_range, $order) {
+    public function getAllPostsPager($count, $page, $page_range, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
@@ -149,7 +149,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
-    public function getAllArticlesPagerByType($count, $page, $page_range, $article_type, $order) {
+    public function getAllPostsPagerByType($count, $page, $page_range, $article_type, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
@@ -172,7 +172,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
-    public function getLastPublishArticle($count, $order) {
+    public function getLastPublishPost($count, $order) {
         $model = new self;
 
         $select = $model
@@ -188,7 +188,7 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
         return $result;
     }
 
-    public function getPublishArticleTitlesByTypeName($article_type_name, $order) {
+    public function getPublishPostTitlesByTypeName($article_type_name, $order) {
         $model = new self;
 
         $article_type = new Application_Model_DbTable_ArticleType();
@@ -201,10 +201,10 @@ class Application_Model_DbTable_Article extends Zend_Db_Table_Abstract {
                     ->order('title ' . $order)
                     ->columns(array('id', 'title'));
 
-            $articles = $model->fetchAll($select);
+            $posts = $model->fetchAll($select);
 
-            if (count($articles) != 0) {
-                return $articles;
+            if (count($posts) != 0) {
+                return $posts;
             } else {
                 return FALSE;
             }

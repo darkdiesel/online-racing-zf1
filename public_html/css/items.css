@@ -10,7 +10,8 @@
 /* UI for blocks*/
 .block_ui_gray{
     border:1px solid #CACACA;
-    background:none repeat scroll 0 0 #EDEDED;
+    background-color:#EDEDED;
+    background-image:linear-gradient(to bottom, #FFFFFF, #E6E6E6);
     display:block;
     border:2px solid #CACACA;
     margin:20px 0;
@@ -37,11 +38,19 @@
 }
 .image_wrapper_250{
     width:250px;
-    max-height:750px;
+    max-height:450px;
+    margin:7px;
+}
+.image_wrapper_690{
+    width:690px;
+    max-height:740px;
     margin:7px;
 }
     .image_size_250{
         width:250px;
+    }
+    .image_size_690{
+        width:690px;
     }
     .image_size_250_250{
         width:250px;
@@ -118,7 +127,6 @@
     .championship_id_info_block table{
         margin:0;
     }
-
 /* team_user */
 .team_user_full_info_item{
     
@@ -132,12 +140,26 @@
         .team_user_full_info_item .user_image img{
             width:165px;
         }
-
+/*post*/
+.post_id_logo_wrapper_690{
+    width:auto;
+    max-width:690px!important;
+    height:auto;
+    max-height:740px;
+    display:inline-block;
+}
+.post_id_logo{
+    width:auto;
+    max-width:690px;
+}
 /* additional common styles */
 .overflow-hide{
     overflow:hidden;
 }
 .align-center{
+    text-align:center;
+}
+.align-center-block{
     text-align:center;
 }
 
@@ -175,3 +197,16 @@
 .alert li{
     margin:5px 0 15px 14px;
 }
+
+/* Like buttons */
+.button-like-wrapper{
+    margin:20px 0 10px 0;
+    overflow:auto;
+}
+    .button-like-wrapper{
+    }
+        .button-like-wrapper div{
+            float:left;
+            margin:0 10px;
+            width:100px;
+        }
