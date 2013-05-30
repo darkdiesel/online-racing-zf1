@@ -55,11 +55,11 @@
         <?php foreach ($this->paginator as $championship): ?>
             <div class="championship_item block_item block_ui_gray">
                 <?php
-                echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['id']));
+                echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
                 ?>
                 <div class="block_item_content">
                     <div class="championship_name article_title">
-                        <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
+                        <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
                     </div>
                     <?php if ($this->escape($championship['url_logo']) != '') { ?>
                         <div class="championship_all_logo_wrapper_250_250 image_wrapper_250_250 img-polaroid pull-left overflow-hide">
@@ -80,7 +80,7 @@
                         <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-warning article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
                         <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-info article_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
                         <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($championship['post_id'])), 'postId', true); ?>" target="_blank" class = "btn btn-small btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-inverse post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>" class = "btn btn-small btn-inverse post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="championship_block_item_info block_item_info_bottom">
                         <div class="content_category block_item_info_bottom_item">

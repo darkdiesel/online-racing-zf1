@@ -35,24 +35,24 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         return $this;
     }
 
-    public function championship_menu($championship_id) {
+    public function championship_menu($league_id, $championship_id) {
         if ($this->view->checkUserAccess('championship/team-add')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'championship_id' => $championship_id), 'championship', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'team-add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить команду')}</a>");
         }
 
         if ($this->view->checkUserAccess('championship/edit')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'edit', 'championship_id' => $championship_id), 'championship', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'edit', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
         }
 
         if ($this->view->checkUserAccess('championship/delete')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'delete', 'championship_id' => $championship_id), 'championship', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'delete', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
         }
 
         if ($this->view->checkUserAccess('race/add')) {
-            $link = $this->view->url(array('controller' => 'race', 'action' => 'add', 'championship_id' => $championship_id), 'championshipRace', true);
+            $link = $this->view->url(array('controller' => 'race', 'action' => 'add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championshipRace', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить гонку')}</a>");
         }
 
@@ -94,7 +94,7 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
 
     public function league_menu($league_id) {
         if ($this->view->checkUserAccess('championship/add')) {
-            $link = $this->view->url(array('controller' => 'championship', 'action' => 'add'), 'default', true);
+            $link = $this->view->url(array('controller' => 'championship', 'action' => 'add', 'league_id' => $league_id), 'leagueActionAddChamp', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить чемпионат')}</a>");
         }
 

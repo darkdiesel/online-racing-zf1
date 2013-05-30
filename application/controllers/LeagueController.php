@@ -12,7 +12,6 @@ class LeagueController extends App_Controller_FirstBootController {
         $league_id = (int) $request->getParam('league_id');
 
         $league = new Application_Model_DbTable_League();
-
         $league_data = $league->getLeagueData($league_id);
 
         if ($league_data) {
@@ -26,14 +25,16 @@ class LeagueController extends App_Controller_FirstBootController {
             $page_range = 5;
             $items_order = 'DESC';
             $page = $request->getParam('page');
+            
+            //add breadscrumb
+            $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, $page);
 
             $this->view->paginator = $championship->getChampionshipsPagerByLeague($page_count_items, $page, $page_range, $items_order, $league_id);
         } else {
-            $this->messageManager->addError($this->view->translate('Лига не существует!'));
+            $this->messageManager->addError($this->view->translate('Запрашиваемая лига не существует!'));
 
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Лига не существует!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
         }
     }
 
@@ -194,6 +195,8 @@ class LeagueController extends App_Controller_FirstBootController {
         $page_range = 5;
         $items_order = 'ASC';
         $page = $this->getRequest()->getParam('page');
+        
+        $this->view->breadcrumb()->LeagueAll($page);
 
         $league = new Application_Model_DbTable_League();
         $paginator = $league->getLeaguePager($page_count_items, $page, $page_range, $items_order);

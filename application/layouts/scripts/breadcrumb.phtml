@@ -1,5 +1,14 @@
 <?php
+if (!$this->breadcrumb) {
+    $this->breadcrumb()->build();
+}
+
+$activeNav = $this->navigation($this->breadcrumb)->findByUri($this->url());
+if ($activeNav != NULL) {
+    $activeNav->active = true;
+}
 $breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
+
 
 if ($breadcrumb != '') {
     ?>

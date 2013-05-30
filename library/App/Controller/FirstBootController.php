@@ -8,6 +8,8 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
 
         // configure main menu
         $uri = $this->_request->getPathInfo();
+        
+        
 
         /* $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
           if ($activeNav != NULL) {
@@ -22,10 +24,7 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
             Zend_Registry::set('breadcrumb', array('show' => TRUE));
             Zend_Registry::set('slider', array('show' => FALSE));
 
-            /* $activeNav = $this->view->navigation($this->view->breadcrumb)->findByUri($uri);
-              if ($activeNav != NULL) {
-              $activeNav->active = true;
-              } */
+             
         }
 
         if (Zend_Auth::getInstance()->hasIdentity()) {

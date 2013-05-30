@@ -18,6 +18,7 @@ class UserController extends App_Controller_FirstBootController {
 
         if ($user_data) {
             $this->view->user = $user_data;
+            $this->view->breadcrumb()->UserAll('1')->User($user_id, $user_data->login);
 
             $this->view->headTitle($this->view->translate('Пилот'));
             $this->view->headTitle($user_data->login);
@@ -592,8 +593,10 @@ class UserController extends App_Controller_FirstBootController {
         // pager settings
         $page_count_items = 9;
         $page = $this->getRequest()->getParam('page');
-        $page_range = 5;
+        $page_range = 10;
         $items_order = 'DESC';
+        
+        $this->view->breadcrumb()->UserAll($page);
 
         $user = new Application_Model_DbTable_User();
         $this->view->paginator = $user->getSimpleEnableUsersPager($page_count_items, $page, $page_range, $items_order);

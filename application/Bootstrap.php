@@ -272,7 +272,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'action' => 'leagues',
             'page' => 1)
         ));
-        
+
         // ADMIN ROUTES END
 
         $router->addRoute(
@@ -286,7 +286,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), 'user/%d.html'
                 )
         );
-        
+
         $router->addRoute(
                 'user', new Zend_Controller_Router_Route_Regex('user/(\d+)/(\w*)\.html', array(
             'module' => 'default',
@@ -300,14 +300,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         );
 
         $router->addRoute(
-                'userAll', new Zend_Controller_Router_Route_Regex('user/all/(\d+)\.html', array(
+                'userAll', new Zend_Controller_Router_Route_Regex('user/all/page/(\d+)\.html', array(
             'module' => 'default',
             'controller' => 'user',
             'action' => 'all',
             1 => 1
                 ), array(
             'page' => 1,
-                ), "user/all/%s.html"
+                ), "user/all/page/%s.html"
         ));
 
         //post controller routers
@@ -322,14 +322,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), "post/%d.html"
                 )
         );
-        
+
         $router->addRoute(
                 'post', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
             'module' => 'default',
             'controller' => 'post',
             1 => 0
                 ), array(
-            'post_id' => 1,        
+            'post_id' => 1,
             'action' => 2,
                 ), "post/%d/%s.html"
                 )
@@ -356,7 +356,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), array(
             'article_type_id' => 1,
             'page' => 2,
-                ), "post/all-by-type/%s/page/%s.html"
+                ), "post/all-by-type/%d/page/%d.html"
         ));
 
         //article-type controller routers
@@ -376,19 +376,30 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         ));
 
         $router->addRoute(
-                'league', new Zend_Controller_Router_Route_Regex('league/(\w*)/(\d+)\.html', array(
+                'league', new Zend_Controller_Router_Route_Regex('league/(\d+)/(\w*)\.html', array(
             'module' => 'default',
             'controller' => 'league',
                 ), array(
-            'action' => 1,
-            'league_id' => 2
-                ), "league/%s/%s.html"
+            'league_id' => 1,
+            'action' => 2,
+                ), "league/%d/%s.html"
+                )
+        );
+
+        $router->addRoute(
+                'leagueActionAddChamp', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship-add\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            'action' => 'add',
+                ), array(
+            'league_id' => 1,
+                ), "league/%d/championship-add.html"
                 )
         );
 
         //league controller routers
         $router->addRoute(
-                'leagueIdAll', new Zend_Controller_Router_Route_Regex('league/(\w*)/(\w*)\.html', array(
+                'leagueIdAll', new Zend_Controller_Router_Route_Regex('league/(\d+)/page/(\d+)\.html', array(
             'module' => 'default',
             'controller' => 'league',
             'action' => 'id',
@@ -397,18 +408,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ), array(
             'league_id' => 1,
             'page' => 2,
-                ), "league/%s/%s.html"
+                ), "league/%d/page/%d.html"
         ));
 
         $router->addRoute(
-                'leagueAll', new Zend_Controller_Router_Route_Regex('league/all/(\d+)\.html', array(
+                'leagueAll', new Zend_Controller_Router_Route_Regex('league/all/page/(\d+)\.html', array(
             'module' => 'default',
             'controller' => 'league',
             'action' => 'all',
             1 => 1
                 ), array(
             'page' => 1,
-                ), "league/all/%s.html"
+                ), "league/all/page/%s.html"
         ));
 
         //team controller routers
@@ -429,7 +440,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
         //championship controller routers
         $router->addRoute(
-                'championship', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/(\w*)\.html', array(
+                'championship', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/([^\/]+)\.html', array(
             'module' => 'default',
             'controller' => 'championship',
             1 => 0,
@@ -439,6 +450,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             'championship_id' => 2,
             'action' => 3,
                 ), "league/%d/championship/%d/%s.html"
+                )
+        );
+
+        $router->addRoute(
+                'championshipId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)\.html', array(
+            'module' => 'default',
+            'controller' => 'championship',
+            'action' => 'id',
+            1 => 0,
+            2 => 0,
+                ), array(
+            'league_id' => 1,
+            'championship_id' => 2,
+                ), "league/%d/championship/%d.html"
                 )
         );
 
@@ -466,7 +491,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             2 => 0,
             3 => 0,
                 ), array(
-            'league_id' => 1,        
+            'league_id' => 1,
             'championship_id' => 2,
             'team_id' => 3,
             'user_id' => 4,
@@ -708,145 +733,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             ),
         );
 
-        $breadcrumbs_pages = array(
-            array(
-                // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
-                'label' => _('Главная'),
-                'controller' => 'index',
-                'action' => 'index',
-                'route' => 'default',
-                'pages' => array(
-                    array(
-                        'label' => _('Лиги'),
-                        'title' => _('Лиги'),
-                        'controller' => 'league',
-                        'action' => 'all',
-                        'route' => 'leagueAll',
-                        'pages' => array(
-                            array(
-                                'label' => _('F1 Online-Racing League'),
-                                'title' => _('F1 Online-Racing League'),
-                                'controller' => 'league',
-                                'action' => 'id',
-                                'route' => 'leagueIdAll',
-                                'params' => array(
-                                    'league_id' => '1'
-                                ),
-                            ),
-                            array(
-                                'label' => _('F1 RFT League'),
-                                'title' => _('F1 RFT League'),
-                                'controller' => 'league',
-                                'action' => 'id',
-                                'route' => 'leagueIdAll',
-                                'params' => array(
-                                    'league_id' => '2'
-                                ),
-                            ),
-                            array(
-                                'label' => _('Все лиги'),
-                                'title' => _('Все лиги'),
-                                'controller' => 'league',
-                                'action' => 'all',
-                                'route' => 'leagueAll',
-                            )
-                        )
-                    ),
-                    array(
-                        'controller' => 'user',
-                        'action' => 'all',
-                        'label' => _('Гонщики'),
-                        'title' => _('Гонщики'),
-                        'route' => 'userAll',
-                        'pages' => array(
-                            array(
-                                'label' => _('Пилот'),
-                                'title' => _('Пилот'),
-                                'controller' => 'user',
-                                'action' => 'id',
-                                'route' => 'user',
-                                'params' => array(
-                                )
-                            )
-                        )
-                    ),
-                    array(
-                        'label' => _('Новости'),
-                        'title' => _('Новости'),
-                        'controller' => 'post',
-                        'action' => 'all',
-                        'route' => 'postAll',
-                        'pages' => array(
-                            array(
-                                'label' => _('Статья'),
-                                'title' => _('Статья'),
-                                'controller' => 'post',
-                                'action' => 'id',
-                                'route' => 'post',
-                                'params' => array()
-                            )
-                        )
-                    ),
-                    array(
-                        'label' => _('Файлы'),
-                        'title' => _('Файлы'),
-                        'uri' => '',
-                        'pages' => array(
-                            array(
-                                'label' => _('Игры и Моды'),
-                                'controller' => 'post',
-                                'action' => 'all-by-type',
-                                'route' => 'postAllByType',
-                                'params' => array(
-                                    'post_type_id' => '3'
-                                ),
-                                'pages' => array(
-                                    array(
-                                        'label' => _('Игра'),
-                                        'title' => _('Игра'),
-                                        'controller' => 'post',
-                                        'action' => 'id',
-                                        'route' => 'post',
-                                        'params' => array()
-                                    )
-                                )
-                            ),
-                        )
-                    ),
-                    array(
-                        'label' => _('Форум'),
-                        'title' => _('Форум'),
-                        'uri' => 'http://f1orl.forum2x2.ru/',
-                    ),
-                    array(
-                        'label' => _('Чат'),
-                        'title' => _('Чат'),
-                        'controller' => 'chat',
-                        'action' => 'index',
-                        'route' => 'default',
-                    ),
-                    array(
-                        'label' => _('Админ. панель'),
-                        'title' => _('Панель администратора'),
-                        'controller' => 'admin',
-                        'action' => 'index',
-                        'route' => 'default',
-                        'pages' => array(
-                        )
-                    )
-                )
-            ),
-        );
-
         // Создаем новый контейнер на основе нашей структуры
         $main_menu_container = new Zend_Navigation($main_menu_pages);
-        $breadcrumb_container = new Zend_Navigation($breadcrumbs_pages);
+
         // Передаем контейнер в View
         $view->main_menu = $main_menu_container;
-        $view->breadcrumb = $breadcrumb_container;
 
         //return $main_menu_container;
-
         /* $this->bootstrap('layout');
           $view = $this->getResource('layout')->getView();
 

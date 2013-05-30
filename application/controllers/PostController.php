@@ -16,6 +16,7 @@ class PostController extends App_Controller_FirstBootController {
         $post_data = $post->getPostData($post_id);
 
         if ($post_data) {
+            $this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->title);
             $this->view->post = $post_data;
             $this->view->headTitle($post_data->title);
             $this->view->pageTitle($post_data->title);
@@ -33,9 +34,11 @@ class PostController extends App_Controller_FirstBootController {
 
         // pager settings
         $page_count_items = 10;
-        $page_range = 5;
+        $page_range = 10;
         $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
+        
+        $this->view->breadcrumb()->PostAll($page);
 
         $post = new Application_Model_DbTable_Post();
         $paginator = $post->getPublishedPostsPager($page_count_items, $page, $page_range, $items_order);

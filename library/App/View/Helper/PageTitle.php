@@ -1,6 +1,6 @@
 <?php
 
-class App_View_Helper_pageTitle extends Zend_View_Helper_Abstract {
+class App_View_Helper_PageTitle extends Zend_View_Helper_Abstract {
 
     private $_page_title;
 
