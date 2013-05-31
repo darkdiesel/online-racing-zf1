@@ -205,8 +205,8 @@
 }
     .button-like-wrapper{
     }
-        .button-like-wrapper div{
+        .button-like-wrapper .button-like{
             float:left;
             margin:0 10px;
-            width:100px;
+            width:90px;
         }

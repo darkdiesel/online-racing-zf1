@@ -149,6 +149,20 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
         return $this;
     }
     
+    public function Drivers($championship_id) {
+        $pages = array(
+            array(
+                'label' => 'Гонщики',
+                'title' => 'Гонщики',
+                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $championship_id), 'championship', true),
+                'pages' => array()
+            )
+        );
+        
+        $this->_add_pages[0]['pages'][0]['pages'][0]['pages'] = $pages;
+        return $this;
+    }
+    
     public function Championship($league_id, $championship_id, $championship_name, $page) {
         $pages = array(
             array(

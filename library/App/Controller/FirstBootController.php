@@ -7,9 +7,7 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
         $this->messageManager = $this->_helper->getHelper('MessageManager');
 
         // configure main menu
-        $uri = $this->_request->getPathInfo();
-        
-        
+        //$uri = $this->_request->getPathInfo();
 
         /* $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
           if ($activeNav != NULL) {
@@ -23,8 +21,6 @@ class App_Controller_FirstBootController extends Zend_Controller_Action {
         } else {
             Zend_Registry::set('breadcrumb', array('show' => TRUE));
             Zend_Registry::set('slider', array('show' => FALSE));
-
-             
         }
 
         if (Zend_Auth::getInstance()->hasIdentity()) {

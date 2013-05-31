@@ -1,10 +1,4 @@
-<?php if ($this->errMessage != "") { ?>
-    <div class="alert alert-error alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-        <?php echo $this->errMessage; ?>
-    </div>
-<?php } else { ?>
+<?php if ($this->championshipTeams) { ?>
     <?php foreach ($this->championshipTeams as $team): ?>
         <div class="article_item team_item">
             <div class="article_team_title">
