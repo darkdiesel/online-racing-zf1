@@ -32,7 +32,7 @@ require_once 'Zend/View/Helper/HtmlElement.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @link http://pl.gravatar.com/site/implement/url
  */
-class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
+class Zend_View_Helper_Gravatar1 extends Zend_View_Helper_HtmlElement
 {
 
     /**
@@ -103,7 +103,7 @@ class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
      * @param  array $attribs Attributes for image tag (title, alt etc.)
      * @return Zend_View_Helper_Gravatar
      */
-    public function gravatar($email = "", $options = array(), $attribs = array())
+    public function gravatar1($email = "", $options = array(), $attribs = array())
     {
         $this->setEmail($email);
         $this->setOptions($options);
@@ -306,7 +306,7 @@ class Zend_View_Helper_Gravatar extends Zend_View_Helper_HtmlElement
      *
      * @return string
      */
-    protected function _getAvatarUrl()
+    public function _getAvatarUrl()
     {
         $src = $this->_getGravatarUrl()
              . '/'

@@ -1,7 +1,8 @@
 /* Common class for item_block */
 .block_item{
     position:relative;
-    padding:10px;
+    margin:15px 0;
+    padding:7px;
 }
     .block_item_content{
         overflow:auto;
@@ -14,8 +15,7 @@
     background-image:linear-gradient(to bottom, #FFFFFF, #E6E6E6);
     display:block;
     border:2px solid #CACACA;
-    margin:20px 0;
-    padding:10px;
+    
 }
 .block_ui_rounded_3{
     border-radius:3px;
@@ -29,28 +29,73 @@
 .block_ui_rounded_10{
     border-radius:10px;
 }
+.block-width-135{
+    width:135px;
+}
+.block-width-290{
+    width:290px;
+}
+.block-width-300{
+    width:300px;
+}
+.block-width-390{
+    width:390px;
+}
+.block-inline{
+    display:inline-block;
+}
 
 /* Images and images wrapper */
+.image_wrapper_70{
+    width:70px;
+    max-height:70px;
+    margin:5px;
+}
+.image_wrapper_100{
+    width:100px;
+    max-height:100px;
+    margin:5px;
+}
 .image_wrapper_250_250{
     width:250px;
     max-height:250px;
-    margin:7px;
+    margin:5px;
 }
 .image_wrapper_250{
     width:250px;
     max-height:450px;
-    margin:7px;
+    margin:5px;
 }
+
+.image_wrapper_365{
+    width:365px;
+    max-height:450px;
+    margin:5px;
+}
+
 .image_wrapper_690{
     width:690px;
     max-height:740px;
-    margin:7px;
+    margin:5px;
 }
+    .image_size_32{
+        width:32px;
+    }
+    .image_size_70{
+        width:70px;
+    }
+    .image_size_100{
+        width:100px;
+    }
     .image_size_250{
         width:250px;
     }
     .image_size_690{
         width:690px;
+    }
+    .image_size_365{
+        width:365px;
+        max-height:450px
     }
     .image_size_250_250{
         width:250px;
@@ -140,6 +185,63 @@
         .team_user_full_info_item .user_image img{
             width:165px;
         }
+/* championship team drivers*/
+#default_championship_drivers{
+    
+}
+    #default_championship_drivers .block_item{
+        margin:5px 0;
+    }
+    #default_championship_drivers .team_item .team_name{
+        margin:5px;
+        text-align:center;
+        text-transform:uppercase;
+    }
+    #default_championship_drivers .team_item .team_number{
+        min-width:20px;
+        text-align:center;
+        margin:8px 5px 6px;
+        font-weight:bold;
+        font-size:15px;
+        padding:5px;
+        position:absolute;
+        left:0px;
+        top:-5px;
+    }
+        #default_championship_drivers .team_item .team_name a{
+            font-weight:bold;
+            color:#636262;
+            text-decoration:none;
+            font: bold 24px/30px sans-serif;
+            text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
+        }
+            #default_championship_drivers .team_item .team_name a:hover{
+                color:#D33B3D;
+            }
+    #default_championship_drivers .team_driver_item{
+        height:180px;
+        max-height:200px;
+        margin:5px 5px;
+    }
+        #default_championship_drivers .team_driver_item .team_driver_number, #default_championship_team-show .team_driver_number{
+            min-width:20px;
+            text-align:center;
+            margin:8px 5px 6px;
+            font-weight:bold;
+            font-size:15px;
+            padding:5px;
+            display:inline-block;
+        }
+        #default_championship_drivers .team_driver_item .team_driver_flag{
+            margin:6px 5px;
+            display:inline-block;
+        }
+        #default_championship_drivers .team_driver_item .team_driver_info{
+            font-size:11px;
+            clear:both;
+            overflow:hidden;
+            max-height:100px;
+        }
 /*post*/
 .post_id_logo_wrapper_690{
     width:auto;
@@ -161,6 +263,12 @@
 }
 .align-center-block{
     text-align:center;
+    margin:0 auto;
+    display:block;
+}
+.break-word-wrap{
+    word-wrap:break-word;
+    overflow:hidden;
 }
 
 /* Fonts styles */

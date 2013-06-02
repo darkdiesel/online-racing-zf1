@@ -14,13 +14,12 @@
                 <div class="img-polaroid align-center">
                     <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($this->championship->game_id)), 'postId', true); ?>" target="_blank" class = "btn btn-small btn-primary post_more" title="<?php echo $this->translate('Игра для проведения') ?>"><?php echo $this->translate('Игра') ?></a>
                     <br/><br/>
-                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'championship_id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-success post_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
-                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'championship_id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-warning post_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
-                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-info post_more" title="<?php echo $this->translate('Гонщики') ?>"><?php echo $this->translate('Гонщики') ?></a>
+                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'league_id' => $this->escape($this->championship->league_id), 'championship_id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-success post_more" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
+                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'league_id' => $this->escape($this->championship->league_id), 'championship_id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-warning post_more" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
+                    <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->escape($this->championship->league_id), 'championship_id' => $this->escape($this->championship->id)), 'championship', true); ?>" class = "btn btn-small btn-info post_more" title="<?php echo $this->translate('Гонщики') ?>"><?php echo $this->translate('Гонщики') ?></a>
                     <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($this->championship->post_id)), 'postId', true); ?>" target="_blank" class = "btn btn-small btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
                 </div>
             </div>
-
             <div class="img-polaroid championship_id_info_block">
                 <table class="table table-striped font-veradana font-size-11">
                     <tbody>

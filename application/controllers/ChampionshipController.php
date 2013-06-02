@@ -32,7 +32,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $page_range = 5;
                 $items_order = 'DESC';
                 $page = $request->getParam('page');
-                
+
                 $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
                         ->championship($league_id, $championship_id, $championship_data->name, $page);
 
@@ -337,41 +337,63 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
     public function teamShowAction() {
         $request = $this->getRequest();
+        $league_id = (int) $request->getParam('league_id');
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
 
-        $championship = new Application_Model_DbTable_Championship();
 
-        if ($championship->checkExistChampionshipById($championship_id)) {
-            $championship_team = new Application_Model_DbTable_ChampionshipTeam();
-            if ($championship_team->checkTeamExist($championship_id, $team_id)) {
-                $championship_data = $championship->getChampionshipNameById($championship_id);
+        $league = new Application_Model_DbTable_League();
+        $league_data = $league->getLeagueData($league_id);
 
+        if ($league_data) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+            $this->view->headTitle($this->view->translate('Чемпионат'));
+
+            $this->view->league_data = $league_data;
+
+            $championship = new Application_Model_DbTable_Championship();
+
+            if ($championship->checkExistChampionshipById($championship_id)) {
                 $championship_team = new Application_Model_DbTable_ChampionshipTeam();
-                $championship_team_data = $championship_team->getTeamData($championship_id, $team_id);
+                if ($championship_team->checkTeamExist($championship_id, $team_id)) {
+                    $championship_data = $championship->getChampionshipNameById($championship_id);
 
-                //head title
-                $this->view->headTitle("{$championship_data->name} :: {$this->view->translate('Команда')} :: {$championship_team_data->name}");
-                $this->view->pageTitle("{$this->view->translate('Команда')} :: {$championship_team_data->name}");
+                    $championship_team = new Application_Model_DbTable_ChampionshipTeam();
+                    $championship_team_data = $championship_team->getTeamData($championship_id, $team_id);
+                    
+                    $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
+                            ->championship($league_id, $championship_id, $championship_data->name, '1')
+                            ->drivers($league_id, $championship_id)->championship_team($league_id, $championship_id, $team_id, $championship_team_data->name);
 
-                $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
-                $championship_team_driver_data = $championship_team_driver->getChampionshipTeamDrivers($championship_id, $team_id);
+                    //head title
+                    $this->view->headTitle("{$championship_data->name} :: {$this->view->translate('Команда')} :: {$championship_team_data->name}");
+                    $this->view->pageTitle("{$this->view->translate('Команда')} :: {$championship_team_data->name}");
 
-                $this->view->team_data = $championship_team_data;
-                $this->view->team_driver_data = $championship_team_driver_data;
+                    $championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
+                    $championship_team_driver_data = $championship_team_driver->getChampionshipTeamDrivers($championship_id, $team_id);
+
+                    $this->view->team_data = $championship_team_data;
+                    $this->view->team_driver_data = $championship_team_driver_data;
+                } else {
+                    //error message if team for this championship not found
+                    $this->messageManager->addError("{$this->view->translate('Команда в чемпионате не существует!')}");
+                    //head title
+                    $this->view->headTitle("{$this->view->translate('Команда')} :: {$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не существует!')}");
+                    $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не существует!')}");
+                }
             } else {
-                //error message if team for this championship not found
-                $this->messageManager->addError("{$this->view->translate('Команда в чемпионате не существует!')}");
+                //error message if championship not found
+                $this->messageManager->addError("{$this->view->translate('Чемпионат не существует!')}");
                 //head title
-                $this->view->headTitle("{$this->view->translate('Команда')} :: {$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не существует!')}");
-                $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не существует!')}");
+                $this->view->headTitle("{$this->view->translate('Команда')} :: {$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не существует!')}");
+                $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не существует!')}");
             }
         } else {
-            //error message if championship not found
-            $this->messageManager->addError("{$this->view->translate('Чемпионат не существует!')}");
+            //error message if league not found
+            $this->messageManager->addError($this->view->translate('Запрашиваемая лига не существует!'));
             //head title
-            $this->view->headTitle("{$this->view->translate('Команда')} :: {$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не существует!')}");
-            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не существует!')}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
         }
     }
 
@@ -597,13 +619,14 @@ class ChampionshipController extends App_Controller_FirstBootController {
         $league_id = (int) $request->getParam('league_id');
         $championship_id = $request->getParam('championship_id');
 
-
         $league = new Application_Model_DbTable_League();
         $league_data = $league->getLeagueData($league_id);
 
         if ($league_data) {
             $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
+
+            $this->view->league_data = $league_data;
 
             $championship = new Application_Model_DbTable_Championship();
 
@@ -620,8 +643,9 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
                 if ($championship_team_data) {
                     $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
-                        ->championship($league_id, $championship_id, $championship_data->name, '1')->drivers($championship_id);
-                    
+                            ->championship($league_id, $championship_id, $championship_data->name, '1')
+                            ->drivers($league_id, $championship_id);
+
                     $this->view->championshipTeams = $championship_team_data;
                 } else {
                     //error message if team in the championship not found
@@ -921,7 +945,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Командный зачет'));
 
         $request = $this->getRequest();
-        $championship_id = $request->getParam('championship_id');
+            $championship_id = $request->getParam('championship_id');
     }
 
 }

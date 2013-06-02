@@ -102,7 +102,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
                 'pages' => array()
             )
         );
-        
+
         $this->_add_pages[0]['pages'][0]['pages'] = $pages;
         return $this;
     }
@@ -120,7 +120,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
         $this->_add_pages[0]['pages'] = $pages;
         return $this;
     }
-    
+
     public function User($user_id, $user_login) {
         $pages = array(
             array(
@@ -130,11 +130,11 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
                 'pages' => array()
             )
         );
-        
+
         $this->_add_pages[0]['pages'][0]['pages'] = $pages;
         return $this;
     }
-    
+
     public function UserAll($page) {
         $pages = array(
             array(
@@ -148,21 +148,35 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
         $this->_add_pages[0]['pages'] = $pages;
         return $this;
     }
-    
-    public function Drivers($championship_id) {
+
+    public function Championship_Team($league_id, $championship_id, $team_id, $team_name) {
+        $pages = array(
+            array(
+                'label' => $team_name,
+                'title' => $team_name,
+                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'team-show', 'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true),
+                'pages' => array()
+            )
+        );
+
+        $this->_add_pages[0]['pages'][0]['pages'][0]['pages'][0]['pages'][0]['pages'] = $pages;
+        return $this;
+    }
+
+    public function Drivers($league_id, $championship_id) {
         $pages = array(
             array(
                 'label' => 'Гонщики',
                 'title' => 'Гонщики',
-                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'drivers', 'championship_id' => $championship_id), 'championship', true),
+                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true),
                 'pages' => array()
             )
         );
-        
-        $this->_add_pages[0]['pages'][0]['pages'][0]['pages'] = $pages;
+
+        $this->_add_pages[0]['pages'][0]['pages'][0]['pages'][0]['pages'] = $pages;
         return $this;
     }
-    
+
     public function Championship($league_id, $championship_id, $championship_name, $page) {
         $pages = array(
             array(
@@ -172,11 +186,11 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
                 'pages' => array()
             )
         );
-        
+
         $this->_add_pages[0]['pages'][0]['pages'][0]['pages'] = $pages;
         return $this;
     }
-    
+
     public function League($league_id, $league_name, $page) {
         $pages = array(
             array(
@@ -186,11 +200,11 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
                 'pages' => array()
             )
         );
-        
+
         $this->_add_pages[0]['pages'][0]['pages'] = $pages;
         return $this;
     }
-    
+
     public function LeagueAll($page) {
         $pages = array(
             array(
