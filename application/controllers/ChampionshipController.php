@@ -672,6 +672,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
     public function driverAddAction() {
         $request = $this->getRequest();
+        $league_id = $request->getParam('league_id');
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
 
@@ -691,8 +692,8 @@ class ChampionshipController extends App_Controller_FirstBootController {
                 $this->view->pageTitle("{$this->view->translate('Команда')} :: {$championship_team_data->name} :: {$this->view->translate('Добавить гонщика')}");
 
                 $form = new Application_Form_Championship_Driver_Add();
-                $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'driver-add', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
-                $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'championship', 'action' => 'team-show', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true)}\"");
+                $form->setAction($this->view->url(array('controller' => 'championship', 'action' => 'driver-add', '$league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'championship', 'action' => 'team-show', '$league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true)}\"");
 
                 $user = new Application_Model_DbTable_User();
 
@@ -833,6 +834,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
     public function driverEditAction() {
         $request = $this->getRequest();
+        $league_id = $request->getParam('championship_id');
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
         $user_id = $request->getParam('user_id');
@@ -901,7 +903,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
                                 $championship_team_driver->update($new_championship_team_driver_data, $championship_where);
 
                                 $this->messageManager->addSuccess("{$this->view->translate("Данные гонщика <strong>\"{$form->driver->getMultiOption($form->getValue('driver'))}\"</strong> успешно обновлены в комаде <strong>\"{$championship_team_data->name}\"</strong>")}");
-                                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team-show', 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
+                                $this->redirect($this->view->url(array('controller' => 'championship', 'action' => 'team-show', 'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true));
                             }
                         } else {
                             $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
