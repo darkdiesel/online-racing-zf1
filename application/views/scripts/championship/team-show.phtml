@@ -1,7 +1,7 @@
 <?php if ($this->team_data) { ?>
     <div class="team_item block_item">
         <?php
-        echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->team_data->championship_id, $this->team_data->team_id);
+        echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id);
         ?>
         <div class="block_item_content">
             <div>
@@ -21,7 +21,7 @@
                 ?>
                 <div class="team_user_full_info_item block_ui_gray block_item">
                     <?php
-                    echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
+                    echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
                     ?>
                     <div class="block_item_content">
                         <div class="article_title team_user_full_info_name">
