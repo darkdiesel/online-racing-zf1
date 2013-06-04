@@ -316,8 +316,8 @@ class PostController extends App_Controller_FirstBootController {
         $article_type_data = $article_type->getName($article_type_id);
 
         if ($article_type_data) {
-            $this->view->headTitle("{$this->view->translate('Тип контента')} :: {$article_type_data}");
-            $this->view->pageTitle("{$this->view->translate('Тип контента')} :: {$article_type_data}");
+            $this->view->headTitle("{$this->view->translate('Категория контента')} :: {$article_type_data}");
+            $this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$article_type_data}");
 
             // setup pager settings
             $page_count_items = 10;

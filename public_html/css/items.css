@@ -2,20 +2,37 @@
 .block_item{
     position:relative;
     margin:15px 0;
-    padding:7px;
+    
 }
+    .block_item .block_item_header{
+        background-image:linear-gradient(to bottom, #3B3B3B, #292929);
+        background-color:#3B3B3B;
+        font-family:Verdana;
+        color:#FFFFFF;
+    }
+        .block_item .block_item_header .block_item_title{
+            padding:10px;
+        }
+        .block_item .block_item_header .block_item_title, .block_item .block_item_header .block_item_title a{
+            color:#FFFFFF;
+            font-size:14px;
+            font-weight:bold;
+        }
+            
     .block_item_content{
         overflow:auto;
+        padding:7px;
     }
-
 /* UI for blocks*/
 .block_ui_gray{
     border:1px solid #CACACA;
     background-color:#EDEDED;
-    background-image:linear-gradient(to bottom, #FFFFFF, #E6E6E6);
+    background-image:linear-gradient(to bottom, #FFFFFF, #E0E0E0);
     display:block;
-    border:2px solid #CACACA;
-    
+    border:2px solid #CBCBCB;
+}
+.block-ui-border-dark{
+    border:2px solid #959595;
 }
 .block_ui_rounded_3{
     border-radius:3px;
@@ -44,7 +61,15 @@
 .block-inline{
     display:inline-block;
 }
-
+/**/
+.block-content-text{
+    color:#424242;
+    font-family:"Trebuchet MS",Arial,Helvetica,sans-serif;
+    margin:7px 0;
+}
+.block-content-button-more{
+    margin-right:20px;
+}
 /* Images and images wrapper */
 .image_wrapper_70{
     width:70px;
@@ -54,6 +79,21 @@
 .image_wrapper_100{
     width:100px;
     max-height:100px;
+    margin:5px;
+}
+.image_wrapper_150_150{
+    width:150px;
+    max-height:150px;
+    margin:5px;
+}
+.image_wrapper_200_200{
+    width:200px;
+    max-height:200px;
+    margin:5px;
+}
+.image_wrapper_210_210{
+    width:210px;
+    max-height:210px;
     margin:5px;
 }
 .image_wrapper_250_250{
@@ -66,15 +106,18 @@
     max-height:450px;
     margin:5px;
 }
-
 .image_wrapper_365{
     width:365px;
     max-height:450px;
     margin:5px;
 }
-
 .image_wrapper_690{
     width:690px;
+    max-height:740px;
+    margin:5px;
+}
+.image_wrapper_700{
+    width:700px;
     max-height:740px;
     margin:5px;
 }
@@ -86,6 +129,12 @@
     }
     .image_size_100{
         width:100px;
+    }
+    .image_size_150{
+        width:150px;
+    }
+    .image_size_200{
+        width:200px;
     }
     .image_size_250{
         width:250px;
@@ -117,7 +166,7 @@
 }
     .configure_block_item_links .configure_block_item_link{
         opacity:0.5;
-        color:#2F2F2F;
+        color:#B39434;
     }
     .configure_block_item_links ul{
         margin:0;
@@ -138,7 +187,6 @@
     border-top:1px solid #E6E0E0;
     font-size:10px;
     color:#969696;
-    text-align:right;
     clear:both;
     margin-top:10px;
 }
@@ -149,9 +197,25 @@
             content:"|";
             margin:0 5px;
         }
+.block_item_header .block_item_info_header{
+    background-color:#C5C5C5;
+    background-image:linear-gradient(to bottom, #B0B0B0, #CFCBCB);
+}        
+.block_item_info_header{
+    font-size:9px;
+    color:#7D270D;
+    padding:2px 5px;
+}
+    .block_item_info_header .block_item_info_header_item{
+        display:inline-block;
+        margin:0 7px;
+    }
+        .block_item_info_header .block_item_info_header_item, .block_item_info_header .block_item_info_header_item a{
+            color:#7D270D;
+        }
         
 /* League */
-.league_all_logo_wrapper_250_250{
+.league_all_logo_wrapper_200_200{
     margin:0 15px 15px 0;
 }
 .league_id_logo_wrapper_250{
@@ -226,7 +290,7 @@
         #default_championship_drivers .team_driver_item .team_driver_number, #default_championship_team-show .team_driver_number{
             min-width:20px;
             text-align:center;
-            margin:8px 5px 6px;
+            margin:0px;
             font-weight:bold;
             font-size:15px;
             padding:5px;
@@ -254,6 +318,15 @@
     width:auto;
     max-width:690px;
 }
+/* Championship team driver*/
+#default_championship_team-show{
+    
+}
+    #default_championship_team-show .team_show_logo_wrapper_210{
+        position:relative;
+        top:-50px;
+        right:-100px;
+    }
 /* additional common styles */
 .overflow-hide{
     overflow:hidden;
@@ -292,6 +365,12 @@
 }
     .font-color-black a{
         color:#000
+    }
+.font-color-gray{
+    color:#676464;
+}
+    .font-color-gray a{
+        color:#676464;
     }
 /* tables styles */
 .cell-text-align-vert{

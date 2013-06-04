@@ -121,7 +121,7 @@ $(document).ready(function() {
 
     $(".configure_block_item_links").hover(function(o) {
         $(this).parent(".block_item").css({
-            "outline": "1px dashed red"
+            "outline": "2px dashed red"
         });
     }, function(o) {
         $(this).parent(".block_item").css({
@@ -132,7 +132,7 @@ $(document).ready(function() {
     $(".configure_block_item_links .configure_block_item_link").click(function(o) {
         $(this).parent(".configure_block_item_links").children(".dropdown-menu").slideDown();
     });
-    
+
     $(".block_item").hover(function(o) {
         //$(this).children(".configure_block_item_links").show();
     }, function(o) {

@@ -115,7 +115,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                                 ->from(array('a' => $this->_name), 'id')
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
                                 ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
-                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->columns('*')
                                 ->where('publish = 1')
                                 ->order('a.id ' . $order)
         );
@@ -158,7 +158,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                                 ->from(array('a' => $this->_name), 'id')
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
                                 ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
-                                ->columns(array('a.id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->columns('*')
                                 ->where('article_type_id=' . $article_type)
                                 ->where('publish = 1')
                                 ->order('a.id ' . $order)

@@ -5,11 +5,15 @@
         ?>
         <div class="block_item_content">
             <div>
-                <?php if ($this->escape($this->team_data->url_logo_car) != '') { ?>
-                    <img class="img-polaroid article_team_car_image_x" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
+                <?php if ($this->escape($this->team_data->url_logo_car)) { ?>
+                    <div class="img-polaroid img-circle align-center team_show_car_wrapper_700 image_wrapper_700 overflow-hide">
+                        <img class="img-polaroid img-circle image_size_690" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
+                    </div>
                 <?php } ?>
                 <?php if ($this->escape($this->team_data->url_logo) != '') { ?>
-                    <img class="img-polaroid article_team_logo_image" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
+                    <div class="img-polaroid img-circle align-center team_show_logo_wrapper_210 image_wrapper_210_210 overflow-hide">
+                        <img class="img-polaroid img-circle image_size_200" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
+                    </div>
                 <?php } ?>
             </div>
         </div>
@@ -23,22 +27,31 @@
                     <?php
                     echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
                     ?>
-                    <div class="block_item_content">
-                        <div class="article_title team_user_full_info_name">
-                            <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
+                    <div class="block_item_header">
+                        <div class="block_item_title">
+                            <span class="badge badge-warning team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
+                            <i class="icon-user"></i>
                             <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
                                 <?php echo $this->escape($driver->user_name) ?>
                                 <?php echo $this->escape($driver->user_surname) ?>
                                 (<?php echo $driver->country_abbreviation ?>)
-                                <img class="user_flag_x" src="<?php echo $driver->country_url_image_glossy_wave ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
+                                <img class="image_size_40_40" src="<?php echo $driver->country_url_image_glossy_wave ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
                             </a>
                         </div>
-                        <div class="user_image pull-left">
+                        <div class="block_item_info_header">
+                            <div class="content_category block_item_info_header_item">
+                                <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+                                <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'all', 'page' => '1'), 'userAll', true) ?>" target="_blank"><?php echo $this->translate('Гонщики'); ?></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block_item_content">
+                        <div class="img-polaroid team_drivers_logo_wrapper_200 image_wrapper_200 overflow-hide pull-left">
                             <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
-                                <?php echo $this->setupUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
+                                <?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'image_size_200', 200); ?>
                             </a>
                         </div>
-                        <div class="teams_driver_info no_width">
+                        <div class="teams_driver_info no_width block-content-text">
                             <table class="table table-condensed">
                                 <tr>
                                     <td><span class="bold_text"><?php echo $this->translate("Имя"); ?>: </span></td>

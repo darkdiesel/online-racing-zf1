@@ -514,6 +514,9 @@ class ChampionshipController extends App_Controller_FirstBootController {
         $league_id = $request->getParam('league_id');
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
+        
+        $league = new Application_Model_DbTable_League();
+        $league_data = $league->getLeagueData($league_id);
 
         if ($league_data) {
             $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");

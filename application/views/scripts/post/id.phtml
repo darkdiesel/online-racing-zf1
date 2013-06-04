@@ -4,14 +4,14 @@
         echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($this->post->id));
         ?>
         <div class="block_item_content">
-            <?php if ($this->post->image != '') { ?>
+            <?php if ($this->post->image) { ?>
                 <div class="align-center-block">
                     <div class="img-polaroid align-center post_id_logo_wrapper_690 image_wrapper_690 overflow-hide">
                         <img class="post_id_logo image_size_690" src="<?php echo $this->escape($this->post->image); ?>">
                     </div>
                 </div>
             <?php } ?>
-            <div class="article_text">
+            <div class="block-content-text">
                 <?php
                 echo $this->RenderContentTypeText($this->post->text, $this->post->content_type_name);
                 ?>

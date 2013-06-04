@@ -1,43 +1,49 @@
 <?php
 if ($this->paginator) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
-    $bbcode = Zend_Markup::factory('Bbcode');
     ?>
-
     <?php foreach ($this->paginator as $post): ?>
-        <div class="post_item block_item block_ui_gray">
+        <div class="post_item block_item block_ui_gray block-ui-border-dark">
             <?php
             echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($post['id']));
             ?>
-            <div class="block_item_content">
-                <div class="article_title">
-                    <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>"><?php echo $this->escape($post['title']); ?></a>
+            <div class="block_item_header">
+                <div class="block_item_title">
+                    <i class="icon-book"></i>
+                    <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>"><?php echo $this->escape($post['title']); ?>                    </a>
                 </div>
+                <div class="block_item_info_header">
+                    <div class="content_category block_item_info_header_item">
+                        <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+                        <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'article_type_id' => $this->escape($post['article_type_id']), 'page' => '1'), 'postAllByType', true) ?>" target="_blank"><?php echo $this->escape($post['article_type_name']); ?></a>
+                    </div>
+                    <div class="post_author block_item_info_header_item">
+                        <span class="font-bold font-color-black"><i class="icon-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
+                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
+                    </div>
+                </div>
+            </div>
+            <div class="block_item_content">
                 <?php if ($this->escape($post['image']) != '') { ?>
-                    <div class="post_all_logo_wrapper_250_250 image_wrapper_250_250 img-polaroid pull-left overflow-hide">
-                        <img class="post_all_logo_250 image_size_250" src="<?php echo $this->escape($post['image']); ?>">
+                    <div class="post_all_logo_wrapper_200_200 image_wrapper_200_200 img-polaroid pull-left overflow-hide">
+                        <img class="post_all_logo_250 image_size_200" src="<?php echo $this->escape($post['image']); ?>">
                     </div>
                 <?php } ?>
-                <div class="article_text">
+                <div class="block-content-text">
                     <?php
                     if ($post['annotation'] != '') {
                         echo $this->RenderContentTypeText($this->escape($post['annotation']), 'bbcode');
                     } else {
-                        echo $bbcode->render((string) ($this->truncate($this->escape($post['text']))->toLength(250)));
+                        echo $this->RenderContentTypeText($this->escape($post['text']), 'bbcode', 250);
                     }
                     ?>
                 </div>
-                <div class="article_controls">
-                    <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>" class = "btn btn-small btn-inverse article_more"><?php echo $this->translate('Подробнее...') ?></a>
+                <div class="pull-right">
+                    <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>" class = "btn btn-small btn-inverse block-content-button-more">
+                        <?php echo $this->translate('Читать дальше') ?> <i class="icon-double-angle-right"></i>
+                    </a>
                 </div>
                 <div class="post_info block_item_info_bottom">
-                    <div class="content_category block_item_info_bottom_item">
-                        <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->escape($post['article_type_name']); ?>
-                    </div>
-                    <div class="post_author block_item_info_bottom_item">
-                        <span class="font-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
-                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
-                    </div>
                     <div class="post_views block_item_info_bottom_item">
                         <span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($post['views']); ?>
                     </div>
