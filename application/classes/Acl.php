@@ -60,15 +60,21 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('game/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('game/delete'), 'admin_allow');
 
-        $this->add(new Zend_Acl_Resource('championship/edit'), 'admin_allow');
-
         $this->add(new Zend_Acl_Resource('event/add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('event/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('event/delete'), 'admin_allow');
 
+        $this->add(new Zend_Acl_Resource('championship/add'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('championship/edit'), 'admin_allow');
+        
+        $this->add(new Zend_Acl_Resource('championship/team-add'), 'admin_allow');
+        $this->add(new Zend_Acl_Resource('championship/team-edit'), 'admin_allow');
+        
         $this->add(new Zend_Acl_Resource('championship/driver-add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('championship/driver-edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('championship/driver-delete'), 'admin_allow');
+        
+        $this->add(new Zend_Acl_Resource('race/add'), 'admin_allow');
 
         // master resources
         $this->add(new Zend_Acl_Resource('master_allow'));
@@ -87,13 +93,7 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('country/id'), 'master_allow');
         $this->add(new Zend_Acl_Resource('country/add'), 'master_allow');
 
-        $this->add(new Zend_Acl_Resource('championship/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('championship/delete'), 'master_allow');
-        
-        $this->add(new Zend_Acl_Resource('championship/team-add'), 'master_allow');
-        $this->add(new Zend_Acl_Resource('championship/team-edit'), 'master_allow');
-        
-        $this->add(new Zend_Acl_Resource('race/add'), 'master_allow');
 
         //Выставляем права, по-умолчанию всё запрещено
         //this->deny('user', 'user_deny', 'show');

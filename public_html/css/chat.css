@@ -26,6 +26,7 @@
     }
     #chat #userChat .form_actions_group{
         display:inline-block;
+        margin-top:10px;
     }
         #chat #userChat .submit{
             

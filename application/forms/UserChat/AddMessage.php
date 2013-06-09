@@ -23,6 +23,7 @@ class Application_Form_UserChat_AddMessage extends Zend_Form {
             'placeholder' => $this->translate('Текст сообщения'),
             'cols' => 28,
             'rows' => 2,
+            'class' => 'ckeditor-chat',
             'maxlength' => 500,
             'required' => true,
             'filters' => array('StripTags', 'StringTrim'),

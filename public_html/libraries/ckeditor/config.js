@@ -9,6 +9,10 @@ CKEDITOR.editorConfig = function(config) {
     // config.uiColor = '#AADC6E';
 
     // The toolbar groups arrangement, optimized for two toolbar rows.
+    config.toolbar_chat = [
+        ['Source', 'Cut', 'Copy', 'Smiley'],
+    ];
+
     config.toolbarGroups = [
         {
             name: 'clipboard',
@@ -57,9 +61,16 @@ CKEDITOR.editorConfig = function(config) {
         }
     ];
 
+    config.toolbar = 'chat';
+
+
     // Remove some buttons, provided by the standard plugins, which we don't
     // need to have in the Standard(s) toolbar.
     config.removeButtons = 'Underline,Subscript,Superscript';
+
+    //config.removePlugins = 'iframe';
+    config.extraPlugins = 'oembed';
+    config.oembed_ShowIframePreview = true;
 
     //config for wordcount plugin
     config.wordcount = {
@@ -70,7 +81,10 @@ CKEDITOR.editorConfig = function(config) {
     //config for smiley plugin
     config.smiley_columns = 6;
     config.smiley_path = 'http://online-racing.net/img/smileys/';
-    config.smiley_images = ['blum1.gif', 'biggrin.gif', 'smile.gif', 'sad.gif'];
+    config.smiley_images =
+            [
+                'blum1.gif', 'biggrin.gif', 'smile.gif', 'sad.gif'
+            ];
     config.smiley_descriptions =
             [
                 'blum', 'biggrin', 'smiley', 'sad'
