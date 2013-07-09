@@ -1,27 +1,27 @@
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <?php echo $this->headTitle() ?>
-        <?php echo $this->headMeta() ?>
-        <?php echo $this->headLink() ?>
-        <?php echo $this->headStyle() ?>
-        <?php echo $this->minifyHeadLink() ?>
-        <?php echo $this->headScript() ?>
-        <?php //echo $this->minifyHeadScript() ?>
+	<?php echo $this->headTitle() ?>
+	<?php echo $this->headMeta() ?>
+	<?php echo $this->headLink() ?>
+	<?php echo $this->headStyle() ?>
+	<?php echo $this->minifyHeadLink() ?>
+	<?php echo $this->headScript() ?>
+	<?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
         <!-- HeadLine -->
-        <?php echo $this->render("head_line.phtml"); ?>
+	<?php echo $this->render("head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
-                <?php
-                $main_slider = Zend_Registry::get('slider');
-                if ($main_slider['show']) {
-                    echo $this->render("slider.phtml");
-                }
-                ?>
+		<?php
+		$main_slider = Zend_Registry::get('slider');
+		if ($main_slider['show']) {
+		    echo $this->render("slider.phtml");
+		}
+		?>
                 <div id="header">
-                    <?php echo $this->render("header.phtml") ?>
+		    <?php echo $this->render("header.phtml") ?>
                 </div>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">
@@ -29,59 +29,64 @@
                         <div id="content">
                             <div id="page_title_wrapper">
                                 <div class="page_title"><?php echo $this->pageTitle() ?></div>
-                                <?php
-                                $breadcrumb = Zend_Registry::get('breadcrumb');
-                                if ($breadcrumb['show']) {
-                                    echo $this->render("breadcrumb.phtml");
-                                }
-                                ?>
+				<?php
+				$breadcrumb = Zend_Registry::get('breadcrumb');
+				if ($breadcrumb['show']) {
+				    echo $this->render("breadcrumb.phtml");
+				}
+				?>
                             </div>
-                            <?php echo $this->showMessages(); ?>
-                            <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}");?>" class="page">
+			    <?php echo $this->showMessages(); ?>
+                            <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
                                 <div class="page_content">
-                                    <?php echo $this->layout()->content ?>
+				    <?php echo $this->layout()->content ?>
                                 </div>
                             </div>
                         </div>
                         <!-- Left sidebar -->
                         <div id="left_sidebar">
-                            <?php echo $this->render("left_sidebar.phtml") ?>
+			    <?php echo $this->render("left_sidebar.phtml") ?>
                         </div>
                     </div>
                 </div>
                 <div id="footer">
-                    <?php echo $this->render("footer.phtml") ?>
+		    <?php echo $this->render("footer.phtml") ?>
                 </div>
             </div>
-            <?php
-            if ($this->back_to_top_btn) {
-                echo $this->render("blocks/back_to_top_btn.phtml");
-            }
-            ?>
-            <?php
-            if ($this->share_block) {
-                echo $this->render("blocks/share_block.phtml");
-            }
-            ?>
-            
-        </div>
-        <?php
-            if ($this->slide_out_tabs_block) {
-                echo $this->render("blocks/slide_out_tabs_block.phtml");
-            }
-            ?>
-        <script type="text/javascript">             var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-32674101-2']);
-            _gaq.push(['_trackPageview']);
+	    <?php
+	    if ($this->back_to_top_btn) {
+		echo $this->render("blocks/back_to_top_btn.phtml");
+	    }
+	    ?>
+	    <?php
+	    if ($this->share_block) {
+		echo $this->render("blocks/share_block.phtml");
+	    }
+	    ?>
 
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
+        </div>
+	<?php
+	if ($this->page_scroller_block) {
+	    echo $this->render("blocks/page_scroller_block.phtml");
+	}
+	?>
+	<?php
+	if ($this->slide_out_tabs_block) {
+	    echo $this->render("blocks/slide_out_tabs_block.phtml");
+	}
+	?>
+        <script type="text/javascript">             var _gaq = _gaq || [];
+	    _gaq.push(['_setAccount', 'UA-32674101-2']);
+	    _gaq.push(['_trackPageview']);
+
+	    (function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	    })();
         </script>
     </body>
 </html>

@@ -1,16 +1,4 @@
 $(document).ready(function() {
-    /*jQuery(function($){
-     // lavalamp main menu plugin
-     $(function() {
-     $("#header #box_main_menu #main_menu").lavaLamp({
-     fx: "backout",
-     speed: 600
-     });
-     });
-     });*/
-
-
-
     // Clear button for .x_field field
     jQuery(function($) {
         $.fn.addXbtn = (function(e) {
