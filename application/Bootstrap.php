@@ -87,7 +87,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->share_block = false; // share block
         $view->back_to_top_btn = false; // back to top block
         $view->slide_out_tabs_block = true; // back to top block
-	$view->page_scroller_block = true; // back to top block
+        $view->page_scroller_block = true; // back to top block
 
         /* [LEFT SIDEBAR] */
         $view->ls_next_event_block = true; // count down block
@@ -140,11 +140,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/articles.css'));
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/items.css'));
         $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/user.css'));
-	
-	if ($view->page_scroller_block){
-	    $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/page_srcoller.css'));
-	    $view->headScript()->appendFile($view->baseUrl("js/page_scroller.js"));
-	}
         // [COMMON CSS]
         //$view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
         //$view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
