@@ -157,6 +157,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             $view->headScript()->appendFile($view->baseUrl("js/slide_out_tabs_block.js"));
         }
 
+	if ($view->page_scroller_block) {
+            $view->headScript()->appendFile($view->baseUrl("js/page_scroller.js"));
+	    $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/page_srcoller.css'));
+        }
+
         //$view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
         // Share block script
         if ($view->share_block) {
