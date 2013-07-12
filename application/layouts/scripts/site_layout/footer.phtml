@@ -1,0 +1,34 @@
+<div class="footer_box footer_left">
+    <div class="footer_logo">
+        <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true) ?>"><img src="<?php echo $this->baseUrl('img/logo_190.png'); ?>" alt="<?php echo $this->translate('Online-Racing.net') ?>"></a>
+    </div>
+    <div><?php echo $this->translate('Online-Racing.Net') ?></div>
+</div>
+<div class="footer_box footer_center">
+    <?php
+    if ($this->ft_menu) {
+	echo $this->render("site_layout/footer/ft_menu.phtml");
+    }
+    ?>
+</div>
+<div class="footer_box footer_right">
+    <div class="socialNetworks_slogan">
+	<?php echo $this->translate('Наши ссылки в социальных сетях') ?>:
+    </div>
+    <?php
+    if ($this->ft_socialNetworks_block) {
+	echo $this->render("site_layout/footer/ft_socialNetworks_block.phtml");
+    }
+    ?>
+</div>
+<div class="footer_bootom">
+    <div class="copyright">
+	<?php echo $this->translate('Версия сайта') ?> 0.13.10b<br>
+        2012-2013 © Online-Racing.net
+    </div>
+    <?php
+    if ($this->ft_user_counters_block) {
+	echo $this->render("site_layout/footer/ft_user_counters_block.phtml");
+    }
+    ?>
+</div>

@@ -89,17 +89,21 @@ class UserController extends App_Controller_FirstBootController {
                             $auth->getStorage()->write($storage_data);
 
                             // Receive Zend_Session_Namespace object
-                            require_once('Zend/Session/Namespace.php');
-                            $session = new Zend_Session_Namespace('Zend_Auth');
-                            // Set the time of user logged in
-                            $session->setExpirationSeconds(24 * 3600);
-
+                            //require_once('Zend/Session/Namespace.php');
+                            
+			    // Set the time of user logged in
                             if ($form->remember->getValue() == 1) {
-                                Zend_Session::rememberMe(60 * 60 * 24 * 5);
+				$session = new Zend_Session_Namespace('Zend_Auth');
+				$session->setExpirationSeconds(60*60*48);
+				
+                                Zend_Session::rememberMe(60*60*48);
+				    Zend_Session::setOptions(array(
+					'cookie_lifetime' => 60*60*48,
+					'gc_maxlifetime' => 60*60*48));
                             } else {
                                 Zend_Session::forgetMe();
                             }
-
+			    
                             $user = new Application_Model_DbTable_User();
 
                             $user_ip = $this->_helper->getHelper('UserServerData')->GetUserIp();

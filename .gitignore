@@ -1,11 +1,12 @@
+/nbproject/
+/nbproject/private/
+/.idea/
 /idea/
 /data/logs/application.log
 /data/logs/errors.log
-/nbproject/private/
 /public_html/img/data/flags
 /public_html/img/data/logos/championships
 /public_html/img/data/logos/leagues
 /public_html/img/data/logos/teams
 /public_html/img/data/users/avatars
 /public_html/img/data/track_schemes
-/.idea/

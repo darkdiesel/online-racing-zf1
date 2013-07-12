@@ -1,0 +1,16 @@
+<div id="headline">
+    <div id="headline_wraper">
+        <!-- User ToolBar -->
+	<?php echo $this->partial('site_layout/header/hd_user_toolbar.phtml'); ?>
+        <!-- Site Logo -->
+        <div id="site_logo">
+            <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>">
+                <img src="<?php echo $this->baseUrl('img/site_logo_04.png'); ?>" alt="<?php echo $this->translate('Главная') ?>" />
+                <span class="logo_title">
+                    <span class="logo_title_main">Online-<span class="logo_title_red">Racing</span>.Net</span>
+                    <span class="logo_title_subline"><span class="logo_title_red">sim</span>-racing <span>portal</span></span>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
