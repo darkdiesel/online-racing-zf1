@@ -1,0 +1,24 @@
+html, body {
+    margin:0;
+    padding:0;
+}
+
+body{
+    background-image: url("/img/forum/forum-bgr.jpg");
+}
+
+#page_wrapper{
+    background-color:#EAEAEA;
+    margin:10px auto 10px;
+    padding:5px;
+    border:1px solid #8E8D8D;
+    box-shadow:3px 1px 8px #514F4F;
+    min-width:1014px;
+    max-width:1270px;
+}
+
+#content{
+    background-color:#fff;
+    padding:5px;
+    border:1px solid #DDDCDC;
+}

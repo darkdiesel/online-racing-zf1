@@ -10,9 +10,31 @@
 	<?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
-	<h3>Forum</h3>
-
-	<?php echo $this->layout()->content ?>
+	<div id="page_wrapper">
+	    <div id="page">
+		<div id="header">
+		    <h2>Online-Racing.Net </h2>
+		    <div class="navbar">
+			<div class="navbar-inner">
+			    <a class="brand" href="#">Forum</a>
+			    <ul class="nav">
+				<li class="active"><a href="<?php echo $this->baseUrl()?>">Home</a></li>
+				<li><a href="#">Link1</a></li>
+				<li><a href="#">Link2</a></li>
+			    </ul>
+			</div>
+		    </div>
+		</div>
+		<hr style="color:gray">
+		<div id="main_wrapper">
+		    <div id="main" class="clearfix">
+			<div id="content">
+			    <?php echo $this->layout()->content ?>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
 	<script type="text/javascript">             var _gaq = _gaq || [];
 	    _gaq.push(['_setAccount', 'UA-32674101-2']);
 	    _gaq.push(['_trackPageview']);

@@ -1,21 +1,18 @@
 #page-scroller{
-    position:absolute;
+    position:fixed;
     display:block;
     background:url("/img/backg-wrapper.png");
-    left:0px;
-    top:0px;
-    padding:0;
-    
+    left:10px;
+    bottom:20px;
+    padding:5px;
     border-left:none;
     border-radius:0 5px 5px 0;
-    position:fixed;
-    
-    height:100%;
+    height:100px;
+    opacity:0.6;
+    border:1px solid;
 }
-#page-scroller:hover1{
-    border:2px solid #8F8F8F;
-    border-left:none;
-    left:0px;
+#page-scroller:hover{
+    opacity:0.9;
 }
 #page-scroller #topcontrol{
     background-image:url("../img/page-scroller/up.png");
@@ -27,28 +24,13 @@
     background-position:center;
     background-repeat: no-repeat;
 }
-#page-scroller #topcontrol,#page-scroller #downcontrol{
-    height:50%;
-    width:60px;
-}
-
 #page-scroller .page-scroller-btn{
-    opacity:0.1;
-    margin:0;
+    margin:2px 0;
+    height:48px;
+    width:48px;
+    opacity:0.3;
 }
 #page-scroller .page-scroller-btn:hover{
-    opacity:0.5;
+    opacity:0.6;
     background-color:#4B4B4B;
-}
-#page-scroller #page-scroller-eject-btn{
-    position:absolute;
-    right:0;
-    top:0;
-    height:100%;
-    width: 15px;
-    color:#cccccc;
-    font-size:35px;
-}
-#page-scroller:hover #page-scroller-eject-btn{
-    color:#fff;
 }

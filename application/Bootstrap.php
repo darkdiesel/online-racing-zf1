@@ -63,8 +63,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	$frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
 
 	$frontController->registerPlugin(new App_Plugin_SessionTrack());
-
-	$frontController->registerPlugin(new App_Plugin_Module_Default($this));
     }
 
     protected function _initView()
