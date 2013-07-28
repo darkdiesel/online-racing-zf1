@@ -3,10 +3,9 @@
     display:block;
     background:url("/img/backg-wrapper.png");
     left:10px;
-    bottom:20px;
+    bottom:45%;
     padding:5px;
     border-left:none;
-    border-radius:0 5px 5px 0;
     height:100px;
     opacity:0.6;
     border:1px solid;

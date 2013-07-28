@@ -1,54 +1,34 @@
-<div id="skitter_wraper">
-    <div class="box_skitter box_skitter_large">
+<div id="slider_block">
+    <div id="main-slider" class="carousel slide">
+	<ol class="carousel-indicators">
+	    <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+	    <li data-target="#main-slider" data-slide-to="1"></li>
+	    <li data-target="#main-slider" data-slide-to="2"></li>
+	</ol>
+	<div class="carousel-inner">
+	    <div class="item active">
+		<img src="/img/data/slider_posts/post_1.jpg" alt="">
+		<div class="carousel-caption">
+		    <h4>Online-Racing.Net - Sim-Racing Portal</h4>
+		    <p>Да прибудет с вами скорость. ©</p>
+		</div>
+	    </div>
+	    <div class="item">
+		<img src="/img/data/slider_posts/post_3.jpg" alt="">
+		<div class="carousel-caption">
+		    <h4>Вы выбрали нужное место!</h4>
+		    <p>На нашем портале вы гарантировано получите самые острые ощущение, море адреналина и захватывающей борьбы.</p>
+		</div>
+	    </div>
+	    <div class="item">
+		<img src="/img/data/slider_posts/F1RFT_2012_V2_logo.jpg" alt="">
+		<div class="carousel-caption">
+		    <h4>F1ORL 2013 2.1</h4>
+		    <p>Наш мод основанный на F1RFT 2013 не даст вам скучать и подарит ощущения реального гонщкиа формулы-1.</p>
+		</div>
+	    </div>
+	</div>
+	<a class="left carousel-control" href="#main-slider" data-slide="prev">&lsaquo;</a>
+	<a class="right carousel-control" href="#main-slider" data-slide="next">&rsaquo;</a>
     </div>
 </div>
-<script type="text/javascript">
-    // skitter slider plugin
-    jQuery(document).ready(function() {
-        var options = {};
-
-        options['label'] = true;
-        options['theme'] = "default"; /*clean, default, square, minimalist*/
-        options['numbers'] = true;
-        options['preview'] = false;
-        options['velocity'] = 2500;
-        options['dots'] = true;
-        //options['focus'] = true;
-        //options['focus_position'] = 'leftTop';
-        options['controls'] = false;
-        options['controls_position'] = 'rightTop';
-        options['hideTools'] = false;
-        options['progressbar'] = true;
-        //options['animation'] = 'swapBarsBack';
-        options['animation'] = 'random';
-        options['easing_default'] = 'random';
-        options['interval'] = 5000;
-        options['xml'] = '../xml/skitter_slider.xml';
-
-        /*if (document.location.search) {
-            var array = document.location.search.split('=');
-            var param = array[0].replace('?', '');
-            var value = array[1];
-
-            if (param == 'animation') {
-                options.animation = value;
-            }
-            else if (param == 'type_navigation') {
-                if (value == 'dots_preview') {
-                    $('.border_box').css({'marginBottom': '30px'});
-                    options['dots'] = true;
-                    options['preview'] = true;
-                } else {
-                    options[value] = true;
-                    if (value == 'dots')
-                        $('.box_skitter_large').css({'marginBottom': '35px'});
-                }
-            }
-        }*/
-        
-        $('#skitter_wraper').css({paddingBottom: 50});
-        
-
-        $('.box_skitter_large').css({width: 1012, height: 300}).skitter(options);
-    });
-</script>

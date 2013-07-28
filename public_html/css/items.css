@@ -327,6 +327,14 @@
         top:-50px;
         right:-100px;
     }
+/* Slider block */
+#slider_block{
+    border:2px solid #292929;
+    border-bottom:none;
+}
+    #slider_block > .carousel{
+	margin:0;
+    }
 /* additional common styles */
 .overflow-hide{
     overflow:hidden;

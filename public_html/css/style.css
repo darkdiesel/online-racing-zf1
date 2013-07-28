@@ -4,7 +4,7 @@ html, body {
 }
 body{
     background:url("../img/main_bgr.png") fixed;
-    padding-top:62px!important;
+    padding-top:72px!important;
 }
 body iframe{
     display:inline;
@@ -37,23 +37,10 @@ body iframe{
                 margin:0 auto;
                 position:relative;
             }
-        #skitter_wraper{
-            width:1012px;
-            margin:15px auto 5px;
-            background:url("/img/backg-wrapper.png");
-            padding:10px 5px;
-            border:1px solid #373A3A;
-            border-radius:7px;
-        }
         #header{
-            width:1012px;
             height:85px;
             position:relative;
-            margin:20px 0;
-            background:url("/img/backg-wrapper.png");
-            padding:10px 5px;
-            border:1px solid #373A3A;
-            border-radius:7px;
+            margin:0 0 20px;
         }
             #site_logo{
                 position:absolute;
@@ -83,12 +70,8 @@ body iframe{
                             text-align:center;
                         }
             #box_main_menu{
-                background:none repeat scroll 0 0 #5E5D5D;
-                border:2px solid #555252;
-                border-radius:5px 5px 5px 5px;
-                padding-top:1px;
+                border:2px solid #292929;
                 position:relative;
-                width:1004px;
                 margin:0 auto;
             }
             #box_main_menu div.navbar{
@@ -96,6 +79,7 @@ body iframe{
             }
                 #box_main_menu div.navbar .navbar-inner {
                     padding:0 10px !important;
+		    border-radius:0;
                 }
                 #box_main_menu div.navbar .nav > li > a {
                     padding:10px!important;
@@ -109,9 +93,10 @@ body iframe{
                 #box_main_menu .nav{
                     margin:2px 10px 0 0;
                 }
-                .moving_text{
+                #moving_text{
                     background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
-                    border:2px solid #555252;
+                    border:2px solid #292929;
+		    border-top:none;
                     box-shadow:0 0 9px 5px #000000 inset;
                     color:#C5C5C2;
                     display:inline-block;
@@ -119,18 +104,17 @@ body iframe{
                     overflow:hidden;
                     padding:7px 5px;
                     position:absolute;
-                    top:55px;
                     white-space:nowrap;
                     width:385px;
                     border-radius:0 0 0 10px;
                     left:15px;
                 }
-                .moving_text marquee{
+                #moving_text marquee{
                 }
-                    .moving_text marquee .header_news{
+                    #moving_text marquee .header_news{
                         margin:0;
                     }
-                        .moving_text marquee .header_news li{
+                        #moving_text marquee .header_news li{
                             display:inline-block;
                             margin:0 40px 0 0;
                             font-weight:bold;
@@ -139,7 +123,7 @@ body iframe{
                             line-height:14px;
                             list-style-type:none;
                         }
-                        .moving_text marquee .header_news li:before{
+                        #moving_text marquee .header_news li:before{
                             content:"";
                             margin-right:10px;
                             font-size:7px;
@@ -148,21 +132,21 @@ body iframe{
                             height:16px;
                             display:inline-block;
                         }
-                            .moving_text marquee .header_news li a{
+                            #moving_text marquee .header_news li a{
                                 color:#E1E1E0;
                                 text-decoration:underline;
                             }
-                                .moving_text marquee .header_news li a:hover{
+                                #moving_text marquee .header_news li a:hover{
                                     text-decoration:none;
                                 }
             #Hot_Laps_F1{
                 background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
-                border:2px solid #555252;
+                border:2px solid #292929;
+		border-top:none;
                 box-shadow:0 0 9px 5px #000000 inset;
                 height:36px;
                 position:absolute;
                 right:20px;
-                top:55px;
                 width:580px;
                 border-radius:0 0 10px 0;
             }

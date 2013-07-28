@@ -1,0 +1,54 @@
+<div id="skitter_wraper">
+    <div class="box_skitter box_skitter_large">
+    </div>
+</div>
+<script type="text/javascript">
+    // skitter slider plugin
+    jQuery(document).ready(function() {
+	var options = {};
+
+	options['label'] = true;
+	options['theme'] = "default"; /*clean, default, square, minimalist*/
+	options['numbers'] = true;
+	options['preview'] = false;
+	options['velocity'] = 2500;
+	options['dots'] = true;
+	//options['focus'] = true;
+	//options['focus_position'] = 'leftTop';
+	options['controls'] = false;
+	options['controls_position'] = 'rightTop';
+	options['hideTools'] = false;
+	options['progressbar'] = true;
+	//options['animation'] = 'swapBarsBack';
+	options['animation'] = 'random';
+	options['easing_default'] = 'random';
+	options['interval'] = 5000;
+	options['xml'] = '../xml/skitter_slider.xml';
+
+	/*if (document.location.search) {
+	 var array = document.location.search.split('=');
+	 var param = array[0].replace('?', '');
+	 var value = array[1];
+	 
+	 if (param == 'animation') {
+	 options.animation = value;
+	 }
+	 else if (param == 'type_navigation') {
+	 if (value == 'dots_preview') {
+	 $('.border_box').css({'marginBottom': '30px'});
+	 options['dots'] = true;
+	 options['preview'] = true;
+	 } else {
+	 options[value] = true;
+	 if (value == 'dots')
+	 $('.box_skitter_large').css({'marginBottom': '35px'});
+	 }
+	 }
+	 }*/
+
+	$('#skitter_wraper').css({paddingBottom: 50});
+
+
+	$('.box_skitter_large').css({width: 1012, height: 300}).skitter(options);
+    });
+</script>

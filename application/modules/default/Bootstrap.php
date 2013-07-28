@@ -7,12 +7,13 @@
  */
 class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 {
+
     protected function _initPlugins()
     {
 	$frontController = Zend_Controller_Front::getInstance();
 	$frontController->registerPlugin(new App_Plugin_Module_Default($this));
     }
-    
+
     public function _initRoutes()
     {
 	$frontController = Zend_Controller_Front::getInstance();
@@ -415,6 +416,117 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	  array('lang' => ':lang')
 	  )
 	  ); */
+    }
+
+    public function _initNavigation()
+    {
+	$this->bootstrap('layout');
+	$layout = $this->getResource('layout');
+	$view = $layout->getView();
+
+	$main_menu_pages = array(
+	    array(
+		// Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
+		'label' => _('Главная'),
+		'module' => 'default',
+		'controller' => 'index',
+		'action' => 'index',
+		'route' => 'default',
+	    ),
+	    array(
+		'label' => _('Лиги'),
+		'title' => _('Лиги'),
+		'module' => 'default',
+		'controller' => 'league',
+		'action' => 'all',
+		'route' => 'leagueAll',
+		'pages' => array(
+		    array(
+			'label' => _('F1 Online-Racing League'),
+			'title' => _('F1 Online-Racing League'),
+			'module' => 'default',
+			'controller' => 'league',
+			'action' => 'id',
+			'route' => 'leagueIdAll',
+			'params' => array(
+			    'league_id' => '1'
+			),
+		    ),
+		    array(
+			'label' => _('F1 RFT League'),
+			'title' => _('F1 RFT League'),
+			'module' => 'default',
+			'controller' => 'league',
+			'action' => 'id',
+			'route' => 'leagueIdAll',
+			'params' => array(
+			    'league_id' => '2'
+			),
+		    ),
+		    array(
+			'label' => _('Все лиги'),
+			'title' => _('Все лиги портала'),
+			'module' => 'default',
+			'controller' => 'league',
+			'action' => 'all',
+			'route' => 'leagueAll',
+		    )
+		)
+	    ),
+	    array(
+		'label' => _('Гонщики'),
+		'title' => _('Все гонщики нашего портала'),
+		'module' => 'default',
+		'controller' => 'user',
+		'action' => 'all',
+		'route' => 'userAll',
+	    ),
+	    array(
+		'label' => _('Новости'),
+		'title' => _('Все статьи опубликованные на нашем портале'),
+		'module' => 'default',
+		'controller' => 'post',
+		'action' => 'all',
+		'route' => 'postAll',
+	    ),
+	    array(
+		'label' => _('Файлы'),
+		'title' => _('Файлы'),
+		'uri' => '#',
+		'pages' => array(
+		    array(
+			'label' => _('Игры и Моды'),
+			'title' => _('Игры и Моды'),
+			'controller' => 'post',
+			'module' => 'default',
+			'action' => 'all-by-type',
+			'route' => 'postAllByType',
+			'params' => array(
+			    'article_type_id' => '3'
+			),
+		    ),
+		)
+	    ),
+	    array(
+		'label' => _('Форум'),
+		'title' => _('Форум'),
+		'uri' => 'http://f1orl.forum2x2.ru/',
+	    ),
+	);
+
+	// Создаем новый контейнер на основе нашей структуры
+	$main_menu_container = new Zend_Navigation($main_menu_pages);
+
+	// Передаем контейнер в View
+	$view->main_menu = $main_menu_container;
+
+	//return $main_menu_container;
+	/* $this->bootstrap('layout');
+	  $view = $this->getResource('layout')->getView();
+
+	  $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml' , 'nav');
+	  $navigation = new Zend_Navigation($config);
+	  $view->navigation($navigation); */
     }
 
 }
