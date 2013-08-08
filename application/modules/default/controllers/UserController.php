@@ -211,7 +211,7 @@ class UserController extends App_Controller_FirstBootController {
 
                 // load e-mail script (template) for user
                 $html = new Zend_View();
-                $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                 // e-mail template values for user
                 $html->assign('login', $user_data['login']);
                 $html->assign('content', 'Спасибо за регистарцию на нашем портале.<br/>' .
@@ -231,7 +231,7 @@ class UserController extends App_Controller_FirstBootController {
 
                 // load e-mail script (template) for admin
                 $html = new Zend_View();
-                $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                 // e-mail template values for admin
                 $html->assign('login', "Глава сайта Online-racing.net");
                 $html->assign('content', 'На сайте появился новый пользователь.<br/>' .
@@ -283,7 +283,7 @@ class UserController extends App_Controller_FirstBootController {
                     case 'done':
                         // load e-mail script (template) for user
                         $html = new Zend_View();
-                        $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                        $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                         // e-mail template values for user
                         $html->assign('login', $user_data['email']);
                         $html->assign('content', 'Ваш профиль активирован. Приятного время провождения на нашем портале.');
@@ -298,7 +298,7 @@ class UserController extends App_Controller_FirstBootController {
 
                         // load e-mail script (template) for admin
                         $html = new Zend_View();
-                        $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                        $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                         // e-mail template values for admin
                         $html->assign('login', "Админу Online-racing.net");
                         $html->assign('content', 'На сайте активирован новый пользователь.<br/>' .
@@ -370,7 +370,7 @@ class UserController extends App_Controller_FirstBootController {
 
                 // load e-mail script (template) for user
                 $html = new Zend_View();
-                $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                 // e-mail template values for user
                 $html->assign('login', $form->getValue('email'));
                 $html->assign('content', 'Уважаемый пользователь вы или кто-то другой запрасили код для создания нового пароля.<br/>' .
@@ -421,7 +421,7 @@ class UserController extends App_Controller_FirstBootController {
                 if ($result) {
                     // load e-mail script (template) for user
                     $html = new Zend_View();
-                    $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                    $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                     // e-mail template values for user
                     $html->assign('login', $user_data['email']);
                     $html->assign('content', 'Ваш пароль изменен. Приятного время провождения на нашем портале.');
@@ -639,7 +639,7 @@ class UserController extends App_Controller_FirstBootController {
 
                                 // load e-mail script (template) for user
                                 $html = new Zend_View();
-                                $html->setScriptPath(APPLICATION_PATH . '/views/emails/');
+                                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                                 // e-mail template values for user
                                 $html->assign('login', $user_data['login']);
                                 $html->assign('password', $form->getValue('newpassword'));

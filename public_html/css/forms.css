@@ -30,6 +30,9 @@ form.white_box{
     form.white_box_size_xxxl{
         width:700px;
     }
+    form.white_box_size_max{
+        width:100%;
+    }
 /* end width */    
     form.white_box .element_box{
         margin:10px 0;

@@ -12,7 +12,7 @@ class Application_Form_Post_Add extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/post/add');
         $this->setName('postAdd');
-        $this->setAttrib('class', 'white_box white_box_size_xxl');
+        $this->setAttrib('class', 'white_box white_box_size_max');
 
         $this->addElement('text', 'title', array(
             'label' => $this->translate('Заголовок'),

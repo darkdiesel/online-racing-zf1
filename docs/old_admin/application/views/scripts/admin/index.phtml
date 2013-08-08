@@ -1,0 +1,435 @@
+    <div id="articles_page" class="page">
+        <div class="page_title"><?php echo $this->translate('Панель управления сайтом'); ?></div>
+        <div class="div_hr"></div>
+        <div class="page_content">
+            <!-- User start -->
+            <div class="accordion" id="accordionUser">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionUser" href="#collapseUser">
+                            <blockquote>
+                                <h5><?php echo $this->translate('Пользователи'); ?></h5>
+                            </blockquote>
+                        </a>
+                    </div>
+                    <div id="collapseUser" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="<?php echo $this->baseURL('admin/users') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                        <td><a href="<?php echo $this->baseURL('admin/users') ?>"><?php echo $this->translate('Просмотреть в админке'); ?></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="<?php echo $this->baseURL('user/all') ?>"><center><i class="icon-eye-close icon-black"></i></center></a></td>
+                                        <td><a href="<?php echo $this->baseURL('user/all') ?>"><?php echo $this->translate('Просмотреть на сайте'); ?></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- User end -->
+            <!-- Content admin start -->
+            <div class="accordion" id="accordionContent">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionContent" href="#collapseContent">
+                            <blockquote>
+                                <h5><?php echo $this->translate('Контент'); ?></h5>
+                            </blockquote>
+                        </a>
+                    </div>
+                    <div id="collapseContent" class="accordion-body collapse">
+                        <!-- Content start -->
+                        <div class="accordion-inner">
+                            <table class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="<?php echo $this->baseURL('post/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                        <td><a href="<?php echo $this->baseURL('post/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="<?php echo $this->baseURL('admin/articles') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                        <td><a href="<?php echo $this->baseURL('admin/articles') ?>"><?php echo $this->translate('Просмотреть в админке'); ?></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="<?php echo $this->baseURL('post/all') ?>"><center><i class="icon-eye-close icon-black"></i></center></a></td>
+                                        <td><a href="<?php echo $this->baseURL('post/all') ?>"><?php echo $this->translate('Просмотреть на сайте'); ?></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- Content end -->
+                            <!-- Game start -->
+                            <div class="accordion" id="accordionGame">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionGame" href="#collapseGame">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Игры и моды'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseGame" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('game/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('game/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('game/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('game/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Game end -->
+                            <!-- Article-Type start -->
+                            <div class="accordion" id="accordionArticleType">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionArticleType" href="#collapseArticleType">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Типы статей'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseArticleType" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('article-type/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('article-type/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('article-type/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('article-type/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Article-Type end -->
+                            <!-- Content-Type start -->
+                            <div class="accordion" id="accordionContentType">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionContentType" href="#collapseContentType">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Типы контента'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseContentType" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('content-type/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('content-type/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('content-type/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('content-type/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Content-Type end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Content admin end -->
+            <!-- Championship admin start -->
+            <div class="accordion" id="accordionChampinshipAdmin">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionChampinshipAdmin" href="#collapseChampinshipAdmin">
+                            <blockquote>
+                                <h5><?php echo $this->translate('Лиги и чемпионаты'); ?></h5>
+                            </blockquote>
+                        </a>
+                    </div>
+                    <div id="collapseChampinshipAdmin" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            <!-- League start -->
+                            <div class="accordion" id="accordionLeague">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionLeague" href="#collapseLeague">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Лиги'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseLeague" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('league/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('league/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('admin/leagues') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('admin/leagues') ?>"><?php echo $this->translate('Просмотреть в админке'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('league/all') ?>"><center><i class="icon-eye-close icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('league/all') ?>"><?php echo $this->translate('Просмотреть на сайте'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- League end -->
+                            <!-- Championship start -->
+                            <div class="accordion" id="accordionChampionships">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionChampionships" href="#collapseChampionships">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Чемпионаты'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseChampionships" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('championship/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('championship/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('championship/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('championship/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Championship end -->
+                            <!-- Team start -->
+                            <div class="accordion" id="accordionTeam">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionTeam" href="#collapseTeam">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Команды'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseTeam" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('team/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('team/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('team/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('team/all') ?>"><?php echo $this->translate('Все команды'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Team end -->
+                            <!-- Track start -->
+                            <div class="accordion" id="accordionTrack">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionTrack" href="#collapseTrack">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Трассы'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseTrack" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('team/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('team/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('team/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('team/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Track end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Championship admin end -->
+            <!-- Site admin start -->
+            <div class="accordion" id="accordionSiteAdmin">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionSiteAdmin" href="#collapseSiteAdmin">
+                            <blockquote>
+                                <h5><?php echo $this->translate('Работа сайта'); ?></h5>
+                            </blockquote>
+                        </a>
+                    </div>
+                    <div id="collapseSiteAdmin" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            <!-- Country start -->
+                            <div class="accordion" id="accordionCountry">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionCountry" href="#collapseCountry">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Страны'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseCountry" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('country/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('country/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('country/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('country/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Country end -->
+                            <!-- Event start -->
+                            <div class="accordion" id="accordionEvent">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionEvent" href="#collapseEvent">
+                                            <blockquote>
+                                                <h5><?php echo $this->translate('Событие'); ?></h5>
+                                            </blockquote>
+                                        </a>
+                                    </div>
+                                    <div id="collapseEvent" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <table class="table table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th><?php echo $this->translate('Действия'); ?></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('event/add') ?>"><center><i class="icon-plus icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('event/add') ?>"><?php echo $this->translate('Создать'); ?></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><a href="<?php echo $this->baseURL('event/all') ?>"><center><i class="icon-eye-open icon-black"></i></center></a></td>
+                                                        <td><a href="<?php echo $this->baseURL('event/all') ?>"><?php echo $this->translate('Просмотреть'); ?></a></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Event end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Site admin end -->
+        </div>
+    </div>

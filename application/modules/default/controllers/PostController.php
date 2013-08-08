@@ -114,7 +114,7 @@ class PostController extends App_Controller_FirstBootController {
             foreach ($article_types as $type):
                 $form->article_type->addMultiOption($type->id, $type->name);
 
-                if (strtolower($type->name) == 'game') {
+                if (strtolower($type->name) == 'news') {
                     $form->article_type->setvalue($type->id);
                 }
             endforeach;

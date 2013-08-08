@@ -2,13 +2,13 @@
 
 class App_View_Helper_CKEditor extends Zend_View_Helper_Abstract {
     
-    public function ckeditor() {
-        
+    public function cKEditor() {
+        return $this;
     }
     
     public function setup() {
         $this->view->headScript()->appendFile($this->view->baseUrl("libraries/ckeditor/ckeditor.js"));
-        return $this;
+        //return $this;
     }
     
     public function replace($editor_mode, $element_id) {
