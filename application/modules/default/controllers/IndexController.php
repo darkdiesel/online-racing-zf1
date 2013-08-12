@@ -4,8 +4,8 @@ class IndexController extends App_Controller_FirstBootController {
 
     public function indexAction() {
         // js and css for Skitter slider
-        //$this->view->headScript()->appendFile($this->view->baseUrl("libraries/skitter/jquery.skitter.min.js"));
-        //$this->view->headLink()->appendStylesheet($this->view->baseUrl("libraries/skitter/css/skitter.styles.min.css"));
+        //$this->view->headScript()->appendFile($this->view->baseUrl("library/skitter/jquery.skitter.min.js"));
+        //$this->view->headLink()->appendStylesheet($this->view->baseUrl("library/skitter/css/skitter.styles.min.css"));
 
         // page title
         $this->view->headTitle($this->view->translate('Портал Онлай Скорости'));

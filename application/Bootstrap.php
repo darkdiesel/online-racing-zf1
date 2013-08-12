@@ -100,31 +100,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	// CSS setups
 	// [JQUERY library]                             
-	$view->headScript()->appendFile($view->baseUrl("libraries/jquery/js/jquery-1.9.1.min.js"));
+	$view->headScript()->appendFile("/library/jquery/js/jquery-1.9.1.min.js");
 
 	// [JQUERY UI library]
-	$view->headLink()->appendStylesheet($view->baseUrl("libraries/jquery/css/flick/jquery-ui-1.10.3.custom.min.css"));
-	$view->headScript()->appendFile($view->baseUrl("libraries/jquery/js/jquery-ui-1.10.3.custom.min.js"));
+	$view->headLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");
+	$view->headScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js");
 
 	// [BOOTSTRAP library]
-	$view->headLink()->appendStylesheet($view->baseUrl("libraries/bootstrap/css/bootstrap.min.css"));
-	$view->headScript()->appendFile($view->baseUrl("libraries/bootstrap/js/bootstrap.min.js"));
+	$view->headLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
+	$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
+	
+	$view->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
 
 	// [FONT-AWESOME library]
-	$view->headLink()->appendStylesheet($view->baseUrl("libraries/font-awesome/css/font-awesome.min.css"));
+	$view->headLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css");
 
-	// [COMMON CSS]
-	//$view->headLink()->appendStylesheet($view->baseUrl("css/style.css"));
-	//$view->headLink()->appendStylesheet($view->baseUrl("css/user_toolbar.css"));
-	//$view->headLink()->appendStylesheet($view->baseUrl("css/forms.css"));
-	//$view->headLink()->appendStylesheet($view->baseUrl("css/articles.css"));
-	//$view->headLink()->appendStylesheet($view->baseUrl("css/items.css"));
-	//$view->headLink()->appendStylesheet($view->baseUrl("css/user.css"));
 	// [GOOGLE FONTS]
 	$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
+	//$view->headLink()->appendStylesheet("/library/google-fonts/Faster+One.css", "screen, print");
 
 	// [COMMON JS]
-	$view->headScript()->appendFile($view->baseUrl("js/app.js"));
+	$view->headScript()->appendFile("/js/app.js");
 
 	//$view->MinifyHeadScript()->appendFile($view->baseUrl("js/app.js"));
 

@@ -62,34 +62,34 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract
 
 	// [CHAT CSS]
 	if ($view->ls_chat_block) {
-	    $view->minifyHeadLink()->appendStylesheet($view->baseUrl("css/chat.css"));
+	    $view->minifyHeadLink()->appendStylesheet("/css/chat.css");
 	}
 	if ($view->slide_out_tabs_block) {
-	    $view->minifyHeadLink()->appendStylesheet($view->baseUrl("css/slide_out_tabs_block.css"));
-	    $view->headScript()->appendFile($view->baseUrl("js/slide_out_tabs_block.js"));
+	    $view->minifyHeadLink()->appendStylesheet("/css/slide_out_tabs_block.css");
+	    $view->headScript()->appendFile("/js/slide_out_tabs_block.js");
 	}
 
 	// Page scroller block
 	if ($view->page_scroller_block) {
-	    $view->headScript()->appendFile($view->baseUrl("js/page_scroller.js"));
-	    $view->minifyHeadLink()->appendStylesheet($view->baseUrl('css/page_srcoller.css'));
+	    $view->headScript()->appendFile("/js/page_scroller.js");
+	    $view->minifyHeadLink()->appendStylesheet("/css/page_srcoller.css");
 	}
 
 	// Share block script
 	if ($view->share_block) {
-	    $view->headScript()->appendFile($view->baseUrl("js/share.js"));
+	    $view->headScript()->appendFile("/js/share.js");
 	}
 
 	// Script for count down block
 	if ($view->ls_next_event_block) {
-	    $view->headScript()->appendFile($view->baseUrl("libraries/jquery.countdown/jquery.countdown.min.js"));
-	    $view->headScript()->appendFile($view->baseUrl("libraries/jquery.countdown/jquery.countdown-ru.js"));
-	    $view->headLink()->appendStylesheet($view->baseUrl("libraries/jquery.countdown/css/jquery.countdown.css"));
+	    $view->headScript()->appendFile("/library/jquery.countdown/jquery.countdown.min.js");
+	    $view->headScript()->appendFile("/library/jquery.countdown/jquery.countdown-ru.js");
+	    $view->headLink()->appendStylesheet("/library/jquery.countdown/css/jquery.countdown.css");
 	}
 
 	if ((Zend_Auth::getInstance()->hasIdentity()) && ($view->ls_chat_block)) {
 	    //chat script
-	    $view->headScript()->appendFile($view->baseUrl("js/chat.js"));
+	    $view->headScript()->appendFile("/js/chat.js");
 	}
 
 	// Change layout

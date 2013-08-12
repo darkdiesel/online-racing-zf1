@@ -7,7 +7,7 @@ class App_View_Helper_CKEditor extends Zend_View_Helper_Abstract {
     }
     
     public function setup() {
-        $this->view->headScript()->appendFile($this->view->baseUrl("libraries/ckeditor/ckeditor.js"));
+        $this->view->headScript()->appendFile($this->view->baseUrl("library/ckeditor/ckeditor.js"));
         //return $this;
     }
     

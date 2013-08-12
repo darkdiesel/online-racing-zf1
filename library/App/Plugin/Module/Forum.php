@@ -20,6 +20,8 @@ class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract
 	$this->_bootstrap->bootstrap('layout');
 	$layout = $this->_bootstrap->getResource('layout');
 	$view = $layout->getView();
+	
+	$view->headTitle($view->translate('Форум'));
 
 	/* ===== [BLOCK DISPLAY SETTINGS] ===== */
 

@@ -9,7 +9,7 @@ class Forum_Bootstrap extends Zend_Application_Module_Bootstrap
 	$layout = $this->getResource('layout');
 	$view = $layout->getView();
 	
-	$view->headTitle($view->translate('Форум'));
+	
     }
     
     protected function _initPlugins()
