@@ -59,6 +59,9 @@
         <controllerFile controllerName="Race">
           <actionMethod actionName="index"/>
         </controllerFile>
+        <controllerFile controllerName="Resource">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false">
         <formFile formName="ArticleAdd"/>
@@ -84,6 +87,7 @@
           <dbTableFile dbTableName="ContentType"/>
           <dbTableFile dbTableName="League"/>
           <dbTableFile dbTableName="Championship"/>
+          <dbTableFile dbTableName="Resource"/>
         </dbTableDirectory>
         <modelFile modelName="UserChat"/>
         <modelFile modelName="UserChatMapper"/>
@@ -250,6 +254,9 @@
           <viewControllerScriptsDirectory forControllerName="Race">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Resource">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -285,6 +292,9 @@
       <testApplicationDirectory>
         <testApplicationControllerDirectory>
           <testApplicationControllerFile forControllerName="Index"/>
+          <testApplicationControllerFile forControllerName="Resource">
+            <testApplicationActionMethod forActionName="index"/>
+          </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory/>
