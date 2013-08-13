@@ -11,7 +11,7 @@ class Admin_IndexController extends App_Controller_FirstBootController
 
     public function indexAction()
     {
-        // action body
+        $this->view->headTitle($this->view->translate('Панель администрирования'));
     }
 
 

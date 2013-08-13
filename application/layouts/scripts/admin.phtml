@@ -10,9 +10,18 @@
 	<?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
-	<h3>Admin</h3>
-
-	<?php echo $this->layout()->content ?>
+	<!-- Content -->
+	<div id="content">
+	    <div id="page_title_wrapper">
+		<div class="page_title"><?php echo $this->pageTitle() ?></div>
+	    </div>
+	    <?php echo $this->showMessages(); ?>
+	    <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
+		<div class="page_content">
+		    <?php echo $this->layout()->content ?>
+		</div>
+	    </div>
+	</div>
 	<script type="text/javascript">             var _gaq = _gaq || [];
 	    _gaq.push(['_setAccount', 'UA-32674101-2']);
 	    _gaq.push(['_trackPageview']);

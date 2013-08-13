@@ -14,15 +14,19 @@ class ContentTypeController extends App_Controller_FirstBootController {
 
 	$content_type = new Application_Model_DbTable_ContentType();
 	$content_type_data = $content_type->fetchRow(array('id = ?' => $content_type_id));
+	
+	$this->view->pageTitle($this->view->translate('Тип контента'));
 
 	if (count($content_type_data) != 0) {
 	    $this->view->content_type = $content_type_data;
 	    $this->view->headTitle($content_type_data->name);
+	    $this->view->pageTitle($content_type_data->name);
 	    return;
 	} else {
-	    $this->view->errMessage = $this->view->translate('Тип контента не найден!');
-	    $this->view->headTitle($this->view->translate('Ошибка!'));
-	    $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип-контента не найден!'));
+	    
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
+            $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не существует!')}");
 	}
     }
 
