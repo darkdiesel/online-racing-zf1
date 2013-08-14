@@ -89,11 +89,11 @@
                         ?>
                     </div>
                     <div class="pull-right">
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-success" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-warning" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-small btn-info" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($championship['post_id'])), 'postId', true); ?>" target="_blank" class = "btn btn-small btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
-                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>" class = "btn btn-small btn-inverse post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-success" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-warning" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-info" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($championship['post_id'])), 'postId', true); ?>" target="_blank" class = "btn btn-sm btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
+                        <a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>" class = "btn btn-sm btn-primary post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
                     </div>
                     <div class="championship_block_item_info block_item_info_bottom">
                         <div class="championship_date_create block_item_info_bottom_item">
@@ -106,7 +106,7 @@
         <?php endforeach; ?>
         <div class="div_hr"></div>
         <?php
-        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+        echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     } else {
         ?>
         <div class="alert alert-info alert-block">

@@ -11,7 +11,7 @@ class Application_Form_Resource_Add extends Zend_Form {
     public function init() {
         $this->setMethod('post');
         $this->setAction('/resource/add');
-        $this->setName('resourceAdd');
+        $this->setName('resource_add');
         $this->setAttrib('class', 'white_box white_box_size_m');
         
         $this->addElement('text', 'name', array(

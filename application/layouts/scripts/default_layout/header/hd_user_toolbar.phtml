@@ -4,49 +4,49 @@
             <span><?php echo $this->translate('Добро пожаловать') ?>,</span>
         </li>
         <li>
-            <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-                <?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
-                <span><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?></a></span>
-            <?php } else { ?>
-                <span><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><?php echo $this->translate('Гость') ?></a></span>
-            <?php } ?>
+	    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+		<?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
+    	    <span><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?></a></span>
+	    <?php } else { ?>
+    	    <span><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><?php echo $this->translate('Гость') ?></a></span>
+	    <?php } ?>
         </li>
     </ul>
     <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
         <div class="user">
-            <div class="btn-group dropdown">
-                <a class="btn btn-primary btn-small" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Выход') ?></a>
-                <a class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
-                    <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
-                    <li><a href="<?php echo$this->url(array('controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
-                    <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
-                    <li class="divider"></li>
-                    <li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
-                </ul>
-            </div>
+    	<div class="btn-group">
+    	    <a class="btn btn-primary btn-sm" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Выход') ?></a>
+    	    <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+    	    <ul class="dropdown-menu">
+    		<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
+    		<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
+    		<li><a href="<?php echo$this->url(array('controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
+    		<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
+    		<li class="divider"></li>
+    		<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
+    	    </ul>
+    	</div>
         </div>
     <?php } else { ?>
         <div class="login">
-            <div class="btn-group dropdown">
-                <a class="btn btn-primary btn-small" href="<?php echo$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Войти') ?></a>
-                <a class="btn btn-primary btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <?php
-                        $form = new Application_Form_User_Login();
-                        $form->setAction("{$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
-                        echo $form;
-                        ?>
-                        <hr style="margin:20px 0 10px 0">
-                        <blockquote>
-                            <p><a class="reg_link" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a></p>
-                            <p><a class="reg_link" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true); ?>"><?php echo $this->translate('Забыли пароль?') ?></a></p>
-                        </blockquote>
-                    </li>
-                </ul>
-            </div>
+    	<div class="btn-group dropdown">
+    	    <a class="btn btn-primary btn-sm" href="<?php echo$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true); ?>"><i class="icon-user icon-white"></i> <?php echo $this->translate('Войти') ?></a>
+    	    <a class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+    	    <ul class="dropdown-menu">
+    		<li>
+			<?php
+			$form = new Application_Form_User_Login();
+			$form->setAction("{$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
+			echo $form;
+			?>
+    		    <hr style="margin:20px 0 10px 0">
+    		    <blockquote>
+    			<p><a class="reg_link" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a></p>
+    			<p><a class="reg_link" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true); ?>"><?php echo $this->translate('Забыли пароль?') ?></a></p>
+    		    </blockquote>
+    		</li>
+    	    </ul>
+    	</div>
         </div>
     <?php } ?>
 </div>

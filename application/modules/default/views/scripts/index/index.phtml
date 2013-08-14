@@ -30,7 +30,7 @@
                     }
                     ?>
                 </p>
-                <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true) ?>" class="btn btn-small btn-inverse article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
+                <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true) ?>" class="btn btn-sm btn-primary article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
             </div>
         <?php } ?>
     </div>
@@ -58,7 +58,7 @@
             <p class="rss_text">
                 <?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"] ?>
             </p>
-            <a class="rss_more btn btn-small btn-primary" href="<?php echo $this->rss_element[$this->rss_index["LINK"][$i + 1]]["value"]; ?>" target="_BLINK"><?php echo $this->translate("Подробнее на F1-News.ru") ?></a>
+            <a class="rss_more btn btn-sm btn-primary" href="<?php echo $this->rss_element[$this->rss_index["LINK"][$i + 1]]["value"]; ?>" target="_BLINK"><?php echo $this->translate("Подробнее на F1-News.ru") ?></a>
         </div>
     <?php } ?>
 </div>

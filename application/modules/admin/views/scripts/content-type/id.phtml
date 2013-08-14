@@ -14,8 +14,8 @@
         </table>
         <div class="article_controls">
 	    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-		<a href = "<?php echo $this->baseUrl('content-type/edit/' . $this->escape($this->content_type->id)) ?>" class = "btn btn-small btn-inverse content_edit"><?php echo $this->translate('Редактировать') ?></a>
-		<a href = "<?php echo $this->baseUrl('content-type/delete/' . $this->escape($this->content_type->id)) ?>" class = "btn btn-small btn-inverse content_delete"><?php echo $this->translate('Удалить') ?></a>
+		<a href = "<?php echo $this->url(array('controller' => 'content-type', 'action' => 'edit', 'content_type_id' => $this->content_type->id), 'content_type', true) ?>" class = "btn btn-sm btn-primary content_edit"><?php echo $this->translate('Редактировать') ?></a>
+		<a href = "<?php echo $this->url(array('controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $this->content_type->id), 'content_type', true) ?>" class = "btn btn-sm btn-primary content_delete"><?php echo $this->translate('Удалить') ?></a>
 	    <?php } ?>
         </div>
         <div class="article_info">

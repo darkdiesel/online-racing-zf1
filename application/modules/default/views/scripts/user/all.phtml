@@ -2,7 +2,7 @@
     <div class="page_content">
         <?php
         if (count($this->paginator)) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');?>
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');?>
             <div class="div_hr"></div>
             <?php
             $date1 = new Zend_Date();
@@ -27,7 +27,7 @@
                 <?php
             endforeach;?>
             <div class="div_hr"></div>
-            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
         } else {
             ?>
             <div class="alert alert-error alert-block">

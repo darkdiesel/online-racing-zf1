@@ -4,7 +4,7 @@
     <div class="page_content">
         <?php
         if (count($this->paginator)) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
             ?>
             <table class="table table-bordered table-hover table-striped articles_table">
                 <thead>
@@ -37,7 +37,7 @@
                 </tbody>
             </table>
             <?php
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
             ?>
             <?php
         } else {

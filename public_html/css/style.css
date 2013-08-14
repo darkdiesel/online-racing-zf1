@@ -74,25 +74,15 @@ body iframe{
                 position:relative;
                 margin:0 auto;
             }
-            #box_main_menu div.navbar{
-                margin:0;
-            }
-                #box_main_menu div.navbar .navbar-inner {
-                    padding:0 10px !important;
-		    border-radius:0;
-                }
-                #box_main_menu div.navbar .nav > li > a {
-                    padding:10px!important;
-                    text-transform:uppercase;
-                    letter-spacing:0;
-                    font:bold 13px arial;
-                }
-                #box_main_menu .navbar-inverse .nav .active > a{
-                    background-color: #606060;
-                }
-                #box_main_menu .nav{
-                    margin:2px 10px 0 0;
-                }
+		#box_main_menu div.navbar{
+		    margin:0;
+		}
+		    #box_main_menu div.navbar .nav > li > a {
+			text-transform:uppercase;
+			letter-spacing:0;
+			font:bold 13px arial;
+			line-height:20px;
+		    }
                 #moving_text{
                     background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
                     border:2px solid #292929;

@@ -1,14 +1,17 @@
 <div id="box_main_menu">
-    <div class="navbar navbar-inverse">
-        <div class="navbar-inner">
-            <?php
-            $partial = array('menu_layout/main_menu.phtml', 'default');
-            $this->navigation()->menu($this->main_menu)->setPartial($partial);
-            echo $this->navigation()->menu()->render();
-            ?>
-            <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="<?php echo $this->translate('Поиск'); ?>">
-            </form>
-        </div>
+    <div class="navbar navbar-inverse" role="navigation">
+	<div class="collapse navbar-collapse">
+	    <?php
+	    $partial = array('menu_layout/main_menu.phtml', 'default');
+	    $this->navigation()->menu($this->main_menu)->setPartial($partial);
+	    echo $this->navigation()->menu()->render();
+	    ?>
+	    <form class="navbar-form navbar-left" action="" role="search">
+		<div class="form-group">
+		    <input type="text" class="form-control" placeholder="<?php echo $this->translate('Поиск'); ?>">
+		</div>
+		<button type="submit" class="btn btn-default"><?php echo $this->translate('Поиск'); ?></button>
+	    </form>
+	</div>
     </div>
 </div>

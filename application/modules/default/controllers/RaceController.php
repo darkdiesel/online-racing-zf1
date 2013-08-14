@@ -67,7 +67,7 @@ class RaceController extends App_Controller_FirstBootController {
                 endforeach;
             } else {
                 $this->messageManager->addError("{$this->view->translate('Трассы не найдены!')}"
-                        . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'track', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                        . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'track', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
             $this->view->form = $form;

@@ -35,12 +35,12 @@
                     <div class="article_controls">
                         <?php if ($edit_access) { ?>
 
-                            <a href = "<?php echo $this->url(array('controller' => 'country', 'action' => 'edit', 'id' => $this->escape($this->country->id)), 'country', true); ?>" class = "btn btn-small btn-inverse content_edit">
+                            <a href = "<?php echo $this->url(array('controller' => 'country', 'action' => 'edit', 'id' => $this->escape($this->country->id)), 'country', true); ?>" class = "btn btn-sm btn-primary content_edit">
                                 <?php echo $this->translate('Редактировать') ?>
                             </a>
                         <?php } ?>
                         <?php if ($delete_access) { ?>
-                            <a href = "<?php echo $this->url(array('controller' => 'country', 'action' => 'edit', 'id' => $this->escape($this->country->id)), 'country', true); ?>" class = "btn btn-small btn-inverse content_delete">
+                            <a href = "<?php echo $this->url(array('controller' => 'country', 'action' => 'edit', 'id' => $this->escape($this->country->id)), 'country', true); ?>" class = "btn btn-sm btn-primary content_delete">
                                 <?php echo $this->translate('Удалить') ?>
                             </a>
                         <?php } ?>

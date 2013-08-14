@@ -138,13 +138,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	    'id' => 0)
 	));
 
-	//content type controller routers
-	$router->addRoute(
-		'contentTypeId', new Zend_Controller_Router_Route('content-type/:action/:id', array(
-	    'module' => 'default',
-	    'controller' => 'content-type',
-	    'league_id' => 0)
-	));
+
 
 	$router->addRoute(
 		'league', new Zend_Controller_Router_Route_Regex('league/(\d+)/(\w*)\.html', array(

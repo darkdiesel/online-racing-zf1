@@ -1,6 +1,6 @@
 <?php
 if ($this->paginator) {
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     foreach ($this->paginator as $league):
         ?>
         <div class="league_item block_item block_ui_gray">
@@ -39,7 +39,7 @@ if ($this->paginator) {
                     ?>
                 </div>
                 <div class="pull-right">
-                    <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>" class = "btn btn-small btn-inverse block-content-button-more"><?php echo $this->translate('Подробнее...') ?></a>
+                    <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>" class = "btn btn-sm btn-primary block-content-button-more"><?php echo $this->translate('Подробнее...') ?></a>
                 </div>
                 <div class="league_info block_item_info_bottom">
                     <div class="league_date league_info_item block_item_info_bottom_item">
@@ -51,7 +51,7 @@ if ($this->paginator) {
         </div>
         <?php
     endforeach;
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     ?>
 <?php }
 ?>

@@ -147,7 +147,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 	    } else {
 		$this->messageManager->addError(
 			"{$this->view->translate('Регламенты не найдены!')}"
-			. "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(
+			. "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(
 				array('controller' => 'post', 'action' => 'add'), 'default', true
 			)}\">{$this->view->translate('Создать?')}</a>"
 		);
@@ -164,7 +164,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 	    } else {
 		$this->messageManager->addError(
 			"{$this->view->translate('Игры не найдены!')}"
-			. "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(
+			. "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(
 				array('controller' => 'post', 'action' => 'add'), 'default', true
 			)}\">{$this->view->translate('Создать?')}</a>"
 		);

@@ -1,6 +1,6 @@
 <?php
 if ($this->paginator) {
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     ?>
     <?php foreach ($this->paginator as $post): ?>
         <div class="post_item block_item block_ui_gray block-ui-border-dark">
@@ -39,7 +39,7 @@ if ($this->paginator) {
                     ?>
                 </div>
                 <div class="pull-right">
-                    <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>" class = "btn btn-small btn-inverse block-content-button-more">
+                    <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>" class = "btn btn-sm btn-primary block-content-button-more">
                         <?php echo $this->translate('Читать дальше') ?> <i class="icon-double-angle-right"></i>
                     </a>
                 </div>
@@ -60,6 +60,6 @@ if ($this->paginator) {
         </div>
         <?php
     endforeach;
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/full_views_pagination_control.phtml');
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
 }
 ?>

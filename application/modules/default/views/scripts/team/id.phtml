@@ -39,10 +39,10 @@
                     ?>
                     <div class="article_controls">
                         <?php if ($edit_access) { ?>
-                            <a href = "<?php echo $this->baseUrl('team/edit/' . $this->escape($this->team->id)) ?>" class = "btn btn-small btn-inverse article_edit"><?php echo $this->translate('Редактировать') ?></a>
+                            <a href = "<?php echo $this->baseUrl('team/edit/' . $this->escape($this->team->id)) ?>" class = "btn btn-sm btn-primary article_edit"><?php echo $this->translate('Редактировать') ?></a>
                         <?php } ?>
                         <?php if ($delete_access) { ?>
-                            <a href = "<?php echo $this->baseUrl('team/delete/' . $this->escape($this->team->id)) ?>" class = "btn btn-small btn-inverse article_delete"><?php echo $this->translate('Удалить') ?></a>
+                            <a href = "<?php echo $this->baseUrl('team/delete/' . $this->escape($this->team->id)) ?>" class = "btn btn-sm btn-primary article_delete"><?php echo $this->translate('Удалить') ?></a>
                         <?php } ?>
                     </div>
                 <?php } ?>

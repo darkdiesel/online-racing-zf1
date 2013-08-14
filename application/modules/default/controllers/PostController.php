@@ -16,10 +16,10 @@ class PostController extends App_Controller_FirstBootController {
         $post_data = $post->getPostData($post_id);
 
         if ($post_data) {
-            $this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->title);
+            $this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data['title']);
             $this->view->post = $post_data;
-            $this->view->headTitle($post_data->title);
-            $this->view->pageTitle($post_data->title);
+            $this->view->headTitle($post_data['title']);
+            $this->view->pageTitle($post_data['title']);
         } else {
             $this->messageManager->addError($this->view->translate('Запрашиваемый контент не существует!'));
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
@@ -29,7 +29,7 @@ class PostController extends App_Controller_FirstBootController {
 
     // action for view all posts
     public function allAction() {
-        $this->view->headTitle($this->view->translate('Весь контент сайта'));
+        $this->view->headTitle($this->view->translate('Контент сайта'));
         $this->view->pageTitle($this->view->translate('Контент сайта'));
 
         // pager settings
@@ -120,12 +120,12 @@ class PostController extends App_Controller_FirstBootController {
             endforeach;
         } else {
             $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
-                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                    . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         // add content types to the form
         $content_type = new Application_Model_DbTable_ContentType();
-        $content_types = $content_type->getContentTypeNames('ASC');
+        $content_types = $content_type->getAll("name", "ASC");
 
         if ($content_types) {
             foreach ($content_types as $type):
@@ -133,7 +133,7 @@ class PostController extends App_Controller_FirstBootController {
             endforeach;
         } else {
             $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
-                    . "<br/><a class=\"btn btn-danger btn-small\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                    . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
         $this->view->form = $form;
@@ -215,7 +215,7 @@ class PostController extends App_Controller_FirstBootController {
 
             // add content types to the form
             $content_type = new Application_Model_DbTable_ContentType();
-            $content_types = $content_type->getContentTypeNames('ASC');
+            $content_types = $content_type->getAll("name", "ASC");
 
             if ($content_types) {
                 foreach ($content_types as $type):
@@ -281,7 +281,7 @@ class PostController extends App_Controller_FirstBootController {
                     switch ($article_type->name) {
                         case 'game':
                             $game = new Application_Model_DbTable_Game();
-                            $game_where = $game->getAdapter()->quoteInto('id = ?', $game_id);
+                            $game_where = $game->getAdapter()->quoteInto('id = ?', $post_id);
                             $game->delete($game_where);
                             break;
                         case 'news':
@@ -293,7 +293,7 @@ class PostController extends App_Controller_FirstBootController {
                     $this->view->showMessages()->clearMessages();
                     $this->messageManager->addSuccess("{$this->view->translate("Статья <strong>\"{$post_data->title}\"</strong> успешно удалена")}");
 
-                    $this->_helper->redirector('all', 'post');
+		    $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'all', 'page' => 1), 'postAll', true));
                 } else {
                     $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
@@ -303,7 +303,7 @@ class PostController extends App_Controller_FirstBootController {
             $this->view->form = $form;
         } else {
             $this->messageManager->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
-            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Контент не существует!')");
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
         }
     }
