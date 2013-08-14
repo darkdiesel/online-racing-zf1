@@ -11,17 +11,12 @@
     </head>
     <body>
         <!-- HeadLine -->
-	<?php echo $this->render("default_layout/head_line.phtml"); ?>
+	<?php //echo $this->render("default_layout/head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
-		<?php
-		$main_slider = Zend_Registry::get('slider');
-		if ($main_slider['show']) {
-		    echo $this->render("default_layout/slider.phtml");
-		}
-		?>
                 <div id="header">
 		    <?php echo $this->render("default_layout/header.phtml") ?>
+		    <div class="clearfix"></div>
                 </div>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">

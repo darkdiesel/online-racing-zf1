@@ -1,5 +1,12 @@
 <!-- Main Menu -->
 <?php echo $this->render('default_layout/header/hd_main_menu.phtml'); ?>
+<?php
+$main_slider = Zend_Registry::get('slider');
+if ($main_slider['show']) {
+    echo $this->render("default_layout/slider.phtml");
+}
+?>
+<div class="clearfix"></div>
 <!-- Moving text-->
 <?php
 if ($this->hd_moving_text_block) {
