@@ -1,6 +1,6 @@
 <?php if ($this->championshipTeams) { ?>
     <?php foreach ($this->championshipTeams as $team): ?>
-        <div class="team_item block_item block_ui_gray">
+        <div class="team_item block_item">
             <?php
             echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->escape($team->championship_id), $this->escape($team->team_id));
             ?>
@@ -24,7 +24,7 @@
                 if ($championship_team_drivers_data) {
                     foreach ($championship_team_drivers_data as $driver):
                         ?>
-                        <div class="team_driver_item block_item block_ui_gray block-width-135 pull-left">
+                        <div class="team_driver_item block_item block-width-135 pull-left">
                             <?php
                             echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
                             ?>
@@ -46,7 +46,7 @@
                     endforeach;
                     if (count($championship_team_drivers_data) == 1) {
                         ?>
-                        <div class="team_driver_item block_item block_ui_gray block-width-135 pull-left">
+                        <div class="team_driver_item block_item block-width-135 pull-left">
                             <div class="block_item_content">
                                 <div class="label label-info align-center align-center-block"><?php echo $this->translate("Место свободно"); ?></div>
                             </div>
@@ -55,12 +55,12 @@
                     }
                 } else {
                     ?>
-                    <div class="team_driver_item block_item block_ui_gray block-width-135 pull-left">
+                    <div class="team_driver_item block_item block-width-135 pull-left">
                         <div class="block_item_content">
                             <div class="label label-info align-center align-center-block"><?php echo $this->translate("Место свободно"); ?></div>
                         </div>
                     </div>
-                    <div class="team_driver_item block_item block_ui_gray block-width-135 pull-left">
+                    <div class="team_driver_item block_item block-width-135 pull-left">
                         <div class="block_item_content">
                             <div class="label label-info align-center align-center-block"><?php echo $this->translate("Место свободно"); ?></div>
                         </div>

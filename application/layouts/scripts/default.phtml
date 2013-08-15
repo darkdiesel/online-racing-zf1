@@ -23,15 +23,22 @@
                     <div id="main" class="clearfix">
                         <!-- Content -->
                         <div id="content">
-                            <div id="page_title_wrapper">
-                                <div class="page_title"><?php echo $this->pageTitle() ?></div>
-				<?php
-				$breadcrumb = Zend_Registry::get('breadcrumb');
-				if ($breadcrumb['show']) {
-				    echo $this->render("default_layout/breadcrumb.phtml");
-				}
+			    <?php
+			    $breadcrumb = Zend_Registry::get('breadcrumb');
+			    $page_title = $this->pageTitle();
+			    if ($page_title != "" || $breadcrumb['show']) :
 				?>
-                            </div>
+    			    <div id="page_title_wrapper" class="block_item">
+				    <?php if ($this->pageTitle() != ""): ?>
+					<div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
+				    <?php endif; ?>
+				    <?php
+				    if ($breadcrumb['show']) {
+					echo $this->render("default_layout/breadcrumb.phtml");
+				    }
+				    ?>
+    			    </div>
+			    <?php endif; ?>
 			    <?php echo $this->showMessages(); ?>
                             <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
                                 <div class="page_content">
@@ -40,7 +47,7 @@
                             </div>
                         </div>
                         <!-- Left sidebar -->
-                        <div id="left_sidebar">
+                        <div id="left_sidebar" class="block_item">
 			    <?php echo $this->render("default_layout/left_sidebar.phtml") ?>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ if ($this->paginator) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     foreach ($this->paginator as $league):
         ?>
-        <div class="league_item block_item block_ui_gray">
+        <div class="league_item block_item">
             <?php
             echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
             ?>

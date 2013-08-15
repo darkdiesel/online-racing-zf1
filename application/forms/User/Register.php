@@ -126,7 +126,7 @@ class Application_Form_User_Register extends Zend_Form {
         $this->addElement('reset', 'reset', array(
             'label' => "",
             'ignore' => true,
-            'class' => 'btn',
+            'class' => 'btn btn-default',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

@@ -15,8 +15,9 @@
 /* Common class for item_block */
 .block_item{
     position:relative;
-    margin:15px 0;
-    
+    margin:0 0 10px;
+    background:none repeat #FFFFFF;
+    box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
 }
     .block_item .block_item_header{
         background-image:linear-gradient(to bottom, #3B3B3B, #292929);
@@ -419,3 +420,12 @@
             margin:0 10px;
             width:90px;
         }
+/* breadcrumb */
+.breadcrumb{
+    margin:0;
+}
+/* pagination */
+.block_item .pagination{
+    margin:20px;
+    text-align:right;
+}

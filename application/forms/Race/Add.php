@@ -131,7 +131,7 @@ class Application_Form_Race_Add extends Zend_Form {
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
-            'class' => 'btn',
+            'class' => 'btn btn-default',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

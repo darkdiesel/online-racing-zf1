@@ -1,5 +1,5 @@
 <?php if ($this->league) { ?>
-    <div class="league_item block_item block_ui_gray">
+    <div class="league_item block_item">
         <?php
         echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($this->league->id));
         ?>
@@ -53,7 +53,7 @@
     <div class="page_title"><?php echo $this->translate('Чемпионаты лиги') ?></div>
     <?php if (count($this->paginator)) { ?>
         <?php foreach ($this->paginator as $championship): ?>
-            <div class="championship_item block_item block_ui_gray">
+            <div class="championship_item block_item">
                 <?php
                 echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
                 ?>

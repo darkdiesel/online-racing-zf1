@@ -16,8 +16,8 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         $this->_menu_html .= "<i class=\"icon-cog icon-black\"></i>";
         $this->_menu_html .= "<b class=\"icon-chevron-down\"></b>";
         $this->_menu_html .= "</a>";
-        $this->_menu_html .= "<ul class=\"dropdown-menu\">";
-        $this->_menu_html .= "<li class=\"nav-header\">{$menu_type}</li>";
+        $this->_menu_html .= "<ul class=\"dropdown-menu\" role=\"menu\">";
+        $this->_menu_html .= "<li class=\"dropdown-header\">{$menu_type}</li>";
         $this->_menu_html .= "<li class=\"divider\"></li>";
 
         return $this;

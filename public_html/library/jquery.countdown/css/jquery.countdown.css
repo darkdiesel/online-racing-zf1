@@ -41,19 +41,15 @@
     font-weight: bold;
 }
 .countdown_amount {
-    background:url("/img/moving_text_bgr.png") repeat;
-    color:#C5C5C2;
-    box-shadow:0 0 9px 5px #000000 inset;
-    border: 2px solid #808080;
-    border-radius: 5px 5px 5px 5px;
-    font: bold 14px verdana;
-    margin:4px auto 2px;
-    padding:8px 10px;
-    text-align: center;
-    width:200px;
-    text-shadow: 1 1 blue;
+    color:#BBBBBB;
+    text-align:center;
     display:block;
     letter-spacing:0px;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:25px;
+    font-weight:bold;
+    background:none 0 0 #F5F5F5;
+    padding:10px 0;
 }
 .countdown_descr {
     display:block;

@@ -98,7 +98,7 @@ class Application_Form_Resource_Edit extends Zend_Form
 
 	$this->addElement('reset', 'reset', array(
 	    'ignore' => true,
-	    'class' => 'btn',
+	    'class' => 'btn btn-default',
 	    'label' => $this->translate('Сбросить'),
 	    'decorators' => array(
 		'ViewHelper', 'HtmlTag',
@@ -108,7 +108,7 @@ class Application_Form_Resource_Edit extends Zend_Form
 
 	$this->addElement('button', 'cancel', array(
 	    'ignore' => true,
-	    'class' => 'btn',
+	    'class' => 'btn btn-default',
 	    'onClick' => "location.href='admin/resource/all'",
 	    'label' => $this->translate('Отмена'),
 	    'decorators' => array(

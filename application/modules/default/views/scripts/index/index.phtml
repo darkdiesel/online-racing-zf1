@@ -1,69 +1,69 @@
-<div class="hero-unit img-polaroid" style="text-align:center; font-family:'Faster One'">
-    <img src="<?php echo $this->baseUrl('img/logo_large.png') ?>">
+<div class="hero-unit block_item" style="text-align:center; font-family:'Faster One'; padding:25px 0;">
     <span style="font-size:50px">Online-<span style="color:#C41D1D">Racing</span>.Net</span>
     <p><span style="color:#C41D1D">sim</span>-racing <span style="color:#C41D1D">portal</span></p>
 </div>
+<div class="block_item">
 <div class="page_title"><?php echo $this->translate('Новости нашего портала') ?>:</div>
-<div class="div_hr"></div>
 <?php if (count($this->last_posts) != 0) { ?>
     <div id="articles_block">
-        <?php
-        $filter = new Zend_Filter();
-        $filter->addFilter(new Zend_Filter_StripTags())
-                ->addFilter(new Zend_Filter_StringTrim());
-        $bbcode = Zend_Markup::factory('Bbcode');
+	<?php
+	$filter = new Zend_Filter();
+	$filter->addFilter(new Zend_Filter_StripTags())
+		->addFilter(new Zend_Filter_StringTrim());
+	$bbcode = Zend_Markup::factory('Bbcode');
 
-        foreach ($this->last_posts as $post) {
-            ?>
-            <h6><a href="#"><?php echo $this->truncate($post->title)->toLength(100); ?></a></h6>
-            <div>
-                <p class="article_block_text">
-                    <?php if (!$post->image == "") { ?>
-                        <img src='<?php echo $post->image; ?>' width="150px" height="100px" class='img-polaroid article_block_image'>
-                    <?php } ?>
+	foreach ($this->last_posts as $post) {
+	    ?>
+	    <h6><a href="#"><?php echo $this->truncate($post->title)->toLength(100); ?></a></h6>
+	    <div>
+		<p class="article_block_text">
+		    <?php if (!$post->image == "") { ?>
+	    	    <img src='<?php echo $post->image; ?>' width="150px" height="100px" class='img-polaroid article_block_image'>
+		    <?php } ?>
 
-                    <?php
-                    if ($post->annotation != '') {
-                        echo $this->escape($post->annotation);
-                    } else {
-                        echo $bbcode->render((string) ($this->truncate($this->escape($post->text))->toLength(250)));
-                    }
-                    ?>
-                </p>
-                <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true) ?>" class="btn btn-sm btn-primary article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
-            </div>
-        <?php } ?>
+		    <?php
+		    if ($post->annotation != '') {
+			echo $this->escape($post->annotation);
+		    } else {
+			echo $bbcode->render((string) ($this->truncate($this->escape($post->text))->toLength(250)));
+		    }
+		    ?>
+		</p>
+		<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true) ?>" class="btn btn-sm btn-primary article_block_more"><?php echo $this->translate("Подробнее...") ?></a>
+	    </div>
+	<?php } ?>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#articles_block").accordion({header: "h6"});
+    	$("#articles_block").accordion({header: "h6"});
         });
     </script>
 <?php } else {
     ?>
     <div class="alert alert-error alert-block">
         <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-
-        <?php echo $this->translate('Контент на сайте не найден.'); ?>
+	<?php echo $this->translate('Контент на сайте не найден.'); ?>
     </div>
 <?php } ?>
-<div class="page_title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
-<div class="div_hr"></div>
-<div id="rss_block">
-    <?php for ($i = 1; $i < $this->rss_count; $i++) { ?>
-        <h6 class="rss_title">
-            <a href="#"><?php echo $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?></a>
-        </h6>
-        <div class="rss_description">
-            <p class="rss_text">
-                <?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"] ?>
-            </p>
-            <a class="rss_more btn btn-sm btn-primary" href="<?php echo $this->rss_element[$this->rss_index["LINK"][$i + 1]]["value"]; ?>" target="_BLINK"><?php echo $this->translate("Подробнее на F1-News.ru") ?></a>
-        </div>
-    <?php } ?>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#rss_block").accordion({header: "h6"});
-    });
-</script>
+<div class="block_item">
+    <div class="page_title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
+    <div id="rss_block">
+	<?php for ($i = 1; $i < $this->rss_count; $i++) { ?>
+            <h6 class="rss_title">
+    	    <a href="#"><?php echo $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?></a>
+            </h6>
+            <div class="rss_description">
+    	    <p class="rss_text">
+		    <?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"] ?>
+    	    </p>
+    	    <a class="rss_more btn btn-sm btn-primary" href="<?php echo $this->rss_element[$this->rss_index["LINK"][$i + 1]]["value"]; ?>" target="_BLINK"><?php echo $this->translate("Подробнее на F1-News.ru") ?></a>
+            </div>
+	<?php } ?>
+    </div>
+    <script type="text/javascript">
+	$(document).ready(function() {
+	    $("#rss_block").accordion({header: "h6"});
+	});
+    </script>
+</div>

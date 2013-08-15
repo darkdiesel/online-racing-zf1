@@ -124,7 +124,8 @@ $(document).ready(function() {
     $(".block_item").hover(function(o) {
         //$(this).children(".configure_block_item_links").show();
     }, function(o) {
-        $('ul', $(this)).hide();
+	$(this).find(".configure_block_item_links").children("ul").hide();
+        //$('ul', $(this)).hide();
         //$(this).children(".configure_block_item_links").hide();
     });
 

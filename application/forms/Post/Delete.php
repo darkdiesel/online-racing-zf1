@@ -26,7 +26,7 @@ class Application_Form_Post_Delete extends Zend_Form {
 
         $this->addElement('button', 'cancel', array(
             'ignore' => true,
-            'class' => 'btn',
+            'class' => 'btn btn-default',
             'onClick' => "location.href='/post/all'",
             'label' => $this->translate('Отмена'),
             'decorators' => array(

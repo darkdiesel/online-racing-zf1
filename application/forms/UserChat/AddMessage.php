@@ -56,7 +56,7 @@ class Application_Form_UserChat_AddMessage extends Zend_Form {
 
         $this->addElement('button', 'reset', array(
             'ignore' => true,
-            'class' => 'btn',
+            'class' => 'btn btn-default',
             'label' => $this->translate('Очистить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

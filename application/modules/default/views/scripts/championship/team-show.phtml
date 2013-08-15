@@ -23,7 +23,7 @@
         if ($this->team_driver_data) {
             foreach ($this->team_driver_data as $driver):
                 ?>
-                <div class="team_user_full_info_item block_ui_gray block_item">
+                <div class="team_user_full_info_item block_item">
                     <?php
                     echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
                     ?>

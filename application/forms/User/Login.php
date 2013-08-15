@@ -84,7 +84,7 @@ class Application_Form_User_Login extends Zend_Form {
 
         $this->addElement('reset', 'reset', array(
             'ignore' => true,
-            'class' => 'btn',
+            'class' => 'btn btn-default',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

@@ -3,7 +3,7 @@ if ($this->paginator) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     ?>
     <?php foreach ($this->paginator as $post): ?>
-        <div class="post_item block_item block_ui_gray block-ui-border-dark">
+        <div class="post_item block_item">
             <?php
             echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($post['id']));
             ?>
