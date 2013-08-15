@@ -429,3 +429,7 @@
     margin:20px;
     text-align:right;
 }
+/* container */
+.container{
+    min-width:1024px;
+}

@@ -12,13 +12,11 @@
     <body>
         <!-- HeadLine -->
 	<?php //echo $this->render("default_layout/head_line.phtml"); ?>
+	<?php echo $this->render("default_layout/head_nav.phtml"); ?>
 	<div id="background-wrapper"></div>
         <div id="page_wrapper">
             <div id="page">
-                <div id="header">
-		    <?php echo $this->render("default_layout/header.phtml") ?>
-		    <div class="clearfix"></div>
-                </div>
+		<?php echo $this->render("default_layout/header.phtml") ?>
                 <div id="main_wrapper">
                     <div id="main" class="clearfix">
                         <!-- Content -->
