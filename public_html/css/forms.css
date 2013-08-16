@@ -195,3 +195,12 @@ input[type="file"] {
     line-height:auto;
     margin-bottom:10px;
 }
+
+/* New forms  */
+.block-item-form{
+    margin:0;
+    padding:10px 20px;
+}
+.block-item-form-w-270{
+    width:270px;
+}

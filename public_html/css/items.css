@@ -18,6 +18,7 @@
     margin:0 0 10px;
     background:none repeat #FFFFFF;
     box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+    border:1px solid #E7E2E2;
 }
     .block_item .block_item_header{
         background-image:linear-gradient(to bottom, #3B3B3B, #292929);
@@ -344,8 +345,9 @@
     }
 /* Slider block */
 #slider_block{
-    border:2px solid #292929;
     border-bottom:none;
+    margin:0;
+    border:2px solid #fff;
 }
     #slider_block > .carousel{
 	margin:0;
@@ -358,7 +360,6 @@
     text-align:center;
 }
 .align-center-block{
-    text-align:center;
     margin:0 auto;
     display:block;
 }
@@ -432,4 +433,29 @@
 /* container */
 .container{
     min-width:1024px;
+}
+
+/* navbar */
+#top-navbar{
+    margin:0;
+}
+#sub-navbar{
+    min-height:40px;
+    background:#fff;
+}
+#sub-navbar .nav > li > a{
+    text-transform:uppercase;
+    letter-spacing:0;
+    font:bold 13px arial;
+    line-height:10px;
+    padding-bottom:10px;
+    border-bottom:5px solid #fff;
+}
+#sub-navbar .nav > li.active > a{
+    border-bottom:5px solid gray;
+}
+
+#sub-navbar .nav > li > a:hover{
+    background:#F9F9F9;
+    border-bottom:5px solid #ccc;
 }

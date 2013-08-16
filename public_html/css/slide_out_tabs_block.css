@@ -12,11 +12,12 @@ position:fixed; margin:0px; padding:0px; top:200px; right:0px; list-style:none; 
         #list_sliding_tabs .sliding_tab_item .list_vertical_item_wraper{
         }
             #list_sliding_tabs .sliding_tab_item .sliding_tab_item_icon{
-                 background:url("/img/backg-wrapper.png");
-                 /*height:50px;*/
+                 /*background:url("/img/backg-wrapper.png");
+                 height:50px;*/
+		 background:#fff;
                  padding:5px 0 5px 5px;
-                 border-radius:5px 0 0 5px;
-                 border:2px solid #373A3A;
+                 border-radius:2px 0 0 2px;
+                 border:2px solid #cccccc;
                  position:absolute;
                  left:-59px;
                  color:#fff;
@@ -26,12 +27,10 @@ position:fixed; margin:0px; padding:0px; top:200px; right:0px; list-style:none; 
                     max-height:50px;
                 }
             #list_sliding_tabs .sliding_tab_item .sliding_tab_item_content{
-                background:#3B3B3B;
-                border:2px solid #373A3A;
-                border-top:none;
+                background:#F8F8F8;
+                border:2px solid #cccccc;
                 position:relative;
-                border-radius:0 0 5px 5px;
-                color:#fff;
+                color:#777777;
                 padding:10px 5px;
                 max-height:250px;
                 overflow:auto;
@@ -39,7 +38,7 @@ position:fixed; margin:0px; padding:0px; top:200px; right:0px; list-style:none; 
                 font-size:12px;
             }
                  #list_sliding_tabs .sliding_tab_item .sliding_tab_item_content a{
-                     color:#fff;
+                     color:#777777;
                 }
             #list_sliding_tabs .sliding_tab_item .sliding_tab_item_content_hidden{
                 display:none;

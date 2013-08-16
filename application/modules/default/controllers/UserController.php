@@ -466,7 +466,7 @@ class UserController extends App_Controller_FirstBootController {
         Zend_Auth::getInstance()->clearIdentity();
         Zend_Session::forgetMe();
         Zend_Session::expireSessionCookie();
-        return $this->_helper->redirector('login', 'user');
+        return $this->_helper->redirector('index', 'index');
     }
 
     public function editAction() {
