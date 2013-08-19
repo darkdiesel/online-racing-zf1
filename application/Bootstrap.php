@@ -81,7 +81,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	$view->headMeta()
 		->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
 		->setHttpEquiv('X-UA-Compatible', 'IE=edge')
-		->setHttpEquiv('X-UA-Compatible', 'IE=EmulateIE9')
 		->appendHttpEquiv('Content-Language', 'en-US')
 		->appendHttpEquiv('Content-Language', 'ru')
 		->appendName('description', 'Site for online racing competition with rFactor games and mods and F1 news.')
@@ -100,7 +99,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	// CSS setups
 	// [JQUERY library]                             
-	$view->headScript()->appendFile("/library/jquery/js/jquery-1.9.1.min.js");
+	$view->headScript()->appendFile("/library/jquery/js/jquery-1.10.2.min.js");
 
 	// [JQUERY UI library]
 	$view->headLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");

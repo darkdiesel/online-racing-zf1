@@ -120,7 +120,7 @@ class Application_Form_User_Login extends Zend_Form
 	    'FormElements',
 	    //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
 //	    /'Fieldset',
-	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form_actions display_group clearfix')),
+	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'clearfix')),
 	));
     }
 
