@@ -107,14 +107,10 @@
         clear:both;
     }
     #users_page .user_item{
-        border:1px solid #CACACA;
         padding:9px;
-        width:176px;
         display:inline-block;
         margin:5px 20px 25px;
         position:relative;
-        background:none repeat scroll 0 0 #F5F5F5;
-        border-radius:3px;
     }
     .user_item:hover{
         background:none repeat scroll 0 0 #fff;

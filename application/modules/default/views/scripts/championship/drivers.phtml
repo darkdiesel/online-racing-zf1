@@ -8,11 +8,11 @@
                 <span class="badge badge-warning team_number"><?php echo $team->team_number; ?></span>
                 <div class="pull-left break-word-wrap block-width-390">
                     <?php if ($this->escape($team['url_logo_car']) != '') { ?>
-                        <div class="img-polaroid team_drivers_logo_wrapper_365 image_wrapper_365 overflow-hide">
+                        <div class="img-thumbnail team_drivers_logo_wrapper_365 image_wrapper_365 overflow-hide">
                             <img class="team_drivers_logo image_size_365" src="<?php echo $this->escape($team['url_logo_car']); ?>">
                         </div>
                     <?php } ?>
-                    <div class="img-polaroid">
+                    <div class="img-thumbnail">
                         <div class="team_name">
                             <a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'team-show', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true) ?>"><?php echo $this->escape($team['name']); ?></a>
                         </div>
@@ -29,7 +29,7 @@
                             echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
                             ?>
                             <div class="block_item_content">
-                                <div class="img-polaroid team_drivers_logo_wrapper_70 image_wrapper_70 overflow-hide pull-left">
+                                <div class="img-thumbnail team_drivers_logo_wrapper_70 image_wrapper_70 overflow-hide pull-left">
                                     <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
                                         <?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'image_size_70', 100); ?>
                                     </a>

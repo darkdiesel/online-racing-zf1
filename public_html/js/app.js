@@ -131,7 +131,9 @@ $(document).ready(function() {
 	$(window).scroll(function() {
 	    if ($(this).scrollTop() > 50) {
 		$('#sub-navbar').addClass("navbar-fixed-top");
+		$('#sub-navbar').removeClass("navbar-static-top");
 	    } else {
+		$('#sub-navbar').addClass("navbar-static-top");
 		$('#sub-navbar').removeClass("navbar-fixed-top");
 	    }
 	});

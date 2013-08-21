@@ -11,8 +11,6 @@ body iframe{
 #page_wrapper{
     min-height: 100%;
     position:relative;
-    width:1024px;
-    margin:0 auto;
     padding:0;
 }
 #page{
@@ -30,6 +28,10 @@ body iframe{
     background-image:linear-gradient(to bottom, #4B4B4B, #0B0B0B);
     border-bottom:2px solid #4A4A4A;
 }
+
+#head-line{
+    margin:0 0 20px 0;
+}
 #headline_wraper{
     width:1024px;
     height:100%;
@@ -38,7 +40,8 @@ body iframe{
 }
 #header{
     position:relative;
-    margin:0 0 20px;
+    margin:0 auto 20px;
+    width:1024px;
 }
 #site_logo{
     position:absolute;
@@ -162,9 +165,11 @@ body iframe{
 #main_wrapper{
     position:relative;
     padding:0;
+    width:1024px;
+    margin:0 auto;
 }
 #main{
-    width:1022px;
+    
 }
 #left_sidebar{
     width:280px;
@@ -215,17 +220,6 @@ body iframe{
     padding:0 0 20px;
     text-align:justify;
 }
-#content .page_title{
-    background: none repeat 0 0 #333333;
-    color: #FFFFFF;
-    display: inline-block;
-    font-size: 13px;
-    font-weight: bold;
-    margin:0;
-    line-height: 17px;
-    padding: 7.5px 20px;
-    vertical-align: top;
-}
 .div_hr{
     background:none repeat scroll 0 0 #D9D9D9;
     border-bottom:1px solid #FFFFFF;
@@ -271,8 +265,7 @@ body iframe{
 }
 #footer{
     border-top:2px solid #8C8C8C;
-    height:160px;
-    width:994px;
+    height:200px;
     position:absolute;
     bottom:0;
     background:#1B1B1B;
@@ -283,6 +276,7 @@ body iframe{
     padding:20px 15px 10px 15px;
     color:#6C6A6A;
     font-size:11px;
+    width:100%;
 }
 #footer .footer_box{
     position:relative;
@@ -423,14 +417,6 @@ body iframe{
 #footer .socialNetworks img:hover{
     opacity:1;
 }
-.clearfix:after{
-    clear:both;
-    content:".";
-    display:block;
-    height:0;
-    visibility:hidden;
-}
-
 .soc_buttons {
     position: absolute;
     right:0;
@@ -536,7 +522,7 @@ div.shareblock #shareblock a:hover{
 }
 /* articles */
 #articles_block{
-    margin:10px 0 20px 0;
+    margin:0;
 }
 /* label for jQuery validate */
 label.error {

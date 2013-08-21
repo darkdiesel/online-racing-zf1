@@ -6,13 +6,13 @@
         <div class="block_item_content">
             <div>
                 <?php if ($this->escape($this->team_data->url_logo_car)) { ?>
-                    <div class="img-polaroid img-circle align-center team_show_car_wrapper_700 image_wrapper_700 overflow-hide">
-                        <img class="img-polaroid img-circle image_size_690" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
+                    <div class="img-thumbnail img-circle align-center team_show_car_wrapper_700 image_wrapper_700 overflow-hide">
+                        <img class="img-thumbnail img-circle image_size_690" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
                     </div>
                 <?php } ?>
                 <?php if ($this->escape($this->team_data->url_logo) != '') { ?>
-                    <div class="img-polaroid img-circle align-center team_show_logo_wrapper_210 image_wrapper_210_210 overflow-hide">
-                        <img class="img-polaroid img-circle image_size_200" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
+                    <div class="img-thumbnail img-circle align-center team_show_logo_wrapper_210 image_wrapper_210_210 overflow-hide">
+                        <img class="img-thumbnail img-circle image_size_200" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
                     </div>
                 <?php } ?>
             </div>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="block_item_content">
-                        <div class="img-polaroid team_drivers_logo_wrapper_200 image_wrapper_200 overflow-hide pull-left">
+                        <div class="img-thumbnail team_drivers_logo_wrapper_200 image_wrapper_200 overflow-hide pull-left">
                             <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
                                 <?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'image_size_200', 200); ?>
                             </a>

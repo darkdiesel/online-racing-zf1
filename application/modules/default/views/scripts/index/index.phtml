@@ -3,7 +3,7 @@
     <p><span style="color:#C41D1D">sim</span>-racing <span style="color:#C41D1D">portal</span></p>
 </div>
 <div class="block_item">
-<div class="page_title"><?php echo $this->translate('Новости нашего портала') ?>:</div>
+<div class="section-title"><?php echo $this->translate('Новости нашего портала') ?>:</div>
 <?php if (count($this->last_posts) != 0) { ?>
     <div id="articles_block">
 	<?php
@@ -18,7 +18,7 @@
 	    <div>
 		<p class="article_block_text">
 		    <?php if (!$post->image == "") { ?>
-	    	    <img src='<?php echo $post->image; ?>' width="150px" height="100px" class='img-polaroid article_block_image'>
+	    	    <img src='<?php echo $post->image; ?>' width="150px" height="100px" class='img-thumbnail article_block_image'>
 		    <?php } ?>
 
 		    <?php
@@ -47,7 +47,7 @@
 <?php } ?>
 </div>
 <div class="block_item">
-    <div class="page_title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
+    <div class="section-title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
     <div id="rss_block">
 	<?php for ($i = 1; $i < $this->rss_count; $i++) { ?>
             <h6 class="rss_title">

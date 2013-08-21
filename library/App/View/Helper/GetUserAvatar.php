@@ -2,7 +2,7 @@
 
 class App_View_Helper_getUserAvatar extends Zend_View_Helper_Abstract {
 
-    function getUserAvatar($user_id, $avatar_type, $img_class = 'img-polaroid', $img_size = 200) {
+    function getUserAvatar($user_id, $avatar_type, $img_class = 'img-thumbnail', $img_size = 200) {
         switch ($avatar_type) {
             case '0':
                 $avatar = $this->view->gravatar()

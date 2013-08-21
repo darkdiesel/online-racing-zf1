@@ -1,40 +1,53 @@
 <div id="users_page" class="page">
     <div class="page_content">
-        <?php
-        if (count($this->paginator)) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');?>
-            <div class="div_hr"></div>
-            <?php
-            $date1 = new Zend_Date();
-            foreach ($this->paginator as $user):
-                ?>
-                <div class="user_item">
-                    <?php
-                    $date2 = new Zend_Date($user['date_last_activity']);
-                    if (($date1->toValue() - $date2->toValue()) <= 420) {
-                        ?>
-                        <img src="/img/user_online.png" class="user_light_status img-polaroid">
-                    <?php } else { ?>
-                        <img src="/img/user_ofline.png" class="user_light_status img-polaroid">
-                    <?php } ?>
-                    <div class="user_image">
-                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $this->setupUserAvatar($user['id'], $user['avatar_type']); ?></a>
-                    </div>
+	<?php
+	if (count($this->paginator)) {
+	    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+	    ?>
+	    <?php
+	    $date1 = new Zend_Date();
+	    $user_index = 1;
+	    foreach ($this->paginator as $user):
+		if ($user_index % 3 == 1) {
+		    ?>
+	    	<div class="row">
+		    <?php } ?>
+		    <div class="col-lg-4">
+			<div class="user_item block_item ">
+			    <?php
+			    $date2 = new Zend_Date($user['date_last_activity']);
+			    if (($date1->toValue() - $date2->toValue()) <= 420) {
+				?>
+	    		    <img src="/img/user_online.png" class="user_light_status img-thumbnail">
+			    <?php } else { ?>
+	    		    <img src="/img/user_ofline.png" class="user_light_status img-thumbnail">
+			    <?php } ?>
+			    <div class="user_image">
+				<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $this->setupUserAvatar($user['id'], $user['avatar_type']); ?></a>
+			    </div>
 
-                    <div class="user_flag"><img src="<?php echo $user['country_url_image_round']; ?>" title="<?php echo $user['country_name']; ?>"></div>
-                    <div class="user_login"><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $user['login']; ?></a></div>
-                </div>
-                <?php
-            endforeach;?>
-            <div class="div_hr"></div>
-            <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-        } else {
-            ?>
-            <div class="alert alert-error alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->translate('Пользователи на сайте не найдены!'); ?>
-            </div>
-        <?php } ?>
+			    <div class="user_flag"><img src="<?php echo $user['country_url_image_round']; ?>" title="<?php echo $user['country_name']; ?>"></div>
+			    <div class="user_login"><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $user['login']; ?></a></div>
+			</div>
+		    </div>
+		    <?php
+		    $user_index++;
+		    if ($user_index % 3 == 1) {
+			?>
+	    	</div>
+		    <?php
+		}
+	    endforeach;
+	    ?>
+	    <?php
+	    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+	} else {
+	    ?>
+    	<div class="alert alert-error alert-block">
+    	    <button type="button" class="close" data-dismiss="alert">×</button>
+    	    <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+		<?php echo $this->translate('Пользователи на сайте не найдены!'); ?>
+    	</div>
+	<?php } ?>
     </div>
 </div>

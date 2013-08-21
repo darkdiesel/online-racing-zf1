@@ -7,11 +7,11 @@
             <?php
             if ($this->league->url_logo != '') {
                 ?>
-                <div class="pull-right img-polaroid league_id_logo_wrapper_250 image_wrapper_250 overflow-hide">
+                <div class="pull-right img-thumbnail league_id_logo_wrapper_250 image_wrapper_250 overflow-hide">
                     <img class="league_id_logo image_size_250" src="<?php echo $this->escape($this->league->url_logo); ?>">
                 </div>
             <?php } ?>
-            <div class="img-polaroid league_id_info_block">
+            <div class="img-thumbnail league_id_info_block">
                 <table class="table table-striped font-veradana font-size-11">
                     <tbody>
                         <tr>
@@ -50,7 +50,7 @@
         </div>
     </div>
     <!-- Championship start -->
-    <div class="page_title"><?php echo $this->translate('Чемпионаты лиги') ?></div>
+    <div class="section-title"><?php echo $this->translate('Чемпионаты лиги') ?></div>
     <?php if (count($this->paginator)) { ?>
         <?php foreach ($this->paginator as $championship): ?>
             <div class="championship_item block_item">
@@ -75,7 +75,7 @@
                 </div>
                 <div class="block_item_content">
                     <?php if ($this->escape($championship['url_logo']) != '') { ?>
-                        <div class="championship_all_logo_wrapper_200_200 image_wrapper_200_200 img-polaroid pull-left overflow-hide">
+                        <div class="championship_all_logo_wrapper_200_200 image_wrapper_200_200 img-thumbnail pull-left overflow-hide">
                             <img class="image_size_200" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
                         </div>
                     <?php } ?>
@@ -104,7 +104,6 @@
                 </div>
             </div>
         <?php endforeach; ?>
-        <div class="div_hr"></div>
         <?php
         echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     } else {
