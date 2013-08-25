@@ -63,7 +63,7 @@
         </div>
     </div>
     <!-- Races start -->
-    <div class="page_title"><?php echo $this->translate('Гонки чемпионата') ?></div>
+    <div class="section-title"><?php echo $this->translate('Гонки чемпионата') ?></div>
     <?php if (count($this->paginator)) { ?>
         <?php foreach ($this->paginator as $race): ?>
             <div class="race_item block_item">
@@ -108,7 +108,6 @@
                 </div>
             </div>
         <?php endforeach; ?>
-        <div class="div_hr"></div>
         <?php
         echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     } else {
