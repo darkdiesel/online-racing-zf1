@@ -181,7 +181,10 @@ class UserController extends App_Controller_FirstBootController {
 
         // page title
         $this->view->headTitle($this->view->translate('Регистрация'));
-
+	$this->view->pageTitle($this->view->translate('Регистрация'));
+	
+	$this->messageManager->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.')}");
+	
         // jQuery validate script
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
 
