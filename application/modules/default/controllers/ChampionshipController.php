@@ -112,6 +112,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 		    $championship_data['user_id'] = $form->getValue('admin');
 		    $championship_data['date_start'] = $form->getValue('date_start');
 		    $championship_data['date_end'] = $form->getValue('date_end');
+		    $championship_data['hotlap_ip'] = $form->getValue('hotlap_ip');
 		    $championship_data['description'] = $form->getValue('description');
 		    $championship_data['date_create'] = $date;
 		    $championship_data['date_edit'] = $date;
@@ -214,12 +215,15 @@ class ChampionshipController extends App_Controller_FirstBootController {
 	    $this->view->headTitle(
 		    "{$this->view->translate('Чемпионат')} :: {$this->view->translate('Редактировать')}"
 	    );
+		    
+		    
 
 	    $championship = new Application_Model_DbTable_Championship();
 	    $championship_data = $championship->getChampionshipData($league_id, $championship_id);
 
 	    if ($championship_data) {
 		$form = new Application_Form_Championship_Edit();
+		$this->view->pageTitle($championship_data->name);
 
 		$form->setAction(
 			$this->view->url(
@@ -246,7 +250,6 @@ class ChampionshipController extends App_Controller_FirstBootController {
 			} else {
 			    $update = true;
 			}
-
 
 			if ($update) {
 			    //saving new data to DB
@@ -284,6 +287,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 			    $new_championship_data['user_id'] = $form->getValue('admin');
 			    $new_championship_data['date_start'] = $form->getValue('date_start');
 			    $new_championship_data['date_end'] = $form->getValue('date_end');
+			    $new_championship_data['hotlap_ip'] = $form->getValue('hotlap_ip');
 			    $new_championship_data['description'] = $form->getValue('description');
 			    $new_championship_data['date_edit'] = $date;
 
@@ -377,6 +381,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
 		$form->date_start->setValue($championship_data->date_start);
 		$form->date_end->setValue($championship_data->date_end);
+		$form->hotlap_ip->setValue($championship_data->hotlap_ip);
 		$form->description->setValue($championship_data->description);
 
 		$this->view->form = $form;

@@ -1,30 +1,28 @@
-<?php
+<div class="col-lg-3 col-lg-pull-9">
+    <div id="sidebar-left" class="block_item">
+	<?php
+	if ($this->ls_next_event_block) {
+	    echo $this->partial("default_layout/left_sidebar/ls_next_event_block.phtml");
+	}
+	?>
+	<?php
+	if ($this->ls_chat_block) {
+	    echo $this->partial("default_layout/left_sidebar/ls_chat_block.phtml");
+	}
+	?>
+	<?php
+	if ($this->ls_user_map_block) {
+	    echo $this->partial("default_layout/left_sidebar/ls_user_map_block.phtml");
+	}
+	?>
+	<?php
+	if ($this->ls_online_radio_block) {
+	    echo $this->partial("default_layout/left_sidebar/ls_online_radio_block.phtml");
+	}
+	?>
 
-if ($this->ls_next_event_block) {
-    echo $this->partial("default_layout/left_sidebar/ls_next_event_block.phtml");
-}
-?>
-<?php
-
-if ($this->ls_chat_block) {
-    echo $this->partial("default_layout/left_sidebar/ls_chat_block.phtml");
-}
-?>
-<?php
-
-if ($this->ls_user_map_block) {
-    echo $this->partial("default_layout/left_sidebar/ls_user_map_block.phtml");
-}
-?>
-<?php
-
-if ($this->ls_online_radio_block) {
-    echo $this->partial("default_layout/left_sidebar/ls_online_radio_block.phtml");
-}
-?>
-
-<?php
-
-echo $this->partial("default_layout/left_sidebar/ls_online_users_block.phtml");
-?>
-
+	<?php
+	echo $this->partial("default_layout/left_sidebar/ls_online_users_block.phtml");
+	?>
+    </div>
+</div>

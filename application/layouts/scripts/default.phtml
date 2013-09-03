@@ -11,43 +11,41 @@
     </head>
     <body>
         <!-- HeadLine -->
-	<?php //echo $this->render("default_layout/head_line.phtml"); ?>
-	<?php echo $this->render("default_layout/head_nav.phtml"); ?>
-	<div id="background-wrapper"></div>
+	<?php echo $this->render("default_layout/head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
 		<?php echo $this->render("default_layout/header.phtml") ?>
-                <div id="main_wrapper">
-                    <div id="main" class="clearfix">
+                <div id="main_wrapper" class="container">
+                    <div id="main" class="row clearfix">
                         <!-- Content -->
-                        <div id="content">
-			    <?php
-			    $breadcrumb = Zend_Registry::get('breadcrumb');
-			    $page_title = $this->pageTitle();
-			    if ($page_title != "" || $breadcrumb['show']) :
-				?>
-    			    <div id="page_title_wrapper" class="block_item">
-				    <?php if ($this->pageTitle() != ""): ?>
-					<div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
-				    <?php endif; ?>
-				    <?php
-				    if ($breadcrumb['show']) {
-					echo $this->render("default_layout/breadcrumb.phtml");
-				    }
+                        <div class="col-lg-9 col-lg-push-3">
+			    <div id="content">
+				<?php
+				$breadcrumb = Zend_Registry::get('breadcrumb');
+				$page_title = $this->pageTitle();
+				if ($page_title != "" || $breadcrumb['show']) :
 				    ?>
-    			    </div>
-			    <?php endif; ?>
-			    <?php echo $this->showMessages(); ?>
-                            <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
-                                <div class="page_content">
-				    <?php echo $this->layout()->content ?>
-                                </div>
-                            </div>
-                        </div>
+    				<div id="page_title_wrapper" class="block_item">
+					<?php if ($this->pageTitle() != ""): ?>
+					    <div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
+					<?php endif; ?>
+					<?php
+					if ($breadcrumb['show']) {
+					    echo $this->render("default_layout/breadcrumb.phtml");
+					}
+					?>
+    				</div>
+				<?php endif; ?>
+				<?php echo $this->showMessages(); ?>
+				<div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
+				    <div class="page_content">
+					<?php echo $this->layout()->content ?>
+				    </div>
+				</div>
+			    </div>
+			</div>
                         <!-- Left sidebar -->
-                        <div id="left_sidebar" class="block_item">
-			    <?php echo $this->render("default_layout/left_sidebar.phtml") ?>
-                        </div>
+			<?php echo $this->render("default_layout/left_sidebar.phtml") ?>
                     </div>
                 </div>
 		<?php echo $this->render("default_layout/footer.phtml") ?>
@@ -74,6 +72,7 @@
 	    echo $this->render("default_layout/blocks/slide_out_tabs_block.phtml");
 	}
 	?>
+	<div id="background-wrapper"></div>
         <script type="text/javascript">
 	    var _gaq = _gaq || [];
 	    _gaq.push(['_setAccount', 'UA-32674101-2']);

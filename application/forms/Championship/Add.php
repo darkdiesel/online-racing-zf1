@@ -38,7 +38,7 @@ class Application_Form_Championship_Add extends Zend_Form {
             'required' => true,
             'height' => '30px',
             'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/championships/',
+            'destination' => APPLICATION_PATH . '/../public_html/data-uploads/championship/logo/',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -147,6 +147,23 @@ class Application_Form_Championship_Add extends Zend_Form {
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors', 'description',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+	
+	$this->addElement('text', 'hotlap_ip', array(
+            'label' => $this->translate('Hot-Laps IP'),
+            'placeholder' => $this->translate('Hot-Laps IP'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'required' => false,
+            'class' => 'form-control white_box_el_size_l',
+            'validators' => array(
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
                 array('HtmlTag', array('class' => 'element_tag')),

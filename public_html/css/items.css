@@ -363,7 +363,7 @@
 .overflow-hide{
     overflow:hidden;
 }
-.align-center{
+.font-align-center{
     text-align:center;
 }
 .align-center-block{
@@ -449,7 +449,7 @@
     background-color:#F8F8F8;
 }
     #top-navbar .navbar{
-	margin:0;
+	margin-bottom:0;
 	border:none;
 	background-color:#F8F8F8;
 	z-index:1001;
@@ -458,7 +458,7 @@
     background-color:#fff;
 }
     #sub-navbar .navbar{
-	margin:0;
+	margin-bottom:0;
 	border:none;
 	background-color:#fff;
 	min-height:40px;
@@ -502,4 +502,26 @@
     line-height: 17px;
     padding: 7.5px 20px;
     vertical-align: top;
+}
+
+.hotlap-block{
+    
+}
+.hotlap-block .hotlap-marquee{
+    background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
+    margin:0;
+    padding:4px 0 0 0;
+}
+.hotlap-block .navbar{
+    margin:0;
+    min-height:100%;
+}
+.hotlap-block .navbar-nav > li > a{
+    text-transform:uppercase;
+    padding-bottom:12px;
+    padding-top:12px;
+    font:bold 13px/10px arial;
+}
+#sidebar-left{
+    padding:0 10px 5px;
 }

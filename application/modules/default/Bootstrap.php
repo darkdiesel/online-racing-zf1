@@ -447,8 +447,8 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 			),
 		    ),
 		    array(
-			'label' => _('F1 RFT League'),
-			'title' => _('F1 RFT League'),
+			'label' => _('F1 ORS League'),
+			'title' => _('F1 ORS League'),
 			'module' => 'default',
 			'controller' => 'league',
 			'action' => 'id',

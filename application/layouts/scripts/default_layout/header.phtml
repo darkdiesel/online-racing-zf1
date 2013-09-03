@@ -1,18 +1,12 @@
-<div id="header">
-    <?php
-    $main_slider = Zend_Registry::get('slider');
-    if ($main_slider['show']) {
-	echo $this->render("default_layout/slider.phtml");
-    }
-    ?>
-    <?php
-    if ($this->hd_moving_text_block) {
-	//echo $this->render('default_layout/header/hd_mooving_text_block.phtml');
-    }
-    ?>
-    <?php
-    if ($this->hd_hot_lap_block) {
-	//echo $this->render('default_layout/header/hd_hot_lap_block.phtml');
-    }
-    ?>
+<div id="header" class="container">
+    <div class="row">
+	<div class="col-lg-12">
+	    <?php
+	    $main_slider = Zend_Registry::get('slider');
+	    if ($main_slider['show']) {
+		echo $this->render("default_layout/slider.phtml");
+	    }
+	    ?>
+	</div>
+    </div>
 </div>

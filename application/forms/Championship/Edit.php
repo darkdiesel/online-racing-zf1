@@ -20,7 +20,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field white_box_el_size_l',
+            'class' => 'form-control white_box_el_size_l',
             'validators' => array(
                 'NotEmpty',
                 //new App_Validate_NoDbRecordExists('championship', 'name')
@@ -38,7 +38,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'required' => false,
             'height' => '30px',
             'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/championships/',
+            'destination' => APPLICATION_PATH . '/../public_html/data-uploads/championship/logo/',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -57,7 +57,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'label' => $this->translate('Лига'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
-            'class' => 'white_box_el_size_m',
+            'class' => 'form-control white_box_el_size_m',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -73,7 +73,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'label' => $this->translate('Регламент'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
-            'class' => 'white_box_el_size_m',
+            'class' => 'form-control white_box_el_size_m',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -89,7 +89,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'label' => $this->translate('Игра для проведения'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
-            'class' => 'white_box_el_size_m',
+            'class' => 'form-control white_box_el_size_m',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -104,7 +104,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'label' => $this->translate('Администратор чемпионата'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
-            'class' => 'white_box_el_size_m',
+            'class' => 'form-control white_box_el_size_m',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -122,7 +122,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'description' => $this->translate('Формат даты yyyy-mm-dd (yyyy - год, mm - месяц, dd - день)'),
             'required' => true,
             'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field',
+            'class' => 'form-control',
             'validators' => array(
                 array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
                 array('StringLength', true, array('min' => 10, 'max' => 10)),
@@ -141,7 +141,7 @@ class Application_Form_Championship_Edit extends Zend_Form {
             'description' => $this->translate('Формат даты yyyy-mm-dd (yyyy - год, mm - месяц, dd - день)'),
             'required' => true,
             'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field',
+            'class' => 'form-control',
             'validators' => array(
                 array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
                 array('StringLength', true, array('min' => 10, 'max' => 10)),
@@ -153,13 +153,30 @@ class Application_Form_Championship_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
+	
+	$this->addElement('text', 'hotlap_ip', array(
+            'label' => $this->translate('Hot-Laps IP'),
+            'placeholder' => $this->translate('Hot-Laps IP'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'required' => false,
+            'class' => 'form-control white_box_el_size_l',
+            'validators' => array(
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
 
         $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание чемпионата'),
             'placeholder' => $this->translate('Описание чемпионата'),
             'cols' => 60,
             'rows' => 10,
-            'class' => 'white_box_el_size_xl',
+            'class' => 'form-control white_box_el_size_xl',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),

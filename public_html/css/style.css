@@ -39,7 +39,7 @@ body iframe{
 }
 #header{
     position:relative;
-    margin:0 auto 20px;
+    margin:0 auto;
     width:1024px;
 }
 #site_logo{
@@ -128,96 +128,42 @@ body iframe{
 #moving_text marquee .header_news li a:hover{
     text-decoration:none;
 }
-#Hot_Laps_F1{
-    background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
-    border:2px solid #292929;
-    border-top:none;
-    box-shadow:0 0 9px 5px #000000 inset;
-    height:36px;
-    right:20px;
-    width:580px;
-    border-radius:0 0 10px 0;
-    float:right;
-    position:relative;
-}
-#Hot_Laps_F1 .Marquee{
-    padding-top:5px;
-    display:inline-block;
-}
-#Hot_Laps_F1 .hot_laps_links{
-    display:inline-block;
-    padding:7px 5px;
-    position:absolute;
-    top:0;
-}
-#Hot_Laps_F1 .hot_laps_links a{
-    font-size:14px;
-    font-weight:bold;
-    margin-left:10px;
-    color:#C5C5C2;
-    text-decoration:underline;
-}
-#Hot_Laps_F1 .hot_laps_links a:hover{
-    text-decoration:none;
-    color:#E1E1E0;
-}
 #main_wrapper{
     position:relative;
     padding:0;
-    width:1024px;
-    margin:0 auto;
+    margin-top:20px;
 }
 #main{
     
 }
-#left_sidebar{
-    width:280px;
-    padding:0px 20px 20px;
-    float:left;
-    margin-left:0;
-    margin-right:-320px;
-    margin-bottom:5px;
-    overflow:visible;
-    word-wrap:break-word;
-}
-#left_sidebar .sidebar_box{
+#sidebar-left .sidebar_box{
     margin:0px 0 1px 0;
 }
 
-#left_sidebar .sidebar_box .sidebar_box_title, #left_sidebar .sidebar_box .sidebar_box_title > a{
+#sidebar-left .sidebar_box .sidebar_box_title, #sidebar-left .sidebar_box .sidebar_box_title > a{
     font-family:Verdana;
     font-size:12px;
     font-weight:bold;
     color:#707070;
 }
-#left_sidebar .sidebar_box .sidebar_box_title{
+#sidebar-left .sidebar_box .sidebar_box_title{
     color:#707070;
     font-size:14px;
     font-weight:bold;
     line-height:16px;
     padding:20px 0;
 }
-#left_sidebar .sidebar_box .sidebar_box_title i{
+#sidebar-left .sidebar_box .sidebar_box_title i{
 }
-#left_sidebar .sidebar_box .sidebar_box_content{
+#sidebar-left .sidebar_box .sidebar_box_content{
     padding:3px 3px;
     overflow:hidden;
 }
 /*countdown_dashboard*/
-#left_sidebar #countdown_dashboard{
+#sidebar-left #countdown_dashboard{
     overflow:hidden;
     text-align:center;
     padding:1px 0 10px;
-}
-#content{
-    word-wrap: break-word;
-    margin-left:288px;
-    margin-right:-1024px;
-    margin-bottom:5px;
-    width:734px;
-    float:left;
-    padding:0 0 20px;
-    text-align:justify;
 }
 .div_hr{
     background:none repeat scroll 0 0 #D9D9D9;
@@ -226,7 +172,6 @@ body iframe{
     height:1px;
     margin:15px 5px;
 }
-
 /*scroll to top button*/
 #back-top {
     position:fixed;
