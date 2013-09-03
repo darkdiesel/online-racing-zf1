@@ -20,7 +20,7 @@ class Application_Form_Post_Add extends Zend_Form {
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field white_box_el_size_xxl',
+            'class' => 'form-control white_box_el_size_xxl',
             'validators' => array('NotEmpty'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -35,6 +35,7 @@ class Application_Form_Post_Add extends Zend_Form {
             'label' => $this->translate('Тип статьи'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
+	    'class' => 'form-control',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -50,6 +51,7 @@ class Application_Form_Post_Add extends Zend_Form {
             'label' => $this->translate('Тип контента'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,
+	    'class' => 'form-control',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
             'decorators' => array(
@@ -63,9 +65,10 @@ class Application_Form_Post_Add extends Zend_Form {
         $this->addElement('text', 'image', array(
             'label' => $this->translate('Изображение'),
             'placeholder' => $this->translate('Изображение'),
+	    'class' => 'form-control',
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field white_box_el_size_l',
+            'class' => 'form-control white_box_el_size_l',
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -79,7 +82,7 @@ class Application_Form_Post_Add extends Zend_Form {
             'placeholder' => $this->translate('Аннотация статьи'),
             'cols' => 60,
             'rows' => 10,
-            'class' => 'white_box_el_size_xxl',
+            'class' => 'form-control white_box_el_size_xxl',
             'maxlength' => 250,
             'required' => true,
             'filters' => array('StringTrim'),
@@ -96,7 +99,7 @@ class Application_Form_Post_Add extends Zend_Form {
             'placeholder' => $this->translate('Текст статьи'),
             'cols' => 60,
             'rows' => 10,
-            'class' => 'white_box_el_size_xxl',
+            'class' => 'form-control white_box_el_size_xxl',
             'maxlength' => 50000,
             'required' => true,
             'filters' => array('StringTrim'),

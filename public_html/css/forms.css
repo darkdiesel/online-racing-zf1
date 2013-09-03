@@ -124,9 +124,6 @@ form.white_box{
         display:inline-block;
         clear:both;
     }
-        form.white_box .form_actions_group button{ 
-            height:27px;
-        }
 /* forms with fieldset */        
 form.fieldset_white_box{
     width:665px;

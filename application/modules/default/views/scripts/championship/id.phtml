@@ -30,19 +30,19 @@
 	    </div>
 	</div>
     <?php } ?>
+
     <div class="championship_item block_item">
 	<?php
 	echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship->league_id), $this->escape($this->championship->id));
 	?>
+	<div class="row">
         <div class="block_item_content">
-
-    	<div class="row pull-right">
-    	    <div class="col-sm-6 col-md-3">
-    		<div class="thumbnail">
+    	    <div class="col-lg-4 col-lg-push-8">
+    		<div class="thumbnail font-align-center">
 			<?php if ($this->championship->url_logo != '') {
 			    ?>
-			    <div class="img-thumbnail league_id_logo_wrapper_250 image_wrapper_250 overflow-hide">
-				<img class="championship_id_logo image_size_250" src="<?php echo $this->escape($this->championship->url_logo); ?>">
+			    <div class="img-thumbnail overflow-hide ">
+				<img class="championship_id_logo img-responsive" src="<?php echo $this->escape($this->championship->url_logo); ?>">
 			    </div>
 			<?php } ?>
     		    <div class="caption">
@@ -55,51 +55,50 @@
     		    </div>
     		</div>
     	    </div>
-    	</div>
-
-
-
-    	<div class="img-thumbnail championship_id_info_block">
-    	    <table class="table table-striped font-veradana font-size-11">
-    		<tbody>
-    		    <tr>
-    			<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Название') ?>:</td>
-    			<td class="cell-text-align-vert"><?php echo $this->escape($this->championship->name); ?></td>
-    		    </tr>
-    		    <tr>
-    			<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Администратор чемпионата') ?>:</td>
-    			<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->championship->user_id)), 'userId', true); ?>"><?php echo $this->escape($this->championship->user_login); ?></a></td>
-    		    </tr>
-    		    <tr>
-    			<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата старта') ?>:</td>
-    			<td class="cell-text-align-vert"><?php echo $this->escape($this->championship->date_start); ?></td>
-    		    </tr>
-    		    <tr>
-    			<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата окончания') ?>:</td>
-    			<td class="cell-text-align-vert"><?php echo $this->escape($this->championship->date_end); ?></td>
-    		    </tr>
-    		    <tr>
-    			<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Описание') ?>:</td>
-    			<td class="cell-text-align-vert">
-				<?php
-				if ($this->championship->description != "") {
-				    echo $this->RenderContentTypeText($this->championship->description, 'bbcode');
-				} else {
-				    echo $this->translate("Нет описания.");
-				}
-				?>
-    			</td>
-    		    </tr>
-    		</tbody>
-    	    </table>
-    	</div>
-    	<div class="block_item_info_bottom">
+    	    <div class="col-lg-8 col-lg-pull-4">
+    		<div class="thumbnail championship_id_info_block">
+    		    <table class="table table-striped font-veradana font-size-11">
+    			<tbody>
+    			    <tr>
+    				<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Название') ?>:</td>
+    				<td class="cell-text-align-vert"><?php echo $this->escape($this->championship->name); ?></td>
+    			    </tr>
+    			    <tr>
+    				<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Администратор чемпионата') ?>:</td>
+    				<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->championship->user_id)), 'userId', true); ?>"><?php echo $this->escape($this->championship->user_login); ?></a></td>
+    			    </tr>
+    			    <tr>
+    				<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата старта') ?>:</td>
+    				<td class="cell-text-align-vert"><?php echo $this->escape($this->championship->date_start); ?></td>
+    			    </tr>
+    			    <tr>
+    				<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата окончания') ?>:</td>
+    				<td class="cell-text-align-vert"><?php echo $this->escape($this->championship->date_end); ?></td>
+    			    </tr>
+    			    <tr>
+    				<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Описание') ?>:</td>
+    				<td class="cell-text-align-vert">
+					<?php
+					if ($this->championship->description != "") {
+					    echo $this->RenderContentTypeText($this->championship->description, 'bbcode');
+					} else {
+					    echo $this->translate("Нет описания.");
+					}
+					?>
+    				</td>
+    			    </tr>
+    			</tbody>
+    		    </table>
+    		</div>
+    	    </div>
+        </div>
+	    </div>
+	<div class="block_item_info_bottom">
     	    <div class="content_category block_item_info_bottom_item">
     		<span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span>
 		    <?php echo $this->translate('Чемпионат'); ?>
     	    </div>
     	</div>
-        </div>
     </div>
     <!-- Races start -->
     <div class="section-title"><?php echo $this->translate('Гонки чемпионата') ?></div>

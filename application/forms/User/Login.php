@@ -16,7 +16,7 @@ class Application_Form_User_Login extends Zend_Form
 	$this->setMethod('post');
 	$this->setAction('/user/login');
 	$this->setName('userlogin');
-	$this->setAttrib('class', 'block_item block-item-form block-item-form-w-270 align-center-block');
+	$this->setAttrib('class', 'block_item block-item-form block-item-form-w-270 block-align-center');
 
 	$this->addDecorators(array('formElements', 'form'));
 

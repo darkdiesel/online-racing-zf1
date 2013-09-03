@@ -26,7 +26,7 @@ if ($this->paginator) {
             <div class="block_item_content">
                 <?php if ($this->escape($league['url_logo']) != '') { ?>
                     <div class="league_all_logo_wrapper_200_200 image_wrapper_200_200 img-thumbnail pull-left overflow-hide">
-                        <img class="league_all_logo_200 image_size_200" src="<?php echo $this->baseURL($this->escape($league['url_logo'])); ?>">
+                        <img class="league_all_logo_200 image_size_200 img-responsive" src="<?php echo $this->baseUrl($this->escape($league['url_logo'])); ?>">
                     </div>
                 <?php } ?>
                 <div class="league_description block-content-text">

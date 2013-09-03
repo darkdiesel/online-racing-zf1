@@ -40,7 +40,6 @@ body iframe{
 #header{
     position:relative;
     margin:0 auto;
-    width:1024px;
 }
 #site_logo{
     position:absolute;
@@ -234,65 +233,63 @@ body iframe{
     text-align:center;
     border-right:1px dashed #3D3A3A;
 }
-#footer .footer_center{
+#footer .footer-center{
     float:left;
     margin:0 7px;
     width:570px;
     color:#5C5656;
     text-align:center;
 }
-#footer .footer_center .footer_menu{
-    text-align:center;
-}
-#footer .footer_center .footer_menu #footer_menu{
+
+#footer_menu{
     display:inline-block;
     margin: 0 auto;
     overflow:hidden;
 }
-#footer .footer_center .footer_menu #footer_menu li{
+#footer_menu li{
     float:left;
     list-style-type:none;
     margin-right:15px;
     margin-left:-2px;
 }
-#footer .footer_center .footer_menu #footer_menu li:before{
+#footer_menu li:before{
     content:"|";
     margin-right:12px;
     line-height: 15px;
 }
-#footer .footer_center .footer_menu #footer_menu li a{
+#footer_menu li a{
     font-size:13px;
     font-family:sans-serif;
     color:#6C6A6A;
 }
-#footer .footer_center .footer_menu #footer_menu li a:hover{
+#footer_menu li a:hover{
     text-decoration:underline;
     color:#968F8F;
 }
-#footer .footer_bootom .web_counters{
+#footer .web_counters{
     position:absolute;
     right:0px;
     display:inline-block;
 }
-#footer .footer_bootom .web_counters img{
+#footer .web_counters img{
     opacity:0.4;
 }
-#footer .footer_bootom .web_counters img:hover{
+#footer .web_counters img:hover{
     opacity:1;
 }
-#footer .footer_bootom .web_counters .liveinternet{
+#footer .web_counters .liveinternet{
     display:inline-block;
     margin:0 5px;
 }
-#footer .footer_bootom .web_counters .rambler100{
+#footer .web_counters .rambler100{
     display:inline-block;
     margin:0 5px;
 }
-#footer .footer_bootom .web_counters .yandex{
+#footer .web_counters .yandex{
     display:inline-block;
     margin:0 5px;
 }
-#footer .footer_bootom .web_counters .mail_ru{
+#footer .web_counters .mail_ru{
     display:inline-block;
     margin:0 5px;
 }
@@ -320,12 +317,6 @@ body iframe{
 #footer .footer_logo a {
     display:block;
 }
-#footer .footer_bootom{
-    border-top:1px dashed #3D3A3A;
-    clear:both;
-    padding-top:5px;
-    position:relative;
-}
 /*block for social network*/
 #footer .socialNetworks_slogan{
     padding:5px 20px;
@@ -333,32 +324,17 @@ body iframe{
     font-size:13px;
     color:#6C6A6A;
 }
-#footer .socialNetworks{
+#footer-social{
     border:1px solid #0E0E0E;
     border-radius:5px;
     background:rgba(113, 113, 113, 0.15);
-    display:inline-block;
-    position:absolute;
     bottom:0px;
-    right:5px;
     padding:4px;
-    height:40px;
 }
-#footer .socialNetworks:before{
-    content:"";
-    display:block;
-    border:1px dashed #3D3A3A;
-    position:relative;
-    top:-15px;
-    width:100%;
-}
-#footer .socialNetworks a{
-    display:inline-block;
-}
-#footer .socialNetworks img{
+#footer-social a > img{
     opacity:0.7;
 }
-#footer .socialNetworks img:hover{
+#footer-social a:hover > img{
     opacity:1;
 }
 .soc_buttons {
@@ -394,33 +370,6 @@ div.shareblock #shareblock:hover a{
 }
 div.shareblock #shareblock a:hover{
     opacity:1;
-}
-/* Last news block */
-#articles_block{
-
-}
-#articles_block .article_block_image{
-    float:left;
-    margin-right:10px;
-}
-#articles_block .article_block_text{
-
-}
-#articles_block .article_block_text img{
-    border:1px solid #D2D2D2;
-    border-radius:2px;
-    padding:4px;
-    background:#ffffff;
-    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
-    width:150px;
-}
-#articles_block .article_block_more{
-    color:#fff;
-
-    float:right;
-}
-#articles_block .article_block_more:hover{
-    text-decoration:none;
 }
 /* RSS Block */
 #rss_block{
@@ -487,21 +436,6 @@ label.valid {
     text-indent:-9999px;
     width:24px;
 }
-/*.breadcrumb{
-    color:gray;
-    border-radius:5px;
-    border:1px solid #C2C2C2;
-    background-color:#F5F5F5;
-    background-image:linear-gradient(to bottom, #FCFCFC, #DADADA);
-    box-shadow:0 1px 10px rgba(0, 0, 0, 0.1);
-    font-size:11px;
-    margin:0 0 10px 10px;
-    padding:0px 0 0 10px;
-}
-.breadcrumb a{
-    color:#284773;
-    font-weight:bold;
-}*/
 .user_light_status{
     height:20px;
     float:right;
@@ -509,20 +443,6 @@ label.valid {
     right:7px;
     top:163px;
 }
-/* Fix bootstrap */
-.tooltip{
-    white-space:normal;
-}
 .no_width{
     width:auto!important;
-}
-#liveracers_block{
-    position:absolute;
-    left:400px;
-    top:60px;
-    opacity:0.5;
-    width:300px;
-}
-#liveracers_block:hover{
-    opacity:1;
 }
