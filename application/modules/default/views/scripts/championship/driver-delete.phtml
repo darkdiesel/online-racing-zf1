@@ -2,8 +2,8 @@
     <?php $driver = $this->team_driver_data; ?>
     <?php echo $this->form ?>
     <div class="div_hr"></div>
-    <div class="team_item block_item">
-        <div class="block_item_content">
+    <div class="team_item block-item">
+        <div class="block-item_content">
             <div>
                 <?php if ($this->escape($this->team_data->url_logo_car) != '') { ?>
                     <img class="img-thumbnail article_team_car_image_x" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
@@ -15,8 +15,8 @@
         </div>
         <div class="page_title"><?php echo $this->translate('Гонщик') ?>:</div>
         <div class="div_hr"></div>
-        <div class="user_full_item block_item">
-            <div class="block_item_content">
+        <div class="user_full_item block-item">
+            <div class="block-item_content">
                 <div class="article_title">
                     <span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
                     <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">

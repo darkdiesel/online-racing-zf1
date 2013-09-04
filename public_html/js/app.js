@@ -105,26 +105,26 @@ $(document).ready(function() {
 
     $('.tooltip_field').tooltip();
 
-    $(".configure_block_item_links").hover(function(o) {
-	$(this).parent(".block_item").css({
+    $(".configure-block-item-links").hover(function(o) {
+	$(this).parent(".block-item").css({
 	    "outline": "2px dashed red"
 	});
     }, function(o) {
-	$(this).parent(".block_item").css({
+	$(this).parent(".block-item").css({
 	    "outline": "none"
 	});
     });
 
-    $(".configure_block_item_links .configure_block_item_link").click(function(o) {
-	$(this).parent(".configure_block_item_links").children(".dropdown-menu").slideDown();
+    $(".configure-block-item-links .configure-block-item-link").click(function(o) {
+	$(this).parent(".configure-block-item-links").children(".dropdown-menu").slideDown();
     });
 
-    $(".block_item").hover(function(o) {
-	//$(this).children(".configure_block_item_links").show();
+    $(".block-item").hover(function(o) {
+	//$(this).children(".configure-block-item-links").show();
     }, function(o) {
-	$(this).find(".configure_block_item_links").children("ul").hide();
+	$(this).find(".configure-block-item-links").children("ul").hide();
 	//$('ul', $(this)).hide();
-	//$(this).children(".configure_block_item_links").hide();
+	//$(this).children(".configure-block-item-links").hide();
     });
 
     $(function() {

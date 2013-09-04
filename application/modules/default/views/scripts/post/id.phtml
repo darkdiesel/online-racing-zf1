@@ -1,13 +1,13 @@
 <?php if ($this->post) { ?>
-    <div class="post_item block_item">
+    <div class="post_item block-item">
         <?php
         echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($this->post['id']));
         ?>
-        <div class="block_item_content">
+        <div class="block-item_content">
             <?php if ($this->post['image']) { ?>
                 <div class="block-align-center font-align-center">
-                    <div class="img-thumbnail post_id_logo_wrapper_690 image_wrapper_690 overflow-hide">
-                        <img class="post_id_logo image_size_690" src="<?php echo $this->escape($this->post['image']); ?>">
+                    <div class="post_id_logo_wrapper_690 image_wrapper_690 overflow-hide">
+                        <img class="post_id_logo image_size_690 img-thumbnail img-responsive" src="<?php echo $this->escape($this->post['image']); ?>">
                     </div>
                 </div>
             <?php } ?>
@@ -69,22 +69,22 @@
                     <!-- AddThis Button END -->
                 </div>
             </div>
-            <div class="post_info block_item_info_bottom">
-                <div class="content_category block_item_info_bottom_item">
+            <div class="post_info block-item-info-bottom">
+                <div class="content_category block-item-info-bottom-item">
                     <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->escape($this->post['article_type_name']); ?>
                 </div>
-                <div class="post_author block_item_info_bottom_item">
+                <div class="post_author block-item-info-bottom-item">
                     <span class="font-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
                     <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $this->escape($this->post['user_login']); ?></a>
                 </div>
-                <div class="post_views block_item_info_bottom_item">
+                <div class="post_views block-item-info-bottom-item">
                     <span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->post['views']); ?>
                 </div>
-                <div class="post_date_create block_item_info_bottom_item">
+                <div class="post_date_create block-item-info-bottom-item">
                     <span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->post['date_create']); ?>
                 </div>
                 <?php if ($this->escape($this->post['date_create']) != $this->escape($this->post['date_edit'])) { ?>
-                    <div class="post_date_edit block_item_info_bottom_item">
+                    <div class="post_date_edit block-item-info-bottom-item">
                         <span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->post['date_edit']); ?>
                     </div>
                 <?php } ?>

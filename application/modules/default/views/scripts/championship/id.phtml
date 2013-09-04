@@ -1,6 +1,6 @@
 <?php if ($this->championship) { ?>
     <?php if ($this->championship->hotlap_ip) { ?>
-	<div class="block_item hotlap-block">
+	<div class="block-item hotlap-block">
 	    <div class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
 		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-hotlap-collapse">
@@ -31,12 +31,12 @@
 	</div>
     <?php } ?>
 
-    <div class="championship_item block_item">
+    <div class="championship_item block-item">
 	<?php
 	echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship->league_id), $this->escape($this->championship->id));
 	?>
 	<div class="row">
-        <div class="block_item_content">
+        <div class="block-item_content">
     	    <div class="col-lg-4 col-lg-push-8">
     		<div class="thumbnail font-align-center">
 			<?php if ($this->championship->url_logo != '') {
@@ -93,8 +93,8 @@
     	    </div>
         </div>
 	    </div>
-	<div class="block_item_info_bottom">
-    	    <div class="content_category block_item_info_bottom_item">
+	<div class="block-item-info-bottom">
+    	    <div class="content_category block-item-info-bottom-item">
     		<span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span>
 		    <?php echo $this->translate('Чемпионат'); ?>
     	    </div>
@@ -104,26 +104,26 @@
     <div class="section-title"><?php echo $this->translate('Гонки чемпионата') ?></div>
     <?php if (count($this->paginator)) { ?>
 	<?php foreach ($this->paginator as $race): ?>
-	    <div class="race_item block_item">
+	    <div class="race_item block-item">
 		<?php
 		echo $this->ConfigureBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($race['id']));
 		?>
-	        <div class="block_item_header">
-	    	<div class="block_item_title">
+	        <div class="block-item_header">
+	    	<div class="block-item_title">
 	    	    <img class="image_size_40_40" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_round'])); ?>">
 	    	    <i class="icon-flag-checkered"></i>
 	    	    <a href="<?php echo $this->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $this->championship->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?></a>
 	    	</div>
-	    	<div class="block_item_info_header">
-	    	    <div class="content_category block_item_info_header_item">
+	    	<div class="block-item_info_header">
+	    	    <div class="content_category block-item_info_header_item">
 	    		<span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
 			    <?php echo $this->translate('Гонка'); ?>
 	    	    </div>
 	    	</div>
 	        </div>
-	        <div class="block_item_content">
-	    	<div class="championship_all_logo_wrapper_150_150 image_wrapper_150_150 img-thumbnail pull-left overflow-hide">
-	    	    <img class="image_size_150" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
+	        <div class="block-item_content">
+	    	<div class="championship_all_logo_wrapper_150_150 image_wrapper_150_150 pull-left overflow-hide">
+	    	    <img class="image_size_150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
 	    	</div>
 	    	<div class="block-content-text">
 			<?php
@@ -137,8 +137,8 @@
 	    	<div class="pull-right">
 	    	    <a href = "<?php echo $this->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $this->championship->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>" class = "btn btn-sm btn-primary block-content-button-more" title="<?php echo $this->translate('Детальная информация о гонке') ?>"><?php echo $this->translate('Подробнее...') ?></a>
 	    	</div>
-	    	<div class="championship_block_item_info block_item_info_bottom">
-	    	    <div class="championship_date_create block_item_info_bottom_item">
+	    	<div class="championship-block-item-info block-item-info-bottom">
+	    	    <div class="championship_date_create block-item-info-bottom-item">
 	    		<span class="font-bold font-color-black"><?php echo $this->translate('Создан') ?>: </span>
 			    <?php echo $this->escape($race['date_create']); ?>
 	    	    </div>

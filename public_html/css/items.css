@@ -13,29 +13,29 @@
     background-image:url("../img/default_background.png");
 }
 /* Common class for item_block */
-.block_item{
+.block-item{
     position:relative;
     margin:0 0 10px;
     background:none repeat #FFFFFF;
     box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
     border:1px solid #E7E2E2;
 }
-    .block_item .block_item_header{
+    .block-item .block-item_header{
         background-image:linear-gradient(to bottom, #3B3B3B, #292929);
         background-color:#3B3B3B;
         font-family:Verdana;
         color:#FFFFFF;
     }
-        .block_item .block_item_header .block_item_title{
+        .block-item .block-item_header .block-item_title{
             padding:10px;
         }
-        .block_item .block_item_header .block_item_title, .block_item .block_item_header .block_item_title a{
+        .block-item .block-item_header .block-item_title, .block-item .block-item_header .block-item_title a{
             color:#FFFFFF;
             font-size:14px;
             font-weight:bold;
         }
             
-    .block_item_content{
+    .block-item_content{
         overflow:auto;
         padding:7px;
     }
@@ -171,63 +171,63 @@
         max-height:30px;
     }
 /* configure block */    
-.block_item:hover .configure_block_item_links{
+.block-item:hover .configure-block-item-links{
     display:block;
 }
-.configure_block_item_links{
+.configure-block-item-links{
     position:absolute;
     right:5px;
     top:0px;
     display:none;
     z-index:99;
 }
-    .configure_block_item_links .configure_block_item_link{
+    .configure-block-item-links .configure-block-item-link{
         opacity:0.5;
         color:#B39434;
     }
-    .configure_block_item_links ul{
+    .configure-block-item-links ul{
         margin:0;
         right:5px;
         left:auto;
         opacity:1;
     }
-    .configure_block_item_links .contextual-links-trigger{
+    .configure-block-item-links .contextual-links-trigger{
         color:gray;
         opacity:0.5;
     }
-        .configure_block_item_links .contextual-links-trigger .caret{
+        .configure-block-item-links .contextual-links-trigger .caret{
             color:black;
         }
 
 /* block item info footer */
-.block_item_info_bottom{
+.block-item-info-bottom{
     border-top:1px solid #E6E0E0;
     font-size:10px;
     color:#969696;
     clear:both;
     margin-top:10px;
 }
-    .block_item_info_bottom .block_item_info_bottom_item{
+    .block-item-info-bottom .block-item-info-bottom-item{
         display:inline-block;
     }
-        .block_item_info_bottom .block_item_info_bottom_item:before{
+        .block-item-info-bottom .block-item-info-bottom-item:before{
             content:"|";
             margin:0 5px;
         }
-.block_item_header .block_item_info_header{
+.block-item_header .block-item_info_header{
     background-color:#C5C5C5;
     background-image:linear-gradient(to bottom, #B0B0B0, #CFCBCB);
 }        
-.block_item_info_header{
+.block-item_info_header{
     font-size:9px;
     color:#7D270D;
     padding:2px 5px;
 }
-    .block_item_info_header .block_item_info_header_item{
+    .block-item_info_header .block-item_info_header_item{
         display:inline-block;
         margin:0 7px;
     }
-        .block_item_info_header .block_item_info_header_item, .block_item_info_header .block_item_info_header_item a{
+        .block-item_info_header .block-item_info_header_item, .block-item_info_header .block-item_info_header_item a{
             color:#7D270D;
         }
         
@@ -268,7 +268,7 @@
 #default_championship_drivers{
     
 }
-    #default_championship_drivers .block_item{
+    #default_championship_drivers .block-item{
         margin:5px 0;
     }
     #default_championship_drivers .team_item .team_name{
@@ -366,7 +366,8 @@
     text-align:center;
 }
 .block-align-center{
-    margin:0 auto;
+    margin-right:auto;
+    margin-left:auto;
     display:block;
 }
 .break-word-wrap{
@@ -432,7 +433,7 @@
     margin:0;
 }
 /* pagination bootstrap3 */
-.block_item .pagination{
+.block-item .pagination{
     margin:20px;
     text-align:right;
 }

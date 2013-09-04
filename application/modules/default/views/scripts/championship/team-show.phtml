@@ -1,9 +1,9 @@
 <?php if ($this->team_data) { ?>
-    <div class="team_item block_item">
+    <div class="team_item block-item">
         <?php
         echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id);
         ?>
-        <div class="block_item_content">
+        <div class="block-item_content">
             <div>
                 <?php if ($this->escape($this->team_data->url_logo_car)) { ?>
                     <div class="img-thumbnail img-circle font-align-center team_show_car_wrapper_700 image_wrapper_700 overflow-hide">
@@ -23,12 +23,12 @@
         if ($this->team_driver_data) {
             foreach ($this->team_driver_data as $driver):
                 ?>
-                <div class="team_user_full_info_item block_item">
+                <div class="team_user_full_info_item block-item">
                     <?php
                     echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
                     ?>
-                    <div class="block_item_header">
-                        <div class="block_item_title">
+                    <div class="block-item_header">
+                        <div class="block-item_title">
                             <span class="badge badge-warning team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
                             <i class="icon-user"></i>
                             <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
@@ -38,14 +38,14 @@
                                 <img class="image_size_40_40" src="<?php echo $driver->country_url_image_glossy_wave ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
                             </a>
                         </div>
-                        <div class="block_item_info_header">
-                            <div class="content_category block_item_info_header_item">
+                        <div class="block-item_info_header">
+                            <div class="content_category block-item_info_header_item">
                                 <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
                                 <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'all', 'page' => '1'), 'userAll', true) ?>" target="_blank"><?php echo $this->translate('Гонщики'); ?></a>
                             </div>
                         </div>
                     </div>
-                    <div class="block_item_content">
+                    <div class="block-item_content">
                         <div class="img-thumbnail team_drivers_logo_wrapper_200 image_wrapper_200 overflow-hide pull-left">
                             <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
                                 <?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'image_size_200', 200); ?>

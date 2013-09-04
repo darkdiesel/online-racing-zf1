@@ -1,146 +1,153 @@
-<div id="user_info_page" class="page">
-    <div class="page_content">
-        <?php if ($this->user) { ?>
-            <?php
-            $date1 = new Zend_Date();
-            $date2 = new Zend_Date($this->user->date_last_activity);
+<?php if ($this->user) { ?>
+    <div class="row">
+	<div class="col-lg-12">
+	<?php
+	$date1 = new Zend_Date();
+	$date2 = new Zend_Date($this->user->date_last_activity);
 
-            if (($date1->toValue() - $date2->toValue()) <= 420) {
-                ?>
-                <div class="alert alert-success">
-                    <strong><?php echo $this->translate("В паддоке") ?></strong>
-                </div>
-            <?php } else { ?>
-                <div class="alert alert-warningr">
-                    <strong><?php echo $this->translate("Вне паддока") ?></strong>
-                </div>
-            <?php } ?>
-            <div class="user_info_ava">
-                <div class="user_info_avatar">
-                    <?php echo $this->avatar; ?>
-                </div>
-                <div class="img-thumbnail nationality">
-                    <img src="<?php echo $this->user->country_url_image_glossy_wave ?>">
-                    <div clas="break_word_wrap"><?php echo $this->user->country_abbreviation ?></div>
-                </div>
-            </div>
-            <div class="user_info_data img-thumbnail">
-                <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <td class="header_column"><?php echo $this->translate('Имя') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo $this->user->name ?></div></td>
-                        </tr>
-                        <tr>
-                            <td class="header_column"><?php echo $this->translate('Фамилия') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo $this->user->surname ?></div></td>
-                        </tr>
-                        <tr>
-                            <td class="header_column"><?php echo $this->translate('Дата рождения') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->birthday), 'd.m.Y') ?></div></td>
-                        </tr>
-                        <tr>
-                            <td class="header_column"><?php echo $this->translate('Страна') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo $this->user->country_native_name . " ({$this->user->country_english_name})" ?></div></td>
-                        </tr>
-                        <tr>
-                            <td class="header_column"><?php echo $this->translate('Город') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo $this->user->city ?></div></td>
-                        </tr>
-                        <tr>
-                            <td class="header_column"><?php echo $this->translate('Последний визит') ?>:</td>
-                            <td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->date_last_activity), 'H:i d.m.Y') ?></div></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="tabs">
-                <ul>
-                    <li><a href="#tabs-1"><?php echo $this->translate('Статистика сайта') ?></a></li>
-                    <li><a href="#tabs-2"><?php echo $this->translate('Контакты') ?></a></li>
-                    <li><a href="#tabs-3"><?php echo $this->translate('Социальные сети') ?></a></li>
-                </ul>
-                <div id="tabs-1">
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td class="header_column"><?php echo $this->translate('Номер пользователя') ?>:</td>
-                                <td><?php echo $this->user->id ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><?php echo $this->translate('Времени на сайте') ?>:</td>
-                                <td>
-                                    <?php
-                                    $d = new DateTime();
-                                    echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
-                                <td>
-                                    <?php
-                                    echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
-                                    ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><?php echo $this->translate('Дата регистрации') ?>:</td>
-                                <td><?php echo date_format(date_create($this->user->date_create), 'H:i d.m.Y') ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="tabs-2">
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/skype_20.png'); ?>"> <?php echo $this->translate('Skype') ?>:</td>
-                                <td><?php echo $this->user->skype ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/icq_20.png'); ?>"> <?php echo $this->translate('ICQ') ?>:</td>
-                                <td><?php echo $this->user->icq ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/googletalk_20.png'); ?>"> <?php echo $this->translate('Google Talk') ?>:</td>
-                                <td><?php echo $this->user->gtalk ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/www_20.png'); ?>"> <?php echo $this->translate('www') ?>:</td>
-                                <td><?php echo $this->user->www ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="tabs-3">
-                    <table class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/vk_20.png'); ?>"> <?php echo $this->translate('Вконтакте') ?>:</td>
-                                <td><?php echo 'none' ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/facebook_20.png'); ?>"> <?php echo $this->translate('Facebook') ?>:</td>
-                                <td><?php echo 'none' ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/twitter_20.png'); ?>"> <?php echo $this->translate('Twitter') ?>:</td>
-                                <td><?php echo 'none' ?></td>
-                            </tr>
-                            <tr>
-                                <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/googleplus_20.png'); ?>"> <?php echo $this->translate('Google+') ?>:</td>
-                                <td><?php echo 'none' ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <script type="text/javascript">
-                jQuery(document).ready(function() {
-                    $('#tabs').tabs();
-                });
-            </script>
-        <?php } ?>
+	if (($date1->toValue() - $date2->toValue()) <= 420) {
+	    ?>
+	    <div class="alert alert-success">
+		<strong><?php echo $this->translate("В паддоке") ?></strong>
+	    </div>
+	<?php } else { ?>
+	    <div class="alert alert-warning">
+		<strong><?php echo $this->translate("Вне паддока") ?></strong>
+	    </div>
+	<?php } ?>
+	    </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-lg-3 col-lg-push-9">
+    	<div class="user_info_ava block-align-center">
+    	    <div class="user_info_avatar">
+		    <?php echo $this->avatar; ?>
+    	    </div>
+    	    <div class="thumbnail nationality font-align-center">
+    		<img src="<?php echo $this->user->country_url_image_glossy_wave ?>" class="img-responsive" />
+    		<div clas="break_word_wrap"><?php echo $this->user->country_abbreviation ?></div>
+    	    </div>
+    	</div>
+        </div>
+        <div class="col-lg-9 col-lg-pull-3">
+    	<div class="user_info_data thumbnail">
+    	    <table class="table table-striped">
+    		<tbody>
+    		    <tr>
+    			<td class="header_column"><?php echo $this->translate('Имя') ?>:</td>
+    			<td><div class="break_word_wrap"><?php echo $this->user->name ?></div></td>
+    		    </tr>
+    		    <tr>
+    			<td class="header_column"><?php echo $this->translate('Фамилия') ?>:</td>
+    			<td><div class="break_word_wrap"><?php echo $this->user->surname ?></div></td>
+    		    </tr>
+    		    <tr>
+    			<td class="header_column"><?php echo $this->translate('Дата рождения') ?>:</td>
+    			<td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->birthday), 'd.m.Y') ?></div></td>
+    		    </tr>
+    		    <tr>
+    			<td class="header_column"><?php echo $this->translate('Страна') ?>:</td>
+    			<td><div class="break_word_wrap"><?php echo $this->user->country_native_name . " ({$this->user->country_english_name})" ?></div></td>
+    		    </tr>
+    		    <tr>
+    			<td class="header_column"><?php echo $this->translate('Город') ?>:</td>
+    			<td><div class="break_word_wrap"><?php echo $this->user->city ?></div></td>
+    		    </tr>
+    		    <tr>
+    			<td class="header_column"><?php echo $this->translate('Последний визит') ?>:</td>
+    			<td><div class="break_word_wrap"><?php echo date_format(date_create($this->user->date_last_activity), 'H:i d.m.Y') ?></div></td>
+    		    </tr>
+    		</tbody>
+    	    </table>
+    	</div>
+        </div>
+    </div>
+    <hr>
+    <div id="tabs">
+        <ul>
+    	<li><a href="#tabs-1"><?php echo $this->translate('Статистика сайта') ?></a></li>
+    	<li><a href="#tabs-2"><?php echo $this->translate('Контакты') ?></a></li>
+    	<li><a href="#tabs-3"><?php echo $this->translate('Социальные сети') ?></a></li>
+        </ul>
+        <div id="tabs-1">
+    	<table class="table table-striped">
+    	    <tbody>
+    		<tr>
+    		    <td class="header_column"><?php echo $this->translate('Номер пользователя') ?>:</td>
+    		    <td><?php echo $this->user->id ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><?php echo $this->translate('Времени на сайте') ?>:</td>
+    		    <td>
+			    <?php
+			    $d = new DateTime();
+			    echo $d->diff(new DateTime($this->user->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
+			    ?>
+    		    </td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><?php echo $this->translate('Дней на сайте') ?>:</td>
+    		    <td>
+			    <?php
+			    echo date_diff(new DateTime(), new DateTime($this->user->date_create))->days;
+			    ?>
+    		    </td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><?php echo $this->translate('Дата регистрации') ?>:</td>
+    		    <td><?php echo date_format(date_create($this->user->date_create), 'H:i d.m.Y') ?></td>
+    		</tr>
+    	    </tbody>
+    	</table>
+        </div>
+        <div id="tabs-2">
+    	<table class="table table-striped">
+    	    <tbody>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/skype_20.png'); ?>"> <?php echo $this->translate('Skype') ?>:</td>
+    		    <td><?php echo $this->user->skype ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/icq_20.png'); ?>"> <?php echo $this->translate('ICQ') ?>:</td>
+    		    <td><?php echo $this->user->icq ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/googletalk_20.png'); ?>"> <?php echo $this->translate('Google Talk') ?>:</td>
+    		    <td><?php echo $this->user->gtalk ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/www_20.png'); ?>"> <?php echo $this->translate('www') ?>:</td>
+    		    <td><?php echo $this->user->www ?></td>
+    		</tr>
+    	    </tbody>
+    	</table>
+        </div>
+        <div id="tabs-3">
+    	<table class="table table-striped">
+    	    <tbody>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/vk_20.png'); ?>"> <?php echo $this->translate('Вконтакте') ?>:</td>
+    		    <td><?php echo 'none' ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/facebook_20.png'); ?>"> <?php echo $this->translate('Facebook') ?>:</td>
+    		    <td><?php echo 'none' ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/twitter_20.png'); ?>"> <?php echo $this->translate('Twitter') ?>:</td>
+    		    <td><?php echo 'none' ?></td>
+    		</tr>
+    		<tr>
+    		    <td class="header_column"><img src="<?php echo $this->baseUrl('img/logo/googleplus_20.png'); ?>"> <?php echo $this->translate('Google+') ?>:</td>
+    		    <td><?php echo 'none' ?></td>
+    		</tr>
+    	    </tbody>
+    	</table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+    	$('#tabs').tabs();
+        });
+    </script>
+<?php } ?>

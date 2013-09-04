@@ -216,7 +216,7 @@ body iframe{
     margin:0 auto;
     display:inline;
     clear:both;
-    padding:20px 15px 10px 15px;
+    padding:15px 15px 10px 15px;
     color:#6C6A6A;
     font-size:11px;
     width:100%;
@@ -226,21 +226,16 @@ body iframe{
     height:120px;
     margin-bottom:10px;
 }
-#footer .footer_left{
-    float:left;
-    width:200px;
+#footer .footer-left{
     font-size:12px;
-    text-align:center;
-    border-right:1px dashed #3D3A3A;
+    
 }
 #footer .footer-center{
-    float:left;
-    margin:0 7px;
-    width:570px;
     color:#5C5656;
-    text-align:center;
 }
-
+#footer .footer-right{
+    
+}
 #footer_menu{
     display:inline-block;
     margin: 0 auto;
@@ -293,17 +288,6 @@ body iframe{
     display:inline-block;
     margin:0 5px;
 }
-#footer .footer_right{
-    width:200px;
-    float:right;
-    border-left:1px dashed #3D3A3A;
-}
-/*block for social liveinternet*/
-#footer .footer_right .liveinternet{
-    position:absolute;
-    right:5px;
-    top:15px;
-}
 #footer .copyright{
     font-family:monospace;
     text-align:left;
@@ -320,16 +304,17 @@ body iframe{
 /*block for social network*/
 #footer .socialNetworks_slogan{
     padding:5px 20px;
-    text-align:center;
     font-size:13px;
     color:#6C6A6A;
 }
-#footer-social{
+.footer-container{
     border:1px solid #0E0E0E;
     border-radius:5px;
     background:rgba(113, 113, 113, 0.15);
-    bottom:0px;
     padding:4px;
+}
+#footer-social{
+    
 }
 #footer-social a > img{
     opacity:0.7;

@@ -3,30 +3,30 @@ if ($this->paginator) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     ?>
     <?php foreach ($this->paginator as $post): ?>
-        <div class="post_item block_item">
+        <div class="post_item block-item">
             <?php
             echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($post['id']));
             ?>
-            <div class="block_item_header">
-                <div class="block_item_title">
+            <div class="block-item_header">
+                <div class="block-item_title">
                     <i class="icon-book"></i>
                     <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>"><?php echo $this->escape($post['title']); ?>                    </a>
                 </div>
-                <div class="block_item_info_header">
-                    <div class="content_category block_item_info_header_item">
+                <div class="block-item_info_header">
+                    <div class="content_category block-item_info_header_item">
                         <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
                         <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'article_type_id' => $this->escape($post['article_type_id']), 'page' => '1'), 'postAllByType', true) ?>" target="_blank"><?php echo $this->escape($post['article_type_name']); ?></a>
                     </div>
-                    <div class="post_author block_item_info_header_item">
+                    <div class="post_author block-item_info_header_item">
                         <span class="font-bold font-color-black"><i class="icon-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
                         <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
                     </div>
                 </div>
             </div>
-            <div class="block_item_content">
+            <div class="block-item_content">
                 <?php if ($this->escape($post['image']) != '') { ?>
-                    <div class="post_all_logo_wrapper_200_200 image_wrapper_200_200 img-thumbnail pull-left overflow-hide">
-                        <img class="post_all_logo_250 image_size_200" src="<?php echo $this->escape($post['image']); ?>">
+                    <div class="post_all_logo_wrapper_200_200 image_wrapper_200_200 thumbnail pull-left overflow-hide">
+                        <img class="post_all_logo_250 image_size_200 img-responsive" src="<?php echo $this->escape($post['image']); ?>">
                     </div>
                 <?php } ?>
                 <div class="block-content-text">
@@ -43,15 +43,15 @@ if ($this->paginator) {
                         <?php echo $this->translate('Читать дальше') ?> <i class="icon-double-angle-right"></i>
                     </a>
                 </div>
-                <div class="post_info block_item_info_bottom">
-                    <div class="post_views block_item_info_bottom_item">
+                <div class="post_info block-item-info-bottom">
+                    <div class="post_views block-item-info-bottom-item">
                         <span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($post['views']); ?>
                     </div>
-                    <div class="post_date_create block_item_info_bottom_item">
+                    <div class="post_date_create block-item-info-bottom-item">
                         <span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($post['date_create']); ?>
                     </div>
                     <?php if ($post['date_create'] != $post['date_edit']) { ?>
-                        <div class="post_date_edit block_item_info_bottom_item">
+                        <div class="post_date_edit block-item-info-bottom-item">
                             <span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($post['date_edit']); ?>
                         </div>
                     <?php } ?>

@@ -1,58 +1,51 @@
 /* user info page */
-    #user_info_page .user_info_ava{
-        float:right;
-        margin:0 0 20px 20px;
-        width:210px;
+    #default_user_id .user_info_ava{
     }
-    #user_info_page .user_info_ava:after{
+    #default_user_id .user_info_ava:after{
         background: url("../img/shadow_sprite.png") no-repeat scroll -250px -29px transparent;
         content: "";
         display: block;
         height: 20px;
     }
-    #user_info_page .user_info_avatar{
+    #default_user_id .user_info_avatar{
          margin:0 0 5px 0;
     }
-        #user_info_page .user_info_avatar img{
-            width:200px;
-        }
-        #user_info_page .user_info_ava .nationality{
-            text-align:center;
+        #default_user_id .user_info_avatar img{
+        
+	}
+        #default_user_id .user_info_ava .nationality{
             text-transform:uppercase;
         }
-    
-    #user_info_page table{
+    #default_user_id table{
         font-family:monospace;
     }
     
-    #user_info_page .user_info_data{
+    #default_user_id .user_info_data{
         position:relative;
-        width:480px;
         margin:0 0 20px 0;
     }
-        #user_info_page .user_info_data table{
+        #default_user_id .user_info_data table{
             margin:0;
             font-size:14px;
-            display:block;
         }
-            #user_info_page .user_info_data table td.header_column{
+            #default_user_id .user_info_data table td.header_column{
                 width:180px;
                 font-weight:bold;
                 vertical-align:middle;
                 font-size:15px;
             }
-            #user_info_page .user_info_data table tr{
+            #default_user_id .user_info_data table tr{
             }
-            #user_info_page .user_info_data table tr td{
+            #default_user_id .user_info_data table tr td{
             }
-                #user_info_page .user_info_data table tr td div{
-                    width:300px;
+                #default_user_id .user_info_data table tr td div{
+                    width:400px;
                 }
     
-    #user_info_page #tabs{
+    #default_user_id #tabs{
         clear:both;
     }
-        #user_info_page #tabs table td.header_column{
+        #default_user_id #tabs table td.header_column{
             clear:both;
             font-weight:bold;
             vertical-align:middle;
@@ -103,13 +96,13 @@
                 font-size:13px;
             }
 /* All users page */
-    #users_page .pagination{
+    #default_user_all .pagination{
         clear:both;
     }
-    #users_page .user_item{
+    #default_user_all .user_item{
         padding:9px;
-        display:inline-block;
-        margin:5px 20px 25px;
+        display:block;
+	width:195px;
         position:relative;
     }
     .user_item:hover{

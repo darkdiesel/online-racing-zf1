@@ -4,7 +4,6 @@ class UserController extends App_Controller_FirstBootController {
 
     public function init() {
         parent::init();
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/user.css"));
         $this->view->headTitle($this->view->translate('Пользователь'));
     }
 
@@ -598,7 +597,7 @@ class UserController extends App_Controller_FirstBootController {
         $this->view->headTitle($this->view->translate('Гонщики'));
         $this->view->pageTitle($this->view->translate('Гонщики'));
         // pager settings
-        $page_count_items = 9;
+        $page_count_items = 12;
         $page = $this->getRequest()->getParam('page');
         $page_range = 10;
         $items_order = 'DESC';

@@ -98,7 +98,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
 			    $filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
 
-			    $championship_data['url_logo'] = '/img/data/logos/championships/' . $newName;
+			    $championship_data['url_logo'] = '/data-content/data-uploads/championship/logo/' . $newName;
 			}
 		    }
 
@@ -216,7 +216,6 @@ class ChampionshipController extends App_Controller_FirstBootController {
 		    "{$this->view->translate('Чемпионат')} :: {$this->view->translate('Редактировать')}"
 	    );
 		    
-		    
 
 	    $championship = new Application_Model_DbTable_Championship();
 	    $championship_data = $championship->getChampionshipData($league_id, $championship_id);
@@ -269,7 +268,7 @@ class ChampionshipController extends App_Controller_FirstBootController {
 
 				    $filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
 
-				    $new_championship_data['url_logo'] = '/img/data/logos/championships/' . $newName;
+				    $new_championship_data['url_logo'] = '/data-content/data-uploads/championship/logo/' . $newName;
 
 				    if ($new_championship_data['url_logo'] != $championship_data['url_logo']) {
 					unlink(APPLICATION_PATH . '/../public_html' . $championship_data['url_logo']);

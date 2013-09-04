@@ -3,27 +3,27 @@ if ($this->paginator) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     foreach ($this->paginator as $league):
         ?>
-        <div class="league_item block_item">
+        <div class="league_item block-item">
             <?php
             echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
             ?>
-            <div class="block_item_header">
-                <div class="block_item_title">
+            <div class="block-item_header">
+                <div class="block-item_title">
                     <i class="icon-refresh"></i>
                     <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>"><?php echo $this->escape($league['name']); ?></a>
                 </div>
-                <div class="block_item_info_header">
-                    <div class="content_category block_item_info_header_item">
+                <div class="block-item_info_header">
+                    <div class="content_category block-item_info_header_item">
                         <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
                         <?php echo $this->translate('Лига'); ?>
                     </div>
-                    <div class="league_admin block_item_info_header_item">
+                    <div class="league_admin block-item_info_header_item">
                         <span class="font-bold font-color-black"><i class="icon-user font-color-gray"></i> <?php echo $this->translate('Администратор лиги') ?>: </span>
                         <a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league['user_id'])), 'userId', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
                     </div>
                 </div>
             </div>
-            <div class="block_item_content">
+            <div class="block-item_content">
                 <?php if ($this->escape($league['url_logo']) != '') { ?>
                     <div class="league_all_logo_wrapper_200_200 image_wrapper_200_200 img-thumbnail pull-left overflow-hide">
                         <img class="league_all_logo_200 image_size_200 img-responsive" src="<?php echo $this->baseUrl($this->escape($league['url_logo'])); ?>">
@@ -41,8 +41,8 @@ if ($this->paginator) {
                 <div class="pull-right">
                     <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>" class = "btn btn-sm btn-primary block-content-button-more"><?php echo $this->translate('Подробнее...') ?></a>
                 </div>
-                <div class="league_info block_item_info_bottom">
-                    <div class="league_date league_info_item block_item_info_bottom_item">
+                <div class="league_info block-item-info-bottom">
+                    <div class="league_date league_info_item block-item-info-bottom-item">
                         <span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
                         </span><?php echo $this->escape($league['date_create']); ?>
                     </div>
