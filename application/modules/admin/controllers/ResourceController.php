@@ -16,16 +16,16 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 
 	$resource = new Application_Model_DbTable_Resource();
 	$resource_data = $resource->getItem($resource_id);
-	
+
 	if ($resource_data) {
 	    //$this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->title);
 	    $this->view->resource = $resource_data;
 	    $this->view->headTitle($resource_data->name);
 	    $this->view->pageTitle($resource_data->name);
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый ресурс не существует!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Ресурс не существует!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Ресурс не существует!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Ресурс не найден!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Ресурс не найден!')}");
 	}
     }
 
@@ -36,20 +36,20 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 	$this->view->pageTitle($this->view->translate('Ресурсы сайта'));
 
 	$resource = new Application_Model_DbTable_Resource();
-	
+
 	// pager settings
 	$pager_args = array(
 	    "page_count_items" => 10,
 	    "page_range" => 5,
 	    "page" => $this->getRequest()->getParam('page')
 	);
-	
-	$paginator = $resource->getAll("all", "ASC", "1", $pager_args);
+
+	$paginator = $resource->getAll("all", "ASC", TRUE, $pager_args);
 
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messageManager->addError("{$this->view->translate('Запрашиваемые ресурсы на сайте не найдены!')}");
+	    $this->messageManager->addInfo("{$this->view->translate('Запрашиваемые ресурсы на сайте не найдены!')}");
 	}
     }
 
@@ -101,7 +101,7 @@ class Admin_ResourceController extends App_Controller_FirstBootController
     public function editAction()
     {
 	$request = $this->getRequest();
-	$resource_id = $request->getParam('resource_id');
+	$resource_id = (int) $request->getParam('resource_id');
 
 	$this->view->headTitle($this->view->translate('Редактировать'));
 
@@ -113,7 +113,7 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 	    $form = new Application_Form_Resource_Edit();
 	    $form->setAction($this->view->url(
 			    array('module' => 'admin', 'controller' => 'resource', 'action' => 'edit',
-			'resource_id' => $resource_id), 'resource', true
+			'resource_id' => $resource_id), 'resource_actions', true
 	    ));
 	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'default', true)}\"");
 
@@ -149,11 +149,11 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 	    $this->view->form = $form;
 	} else {
 	    $this->messageManager->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Ресурс не существует!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Ресурс не существует!')}");
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Ресурс не найден!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Ресурс не найден!')}");
 	}
     }
-    
+
     // action for delete resource
     public function deleteAction()
     {
@@ -169,11 +169,11 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 	    $this->view->headTitle($resource_data->name);
 	    $this->view->pageTitle("{$this->view->translate('Удалить ресурс')} :: {$resource_data->name}");
 
-	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить тип контента')} <strong>\"{$resource_data->name}\"</strong> ?");
+	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить русурс')} <strong>\"{$resource_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_ArticleType_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'resource_id' => $resource_id), 'resource', true));
-	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'resource_id' => $resource_id), 'resource_id', true) . '"');
+	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'delete', 'resource_id' => $resource_id), 'resource_actions', true));
+	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $resource_id), 'resource_id', true) . '"');
 
 	    if ($this->getRequest()->isPost()) {
 		if ($form->isValid($request->getPost())) {
@@ -181,9 +181,9 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 		    $resource->delete($resource_where);
 
 		    $this->view->showMessages()->clearMessages();
-		    $this->messageManager->addSuccess("{$this->view->translate("Тип контента <strong>\"{$resource_data->name}\"</strong> успешно удален")}");
+		    $this->messageManager->addSuccess("{$this->view->translate("Ресурс <strong>\"{$resource_data->name}\"</strong> успешно удален")}");
 
-		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1), 'resource_all', true));
+		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all', 'page' => 1), 'resource_all', true));
 		} else {
 		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
@@ -192,9 +192,9 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 	    $this->view->form = $form;
 	    $this->view->resource = $resource_data;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип-контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не существует!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Ресурс не существует!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Ресурс не существует!')}");
 	}
     }
 

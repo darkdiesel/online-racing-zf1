@@ -3,15 +3,6 @@
 class Forum_Bootstrap extends Zend_Application_Module_Bootstrap
 {
 
-    protected function _initView()
-    {
-	$this->bootstrap('layout');
-	$layout = $this->getResource('layout');
-	$view = $layout->getView();
-	
-	
-    }
-    
     protected function _initPlugins()
     {
 	$frontController = Zend_Controller_Front::getInstance();

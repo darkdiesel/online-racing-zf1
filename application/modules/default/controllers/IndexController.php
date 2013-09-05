@@ -29,6 +29,11 @@ class IndexController extends App_Controller_FirstBootController {
         $this->view->rss_element = $element;
         
         $this->view->last_posts = $artiles_data;
+	
+	$league = new Application_Model_DbTable_League();
+	
+	$this->view->league1 = $league->getItem(array('id', 1), array('name', 'url_logo'));
+	$this->view->league2 = $league->getItem(array('id', 2), array('name', 'url_logo'));
     }
     
     public function sitemapAction()

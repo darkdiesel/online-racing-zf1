@@ -130,6 +130,10 @@ class PostController extends App_Controller_FirstBootController {
         if ($content_types) {
             foreach ($content_types as $type):
                 $form->content_type->addMultiOption($type->id, $type->name);
+	    
+		if (strtolower($type->name) == 'full html') {
+                    $form->content_type->setvalue($type->id);
+                }
             endforeach;
         } else {
             $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"

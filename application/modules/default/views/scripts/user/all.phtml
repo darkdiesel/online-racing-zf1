@@ -32,7 +32,7 @@ if (count($this->paginator)) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
 } else {
     ?>
-    <div class="alert alert-error alert-block">
+    <div class="alert alert-warning alert-block">
         <button type="button" class="close" data-dismiss="alert">×</button>
         <h4><?php echo $this->translate('Ошибка!'); ?></h4>
 	<?php echo $this->translate('Пользователи на сайте не найдены!'); ?>

@@ -304,21 +304,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	  'page' => 1)
 	  )); */
 
-	//event controller routers
-	$router->addRoute(
-		'event', new Zend_Controller_Router_Route('event/:action/:id', array(
-	    'module' => 'default',
-	    'controller' => 'event',
-	    'id' => 0)
-	));
-
-	$router->addRoute(
-		'eventAll', new Zend_Controller_Router_Route('event/all/:page', array(
-	    'module' => 'default',
-	    'controller' => 'event',
-	    'action' => 'all',
-	    'page' => 1)
-	));
+	
 	//country controller routers
 	$router->addRoute(
 		'country', new Zend_Controller_Router_Route('country/:action/:country_id', array(

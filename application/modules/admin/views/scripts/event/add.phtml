@@ -1,0 +1,14 @@
+<?php echo $this->form; ?>
+<script>
+    jQuery(document).ready(function() {
+	$("#date_event").datetimepicker({
+	    showButtonPanel: true,
+	    dateFormat: "yy-mm-dd",
+	    showAnim: "clip",
+	    showSecond: true,
+	    timeFormat: 'HH:mm:ss',
+	    stepHour: 1,
+	    stepSecond: 10
+	});
+    });
+</script>

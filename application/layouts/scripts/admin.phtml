@@ -10,19 +10,65 @@
 	<?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
-	<!-- Content -->
-	<div id="content">
-	    <div id="page_title_wrapper">
-		<div class="page_title"><?php echo $this->pageTitle() ?></div>
-	    </div>
-	    <?php echo $this->showMessages(); ?>
-	    <div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
-		<div class="page_content">
-		    <?php echo $this->layout()->content ?>
+        <!-- HeadLine -->
+	<?php echo $this->render("admin_layout/head_line.phtml"); ?>
+        <div id="page_wrapper">
+            <div id="page">
+		<div id="header" class="container">
+		    <div class="row">
+			<div class="col-lg-12">
+			    <?php echo $this->render("admin_layout/header.phtml") ?>
+			</div>
+		    </div>
 		</div>
-	    </div>
-	</div>
-	<script type="text/javascript">             var _gaq = _gaq || [];
+                <div id="main_wrapper" class="container">
+                    <div id="main" class="row clearfix">
+                        <!-- Content -->
+                        <div class="col-lg-9 col-lg-push-3">
+			    <div id="content">
+				<?php
+				$breadcrumb = Zend_Registry::get('breadcrumb');
+				$page_title = $this->pageTitle();
+				if ($page_title != "" || $breadcrumb['show']) :
+				    ?>
+    				<div id="page_title_wrapper" class="block-item">
+					<?php if ($this->pageTitle() != ""): ?>
+					    <div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
+					<?php endif; ?>
+					<?php
+					if ($breadcrumb['show']) {
+					    echo $this->render("admin_layout/breadcrumb.phtml");
+					}
+					?>
+    				</div>
+				<?php endif; ?>
+				<?php echo $this->showMessages(); ?>
+				<div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
+				    <div class="page_content">
+					<?php echo $this->layout()->content ?>
+				    </div>
+				</div>
+			    </div>
+			</div>
+			<!-- Left sidebar -->
+			<div class="col-lg-3 col-lg-pull-9">
+			    <div id="sidebar-left" class="block-item">
+				<?php echo $this->render("admin_layout/left_sidebar.phtml") ?>
+			    </div>
+			</div>
+                    </div>
+                </div>
+		<?php echo $this->render("admin_layout/footer.phtml") ?>
+            </div>
+        </div>
+	<?php
+	if ($this->page_scroller_block) {
+	    echo $this->render("common_blocks/page_scroller_block.phtml");
+	}
+	?>
+	<div id="background-wrapper"></div>
+        <script type="text/javascript">
+	    var _gaq = _gaq || [];
 	    _gaq.push(['_setAccount', 'UA-32674101-2']);
 	    _gaq.push(['_trackPageview']);
 
@@ -36,3 +82,4 @@
 	    })();
         </script>
     </body>
+</html>

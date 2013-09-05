@@ -3,23 +3,40 @@
 class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'Resource';
+    protected $_name = 'resource';
     protected $_primary = 'id';
 
-    public function getItem($id, $fields = array())
+    public function getItem($idencity = array(), $fields = array())
     {
 	$model = new self;
+
+	if (!count($idencity)) {
+	    return FALSE;
+	} elseif (is_array($idencity)) {
+	    $idencity_field = $idencity[0];
+	    $idencity_value = $idencity[1];
+	} elseif (is_int($idencity)) {
+	    $idencity_field = 'id';
+	    $idencity_value = $idencity;
+	}
+	
+	if (!isset($idencity_field) || !isset($idencity_value))
+	    return FALSE;
 
 	if (!count($fields) || strtolower($fields) == 'all')
 	    $fields = "*";
 	else {
-	    $fields = array_map('trim', explode(",", $fields));
+	    if (is_array($fields)) {
+		$fields = array_map('trim', $fields);
+	    } elseif (is_string($fields)) {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
 	}
 
 	$select = $model->select()
 		->setIntegrityCheck(false)
-		->from(array('r' => $this->_name), 'r.id')
-		->where('r.id = ' . $id)
+		->from(array('r' => $this->_name))
+		->where('r.' . $idencity_field . ' = ' . $idencity_value)
 		->columns($fields);
 
 	$resource = $model->fetchRow($select);
@@ -31,20 +48,35 @@ class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
 	}
     }
 
-    public function getAll($fields = "", $order = "ASC", $pager = 0, array $pager_args = array())
+    public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
     {
 	$model = new self;
 
 	if (!count($fields) || strtolower($fields) == 'all')
 	    $fields = "*";
 	else {
-	    $fields = array_map('trim', explode(",", $fields));
+	    if (is_array($fields)) {
+		$fields = array_map('trim', $fields);
+	    } elseif (is_string($fields)) {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
+	}
+	
+	if (!count($order)) {
+	    $order_field = 'id';
+	    $order_value = "ASC";
+	} elseif (is_array($order)) {
+	    $order_field = $order[0];
+	    $order_value = $order[1];
+	} elseif (is_string($order)) {
+	    $order_field = 'id';
+	    $order_value = $order;
 	}
 
 	$select = $model->select()
 		->from(array('r' => $this->_name), 'r.id')
 		->columns($fields)
-		->order('r.id' . " " . $order);
+		->order('r.'.$order_field . " " . $order_value);
 
 	if ($pager) {
 	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);

@@ -1,0 +1,61 @@
+<ul class="nav nav-pills nav-stacked">
+    <li class="active">
+	<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
+	    <?php echo $this->translate('Сайт'); ?>
+	</a>
+    </li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('Типы контента'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    </li>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'content_type_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+	</ul>
+    </li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('Ресурсы сайта'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    </li>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'resource_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+	</ul>
+    </li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('События'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'all'), 'event_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+    </li>
+</ul>
+</li>
+</ul>

@@ -4,13 +4,27 @@
 </div>
 <div class="row">
     <div class="col-lg-6">
-	<div class="block-item">
-	    asdfasdf
+	<div class="block-item row">
+	    <div class="col-lg-12">
+		<div class="image_wrapper_200_200 block-align-center overflow-hide">
+		    <img src="<?php echo $this->league1->url_logo ?>"  alt="<?php echo $this->league1->name ?>" class="img-responsive img-thumbnail">
+		</div>
+		<div class="caption">
+		    <h3 class="font-align-center"><span class="label label-default"><?php echo $this->league1->name ?></span></h3>
+		</div>
+	    </div>
 	</div>
     </div>
     <div class="col-lg-6">
-	<div class="block-item">
-	    asdfasdf
+	<div class="block-item row">
+	    <div class="col-lg-12">
+		<div class="image_wrapper_200_200 block-align-center overflow-hide">
+		    <img src="<?php echo $this->league2->url_logo ?>"  alt="<?php echo $this->league2->name ?>" class="img-responsive img-thumbnail">
+		</div>
+		<div class="caption">
+		    <h3 class="font-align-center"><span class="label label-default"><?php echo $this->league2->name ?></span></h3>
+		</div>
+	    </div>
 	</div>
     </div>
 </div>
@@ -57,8 +71,8 @@
         </script>
     <?php } else {
 	?>
-        <div class="alert alert-error alert-block">
-            <h4><?php echo $this->translate('Ошибка!'); ?></h4>
+        <div class="alert alert-warning alert-block">
+    	<h4><?php echo $this->translate('Ошибка!'); ?></h4>
 	    <?php echo $this->translate('Контент на сайте не найден.'); ?>
         </div>
     <?php } ?>

@@ -102,7 +102,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
         }
 
         if (count($this->_error_messages)) {
-            $this->_messages_html .= "<div class=\"alert alert-error\">";
+            $this->_messages_html .= "<div class=\"alert alert-warning\">";
             $this->_messages_html .= $button;
             $this->_messages_html .= "<h4><i class=\"icon-exclamation-sign\"></i> {$this->view->translate('Ошибка!')}</h4>";
 

@@ -26,9 +26,9 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	    $this->view->pageTitle($content_type_data->name);
 	    return;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип-контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не существует!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
 	}
     }
 
@@ -52,7 +52,7 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messageManager->addError("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
+	    $this->messageManager->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
 	}
     }
 
@@ -103,7 +103,7 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
     public function editAction()
     {
 	$request = $this->getRequest();
-	$content_type_id = $request->getParam('content_type_id');
+	$content_type_id = (int) $request->getParam('content_type_id');
 
 	$this->view->headTitle($this->view->translate('Редактировать'));
 
@@ -115,7 +115,7 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	    $form = new Application_Form_ContentType_Edit();
 	    $form->setAction($this->view->url(
 			    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit',
-			'content_type_id' => $content_type_id), 'content_type', true
+			'content_type_id' => $content_type_id), 'content_type_actions', true
 	    ));
 	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'default', true)}\"");
 
@@ -146,9 +146,9 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип-контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не существует!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
 	}
     }
 
@@ -170,7 +170,7 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить тип контента')} <strong>\"{$content_type_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_ArticleType_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type', true));
+	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_actions', true));
 	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'content_type_id' => $content_type_id), 'content_type_id', true) . '"');
 
 	    if ($this->getRequest()->isPost()) {
@@ -190,9 +190,9 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	    $this->view->form = $form;
 	    $this->view->content_type = $content_type_data;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип-контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не существует!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
 	}
     }
 

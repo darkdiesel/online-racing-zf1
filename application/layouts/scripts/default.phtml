@@ -14,7 +14,11 @@
 	<?php echo $this->render("default_layout/head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
-		<?php echo $this->render("default_layout/header.phtml") ?>
+		<div id="header" class="container">
+		    <div class="row">
+			<?php echo $this->render("default_layout/header.phtml") ?>
+		    </div>
+		</div>
                 <div id="main_wrapper" class="container">
                     <div id="main" class="row clearfix">
                         <!-- Content -->
@@ -44,27 +48,31 @@
 				</div>
 			    </div>
 			</div>
-                        <!-- Left sidebar -->
-			<?php echo $this->render("default_layout/left_sidebar.phtml") ?>
+			<!-- Left sidebar -->
+			<div class="col-lg-3 col-lg-pull-9">
+			    <div id="sidebar-left" class="block-item">
+				<?php echo $this->render("default_layout/left_sidebar.phtml") ?>
+			    </div>
+			</div>
                     </div>
                 </div>
 		<?php echo $this->render("default_layout/footer.phtml") ?>
             </div>
 	    <?php
 	    if ($this->back_to_top_btn) {
-		echo $this->render("default_layout/blocks/back_to_top_btn.phtml");
+		echo $this->render("common_blocks/back_to_top_btn.phtml");
 	    }
 	    ?>
 	    <?php
 	    if ($this->share_block) {
-		echo $this->render("default_layout/blocks/share_block.phtml");
+		echo $this->render("common_blocks/share_block.phtml");
 	    }
 	    ?>
 
         </div>
 	<?php
 	if ($this->page_scroller_block) {
-	    echo $this->render("default_layout/blocks/page_scroller_block.phtml");
+	    echo $this->render("common_blocks/page_scroller_block.phtml");
 	}
 	?>
 	<?php
