@@ -50,19 +50,8 @@ class Acl extends Zend_Acl {
         $this->add(new Zend_Acl_Resource('post/edit'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('post/delete'), 'admin_allow');
 
-        $this->add(new Zend_Acl_Resource('admin/articles'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('admin/index'), 'admin_allow');
-
         $this->add(new Zend_Acl_Resource('article-type/id'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('article-type/all'), 'admin_allow');
-
-        $this->add(new Zend_Acl_Resource('game/add'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('game/edit'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('game/delete'), 'admin_allow');
-
-        $this->add(new Zend_Acl_Resource('event/add'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('event/edit'), 'admin_allow');
-        $this->add(new Zend_Acl_Resource('event/delete'), 'admin_allow');
 
         $this->add(new Zend_Acl_Resource('championship/add'), 'admin_allow');
         $this->add(new Zend_Acl_Resource('championship/edit'), 'admin_allow');
@@ -78,22 +67,48 @@ class Acl extends Zend_Acl {
 
         // master resources
         $this->add(new Zend_Acl_Resource('master_allow'));
-        $this->add(new Zend_Acl_Resource('article-type/add'), 'master_allow');
-        $this->add(new Zend_Acl_Resource('article-type/edit'), 'master_allow');
-        $this->add(new Zend_Acl_Resource('article-type/delete'), 'master_allow');
 
+	// LEAGUE
         $this->add(new Zend_Acl_Resource('league/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('league/edit'), 'master_allow');
         $this->add(new Zend_Acl_Resource('league/delete'), 'master_allow');
 
+	// TEAM 
         $this->add(new Zend_Acl_Resource('team/add'), 'master_allow');
         $this->add(new Zend_Acl_Resource('team/edit'), 'master_allow');
         $this->add(new Zend_Acl_Resource('team/delete'), 'master_allow');
 
+	// COUNTRY
         $this->add(new Zend_Acl_Resource('country/id'), 'master_allow');
         $this->add(new Zend_Acl_Resource('country/add'), 'master_allow');
+	
+	// EVENT
+	$this->add(new Zend_Acl_Resource('event/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('event/edit'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('event/delete'), 'master_allow');
+	
+	// RESOURCE
+	$this->add(new Zend_Acl_Resource('resource/id'), 'master_allow');
+	$this->add(new Zend_Acl_Resource('resource/all'), 'master_allow');
+	$this->add(new Zend_Acl_Resource('resource/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('resource/edit'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('resource/delete'), 'master_allow');
+	
+	// CONTENT-TYPE
+	$this->add(new Zend_Acl_Resource('content-type/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('content-type/edit'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('content-type/delete'), 'master_allow');
+	
+	// ARTICLE-TYPE
+        $this->add(new Zend_Acl_Resource('article-type/add'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('article-type/edit'), 'master_allow');
+        $this->add(new Zend_Acl_Resource('article-type/delete'), 'master_allow');
 
+	// CHAMPIONSHIP
         $this->add(new Zend_Acl_Resource('championship/delete'), 'master_allow');
+	
+	// RACE
+	$this->add(new Zend_Acl_Resource('race/add'), 'master_allow');
 
         //Выставляем права, по-умолчанию всё запрещено
         //this->deny('user', 'user_deny', 'show');

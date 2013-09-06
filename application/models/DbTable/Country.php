@@ -1,122 +1,158 @@
 <?php
 
-class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
+class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
+{
 
     protected $_name = 'country';
     protected $_primary = 'id';
 
-    public function getCountryData($id) {
-        $model = new self;
-        $select = $model->select()
-                ->from($this->_name, 'id')
-                ->where('id = ?', $id)
-                ->columns('*');
+    /*
+     * Get Item by idencity field value and $field array of fields list.
+     */
 
-        $country_data = $model->fetchRow($select);
+    public function getItem($idencity = array(), $fields = array())
+    {
+	$model = new self;
 
-        if (count($country_data) != 0) {
-            return $country_data;
-        } else {
-            return FALSE;
-        }
+	if (!count($idencity)) {
+	    return FALSE;
+	} elseif (is_array($idencity)) {
+	    $idencity_field = $idencity[0];
+	    $idencity_value = $idencity[1];
+	} elseif (is_int($idencity)) {
+	    $idencity_field = 'id';
+	    $idencity_value = $idencity;
+	}
+
+	if (!isset($idencity_field) || !isset($idencity_value))
+	    return FALSE;
+
+	if (!count($fields) || strtolower($fields) == 'all')
+	    $fields = "*";
+	else {
+	    if (is_array($fields)) {
+		$fields = array_map('trim', $fields);
+	    } elseif (is_string($fields)) {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
+	}
+
+	$select = $model->select()
+		->setIntegrityCheck(false)
+		->from(array('r' => $this->_name))
+		->where('r.' . $idencity_field . ' = ' . $idencity_value)
+		->columns($fields);
+
+	$resource = $model->fetchRow($select);
+
+	if (count($resource) != 0) {
+	    return $resource;
+	} else {
+	    return FALSE;
+	}
     }
 
-    public function checkExistCountryNativeName($country_name) {
-        $model = new self;
-        $select = $model->select()
-                ->from($this->_name, 'id')
-                ->where('native_name = ?', $country_name)
-                ->columns('id');
+    /*
+     * Function returns array of Items with $fields array of fields list.
+     * Sorted by $order value
+     * 
+     * If $pager == TRUE function return Pager with $pager_args parameters
+     * 
+     * Parameters:
+     * $pager_args['page_count_items']	- Count items for page
+     * $pager_args['page']		- Number of curent page
+     * $pager_args['page_range']	- Range of pages displaying at the pager's block
+     * 
+     */
 
-        $country_data = $model->fetchRow($select);
+    public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
+    {
+	$model = new self;
 
-        if (count($country_data) != 0) {
-            return $country_data->id;
-        } else {
-            return FALSE;
-        }
+	if (!count($fields) || strtolower($fields) == 'all')
+	    $fields = "*";
+	else {
+	    if (is_array($fields)) {
+		$fields = array_map('trim', $fields);
+	    } elseif (is_string($fields)) {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
+	}
+
+	if (!count($order)) {
+	    $order_field = 'id';
+	    $order_value = "ASC";
+	} elseif (is_array($order)) {
+	    $order_field = $order[0];
+	    $order_value = $order[1];
+	} elseif (is_string($order)) {
+	    $order_field = 'id';
+	    $order_value = $order;
+	}
+
+	$select = $model->select()
+		->from(array('r' => $this->_name), 'r.id')
+		->columns($fields)
+		->order('r.' . $order_field . " " . $order_value);
+
+	if ($pager) {
+	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+
+	    $paginator = new Zend_Paginator($adapter);
+	    if (count($pager_args)) {
+		$paginator->setItemCountPerPage($pager_args['page_count_items']);
+		$paginator->setCurrentPageNumber($pager_args['page']);
+		$paginator->setPageRange($pager_args['page_range']);
+	    } else {
+		$paginator->setItemCountPerPage("10");
+		$paginator->setCurrentPageNumber("1");
+		$paginator->setPageRange("5");
+	    }
+
+	    return $paginator;
+	} else {
+	    $resources = $model->fetchAll($select);
+
+	    if (count($resources) != 0) {
+		return $resources;
+	    } else {
+		return FALSE;
+	    }
+	}
     }
 
-    public function checkExistCountryAbbreviation($country_abbreviation) {
-        $model = new self;
-        $select = $model->select()
-                ->from($this->_name, 'id')
-                ->where('abbreviation = ?', $country_abbreviation)
-                ->columns('id');
+    public function checkExistCountryNativeName($country_name)
+    {
+	$model = new self;
+	$select = $model->select()
+		->from($this->_name, 'id')
+		->where('native_name = ?', $country_name)
+		->columns('id');
 
-        $country_data = $model->fetchRow($select);
+	$country_data = $model->fetchRow($select);
 
-        if (count($country_data) != 0) {
-            return $country_data->id;
-        } else {
-            return FALSE;
-        }
+	if (count($country_data) != 0) {
+	    return $country_data->id;
+	} else {
+	    return FALSE;
+	}
     }
 
-    public function getCountryName($id) {
-        $model = new self;
-        $select = $model->select()
-                ->from($this->_name, 'id')
-                ->where('id = ?', $id)
-                ->columns(array('native_name'));
+    public function checkExistCountryAbbreviation($country_abbreviation)
+    {
+	$model = new self;
+	$select = $model->select()
+		->from($this->_name, 'id')
+		->where('abbreviation = ?', $country_abbreviation)
+		->columns('id');
 
-        $country_data = $model->fetchRow($select);
+	$country_data = $model->fetchRow($select);
 
-        if (count($country_data) != 0) {
-            return $country_data->native_name;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function getCountriesName($order) {
-        $model = new self;
-
-        $select = $model->select()
-                ->from($this->_name, 'native_name')
-                ->columns(array('id', 'native_name', 'english_name'))
-                ->order('native_name ' . $order);
-
-        $countries = $model->fetchAll($select);
-
-        if (count($countries) != 0) {
-            return $countries;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function getCountryId($country_name) {
-        $model = new self;
-        $select = $model->select()
-                ->from($this->_name, 'native_name')
-                ->where('native_name = ?', $country_name)
-                ->columns(array('id'));
-
-        $country_data = $model->fetchRow($select);
-
-        if (count($country_data) != 0) {
-            return $country_data->id;
-        } else {
-            return FALSE;
-        }
-    }
-
-    public function getCountriesPager($count, $page, $page_range, $order) {
-        $model = new self;
-
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
-                                ->select()
-                                ->from($this->_name, 'id')
-                                ->columns('*')
-                                ->order('id ' . $order));
-
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setItemCountPerPage($count);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setPageRange($page_range);
-
-        return $paginator;
+	if (count($country_data) != 0) {
+	    return $country_data->id;
+	} else {
+	    return FALSE;
+	}
     }
 
 }

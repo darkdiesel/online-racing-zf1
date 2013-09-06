@@ -1,0 +1,61 @@
+<?php if ($this->country) { ?>
+    <div class="country_item">
+        <table class="table table-striped table-bordered article_table">
+    	<tbody>
+    	    <tr>
+    		<td class="header_column"><span><?php echo $this->translate('Родное название'); ?></span></td>
+    		<td><span><?php echo $this->escape($this->country->native_name); ?></span></td>
+    	    </tr>
+    	    <tr>
+    		<td class="header_column"><span><?php echo $this->translate('Английское название'); ?></span></td>
+    		<td><span><?php echo $this->escape($this->country->english_name); ?></span></td>
+    	    </tr>
+    	    <tr>
+    		<td class="header_column"><span><?php echo $this->translate('Аббревиатура'); ?></span></td>
+    		<td><span><?php echo $this->escape($this->country->abbreviation); ?></span></td>
+    	    </tr>
+    	    <tr>
+    		<td class="header_column"><span><?php echo $this->translate('Круговая картинка'); ?></span></td>
+    		<td><span><img src="<?php echo $this->baseUrl($this->escape($this->country->url_image_round)); ?>"></span></td>
+    	    </tr>
+    	    <tr>
+    		<td class="header_column"><span><?php echo $this->translate('Волнистая картинка'); ?></span></td>
+    		<td><span><img src="<?php echo $this->baseUrl($this->escape($this->country->url_image_glossy_wave)); ?>"></span></td>
+    	    </tr>
+    	</tbody>
+        </table>
+	<?php
+	$edit_access = $this->checkUserAccess('country/edit');
+	$delete_access = $this->checkUserAccess('country/delete');
+
+	if ($edit_access || $delete_access) {
+	    ?>
+	    <div class="article_controls">
+		<?php if ($edit_access) { ?>
+
+	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($this->country->id)), 'country_actions', true); ?>" class = "btn btn-sm btn-primary content_edit">
+			<?php echo $this->translate('Редактировать') ?>
+	    	</a>
+		<?php } ?>
+		<?php if ($delete_access) { ?>
+	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($this->country->id)), 'country_actions', true); ?>" class = "btn btn-sm btn-primary content_delete">
+			<?php echo $this->translate('Удалить') ?>
+	    	</a>
+		<?php } ?>
+	    </div>
+	<?php } ?>
+        <div class="article_info">
+    	<div class="country_name article_info_item">
+    	    <span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Страна'); ?>
+    	</div>
+    	<div class="country_date_create article_info_item">
+    	    <span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->country->date_create); ?>
+    	</div>
+	    <?php if ($this->escape($this->country->date_create) != $this->escape($this->country->date_edit)) { ?>
+		<div class="country_date_edit article_info_item">
+		    <span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->country->date_edit); ?>
+		</div>
+	    <?php } ?>
+        </div>
+    </div>
+<?php } ?>

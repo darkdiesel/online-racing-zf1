@@ -7,7 +7,7 @@ class Application_Model_DbTable_Event extends Zend_Db_Table_Abstract
     protected $_primary = 'id';
 
     /*
-     * Get Item by idencity field value and $field list.
+     * Get Item by idencity field value and $field array of fields list.
      */
 
     public function getItem($idencity = array(), $fields = array())
@@ -23,7 +23,7 @@ class Application_Model_DbTable_Event extends Zend_Db_Table_Abstract
 	    $idencity_field = 'id';
 	    $idencity_value = $idencity;
 	}
-	
+
 	if (!isset($idencity_field) || !isset($idencity_value))
 	    return FALSE;
 
@@ -51,29 +51,19 @@ class Application_Model_DbTable_Event extends Zend_Db_Table_Abstract
 	    return FALSE;
 	}
     }
-
-    public function getNext()
-    {
-	$model = new self();
-
-	$date = new Zend_Date();
-	$date = $date->toString('yyyy-MM-dd HH:mm:ss');
-
-	$select = $model
-		->select()
-		->from(array('e' => $this->_name))
-		->where('e.date_event >= ?', $date)
-		->columns('*')
-		->order('date_event ASC');
-
-	$event = $model->fetchRow($select);
-
-	if (count($event) != 0) {
-	    return $event;
-	} else {
-	    return FALSE;
-	};
-    }
+    
+    /*
+     * Function returns array of Items with $fields array of fields list.
+     * Sorted by $order value
+     * 
+     * If $pager == TRUE function return Pager with $pager_args parameters
+     * 
+     * Parameters:
+     * $pager_args['page_count_items']	- Count items for page
+     * $pager_args['page']		- Number of curent page
+     * $pager_args['page_range']	- Range of pages displaying at the pager's block
+     * 
+     */
 
     public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
     {
@@ -129,6 +119,29 @@ class Application_Model_DbTable_Event extends Zend_Db_Table_Abstract
 		return FALSE;
 	    }
 	}
+    }
+
+    public function getNext()
+    {
+	$model = new self();
+
+	$date = new Zend_Date();
+	$date = $date->toString('yyyy-MM-dd HH:mm:ss');
+
+	$select = $model
+		->select()
+		->from(array('e' => $this->_name))
+		->where('e.date_event >= ?', $date)
+		->columns('*')
+		->order('date_event ASC');
+
+	$event = $model->fetchRow($select);
+
+	if (count($event) != 0) {
+	    return $event;
+	} else {
+	    return FALSE;
+	};
     }
 
 }

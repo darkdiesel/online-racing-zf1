@@ -120,7 +120,39 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	    'page' => 1,
 		), "admin/event/all/page/%s.html"
 	));
-
+	
+	//COUNTRY CONTROLLER ROUTERS
+	$router->addRoute(
+		'country_id', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'country',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'country_id' => 1,
+		), "admin/country/%d.html"
+	));
+	
+	$router->addRoute(
+		'country_actions', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)/(\w*)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'country',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'country_id' => 1,
+	    'action' => 2,
+		), "admin/country/%d/%s.html"
+	));
+	
+	$router->addRoute(
+		'country_all', new Zend_Controller_Router_Route_Regex('admin/country/all/page/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'country',
+	    'action' => 'all',
+	    1 => 1
+		), array(
+	    'page' => 1,
+		), "admin/country/all/page/%s.html"
+	));
     }
 
 }

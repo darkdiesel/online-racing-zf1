@@ -18,7 +18,6 @@ class Admin_ResourceController extends App_Controller_FirstBootController
 	$resource_data = $resource->getItem($resource_id);
 
 	if ($resource_data) {
-	    //$this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->title);
 	    $this->view->resource = $resource_data;
 	    $this->view->headTitle($resource_data->name);
 	    $this->view->pageTitle($resource_data->name);

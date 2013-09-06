@@ -55,7 +55,23 @@
 		    <?php echo $this->translate('Все'); ?>
 		</a>
 	    </li>
+	</ul>
     </li>
-</ul>
-</li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('Страны'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+	</ul>
+    </li>
 </ul>

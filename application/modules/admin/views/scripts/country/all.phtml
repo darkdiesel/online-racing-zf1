@@ -1,0 +1,68 @@
+<?php
+if (count($this->paginator)) {
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+    ?>
+    <div class="block-item">
+        <table class="table table-bordered table-hover table-striped articles_table">
+    	<thead>
+    	    <tr>
+    		<th class="country_id"><span>#</span></th>
+    		<th class="country_name"><span><?php echo $this->translate('Родное название'); ?></span></th>
+    		<th class="country_name"><span><?php echo $this->translate('Английское название'); ?></span></th>
+    		<th class="country_descr"><span><?php echo $this->translate('Аббревиатура'); ?></span></th>
+    		<th class="country_descr"><span><?php echo $this->translate('Круговая картинка'); ?></span></th>
+    		<th class="country_descr"><span><?php echo $this->translate('Волнистая картинка'); ?></span></th>
+    		<th class="country_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+    	    </tr>
+    	</thead>
+    	<tbody>
+		<?php foreach ($this->paginator as $country): ?>
+		    <tr>
+			<td class="country_id">
+			    <span><a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country['id'])), 'country_id', true); ?>">
+				    <?php echo $this->escape($country['id']) ?>
+				</a></span>
+			</td>
+			<td class="country_name">
+			    <span><a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country['id'])), 'country_id', true); ?>">
+				    <?php echo $this->escape($country['native_name']) ?>
+				</a></span>
+			</td>
+			<td class="country_name">
+			    <span><a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country['id'])), 'country_id', true); ?>">
+				    <?php echo $this->escape($country['english_name']) ?>
+				</a></span>
+			</td>
+			<td class="country_name">
+			    <span><a href="<?php echo $this->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country['id'])), 'country_id', true); ?>">
+				    <?php echo $this->escape($country['abbreviation']) ?>
+				</a></span>
+			</td>
+			<td class="country_img_round">
+			    <span><img src="<?php echo $this->baseUrl($this->escape($country['url_image_round'])); ?>"></span>
+			</td>
+			<td class="country_img_glossy_wave">
+			    <span><img src="<?php echo $this->baseUrl($this->escape($country['url_image_glossy_wave'])); ?>"></span>
+			</td>
+			<td class="country_action articles_table_action">
+			    <span>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country['id'])), 'country_id', true); ?>">
+				    <i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?>
+				</a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($country['id'])), 'country_actions', true); ?>">
+				    <i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?>
+				</a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($country['id'])), 'country_actions', true); ?>">
+				    <i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?>
+				</a><br/>
+			    </span>
+			</td>
+		    </tr>
+		<?php endforeach; ?>
+    	</tbody>
+        </table>
+    </div>
+    <?php
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+}
+?>

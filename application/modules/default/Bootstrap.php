@@ -305,23 +305,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	  )); */
 
 	
-	//country controller routers
-	$router->addRoute(
-		'country', new Zend_Controller_Router_Route('country/:action/:country_id', array(
-	    'module' => 'default',
-	    'controller' => 'country',
-	    'country_id' => 0)
-	));
+	
 
-	$router->addRoute(
-		'countryAll', new Zend_Controller_Router_Route('country/all/:page', array(
-	    'module' => 'default',
-	    'controller' => 'country',
-	    'action' => 'all',
-	    'page' => 1)
-	));
-
-	//country controller routers
+	//track controller routers
 	$router->addRoute(
 		'track', new Zend_Controller_Router_Route('track/:action/:track_id', array(
 	    'module' => 'default',

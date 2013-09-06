@@ -6,6 +6,10 @@ class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
     protected $_name = 'resource';
     protected $_primary = 'id';
 
+    /*
+     * Get Item by idencity field value and $field array of fields list.
+     */
+
     public function getItem($idencity = array(), $fields = array())
     {
 	$model = new self;
@@ -19,7 +23,7 @@ class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
 	    $idencity_field = 'id';
 	    $idencity_value = $idencity;
 	}
-	
+
 	if (!isset($idencity_field) || !isset($idencity_value))
 	    return FALSE;
 
@@ -47,6 +51,19 @@ class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
 	    return FALSE;
 	}
     }
+    
+    /*
+     * Function returns array of Items with $fields array of fields list.
+     * Sorted by $order value
+     * 
+     * If $pager == TRUE function return Pager with $pager_args parameters
+     * 
+     * Parameters:
+     * $pager_args['page_count_items']	- Count items for page
+     * $pager_args['page']		- Number of curent page
+     * $pager_args['page_range']	- Range of pages displaying at the pager's block
+     * 
+     */
 
     public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
     {
@@ -61,7 +78,7 @@ class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
 		$fields = array_map('trim', explode(",", $fields));
 	    }
 	}
-	
+
 	if (!count($order)) {
 	    $order_field = 'id';
 	    $order_value = "ASC";
@@ -76,7 +93,7 @@ class Application_Model_DbTable_Resource extends Zend_Db_Table_Abstract
 	$select = $model->select()
 		->from(array('r' => $this->_name), 'r.id')
 		->columns($fields)
-		->order('r.'.$order_field . " " . $order_value);
+		->order('r.' . $order_field . " " . $order_value);
 
 	if ($pager) {
 	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);

@@ -77,7 +77,7 @@ class Application_Form_Country_Edit extends Zend_Form {
         $this->addElement('file', 'image_round', array(
             'label' => $this->translate('Круговая картинка флага (32х24)'),
             'required' => false,
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/flags/',
+            'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/flags/',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),
@@ -94,7 +94,7 @@ class Application_Form_Country_Edit extends Zend_Form {
         $this->addElement('file', 'image_glossy_wave', array(
             'label' => $this->translate('Волнистая картинка флага (64х48)'),
             'required' => false,
-            'destination' => APPLICATION_PATH . '/../public_html/img/data/flags/',
+            'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/flags/',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),

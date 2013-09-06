@@ -63,6 +63,10 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract
 	    return FALSE;
 	}
     }
+    
+    /*
+     * Get Item by idencity field value and $field array of fields list.
+     */
 
     public function getItem($idencity = array(), $fields = array())
     {
