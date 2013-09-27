@@ -1,6 +1,6 @@
 <?php
 
-class Admin_EventController extends App_Controller_FirstBootController
+class Admin_EventController extends App_Controller_LoaderController
 {
 
     public function init()
@@ -123,7 +123,7 @@ class Admin_EventController extends App_Controller_FirstBootController
 	    $form = new Application_Form_Event_Edit();
 	    $form->setAction($this->view->url(
 			    array('module' => 'admin', 'controller' => 'event', 'action' => 'edit',
-			'event_id' => $event_id), 'event_actions', true
+			'event_id' => $event_id), 'event_action', true
 	    ));
 
 	    if ($this->getRequest()->isPost()) {
@@ -182,7 +182,7 @@ class Admin_EventController extends App_Controller_FirstBootController
 	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить событие')} <strong>\"{$event_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_Event_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event_id), 'event_actions', true));
+	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event_id), 'event_action', true));
 	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event_id), 'event_id', true) . '"');
 
 	    if ($this->getRequest()->isPost()) {

@@ -17,6 +17,42 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
     {
 	$frontController = Zend_Controller_Front::getInstance();
 	$router = $frontController->getRouter();
+	
+	//USER CONTROLLER ROUTERS
+	$router->addRoute(
+		'user_id', new Zend_Controller_Router_Route_Regex('admin/user/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'user',
+	    'action' => 'id',
+	    1 => 0
+		), array(
+	    'user_id' => 1,
+		), "admin/user/%d.html"
+		)
+	);
+
+	$router->addRoute(
+		'user_action', new Zend_Controller_Router_Route_Regex('admin/user/(\d+)/(\w*)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'user',
+	    1 => 0
+		), array(
+	    'user_id' => 1,
+	    'action' => 2,
+		), "admin/user/%d/%s.html"
+		)
+	);
+	
+	$router->addRoute(
+		'user_all', new Zend_Controller_Router_Route_Regex('admin/user/all/page/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'user',
+	    'action' => 'all',
+	    1 => 1
+		), array(
+	    'page' => 1,
+		), "admin/user/all/page/%s.html"
+	));
 
 	//RESOURCE CONTROLLER ROUTERS
 	$router->addRoute(
@@ -32,7 +68,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	);
 
 	$router->addRoute(
-		'resource_actions', new Zend_Controller_Router_Route_Regex('admin/resource/(\d+)/(\w*)\.html', array(
+		'resource_action', new Zend_Controller_Router_Route_Regex('admin/resource/(\d+)/(\w*)\.html', array(
 	    'module' => 'admin',
 	    'controller' => 'resource',
 	    1 => 0
@@ -53,6 +89,42 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	    'page' => 1,
 		), "admin/resource/all/page/%s.html"
 	));
+	
+	//ROLE CONTROLLER ROUTERS
+	$router->addRoute(
+		'role_id', new Zend_Controller_Router_Route_Regex('admin/role/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'role',
+	    'action' => 'id',
+	    1 => 0
+		), array(
+	    'role_id' => 1,
+		), "admin/role/%d.html"
+		)
+	);
+
+	$router->addRoute(
+		'role_action', new Zend_Controller_Router_Route_Regex('admin/role/(\d+)/(\w*)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'role',
+	    1 => 0
+		), array(
+	    'role_id' => 1,
+	    'action' => 2,
+		), "admin/role/%d/%s.html"
+		)
+	);
+	
+	$router->addRoute(
+		'role_all', new Zend_Controller_Router_Route_Regex('admin/role/all/page/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'role',
+	    'action' => 'all',
+	    1 => 1
+		), array(
+	    'page' => 1,
+		), "admin/role/all/page/%s.html"
+	));
 
 	//CONTENT TYPE CONTROLLER ROUTERS
 	$router->addRoute(
@@ -66,7 +138,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	));
 
 	$router->addRoute(
-		'content_type_actions', new Zend_Controller_Router_Route_Regex('admin/content-type/(\d+)/(\w*)\.html', array(
+		'content_type_action', new Zend_Controller_Router_Route_Regex('admin/content-type/(\d+)/(\w*)\.html', array(
 	    'module' => 'admin',
 	    'controller' => 'content-type',
 	    'action' => 'id',
@@ -100,7 +172,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	));
 	
 	$router->addRoute(
-		'event_actions', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)/(\w*)\.html', array(
+		'event_action', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)/(\w*)\.html', array(
 	    'module' => 'admin',
 	    'controller' => 'event',
 	    'action' => 'id',
@@ -133,7 +205,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	));
 	
 	$router->addRoute(
-		'country_actions', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)/(\w*)\.html', array(
+		'country_action', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)/(\w*)\.html', array(
 	    'module' => 'admin',
 	    'controller' => 'country',
 	    'action' => 'id',

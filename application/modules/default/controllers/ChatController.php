@@ -1,6 +1,6 @@
 <?php
 
-class ChatController extends App_Controller_FirstBootController {
+class ChatController extends App_Controller_LoaderController {
 
     public function indexAction() {
         $this->view->headTitle($this->view->translate('Чат'));

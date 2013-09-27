@@ -1,6 +1,6 @@
 <?php
 
-class Admin_IndexController extends App_Controller_FirstBootController
+class Admin_IndexController extends App_Controller_LoaderController
 {
 
     public function init()

@@ -27,15 +27,19 @@
 				<?php
 				$breadcrumb = Zend_Registry::get('breadcrumb');
 				$page_title = $this->pageTitle();
-				if ($page_title != "" || $breadcrumb['show']) :
-				    ?>
+				
+				if ($breadcrumb['show']) {
+				    $breadcrumb_data = $this->render("admin_layout/breadcrumb.phtml");
+				}
+				
+				if ($page_title != "" || ($breadcrumb_data)) : ?>
     				<div id="page_title_wrapper" class="block-item">
 					<?php if ($this->pageTitle() != ""): ?>
 					    <div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
 					<?php endif; ?>
 					<?php
 					if ($breadcrumb['show']) {
-					    echo $this->render("default_layout/breadcrumb.phtml");
+					    echo $breadcrumb_data;
 					}
 					?>
     				</div>

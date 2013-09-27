@@ -1,17 +1,26 @@
 <?php
 
-class ErrorController extends App_Controller_FirstBootController {
+class ErrorController extends App_Controller_LoaderController {
 
+    public function init(){
+	parent::init();
+	
+	$this->view->headTitle($this->view->translate('Ошибка'));
+	$this->view->pageTitle($this->view->translate('Ошибка'));
+    }
+    
     public function errorAction() {
-        $errors = $this->_getParam('error_handler');
+	$this->_helper->layout->setLayout( 'no-column-layout' );
+        
+	$errors = $this->_getParam('error_handler');
 
         if (!$errors || !$errors instanceof ArrayObject) {
             switch ($errors['type']) {
                 case "access_denied":
-                    $this->view->message = $this->view->translate('Доступ запрещен');
+		    $this->messageManager->addError($this->view->translate('Доступ запрещен!'));
                     break;
                 default:
-                    $this->view->message = 'You have reached the error page';
+		    $this->messageManager->addError($this->view->translate('You have reached the error page!'));
                     break;
             }
             return;

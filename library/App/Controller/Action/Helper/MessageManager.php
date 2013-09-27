@@ -4,12 +4,13 @@ class App_Controller_Action_Helper_MessageManager extends Zend_Controller_Action
 
     protected $session;
 
-    public function preDispatch() {
-        $this->session = new Zend_Session_Namespace('App_Messages');
+    public function __construct(){
+	$this->session = new Zend_Session_Namespace('App_Messages');
     }
 
     protected function addMessage($message, $type) {
         $messages = (isset($this->session->messages)) ? $this->session->messages : array();
+	
         if (array_key_exists($type, $messages)) {
             $messages [$type] [] = $message;
         } else {
@@ -17,7 +18,10 @@ class App_Controller_Action_Helper_MessageManager extends Zend_Controller_Action
                 $message
             );
         }
-        $this->session->messages = $messages;
+	
+	if (!empty($messages)){
+	    $this->session->messages = $messages;
+	}
     }
 
     public function addError($message) {
@@ -34,6 +38,10 @@ class App_Controller_Action_Helper_MessageManager extends Zend_Controller_Action
 
     public function addWarning($message) {
         $this->addMessage($message, 'warning');
+    }
+    
+    public function clearMessages(){
+	$this->session->messages = "";
     }
 
 }

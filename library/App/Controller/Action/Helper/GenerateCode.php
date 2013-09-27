@@ -6,7 +6,7 @@ class App_Controller_Action_Helper_GenerateCode extends Zend_Controller_Action_H
      * 
      * @param int $length
      */
-    static function  GenerateCodeString($length) {
+    static function  GenerateCodeString($length = 6) {
         $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
         $numChars = strlen($chars);
 		$string = '';

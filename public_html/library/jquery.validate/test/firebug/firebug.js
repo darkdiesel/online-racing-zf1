@@ -211,10 +211,10 @@ if (!("console" in window) || !("firebug" in console)) {
             flush();
         }
 
-        var baseURL = getFirebugURL();
+        var baseUrl = getFirebugURL();
 
         consoleFrame = document.createElement("iframe");
-        consoleFrame.setAttribute("src", baseURL+"/firebug.html");
+        consoleFrame.setAttribute("src", baseUrl+"/firebug.html");
         consoleFrame.setAttribute("frameBorder", "0");
         consoleFrame.style.visibility = (frameVisible ? "visible" : "hidden");    
         consoleFrame.style.zIndex = "2147483647";

@@ -27,12 +27,16 @@ class Application_Model_DbTable_Event extends Zend_Db_Table_Abstract
 	if (!isset($idencity_field) || !isset($idencity_value))
 	    return FALSE;
 
-	if (!count($fields) || strtolower($fields) == 'all')
-	    $fields = "*";
-	else {
-	    if (is_array($fields)) {
+	if (is_array($fields)) {
+	    if (count($fields)){
 		$fields = array_map('trim', $fields);
-	    } elseif (is_string($fields)) {
+	    } else {
+		$fields = "*";
+	    }
+	} elseif (is_string($fields)) {
+	    if (strtolower($fields) == "all"){
+		$fields = "*";
+	    } else {
 		$fields = array_map('trim', explode(",", $fields));
 	    }
 	}

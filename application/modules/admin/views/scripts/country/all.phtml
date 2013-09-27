@@ -49,10 +49,10 @@ if (count($this->paginator)) {
 				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country['id'])), 'country_id', true); ?>">
 				    <i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?>
 				</a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($country['id'])), 'country_actions', true); ?>">
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($country['id'])), 'country_action', true); ?>">
 				    <i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?>
 				</a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($country['id'])), 'country_actions', true); ?>">
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($country['id'])), 'country_action', true); ?>">
 				    <i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?>
 				</a><br/>
 			    </span>

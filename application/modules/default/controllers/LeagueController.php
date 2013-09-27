@@ -1,6 +1,6 @@
 <?php
 
-class LeagueController extends App_Controller_FirstBootController
+class LeagueController extends App_Controller_LoaderController
 {
 
     public function init()

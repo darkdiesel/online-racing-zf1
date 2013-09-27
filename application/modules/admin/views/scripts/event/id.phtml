@@ -31,10 +31,10 @@
 	    ?>
 	    <div class = "article_controls" >
 		<?php if ($edit_access) { ?>
-	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $this->event['id']), 'event_actions', true) ?>" class = "btn btn-sm btn-primary content_edit"><?php echo $this->translate('Редактировать') ?></a>
+	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $this->event['id']), 'event_action', true) ?>" class = "btn btn-sm btn-primary content_edit"><?php echo $this->translate('Редактировать') ?></a>
 		<?php } ?>
 		<?php if ($delete_access) { ?>
-	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $this->event['id']), 'event_actions', true) ?>" class = "btn btn-sm btn-primary content_delete"><?php echo $this->translate('Удалить') ?></a>
+	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $this->event['id']), 'event_action', true) ?>" class = "btn btn-sm btn-primary content_delete"><?php echo $this->translate('Удалить') ?></a>
 		<?php } ?>
 	    </div>
 	<?php } ?>

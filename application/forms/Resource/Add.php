@@ -12,18 +12,37 @@ class Application_Form_Resource_Add extends Zend_Form {
         $this->setMethod('post');
         $this->setAction('/resource/add');
         $this->setName('resource_add');
-        $this->setAttrib('class', 'white_box white_box_size_m');
+        $this->setAttrib('class', 'form-resource white_box white_box_size_m');
         
         $this->addElement('text', 'name', array(
             'label' => $this->translate('Название'),
-            'placeholder' => $this->translate('Название'),
-            'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
             'required' => true,
-            'class' => 'x_field  white_box_el_size_s',
-            'validators' => array(
+	    'placeholder' => $this->translate('Название'),
+	    'class' => 'form-control  white_box_el_size_s',
+	    'readonly' => 'readonly',
+	    'maxlength' => 255,
+	    'validators' => array(
                 'NotEmpty',
                 new App_Validate_NoDbRecordExists('resource', 'name')
+            ),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+	
+	$this->addElement('text', 'module', array(
+            'label' => $this->translate('Модуль'),
+            'placeholder' => $this->translate('Модуль'),
+            'maxlength' => 255,
+            'filters' => array('StripTags', 'StringTrim'),
+            'required' => false,
+            'class' => 'form-control white_box_el_size_s',
+            'validators' => array(
+                'NotEmpty'
             ),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -38,8 +57,8 @@ class Application_Form_Resource_Add extends Zend_Form {
             'placeholder' => $this->translate('Контроллер'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
-            'required' => true,
-            'class' => 'x_field  white_box_el_size_s',
+            'required' => false,
+            'class' => 'form-control  white_box_el_size_s',
             'validators' => array(
                 'NotEmpty'
             ),
@@ -56,8 +75,8 @@ class Application_Form_Resource_Add extends Zend_Form {
             'placeholder' => $this->translate('Дейсвие'),
             'maxlength' => 255,
             'filters' => array('StripTags', 'StringTrim'),
-            'required' => true,
-            'class' => 'x_field  white_box_el_size_s',
+            'required' => false,
+            'class' => 'form-control  white_box_el_size_s',
             'validators' => array(
                 'NotEmpty'
             ),
@@ -68,13 +87,39 @@ class Application_Form_Resource_Add extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+	
+	// parent resource
+        $this->addElement('select', 'parent_resource', array(
+            'label' => $this->translate('Родительский ресурс'),
+	    'multiOptions' => array('' => ''),
+            'required' => false,
+	    'class' => 'form-control',
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+	
+	$resource = new Application_Model_DbTable_Resource();
+	
+	$resources = $resource->getAll("id, name");
+	
+	foreach ($resources as $resource){
+	    $this->parent_resource->addMultiOptions(array(
+		$resource->id => $resource->name
+	    ));
+	}
+	
         $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание ресурса'),
             'placeholder' => $this->translate('Описание ресурса'),
             'cols' => 60,
             'rows' => 10,
-            'class' => 'white_box_el_size_m',
+            'class' => 'form-control white_box_el_size_m',
             'maxlength' => 500,
             'required' => false,
             'filters' => array('StringTrim'),

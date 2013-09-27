@@ -65,7 +65,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                                 ->select()
                                 ->setIntegrityCheck(false)
                                 ->from(array('u' => 'user'), 'u.id')
-                                ->where('u.user_role_id != 1 and u.enable = 1')
+                                //->where('u.user_role_id != 1 and u.enable = 1')
                                 ->join(array('c' => 'country'), 'u.country_id = c.id', array(
                                     'country_url_image_round' => 'c.url_image_round',
                                     'country_name' => 'c.native_name')
@@ -89,7 +89,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                                 ->select()
                                 ->setIntegrityCheck(false)
                                 ->from(array('u' => 'user'), 'u.id')
-                                ->where('u.user_role_id != 1 and u.enable = 1')
+                                //->where('u.user_role_id != 1 and u.enable = 1')
                                 ->join(array('c' => 'country'), 'u.country_id = c.id', array(
                                     'country_url_image_round' => 'c.url_image_round',
                                     'country_name' => 'c.name')
@@ -286,7 +286,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 ->setIntegrityCheck(false)
                 ->from(array('u' => $this->_name), 'u.id')
                 ->where('u.id = ?', $id)
-                ->join(array('u_r' => 'user_role'), 'u_r.id = u.user_role_id', array('user_role' => 'u_r.name'))
+                //->join(array('u_r' => 'user_role'), 'u_r.id = u.user_role_id', array('user_role' => 'u_r.name'))
                 ->columns(array('code_activate', 'enable'));
 
         $user = $model->fetchRow($select);
@@ -407,6 +407,146 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $date = $date->toString('yyyy-MM-dd HH:mm:ss');
 
         return $model->fetchAll(array('date_last_activity >= ?' => $date))->count();
+    }
+    
+    
+    
+    
+    /*
+     * Get Item by idencity field value and $field array of fields list.
+     */
+
+    public function getItem($idencity = array(), $fields = array())
+    {
+	$model = new self;
+
+	if (!count($idencity)) {
+	    return FALSE;
+	} elseif (is_array($idencity)) {
+	    $idencity_field = $idencity[0];
+	    $idencity_value = $idencity[1];
+	} elseif (is_int($idencity)) {
+	    $idencity_field = 'id';
+	    $idencity_value = $idencity;
+	}
+
+	if (!isset($idencity_field) || !isset($idencity_value)){
+	    return FALSE;
+	}
+	
+	if (is_array($fields)) {
+	    if (count($fields)){
+		$fields = array_map('trim', $fields);
+	    } else {
+		$fields = "*";
+	    }
+	} elseif (is_string($fields)) {
+	    if (strtolower($fields) == "all"){
+		$fields = "*";
+	    } else {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
+	}
+
+	$select = $model->select()
+		->setIntegrityCheck(false)
+		->from(array('u' => $this->_name))
+		->where('u.' . $idencity_field . ' = ' . $idencity_value)
+		->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+                    'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+                    'country_native_name' => 'c.native_name',
+                    'country_english_name' => 'c.english_name',))
+		->joinLeft(array('ur' => 'user_role'), 'u.id = ur.user_id',array('user_role_id' => 'ur.role_id'))
+		->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id',array('user_role_name' => 'rl.name'))
+		->columns($fields);
+
+	$resource = $model->fetchRow($select);
+
+	if (count($resource) != 0) {
+	    return $resource;
+	} else {
+	    return FALSE;
+	}
+    }
+    
+    /*
+     * Function returns array of Items with $fields array of fields list.
+     * Sorted by $order value
+     * 
+     * If $pager == TRUE function return Pager with $pager_args parameters
+     * 
+     * Parameters:
+     * $pager_args['page_count_items']	- Count items for page
+     * $pager_args['page']		- Number of curent page
+     * $pager_args['page_range']	- Range of pages displaying at the pager's block
+     * 
+     */
+
+    public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
+    {
+	$model = new self;
+
+	if (is_array($fields)) {
+	    if (count($fields)){
+		$fields = array_map('trim', $fields);
+	    } else {
+		$fields = "*";
+	    }
+	} elseif (is_string($fields)) {
+	    if (strtolower($fields) == "all"){
+		$fields = "*";
+	    } else {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
+	}
+
+	if (!count($order)) {
+	    $order_field = 'id';
+	    $order_value = "ASC";
+	} elseif (is_array($order)) {
+	    $order_field = $order[0];
+	    $order_value = $order[1];
+	} elseif (is_string($order)) {
+	    $order_field = 'id';
+	    $order_value = $order;
+	}
+
+	$select = $model->select()
+		->setIntegrityCheck(false)
+		->from(array('u' => $this->_name), 'u.id')
+		->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+                    'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+                    'country_native_name' => 'c.native_name',
+                    'country_english_name' => 'c.english_name',))
+		->joinLeft(array('ur' => 'user_role'), 'u.id = ur.user_id',array('user_role_id' => 'ur.role_id'))
+		->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id',array('user_role_name' => 'rl.name'))
+		->columns($fields)
+		->order('u.' . $order_field . " " . $order_value);
+
+	if ($pager) {
+	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+
+	    $paginator = new Zend_Paginator($adapter);
+	    if (count($pager_args)) {
+		$paginator->setItemCountPerPage($pager_args['page_count_items']);
+		$paginator->setCurrentPageNumber($pager_args['page']);
+		$paginator->setPageRange($pager_args['page_range']);
+	    } else {
+		$paginator->setItemCountPerPage("10");
+		$paginator->setCurrentPageNumber("1");
+		$paginator->setPageRange("5");
+	    }
+
+	    return $paginator;
+	} else {
+	    $resources = $model->fetchAll($select);
+
+	    if (count($resources) != 0) {
+		return $resources;
+	    } else {
+		return FALSE;
+	    }
+	}
     }
 
 }

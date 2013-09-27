@@ -1,25 +1,60 @@
 <?php
 
-class Application_Model_DbTable_UserRole extends Zend_Db_Table_Abstract {
+class Application_Model_DbTable_UserRole extends Zend_Db_Table_Abstract
+{
 
     protected $_name = 'user_role';
-    protected $_primary = 'id';
+    protected $_primary = 'user_id';
 
-    public function getId($role_name) {
-        $model = new self;
+    /*
+     * Get Item by idencity field value and $field array of fields list.
+     */
 
-        $select = $model->select()
-                ->from($this->_name, 'id')
-                ->where('name = ?', $role_name)
-                ->columns('id');
+    public function getItem($idencity = array(), $fields = array())
+    {
+	$model = new self;
 
-        $user_role_data = $model->fetchRow($select);
+	if (!count($idencity)) {
+	    return FALSE;
+	} elseif (is_array($idencity)) {
+	    $idencity_field = $idencity[0];
+	    $idencity_value = $idencity[1];
+	} elseif (is_int($idencity)) {
+	    $idencity_field = 'id';
+	    $idencity_value = $idencity;
+	}
 
-        if (count($user_role_data) != 0) {
-            return $user_role_data->id;
-        } else {
-            return FALSE;
-        }
+	if (!isset($idencity_field) || !isset($idencity_value)) {
+	    return FALSE;
+	}
+
+	if (is_array($fields)) {
+	    if (count($fields)) {
+		$fields = array_map('trim', $fields);
+	    } else {
+		$fields = "*";
+	    }
+	} elseif (is_string($fields)) {
+	    if (strtolower($fields) == "all") {
+		$fields = "*";
+	    } else {
+		$fields = array_map('trim', explode(",", $fields));
+	    }
+	}
+
+	$select = $model->select()
+		->setIntegrityCheck(false)
+		->from(array('r' => $this->_name))
+		->where('r.' . $idencity_field . ' = ' . $idencity_value)
+		->columns($fields);
+
+	$resource = $model->fetchRow($select);
+
+	if (count($resource) != 0) {
+	    return $resource;
+	} else {
+	    return FALSE;
+	}
     }
 
 }

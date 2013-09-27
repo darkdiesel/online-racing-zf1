@@ -1,6 +1,6 @@
 <?php
 
-class PostController extends App_Controller_FirstBootController {
+class PostController extends App_Controller_LoaderController {
 
     public function init() {
         parent::init();

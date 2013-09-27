@@ -12,7 +12,6 @@ class CreateUserTable extends Akrabat_Db_Schema_AbstractChange
                             `code_activate` varchar(15) NOT NULL,
                             `code_restore_pass` varchar(15) NOT NULL,
                             `enable` int(1) NOT NULL,
-                            `user_role_id` int(11) NOT NULL,
                             `email` varchar(100) NOT NULL,
                             `name` varchar(250) NOT NULL,
                             `surname` varchar(250) NOT NULL,

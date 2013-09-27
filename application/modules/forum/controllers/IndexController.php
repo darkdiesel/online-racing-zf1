@@ -1,6 +1,6 @@
 <?php
 
-class Forum_IndexController extends App_Controller_FirstBootController
+class Forum_IndexController extends App_Controller_LoaderController
 {
 
     public function init()

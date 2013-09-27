@@ -1,6 +1,6 @@
 <?php
 
-class SitemapController extends App_Controller_FirstBootController {
+class SitemapController extends App_Controller_LoaderController {
 
     public function indexAction() {
         $this->view->layout()->disableLayout();

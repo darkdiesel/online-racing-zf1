@@ -18,8 +18,8 @@
                 <tbody>
                     <?php foreach ($this->paginator as $team): ?>
                         <tr>
-                            <td class="team_id"><span><a href="<?php echo $this->baseURL('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['id']) ?></a></span></td>
-                            <td class="team_name"><span><a href="<?php echo $this->baseURL('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['name']) ?></a></span></td>
+                            <td class="team_id"><span><a href="<?php echo $this->baseUrl('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['id']) ?></a></span></td>
+                            <td class="team_name"><span><a href="<?php echo $this->baseUrl('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['name']) ?></a></span></td>
                             <td class="team_descr"><span><?php echo $this->truncate($this->escape($team['description']))->toLength(200); ?></span></td>
                             <td class="team_action articles_table_action">
                                 <span>

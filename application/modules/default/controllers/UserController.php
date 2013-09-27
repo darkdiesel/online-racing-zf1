@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends App_Controller_FirstBootController {
+class UserController extends App_Controller_LoaderController {
 
     public function init() {
         parent::init();
@@ -199,7 +199,7 @@ class UserController extends App_Controller_FirstBootController {
 
                 $user_data['login'] = $form->getValue('login');
                 $user_data['email'] = $form->getValue('email');
-                $user_data['user_role_id'] = 3;
+                //$user_data['user_role_id'] = 3;
                 $user_data['country_id'] = 1;
                 $user_data['enable'] = 1;
 
@@ -338,7 +338,7 @@ class UserController extends App_Controller_FirstBootController {
 
                         break;
                     case 'activate':
-                        $this->view->errMessage .= $this->view->translate('Пользователь уже активирован!') . ' <strong><a href="' . $this->view->baseURL('user/login') . '">'
+                        $this->view->errMessage .= $this->view->translate('Пользователь уже активирован!') . ' <strong><a href="' . $this->view->baseUrl('user/login') . '">'
                                 . $this->view->translate('Авторизоваться?') . '</a></strong>';
                         break;
                     case 'notFound':

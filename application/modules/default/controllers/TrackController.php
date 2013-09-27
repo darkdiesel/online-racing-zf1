@@ -1,6 +1,6 @@
 <?php
 
-class TrackController extends App_Controller_FirstBootController {
+class TrackController extends App_Controller_LoaderController {
 
     public function init() {
         parent::init();

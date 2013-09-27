@@ -24,8 +24,8 @@ if (count($this->paginator)) {
 		    <td class="content_type_action articles_table_action">
 			<span>
 			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $event['id']), 'event_actions', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event['id']), 'event_actions', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
 			</span>
 		    </td>
 		</tr>

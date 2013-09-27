@@ -19,8 +19,8 @@
                     <tbody>
                         <?php foreach ($this->paginator as $league): ?>
                             <tr>
-                                <td class="league_id"><span><a href="<?php echo $this->baseURL('league/id/' . $this->escape($league['id'])) ?>"><?php echo $this->escape($league['id']) ?></a></span></td>
-                                <td class="league_name"><span><a href="<?php echo $this->baseURL('league/id/' . $this->escape($league['id'])) ?>"><?php echo $this->escape($league['name']) ?></a></span></td>
+                                <td class="league_id"><span><a href="<?php echo $this->baseUrl('league/id/' . $this->escape($league['id'])) ?>"><?php echo $this->escape($league['id']) ?></a></span></td>
+                                <td class="league_name"><span><a href="<?php echo $this->baseUrl('league/id/' . $this->escape($league['id'])) ?>"><?php echo $this->escape($league['name']) ?></a></span></td>
                                 <td class="league_descr"><span><?php echo $this->truncate($this->escape($league['description']))->toLength(200); ?></span></td>
                                 <td class="league_action">
                                     <span>

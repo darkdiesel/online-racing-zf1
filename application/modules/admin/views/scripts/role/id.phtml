@@ -1,0 +1,9 @@
+<?php if ($this->role) { ?>
+    <div class="block-item">
+	<?php
+	foreach ($this->role as $role_field):
+	    echo $role_field . "<br/>";
+	endforeach;
+	?>
+    </div>
+<?php } ?>

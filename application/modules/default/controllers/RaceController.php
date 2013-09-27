@@ -1,6 +1,6 @@
 <?php
 
-class RaceController extends App_Controller_FirstBootController {
+class RaceController extends App_Controller_LoaderController {
 
     public function init() {
         parent::init();

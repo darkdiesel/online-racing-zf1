@@ -1,6 +1,6 @@
 <?php
 
-class ArticleTypeController extends App_Controller_FirstBootController {
+class ArticleTypeController extends App_Controller_LoaderController {
 
     public function init() {
         parent::init();

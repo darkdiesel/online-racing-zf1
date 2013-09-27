@@ -33,12 +33,12 @@
 	    <div class="article_controls">
 		<?php if ($edit_access) { ?>
 
-	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($this->country->id)), 'country_actions', true); ?>" class = "btn btn-sm btn-primary content_edit">
+	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($this->country->id)), 'country_action', true); ?>" class = "btn btn-sm btn-primary content_edit">
 			<?php echo $this->translate('Редактировать') ?>
 	    	</a>
 		<?php } ?>
 		<?php if ($delete_access) { ?>
-	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($this->country->id)), 'country_actions', true); ?>" class = "btn btn-sm btn-primary content_delete">
+	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($this->country->id)), 'country_action', true); ?>" class = "btn btn-sm btn-primary content_delete">
 			<?php echo $this->translate('Удалить') ?>
 	    	</a>
 		<?php } ?>

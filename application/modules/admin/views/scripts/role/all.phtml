@@ -1,0 +1,38 @@
+<?php
+if ($this->paginator) {
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+    ?>
+    <div class='block-item'>
+        <table class="table table-bordered table-hover table-striped articles_table">
+            <thead>
+    	    <tr>
+    		<th class="role_id"><span>#</span></th>
+    		<th class="role_name"><span><?php echo $this->translate('Название'); ?></span></th>
+    		<th class="role_parent"><span><?php echo $this->translate('Родительская роль'); ?></span></th>
+		<th class="role_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+    		<th class="role_action articles_table_action"><span><?php echo $this->translate('Операции'); ?></span></th>
+    	    </tr>
+            </thead>
+            <tbody>
+		<?php foreach ($this->paginator as $role): ?>
+		    <tr>
+			<td class="role_id"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role['id']), 'role_id', true) ?>"><?php echo $this->escape($role['id']) ?></a></span></td>
+			<td class="role_name"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role['id']), 'role_id', true) ?>"><?php echo $this->escape($role['name']) ?></a></span></td>
+			<td class="role_зфкуте"><span><?php echo $this->truncate($this->escape($role['parent_role_id']))->toLength(200); ?></span></td>
+			<td class="role_descr"><span><?php echo $this->truncate($this->escape($role['description']))->toLength(200); ?></span></td>
+			<td class="role_action articles_table_action">
+			    <span>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role['id']), 'role_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'edit', 'role_id' => $role['id']), 'role_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'role_id' => $role['id']), 'role_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+			    </span>
+			</td>
+		    </tr>
+		<?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+}
+?>

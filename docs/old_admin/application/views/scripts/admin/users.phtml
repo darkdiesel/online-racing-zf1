@@ -21,8 +21,8 @@
                     <tbody>
                         <?php foreach ($this->paginator as $user): ?>
                             <tr>
-                                <td class="user_id"><span><a href="<?php echo $this->baseURL('user/id/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
-                                <td class="user_login"><span><a href="<?php echo $this->baseURL('user/id/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
+                                <td class="user_id"><span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
+                                <td class="user_login"><span><a href="<?php echo $this->baseUrl('user/id/' . $this->escape($user['id'])) ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
                                 <td class="user_activation"><span><?php echo $this->escape($user['code_activate']) ?></span></td>
                                 <td class="user_status"><span><?php echo ($this->escape($user['enable']) == 1) ? $this->translate('Активный') : $this->translate('Забанен') ?></span></td>
                                 <td class="user_last_activity"><span><?php echo $this->escape($user['date_last_activity']) ?></span></td>

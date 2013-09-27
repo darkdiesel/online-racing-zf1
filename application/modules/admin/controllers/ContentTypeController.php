@@ -1,6 +1,6 @@
 <?php
 
-class Admin_ContentTypeController extends App_Controller_FirstBootController
+class Admin_ContentTypeController extends App_Controller_LoaderController
 {
 
     public function init()
@@ -115,7 +115,7 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	    $form = new Application_Form_ContentType_Edit();
 	    $form->setAction($this->view->url(
 			    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit',
-			'content_type_id' => $content_type_id), 'content_type_actions', true
+			'content_type_id' => $content_type_id), 'content_type_action', true
 	    ));
 	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'default', true)}\"");
 
@@ -170,7 +170,7 @@ class Admin_ContentTypeController extends App_Controller_FirstBootController
 	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить тип контента')} <strong>\"{$content_type_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_ArticleType_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_actions', true));
+	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
 	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'content_type_id' => $content_type_id), 'content_type_id', true) . '"');
 
 	    if ($this->getRequest()->isPost()) {

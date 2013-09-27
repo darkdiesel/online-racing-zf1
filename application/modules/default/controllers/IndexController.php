@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends App_Controller_FirstBootController {
+class IndexController extends App_Controller_LoaderController {
 
     public function indexAction() {
         // js and css for Skitter slider
