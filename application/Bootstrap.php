@@ -165,10 +165,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     public function _initAcl()
     {
-	//Zend_Loader::loadClass('Acl');
-	//Zend_Loader::loadClass('CheckAccess');
-	//Zend_Controller_Front::getInstance()->registerPlugin(new CheckAccess());
-	//return new Acl();
+	Zend_Loader::loadClass('Acl');
+	Zend_Loader::loadClass('CheckAccess');
+	Zend_Controller_Front::getInstance()->registerPlugin(new CheckAccess());
+	return new Acl();
     }
 
     public function _initLogger()

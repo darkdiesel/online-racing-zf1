@@ -3,34 +3,34 @@
 class Acl extends Zend_Acl
 {
 
+    protected $roles;
+
     public function __construct()
     {
-	//Добавляем роли
-	$this->addRole('guest');
-	$this->addRole('user', 'guest');
-	$this->addRole('admin', 'user');
-	$this->addRole('master', 'admin');
+	// Init roles array from DB
+	$this->getRolesArray();
+	$this->initRoles();
 
 	// resources
-	$this->addResource(new Zend_Acl_Resource('user/register'));
-	$this->addResource(new Zend_Acl_Resource('user/activate'));
-	$this->addResource(new Zend_Acl_Resource('user/restorepasswd'));
+	$this->addResource(new Zend_Acl_Resource('default/user/register'));
+	$this->addResource(new Zend_Acl_Resource('default/user/activate'));
+	$this->addResource(new Zend_Acl_Resource('default/user/restorepasswd'));
 
 	//Add resources
 	// guest resources
 	$this->add(new Zend_Acl_Resource('guest_allow'));
-	$this->add(new Zend_Acl_Resource('index/index'), 'guest_allow');
-	$this->add(new Zend_Acl_Resource('user/login'), 'guest_allow');
+	$this->add(new Zend_Acl_Resource('default/index/index'), 'guest_allow');
+	$this->add(new Zend_Acl_Resource('default/user/login'), 'guest_allow');
 
-	$this->add(new Zend_Acl_Resource('league/id'), 'guest_allow');
-	$this->add(new Zend_Acl_Resource('league/all'), 'guest_allow');
+	$this->add(new Zend_Acl_Resource('default/league/id'), 'guest_allow');
+	$this->add(new Zend_Acl_Resource('default/league/all'), 'guest_allow');
 
-	$this->add(new Zend_Acl_Resource('game/all'), 'guest_allow');
-	$this->add(new Zend_Acl_Resource('game/id'), 'guest_allow');
+	$this->add(new Zend_Acl_Resource('default/game/all'), 'guest_allow');
+	$this->add(new Zend_Acl_Resource('default/game/id'), 'guest_allow');
 
-	$this->allow('guest', 'user/register');
-	$this->allow('guest', 'user/activate');
-	$this->allow('guest', 'user/restorepasswd');
+	$this->allow('guest', 'default/user/register');
+	$this->allow('guest', 'default/user/activate');
+	$this->allow('guest', 'default/user/restorepasswd');
 
 	// user resources
 	$this->add(new Zend_Acl_Resource('user_allow'));
@@ -41,10 +41,6 @@ class Acl extends Zend_Acl
 	$this->add(new Zend_Acl_Resource('default/user/logout'), 'user_allow');
 	$this->add(new Zend_Acl_Resource('default/chat/addmessage'), 'user_allow');
 
-	//$this->deny('user', 'user/register');
-	//$this->deny('user', 'user/activate');
-	//$this->deny('user', 'user/restore-passwd');
-	//$this->deny('user', 'user/set-restore-passwd');
 	// admin resources
 	$this->add(new Zend_Acl_Resource('admin_allow'));
 
@@ -121,6 +117,48 @@ class Acl extends Zend_Acl
 	$this->allow('admin', 'admin_allow', 'show');
 	$this->allow('master', 'master_allow', 'show');
     }
+    
+    protected function getRolesArray(){
+	$role = new Application_Model_DbTable_Role();
+	$role_all = $role->getAll('id, name, parent_role_id', array('parent_role_id', 'ASC'));
+
+	$this->roles = array();
+	foreach ($role_all as $role) {
+	    $this->roles[$role->id] = array(
+		'id' => $role->id,
+		'name' => $role->name,
+		'parent_role_id' => $role->parent_role_id,
+		'added' => 0,
+	    );
+	}
+    }
+    
+    protected function initRoles()
+    {
+	foreach ($this->roles as $role){
+	    if (!$this->roles[$role['id']]['added']){
+		$this->addRecursiveRole($role['id']);
+	    }
+	}
+    }
+    
+    protected function addRecursiveRole($role_id)
+    {
+	$parent_role_id = $this->roles[$role_id]['parent_role_id'];
+
+	if ($parent_role_id) {
+	    if ($this->roles[$parent_role_id]['added']) {
+		$this->addRole($this->roles[$role_id]['name'], $this->roles[$parent_role_id]['name']);
+		$this->roles[$role_id]['added'] = 1;
+	    } else {
+		$this->addRecursiveRole($parent_role_id);
+		$this->addRecursiveRole($role_id);
+	    }
+	} else {
+	    $this->addRole($this->roles[$role_id]['name']);
+	    $this->roles[$role_id]['added'] = 1;
+	}
+    }
 
     public function can($privilege = 'show')
     {
@@ -131,12 +169,17 @@ class Acl extends Zend_Acl
 	if (!$this->has($resource))
 	    return true;
 
-	//Инициируем роль
+	//Inicialize role
 	if (Zend_Auth::getInstance()->hasIdentity()) {
 	    $storage_data = Zend_Auth::getInstance()->getStorage()->read();
+
 	    // get role name for current user
 	    $user = new Application_Model_DbTable_User();
 	    $role = $user->getUserRoleName($storage_data->id);
+
+	    $user_role_db = new Application_Model_DbTable_UserRole();
+
+	    $role = $user_role_db->getItem(array('user_id', $storage_data->id), array('id', 'nam'));
 	} else {
 	    $role = 'guest';
 	}
@@ -153,7 +196,7 @@ class Acl extends Zend_Acl
 	$role = $this->getRole();
 	return $this->isAllowed($role, $resource, $privilege);
     }
-    
+
     // function return user role
     public function getUser()
     {

@@ -44,8 +44,9 @@ class Application_Model_DbTable_UserRole extends Zend_Db_Table_Abstract
 
 	$select = $model->select()
 		->setIntegrityCheck(false)
-		->from(array('r' => $this->_name))
-		->where('r.' . $idencity_field . ' = ' . $idencity_value)
+		->from(array('ur' => $this->_name))
+		->join(array('r' => 'role'), 'ur.role_id = r.id',array('role_name' => 'r.name'))
+		->where('ur.' . $idencity_field . ' = ' . $idencity_value)
 		->columns($fields);
 
 	$resource = $model->fetchRow($select);
