@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <meta content="text/html; charset=windows-1251" http-equiv="Content-Type">
+<meta name="keywords" content="rFactor, Racing, Online, rFactorResults, rFactorHotlaps, rFactorLeague, Hotlaps, Results, League">
+<title>rFactor Live!</title>
+<style type="text/css">
+body {
+                background:url('rFactorHotlaps/baground.jpg') fixed;
+	color: #FFFFFF;
+}
+a:link {
+	color: #D0D000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #D0D000;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:active {
+	text-decoration: none;
+}
+div.live div.server {
+	color: #DC9155;
+                font-size:15px;
+                color:#B41010;
+                font-family:gill;
+                font-size:35px;
+                line-height:35px;
+                text-shadow:1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
+}
+div.live div.session {
+	color: #FFFFFF;
+	font-size:14px;
+	font-weight: bold;
+                font-family:monospace;
+}
+div.live div.progress {
+	color: #FFFFFF;
+	font-size:14px;
+	font-weight: bold;
+                font-family:monospace;
+}
+div.live div.flag {
+	color: #FFFFFF;
+	font-size:14px;
+	font-weight: bold;
+                font-family:monospace;
+}
+div.live caption.track {
+                color:#fff;
+                font-size:18px;
+	font-weight: bold;
+                text-transform:uppercase;
+                text-decoration:none;
+                margin-bottom:0px;
+                background:#7B0606;
+                border-radius:10px 10px 0 0;
+                padding:5px 0;
+                font-family:monospace;
+}
+div.live tr.header {
+	color: #FFFFFF;
+                font-size:18px;
+                background:#252525;
+}
+div.live th {
+                margin:10px 0;
+                padding:5px;
+                border-bottom:5px solid #000;
+}
+div.live tr.detaileven {
+                color:#FFFFFF;
+                font-size:18px;
+                font-weight:bold;
+}
+div.live tr.detailodd {
+                color: #828282;
+                font-size:18px;
+                font-weight:bold;
+}
+div.live td.col1even {
+	color:#FFFFFF;
+	font-size:14px;
+	font-weight: bold;
+}
+div.live td.col1odd {
+	color: #FFFFFF;
+	font-size:14px;
+	font-weight: bold;
+}
+div.live td.col2even {
+	color:#DDDDFF;
+	font-size:14px;
+	text-align: left;
+}
+div.live td.col2odd {
+	color: #BBBBFF;
+	font-size:14px;
+	text-align: left;
+}
+div.live td.col3even {
+	color:#DDDDFF;
+	font-size:14px;
+	text-align: left;
+}
+div.live td.col3odd {
+	color: #BBBBFF;
+	font-size:14px;
+	text-align: left;
+}
+            .hotlap_title{
+                color:#B41010;
+                font-family:gill;
+                font-size:35px;
+                line-height:35px;
+                text-shadow:1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
+                display:block;
+                margin-bottom:50px;
+            }
+            .left_car{
+                float:left;
+            }
+            .right_car{
+                float:right;
+            }
+            div.live table{
+                border-radius:0 0 10px 10px;
+                padding:5px 2px;
+                margin:5px;
+		box-shadow:5px 5px 50px #000000;
+                background:#000;
+            }
+                div.live table tr td,div.live table tr th{
+                    margin:0;
+                    font-family:monospace;
+                    font-size:16px;
+                }
+</style>
+<script language="JavaScript1.2">
+
+// Object to load the live standings
+var xmldoc;
+var xmlhttp;
+
+function loadXMLDoc(xmlurl) {
+   if (window.ActiveXObject) {
+      // code for IE
+      xmldoc = new ActiveXObject("Microsoft.XMLDOM");
+      xmldoc.onreadystatechange = state_Change
+      xmldoc.async = true
+      xmldoc.load(xmlurl);
+   } else if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+      // Google chrome
+      xmlhttp = new window.XMLHttpRequest(); 
+			xmlhttp.onreadystatechange = state_Change;
+      xmlhttp.open("GET", xmlurl, true); 
+      xmlhttp.send(null); 
+   } else if (document.implementation && document.implementation.createDocument) {
+      // code for Mozilla, Firefox, Opera, etc.
+      xmldoc = document.implementation.createDocument("","",null)
+      xmldoc.async = true
+			xmldoc.onload = populate
+      xmldoc.load(xmlurl)
+   } else {
+      alert('Your browser cannot handle this script');
+   }
+}
+function state_Change() {
+  if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+     if (xmlhttp.readyState == 4) {
+        xmldoc = xmlhttp.responseXML.documentElement;      
+        populate()
+     }
+  } else {
+     if (xmldoc.readyState == 4) {
+        populate()
+     }
+  }
+}
+
+var interval, livetab
+
+function populate() {
+   livetab = document.getElementById ? document.getElementById('livetable') : document.all.livetable
+
+   // First remove all existing rows from the body
+   for (var i = livetab.tBodies[0].rows.length - 1; i >= 0; i--) {
+   		livetab.tBodies[0].deleteRow(i)
+   }
+
+   // Load the rows
+   if (xmldoc != null) {
+
+	   var xn, xn1
+     // Do the common data here
+	   xn = xmldoc.getElementsByTagName('track')[0].childNodes[0]
+	   xn1 = xn.parentNode.parentNode.getAttributeNode('trackWetness')
+     livetab.caption.innerHTML = (xn == null ? '' : xn.nodeValue + " (" + Math.round(parseFloat(xn1.nodeValue) * 100.0) + "&#37; Wetness)" )
+	   xn = xmldoc.getElementsByTagName('server')[0].childNodes[0]
+     document.getElementById('server').innerHTML = (xn == null ? '' : xn.nodeValue)
+	   xn = xmldoc.getElementsByTagName('session')[0].childNodes[0]
+     document.getElementById('session').innerHTML = (xn == null ? '' : xn.nodeValue)
+	   xn = xmldoc.getElementsByTagName('progress')[0].childNodes[0]
+     document.getElementById('progress').innerHTML = (xn == null ? '' : xn.nodeValue)
+	   xn = xmldoc.getElementsByTagName('flag')[0].childNodes[0]
+     document.getElementById('flag').innerHTML = (xn == null ? '' : xn.nodeValue + " flag")
+
+	   for ( var row = 0; row < xmldoc.getElementsByTagName('standings').length; row++) {
+		   // Add rows
+		   var r = livetab.tBodies[0].appendChild(document.createElement('tr'))
+	     r.className = 'detail' + (row & 1 ? 'odd' : 'even')
+       var c
+
+	     c = document.createElement('td')
+	     c.className = 'col1' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('position')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col2' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('driverName')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col3' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('vehicle')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col4' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('bestLap')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col5' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('behindLeader')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col6' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('lastLapTime')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col7' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('lapsLed')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col8' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('totalLaps')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col9' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('numPenalties')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col10' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('numPitStops')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col11' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('inPits')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+
+	     c = document.createElement('td')
+	     c.className = 'col12' + (row & 1 ? 'odd' : 'even')
+	     xn = xmldoc.getElementsByTagName('finishStatus')[row].childNodes[0]
+	     c.appendChild(document.createTextNode(xn == null ? '' : xn.nodeValue))
+	     r.appendChild(c)
+	   }
+	  }
+      
+   // Refresh interval
+   clearInterval(interval)
+   interval = setInterval("loadXMLDoc('rFactorLive?id=livedata')", 5000)
+}
+
+window.onload = function() { loadXMLDoc('rFactorLive?id=livedata') }
+//window.onload = function() { loadXMLDoc('rFactorLive/rFactorTest.xml') }
+
+</script>
+</head>
+<body>
+	<center>
+	<div align="middle" class="live">
+                <p>
+                    <span class="left_car"><img src="rFactorHotlaps/t_left_car.png" width="128px" height="128px"></span>
+                    <span class="right_car"><img src="rFactorHotlaps/t_right_car.png" width="128px" height="128px"></span>
+                </p>
+                <span class="hotlap_title">Online-Racing.Net Live</span>
+                <p><img src="rFactorHotlaps/cartime.png"></p>
+	  <p>&nbsp;</p>
+		<div id="server" align="middle" class="server"></div><br>
+		<div id="session" align="middle" class="session"></div>
+		<div id="progress" align="middle" class="progress"></div>
+		<div id="flag" align="middle" class="flag"></div><br>
+                <table id="livetable" border="0" cellpadding="2" cellspacing="2" width="80%">
+			<caption align="top" class="track"></caption>
+			<thead>
+			<tr class="header">
+			<th align="center">Pos</th>
+			<th align="left">Driver</th>
+			<th align="left">Vehicle</th>
+			<th align="center">Best<br>Lap</th>
+			<th align="center">Behind<br>Leader</th>
+			<th align="center">Last<br>Lap</th>
+			<th align="center">Laps<br>Led</th>
+			<th align="center">Total<br>Laps</th>
+			<th align="center">Penalties</th>
+			<th align="center">Pit<br>Stops</th>
+			<th align="center">In<br>Pits</th>
+			<th align="center">Status</th>
+			</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+                <p>
+                    <span class="left_car"><img src="rFactorHotlaps/b_left_car.png" width="128px" height="128px"></span>
+                    <span class="right_car"><img src="rFactorHotlaps/b_right_car.png" width="128px" height="128px"></span>
+                </p>
+	</div>
+  </center>
+</body>
+</html>

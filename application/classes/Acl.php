@@ -172,14 +172,9 @@ class Acl extends Zend_Acl
 	//Inicialize role
 	if (Zend_Auth::getInstance()->hasIdentity()) {
 	    $storage_data = Zend_Auth::getInstance()->getStorage()->read();
-
-	    // get role name for current user
-	    $user = new Application_Model_DbTable_User();
-	    $role = $user->getUserRoleName($storage_data->id);
-
+	    
 	    $user_role_db = new Application_Model_DbTable_UserRole();
-
-	    $role = $user_role_db->getItem(array('user_id', $storage_data->id), array('id', 'nam'));
+	    $role = $user_role_db->getItem(array('user_id', $storage_data->id))->role_name;
 	} else {
 	    $role = 'guest';
 	}

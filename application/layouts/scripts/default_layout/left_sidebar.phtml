@@ -1,30 +1,26 @@
-
 <?php
-
 if ($this->ls_next_event_block) {
     echo $this->partial("default_layout/left_sidebar/ls_next_event_block.phtml");
 }
 ?>
 <?php
-
+echo $this->partial("default_layout/left_sidebar/ls_calendar_block.phtml");
+?>
+<?php
 if ($this->ls_chat_block) {
     echo $this->partial("default_layout/left_sidebar/ls_chat_block.phtml");
 }
 ?>
 <?php
-
 if ($this->ls_user_map_block) {
     echo $this->partial("default_layout/left_sidebar/ls_user_map_block.phtml");
 }
 ?>
 <?php
-
 if ($this->ls_online_radio_block) {
     echo $this->partial("default_layout/left_sidebar/ls_online_radio_block.phtml");
 }
 ?>
-
 <?php
-
 echo $this->partial("default_layout/left_sidebar/ls_online_users_block.phtml");
 ?>
