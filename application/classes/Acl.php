@@ -148,14 +148,14 @@ class Acl extends Zend_Acl
 
 	if ($parent_role_id) {
 	    if ($this->roles[$parent_role_id]['added']) {
-		$this->addRole($this->roles[$role_id]['name'], $this->roles[$parent_role_id]['name']);
+		$this->addRole(new Zend_Acl_Role($this->roles[$role_id]['name']), $this->roles[$parent_role_id]['name']);
 		$this->roles[$role_id]['added'] = 1;
 	    } else {
 		$this->addRecursiveRole($parent_role_id);
 		$this->addRecursiveRole($role_id);
 	    }
 	} else {
-	    $this->addRole($this->roles[$role_id]['name']);
+	    $this->addRole(new Zend_Acl_Role($this->roles[$role_id]['name']));
 	    $this->roles[$role_id]['added'] = 1;
 	}
     }

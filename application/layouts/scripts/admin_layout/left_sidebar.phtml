@@ -93,6 +93,23 @@
     </li>
     <li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('Действия доступа'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all'), 'right_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+	</ul>
+    </li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    <?php echo $this->translate('Пользователи'); ?> <span class="caret"></span>
 	</a>
 	<ul class="dropdown-menu">

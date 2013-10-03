@@ -125,6 +125,39 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	    'page' => 1,
 		), "admin/role/all/page/%s.html"
 	));
+	
+	//RIGHT CONTROLLER ROUTERS
+	$router->addRoute(
+		'right_id', new Zend_Controller_Router_Route_Regex('admin/right/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'right',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'right_id' => 1,
+		), "admin/right/%d.html"
+	));
+
+	$router->addRoute(
+		'right_action', new Zend_Controller_Router_Route_Regex('admin/right/(\d+)/(\w*)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'right',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'right_id' => 1,
+	    'action' => 2,
+		), "admin/right/%d/%s.html"
+	));
+	
+	$router->addRoute(
+		'right_all', new Zend_Controller_Router_Route_Regex('admin/right/all/page/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'right',
+	    'action' => 'all',
+	    1 => 1
+		), array(
+	    'page' => 1,
+		), "admin/right/all/page/%s.html"
+	));
 
 	//CONTENT TYPE CONTROLLER ROUTERS
 	$router->addRoute(
@@ -158,7 +191,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	    'page' => 1,
 		), "admin/content-type/all/page/%s.html"
 	));
-	
 		
 	// EVENT CONTROLLER ROUTERS
 	$router->addRoute(

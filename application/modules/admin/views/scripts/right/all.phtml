@@ -1,0 +1,34 @@
+<?php
+if ($this->paginator) {
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+    ?>
+    <table class="table table-bordered table-hover table-striped articles_table">
+        <thead>
+    	<tr>
+    	    <th class="right_id"><span>#</span></th>
+    	    <th class="right_name"><span><?php echo $this->translate('Название'); ?></span></th>
+    	    <th class="right_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+    	    <th class="right_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+    	</tr>
+        </thead>
+        <tbody>
+	    <?php foreach ($this->paginator as $right): ?>
+		<tr>
+		    <td class="right_id"><span><a href="<?php echo $this->url(array('controller' => 'right', 'action' => 'id', 'right_id' => $right['id']), 'right_id', true) ?>"><?php echo $this->escape($right['id']) ?></a></span></td>
+		    <td class="right_name"><span><a href="<?php echo $this->url(array('controller' => 'right', 'action' => 'id', 'right_id' => $right['id']), 'right_id', true) ?>"><?php echo $this->escape($right['name']) ?></a></span></td>
+		    <td class="right_descr"><span><?php echo $this->truncate($this->escape($right['description']))->toLength(200); ?></span></td>
+		    <td class="right_action articles_table_action">
+			<span>
+			    <a href="<?php echo $this->url(array('controller' => 'right', 'action' => 'id', 'right_id' => $right['id']), 'right_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+			    <a href="<?php echo $this->url(array('controller' => 'right', 'action' => 'edit', 'right_id' => $right['id']), 'right_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+			    <a href="<?php echo $this->url(array('controller' => 'right', 'action' => 'delete', 'right_id' => $right['id']), 'right_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+			</span>
+		    </td>
+		</tr>
+	    <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php
+    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+}
+?>

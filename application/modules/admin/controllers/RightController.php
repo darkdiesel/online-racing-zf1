@@ -1,41 +1,41 @@
 <?php
 
-class Admin_ContentTypeController extends App_Controller_LoaderController
+class Admin_RightController extends App_Controller_LoaderController
 {
 
     public function init()
     {
 	parent::init();
-	$this->view->headTitle($this->view->translate('Тип контента'));
+	$this->view->headTitle($this->view->translate('Правила'));
     }
 
     // action for view content type
     public function idAction()
     {
-	$this->view->pageTitle($this->view->translate('Тип контента'));
+	$this->view->pageTitle($this->view->translate('Правила'));
 
 	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+	$right_id = (int) $request->getParam('right_id');
 
-	$content_type_data = $this->db->get('content_type')->getItem($content_type_id);
+	$right_data = $this->db->get('right')->getItem($right_id);
 
-	if ($content_type_data) {
-	    $this->view->content_type = $content_type_data;
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle($content_type_data->name);
+	if ($right_data) {
+	    $this->view->right = $right_data;
+	    $this->view->headTitle($right_data->name);
+	    $this->view->pageTitle($right_data->name);
 	    return;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
     }
 
     // action for view all content types
     public function allAction()
     {
-	$this->view->headTitle($this->view->translate('Типы контента'));
-	$this->view->pageTitle($this->view->translate('Типы контента'));
+	$this->view->headTitle($this->view->translate('Правила'));
+	$this->view->pageTitle($this->view->translate('Правила'));
 
 	// pager settings
 	$pager_args = array(
@@ -44,7 +44,7 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 	    "page" => $this->getRequest()->getParam('page')
 	);
 
-	$paginator = $this->db->get('content_type')->getAll(FALSE, "id, name, description", "ASC", TRUE, $pager_args);
+	$paginator = $this->db->get('right')->getAll(FALSE, "all", "ASC", "1", $pager_args);
 
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
@@ -57,34 +57,34 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
     public function addAction()
     {
 	$this->view->headTitle($this->view->translate('Добавить'));
-	$this->view->pageTitle($this->view->translate('Добавить тип контента'));
+	$this->view->pageTitle($this->view->translate('Добавить правило'));
 
 	$request = $this->getRequest();
 	// form
-	$form = new Application_Form_ContentType_Add();
+	$form = new Application_Form_Right_Add();
 	$form->setAction(
 		$this->view->url(
-			array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default', true
+			array('module' => 'admin', 'controller' => 'right', 'action' => 'add'), 'default', true
 		)
 	);
 
 	if ($this->getRequest()->isPost()) {
 	    if ($form->isValid($request->getPost())) {
 		$date = date('Y-m-d H:i:s');
-		$content_type_data = array(
+		$right_data = array(
 		    'name' => strtolower($form->getValue('name')),
 		    'description' => $form->getValue('description'),
 		    'date_create' => $date,
 		    'date_edit' => $date,
 		);
 
-		$new_content_type = $this->db->get('content_type')->createRow($content_type_data);
-		$new_content_type->save();
+		$new_right = $this->db->get('right')->createRow($right_data);
+		$new_right->save();
 
 		$this->redirect(
 			$this->view->url(
-				array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-			    'content_type_id' => $new_content_type->id), 'content_type_id', true
+				array('module' => 'admin', 'controller' => 'right', 'action' => 'id',
+			    'right_id' => $new_right->id), 'right_id', true
 			)
 		);
 	    } else {
@@ -103,7 +103,8 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
 	$this->view->headTitle($this->view->translate('Редактировать'));
 
-	$content_type_data = $this->db->get('content_type')->getItem($content_type_id);
+	$content_type = new Application_Model_DbTable_ContentType();
+	$content_type_data = $content_type->getItem($content_type_id);
 
 	if ($content_type_data) {
 	    // form
@@ -141,9 +142,9 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
     }
 
@@ -160,9 +161,9 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
 	if ($content_type_data) {
 	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Удалить тип контента')} :: {$content_type_data->name}");
+	    $this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$content_type_data->name}");
 
-	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить тип контента')} <strong>\"{$content_type_data->name}\"</strong> ?");
+	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$content_type_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_ArticleType_Delete();
 	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
@@ -174,7 +175,7 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 		    $content_type->delete($content_type_where);
 
 		    $this->view->showMessages()->clearMessages();
-		    $this->messageManager->addSuccess("{$this->view->translate("Тип контента <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
+		    $this->messageManager->addSuccess("{$this->view->translate("Правила <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
 
 		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1), 'content_type_all', true));
 		} else {
@@ -185,9 +186,9 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 	    $this->view->form = $form;
 	    $this->view->content_type = $content_type_data;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
+	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
+	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
     }
 

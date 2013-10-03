@@ -1,11 +1,11 @@
 <?php
 
-class Application_Model_DbTable_ContentType extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_Right extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'content_type';
+    protected $_name = 'permission_right';
     protected $_primary = 'id';
-    protected $db_href = 'pr';
+    protected $db_href = 'rh';
 
     /*
      * Get Item by idencity field value and $field array of fields list.
