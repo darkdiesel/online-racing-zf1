@@ -155,8 +155,7 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 	$request = $this->getRequest();
 	$content_type_id = (int) $request->getParam('content_type_id');
 
-	$content_type = new Application_Model_DbTable_ContentType();
-	$content_type_data = $content_type->getItem($content_type_id);
+	$content_type_data = $this->db->get('content_type')->getItem($content_type_id);
 
 	if ($content_type_data) {
 	    $this->view->headTitle($content_type_data->name);
@@ -170,8 +169,8 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
 	    if ($this->getRequest()->isPost()) {
 		if ($form->isValid($request->getPost())) {
-		    $content_type_where = $content_type->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $content_type->delete($content_type_where);
+		    $content_type_where = $this->db->get('content_type')->getAdapter()->quoteInto('id = ?', $content_type_id);
+		    $this->db->get('content_type')->delete($content_type_where);
 
 		    $this->view->showMessages()->clearMessages();
 		    $this->messageManager->addSuccess("{$this->view->translate("Тип контента <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
