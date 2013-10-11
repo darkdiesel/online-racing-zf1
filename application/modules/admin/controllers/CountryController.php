@@ -59,6 +59,12 @@ class Admin_CountryController extends App_Controller_LoaderController
 	$request = $this->getRequest();
 	// form
 	$form = new Application_Form_Country_Add();
+	$form->setAction(
+		$this->view->url(
+			array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default', true
+		)
+	);
+	$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'country', 'action' => 'all'), 'country_all', true)}\"");
 
 	if ($this->getRequest()->isPost()) {
 	    if ($form->isValid($request->getPost())) {
@@ -128,8 +134,11 @@ class Admin_CountryController extends App_Controller_LoaderController
 	if ($country_data) {
 	    //create form and set some parameters
 	    $form = new Application_Form_Country_Edit();
-	    $form->setAction($this->view->url(array('controller' => 'contry', 'action' => 'edit', 'id' => $country_id), 'country_action', true));
-	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $country_id), 'country_id', true)}\"");
+	    $form->setAction($this->view->url(
+			    array('module' => 'admin', 'controller' => 'country', 'action' => 'edit',
+			'country_id' => $country_id), 'country_action', true
+	    ));
+	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $country_id), 'country_id', true)}\"");
 
 	    if ($this->getRequest()->isPost()) {
 		if ($form->isValid($request->getPost())) {

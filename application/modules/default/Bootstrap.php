@@ -369,8 +369,8 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 		'route' => 'leagueAll',
 		'pages' => array(
 		    array(
-			'label' => _('F1 Online-Racing League'),
-			'title' => _('F1 Online-Racing League'),
+			'label' => _('F1 ORL'),
+			'title' => _('F1 ORL'),
 			'module' => 'default',
 			'controller' => 'league',
 			'action' => 'id',

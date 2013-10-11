@@ -18,6 +18,7 @@ class Application_Form_User_Login extends Zend_Form
 	$this->setName('userlogin');
 	$this->setAttrib('class', 'block-item block-item-form block-item-form-w-270 block-align-center');
 
+	// decorators for this form
 	$this->addDecorators(array('formElements', 'form'));
 
 	// Add an email element
@@ -63,21 +64,6 @@ class Application_Form_User_Login extends Zend_Form
 	    )
 	));
 
-	/* $this->addElement('checkbox', 'remember', array(
-	  'label' => $this->translate('Запомнить меня'),
-	  'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
-	  'data-placeholder' => 'left',
-	  'class' => 'tooltip_field',
-	  'data-placement' => 'bottom',
-	  'decorators' => array(
-	  'ViewHelper', 'HtmlTag', 'Errors',
-	  array('label', array('class' => '','placement' => 'PREPEND')),
-	  array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-	  array('HtmlTag', array('tag' => 'div', 'class' => 'checkbox1')),
-	  )
-	  ));
-	  $this->getElement('remember')->getDecorator('label')->setOptions(array('placement' => 'APPEND')); */
-
 	$this->addElement('checkbox', 'remember', array(
 	    'label' => $this->translate('Запомнить меня'),
 	    'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
@@ -95,8 +81,8 @@ class Application_Form_User_Login extends Zend_Form
 	    'label' => $this->translate('Войти'),
 	    'decorators' => array(
 		'ViewHelper', 'HtmlTag',
-		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group col-lg-offset-0 col-lg-5 pull-left')),
-		array('HtmlTag', array('class' => '')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
 	    )
 	));
 
@@ -106,21 +92,21 @@ class Application_Form_User_Login extends Zend_Form
 	    'label' => $this->translate('Сбросить'),
 	    'decorators' => array(
 		'ViewHelper', 'HtmlTag',
-		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group col-lg-offset-0 col-lg-5 pull-right')),
-		array('HtmlTag', array('class' => '')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
 	    )
 	));
-
-	$this->addDisplayGroup(array(
-	    $this->getElement('submit'),
-	    $this->getElement('reset')
-		), 'form_actions', array());
-
-	$this->getDisplayGroup('form_actions')->setDecorators(array(
+        
+        $this->addDisplayGroup(array(
+            $this->getElement('submit'),
+            $this->getElement('reset')
+                ), 'form_actions', array());
+        
+        $this->getDisplayGroup('form_actions')->setDecorators(array(
 	    'FormElements',
 	    //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
 //	    /'Fieldset',
-	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'clearfix')),
+	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
 	));
     }
 

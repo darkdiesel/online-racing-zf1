@@ -72,6 +72,7 @@ class Admin_EventController extends App_Controller_LoaderController
 			array('module' => 'admin', 'controller' => 'event', 'action' => 'add'), 'default', true
 		)
 	);
+	$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'all'), 'event_all', true)}\"");
 
 	if ($this->getRequest()->isPost()) {
 	    if ($form->isValid($request->getPost())) {
@@ -125,6 +126,7 @@ class Admin_EventController extends App_Controller_LoaderController
 			    array('module' => 'admin', 'controller' => 'event', 'action' => 'edit',
 			'event_id' => $event_id), 'event_action', true
 	    ));
+	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event_id), 'event_id', true)}\"");
 
 	    if ($this->getRequest()->isPost()) {
 		if ($form->isValid($request->getPost())) {

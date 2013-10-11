@@ -2,36 +2,38 @@
 if (count($this->paginator)) {
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
     ?>
-    <table class="table table-bordered table-hover table-striped articles_table">
-        <thead>
-    	<tr>
-    	    <th class="event_id"><span>#</span></th>
-    	    <th class="event_name"><span><?php echo $this->translate('Название'); ?></span></th>
-    	    <th class="event_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
-    	    <th class="event_date_event"><span><?php echo $this->translate('Дата события'); ?></span></th>
-    	    <th class="event_url_event"><span><?php echo $this->translate('Ссылка события'); ?></span></th>
-    	    <th class="content_type_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-    	</tr>
-        </thead>
-        <tbody>
-	    <?php foreach ($this->paginator as $event): ?>
-		<tr>
-		    <td class="event_id"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><?php echo $this->escape($event['id']) ?></a></span></td>
-		    <td class="event_name"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><?php echo $this->escape($event['name']) ?></a></span></td>
-		    <td class="event_descr"><span><?php echo $this->truncate($this->escape($event['description']))->toLength(200); ?></span></td>
-		    <td class="event_date_event"><span><?php echo $this->escape($event['date_event']); ?></span></td>
-		    <td class="event_url_event"><span><a href="<?php echo $this->escape($event['url_event']); ?>"><?php echo $this->translate('Ссылка'); ?></a></span></td>
-		    <td class="content_type_action articles_table_action">
-			<span>
-			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-			    <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
-			</span>
-		    </td>
-		</tr>
-	    <?php endforeach; ?>
-        </tbody>
-    </table>
+    <div class="block-item">
+        <table class="table table-bordered table-hover table-striped articles_table">
+            <thead>
+    	    <tr>
+    		<th class="event_id"><span>#</span></th>
+    		<th class="event_name"><span><?php echo $this->translate('Название'); ?></span></th>
+    		<th class="event_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+    		<th class="event_date_event"><span><?php echo $this->translate('Дата события'); ?></span></th>
+    		<th class="event_url_event"><span><?php echo $this->translate('Ссылка события'); ?></span></th>
+    		<th class="content_type_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+    	    </tr>
+            </thead>
+            <tbody>
+		<?php foreach ($this->paginator as $event): ?>
+		    <tr>
+			<td class="event_id"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><?php echo $this->escape($event['id']) ?></a></span></td>
+			<td class="event_name"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><?php echo $this->escape($event['name']) ?></a></span></td>
+			<td class="event_descr"><span><?php echo $this->truncate($this->escape($event['description']))->toLength(200); ?></span></td>
+			<td class="event_date_event"><span><?php echo $this->escape($event['date_event']); ?></span></td>
+			<td class="event_url_event"><span><a href="<?php echo $this->escape($event['url_event']); ?>"><?php echo $this->translate('Ссылка'); ?></a></span></td>
+			<td class="content_type_action articles_table_action">
+			    <span>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+			    </span>
+			</td>
+		    </tr>
+		<?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
     <?php
     echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
 }

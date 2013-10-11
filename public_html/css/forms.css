@@ -198,6 +198,21 @@ input[type="file"] {
     margin:0;
     padding:10px 20px;
 }
+.block-item-form-delete{
+    margin:10px 0 15px;
+}
+.block-item-form .block-item-form-actions{
+    margin:10px 0;
+    padding:5px;
+}
+.block-item-form .block-item-form-actions > .form-group{
+    display:inline-block;
+    margin:0 10px;
+    
+}
 .block-item-form-w-270{
     width:270px;
+}
+.block-item-form-w-350{
+    width:350px;
 }

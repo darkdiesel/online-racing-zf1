@@ -1,0 +1,45 @@
+[TEXT FIELD]
+-==== OLD ====-
+'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+-==== NEW (BOOTSRAP 3) ====-
+			'decorators' => array(
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
+		
+		
+[CHECKBOX LOGIN]
+-===== OLD ====-
+$this->addElement('checkbox', 'remember', array(
+	  'label' => $this->translate('Запомнить меня'),
+	  'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
+	  'data-placeholder' => 'left',
+	  'class' => 'tooltip_field',
+	  'data-placement' => 'bottom',
+	  'decorators' => array(
+	  'ViewHelper', 'HtmlTag', 'Errors',
+	  array('label', array('class' => '','placement' => 'PREPEND')),
+	  array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+	  array('HtmlTag', array('tag' => 'div', 'class' => 'checkbox1')),
+	  )
+	  ));
+	  $this->getElement('remember')->getDecorator('label')->setOptions(array('placement' => 'APPEND')); 
+	  
+-===== NEW =====-
+$this->addElement('checkbox', 'remember', array(
+	    'label' => $this->translate('Запомнить меня'),
+	    'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
+	    'data-placeholder' => 'left',
+	    'class' => 'tooltip_field',
+	    'data-placement' => 'bottom',
+	    'decorators' => array(array('ViewScript', array(
+			'viewScript' => 'form_elements/bootstrap3_checkbox.phtml'
+		    )))
+	));

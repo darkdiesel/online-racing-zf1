@@ -56,7 +56,6 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract
 	$view->minifyHeadLink()->appendStylesheet('/css/style.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/default.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/user_toolbar.css');
-	$view->minifyHeadLink()->appendStylesheet('/css/forms.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/articles.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/user.css');
 

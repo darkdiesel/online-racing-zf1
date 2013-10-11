@@ -123,6 +123,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	// [COMMON CSS]
 	$view->minifyHeadLink()->appendStylesheet('/css/items.css');
+	$view->minifyHeadLink()->appendStylesheet('/css/forms.css');
 	
 	// [COMMON JS]
 	$view->headScript()->appendFile("/js/app.js");

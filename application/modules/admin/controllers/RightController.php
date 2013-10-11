@@ -1,17 +1,14 @@
 <?php
 
-class Admin_RightController extends App_Controller_LoaderController
-{
+class Admin_RightController extends App_Controller_LoaderController {
 
-    public function init()
-    {
+    public function init() {
 	parent::init();
 	$this->view->headTitle($this->view->translate('Правила'));
     }
 
     // action for view content type
-    public function idAction()
-    {
+    public function idAction() {
 	$this->view->pageTitle($this->view->translate('Правила'));
 
 	$request = $this->getRequest();
@@ -32,8 +29,7 @@ class Admin_RightController extends App_Controller_LoaderController
     }
 
     // action for view all content types
-    public function allAction()
-    {
+    public function allAction() {
 	$this->view->headTitle($this->view->translate('Правила'));
 	$this->view->pageTitle($this->view->translate('Правила'));
 
@@ -54,8 +50,7 @@ class Admin_RightController extends App_Controller_LoaderController
     }
 
     // action for add new content type
-    public function addAction()
-    {
+    public function addAction() {
 	$this->view->headTitle($this->view->translate('Добавить'));
 	$this->view->pageTitle($this->view->translate('Добавить правило'));
 
@@ -67,6 +62,7 @@ class Admin_RightController extends App_Controller_LoaderController
 			array('module' => 'admin', 'controller' => 'right', 'action' => 'add'), 'default', true
 		)
 	);
+	$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all'), 'right_all', true)}\"");
 
 	if ($this->getRequest()->isPost()) {
 	    if ($form->isValid($request->getPost())) {
@@ -96,49 +92,47 @@ class Admin_RightController extends App_Controller_LoaderController
     }
 
     // action for edit content type
-    public function editAction()
-    {
+    public function editAction() {
 	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+	$right_id = (int) $request->getParam('right_id');
 
 	$this->view->headTitle($this->view->translate('Редактировать'));
 
-	$content_type = new Application_Model_DbTable_ContentType();
-	$content_type_data = $content_type->getItem($content_type_id);
+	$right_data = $this->db->get('right')->getItem($right_id);
 
-	if ($content_type_data) {
+	if ($right_data) {
 	    // form
-	    $form = new Application_Form_ContentType_Edit();
+	    $form = new Application_Form_Right_Edit();
 	    $form->setAction($this->view->url(
-			    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit',
-			'content_type_id' => $content_type_id), 'content_type_action', true
+			    array('module' => 'admin', 'controller' => 'right', 'action' => 'edit',
+			'right_id' => $right_id), 'right_action', true
 	    ));
-	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'default', true)}\"");
+	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'id', 'right_id' => $right_id), 'right_id', true)}\"");
 
 	    if ($this->getRequest()->isPost()) {
 		if ($form->isValid($request->getPost())) {
-		    $new_content_type_data = array(
+		    $new_right_data = array(
 			'name' => strtolower($form->getValue('name')),
 			'description' => $form->getValue('description'),
 			'date_edit' => date('Y-m-d H:i:s')
 		    );
 
-		    $content_type_where = $content_type->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $content_type->update($new_content_type_data, $content_type_where);
+		    $right_where = $this->db->get('right')->getAdapter()->quoteInto('id = ?', $right_id);
+		    $this->db->get('right')->update($new_right_data, $right_where);
 
 		    $this->redirect($this->view->url(
-				    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-				'content_type_id' => $content_type_id), 'content_type_id', true
+				    array('module' => 'admin', 'controller' => 'right', 'action' => 'id',
+				'right_id' => $right_id), 'right_id', true
 		    ));
 		} else {
 		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$content_type_data->name}");
+	    $this->view->headTitle($right_data->name);
+	    $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$right_data->name}");
 
-	    $form->name->setvalue($content_type_data->name);
-	    $form->description->setvalue($content_type_data->description);
+	    $form->name->setvalue($right_data->name);
+	    $form->description->setvalue($right_data->description);
 
 	    $this->view->form = $form;
 	} else {
@@ -149,42 +143,40 @@ class Admin_RightController extends App_Controller_LoaderController
     }
 
     // action for delete content type
-    public function deleteAction()
-    {
+    public function deleteAction() {
 	$this->view->headTitle($this->view->translate('Удалить'));
 
 	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+	$right_id = (int) $request->getParam('right_id');
 
-	$content_type = new Application_Model_DbTable_ContentType();
-	$content_type_data = $content_type->getItem($content_type_id);
+	$right_data = $this->db->get('right')->getItem($right_id);
 
-	if ($content_type_data) {
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$content_type_data->name}");
+	if ($right_data) {
+	    $this->view->headTitle($right_data->name);
+	    $this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$right_data->name}");
 
-	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$content_type_data->name}\"</strong> ?");
+	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$right_data->name}\"</strong> ?");
 
-	    $form = new Application_Form_PostType_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
-	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'content_type_id' => $content_type_id), 'content_type_id', true) . '"');
+	    $form = new Application_Form_Right_Delete();
+	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'delete', 'right_id' => $right_id), 'right_action', true));
+	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'id', 'right_id' => $right_id), 'right_id', true) . '"');
 
 	    if ($this->getRequest()->isPost()) {
 		if ($form->isValid($request->getPost())) {
-		    $content_type_where = $content_type->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $content_type->delete($content_type_where);
+		    $right_where = $this->db->get('right')->getAdapter()->quoteInto('id = ?', $right_id);
+		    $this->db->get('right')->delete($right_where);
 
-		    $this->view->showMessages()->clearMessages();
-		    $this->messageManager->addSuccess("{$this->view->translate("Правила <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
+		    $this->messageManager->clearMessages();
+		    $this->messageManager->addSuccess("{$this->view->translate("Правило <strong>\"{$right_data->name}\"</strong> успешно удалено")}");
 
-		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1), 'content_type_all', true));
+		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all', 'page' => 1), 'right_all', true));
 		} else {
 		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
 	    $this->view->form = $form;
-	    $this->view->content_type = $content_type_data;
+	    $this->view->right = $right_data;
 	} else {
 	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
