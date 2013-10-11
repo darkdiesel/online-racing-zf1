@@ -51,9 +51,9 @@ class Application_Form_Role_Edit extends Zend_Form
 	    )
 	));
 
-	$role = new Application_Model_DbTable_Role();
+	$role_db = new Application_Model_DbTable_Role();
 
-	$roles = $role->getAll("id, name");
+	$roles = $role_db->getAll(FALSE, "id, name");
 
 	foreach ($roles as $role) {
 	    $this->parent_role->addMultiOptions(array(

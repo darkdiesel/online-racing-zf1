@@ -24,6 +24,24 @@
     </li>
     <li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('Типы постов'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    </li>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'post_type_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+	</ul>
+    </li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	    <?php echo $this->translate('Ресурсы сайта'); ?> <span class="caret"></span>
 	</a>
 	<ul class="dropdown-menu">
@@ -93,7 +111,7 @@
     </li>
     <li class="dropdown">
 	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Действия доступа'); ?> <span class="caret"></span>
+	    <?php echo $this->translate('Права доступа'); ?> <span class="caret"></span>
 	</a>
 	<ul class="dropdown-menu">
 	    <li>
@@ -103,6 +121,23 @@
 	    <li class="divider"></li>
 	    <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all'), 'right_all', true) ?>">
+		    <?php echo $this->translate('Все'); ?>
+		</a>
+	    </li>
+	</ul>
+    </li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	    <?php echo $this->translate('Превилегии ролей пользователя'); ?> <span class="caret"></span>
+	</a>
+	<ul class="dropdown-menu">
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true) ?>">
+		    <?php echo $this->translate('Добавить'); ?>
+		</a>
+	    <li class="divider"></li>
+	    <li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'privilege_all', true) ?>">
 		    <?php echo $this->translate('Все'); ?>
 		</a>
 	    </li>

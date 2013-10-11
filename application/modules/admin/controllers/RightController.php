@@ -165,7 +165,7 @@ class Admin_RightController extends App_Controller_LoaderController
 
 	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$content_type_data->name}\"</strong> ?");
 
-	    $form = new Application_Form_ArticleType_Delete();
+	    $form = new Application_Form_PostType_Delete();
 	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
 	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'content_type_id' => $content_type_id), 'content_type_id', true) . '"');
 

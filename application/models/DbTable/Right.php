@@ -3,7 +3,7 @@
 class Application_Model_DbTable_Right extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'permission_right';
+    protected $_name = 'privilege_right';
     protected $_primary = 'id';
     protected $db_href = 'rh';
 

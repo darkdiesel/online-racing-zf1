@@ -19,33 +19,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	$frontController = Zend_Controller_Front::getInstance();
 	$router = $frontController->getRouter();
 
-	//ADMIN ROUTES
-	$router->addRoute(
-		'adminArticleAll', new Zend_Controller_Router_Route('admin/articles/:page', array(
-	    'module' => 'default',
-	    'controller' => 'admin',
-	    'action' => 'articles',
-	    'page' => 1)
-	));
-
-	$router->addRoute(
-		'adminUserAll', new Zend_Controller_Router_Route('admin/users/:page', array(
-	    'module' => 'default',
-	    'controller' => 'admin',
-	    'action' => 'users',
-	    'page' => 1)
-	));
-
-	$router->addRoute(
-		'adminLeagueAll', new Zend_Controller_Router_Route('admin/leagues/:page', array(
-	    'module' => 'default',
-	    'controller' => 'admin',
-	    'action' => 'leagues',
-	    'page' => 1)
-	));
-
-	// ADMIN ROUTES END
-
 	$router->addRoute(
 		'userId', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html', array(
 	    'module' => 'default',
@@ -125,19 +98,10 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	    1 => 0,
 	    2 => 1,
 		), array(
-	    'article_type_id' => 1,
+	    'post_type_id' => 1,
 	    'page' => 2,
 		), "post/all-by-type/%d/page/%d.html"
 	));
-
-	//article-type controller routers
-	$router->addRoute(
-		'articleTypeId', new Zend_Controller_Router_Route('article-type/:action/:id', array(
-	    'module' => 'default',
-	    'controller' => 'article-type',
-	    'id' => 0)
-	));
-
 
 
 	$router->addRoute(
@@ -304,9 +268,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	  'page' => 1)
 	  )); */
 
-	
-	
-
 	//track controller routers
 	$router->addRoute(
 		'track', new Zend_Controller_Router_Route('track/:action/:track_id', array(
@@ -468,7 +429,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 			'action' => 'all-by-type',
 			'route' => 'postAllByType',
 			'params' => array(
-			    'article_type_id' => '3'
+			    'post_type_id' => '3'
 			),
 		    ),
 		)

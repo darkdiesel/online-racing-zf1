@@ -15,7 +15,7 @@ if ($this->paginator) {
                 <div class="block-item_info_header">
                     <div class="content_category block-item_info_header_item">
                         <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-                        <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'article_type_id' => $this->escape($post['article_type_id']), 'page' => '1'), 'postAllByType', true) ?>" target="_blank"><?php echo $this->escape($post['article_type_name']); ?></a>
+                        <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'post_type_id' => $this->escape($post['post_type_id']), 'page' => '1'), 'postAllByType', true) ?>" target="_blank"><?php echo $this->escape($post['post_type_name']); ?></a>
                     </div>
                     <div class="post_author block-item_info_header_item">
                         <span class="font-bold font-color-black"><i class="icon-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>

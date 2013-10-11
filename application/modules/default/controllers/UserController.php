@@ -578,8 +578,7 @@ class UserController extends App_Controller_LoaderController {
             $this->view->user_id = $user_data->id;
 
 
-            $country = new Application_Model_DbTable_Country();
-            $countries = $country->getCountriesName('ASC');
+            $countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'));
 
             foreach ($countries as $country):
                 $form->country->addMultiOption($country->id, $country->native_name . " ({$country->english_name})");

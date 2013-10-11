@@ -18,6 +18,9 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 	  'user_role' => '',
 	  'right' => '',
 	  'content_type' => '',
+          'post_type' => '',
+          'country' => '',
+          'privilege' => '',
 	);
     }
     
@@ -46,6 +49,15 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 		break;
 	    case "content_type":
 		$this->db[$db_name] = new Application_Model_DbTable_ContentType();
+		break;
+	    case "post_type":
+		$this->db[$db_name] = new Application_Model_DbTable_PostType();
+		break;
+	    case "country":
+		$this->db[$db_name] = new Application_Model_DbTable_Country();
+		break;
+	    case "privilege":
+		$this->db[$db_name] = new Application_Model_DbTable_Privilege();
 		break;
 	    default:
 		return FALSE;

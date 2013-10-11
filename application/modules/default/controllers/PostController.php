@@ -37,7 +37,7 @@ class PostController extends App_Controller_LoaderController {
         $page_range = 10;
         $items_order = 'DESC';
         $page = $this->getRequest()->getParam('page');
-        
+
         $this->view->breadcrumb()->PostAll($page);
 
         $post = new Application_Model_DbTable_Post();
@@ -66,7 +66,7 @@ class PostController extends App_Controller_LoaderController {
                 $date = date('Y-m-d H:i:s');
                 $post_data = array(
                     'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
-                    'article_type_id' => $form->getValue('article_type'),
+                    'post_type_id' => $form->getValue('post_type'),
                     'content_type_id' => $form->getValue('content_type'),
                     'title' => $form->getValue('title'),
                     'annotation' => $form->getValue('annotation'),
@@ -82,11 +82,11 @@ class PostController extends App_Controller_LoaderController {
                 $newPost = $post->createRow($post_data);
                 $newPost->save();
 
-                $article_type = new Application_Model_DbTable_ArticleType();
-                $article_type_name = $article_type->getName($form->getValue('article_type'));
+                $post_type = new Application_Model_DbTable_PostType();
+                $post_type_name = $post_type->getName($form->getValue('post_type'));
 
-                // save additional information corespondig article_type to db
-                switch ($article_type_name) {
+                // save additional information corespondig post_type to db
+                switch ($post_type_name) {
                     case 'game':
                         $game = new Application_Model_DbTable_Game();
                         $game_data = array(
@@ -107,15 +107,14 @@ class PostController extends App_Controller_LoaderController {
         }
 
         // add post types to the form
-        $article_types = new Application_Model_DbTable_ArticleType();
-        $article_types = $article_types->getArticleTypeNames('ASC');
+        $post_types_data = $this->db->get('post_type')->getAll(FALSE, array("id", "name"), "ASC");
 
-        if ($article_types) {
-            foreach ($article_types as $type):
-                $form->article_type->addMultiOption($type->id, $type->name);
+        if ($post_types_data) {
+            foreach ($post_types_data as $post_type):
+                $form->post_type->addMultiOption($post_type->id, $post_type->name);
 
-                if (strtolower($type->name) == 'news') {
-                    $form->article_type->setvalue($type->id);
+                if (strtolower($post_type->name) == 'news') {
+                    $form->post_type->setvalue($post_type->id);
                 }
             endforeach;
         } else {
@@ -124,15 +123,14 @@ class PostController extends App_Controller_LoaderController {
         }
 
         // add content types to the form
-        $content_type = new Application_Model_DbTable_ContentType();
-        $content_types = $content_type->getAll("name", "ASC");
+        $content_types_data = $this->db->get('content_type')->getAll(FALSE, array("id", "name"), "ASC");
 
-        if ($content_types) {
-            foreach ($content_types as $type):
-                $form->content_type->addMultiOption($type->id, $type->name);
-	    
-		if (strtolower($type->name) == 'full html') {
-                    $form->content_type->setvalue($type->id);
+        if ($content_types_data) {
+            foreach ($content_types_data as $content_type):
+                $form->content_type->addMultiOption($content_type->id, $content_type->name);
+
+                if (strtolower($content_type->name) == 'full html') {
+                    $form->content_type->setvalue($content_type->id);
                 }
             endforeach;
         } else {
@@ -160,10 +158,10 @@ class PostController extends App_Controller_LoaderController {
             if ($this->getRequest()->isPost()) {
                 if ($form->isValid($request->getPost())) {
 
-                    if ($post_data->article_type_id == $form->getValue('article_type')) {
+                    if ($post_data->post_type_id == $form->getValue('post_type')) {
                         // if article type not changed do this code
                         $new_post_data = array(
-                            'article_type_id' => $form->getValue('article_type'),
+                            'post_type_id' => $form->getValue('post_type'),
                             'content_type_id' => $form->getValue('content_type'),
                             'annotation' => $form->getValue('annotation'),
                             'title' => $form->getValue('title'),
@@ -176,11 +174,11 @@ class PostController extends App_Controller_LoaderController {
                         $post_where = $post->getAdapter()->quoteInto('id = ?', $post_id);
                         $post->update($new_post_data, $post_where);
 
-                        $article_type = new Application_Model_DbTable_ArticleType();
-                        $article_type_name = $article_type->getName($form->getValue('article_type'));
+                        $post_type = new Application_Model_DbTable_PostType();
+                        $post_type_name = $post_type->getName($form->getValue('post_type'));
 
-                        // save additional information corespondig article_type to db
-                        switch ($article_type_name) {
+                        // save additional information corespondig post_type to db
+                        switch ($post_type_name) {
                             case 'game':
                                 $game = new Application_Model_DbTable_Game();
                                 $game_data = array(
@@ -204,30 +202,36 @@ class PostController extends App_Controller_LoaderController {
                 }
             }
 
-            // add article types to the form
-            $article_types = new Application_Model_DbTable_ArticleType();
-            $article_types = $article_types->getArticleTypeNames('ASC');
+            // add post types to the form
+            $post_types_data = $this->db->get('post_type')->getAll(FALSE, array("id", "name"), "ASC");
 
-            if ($article_types) {
-                foreach ($article_types as $type):
-                    $form->article_type->addMultiOption($type->id, $type->name);
+            if ($post_types_data) {
+                foreach ($post_types_data as $post_type):
+                    $form->post_type->addMultiOption($post_type->id, $post_type->name);
+
+                    if (strtolower($post_type->name) == 'news') {
+                        $form->post_type->setvalue($post_type->id);
+                    }
                 endforeach;
             } else {
-                $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}" .
-                        "<br/><a href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
+                        . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
             // add content types to the form
-            $content_type = new Application_Model_DbTable_ContentType();
-            $content_types = $content_type->getAll("name", "ASC");
+            $content_types_data = $this->db->get('content_type')->getAll(FALSE, array("id", "name"), "ASC");
 
-            if ($content_types) {
-                foreach ($content_types as $type):
-                    $form->content_type->addMultiOption($type->id, $type->name);
+            if ($content_types_data) {
+                foreach ($content_types_data as $content_type):
+                    $form->content_type->addMultiOption($content_type->id, $content_type->name);
+
+                    if (strtolower($content_type->name) == 'full html') {
+                        $form->content_type->setvalue($content_type->id);
+                    }
                 endforeach;
             } else {
-                $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}" .
-                        "<br/><a href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
+                $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
+                        . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
             //head titles
@@ -235,7 +239,7 @@ class PostController extends App_Controller_LoaderController {
             $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$post_data->title}");
 
             $form->title->setvalue($post_data->title);
-            $form->article_type->setvalue($post_data->article_type_id);
+            $form->post_type->setvalue($post_data->post_type_id);
             $form->content_type->setvalue($post_data->content_type_id);
             $form->annotation->setvalue($post_data->annotation);
             $form->text->setvalue($post_data->text);
@@ -279,10 +283,10 @@ class PostController extends App_Controller_LoaderController {
                     $post_where = $post->getAdapter()->quoteInto('id = ?', $post_id);
                     $post->delete($post_where);
 
-                    $article_type = new Application_Model_DbTable_ArticleType();
-                    $article_type->getName($post_data->article_type_id);
+                    $post_type = new Application_Model_DbTable_PostType();
+                    $post_type->getName($post_data->post_type_id);
 
-                    switch ($article_type->name) {
+                    switch ($post_type->name) {
                         case 'game':
                             $game = new Application_Model_DbTable_Game();
                             $game_where = $game->getAdapter()->quoteInto('id = ?', $post_id);
@@ -297,7 +301,7 @@ class PostController extends App_Controller_LoaderController {
                     $this->view->showMessages()->clearMessages();
                     $this->messageManager->addSuccess("{$this->view->translate("Статья <strong>\"{$post_data->title}\"</strong> успешно удалена")}");
 
-		    $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'all', 'page' => 1), 'postAll', true));
+                    $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'all', 'page' => 1), 'postAll', true));
                 } else {
                     $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
@@ -307,21 +311,21 @@ class PostController extends App_Controller_LoaderController {
             $this->view->form = $form;
         } else {
             $this->messageManager->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
+            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
         }
     }
 
     public function allByTypeAction() {
         $request = $this->getRequest();
-        $article_type_id = (int) $request->getParam('article_type_id');
+        $post_type_id = (int) $request->getParam('post_type_id');
 
-        $article_type = new Application_Model_DbTable_ArticleType();
-        $article_type_data = $article_type->getName($article_type_id);
+        $post_type = new Application_Model_DbTable_PostType();
+        $post_type_data = $post_type->getName($post_type_id);
 
-        if ($article_type_data) {
-            $this->view->headTitle("{$this->view->translate('Категория контента')} :: {$article_type_data}");
-            $this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$article_type_data}");
+        if ($post_type_data) {
+            $this->view->headTitle("{$this->view->translate('Категория контента')} :: {$post_type_data}");
+            $this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$post_type_data}");
 
             // setup pager settings
             $page_count_items = 10;
@@ -330,7 +334,7 @@ class PostController extends App_Controller_LoaderController {
             $page = $this->getRequest()->getParam('page');
 
             $post = new Application_Model_DbTable_Post();
-            $paginator = $post->getAllPostsPagerByType($page_count_items, $page, $page_range, $article_type_id, $items_order);
+            $paginator = $post->getAllPostsPagerByType($page_count_items, $page, $page_range, $post_type_id, $items_order);
 
             if (count($paginator)) {
                 $this->view->paginator = $paginator;
@@ -338,7 +342,7 @@ class PostController extends App_Controller_LoaderController {
                 $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
             }
 
-            $this->view->article_type_name = $article_type_data;
+            $this->view->post_type_name = $post_type_data;
         } else {
             $this->messageManager->addError("{$this->view->translate('Зарпашиваемый тип контента не существует!')}");
 

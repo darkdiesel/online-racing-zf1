@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_ArticleType_Edit extends Zend_Form {
+class Application_Form_PostType_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_ArticleType_Edit extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/article-type/edit');
-        $this->setName('articleTypeEdit');
+        $this->setAction('/post-type/add');
+        $this->setName('postTypeAdd');
         $this->setAttrib('class', 'white_box white_box_size_m');
 
         $this->addElement('text', 'name', array(
@@ -30,7 +30,7 @@ class Application_Form_ArticleType_Edit extends Zend_Form {
                 array('HtmlTag', array('class' => 'element_tag')),
             )
         ));
-        
+
         $this->addElement('textarea', 'description', array(
             'label' => $this->translate('Описание типа статьи'),
             'placeholder' => $this->translate('Описание типа статьи'),
@@ -48,16 +48,18 @@ class Application_Form_ArticleType_Edit extends Zend_Form {
             )
         ));
 
-        $this->addElement('submit', 'submit', array('ignore' => true,
+        $this->addElement('submit', 'submit', array(
+            'ignore' => true,
             'class' => 'btn btn-primary',
-            'label' => $this->translate('Изменить'),
+            'label' => $this->translate('Добавить'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',
                 array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
             )
         ));
 
-        $this->addElement('reset', 'reset', array('ignore' => true,
+        $this->addElement('reset', 'reset', array(
+            'ignore' => true,
             'class' => 'btn btn-default',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
@@ -65,23 +67,12 @@ class Application_Form_ArticleType_Edit extends Zend_Form {
                 array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
             )
         ));
-        
-        $this->addElement('button', 'cancel', array(
-            'ignore' => true,
-            'class' => 'btn btn-default',
-            'onClick' => "location.href='/article-type/all'",
-            'label' => $this->translate('Отмена'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'div', 'class' => 'cancel form_actions_group'))
-            )
-        ));
 
         $this->addDisplayGroup(array(
             $this->getElement('submit'),
-            $this->getElement('reset'),
-            $this->getElement('cancel')
+            $this->getElement('reset')
                 ), 'form_actions', array());
+
         $this->getDisplayGroup('form_actions')->setDecorators(array(
             'FormElements',
             array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
@@ -91,3 +82,4 @@ class Application_Form_ArticleType_Edit extends Zend_Form {
     }
 
 }
+

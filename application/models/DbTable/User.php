@@ -4,6 +4,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
     protected $_name = 'user';
     protected $_primary = 'id';
+    protected $db_href = 'pri';
 
     public function getUserData($id) {
         $model = new self;
@@ -462,47 +463,87 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
      * $pager_args['page_range']	- Range of pages displaying at the pager's block
      * 
      */
-
-    public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
+    
+    public function getAll($idencity = array(), $fields = array(), $order = array(), $pager = FALSE, array $pager_args = array())
     {
 	$model = new self;
+	$idencity_data = "";
+	$order_data = "";
 
-	if (is_array($fields)) {
-	    if (count($fields)){
-		$fields = array_map('trim', $fields);
-	    } else {
-		$fields = "*";
-	    }
-	} elseif (is_string($fields)) {
-	    if (strtolower($fields) == "all"){
-		$fields = "*";
-	    } else {
-		$fields = array_map('trim', explode(",", $fields));
+	// idencity fields list
+	if ($idencity) {
+	    if (is_array($idencity)) {
+		foreach ($idencity as $field => $value) {
+		    if ($idencity_data) {
+			if (isset($value['condition'])) {
+			    if ($value['condition']) {
+				$condition = $value['condition'];
+			    } else {
+				$condition = "OR";
+			    }
+			} else {
+			    $condition = "OR";
+			}
+
+			$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+		    } else {
+			$idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
+		    }
+		}
+	    } elseif (is_int($idencity) || is_string($idencity)) {
+		$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
 	    }
 	}
 
-	if (!count($order)) {
-	    $order_field = 'id';
-	    $order_value = "ASC";
-	} elseif (is_array($order)) {
-	    $order_field = $order[0];
-	    $order_value = $order[1];
-	} elseif (is_string($order)) {
-	    $order_field = 'id';
-	    $order_value = $order;
+	// fields list
+	if ($fields) {
+	    if (is_array($fields)) {
+		$fields = array_map('trim', $fields);
+	    } elseif (is_string($fields)) {
+		if (strtolower($fields) == "all") {
+		    $fields = "*";
+		} else {
+		    $fields = array_map('trim', explode(",", $fields));
+		}
+	    }
+	}
+
+	// order list
+	if ($order) {
+	    if (is_array($order)) {
+		foreach ($order as $field => $value) {
+		    if ($order_data) {
+			$order_data .= sprintf(", %s.%s %s", $this->db_href, $field, $value);
+		    } else {
+			$order_data = sprintf("%s.%s %s", $this->db_href, $field, $value);
+		    }
+		}
+	    }
 	}
 
 	$select = $model->select()
-		->setIntegrityCheck(false)
-		->from(array('u' => $this->_name), 'u.id')
-		->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+                ->setIntegrityCheck(false)
+		->from(array($this->db_href => $this->_name))
+                ->join(array('c' => 'country'), $this->db_href.'.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                     'country_native_name' => 'c.native_name',
                     'country_english_name' => 'c.english_name',))
-		->joinLeft(array('ur' => 'user_role'), 'u.id = ur.user_id',array('user_role_id' => 'ur.role_id'))
-		->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id',array('user_role_name' => 'rl.name'))
-		->columns($fields)
-		->order('u.' . $order_field . " " . $order_value);
+		->joinLeft(array('ur' => 'user_role'), $this->db_href.'.id = ur.user_id',array('user_role_id' => 'ur.role_id'))
+		->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id',array('user_role_name' => 'rl.name'));
+
+	if ($fields) {
+	    $select->columns($fields);
+	} else {
+	    $select->columns("*");
+	}
+
+	if ($idencity_data) {
+	    $select->where($idencity_data);
+	}
+
+	if ($order_data) {
+	    $select->order($order_data);
+	}
 
 	if ($pager) {
 	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);

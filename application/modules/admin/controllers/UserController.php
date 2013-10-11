@@ -27,7 +27,7 @@ class Admin_UserController extends App_Controller_LoaderController
 	    "page" => $this->getRequest()->getParam('page')
 	);
 
-	$paginator = $this->db->get("user")->getAll("all", "ASC", TRUE, $pager_args);
+	$paginator = $this->db->get("user")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;

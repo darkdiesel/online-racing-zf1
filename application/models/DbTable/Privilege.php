@@ -1,11 +1,11 @@
 <?php
 
-class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_Privilege extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'country';
-    protected $_primary = 'id';
-    protected $db_href = 'c';
+    protected $_name = 'privilege';
+    protected $_primary = 'resource_id';
+    protected $db_href = 'priv';
 
     /*
      * Get Item by idencity field value and $field array of fields list.
@@ -21,20 +21,25 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
 	    return FALSE;
 	} elseif (is_array($idencity)) {
 	    foreach ($idencity as $field => $value) {
-		if ($idencity_data) {
-		    if (isset($value['condition'])) {
-			if ($value['condition']) {
-			    $condition = $value['condition'];
-			} else {
-			    $condition = "OR";
-			}
-		    } else {
-			$condition = "OR";
-		    }
+                if (is_array($value)) {
+                    if (isset($value['condition'])) {
+                        if ($value['condition']) {
+                            $condition = $value['condition'];
+                        } else {
+                            $condition = "OR";
+                        }
+                    } else {
+                        $condition = "OR";
+                    }
+                    $value = $value['value'];
+                } else {
+                    $condition = "OR";
+                }
 
-		    $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+                if ($idencity_data) {
+		    $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
 		} else {
-		    $idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
+		    $idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value);
 		}
 	    }
 	} elseif (is_int($idencity) || is_string($idencity)) {
@@ -56,7 +61,7 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
 
 	$select = $model->select()
 		->setIntegrityCheck(false)
-		->from(array($this->db_href => $this->_name), $this->db_href . '.id')
+		->from(array($this->db_href => $this->_name))
 		->where($idencity_data);
 
 	if ($fields) {
@@ -87,7 +92,7 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
      * 
      */
 
-    public function getAll($idencity = array(), $fields = array(), $order = "ASC", $pager = FALSE, array $pager_args = array())
+    public function getAll($idencity = array(), $fields = array(), $order = array(), $pager = FALSE, array $pager_args = array())
     {
 	$model = new self;
 	$idencity_data = "";
@@ -141,13 +146,11 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
 			$order_data = sprintf("%s.%s %s", $this->db_href, $field, $value);
 		    }
 		}
-	    } elseif (is_string($order) && !empty($order)) {
-		$order_data = sprintf("%s.id %s", $this->db_href, $order);
 	    }
 	}
 
 	$select = $model->select()
-		->from(array($this->db_href => $this->_name), $this->db_href . '.id');
+		->from(array($this->db_href => $this->_name));
 
 	if ($fields) {
 	    $select->columns($fields);
@@ -186,40 +189,6 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract
 	    } else {
 		return FALSE;
 	    }
-	}
-    }
-
-    public function checkExistCountryNativeName($country_name)
-    {
-	$model = new self;
-	$select = $model->select()
-		->from($this->_name, 'id')
-		->where('native_name = ?', $country_name)
-		->columns('id');
-
-	$country_data = $model->fetchRow($select);
-
-	if (count($country_data) != 0) {
-	    return $country_data->id;
-	} else {
-	    return FALSE;
-	}
-    }
-
-    public function checkExistCountryAbbreviation($country_abbreviation)
-    {
-	$model = new self;
-	$select = $model->select()
-		->from($this->_name, 'id')
-		->where('abbreviation = ?', $country_abbreviation)
-		->columns('id');
-
-	$country_data = $model->fetchRow($select);
-
-	if (count($country_data) != 0) {
-	    return $country_data->id;
-	} else {
-	    return FALSE;
 	}
     }
 

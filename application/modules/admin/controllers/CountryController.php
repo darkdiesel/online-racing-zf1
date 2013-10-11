@@ -42,7 +42,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 	    "page" => $this->getRequest()->getParam('page')
 	);
 
-	$paginator = $country->getAll("all", "ASC", TRUE, $pager_args);
+	$paginator = $country->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;

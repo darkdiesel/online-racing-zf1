@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Permission_Add extends Zend_Form {
+class Application_Form_Privilege_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,15 +10,15 @@ class Application_Form_Permission_Add extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/permission/add');
-        $this->setName('permission_add');
-        $this->setAttrib('class', 'form-permission white_box white_box_size_m');
+        $this->setAction('/privilege/add');
+        $this->setName('privilege_add');
+        $this->setAttrib('class', 'form-privilege white_box white_box_size_m');
         
-	// parent role
+	// role list
         $this->addElement('select', 'role', array(
             'label' => $this->translate('Роль'),
 	    'multiOptions' => array('' => ''),
-            'required' => false,
+            'required' => true,
 	    'class' => 'form-control',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
@@ -32,7 +32,7 @@ class Application_Form_Permission_Add extends Zend_Form {
 	
 	$role = new Application_Model_DbTable_Role();
 	
-	$roles = $role->getAll("id, name");
+	$roles = $role->getAll(FALSE, array("id", "name"));
 	
 	foreach ($roles as $role){
 	    $this->role->addMultiOptions(array(
@@ -40,11 +40,11 @@ class Application_Form_Permission_Add extends Zend_Form {
 	    ));
 	}
 	
-	// parent role
+	// resource list
         $this->addElement('select', 'resource', array(
             'label' => $this->translate('Ресурс'),
 	    'multiOptions' => array('' => ''),
-            'required' => false,
+            'required' => true,
 	    'class' => 'form-control',
             'registerInArrayValidator' => false,
             'validators' => array('NotEmpty'),
@@ -58,11 +58,37 @@ class Application_Form_Permission_Add extends Zend_Form {
 	
 	$resource_db = new Application_Model_DbTable_Resource();
 	
-	$resources = $resource_db->getAll("id, name");
+	$resources = $resource_db->getAll(FALSE, array("id", "name"));
 	
 	foreach ($resources as $resource){
 	    $this->resource->addMultiOptions(array(
 		$resource->id => $resource->name
+	    ));
+	}
+        
+        // resource list
+        $this->addElement('select', 'right', array(
+            'label' => $this->translate('Право'),
+	    'multiOptions' => array('' => ''),
+            'required' => true,
+	    'class' => 'form-control',
+            'registerInArrayValidator' => false,
+            'validators' => array('NotEmpty'),
+            'decorators' => array(
+                'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                array('Label', array('class' => 'element_label')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
+                array('HtmlTag', array('class' => 'element_tag')),
+            )
+        ));
+	
+	$right_db = new Application_Model_DbTable_Right();
+	
+	$rights = $right_db->getAll(FALSE, array("id", "name"));
+	
+	foreach ($rights as $right){
+	    $this->right->addMultiOptions(array(
+		$right->id => $right->name
 	    ));
 	}
 	

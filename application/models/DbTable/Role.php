@@ -1,60 +1,75 @@
 <?php
 
-class Application_Model_DbTable_Role extends Zend_Db_Table_Abstract
-{
+class Application_Model_DbTable_Role extends Zend_Db_Table_Abstract {
 
     protected $_name = 'role';
     protected $_primary = 'id';
+    protected $db_href = 'rl';
 
     /*
      * Get Item by idencity field value and $field array of fields list.
      */
 
-    public function getItem($idencity = array(), $fields = array())
-    {
-	$model = new self;
+    public function getItem($idencity = array(), $fields = array()) {
+        $model = new self;
+        $idencity_data = "";
 
-	if (!count($idencity)) {
-	    return FALSE;
-	} elseif (is_array($idencity)) {
-	    $idencity_field = $idencity[0];
-	    $idencity_value = $idencity[1];
-	} elseif (is_int($idencity)) {
-	    $idencity_field = 'id';
-	    $idencity_value = $idencity;
-	}
+        // idencity fields list
+        if (!count($idencity)) {
+            return FALSE;
+        } elseif (is_array($idencity)) {
+            foreach ($idencity as $field => $value) {
+                if ($idencity_data) {
+                    if (isset($value['condition'])) {
+                        if ($value['condition']) {
+                            $condition = $value['condition'];
+                        } else {
+                            $condition = "OR";
+                        }
+                    } else {
+                        $condition = "OR";
+                    }
 
-	if (!isset($idencity_field) || !isset($idencity_value)) {
-	    return FALSE;
-	}
+                    $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+                } else {
+                    $idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
+                }
+            }
+        } elseif (is_int($idencity) || is_string($idencity)) {
+            $idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
+        }
 
-	if (is_array($fields)) {
-	    if (count($fields)) {
-		$fields = array_map('trim', $fields);
-	    } else {
-		$fields = "*";
-	    }
-	} elseif (is_string($fields)) {
-	    if (strtolower($fields) == "all") {
-		$fields = "*";
-	    } else {
-		$fields = array_map('trim', explode(",", $fields));
-	    }
-	}
+        // fields list
+        if ($fields) {
+            if (is_array($fields)) {
+                $fields = array_map('trim', $fields);
+            } elseif (is_string($fields)) {
+                if (strtolower($fields) == "all") {
+                    $fields = "*";
+                } else {
+                    $fields = array_map('trim', explode(",", $fields));
+                }
+            }
+        }
 
-	$select = $model->select()
-		->setIntegrityCheck(false)
-		->from(array('r' => $this->_name))
-		->where('r.' . $idencity_field . ' = ' . $idencity_value)
-		->columns($fields);
+        $select = $model->select()
+                ->setIntegrityCheck(false)
+                ->from(array($this->db_href => $this->_name), $this->db_href . '.id')
+                ->where($idencity_data);
 
-	$resource = $model->fetchRow($select);
+        if ($fields) {
+            $select->columns($fields);
+        } else {
+            $select->columns("*");
+        }
 
-	if (count($resource) != 0) {
-	    return $resource;
-	} else {
-	    return FALSE;
-	}
+        $resource = $model->fetchRow($select);
+
+        if (count($resource) != 0) {
+            return $resource;
+        } else {
+            return FALSE;
+        }
     }
 
     /*
@@ -70,64 +85,105 @@ class Application_Model_DbTable_Role extends Zend_Db_Table_Abstract
      * 
      */
 
-    public function getAll($fields = array(), $order = "ASC", $pager = TRUE, array $pager_args = array())
-    {
-	$model = new self;
+    public function getAll($idencity = array(), $fields = array(), $order = "ASC", $pager = FALSE, array $pager_args = array()) {
+        $model = new self;
+        $idencity_data = "";
+        $order_data = "";
 
-	if (is_array($fields)) {
-	    if (count($fields)) {
-		$fields = array_map('trim', $fields);
-	    } else {
-		$fields = "*";
-	    }
-	} elseif (is_string($fields)) {
-	    if (strtolower($fields) == "all") {
-		$fields = "*";
-	    } else {
-		$fields = array_map('trim', explode(",", $fields));
-	    }
-	}
+        // idencity fields list
+        if ($idencity) {
+            if (is_array($idencity)) {
+                foreach ($idencity as $field => $value) {
+                    if ($idencity_data) {
+                        if (isset($value['condition'])) {
+                            if ($value['condition']) {
+                                $condition = $value['condition'];
+                            } else {
+                                $condition = "OR";
+                            }
+                        } else {
+                            $condition = "OR";
+                        }
 
-	if (!count($order)) {
-	    $order_field = 'id';
-	    $order_value = "ASC";
-	} elseif (is_array($order)) {
-	    $order_field = $order[0];
-	    $order_value = $order[1];
-	} elseif (is_string($order)) {
-	    $order_field = 'id';
-	    $order_value = $order;
-	}
+                        $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+                    } else {
+                        $idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
+                    }
+                }
+            } elseif (is_int($idencity) || is_string($idencity)) {
+                $idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
+            }
+        }
 
-	$select = $model->select()
-		->from(array('r' => $this->_name), 'r.id')
-		->columns($fields)
-		->order('r.' . $order_field . " " . $order_value);
+        // fields list
+        if ($fields) {
+            if (is_array($fields)) {
+                $fields = array_map('trim', $fields);
+            } elseif (is_string($fields)) {
+                if (strtolower($fields) == "all") {
+                    $fields = "*";
+                } else {
+                    $fields = array_map('trim', explode(",", $fields));
+                }
+            }
+        }
 
-	if ($pager) {
-	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+        // order list
+        if ($order) {
+            if (is_array($order)) {
+                foreach ($order as $field => $value) {
+                    if ($order_data) {
+                        $order_data .= sprintf(", %s.%s %s", $this->db_href, $field, $value);
+                    } else {
+                        $order_data = sprintf("%s.%s %s", $this->db_href, $field, $value);
+                    }
+                }
+            } elseif (is_string($order) && !empty($order)) {
+                $order_data = sprintf("%s.id %s", $this->db_href, $order);
+            }
+        }
 
-	    $paginator = new Zend_Paginator($adapter);
-	    if (count($pager_args)) {
-		$paginator->setItemCountPerPage($pager_args['page_count_items']);
-		$paginator->setCurrentPageNumber($pager_args['page']);
-		$paginator->setPageRange($pager_args['page_range']);
-	    } else {
-		$paginator->setItemCountPerPage("10");
-		$paginator->setCurrentPageNumber("1");
-		$paginator->setPageRange("5");
-	    }
+        $select = $model->select()
+                ->from(array($this->db_href => $this->_name), $this->db_href . '.id');
 
-	    return $paginator;
-	} else {
-	    $resources = $model->fetchAll($select);
+        if ($fields) {
+            $select->columns($fields);
+        } else {
+            $select->columns("*");
+        }
 
-	    if (count($resources) != 0) {
-		return $resources;
-	    } else {
-		return FALSE;
-	    }
-	}
+        if ($idencity_data) {
+            $select->where($idencity_data);
+        }
+
+        if ($order_data) {
+            $select->order($order_data);
+        }
+
+        if ($pager) {
+            $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+
+            $paginator = new Zend_Paginator($adapter);
+            if (count($pager_args)) {
+                $paginator->setItemCountPerPage($pager_args['page_count_items']);
+                $paginator->setCurrentPageNumber($pager_args['page']);
+                $paginator->setPageRange($pager_args['page_range']);
+            } else {
+                $paginator->setItemCountPerPage("10");
+                $paginator->setCurrentPageNumber("1");
+                $paginator->setPageRange("5");
+            }
+
+            return $paginator;
+        } else {
+            $resources = $model->fetchAll($select);
+
+            if (count($resources) != 0) {
+                return $resources;
+            } else {
+                return FALSE;
+            }
+        }
     }
 
 }

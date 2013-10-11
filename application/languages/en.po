@@ -25,10 +25,10 @@ msgstr ""
 "X-Poedit-SearchPath-5: d:\\dev\\localhost\\online-racing\\application"
 "\\modules\\default\\views\\scripts\n"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Add.php:18
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Add.php:19
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:18
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:19
+#: d:\dev\localhost\online-racing\application\forms/PostType/Add.php:18
+#: d:\dev\localhost\online-racing\application\forms/PostType/Add.php:19
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:18
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:19
 #: d:\dev\localhost\online-racing\application\forms/Championship/Add.php:18
 #: d:\dev\localhost\online-racing\application\forms/Championship/Add.php:19
 #: d:\dev\localhost\online-racing\application\forms/Championship/Edit.php:18
@@ -63,10 +63,10 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\forms/Track/Add.php:19
 #: d:\dev\localhost\online-racing\application\forms/Track/Edit.php:18
 #: d:\dev\localhost\online-racing\application\forms/Track/Edit.php:19
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Add.php:18
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Add.php:19
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:18
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:19
+#: d:\dev\localhost\online-racing\application/forms/PostType/Add.php:18
+#: d:\dev\localhost\online-racing\application/forms/PostType/Add.php:19
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:18
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:19
 #: d:\dev\localhost\online-racing\application/forms/Championship/Add.php:18
 #: d:\dev\localhost\online-racing\application/forms/Championship/Add.php:19
 #: d:\dev\localhost\online-racing\application/forms/Championship/Edit.php:18
@@ -166,18 +166,18 @@ msgstr ""
 msgid "Название"
 msgstr "Name"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Add.php:35
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Add.php:36
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:35
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:36
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Add.php:35
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Add.php:36
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:35
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:36
+#: d:\dev\localhost\online-racing\application\forms/PostType/Add.php:35
+#: d:\dev\localhost\online-racing\application\forms/PostType/Add.php:36
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:35
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:36
+#: d:\dev\localhost\online-racing\application/forms/PostType/Add.php:35
+#: d:\dev\localhost\online-racing\application/forms/PostType/Add.php:36
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:35
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:36
 msgid "Описание типа статьи"
 msgstr "Arcticle type description"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Add.php:54
+#: d:\dev\localhost\online-racing\application\forms/PostType/Add.php:54
 #: d:\dev\localhost\online-racing\application\forms/Championship/Driver/Add.php:70
 #: d:\dev\localhost\online-racing\application\forms/Championship/Team/Add.php:110
 #: d:\dev\localhost\online-racing\application\forms/ContentType/Add.php:54
@@ -189,7 +189,7 @@ msgstr "Arcticle type description"
 #: d:\dev\localhost\online-racing\application\forms/Team/Add.php:54
 #: d:\dev\localhost\online-racing\application\forms/Track/Add.php:123
 #: d:\dev\localhost\online-racing\application\forms/Track/Edit.php:123
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Add.php:54
+#: d:\dev\localhost\online-racing\application/forms/PostType/Add.php:54
 #: d:\dev\localhost\online-racing\application/forms/Championship/Driver/Add.php:70
 #: d:\dev\localhost\online-racing\application/forms/Championship/Team/Add.php:110
 #: d:\dev\localhost\online-racing\application/forms/ContentType/Add.php:54
@@ -203,7 +203,7 @@ msgstr "Arcticle type description"
 #: d:\dev\localhost\online-racing\application/forms/Track/Edit.php:123
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ContentTypeController.php:62
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ResourceController.php:58
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:46
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:46
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/CountryController.php:49
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/EventController.php:47
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/LeagueController.php:46
@@ -212,14 +212,14 @@ msgstr "Arcticle type description"
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/TrackController.php:29
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ContentTypeController.php:62
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ResourceController.php:58
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:46
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:46
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/CountryController.php:49
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/EventController.php:47
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/LeagueController.php:46
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/PostController.php:56
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TeamController.php:47
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TrackController.php:29
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:46
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:46
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/CountryController.php:49
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/EventController.php:47
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/LeagueController.php:46
@@ -233,8 +233,8 @@ msgstr "Arcticle type description"
 msgid "Добавить"
 msgstr "Add"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Add.php:64
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:62
+#: d:\dev\localhost\online-racing\application\forms/PostType/Add.php:64
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:62
 #: d:\dev\localhost\online-racing\application\forms/Championship/Add.php:186
 #: d:\dev\localhost\online-racing\application\forms/Championship/Edit.php:187
 #: d:\dev\localhost\online-racing\application\forms/Championship/Driver/Add.php:80
@@ -265,8 +265,8 @@ msgstr "Add"
 #: d:\dev\localhost\online-racing\application\forms/User/RestorePasswd.php:90
 #: d:\dev\localhost\online-racing\application\forms/User/SetRestorePasswd.php:128
 #: d:\dev\localhost\online-racing\application\forms/User/Settings.php:106
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Add.php:64
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:62
+#: d:\dev\localhost\online-racing\application/forms/PostType/Add.php:64
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:62
 #: d:\dev\localhost\online-racing\application/forms/Championship/Add.php:186
 #: d:\dev\localhost\online-racing\application/forms/Championship/Edit.php:187
 #: d:\dev\localhost\online-racing\application/forms/Championship/Driver/Add.php:80
@@ -300,7 +300,7 @@ msgstr "Add"
 msgid "Сбросить"
 msgstr "Reset"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Delete.php:20
+#: d:\dev\localhost\online-racing\application\forms/PostType/Delete.php:20
 #: d:\dev\localhost\online-racing\application\forms/Championship/Delete.php:20
 #: d:\dev\localhost\online-racing\application\forms/Championship/Driver/Delete.php:20
 #: d:\dev\localhost\online-racing\application\forms/ContentType/Delete.php:20
@@ -309,7 +309,7 @@ msgstr "Reset"
 #: d:\dev\localhost\online-racing\application\forms/Post/Delete.php:20
 #: d:\dev\localhost\online-racing\application\forms/Team/Delete.php:20
 #: d:\dev\localhost\online-racing\application\forms/Track/Delete.php:20
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Delete.php:20
+#: d:\dev\localhost\online-racing\application/forms/PostType/Delete.php:20
 #: d:\dev\localhost\online-racing\application/forms/Championship/Delete.php:20
 #: d:\dev\localhost\online-racing\application/forms/Championship/Driver/Delete.php:20
 #: d:\dev\localhost\online-racing\application/forms/ContentType/Delete.php:20
@@ -320,7 +320,7 @@ msgstr "Reset"
 #: d:\dev\localhost\online-racing\application/forms/Track/Delete.php:20
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ContentTypeController.php:158
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ResourceController.php:160
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:122
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:122
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/ChampionshipController.php:401
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/CountryController.php:231
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/EventController.php:137
@@ -328,13 +328,13 @@ msgstr "Reset"
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/TeamController.php:123
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ContentTypeController.php:158
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ResourceController.php:160
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:122
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:122
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/ChampionshipController.php:401
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/CountryController.php:231
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/EventController.php:137
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/PostController.php:252
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TeamController.php:123
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:122
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:122
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/ChampionshipController.php:401
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/CountryController.php:231
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/EventController.php:137
@@ -365,8 +365,8 @@ msgstr "Reset"
 msgid "Удалить"
 msgstr "Delete"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Delete.php:31
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:73
+#: d:\dev\localhost\online-racing\application\forms/PostType/Delete.php:31
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:73
 #: d:\dev\localhost\online-racing\application\forms/Championship/Delete.php:31
 #: d:\dev\localhost\online-racing\application\forms/Championship/Edit.php:198
 #: d:\dev\localhost\online-racing\application\forms/Championship/Driver/Add.php:91
@@ -386,8 +386,8 @@ msgstr "Delete"
 #: d:\dev\localhost\online-racing\application\forms/Team/Delete.php:31
 #: d:\dev\localhost\online-racing\application\forms/Team/Edit.php:73
 #: d:\dev\localhost\online-racing\application\forms/Track/Delete.php:31
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Delete.php:31
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:73
+#: d:\dev\localhost\online-racing\application/forms/PostType/Delete.php:31
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:73
 #: d:\dev\localhost\online-racing\application/forms/Championship/Delete.php:31
 #: d:\dev\localhost\online-racing\application/forms/Championship/Edit.php:198
 #: d:\dev\localhost\online-racing\application/forms/Championship/Driver/Add.php:91
@@ -410,14 +410,14 @@ msgstr "Delete"
 msgid "Отмена"
 msgstr "Cancel"
 
-#: d:\dev\localhost\online-racing\application\forms/ArticleType/Edit.php:53
+#: d:\dev\localhost\online-racing\application\forms/PostType/Edit.php:53
 #: d:\dev\localhost\online-racing\application\forms/ContentType/Edit.php:53
 #: d:\dev\localhost\online-racing\application\forms/Event/Edit.php:95
 #: d:\dev\localhost\online-racing\application\forms/League/Edit.php:85
 #: d:\dev\localhost\online-racing\application\forms/Post/Edit.php:136
 #: d:\dev\localhost\online-racing\application\forms/Resource/Edit.php:92
 #: d:\dev\localhost\online-racing\application\forms/Team/Edit.php:53
-#: d:\dev\localhost\online-racing\application/forms/ArticleType/Edit.php:53
+#: d:\dev\localhost\online-racing\application/forms/PostType/Edit.php:53
 #: d:\dev\localhost\online-racing\application/forms/ContentType/Edit.php:53
 #: d:\dev\localhost\online-racing\application/forms/Event/Edit.php:95
 #: d:\dev\localhost\online-racing\application/forms/League/Edit.php:85
@@ -575,7 +575,7 @@ msgstr "Create"
 #: d:\dev\localhost\online-racing\application/forms/Country/Edit.php:113
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ContentTypeController.php:108
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ResourceController.php:106
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:77
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:77
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/CountryController.php:112
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/EventController.php:84
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/LeagueController.php:114
@@ -583,13 +583,13 @@ msgstr "Create"
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/TeamController.php:78
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ContentTypeController.php:108
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ResourceController.php:106
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:77
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:77
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/CountryController.php:112
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/EventController.php:84
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/LeagueController.php:114
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/PostController.php:146
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TeamController.php:78
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:77
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:77
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/CountryController.php:112
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/EventController.php:84
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/LeagueController.php:114
@@ -978,9 +978,9 @@ msgstr "Title"
 #: d:\dev\localhost\online-racing\application\forms/Post/Edit.php:35
 #: d:\dev\localhost\online-racing\application/forms/Post/Add.php:35
 #: d:\dev\localhost\online-racing\application/forms/Post/Edit.php:35
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:7
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:7
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:7
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:7
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:7
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:7
 #: d:\dev\localhost\online-racing\application/modules/default/views/scripts/article-type/delete.phtml:40
 #: d:\dev\localhost\online-racing\application/modules/default/views/scripts/article-type/id.phtml:5
 #: d:\dev\localhost\online-racing\application/modules/default/views/scripts/article-type/id.phtml:41
@@ -1805,9 +1805,9 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ContentTypeController.php:195
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ResourceController.php:196
 #: d:\dev\localhost\online-racing\application/modules/admin/controllers/ResourceController.php:197
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:24
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:115
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:152
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:24
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:115
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:152
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/ChampionshipController.php:385
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/ChampionshipController.php:784
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/ChampionshipController.php:791
@@ -1855,9 +1855,9 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ContentTypeController.php:195
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ResourceController.php:196
 #: d:\dev\localhost\online-racing\application\modules/admin/controllers/ResourceController.php:197
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:24
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:115
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:152
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:24
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:115
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:152
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/ChampionshipController.php:385
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/ChampionshipController.php:784
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/ChampionshipController.php:791
@@ -1901,9 +1901,9 @@ msgstr ""
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TeamController.php:116
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TeamController.php:153
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/UserController.php:32
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:24
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:115
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:152
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:24
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:115
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:152
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/ChampionshipController.php:385
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/ChampionshipController.php:784
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/ChampionshipController.php:791
@@ -2315,56 +2315,56 @@ msgstr "Games and Mods"
 msgid "Форум"
 msgstr "Forum"
 
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:23
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:25
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:114
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:116
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:151
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:153
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:23
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:25
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:114
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:116
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:151
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:153
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:23
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:25
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:114
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:116
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:151
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:153
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:23
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:25
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:114
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:116
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:151
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:153
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:23
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:25
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:114
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:116
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:151
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:153
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:23
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:25
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:114
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:116
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:151
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:153
 msgid "Тип статьи не найден!"
 msgstr "Article type not found on the site!"
 
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:31
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:31
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/EventController.php:32
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/TeamController.php:32
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:31
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:31
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/EventController.php:32
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/TeamController.php:32
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:31
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:31
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/EventController.php:32
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/TeamController.php:32
 msgid "Просмотреть все"
 msgstr "View all"
 
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:68
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:68
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:68
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:68
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:68
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:68
 msgid "Исправте следующие ошибки для добавления типа статьи!"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:103
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:103
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:103
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:103
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:103
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:103
 msgid "Исправте следующие ошибки для изминения типа статьи!"
 msgstr ""
 
-#: d:\dev\localhost\online-racing\application/modules/default/controllers/ArticleTypeController.php:144
+#: d:\dev\localhost\online-racing\application/modules/default/controllers/PostTypeController.php:144
 #: d:\dev\localhost\online-racing\application/modules/default/controllers/EventController.php:159
-#: d:\dev\localhost\online-racing\application\modules/default/controllers/ArticleTypeController.php:144
+#: d:\dev\localhost\online-racing\application\modules/default/controllers/PostTypeController.php:144
 #: d:\dev\localhost\online-racing\application\modules/default/controllers/EventController.php:159
-#: d:\dev\localhost\online-racing\application\modules\default/controllers/ArticleTypeController.php:144
+#: d:\dev\localhost\online-racing\application\modules\default/controllers/PostTypeController.php:144
 #: d:\dev\localhost\online-racing\application\modules\default/controllers/EventController.php:159
 msgid ""
 "Произошла неожиданноя ошибка! Пожалуйста обратитесь к нам и сообщите о ней."

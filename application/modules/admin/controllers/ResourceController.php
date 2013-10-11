@@ -40,7 +40,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
 	    "page" => $this->getRequest()->getParam('page')
 	);
 
-	$paginator = $this->db->get("resource")->getAll("all", "ASC", TRUE, $pager_args);
+	$paginator = $this->db->get("resource")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;

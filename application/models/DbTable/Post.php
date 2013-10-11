@@ -14,7 +14,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                 ->where('a.id = ?', $id)
                 ->where('a.publish = 1')
                 ->join(array('u' => 'user'), 'a.user_id = u.id', array('user_login' => 'u.login'))
-                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                ->join(array('a_t' => 'post_type'), 'a_t.id = a.post_type_id', array('post_type_name' => 'a_t.name'))
                 ->columns('*');
 
         $post = $model->fetchRow($select);
@@ -45,7 +45,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                 ->from(array('a' => $this->_name), 'a.id')
                 ->where('a.id = ' . $id)
                 ->join(array('u' => 'user'), 'a.user_id = u.id', array('user_login' => 'u.login'))
-                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                ->join(array('a_t' => 'post_type'), 'a_t.id = a.post_type_id', array('post_type_name' => 'a_t.name'))
                 ->join(array('c_t' => 'content_type'), 'c_t.id = a.content_type_id', array('content_type_name' => 'c_t.name'))
                 ->columns('*');
 
@@ -70,12 +70,12 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getPublishPostTitlesByType($article_type, $order) {
+    public function getPublishPostTitlesByType($post_type, $order) {
         $model = new self;
 
         $select = $model->select()
                 ->from($this->_name, 'id')
-                ->where('publish=1 and article_type_id=' . $article_type)
+                ->where('publish=1 and post_type_id=' . $post_type)
                 ->order('title ' . $order)
                 ->columns(array('id', 'title'));
 
@@ -88,12 +88,12 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
         }
     }
 
-    public function getAllPostTitlesByType($article_type, $order) {
+    public function getAllPostTitlesByType($post_type, $order) {
         $model = new self;
 
         $select = $model->select()
                 ->from($this->_name, 'id')
-                ->where('article_type_id=' . $article_type)
+                ->where('post_type_id=' . $post_type)
                 ->order('title ' . $order)
                 ->columns(array('id', 'title'));
 
@@ -114,7 +114,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                                 ->setIntegrityCheck(false)
                                 ->from(array('a' => $this->_name), 'id')
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
-                                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                                ->join(array('a_t' => 'post_type'), 'a_t.id = a.post_type_id', array('post_type_name' => 'a_t.name'))
                                 ->columns('*')
                                 ->where('publish = 1')
                                 ->order('a.id ' . $order)
@@ -136,8 +136,8 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                                 ->setIntegrityCheck(false)
                                 ->from(array('a' => $this->_name), 'id')
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
-                                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
-                                ->columns(array('a.id', 'a.article_type_id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
+                                ->join(array('a_t' => 'post_type'), 'a_t.id = a.post_type_id', array('post_type_name' => 'a_t.name'))
+                                ->columns(array('a.id', 'a.post_type_id', 'a.user_id', 'a.title', 'a.annotation', 'a.text', 'a.image', 'a.views', 'a.date_create', 'a.date_edit'))
                                 ->order('a.id ' . $order)
         );
 
@@ -149,7 +149,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
         return $paginator;
     }
 
-    public function getAllPostsPagerByType($count, $page, $page_range, $article_type, $order) {
+    public function getAllPostsPagerByType($count, $page, $page_range, $post_type, $order) {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
@@ -157,9 +157,9 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
                                 ->setIntegrityCheck(false)
                                 ->from(array('a' => $this->_name), 'id')
                                 ->join(array('u' => 'user'), 'u.id = a.user_id', array('user_login' => 'u.login'))
-                                ->join(array('a_t' => 'article_type'), 'a_t.id = a.article_type_id', array('article_type_name' => 'a_t.name'))
+                                ->join(array('a_t' => 'post_type'), 'a_t.id = a.post_type_id', array('post_type_name' => 'a_t.name'))
                                 ->columns('*')
-                                ->where('article_type_id=' . $article_type)
+                                ->where('post_type_id=' . $post_type)
                                 ->where('publish = 1')
                                 ->order('a.id ' . $order)
         );
@@ -188,16 +188,16 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
         return $result;
     }
 
-    public function getPublishPostTitlesByTypeName($article_type_name, $order) {
+    public function getPublishPostTitlesByTypeName($post_type_name, $order) {
         $model = new self;
 
-        $article_type = new Application_Model_DbTable_ArticleType();
-        $article_type_id = $article_type->getId($article_type_name);
+        $post_type = new Application_Model_DbTable_PostType();
+        $post_type_id = $post_type->getId($post_type_name);
 
-        if (count($article_type_id) != 0) {
+        if (count($post_type_id) != 0) {
             $select = $model->select()
                     ->from($this->_name, 'id')
-                    ->where('publish = 1 and article_type_id = ' . $article_type_id)
+                    ->where('publish = 1 and post_type_id = ' . $post_type_id)
                     ->order('title ' . $order)
                     ->columns(array('id', 'title'));
 

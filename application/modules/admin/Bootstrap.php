@@ -158,8 +158,74 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 	    'page' => 1,
 		), "admin/right/all/page/%s.html"
 	));
+        
+        //PRIVILEGE CONTROLLER ROUTERS
+	$router->addRoute(
+		'privilege_id', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'privilege',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'privilege_id' => 1,
+		), "admin/privilege/%d.html"
+	));
 
-	//CONTENT TYPE CONTROLLER ROUTERS
+	$router->addRoute(
+		'privilege_action', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)/(\w*)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'privilege',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'privilege_id' => 1,
+	    'action' => 2,
+		), "admin/privilege/%d/%s.html"
+	));
+	
+	$router->addRoute(
+		'privilege_all', new Zend_Controller_Router_Route_Regex('admin/privilege/all/page/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'privilege',
+	    'action' => 'all',
+	    1 => 1
+		), array(
+	    'page' => 1,
+		), "admin/privilege/all/page/%s.html"
+	));
+
+	//POST TYPE CONTROLLER ROUTERS
+	$router->addRoute(
+		'post_type_id', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'post-type',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'post_type_id' => 1,
+		), "admin/post-type/%d.html"
+	));
+
+	$router->addRoute(
+		'post_type_action', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)/(\w*)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'post-type',
+	    'action' => 'id',
+	    1 => 0), array(
+	    'post_type_id' => 1,
+	    'action' => 2,
+		), "admin/post-type/%d/%s.html"
+	));
+	
+	$router->addRoute(
+		'post_type_all', new Zend_Controller_Router_Route_Regex('admin/post-type/all/page/(\d+)\.html', array(
+	    'module' => 'admin',
+	    'controller' => 'post-type',
+	    'action' => 'all',
+	    1 => 1
+		), array(
+	    'page' => 1,
+		), "admin/post-type/all/page/%s.html"
+	));
+        
+        //CONTENT TYPE CONTROLLER ROUTERS
 	$router->addRoute(
 		'content_type_id', new Zend_Controller_Router_Route_Regex('admin/content-type/(\d+)\.html', array(
 	    'module' => 'admin',

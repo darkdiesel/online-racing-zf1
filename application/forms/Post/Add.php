@@ -31,7 +31,7 @@ class Application_Form_Post_Add extends Zend_Form {
         ));
 
         // artcile type
-        $this->addElement('select', 'article_type', array(
+        $this->addElement('select', 'post_type', array(
             'label' => $this->translate('Тип статьи'),
             //'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
             'required' => true,

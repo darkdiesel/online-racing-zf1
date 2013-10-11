@@ -104,9 +104,9 @@ class Application_Form_Resource_Edit extends Zend_Form
             )
         ));
 
-	$resource = new Application_Model_DbTable_Resource();
+	$resource_db = new Application_Model_DbTable_Resource();
 	
-	$resources = $resource->getAll("id, name");
+	$resources = $resource_db->getAll(FALSE, "id, name");
 	
 	foreach ($resources as $resource){
 	    $this->parent_resource->addMultiOptions(array(
