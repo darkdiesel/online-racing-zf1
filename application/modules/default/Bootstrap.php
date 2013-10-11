@@ -391,6 +391,17 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 			),
 		    ),
 		    array(
+			'label' => _('ORT League'),
+			'title' => _('ORT League'),
+			'module' => 'default',
+			'controller' => 'league',
+			'action' => 'id',
+			'route' => 'leagueIdAll',
+			'params' => array(
+			    'league_id' => '3'
+			),
+		    ),
+		    array(
 			'label' => _('Все лиги'),
 			'title' => _('Все лиги портала'),
 			'module' => 'default',
