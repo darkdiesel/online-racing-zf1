@@ -61,8 +61,8 @@ class Admin_EventController extends App_Controller_LoaderController
 	$this->view->pageTitle($this->view->translate('Добавить событие'));
 
 	// css and js for date time picker script
-	$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.css"));
-	$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery-ui-timepicker-addon.js"));
+	$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.min.css"));
+	$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery-ui-timepicker-addon.min.js"));
 
 	$request = $this->getRequest();
 	// form
@@ -113,8 +113,8 @@ class Admin_EventController extends App_Controller_LoaderController
 	$this->view->headTitle($this->view->translate('Редактировать'));
 
 	// css and js for date time picker script
-	$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.css"));
-	$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery-ui-timepicker-addon.js"));
+	$this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.min.css"));
+	$this->view->headScript()->appendFile($this->view->baseUrl("js/jquery-ui-timepicker-addon.min.js"));
 
 	$event = new Application_Model_DbTable_Event();
 	$event_data = $event->getItem($event_id);
