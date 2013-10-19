@@ -13,8 +13,8 @@ class RaceController extends App_Controller_LoaderController {
 
     public function addAction() {
         // css and js for date time picker script
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.css"));
-        $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery-ui-timepicker-addon.js"));
+        $this->view->headLink()->appendStylesheet($this->view->baseUrl("css/jquery-ui-timepicker-addon.min.css"));
+        $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery-ui-timepicker-addon.min.js"));
 
         $request = $this->getRequest();
         $championship_id = (int) $request->getParam('championship_id');
