@@ -32,7 +32,7 @@
 				    $breadcrumb_data = $this->render("admin_layout/breadcrumb.phtml");
 				}
 				
-				if ($page_title != "" || ($breadcrumb_data)) : ?>
+				if ($page_title != "" || (isset($breadcrumb_data))) : ?>
     				<div id="page_title_wrapper" class="block-item">
 					<?php if ($this->pageTitle() != ""): ?>
 					    <div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>

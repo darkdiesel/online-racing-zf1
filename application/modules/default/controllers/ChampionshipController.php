@@ -1385,16 +1385,22 @@ class ChampionshipController extends App_Controller_LoaderController {
 
     public function dsAction() {
 	$this->view->headTitle($this->view->translate('Личный зачет'));
+	$this->view->pageTitle($this->view->translate('Личный зачет'));
 
 	$request = $this->getRequest();
 	$championship_id = $request->getParam('championship_id');
+	
+	$this->messageManager->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
     }
 
     public function tsAction() {
 	$this->view->headTitle($this->view->translate('Командный зачет'));
+	$this->view->pageTitle($this->view->translate('Командный зачет'));
 
 	$request = $this->getRequest();
 	$championship_id = $request->getParam('championship_id');
+	
+	$this->messageManager->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
     }
 
 }

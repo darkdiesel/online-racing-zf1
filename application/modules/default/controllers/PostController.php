@@ -78,12 +78,10 @@ class PostController extends App_Controller_LoaderController {
                     'date_edit' => $date,
                 );
 
-                $post = new Application_Model_DbTable_Post();
-                $newPost = $post->createRow($post_data);
+                $newPost = $this->db->get('post')->createRow($post_data);
                 $newPost->save();
 
-                $post_type = new Application_Model_DbTable_PostType();
-                $post_type_name = $post_type->getName($form->getValue('post_type'));
+                $post_type_name = $this->db->get('post_type')->getItem($form->getValue('post_type'), array('id','name'));
 
                 // save additional information corespondig post_type to db
                 switch ($post_type_name) {
@@ -147,8 +145,7 @@ class PostController extends App_Controller_LoaderController {
         $post_id = (int) $request->getParam('post_id');
         $this->view->headTitle($this->view->translate('Редактировать'));
 
-        $post = new Application_Model_DbTable_Post();
-        $post_data = $post->getPostData($post_id);
+        $post_data = $this->db->get('post')->getPostData($post_id);
 
         if ($post_data) {
             $form = new Application_Form_Post_Edit();
@@ -171,11 +168,10 @@ class PostController extends App_Controller_LoaderController {
                             'publish_to_slider' => $form->getValue('publish_to_slider'),
                             'date_edit' => date('Y-m-d H:i:s'),
                         );
-                        $post_where = $post->getAdapter()->quoteInto('id = ?', $post_id);
-                        $post->update($new_post_data, $post_where);
+                        $post_where = $this->db->get('post')->getAdapter()->quoteInto('id = ?', $post_id);
+                        $this->db->get('post')->update($new_post_data, $post_where);
 
-                        $post_type = new Application_Model_DbTable_PostType();
-                        $post_type_name = $post_type->getName($form->getValue('post_type'));
+                        $post_type_name = $this->db->get('post_type')->getItem($form->getValue('post_type'), array('id', 'name'));
 
                         // save additional information corespondig post_type to db
                         switch ($post_type_name) {

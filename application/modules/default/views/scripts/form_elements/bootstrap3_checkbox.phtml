@@ -2,9 +2,8 @@
     <div class="">
 	<div class="checkbox">
 	    <label>
-		<input type="checkbox" value="<?= $this->element->getValue() ?>" id="<?= $this->element->getId() ?>" name="<?= $name ?>" <?php echo $this->element->isChecked() ? " checked=\"checked\"" : "" ?> /> <?php echo $this->element->getLabel() ?>
+		<input type="checkbox" value="<?php $this->element->getValue() ?>" id="<?php $this->element->getId() ?>" name="<?php $this->element->getName() ?>" <?php echo $this->element->isChecked() ? " checked=\"checked\"" : "" ?> /> <?php echo $this->element->getLabel() ?>
 	    </label>
 	</div>
     </div>
 </div>
-
