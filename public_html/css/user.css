@@ -11,7 +11,7 @@
          margin:0 0 5px 0;
     }
         #default_user_id .user_info_avatar img{
-        
+            min-width:100%;
 	}
         #default_user_id .user_info_ava .nationality{
             text-transform:uppercase;

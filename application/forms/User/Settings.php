@@ -31,7 +31,7 @@ class Application_Form_User_Settings extends Zend_Form {
             'label' => $this->translate('Старый пароль'),
             'placeholder' => $this->translate('Старый пароль'),
             'title' => $this->translate('Введите старый пароль, чтобы подтвердить свою личность.'),
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
@@ -48,7 +48,7 @@ class Application_Form_User_Settings extends Zend_Form {
             'label' => $this->translate('Новый пароль'),
             'placeholder' => $this->translate('Новый пароль'),
             'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
@@ -66,7 +66,7 @@ class Application_Form_User_Settings extends Zend_Form {
             'placeholder' => $this->translate('Подтвердите новый пароль'),
             'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
             'AllowEmpty' => false,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 //new App_Validate_EqualInputs('password')

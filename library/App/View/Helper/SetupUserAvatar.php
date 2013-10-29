@@ -9,7 +9,7 @@ class App_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
                         ->setImgSize(200)
                         ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                         ->setSecure(true)
-                        ->setAttribs(array('class' => 'img-thumbnail', 'title' => 'no avatar'));
+                        ->setAttribs(array('class' => 'img-thumbnail img-responsive', 'title' => 'no avatar'));
 
                 return $avatar;
                 break;
@@ -21,13 +21,13 @@ class App_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
                 $avatar = $user->getUserAvatarLoad($user_id);
 
                 if ($avatar) {
-                    return '<img class="img-thumbnail" src="' . $avatar . '" title="user avatar">';
+                    return '<img class="img-thumbnail img-responsive" src="' . $avatar . '" title="user avatar">';
                 } else {
                     $avatar = $this->view->gravatar()
                             ->setImgSize(200)
                             ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                             ->setSecure(true)
-                            ->setAttribs(array('class' => 'img-thumbnail', 'title' => 'no avatar'));
+                            ->setAttribs(array('class' => 'img-thumbnail img-responsive', 'title' => 'no avatar'));
 
                     return $avatar;
                 }
@@ -39,13 +39,13 @@ class App_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
                 $avatar = $user->getUserAvatarLink($user_id);
 
                 if ($avatar) {
-                    return '<img class="img-thumbnail" src="' . $avatar . '" title="user avatar">';
+                    return '<img class="img-thumbnail img-responsive" src="' . $avatar . '" title="user avatar">';
                 } else {
                     $avatar = $this->view->gravatar()
                             ->setImgSize(200)
                             ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                             ->setSecure(true)
-                            ->setAttribs(array('class' => 'img-thumbnail', 'title' => 'no avatar'));
+                            ->setAttribs(array('class' => 'img-thumbnail img-responsive', 'title' => 'no avatar'));
 
                     return $avatar;
                 }
@@ -62,14 +62,14 @@ class App_View_Helper_SetupUserAvatar extends Zend_View_Helper_Abstract {
                             ->setImgSize(200)
                             ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                             ->setSecure(true)
-                            ->setAttribs(array('class' => 'img-thumbnail', 'title' => "User avatar"));
+                            ->setAttribs(array('class' => 'img-thumbnail img-responsive', 'title' => "User avatar"));
                     return $avatar;
                 } else {
                     $avatar = $this->view->gravatar()
                             ->setImgSize(200)
                             ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                             ->setSecure(true)
-                            ->setAttribs(array('class' => 'img-thumbnail', 'title' => 'no avatar'));
+                            ->setAttribs(array('class' => 'img-thumbnail img-responsive', 'title' => 'no avatar'));
 
                     return $avatar;
                 }

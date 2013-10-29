@@ -13,9 +13,9 @@ if (count($this->paginator)) {
 		    $date2 = new Zend_Date($user['date_last_activity']);
 		    if (($date1->toValue() - $date2->toValue()) <= 420) {
 			?>
-	    	    <img src="/img/user_online.png" class="user_light_status img-thumbnail">
+	    	    <img src="/img/user_online.png" class="user_light_status img-thumbnail img-responsive">
 		    <?php } else { ?>
-	    	    <img src="/img/user_ofline.png" class="user_light_status img-thumbnail">
+	    	    <img src="/img/user_ofline.png" class="user_light_status img-thumbnail img-responsive">
 		    <?php } ?>
 		    <div class="user_image">
 			<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $this->setupUserAvatar($user['id'], $user['avatar_type']); ?></a>

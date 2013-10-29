@@ -103,7 +103,7 @@ $(document).ready(function() {
 	});
     });
 
-    $('.tooltip_field').tooltip();
+    $('.tooltip-field').tooltip();
 
     $(".configure-block-item-links").hover(function(o) {
 	$(this).parent(".block-item").css({

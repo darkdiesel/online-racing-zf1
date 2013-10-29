@@ -21,7 +21,7 @@ class Application_Form_User_SetRestorePasswd extends Zend_Form {
             'placeholder' => 'E-mail',
             'title' => $this->translate('Введи e-mail адрес, на который зарегестрирован ваш пользователь.'),
             'required' => true,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -41,7 +41,7 @@ class Application_Form_User_SetRestorePasswd extends Zend_Form {
             'title' => $this->translate('Введи код восстановления высланный вам для подтверждения на e-mail.'),
             'required' => true,
             'AllowEmpty' => false,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array('alnum',
             //array('regex', false, '/^[a-z]/i')
@@ -59,7 +59,7 @@ class Application_Form_User_SetRestorePasswd extends Zend_Form {
             'placeholder' => $this->translate('Новый пароль'),
             'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
             'required' => true,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6, 'max' => 25))
@@ -77,7 +77,7 @@ class Application_Form_User_SetRestorePasswd extends Zend_Form {
             'placeholder' => $this->translate('Подтвердите пароль'),
             'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
             'AllowEmpty' => false,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 new App_Validate_EqualInputs('password')

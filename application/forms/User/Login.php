@@ -13,10 +13,13 @@ class Application_Form_User_Login extends Zend_Form
     public function init()
     {
 	// Set the method for the display form to POST
-	$this->setMethod('post');
-	$this->setAction('/user/login');
-	$this->setName('userlogin');
-	$this->setAttrib('class', 'block-item block-item-form block-item-form-w-270 block-align-center');
+        $this->setMethod('post')
+		->setName('default-user-login');
+        
+        $this->setAttribs(array(
+	    'class' => 'block-item block-item-form block-item-form-w-270 block-align-center',
+	    'id' => 'default-user-login',
+	));
 
 	// decorators for this form
 	$this->addDecorators(array('formElements', 'form'));
@@ -25,9 +28,9 @@ class Application_Form_User_Login extends Zend_Form
 	$this->addElement('text', 'loginemail', array(
 	    'label' => 'E-mail:',
 	    'placeholder' => 'E-mail',
-	    'title' => $this->translate('Введите свой электронный почтовый ящик. Пример: example@mail.com.'),
+	    'data-title' => $this->translate('Введите свой электронный почтовый ящик. Пример: example@mail.com.'),
 	    'required' => true,
-	    'class' => 'tooltip_field form-control',
+	    'class' => 'tooltip-field form-control',
 	    'data-placement' => 'bottom',
 	    'filters' => array('StripTags', 'StripTags', 'StringTrim', 'StringToLower'),
 	    'maxlength' => 255,
@@ -47,9 +50,9 @@ class Application_Form_User_Login extends Zend_Form
 	$this->addElement('password', 'loginpassword', array(
 	    'label' => $this->translate('Пароль'),
 	    'placeholder' => $this->translate('Пароль'),
-	    'title' => $this->translate('Введите пароль от своей учетной записи.'),
+	    'data-title' => $this->translate('Введите пароль от своей учетной записи.'),
 	    'required' => true,
-	    'class' => 'tooltip_field form-control',
+	    'class' => 'tooltip-field form-control',
 	    'data-placement' => 'bottom',
 	    'filters' => array('StripTags', 'StringTrim'),
 	    'maxlength' => 25,
@@ -66,12 +69,12 @@ class Application_Form_User_Login extends Zend_Form
 
 	$this->addElement('checkbox', 'remember', array(
 	    'label' => $this->translate('Запомнить меня'),
-	    'title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
+	    'data-title' => $this->translate('Отметьте поле, чтобы не авторизовываться при следующем посещении сайта.'),
 	    'data-placeholder' => 'left',
-	    'class' => 'tooltip_field',
+	    'class' => 'tooltip-field',
 	    'data-placement' => 'bottom',
 	    'decorators' => array(array('ViewScript', array(
-			'viewScript' => 'form_elements/bootstrap3_checkbox.phtml'
+			'viewScript' => 'viewScript/form_checkbox_bootstrap3.phtml'
 		    )))
 	));
 
@@ -105,7 +108,7 @@ class Application_Form_User_Login extends Zend_Form
         $this->getDisplayGroup('form_actions')->setDecorators(array(
 	    'FormElements',
 	    //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
-//	    /'Fieldset',
+	    //'Fieldset',
 	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
 	));
     }

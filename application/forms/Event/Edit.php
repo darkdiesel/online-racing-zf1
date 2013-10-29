@@ -45,7 +45,7 @@ class Application_Form_Event_Edit extends Zend_Form {
 	    'title' => $this->translate('Формат даты yyyy-mm-dd hh:mm:ss (yyyy - год, mm - месяц, dd - день, hh - часы (24), mm - минуты, ss - секунды)'),
 	    'required' => true,
 	    'filters' => array('StripTags', 'StringTrim'),
-	    'class' => 'form-control tooltip_field',
+	    'class' => 'form-control tooltip-field',
 	    'validators' => array(
 		//array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
 		array('StringLength', true, array('min' => 19, 'max' => 19)),

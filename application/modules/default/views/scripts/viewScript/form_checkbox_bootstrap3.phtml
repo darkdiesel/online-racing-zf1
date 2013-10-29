@@ -1,0 +1,16 @@
+<div class="form-group">
+    <?php
+    $options = "";
+    foreach ($this->element->getAttribs() as $name => $value):
+        if ($name != "options") {
+            $options .= $name . "='" . $value . "'";
+        }
+    endforeach;
+    ?>
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="<?php echo $this->element->getValue() ?>" id="<?php echo $this->element->getId() ?>" name="<?php echo $this->element->getName() ?>" <?php echo $options; ?> /> <?php echo $this->element->getLabel() ?>
+        </label>
+    </div>
+</div>

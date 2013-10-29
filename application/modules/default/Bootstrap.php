@@ -91,16 +91,16 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 	));
 
 	$router->addRoute(
-		'postAllByType', new Zend_Controller_Router_Route_Regex('post/all-by-type/(\d+)/page/(\d+)\.html', array(
+		'postByType', new Zend_Controller_Router_Route_Regex('post/by-type/(\d+)/page/(\d+)\.html', array(
 	    'module' => 'default',
 	    'controller' => 'post',
-	    'action' => 'all-by-type',
+	    'action' => 'by-type',
 	    1 => 0,
 	    2 => 1,
 		), array(
 	    'post_type_id' => 1,
 	    'page' => 2,
-		), "post/all-by-type/%d/page/%d.html"
+		), "post/by-type/%d/page/%d.html"
 	));
 
 
@@ -437,8 +437,8 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 			'title' => _('Игры и Моды'),
 			'controller' => 'post',
 			'module' => 'default',
-			'action' => 'all-by-type',
-			'route' => 'postAllByType',
+			'action' => 'by-type',
+			'route' => 'postByType',
 			'params' => array(
 			    'post_type_id' => '3'
 			),

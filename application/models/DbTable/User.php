@@ -63,16 +63,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($model
-                                ->select()
-                                ->setIntegrityCheck(false)
-                                ->from(array('u' => 'user'), 'u.id')
-                                //->where('u.user_role_id != 1 and u.enable = 1')
-                                ->join(array('c' => 'country'), 'u.country_id = c.id', array(
-                                    'country_url_image_round' => 'c.url_image_round',
-                                    'country_name' => 'c.native_name')
-                                )
-                                ->columns(array('id', 'avatar_type', 'login', 'date_last_activity'))
-                                ->order('date_last_activity ' . $order)
+                        ->select()
+                        ->setIntegrityCheck(false)
+                        ->from(array('u' => 'user'), 'u.id')
+                        //->where('u.user_role_id != 1 and u.enable = 1')
+                        ->join(array('c' => 'country'), 'u.country_id = c.id', array(
+                            'country_url_image_round' => 'c.url_image_round',
+                            'country_name' => 'c.native_name')
+                        )
+                        ->columns(array('id', 'avatar_type', 'login', 'date_last_activity'))
+                        ->order('date_last_activity ' . $order)
         );
 
         $paginator = new Zend_Paginator($adapter);
@@ -87,16 +87,16 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $model = new self;
 
         $adapter = new Zend_Paginator_Adapter_DbSelect($model
-                                ->select()
-                                ->setIntegrityCheck(false)
-                                ->from(array('u' => 'user'), 'u.id')
-                                //->where('u.user_role_id != 1 and u.enable = 1')
-                                ->join(array('c' => 'country'), 'u.country_id = c.id', array(
-                                    'country_url_image_round' => 'c.url_image_round',
-                                    'country_name' => 'c.name')
-                                )
-                                ->columns('*')
-                                ->order('id ' . $order)
+                        ->select()
+                        ->setIntegrityCheck(false)
+                        ->from(array('u' => 'user'), 'u.id')
+                        //->where('u.user_role_id != 1 and u.enable = 1')
+                        ->join(array('c' => 'country'), 'u.country_id = c.id', array(
+                            'country_url_image_round' => 'c.url_image_round',
+                            'country_name' => 'c.name')
+                        )
+                        ->columns('*')
+                        ->order('id ' . $order)
         );
 
         $paginator = new Zend_Paginator($adapter);
@@ -117,7 +117,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
         $user_where = $model->getAdapter()->quoteInto('id = ?', $user_id);
         $model->update($user_data, $user_where);
     }
-    
+
     public function setLastLoginIP($user_id, $ip) {
         $model = new self;
 
@@ -148,6 +148,23 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
                 $user_where = $model->getAdapter()->quoteInto('id = ?', $user->id);
                 $model->update($user_data, $user_where);
+
+                $role_db = new Application_Model_DbTable_Role();
+                $role_data = $role_db->getAll(array("name" => array("value" => "user")), array("id", "name"));
+                $user_role_db = new Application_Model_DbTable_UserRole();
+
+                $new_user_role_data = array(
+                    'user_id' => $user->id,
+                    'role_id' => $role_data->id,
+                );
+
+                $user_where = $user_role_db->getAdapter()->quoteInto('user_id = ?', $user->id);
+                $updated = $user_role_db->update($new_user_role_data, $user_where);
+
+                if (!$updated) {
+                    $new_user_role = $user_role_db->createRow($new_user_role_data);
+                    $new_user_role->save();
+                }
 
                 return 'done';
             } elseif ($user->code_activate == '') {
@@ -320,7 +337,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
             return FALSE;
         }
     }
-    
+
     public function getAllUsers($order) {
         $model = new self;
 
@@ -390,67 +407,63 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
         return $model->fetchAll(array('date_last_activity >= ?' => $date))->count();
     }
-    
-    
-    
-    
+
     /*
      * Get Item by idencity field value and $field array of fields list.
      */
 
-    public function getItem($idencity = array(), $fields = array())
-    {
-	$model = new self;
+    public function getItem($idencity = array(), $fields = array()) {
+        $model = new self;
 
-	if (!count($idencity)) {
-	    return FALSE;
-	} elseif (is_array($idencity)) {
-	    $idencity_field = $idencity[0];
-	    $idencity_value = $idencity[1];
-	} elseif (is_int($idencity)) {
-	    $idencity_field = 'id';
-	    $idencity_value = $idencity;
-	}
+        if (!count($idencity)) {
+            return FALSE;
+        } elseif (is_array($idencity)) {
+            $idencity_field = $idencity[0];
+            $idencity_value = $idencity[1];
+        } elseif (is_int($idencity)) {
+            $idencity_field = 'id';
+            $idencity_value = $idencity;
+        }
 
-	if (!isset($idencity_field) || !isset($idencity_value)){
-	    return FALSE;
-	}
-	
-	if (is_array($fields)) {
-	    if (count($fields)){
-		$fields = array_map('trim', $fields);
-	    } else {
-		$fields = "*";
-	    }
-	} elseif (is_string($fields)) {
-	    if (strtolower($fields) == "all"){
-		$fields = "*";
-	    } else {
-		$fields = array_map('trim', explode(",", $fields));
-	    }
-	}
+        if (!isset($idencity_field) || !isset($idencity_value)) {
+            return FALSE;
+        }
 
-	$select = $model->select()
-		->setIntegrityCheck(false)
-		->from(array('u' => $this->_name))
-		->where('u.' . $idencity_field . ' = ' . $idencity_value)
-		->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+        if (is_array($fields)) {
+            if (count($fields)) {
+                $fields = array_map('trim', $fields);
+            } else {
+                $fields = "*";
+            }
+        } elseif (is_string($fields)) {
+            if (strtolower($fields) == "all") {
+                $fields = "*";
+            } else {
+                $fields = array_map('trim', explode(",", $fields));
+            }
+        }
+
+        $select = $model->select()
+                ->setIntegrityCheck(false)
+                ->from(array('u' => $this->_name))
+                ->where('u.' . $idencity_field . ' = ' . $idencity_value)
+                ->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                     'country_native_name' => 'c.native_name',
                     'country_english_name' => 'c.english_name',))
-		->joinLeft(array('ur' => 'user_role'), 'u.id = ur.user_id',array('user_role_id' => 'ur.role_id'))
-		->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id',array('user_role_name' => 'rl.name'))
-		->columns($fields);
+                ->joinLeft(array('ur' => 'user_role'), 'u.id = ur.user_id', array('user_role_id' => 'ur.role_id'))
+                ->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id', array('user_role_name' => 'rl.name'))
+                ->columns($fields);
 
-	$resource = $model->fetchRow($select);
+        $resource = $model->fetchRow($select);
 
-	if (count($resource) != 0) {
-	    return $resource;
-	} else {
-	    return FALSE;
-	}
+        if (count($resource) != 0) {
+            return $resource;
+        } else {
+            return FALSE;
+        }
     }
-    
+
     /*
      * Function returns array of Items with $fields array of fields list.
      * Sorted by $order value
@@ -463,112 +476,111 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
      * $pager_args['page_range']	- Range of pages displaying at the pager's block
      * 
      */
-    
-    public function getAll($idencity = array(), $fields = array(), $order = array(), $pager = FALSE, array $pager_args = array())
-    {
-	$model = new self;
-	$idencity_data = "";
-	$order_data = "";
 
-	// idencity fields list
-	if ($idencity) {
-	    if (is_array($idencity)) {
-		foreach ($idencity as $field => $value) {
-		    if ($idencity_data) {
-			if (isset($value['condition'])) {
-			    if ($value['condition']) {
-				$condition = $value['condition'];
-			    } else {
-				$condition = "OR";
-			    }
-			} else {
-			    $condition = "OR";
-			}
+    public function getAll($idencity = array(), $fields = array(), $order = array(), $pager = FALSE, array $pager_args = array()) {
+        $model = new self;
+        $idencity_data = "";
+        $order_data = "";
 
-			$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
-		    } else {
-			$idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
-		    }
-		}
-	    } elseif (is_int($idencity) || is_string($idencity)) {
-		$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
-	    }
-	}
+        // idencity fields list
+        if ($idencity) {
+            if (is_array($idencity)) {
+                foreach ($idencity as $field => $value) {
+                    if ($idencity_data) {
+                        if (isset($value['condition'])) {
+                            if ($value['condition']) {
+                                $condition = $value['condition'];
+                            } else {
+                                $condition = "OR";
+                            }
+                        } else {
+                            $condition = "OR";
+                        }
 
-	// fields list
-	if ($fields) {
-	    if (is_array($fields)) {
-		$fields = array_map('trim', $fields);
-	    } elseif (is_string($fields)) {
-		if (strtolower($fields) == "all") {
-		    $fields = "*";
-		} else {
-		    $fields = array_map('trim', explode(",", $fields));
-		}
-	    }
-	}
+                        $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+                    } else {
+                        $idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
+                    }
+                }
+            } elseif (is_int($idencity) || is_string($idencity)) {
+                $idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
+            }
+        }
 
-	// order list
-	if ($order) {
-	    if (is_array($order)) {
-		foreach ($order as $field => $value) {
-		    if ($order_data) {
-			$order_data .= sprintf(", %s.%s %s", $this->db_href, $field, $value);
-		    } else {
-			$order_data = sprintf("%s.%s %s", $this->db_href, $field, $value);
-		    }
-		}
-	    }
-	}
+        // fields list
+        if ($fields) {
+            if (is_array($fields)) {
+                $fields = array_map('trim', $fields);
+            } elseif (is_string($fields)) {
+                if (strtolower($fields) == "all") {
+                    $fields = "*";
+                } else {
+                    $fields = array_map('trim', explode(",", $fields));
+                }
+            }
+        }
 
-	$select = $model->select()
+        // order list
+        if ($order) {
+            if (is_array($order)) {
+                foreach ($order as $field => $value) {
+                    if ($order_data) {
+                        $order_data .= sprintf(", %s.%s %s", $this->db_href, $field, $value);
+                    } else {
+                        $order_data = sprintf("%s.%s %s", $this->db_href, $field, $value);
+                    }
+                }
+            }
+        }
+
+        $select = $model->select()
                 ->setIntegrityCheck(false)
-		->from(array($this->db_href => $this->_name))
-                ->join(array('c' => 'country'), $this->db_href.'.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
+                ->from(array($this->db_href => $this->_name))
+                ->join(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
                     'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                     'country_native_name' => 'c.native_name',
                     'country_english_name' => 'c.english_name',))
-		->joinLeft(array('ur' => 'user_role'), $this->db_href.'.id = ur.user_id',array('user_role_id' => 'ur.role_id'))
-		->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id',array('user_role_name' => 'rl.name'));
+                ->joinLeft(array('ur' => 'user_role'), $this->db_href . '.id = ur.user_id', array('user_role_id' => 'ur.role_id'))
+                ->joinLeft(array('rl' => 'role'), 'ur.role_id = rl.id', array('user_role_name' => 'rl.name'));
 
-	if ($fields) {
-	    $select->columns($fields);
-	} else {
-	    $select->columns("*");
-	}
+        if ($fields) {
+            $select->columns($fields);
+        } else {
+            $select->columns("*");
+        }
 
-	if ($idencity_data) {
-	    $select->where($idencity_data);
-	}
+        if ($idencity_data) {
+            $select->where($idencity_data);
+        }
 
-	if ($order_data) {
-	    $select->order($order_data);
-	}
+        if ($order_data) {
+            $select->order($order_data);
+        }
 
-	if ($pager) {
-	    $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
+        if ($pager) {
+            $adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
 
-	    $paginator = new Zend_Paginator($adapter);
-	    if (count($pager_args)) {
-		$paginator->setItemCountPerPage($pager_args['page_count_items']);
-		$paginator->setCurrentPageNumber($pager_args['page']);
-		$paginator->setPageRange($pager_args['page_range']);
-	    } else {
-		$paginator->setItemCountPerPage("10");
-		$paginator->setCurrentPageNumber("1");
-		$paginator->setPageRange("5");
-	    }
+            $paginator = new Zend_Paginator($adapter);
+            if (count($pager_args)) {
+                $paginator->setItemCountPerPage($pager_args['page_count_items']);
+                $paginator->setCurrentPageNumber($pager_args['page']);
+                $paginator->setPageRange($pager_args['page_range']);
+            } else {
+                $paginator->setItemCountPerPage("10");
+                $paginator->setCurrentPageNumber("1");
+                $paginator->setPageRange("5");
+            }
 
-	    return $paginator;
-	} else {
-	    $resources = $model->fetchAll($select);
+            return $paginator;
+        } else {
+            $resources = $model->fetchAll($select);
 
-	    if (count($resources) != 0) {
-		return $resources;
-	    } else {
-		return FALSE;
-	    }
-	}
+            if (count($resources) != 0) {
+                return $resources;
+            } else {
+                return FALSE;
+            }
+        }
     }
 
 }

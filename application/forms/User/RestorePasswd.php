@@ -21,7 +21,7 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
             'placeholder' => 'E-mail',
             'title' => $this->translate('Введи e-mail адрес, на который зарегестрирован ваш пользователь.'),
             'required' => true,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -39,7 +39,7 @@ class Application_Form_User_RestorePasswd extends Zend_Form {
             'placeholder' => $this->translate('Подтвердите E-mail'),
             'title' => $this->translate('Повторите e-mail.'),
             'AllowEmpty' => false,
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 new App_Validate_EqualInputs('email')

@@ -312,16 +312,15 @@ class PostController extends App_Controller_LoaderController {
         }
     }
 
-    public function allByTypeAction() {
+    public function byTypeAction() {
         $request = $this->getRequest();
         $post_type_id = (int) $request->getParam('post_type_id');
 
-        $post_type = new Application_Model_DbTable_PostType();
-        $post_type_data = $post_type->getName($post_type_id);
+        $post_type_data = $this->db->get('post_type')->getItem($post_type_id);
 
         if ($post_type_data) {
-            $this->view->headTitle("{$this->view->translate('Категория контента')} :: {$post_type_data}");
-            $this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$post_type_data}");
+            $this->view->headTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->name}");
+            $this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->name}");
 
             // setup pager settings
             $page_count_items = 10;

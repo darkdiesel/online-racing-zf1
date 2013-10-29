@@ -73,7 +73,7 @@ class Application_Form_Race_Add extends Zend_Form {
             'title' => $this->translate('Формат даты yyyy-mm-dd hh:mm:ss (yyyy - год, mm - месяц, dd - день, hh - часы (24), mm - минуты, ss - секунды)'),
             'required' => true,
             'filters' => array('StripTags', 'StringTrim'),
-            'class' => 'x_field tooltip_field',
+            'class' => 'x_field tooltip-field',
             'validators' => array(
                 //array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
                 array('StringLength', true, array('min' => 19, 'max' => 19)),

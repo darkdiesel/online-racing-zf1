@@ -45,6 +45,11 @@ class UserController extends App_Controller_LoaderController {
 
         $request = $this->getRequest();
         $form = new Application_Form_User_Login();
+        $form->setAction(
+		$this->view->url(
+			array('module' => 'default', 'controller' => 'user', 'action' => 'login'), 'default', true
+		)
+	);
 
         if (!$request->getParam('returnUrl')) {
             $user_url = $this->_helper->getHelper('UserServerData')->GetPreviousPage();
@@ -474,6 +479,7 @@ class UserController extends App_Controller_LoaderController {
     public function editAction() {
         // page title
         $this->view->headTitle($this->view->translate('Редактирование профиля'));
+        $this->view->pageTitle($this->view->translate('Редактирование профиля'));
 
         $request = $this->getRequest();
         $form = new Application_Form_User_Edit();
@@ -481,6 +487,11 @@ class UserController extends App_Controller_LoaderController {
         $user = new Application_Model_DbTable_User();
 
         $form->isValid($request->getPost());
+        $form->setAction(
+		$this->view->url(
+			array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true
+		)
+	);
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValidPartial($request->getPost())) {
@@ -610,11 +621,15 @@ class UserController extends App_Controller_LoaderController {
     public function messageAction() {
         // page title
         $this->view->headTitle($this->view->translate('Сообщения'));
+        $this->view->pageTitle($this->view->translate('Сообщения'));
+        
+        $this->messageManager->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
     }
 
     public function settingsAction() {
         // page title
         $this->view->headTitle($this->view->translate('Настройки профиля'));
+        $this->view->pageTitle($this->view->translate('Настройки профиля'));
 
         $request = $this->getRequest();
         $form = new Application_Form_User_Settings();

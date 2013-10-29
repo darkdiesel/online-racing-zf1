@@ -20,7 +20,7 @@ class Application_Form_User_Register extends Zend_Form {
             'placeholder' => $this->translate('Логин'),
             'title' => $this->translate('Длина поля должна быть от 5 до 20 символов, содержать только латинские буквы, цифпы и символы -_.'),
             'required' => true,
-            'class' => 'form-control tooltip_field',
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 array('regex', false, '/^[a-zA-Z0-9_-]{5,20}$/'),
@@ -40,7 +40,7 @@ class Application_Form_User_Register extends Zend_Form {
             'placeholder' => 'E-mail',
             'title' => $this->translate('Поле должно содержать правильный адрес вашего электронного почтового ящика. Пример: example@mail.com.'),
             'required' => true,
-            'class' => 'form-control tooltip_field',
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim', 'StringToLower'),
             'validators' => array(
                 'EmailAddress',
@@ -60,7 +60,7 @@ class Application_Form_User_Register extends Zend_Form {
             'placeholder' => $this->translate('Пароль'),
             'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
             'required' => true,
-            'class' => 'form-control tooltip_field',
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
@@ -78,7 +78,7 @@ class Application_Form_User_Register extends Zend_Form {
             'placeholder' => $this->translate('Подтвердите пароль'),
             'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
             'AllowEmpty' => false,
-            'class' => 'form-control tooltip_field',
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 new App_Validate_EqualInputs('password')
