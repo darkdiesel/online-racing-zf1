@@ -15,11 +15,11 @@ class Application_Form_User_Edit extends Zend_Form {
         
         $this->setAttribs(array(
 	    'class' => 'block-item block-item-form form-horizontal',
-	    'id' => 'default-user-login',
+	    'id' => 'default-user-edit',
 	));
         
-        //$this->setAttrib('class', 'fieldset_white_box');
         $this->setEnctype('multipart/form-data');
+        $this->addDecorators(array('formElements', 'form'));
 
         // user info
         $this->addElement('text', 'name', array(

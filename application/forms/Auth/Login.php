@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_User_Login extends Zend_Form
+class Application_Form_Auth_Login extends Zend_Form
 {
 
     protected function translate($str)
@@ -14,11 +14,11 @@ class Application_Form_User_Login extends Zend_Form
     {
 	// Set the method for the display form to POST
         $this->setMethod('post')
-		->setName('default-user-login');
+		->setName('default-auth-login');
         
         $this->setAttribs(array(
 	    'class' => 'block-item block-item-form block-item-form-w-270 block-align-center',
-	    'id' => 'default-user-login',
+	    'id' => 'default-auth-login',
 	));
 
 	// decorators for this form

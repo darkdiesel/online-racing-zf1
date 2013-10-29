@@ -32,8 +32,7 @@ class IndexController extends App_Controller_LoaderController {
 	
 	$league = new Application_Model_DbTable_League();
 	
-	$this->view->league1 = $league->getItem(array('id', 1), array('name', 'url_logo'));
-	$this->view->league2 = $league->getItem(array('id', 2), array('name', 'url_logo'));
+	$this->view->leagues = $league->getAll(FALSE, array('id','name', 'url_logo'));
     }
     
     public function sitemapAction()

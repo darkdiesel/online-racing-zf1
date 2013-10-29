@@ -9,9 +9,6 @@ class App_Controller_LoaderController extends Zend_Controller_Action {
     }
     
     public function init() {
-        //setup global variables
-        
-
         // configure main menu
         //$uri = $this->_request->getPathInfo();
 

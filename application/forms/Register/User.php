@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_User_Register extends Zend_Form {
+class Application_Form_Register_User extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,11 +10,16 @@ class Application_Form_User_Register extends Zend_Form {
 
     public function init() {
         // Set the method for the display form to POST
-        $this->setMethod('post');
-        $this->setAction('/user/register');
-        $this->setName('userRegister');
-        $this->setAttrib('class', 'white_box white_box_size_m');
-
+        $this->setMethod('post')
+		->setName('default-register-user');
+        
+        $this->setAttribs(array(
+	    'class' => 'block-item block-item-form block-item-form-w-400 block-align-center',
+	    'id' => 'default-register-user',
+	));
+        // decorators for this form
+	$this->addDecorators(array('formElements', 'form'));
+        
         $this->addElement('text', 'login', array(
             'label' => $this->translate('Логин'),
             'placeholder' => $this->translate('Логин'),
@@ -28,11 +33,11 @@ class Application_Form_User_Register extends Zend_Form {
                 new App_Validate_NoDbRecordExists('user', 'login')
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'control-label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
-                array('HtmlTag', array('class' => 'controls')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement('text', 'email', array(
@@ -48,11 +53,11 @@ class Application_Form_User_Register extends Zend_Form {
                 array('StringLength', true, array('min' => 5))
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'control-label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
-                array('HtmlTag', array('class' => 'controls')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement('password', 'password', array(
@@ -66,11 +71,11 @@ class Application_Form_User_Register extends Zend_Form {
                 array('StringLength', true, array('min' => 6))
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'control-label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
-                array('HtmlTag', array('class' => 'controls')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement('password', 'confirmpassword', array(
@@ -84,11 +89,11 @@ class Application_Form_User_Register extends Zend_Form {
                 new App_Validate_EqualInputs('password')
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'control-label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'control-group')),
-                array('HtmlTag', array('class' => 'controls')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement(
@@ -118,9 +123,10 @@ class Application_Form_User_Register extends Zend_Form {
             'class' => 'btn btn-primary',
             'label' => $this->translate('Зарегестрировать'),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'div', 'class' => 'submit form_actions_group'))
-            )
+		'ViewHelper', 'HtmlTag',
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+	    )
         ));
 
         $this->addElement('reset', 'reset', array(
@@ -129,9 +135,10 @@ class Application_Form_User_Register extends Zend_Form {
             'class' => 'btn btn-default',
             'label' => $this->translate('Сбросить'),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'div', 'class' => 'reset form_actions_group'))
-            )
+		'ViewHelper', 'HtmlTag',
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+	    )
         ));
 
         $this->addDisplayGroup(array(
@@ -140,11 +147,11 @@ class Application_Form_User_Register extends Zend_Form {
                 ), 'form_actions', array());
 
         $this->getDisplayGroup('form_actions')->setDecorators(array(
-            'FormElements',
-            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
-            'Fieldset',
-            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form_actions display_group')),
-        ));
+	    'FormElements',
+	    //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
+	    //'Fieldset',
+	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
+	));
     }
 
 }

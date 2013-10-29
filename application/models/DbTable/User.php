@@ -150,7 +150,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
                 $model->update($user_data, $user_where);
 
                 $role_db = new Application_Model_DbTable_Role();
-                $role_data = $role_db->getAll(array("name" => array("value" => "user")), array("id", "name"));
+                $role_data = $role_db->getItem(array("name" => array("value" => "user")), array("id", "name"));
                 $user_role_db = new Application_Model_DbTable_UserRole();
 
                 $new_user_role_data = array(

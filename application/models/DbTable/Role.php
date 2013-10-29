@@ -32,7 +32,7 @@ class Application_Model_DbTable_Role extends Zend_Db_Table_Abstract {
 
                     $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
                 } else {
-                    $idencity_data = sprintf("%s.%s = %s", $this->db_href, $field, $value['value']);
+                    $idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value['value']);
                 }
             }
         } elseif (is_int($idencity) || is_string($idencity)) {
@@ -54,7 +54,7 @@ class Application_Model_DbTable_Role extends Zend_Db_Table_Abstract {
 
         $select = $model->select()
                 ->setIntegrityCheck(false)
-                ->from(array($this->db_href => $this->_name), $this->db_href . '.id')
+                ->from(array($this->db_href => $this->_name))
                 ->where($idencity_data);
 
         if ($fields) {

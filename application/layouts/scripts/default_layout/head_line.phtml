@@ -21,18 +21,18 @@
     				<li class="dropdown">
     				    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?> <b class="caret"></b></a>
     				    <ul class="dropdown-menu">
-    					<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
-    					<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
-    					<li><a href="<?php echo$this->url(array('controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
-    					<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
+    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
+    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
+    					<li><a href="<?php echo$this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
+    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
     					<li class="divider"></li>
-    					<li><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
+    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
     				    </ul>
     				</li>
     			    </ul>
 			    <?php } else { ?> 
     			    <ul class="nav navbar-nav navbar-collapse navbar-right">
-    				<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'register'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
+    				<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
     				<button data-toggle="modal" href="#myModal" type="button" class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
     			    </ul>
 			    <?php } ?>
@@ -78,8 +78,8 @@
 		</div>
 		<div class="modal-body">
 		    <?php
-		    $form = new Application_Form_User_Login();
-		    $form->setAction("{$this->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
+		    $form = new Application_Form_Auth_Login();
+		    $form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
 		    echo $form;
 		    ?>
 		</div>
