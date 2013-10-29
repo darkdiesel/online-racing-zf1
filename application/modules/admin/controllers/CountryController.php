@@ -22,7 +22,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 	    $this->view->headTitle($country_data->native_name);
 	    $this->view->pageTitle("{$this->view->translate('Страна')} :: {$country_data->english_name} ({$country_data->native_name})");
 	} else {
-	    $this->messageManager->addError("{$this->view->translate('Запрашиваемая страна не найдена!!')}");
+	    $this->messages->addError("{$this->view->translate('Запрашиваемая страна не найдена!!')}");
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Страна не найдена!')");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Страна не найдена!')");
 	}
@@ -47,7 +47,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messageManager->addError("{$this->view->translate('Запрашиваемыt страны на сайте не найден!')}");
+	    $this->messages->addError("{$this->view->translate('Запрашиваемыt страны на сайте не найден!')}");
 	}
     }
 
@@ -221,11 +221,11 @@ class Admin_CountryController extends App_Controller_LoaderController
 
 			$this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $country_id), 'country_id', true));
 		    } else {
-			$this->messageManager->addError($this->view->translate('Неверное имя страны или аббревиация!') . ": {$form->getValue('native_name')} , {$form->getValue('abbreviation')}");
-			$this->messageManager->addError($this->view->translate('Имя страны или аббревиатура уже существуют в базе данных!'));
+			$this->messages->addError($this->view->translate('Неверное имя страны или аббревиация!') . ": {$form->getValue('native_name')} , {$form->getValue('abbreviation')}");
+			$this->messages->addError($this->view->translate('Имя страны или аббревиатура уже существуют в базе данных!'));
 		    }
 		} else {
-		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
@@ -241,7 +241,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 	    //get form for views
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемая страна не найдена!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Страна не найдена!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Страна не найдена!')}");
 	}
@@ -262,7 +262,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 	    $this->view->headTitle("{$country_data->native_name} ({$country_data->english_name})");
 	    $this->view->pageTitle("{$this->view->translate('Удалить страну')} :: {$country_data->native_name} ({$country_data->english_name})");
 
-	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить страну')} <strong>\"{$country_data->native_name} ({$country_data->english_name})\"</strong> ?");
+	    $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить страну')} <strong>\"{$country_data->native_name} ({$country_data->english_name})\"</strong> ?");
 
 	    //create delete form
 	    $form = new Application_Form_Country_Delete();
@@ -275,18 +275,18 @@ class Admin_CountryController extends App_Controller_LoaderController
 		    $country->delete($country_where);
 
 		    $this->view->showMessages()->clearMessages();
-		    $this->messageManager->addSuccess("{$this->view->translate("Страна <strong>\"{$country_data->native_name} ({$country_data->english_name})\"</strong> успешно удален")}");
+		    $this->messages->addSuccess("{$this->view->translate("Страна <strong>\"{$country_data->native_name} ({$country_data->english_name})\"</strong> успешно удален")}");
 
 		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all', 'page' => 1), 'country_all', true));
 		} else {
-		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
 	    $this->view->country = $country_data;
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемая страна не найдена!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Страна не найдена!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Страна не найдена!')}");
 	}

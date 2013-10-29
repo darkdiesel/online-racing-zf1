@@ -9,74 +9,78 @@ class Application_Form_User_Settings extends Zend_Form {
     }
 
     public function init() {
-        /* Form Elements & Other Definitions Here ... */
-        $this->setMethod('post');
-        $this->setAction('/user/settings');
-        $this->setName('userSettingsNewPasswd');
-        $this->setAttrib('class', 'fieldset_white_box');
+        // Set the method for the display form to POST
+        $this->setMethod('post')
+		->setName('default-user-settings');
+        
+        $this->setAttribs(array(
+	    'class' => 'block-item block-item-form',
+	    'id' => 'default-user-settings',
+	));
         
         // lang
         $this->addElement('select', 'lang', array(
             'label' => $this->translate('Язык'),
+            'class' => 'form-control',
             'multiOptions' => array('Русский', 'English'),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement('password', 'oldpassword', array(
             'label' => $this->translate('Старый пароль'),
             'placeholder' => $this->translate('Старый пароль'),
-            'title' => $this->translate('Введите старый пароль, чтобы подтвердить свою личность.'),
-            'class' => 'x_field tooltip-field',
+            'data-title' => $this->translate('Введите старый пароль, чтобы подтвердить свою личность.'),
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement('password', 'newpassword', array(
             'label' => $this->translate('Новый пароль'),
             'placeholder' => $this->translate('Новый пароль'),
-            'title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
-            'class' => 'x_field tooltip-field',
+            'data-title' => $this->translate('Длина поля должна быть от 6 до 25 символов, содержать только латиские буквы, цифры и символы -_.'),
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 array('StringLength', true, array('min' => 6))
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         $this->addElement('password', 'confirmnewpassword', array(
             'label' => $this->translate('Подтвердите новый пароль'),
             'placeholder' => $this->translate('Подтвердите новый пароль'),
-            'title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
+            'data-title' => $this->translate('Значение поля должно совпадать со значеним предыдущего поля.'),
             'AllowEmpty' => false,
-            'class' => 'x_field tooltip-field',
+            'class' => 'form-control tooltip-field',
             'filters' => array('StripTags', 'StringTrim'),
             'validators' => array(
                 //new App_Validate_EqualInputs('password')
             ),
             'decorators' => array(
-                'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                array('Label', array('class' => 'element_label')),
-                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-                array('HtmlTag', array('class' => 'element_tag')),
-            )
+		'ViewHelper', 'HtmlTag', 'label', 'Errors',
+		array('Label', array('class' => 'control-label')),
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('class' => '')),
+	    )
         ));
 
         // element for saving tab name
@@ -90,25 +94,26 @@ class Application_Form_User_Settings extends Zend_Form {
 
         // conrols
         $this->addElement('submit', 'submit', array(
-            'ignore' => true,
-            'class' => 'btn btn-primary',
-            'label' => $this->translate('Сохранить'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'span', 'class' => 'submit form_actions_group'))
-            )
-        ));
+	    'ignore' => true,
+	    'class' => 'btn btn-primary',
+	    'label' => $this->translate('Сохранить'),
+	    'decorators' => array(
+		'ViewHelper', 'HtmlTag',
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+	    )
+	));
 
-        $this->addElement('reset', 'reset', array(
-            'label' => "",
-            'ignore' => true,
-            'class' => 'btn btn-default',
-            'label' => $this->translate('Сбросить'),
-            'decorators' => array(
-                'ViewHelper', 'HtmlTag',
-                array('HtmlTag', array('tag' => 'span', 'class' => 'reset form_actions_group'))
-            )
-        ));
+	$this->addElement('reset', 'reset', array(
+	    'ignore' => true,
+	    'class' => 'btn btn-default',
+	    'label' => $this->translate('Сбросить'),
+	    'decorators' => array(
+		'ViewHelper', 'HtmlTag',
+		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+	    )
+	));
         
         // lang display group
         $this->addDisplayGroup(array(
@@ -137,17 +142,17 @@ class Application_Form_User_Settings extends Zend_Form {
         ));
 
         // form actions display group
-        $this->addDisplayGroup(array(
+         $this->addDisplayGroup(array(
             $this->getElement('submit'),
             $this->getElement('reset')
                 ), 'form_actions', array());
-
+        
         $this->getDisplayGroup('form_actions')->setDecorators(array(
-            'FormElements',
-            array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'fieldset_inner_form')),
-            'Fieldset',
-            array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form_actions display_group')),
-        ));
+	    'FormElements',
+	    //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
+	    //'Fieldset',
+	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
+	));
     }
 
 }

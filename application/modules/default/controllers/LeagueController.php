@@ -34,7 +34,7 @@ class LeagueController extends App_Controller_LoaderController
 
 	    $this->view->paginator = $championship->getChampionshipsPagerByLeague($page_count_items, $page, $page_range, $items_order, $league_id);
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемая лига не существует!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемая лига не существует!'));
 
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
@@ -84,7 +84,7 @@ class LeagueController extends App_Controller_LoaderController
 
 		$this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $newLeague->id), 'leagueIdAll', true));
 	    } else {
-		$this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 	    }
 	}
 
@@ -98,7 +98,7 @@ class LeagueController extends App_Controller_LoaderController
 	    }
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы создать лигу.'));
+	    $this->messages->addError($this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы создать лигу.'));
 	}
     }
 
@@ -156,7 +156,7 @@ class LeagueController extends App_Controller_LoaderController
 
 		    $this->redirect($this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id), 'leagueIdAll', true));
 		} else {
-		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
@@ -170,7 +170,7 @@ class LeagueController extends App_Controller_LoaderController
 		}
 		$this->view->form = $form;
 	    } else {
-		$this->messageManager->addError($this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы редактировать лигу.'));
+		$this->messages->addError($this->view->translate('Администраторы на сайте не найдены! Создайте администратора, чтобы редактировать лигу.'));
 	    }
 
 	    $form->name->setvalue($league_data->name);
@@ -179,7 +179,7 @@ class LeagueController extends App_Controller_LoaderController
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Лига не существует!'));
+	    $this->messages->addError($this->view->translate('Лига не существует!'));
 	    $this->view->headTitle($this->view->translate('Ошибка!'));
 	    $this->view->headTitle($this->view->translate('Лига не существует!'));
 
@@ -211,7 +211,7 @@ class LeagueController extends App_Controller_LoaderController
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не существует!')}");
+	    $this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не существует!')}");
 	}
     }
 

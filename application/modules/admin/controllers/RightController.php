@@ -22,7 +22,7 @@ class Admin_RightController extends App_Controller_LoaderController {
 	    $this->view->pageTitle($right_data->name);
 	    return;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
@@ -45,7 +45,7 @@ class Admin_RightController extends App_Controller_LoaderController {
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messageManager->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
+	    $this->messages->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
 	}
     }
 
@@ -84,7 +84,7 @@ class Admin_RightController extends App_Controller_LoaderController {
 			)
 		);
 	    } else {
-		$this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 	    }
 	}
 
@@ -125,7 +125,7 @@ class Admin_RightController extends App_Controller_LoaderController {
 				'right_id' => $right_id), 'right_id', true
 		    ));
 		} else {
-		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 	    $this->view->headTitle($right_data->name);
@@ -136,7 +136,7 @@ class Admin_RightController extends App_Controller_LoaderController {
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
@@ -155,7 +155,7 @@ class Admin_RightController extends App_Controller_LoaderController {
 	    $this->view->headTitle($right_data->name);
 	    $this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$right_data->name}");
 
-	    $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$right_data->name}\"</strong> ?");
+	    $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$right_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_Right_Delete();
 	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'delete', 'right_id' => $right_id), 'right_action', true));
@@ -166,19 +166,19 @@ class Admin_RightController extends App_Controller_LoaderController {
 		    $right_where = $this->db->get('right')->getAdapter()->quoteInto('id = ?', $right_id);
 		    $this->db->get('right')->delete($right_where);
 
-		    $this->messageManager->clearMessages();
-		    $this->messageManager->addSuccess("{$this->view->translate("Правило <strong>\"{$right_data->name}\"</strong> успешно удалено")}");
+		    $this->messages->clearMessages();
+		    $this->messages->addSuccess("{$this->view->translate("Правило <strong>\"{$right_data->name}\"</strong> успешно удалено")}");
 
 		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all', 'page' => 1), 'right_all', true));
 		} else {
-		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
 	    $this->view->form = $form;
 	    $this->view->right = $right_data;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}

@@ -7,9 +7,9 @@ class ChatController extends App_Controller_LoaderController {
         $this->view->pageTitle($this->view->translate('Чат'));
 
         if (Zend_Auth::getInstance()->hasIdentity()) {
-            $this->messageManager->addInfo("{$this->view->translate('Введите сообщение в поле ввода и нажмите "Отправить".')}");
+            $this->messages->addInfo("{$this->view->translate('Введите сообщение в поле ввода и нажмите "Отправить".')}");
         } else {
-            $this->messageManager->addWarning("{$this->view->translate('Сообщения в чате могут оставлять только авторизованные пользователи.')}"
+            $this->messages->addWarning("{$this->view->translate('Сообщения в чате могут оставлять только авторизованные пользователи.')}"
                     . "<br/><a class=\"btn btn-warning\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'login'), 'default', true)}\">{$this->view->translate('Авторизоваться')}</a>"
                     . " {$this->view->translate('или')} "
                     . "<a class=\"btn btn-danger\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться')}</a>"

@@ -32,7 +32,7 @@ class Admin_UserController extends App_Controller_LoaderController
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messageManager->addInfo("{$this->view->translate('Запрашиваемые пользователи на сайте не найдены!')}");
+	    $this->messages->addInfo("{$this->view->translate('Запрашиваемые пользователи на сайте не найдены!')}");
 	}
     }
     
@@ -75,7 +75,7 @@ class Admin_UserController extends App_Controller_LoaderController
 				'user_id' => $user_id), 'user_id', true
 		    ));
 		} else {
-		    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 	    $this->view->headTitle($user_data->name);
@@ -85,7 +85,7 @@ class Admin_UserController extends App_Controller_LoaderController
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messageManager->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
+	    $this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
 	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Роль пользователя не найдена!')}");
 	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Роль пользователя не найдена!')}");
 	}

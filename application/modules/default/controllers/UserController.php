@@ -26,7 +26,7 @@ class UserController extends App_Controller_LoaderController {
 
             $this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
         } else {
-            $this->messageManager->addError("{$this->view->translate("Пользователь не существует!")}");
+            $this->messages->addError("{$this->view->translate("Пользователь не существует!")}");
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Пользователь не существует!')}");
             $this->view->pageTitle($this->view->translate('Ошибка!'));
         }
@@ -41,7 +41,7 @@ class UserController extends App_Controller_LoaderController {
         $this->view->headTitle($this->view->translate('Авторизация'));
         $this->view->pageTitle($this->view->translate('Авторизация'));
 
-        $this->messageManager->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы авторизоваться на сайте.')}");
+        $this->messages->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы авторизоваться на сайте.')}");
 
         $request = $this->getRequest();
         $form = new Application_Form_User_Login();
@@ -119,12 +119,12 @@ class UserController extends App_Controller_LoaderController {
                             $user->update($new_user_data, $user_where);
 
                             $this->view->showMessages()->clearMessages();
-                            $this->messageManager->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
+                            $this->messages->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
 
                             $this->redirect($request->getParam('returnUrl'));
                         } else {
                             $form->populate($request->getPost());
-                            $this->messageManager->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
+                            $this->messages->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
                                     . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
                                     . " <a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
                         }
@@ -157,21 +157,21 @@ class UserController extends App_Controller_LoaderController {
                           } */
                         break;
                     case 'disable':
-                        $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными заблокирован! Обротитесь к администрации сайта для разблокировки.')}");
+                        $this->messages->addError("{$this->view->translate('Пользователь с этими данными заблокирован! Обротитесь к администрации сайта для разблокировки.')}");
                         break;
                     case 'notActivate':
-                        $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными не активирован!')}"
+                        $this->messages->addError("{$this->view->translate('Пользователь с этими данными не активирован!')}"
                                 . " <a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'activate'), 'default', true)}\">{$this->view->translate('Активировать?')}</a>");
                         break;
                     case 'notFound':
-                        $this->messageManager->addError("{$this->view->translate('Пользователь с этими данными не найден!')}"
+                        $this->messages->addError("{$this->view->translate('Пользователь с этими данными не найден!')}"
                                 . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
                                 . " <a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
                         break;
                 }
             } else {
-                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-                $this->messageManager->addError("<a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
+                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError("<a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
                         . " <a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
             }
         }
@@ -187,7 +187,7 @@ class UserController extends App_Controller_LoaderController {
         $this->view->headTitle($this->view->translate('Регистрация'));
 	$this->view->pageTitle($this->view->translate('Регистрация'));
 	
-	$this->messageManager->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.')}");
+	$this->messages->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.')}");
 	
         // jQuery validate script
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
@@ -566,7 +566,7 @@ class UserController extends App_Controller_LoaderController {
                         break;
                 }
             } else {
-                $this->view->errMessage .= $this->view->translate('Исправте следующие ошибки для сохранения изминений профиля!');
+                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -623,16 +623,26 @@ class UserController extends App_Controller_LoaderController {
         $this->view->headTitle($this->view->translate('Сообщения'));
         $this->view->pageTitle($this->view->translate('Сообщения'));
         
-        $this->messageManager->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
+        $this->messages->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
     }
 
     public function settingsAction() {
         // page title
         $this->view->headTitle($this->view->translate('Настройки профиля'));
         $this->view->pageTitle($this->view->translate('Настройки профиля'));
+        
+        $this->messages->addInfo($this->view->translate('Измините настройки и нажмите "Сохранить".'));
+        
+        echo $this->message;
 
         $request = $this->getRequest();
+        
         $form = new Application_Form_User_Settings();
+        $form->setAction(
+		$this->view->url(
+			array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true
+		)
+	);
 
         $user = new Application_Model_DbTable_User();
 
@@ -640,16 +650,16 @@ class UserController extends App_Controller_LoaderController {
             if ($form->isValid($request->getPost())) {
                 switch ($request->getParam('tab_name')) {
                     case 'lang_settings ':
-                        $this->view->errMessage .= "Сожалеем, но данный функционал пока не доступен." . '<br />';
+                        $this->messages->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
                         break;
                     case 'change_password':
                         if ($form->getValue('newpassword') == $form->getValue('confirmnewpassword') && ($form->getValue('newpassword') != '')) {
                             $user_data = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage()->read()->id, $form->getValue('oldpassword'), $form->getValue('newpassword'));
 
                             if (!$user_data) {
-                                $this->view->errMessage .= "Старый пароль введен не верно! Повторите ввод." . '<br />';
+                                $this->messages->addError($this->view->translate("Старый пароль введен не верно! Повторите ввод."));
                             } else {
-                                $this->view->succMessage .= "Пароль успешно изменен." . '<br />';
+                                $this->messages->addSuccess($this->view->translate("Пароль успешно изменен."));
 
                                 $user_data = $user->getUserData(Zend_Auth::getInstance()->getStorage()->read()->id);
 
@@ -670,7 +680,7 @@ class UserController extends App_Controller_LoaderController {
                                 $mail->send();
                             }
                         } else {
-                            $this->view->errMessage .= "Поля нового пароля должны содержать одинаковые значения и не должны быть пустыми!" . '<br />';
+                            $this->messages->addError($this->view->translate("Поля нового пароля должны содержать одинаковые значения и не должны быть пустыми!"));
                         }
                         break;
                     default :

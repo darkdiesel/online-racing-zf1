@@ -4,13 +4,12 @@ class App_Controller_LoaderController extends Zend_Controller_Action {
 
     public function preDispatch()
     {
-	$this->messageManager = $this->_helper->getHelper('MessageManager');
+	$this->messages = $this->_helper->getHelper('MessageManager');
 	$this->db = $this->_helper->getHelper('DB');
     }
     
     public function init() {
         //setup global variables
-//        /$this->messageManager = $this->_helper->getHelper('MessageManager');
         
 
         // configure main menu

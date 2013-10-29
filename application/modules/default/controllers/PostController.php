@@ -21,7 +21,7 @@ class PostController extends App_Controller_LoaderController {
             $this->view->headTitle($post_data['title']);
             $this->view->pageTitle($post_data['title']);
         } else {
-            $this->messageManager->addError($this->view->translate('Запрашиваемый контент не существует!'));
+            $this->messages->addError($this->view->translate('Запрашиваемый контент не существует!'));
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
         }
@@ -46,7 +46,7 @@ class PostController extends App_Controller_LoaderController {
         if (count($paginator)) {
             $this->view->paginator = $paginator;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+            $this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
         }
     }
 
@@ -100,7 +100,7 @@ class PostController extends App_Controller_LoaderController {
 
                 $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $newPost->id), 'postId', true));
             } else {
-                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -116,7 +116,7 @@ class PostController extends App_Controller_LoaderController {
                 }
             endforeach;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
+            $this->messages->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
                     . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
@@ -132,7 +132,7 @@ class PostController extends App_Controller_LoaderController {
                 }
             endforeach;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
+            $this->messages->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
                     . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
         }
 
@@ -191,10 +191,10 @@ class PostController extends App_Controller_LoaderController {
                         $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true));
                     } else {
                         // if post type changed
-                        $this->messageManager->addError("{$this->view->translate('Функционал для смены типов статьи не готов.')}");
+                        $this->messages->addError("{$this->view->translate('Функционал для смены типов статьи не готов.')}");
                     }
                 } else {
-                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
@@ -210,7 +210,7 @@ class PostController extends App_Controller_LoaderController {
                     }
                 endforeach;
             } else {
-                $this->messageManager->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
+                $this->messages->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
                         . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
@@ -226,7 +226,7 @@ class PostController extends App_Controller_LoaderController {
                     }
                 endforeach;
             } else {
-                $this->messageManager->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
+                $this->messages->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
                         . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
@@ -245,7 +245,7 @@ class PostController extends App_Controller_LoaderController {
 
             $this->view->form = $form;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент не существует!')}");
+            $this->messages->addError("{$this->view->translate('Запрашиваемый контент не существует!')}");
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
         }
@@ -266,7 +266,7 @@ class PostController extends App_Controller_LoaderController {
             $this->view->headTitle($post_data->title);
             $this->view->pageTitle("{$this->view->translate('Удалить контент')} :: {$post_data->title}");
 
-            $this->messageManager->addWarning("{$this->view->translate('Вы действительно хотите удалить контент')} <strong>\"{$post_data->title}\"</strong> ?");
+            $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить контент')} <strong>\"{$post_data->title}\"</strong> ?");
 
             //create delete form
             $form = new Application_Form_Post_Delete();
@@ -295,18 +295,18 @@ class PostController extends App_Controller_LoaderController {
                     }
 
                     $this->view->showMessages()->clearMessages();
-                    $this->messageManager->addSuccess("{$this->view->translate("Статья <strong>\"{$post_data->title}\"</strong> успешно удалена")}");
+                    $this->messages->addSuccess("{$this->view->translate("Статья <strong>\"{$post_data->title}\"</strong> успешно удалена")}");
 
                     $this->redirect($this->view->url(array('controller' => 'post', 'action' => 'all', 'page' => 1), 'postAll', true));
                 } else {
-                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
             $this->view->post = $post_data;
             $this->view->form = $form;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
+            $this->messages->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
         }
@@ -334,12 +334,12 @@ class PostController extends App_Controller_LoaderController {
             if (count($paginator)) {
                 $this->view->paginator = $paginator;
             } else {
-                $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+                $this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
             }
 
             $this->view->post_type_name = $post_type_data;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Зарпашиваемый тип контента не существует!')}");
+            $this->messages->addError("{$this->view->translate('Зарпашиваемый тип контента не существует!')}");
 
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");

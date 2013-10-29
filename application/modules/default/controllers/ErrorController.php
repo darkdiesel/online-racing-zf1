@@ -17,10 +17,10 @@ class ErrorController extends App_Controller_LoaderController {
         if (!$errors || !$errors instanceof ArrayObject) {
             switch ($errors['type']) {
                 case "access_denied":
-		    $this->messageManager->addError($this->view->translate('Доступ запрещен!'));
+		    $this->messages->addError($this->view->translate('Доступ запрещен!'));
                     break;
                 default:
-		    $this->messageManager->addError($this->view->translate('You have reached the error page!'));
+		    $this->messages->addError($this->view->translate('You have reached the error page!'));
                     break;
             }
             return;

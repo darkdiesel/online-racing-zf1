@@ -50,7 +50,7 @@ class RaceController extends App_Controller_LoaderController {
                     $newRace->save();
                     $this->redirect($this->view->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'championshipRaceId', true));
                 } else {
-                    $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
@@ -66,13 +66,13 @@ class RaceController extends App_Controller_LoaderController {
                     $form->track->addMultiOption($track->id, $track->name);
                 endforeach;
             } else {
-                $this->messageManager->addError("{$this->view->translate('Трассы не найдены!')}"
+                $this->messages->addError("{$this->view->translate('Трассы не найдены!')}"
                         . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'track', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
             }
 
             $this->view->form = $form;
         } else {
-            $this->messageManager->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
+            $this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не найден!')}");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не найден!')}");
         }

@@ -19,7 +19,7 @@ class TrackController extends App_Controller_LoaderController {
             $this->view->headTitle($track_data->name);
             $this->view->pageTitle("{$this->view->translate('Трасса')} :: {$track_data->name}");
         } else {
-            $this->messageManager->addError("{$this->view->translate('Запрашиваемая трасса не существует!')}");
+            $this->messages->addError("{$this->view->translate('Запрашиваемая трасса не существует!')}");
             $this->view->headTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Трасса не существует!')");
             $this->view->pageTitle("{$this->view->translate('Ошибка!')} :: $this->view->translate('Трасса не существует!')");
         }
@@ -69,7 +69,7 @@ class TrackController extends App_Controller_LoaderController {
 
                 $this->redirect($this->view->url(array('controller' => 'track', 'action' => 'id', 'track_id' => $newTrack->id), 'track', true));
             } else {
-                $this->messageManager->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -84,7 +84,7 @@ class TrackController extends App_Controller_LoaderController {
     }
 
     public function allAction() {
-        $this->messageManager->addError("{$this->view->translate('" Все трассы" Функционал не доделан!')}");
+        $this->messages->addError("{$this->view->translate('" Все трассы" Функционал не доделан!')}");
         
         $this->view->headTitle($this->view->translate('Все трассы'));
         $this->view->pageTitle($this->view->translate('Все трассы'));
@@ -101,7 +101,7 @@ class TrackController extends App_Controller_LoaderController {
          if (count($paginator)){
             $this->view->paginator = $paginator;
         } else {
-            $this->messageManager->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+            $this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
         }
     }
     
