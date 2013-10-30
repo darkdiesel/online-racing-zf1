@@ -446,6 +446,11 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 		)
 	    ),
 	    array(
+		'label' => _('Блог'),
+		'title' => _('Блог'),
+		'uri' => 'http://onlineracingnet.blogspot.com/',
+	    ),
+	    array(
 		'label' => _('Форум'),
 		'title' => _('Форум'),
 		'uri' => 'http://f1orl.forum2x2.ru/',
