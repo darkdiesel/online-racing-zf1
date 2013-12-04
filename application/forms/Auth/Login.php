@@ -88,7 +88,7 @@ class Application_Form_Auth_Login extends Zend_Form {
 
 		$this->addElement('button', 'restore_pass', array(
 			'ignore' => true,
-			'class' => 'btn btn-link',
+			'class' => 'btn btn-danger',
 			'onClick' => "location.href='/user/restore-pass'",
 			'label' => $this->translate('Забыли пароль?'),
 			'decorators' => array(
