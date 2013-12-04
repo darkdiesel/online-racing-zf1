@@ -160,7 +160,7 @@ class UserController extends App_Controller_LoaderController {
                 $html = new Zend_View();
                 $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                 // e-mail template values for user
-                $restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pas'), 'default', true);
+                $restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true);
                 $html->assign('login', $form->getValue('email'));
                 $html->assign('content', 'Уважаемый пользователь вы или кто-то другой запрасили код для создания нового пароля.<br/>' .
                         'На <a href="' . $restore_url . '">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
@@ -176,7 +176,7 @@ class UserController extends App_Controller_LoaderController {
                 $mail->setBodyHtml($bodyText);
                 $mail->send();
 
-                $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pas'), 'default', true));
+                $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
             } else {
                 $this->messages->addError($this->view->translate('Исправте следующие ошибки для востановления пароля!'));
             }
@@ -241,7 +241,7 @@ class UserController extends App_Controller_LoaderController {
                     return $this->_helper->redirector('index', 'index');
                 } else {
                     $this->view->errMessage .= $this->view->translate('Введены неверные данные для создания нового пароля!') . '<br>'
-                            . '<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pas'), 'default', true) . '">' . $this->view->translate('Выслать данные еще раз?') . '</a></strong>';
+                            . '<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true) . '">' . $this->view->translate('Выслать данные еще раз?') . '</a></strong>';
                 }
             } else {
                 $this->view->errMessage .= $this->view->translate('Исправте ошибки для корректного создания пароля!');
