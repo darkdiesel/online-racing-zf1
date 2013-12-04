@@ -101,7 +101,7 @@ class AuthController extends App_Controller_LoaderController {
                         } else {
                             $form->populate($request->getPost());
                             $reg_url = $this->view->url(array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true);
-                            $rest_pass_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-passwd'), 'default', true);
+                            $rest_pass_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pas'), 'default', true);
                             $this->messages->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
                                     . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$rest_pass_url}\">{$this->view->translate('Забыли пароль?')}</a>"
                                     . " <a class=\"btn btn-danger btn-sm\" href=\"{$reg_url}\">{$this->view->translate('Зарегистрироваться?')}</a>");
@@ -129,7 +129,7 @@ class AuthController extends App_Controller_LoaderController {
                           default:
                           $form->populate($request->getPost());
                           $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
-                          $this->view->errMessage .= '<strong><a href="' . $this->view->baseUrl('user/restore-passwd') . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
+                          $this->view->errMessage .= '<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pas'), 'default', true) . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
                           . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
                           break;
                           } */
@@ -143,7 +143,7 @@ class AuthController extends App_Controller_LoaderController {
                         break;
                     case 'notFound':
                         $this->messages->addError("{$this->view->translate('Пользователь с этими данными не найден!')}"
-                                . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-passwd'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
+                                . "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'restore-pas'), 'default', true)}\">{$this->view->translate('Забыли пароль?')}</a>"
                                 . " <a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'user', 'action' => 'register'), 'default', true)}\">{$this->view->translate('Зарегистрироваться?')}</a>");
                         break;
                 }

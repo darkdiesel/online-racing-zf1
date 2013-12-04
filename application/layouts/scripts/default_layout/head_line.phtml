@@ -32,7 +32,7 @@
     			    </ul>
 			    <?php } else { ?> 
     			    <ul class="nav navbar-nav navbar-collapse navbar-right">
-    				<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
+    				<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
     				<button data-toggle="modal" href="#myModal" type="button" class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
     			    </ul>
 			    <?php } ?>
@@ -82,6 +82,7 @@
 		    $form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
 		    echo $form;
 		    ?>
+			<br/>
 		</div>
 		<div class="modal-footer">
 		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

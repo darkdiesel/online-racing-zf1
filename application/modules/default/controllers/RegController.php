@@ -1,6 +1,6 @@
 <?php
 
-class RegisterController extends App_Controller_LoaderController {
+class RegController extends App_Controller_LoaderController {
 
     public function init() {
         parent::init();
