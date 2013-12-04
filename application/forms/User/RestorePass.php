@@ -14,7 +14,7 @@ class Application_Form_User_RestorePass extends Zend_Form {
 				->setName('default-user-restore-pass');
 
 		$this->setAttribs(array(
-			'class' => 'block-item block-item-form block-item-form-w-320 block-align-center',
+			'class' => 'block-item block-item-form block-item-form-w-370 block-align-center',
 			'id' => 'default-user-restore-pass',
 		));
 		

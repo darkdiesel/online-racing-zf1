@@ -21,7 +21,7 @@ class RegController extends App_Controller_LoaderController {
         $this->view->headScript()->appendFile($this->view->baseUrl("js/jquery.validate.my.js"));
 
         $request = $this->getRequest();
-        $form = new Application_Form_Register_User();
+        $form = new Application_Form_Reg_User();
         $form->setAction(
                     $this->view->url(
                             array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true
