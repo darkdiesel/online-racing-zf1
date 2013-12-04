@@ -213,6 +213,12 @@ input[type="file"] {
 .block-item-form-w-270{
     width:270px;
 }
+.block-item-form-w-290{
+    width:290px;
+}
+.block-item-form-w-320{
+    width:320px;
+}
 .block-item-form-w-350{
     width:350px;
 }

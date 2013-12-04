@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_User_SetRestorePasswd extends Zend_Form {
+class Application_Form_User_SetRestorePass extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();

@@ -139,14 +139,14 @@ class UserController extends App_Controller_LoaderController {
         $this->view->form = $form;
     }
 
-    public function restorePasAction() {
+    public function restorePassAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');
         }
         $this->view->headTitle($this->view->translate('Восстановление пароля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_User_RestorePasswd();
+        $form = new Application_Form_User_RestorePass();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
@@ -185,7 +185,7 @@ class UserController extends App_Controller_LoaderController {
         $this->view->form = $form;
     }
 
-    public function setRestorePasAction() {
+    public function setRestorePassAction() {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');
         }
@@ -193,7 +193,7 @@ class UserController extends App_Controller_LoaderController {
         $this->view->headTitle($this->view->translate('Создание нового пароля'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_User_SetRestorePasswd();
+        $form = new Application_Form_User_SetRestorePass();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
