@@ -357,12 +357,17 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 
     public function getUsersByRoleName($role_name, $order) {
         $model = new self;
-        $user_role = new Application_Model_DbTable_UserRole();
-        $user_role_id = $user_role->getId($role_name);
+		/*
+		// get role_id by role_name
+		$role_db = new Application_Model_DbTable_Role();
+		$role_data = $role_db->getItem(array('name' => $role_name));
+		
+		//get users with role_id
+        $user_role_db = new Application_Model_DbTable_UserRole();
+        $user_role_data = $user_role_db->getItem(array('role_id' => $role_data->id));*/
 
         $select = $model->select()
                 ->from('user', 'id')
-                ->where('user_role_id = ?', $user_role_id)
                 ->columns(array('id', 'login', 'name', 'surname'))
                 ->order('surname ' . $order);
 

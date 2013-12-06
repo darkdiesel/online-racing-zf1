@@ -11,66 +11,71 @@ class Application_Model_DbTable_Role extends Zend_Db_Table_Abstract {
      */
 
     public function getItem($idencity = array(), $fields = array()) {
-        $model = new self;
-        $idencity_data = "";
+		$model = new self;
+		$idencity_data = "";
 
-        // idencity fields list
-        if (!count($idencity)) {
-            return FALSE;
-        } elseif (is_array($idencity)) {
-            foreach ($idencity as $field => $value) {
-                if ($idencity_data) {
-                    if (isset($value['condition'])) {
-                        if ($value['condition']) {
-                            $condition = $value['condition'];
-                        } else {
-                            $condition = "OR";
-                        }
-                    } else {
-                        $condition = "OR";
-                    }
+		// idencity fields list
+		if (!count($idencity)) {
+			return FALSE;
+		} elseif (is_array($idencity)) {
+			foreach ($idencity as $field => $value) {
+				if (is_array($value)) {
+					if (isset($value['condition'])) {
+						if ($value['condition']) {
+							$condition = $value['condition'];
+						} else {
+							$condition = "OR";
+						}
+					} else {
+						$condition = "OR";
+					}
+					$value = $value['value'];
+				} else {
+					$condition = "OR";
+				}
 
-                    $idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
-                } else {
-                    $idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value['value']);
-                }
-            }
-        } elseif (is_int($idencity) || is_string($idencity)) {
-            $idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
-        }
+				if ($idencity_data) {
+					$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
+				} else {
+					$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value);
+				}
+			}
+		} elseif (is_int($idencity) || is_string($idencity)) {
+			$idencity_data = sprintf("%s.id = '%s'", $this->db_href, $idencity);
+		}
 
-        // fields list
-        if ($fields) {
-            if (is_array($fields)) {
-                $fields = array_map('trim', $fields);
-            } elseif (is_string($fields)) {
-                if (strtolower($fields) == "all") {
-                    $fields = "*";
-                } else {
-                    $fields = array_map('trim', explode(",", $fields));
-                }
-            }
-        }
+		// fields list
+		if ($fields) {
+			if (is_array($fields)) {
+				$fields = array_map('trim', $fields);
+			} elseif (is_string($fields)) {
+				if (strtolower($fields) == "all") {
+					$fields = "*";
+				} else {
+					$fields = array_map('trim', explode(",", $fields));
+				}
+			}
+		}
 
-        $select = $model->select()
-                ->setIntegrityCheck(false)
-                ->from(array($this->db_href => $this->_name))
-                ->where($idencity_data);
+		$select = $model->select()
+				->setIntegrityCheck(false)
+				->from(array($this->db_href => $this->_name))
+				->where($idencity_data);
 
-        if ($fields) {
-            $select->columns($fields);
-        } else {
-            $select->columns("*");
-        }
+		if ($fields) {
+			$select->columns($fields);
+		} else {
+			$select->columns("*");
+		}
 
-        $resource = $model->fetchRow($select);
+		$resource = $model->fetchRow($select);
 
-        if (count($resource) != 0) {
-            return $resource;
-        } else {
-            return FALSE;
-        }
-    }
+		if (count($resource) != 0) {
+			return $resource;
+		} else {
+			return FALSE;
+		}
+	}
 
     /*
      * Function returns array of Items with $fields array of fields list.

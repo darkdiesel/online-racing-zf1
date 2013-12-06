@@ -36,7 +36,7 @@
 	echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship->league_id), $this->escape($this->championship->id));
 	?>
 	<div class="row">
-        <div class="block-item_content">
+        <div class="block-item-content">
     	    <div class="col-lg-4 col-lg-push-8">
     		<div class="thumbnail text-align-center">
 			<?php if ($this->championship->url_logo != '') {
@@ -121,7 +121,7 @@
 	    	    </div>
 	    	</div>
 	        </div>
-	        <div class="block-item_content">
+	        <div class="block-item-content">
 	    	<div class="championship_all_logo_wrapper_150_150 image_wrapper_150_150 pull-left overflow-hide">
 	    	    <img class="image_size_150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
 	    	</div>

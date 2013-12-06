@@ -167,7 +167,7 @@
         .teams_driver_info table tr td{
             vertical-align:middle;
         }
-.team_item .user_item{
+.team-item .user_item{
     width:310px;
     margin:0 7px;
 }

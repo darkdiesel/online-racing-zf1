@@ -194,8 +194,8 @@ class LeagueController extends App_Controller_LoaderController
 
     public function allAction()
     {
-	$this->view->headTitle($this->view->translate('Все Лиги'));
-	$this->view->pageTitle($this->view->translate('Все Лиги'));
+	$this->view->headTitle($this->view->translate('Лиги Портала'));
+	$this->view->pageTitle($this->view->translate('Лиги Портала'));
 
 	// pager settings
 	$page_count_items = 10;

@@ -146,7 +146,7 @@ class UserController extends App_Controller_LoaderController {
 		$this->view->headTitle($this->view->translate('Восстановление пароля'));
 		$this->view->pageTitle($this->view->translate('Восстановление пароля'));
 
-		$this->messages->addInfo($this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для востановления пароля.'));
+		$this->messages->addInfo($this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.'));
 
 		$request = $this->getRequest();
 		$form = new Application_Form_User_RestorePass();
@@ -166,16 +166,16 @@ class UserController extends App_Controller_LoaderController {
 				// e-mail template values for user
 				$restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true);
 				$html->assign('login', $form->getValue('email'));
-				$html->assign('content', 'Уважаемый пользователь вы или кто-то другой запрасили код для создания нового пароля.<br/>' .
+				$html->assign('content', 'Уважаемый пользователь, вы или кто-то другой запросили код для создания нового пароля.<br/>' .
 						'На <a href="' . $restore_url . '">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
 						'E-mail: <strong>' . $form->getValue('email') . '</strong><br/>' .
-						'Код востановления: <strong>' . $user_code_restore_pass . '</strong><br/>' .
-						'Если это не вы запросили новый пароль, то просто проигнорируйте это сообщение.');
+						'Код восстановления: <strong>' . $user_code_restore_pass . '</strong><br/>' .
+						'Если вы не запрашивали новый пароль, то просто проигнорируйте данное сообщение.');
 				// e-mail for user
 				$mail = new Zend_Mail('UTF-8');
 				$bodyText = $html->render('restore_passwd_template.phtml');
 				$mail->addTo($form->getValue('email'), $form->getValue('email'));
-				$mail->setSubject('Online-Racing.net - Код востановления пароля.');
+				$mail->setSubject('Online-Racing.net - Код для восстановления пароля.');
 				$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
 				$mail->setBodyHtml($bodyText);
 				$mail->send();
@@ -185,7 +185,7 @@ class UserController extends App_Controller_LoaderController {
 
 				$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
 			} else {
-				$this->messages->addError($this->view->translate('Исправте следующие ошибки для востановления пароля!'));
+				$this->messages->addError($this->view->translate('Исправте следующие ошибки для восстановления пароля!'));
 			}
 		}
 
@@ -201,7 +201,7 @@ class UserController extends App_Controller_LoaderController {
 		$this->view->pageTitle($this->view->translate('Создание нового пароля'));
 		
 		$this->messages->addInfo($this->view->translate('Введите данные, полученные на ваш регистрационный e-mail в форму ниже для создания нового пароля.'));
-		$this->messages->addInfo($this->view->translate('Если вы не получили письмо - проверьте письма из папки спам и пометьте его как "не смам".'));
+		$this->messages->addInfo($this->view->translate('Если вы не получали писем - проверьте папку спам на его наличия в ней и <strong>обозначте его как <u>"не смам"</u></strong>.'));
 
 		$request = $this->getRequest();
 		$form = new Application_Form_User_SetRestorePass();
@@ -225,10 +225,10 @@ class UserController extends App_Controller_LoaderController {
 					$html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
 					// e-mail template values for user
 					$html->assign('login', $user_data['email']);
-					$html->assign('content', 'Ваш пароль изменен. Приятного время провождения на нашем портале.');
+					$html->assign('content', 'Ваш пароль изменен. Приятного время на нашем портале. <br/> Да прибудем с Вами скорость! ©');
 					// e-mail for user
 					$mail = new Zend_Mail('UTF-8');
-					$bodyText = $html->render('set_restore_passwd_template.phtml');
+					$bodyText = $html->render('set_restore_pass_template.phtml');
 					$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
 					$mail->setSubject('Online-Racing.net - Ваш пароль изменен.');
 					$mail->addTo($user_data['email'], $user_data['email']);

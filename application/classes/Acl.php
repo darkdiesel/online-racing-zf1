@@ -188,7 +188,7 @@ class Acl extends Zend_Acl {
             $storage_data = Zend_Auth::getInstance()->getStorage()->read();
 
             $user_role_db = new Application_Model_DbTable_UserRole();
-            $role = $user_role_db->getItem(array('user_id', $storage_data->id))->role_name;
+            $role = $user_role_db->getItem(array('user_id' => $storage_data->id))->role_name;
         } else {
             $role = 'guest';
         }
@@ -206,7 +206,7 @@ class Acl extends Zend_Acl {
             $storage_data = Zend_Auth::getInstance()->getStorage()->read();
 
             $user_role_db = new Application_Model_DbTable_UserRole();
-            $role = $user_role_db->getItem(array('user_id', $storage_data->id))->role_name;
+            $role = $user_role_db->getItem(array('user_id' => $storage_data->id))->role_name;
         } else {
             $role = 'guest';
         }
