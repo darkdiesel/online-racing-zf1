@@ -4,7 +4,7 @@
 			<div class="col-lg-12">
 				<div class="clearfix">
 					<?php
-					echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->escape($team->championship_id), $this->escape($team->team_id));
+					
 					$team_url = $this->url(array('controller' => 'championship', 'action' => 'team', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($team->championship_id), 'team_id' => $this->escape($team->team_id)), 'championshipTeam', true);
 
 					$championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
@@ -13,7 +13,8 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="well well-sm block-item">
-								<div class="media">
+								<?php echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->escape($team->championship_id), $this->escape($team->team_id)); ?>
+								<div class="block-item-content media">
 									<?php if ($this->escape($team['url_logo']) != '') { ?>
 										<div class=" team_drivers_logo_wrapper_365 image_wrapper_150_150 overflow-hide pull-left">
 											<a href="<?php echo $team_url; ?>">
@@ -50,12 +51,10 @@
 										?>
 										<div class="team-driver-item block-item">
 											<?php
-											$driver_url = $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true);
-											?>
-											<div class="media well">
-												<?php
+												$driver_url = $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true);
 												echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
-												?>
+											?>
+											<div class="block-item-content media well">
 												<div class="team_drivers_logo_wrapper_70 image_wrapper_100 overflow-hide pull-left img-circle dp">
 													<a href="<?php echo $driver_url; ?>" target="_blank">
 														<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'media-object img-responsive', 100); ?>
