@@ -438,9 +438,8 @@ class ChampionshipController extends App_Controller_LoaderController {
 				if ($championship_team_data) {
 					$this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
 							->championship($league_id, $championship_id, $championship_data->name, '1')
-							->drivers($league_id, $championship_id)->championship_team(
-							$league_id, $championship_id, $team_id, $championship_team_data->name
-					);
+							->drivers($league_id, $championship_id)
+							->championship_team($league_id, $championship_id, $team_id, $championship_team_data->name);
 
 					//head title
 					$this->view->headTitle("{$this->view->translate('Команда')} :: {$championship_team_data->name}");

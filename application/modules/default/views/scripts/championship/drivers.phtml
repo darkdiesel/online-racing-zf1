@@ -16,7 +16,7 @@
 								<?php echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->escape($team->championship_id), $this->escape($team->team_id)); ?>
 								<div class="block-item-content media">
 									<?php if ($this->escape($team['url_logo']) != '') { ?>
-										<div class=" team_drivers_logo_wrapper_365 image_wrapper_150_150 overflow-hide pull-left">
+										<div class=" team_drivers_logo_wrapper_365 img-wrapper-150-150 overflow-hide pull-left">
 											<a href="<?php echo $team_url; ?>">
 												<img class="team_drivers_logo img-thumbnail img-responsive" src="<?php echo $this->escape($team['url_logo']); ?>">
 											</a>
@@ -33,7 +33,7 @@
 										</p>
 									</div>
 									<?php if ($this->escape($team['url_logo_car']) != '') { ?>
-										<div class=" team_drivers_logo_wrapper_365 image_wrapper_365 overflow-hide">
+										<div class=" team_drivers_logo_wrapper_365 img-wrapper-365 overflow-hide">
 											<a href="<?php echo $team_url; ?>">
 												<img class="team_drivers_logo img-thumbnail img-responsive" src="<?php echo $this->escape($team['url_logo_car']); ?>">
 											</a>
@@ -55,7 +55,7 @@
 												echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
 											?>
 											<div class="block-item-content media well">
-												<div class="team_drivers_logo_wrapper_70 image_wrapper_100 overflow-hide pull-left img-circle dp">
+												<div class="team_drivers_logo_wrapper_70 img-wrapper-100 overflow-hide pull-left img-circle dp">
 													<a href="<?php echo $driver_url; ?>" target="_blank">
 														<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'media-object img-responsive', 100); ?>
 													</a>
@@ -73,7 +73,7 @@
 													<h4 class="media-heading">
 														<a class="font-color-black" href="<?php echo $driver_url; ?>" target="_blank"><?php echo $user_name; ?></a> <small> <?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)</small></h4>
 													<hr style="margin:8px auto">
-													<span class="label"><img class="image_size_32 team_driver_flag" src="<?php echo $driver->country_url_image_round ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)"></span>
+													<span class="label"><img class="img-size-32 team_driver_flag" src="<?php echo $driver->country_url_image_round ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)"></span>
 													<span class="label label-default"><?php echo $this->translate('Номер') . ': ' . $driver->driver_number; ?></span>
 												</div>
 											</div>

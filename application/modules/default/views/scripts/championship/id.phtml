@@ -110,7 +110,7 @@
 		?>
 	        <div class="block-item_header">
 	    	<div class="block-item_title">
-	    	    <img class="image_size_40_40" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_round'])); ?>">
+	    	    <img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_round'])); ?>">
 	    	    <i class="icon-flag-checkered"></i>
 	    	    <a href="<?php echo $this->url(array('controller' => 'race', 'action' => 'id', 'championship_id' => $this->championship->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?></a>
 	    	</div>
@@ -122,8 +122,8 @@
 	    	</div>
 	        </div>
 	        <div class="block-item-content">
-	    	<div class="championship_all_logo_wrapper_150_150 image_wrapper_150_150 pull-left overflow-hide">
-	    	    <img class="image_size_150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
+	    	<div class="championship_all_logo_wrapper_150_150 img-wrapper-150-150 pull-left overflow-hide">
+	    	    <img class="img-size-150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
 	    	</div>
 	    	<div class="block-content-text">
 			<?php

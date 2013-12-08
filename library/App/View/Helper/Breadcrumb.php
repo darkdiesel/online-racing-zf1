@@ -98,7 +98,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => $post_title,
                 'title' => $post_title,
-                'uri' => $this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true),
                 'pages' => array()
             )
         );
@@ -112,7 +112,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => _('Контент сайта'),
                 'title' => _('Контент сайта'),
-                'uri' => $this->view->url(array('controller' => 'post', 'action' => 'all', 'page' => $page), 'postAll', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'post', 'action' => 'all', 'page' => $page), 'postAll', true),
                 'pages' => array()
             )
         );
@@ -126,7 +126,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => $user_login,
                 'title' => $user_login,
-                'uri' => $this->view->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user_id), 'userId', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user_id), 'userId', true),
                 'pages' => array()
             )
         );
@@ -140,7 +140,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => _('Гонщики'),
                 'title' => _('Гонщики'),
-                'uri' => $this->view->url(array('controller' => 'user', 'action' => 'all', 'page' => $page), 'userAll', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'user', 'action' => 'all', 'page' => $page), 'userAll', true),
                 'pages' => array()
             )
         );
@@ -154,7 +154,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => $team_name,
                 'title' => $team_name,
-                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'team-show', 'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'championship', 'action' => 'team', 'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id), 'championshipTeam', true),
                 'pages' => array()
             )
         );
@@ -168,7 +168,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => 'Гонщики',
                 'title' => 'Гонщики',
-                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'championship', 'action' => 'drivers', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true),
                 'pages' => array()
             )
         );
@@ -182,7 +182,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => $championship_name,
                 'title' => $championship_name,
-                'uri' => $this->view->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id, 'page' => $page), 'championshipId', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id, 'page' => $page), 'championshipId', true),
                 'pages' => array()
             )
         );
@@ -196,7 +196,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => $league_name,
                 'title' => $league_name,
-                'uri' => $this->view->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $league_id, 'page' => $page), 'leagueIdAll', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id, 'page' => $page), 'leagueIdAll', true),
                 'pages' => array()
             )
         );
@@ -210,7 +210,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
             array(
                 'label' => _('Все лиги'),
                 'title' => _('Все лиги'),
-                'uri' => $this->view->url(array('controller' => 'league', 'action' => 'all', 'page' => $page), 'leagueAll', true),
+                'uri' => $this->view->url(array('module'=> 'default', 'controller' => 'league', 'action' => 'all', 'page' => $page), 'leagueAll', true),
                 'pages' => array()
             )
         );

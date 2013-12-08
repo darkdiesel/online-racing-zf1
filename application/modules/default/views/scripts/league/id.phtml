@@ -10,7 +10,7 @@
 						<?php
 						if ($this->league->url_logo != '') {
 							?>
-							<div class="league_id_logo_wrapper_250 image_wrapper_250 overflow-hide">
+							<div class="league_id_logo_wrapper_250 img-wrapper-250 overflow-hide">
 								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->league->url_logo); ?>">
 							</div>
 						<?php } ?>
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<!-- Championship start -->
-	<div class="section-title"><?php echo $this->translate('Чемпионаты лиги') ?></div>
+	<div class="section-title m-b-15"><?php echo $this->translate('Чемпионаты лиги') ?></div>
 	<?php if (count($this->paginator)) { ?>
 		<?php foreach ($this->paginator as $championship): ?>
 			<div class="championship_item block-item">
@@ -83,7 +83,7 @@
 				</div>
 				<div class="block-item-content">
 					<?php if ($this->escape($championship['url_logo']) != '') { ?>
-						<div class="championship_all_logo_wrapper_200_200 image_wrapper_200_200 pull-left overflow-hide">
+						<div class="championship_all_logo_wrapper_200_200 img-wrapper-200-200 pull-left overflow-hide">
 							<img class="img-thumbnail img-responsive" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
 						</div>
 					<?php } ?>

@@ -1,5 +1,4 @@
 <?php if ($this->team_data) { ?>
-
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="team-item block-item">
@@ -9,12 +8,12 @@
 				<div class="block-item-content">
 					<div>
 						<?php if ($this->escape($this->team_data->url_logo_car)) { ?>
-							<div class=" text-align-center team_show_car_wrapper_700 image_wrapper_700 overflow-hide">
+							<div class=" text-align-center team_show_car_wrapper_700 img-wrapper-700 overflow-hide">
 								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
 							</div>
 						<?php } ?>
 						<?php if ($this->escape($this->team_data->url_logo) != '') { ?>
-							<div class="text-align-center team_show_logo_wrapper_210 image_wrapper_210_210 overflow-hide">
+							<div class="text-align-center team_show_logo_wrapper_210 img-wrapper-210-210 overflow-hide">
 								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
 							</div>
 						<?php } ?>
@@ -23,59 +22,59 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="page_title"><?php echo $this->translate('Состав команды') ?>:</div>
-
-	<div class="team-item block-item">
-
-		<div class="div_hr"></div>
+	<div class="section-title m-b-15"><?php echo $this->translate('Состав команды') ?>:</div>
+	<div class="row">
 		<?php
 		if ($this->team_driver_data) {
 			foreach ($this->team_driver_data as $driver):
 				?>
-				<div class="team_user_full_info_item block-item">
-					<?php
-					echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
-					?>
-					<div class="block-item_header">
-						<div class="block-item_title">
-							<span class="badge badge-warning team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
-							<i class="icon-user"></i>
-							<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
-								<?php echo $this->escape($driver->user_name) ?>
-								<?php echo $this->escape($driver->user_surname) ?>
-								(<?php echo $driver->country_abbreviation ?>)
-								<img class="image_size_40_40" src="<?php echo $driver->country_url_image_glossy_wave ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
-							</a>
-						</div>
-						<div class="block-item_info_header">
-							<div class="content_category block-item_info_header_item">
-								<span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-								<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'all', 'page' => '1'), 'userAll', true) ?>" target="_blank"><?php echo $this->translate('Гонщики'); ?></a>
+				<div class="col-lg-12">
+					<div class="team-driver-item block-item ">
+						<?php
+						$user_name = "";
+						if (isset($driver->user_name) && !empty($driver->user_name)) {
+							$user_name .= $this->escape($driver->user_name) . " ";
+						}
+						if (isset($driver->user_surname) && !empty($driver->user_surname)) {
+							$user_name .= $this->escape($driver->user_surname);
+						}
+						?>
+						<?php
+						echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
+						?>
+						<div class="block-item-content">
+							<div class="media">
+								<div class="team-driver-img img-wrapper-200-200 overflow-hide pull-left">
+									<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
+										<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'img-thumbnail img-rounded img-responsive', 200); ?>
+									</a>
+								</div>
+								<div class="media-body">
+									<h4 class="media-heading">
+										<a class="font-color-black" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
+											<?php echo $user_name; ?>
+										</a>
+									</h4>
+									<blockquote>
+										<img class="img-size-40-40 pull-left m-r-15" src="<?php echo $driver->country_url_image_glossy_wave ?>" title="<?php echo $driver->country_native_name ?> (<?php echo $driver->country_english_name ?>)">
+										<small> <?php echo $driver->country_native_name . ' (' . $driver->country_english_name . ')'; ?> <i class="glyphicon glyphicon-map-marker"></i></small>
+									</blockquote>
+									<hr style="margin:8px auto">
+									<span class="label label-warning"><?php echo $this->translate('Номер') . ': ' . $driver->driver_number; ?></span>
+									<span class="label label-info"><i class="glyphicon glyphicon-gift"></i> <?php echo $driver->user_birthday; ?></span>
+									<div class="m-t-10">
+										<strong><?php echo $this->translate('О гонщике'); ?></strong>
+										<table class="table table-condensed table-responsive table-user-information">
+											<tbody>
+												<tr>
+													<td><?php echo $this->translate("Ник-нэйм"); ?>:</td>
+													<td><?php echo $this->escape($driver->user_login) ?></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="block-item-content">
-						<div class="img-thumbnail team_drivers_logo_wrapper_200 image_wrapper_200 overflow-hide pull-left">
-							<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
-								<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'image_size_200', 200); ?>
-							</a>
-						</div>
-						<div class="teams_driver_info no_width block-content-text">
-							<table class="table table-condensed">
-								<tr>
-									<td><span class="bold_text"><?php echo $this->translate("Имя"); ?>: </span></td>
-									<td><?php echo $this->escape($driver->user_name) ?></td>
-								</tr>
-								<tr>
-									<td><span class="bold_text"><?php echo $this->translate("Фамилия"); ?>: </span></td>
-									<td><?php echo $this->escape($driver->user_surname) ?></td>
-								</tr>
-								<tr>
-									<td><span class="bold_text"><?php echo $this->translate("Ник-нэйм"); ?>: </span></td>
-									<td><?php echo $this->escape($driver->user_login) ?></td>
-								</tr>
-							</table>
 						</div>
 					</div>
 				</div>
