@@ -396,9 +396,10 @@
             width:90px;
         }
 /* breadcrumb bootstrap3 */
-.breadcrumb{
-    margin:0;
-}
+.breadcrumb{margin:0;font-size:12px;padding:8px 10px;}
+.breadcrumb li{color:#6D6D6D;}
+.breadcrumb li a{color:#E00000;}
+
 /* pagination bootstrap3 */
 .block-item .pagination{
     margin:20px;
