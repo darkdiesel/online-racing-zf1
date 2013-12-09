@@ -108,6 +108,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	// [BOOTSTRAP library]
 	$view->headLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
 	$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
+
+	// [SNOW FALL]
+	$view->headScript()->appendFile("/library/JQuery-Snowfall/snowfall.min.jquery.js");
 	
 	$view->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
 
@@ -115,8 +118,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	$view->headLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css");
 	$view->headLink()->appendStylesheet("/library/bootstrap-glyphicons-gh-pages/css/bootstrap-glyphicons.css");
 	
-	//$view->headScript()->appendFile("/library/imsky-holder/holder.js");
-
 	// [GOOGLE FONTS]
 	$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
 	//$view->headLink()->appendStylesheet("/library/google-fonts/Faster+One.css", "screen, print");
