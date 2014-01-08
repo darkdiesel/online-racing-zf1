@@ -42,13 +42,13 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract
 	/* [FOOTER] */
 	$view->ft_menu = true; // footer menu
 	$view->ft_socialNetworks_block = true; // footer social networks block
-	$view->ft_user_counters_block = true; // user counters block
+	$view->ft_web_counters_block = true; // user counters block
 
 	/* [FOOTER COUNTER] */
-	$view->uc_live_internet_block = true; // liveinternet user counter block
-	$view->uc_mail_ru_block = true; // mail.ru user counter block
-	$view->uc_rambler100_block = true; // rambler 100 user counter block
-	$view->uc_yandex_block = true; // yandex user counter block
+	$view->wc_live_internet_block = true; // liveinternet user counter block
+	$view->wc_mail_ru_block = true; // mail.ru user counter block
+	$view->wc_rambler100_block = true; // rambler 100 user counter block
+	$view->wc_yandex_block = true; // yandex user counter block
 
 	$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 

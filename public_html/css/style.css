@@ -139,41 +139,20 @@ body iframe{
 .soc_buttons a {
     display: block;
 }
-div.shareblock{
-    position: absolute;
-    right:-20px;
-    top:-15px;
-    opacity:0.5;
-}
-div.shareblock #shareblock{
-    background:#F0F0F0;
-    padding:10px;
-    border-radius:10px;
-    border:2px solid #706E88;
-}
-div.shareblock #shareblock a{
-    border:3px solid #BCBBBB;
-    border-radius:10px;
 
-}
-div.shareblock #shareblock:hover a{
-    opacity:0.5;
-}
-div.shareblock #shareblock a:hover{
-    opacity:1;
-}
+
+/* Old styles for share block */
+div.shareblock{position: absolute; right:-20px; top:-15px; opacity:0.5;}
+div.shareblock #shareblock{background:#F0F0F0; padding:10px; border-radius:10px; border:2px solid #706E88;}
+div.shareblock #shareblock a{border:3px solid #BCBBBB; border-radius:10px;}
+div.shareblock #shareblock:hover a{opacity:0.5;}
+div.shareblock #shareblock a:hover{opacity:1;}
+
 /* RSS Block */
-#rss_block{
-
-}
-#rss_block .rss_description{
-    clear:both;
-}
-#rss_block p{
-
-}
-#rss_block img{
-    float:left;
+#rss_block{}
+#rss_block .rss_description{clear:both;}
+#rss_block p{}
+#rss_block img{    float:left;
     margin-right:10px;
     border:1px solid #D2D2D2;
     border-radius:2px;
@@ -237,8 +216,6 @@ label.valid {
 .no_width{
     width:auto!important;
 }
-
-
 /* margins */
 .m-t-0{margin-top:0;}
 .m-b-0{margin-bottom:0;}

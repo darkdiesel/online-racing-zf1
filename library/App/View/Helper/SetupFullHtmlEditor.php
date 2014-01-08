@@ -14,7 +14,7 @@ class App_View_Helper_SetupFullHtmlEditor extends Zend_View_Helper_Abstract {
               [ 'Link', 'Unlink', 'Image', 'Smiley', 'SpecialChar', 'oembed' ],
               '/',
               [ 'Bold', 'Italic', 'Underline', '-', 'RemoveFormat' ],
-              [ 'FontSize' ],
+              [ 'Font', 'FontSize' ],
               [ 'TextColor' ],
               [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ],
               [ 'Maximize' ],
