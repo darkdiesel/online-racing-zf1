@@ -1,87 +1,7 @@
-html, body {
-    margin:0;
-    padding:0;
-}
-body{
-    
-}
 body iframe{
     display:inline;
 }
-#page_wrapper{
-    min-height: 100%;
-    position:relative;
-    padding:0;
-}
-#page{
-    padding-bottom: 200px;
-}
-#headline{
-    top:0;
-    left:0;
-    right:0;
-    margin-bottom:0;
-    z-index:1030;
-    position:fixed;
-    height:60px;
-    background-color:#1B1B1B;
-    background-image:linear-gradient(to bottom, #4B4B4B, #0B0B0B);
-    border-bottom:2px solid #4A4A4A;
-}
-#head-line{
-    margin:0 0 20px 0;
-}
-#headline_wraper{
-    width:1024px;
-    height:100%;
-    margin:0 auto;
-    position:relative;
-}
-#header{
-    position:relative;
-    margin:0 auto;
-}
-#site_logo{
-    position:absolute;
-    padding:0;
-    left:0;
-    top:0;
-}
-#site_logo a{
-    text-decoration:none;
-}
-#site_logo a img{
-    float:left;
-    margin-right:10px;
-}
-#site_logo .logo_title{
-    font-family:'Faster One';
-    color:#fff;
-    font-size:27px;
-    display:none;
-}
-#site_logo .logo_title .logo_title_red{
-    color:#881B1B;
-}
-#site_logo .logo_title .logo_title_subline{
-    font-size:17px;
-    display:block;
-    text-align:center;
-}
-#box_main_menu{
-    border:2px solid #292929;
-    position:relative;
-    margin:0 auto;
-}
-#box_main_menu div.navbar{
-    margin:0;
-}
-#box_main_menu div.navbar .nav > li > a {
-    text-transform:uppercase;
-    letter-spacing:0;
-    font:bold 13px arial;
-    line-height:20px;
-}
+
 #moving_text{
     background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
     border:2px solid #292929;
@@ -127,37 +47,8 @@ body iframe{
 #moving_text marquee .header_news li a:hover{
     text-decoration:none;
 }
-#main_wrapper{
-    position:relative;
-    padding:0;
-    margin-top:20px;
-}
-#main{
-    
-}
-#sidebar-left .sidebar_box{
-    margin:0px 0 1px 0;
-}
 
-#sidebar-left .sidebar_box .sidebar_box_title, #sidebar-left .sidebar_box .sidebar_box_title > a{
-    font-family:Verdana;
-    font-size:12px;
-    font-weight:bold;
-    color:#707070;
-}
-#sidebar-left .sidebar_box .sidebar_box_title{
-    color:#707070;
-    font-size:14px;
-    font-weight:bold;
-    line-height:16px;
-    padding:20px 0;
-}
-#sidebar-left .sidebar_box .sidebar_box_title i{
-}
-#sidebar-left .sidebar_box .sidebar_box_content{
-    padding:3px 3px;
-    overflow:hidden;
-}
+
 /*countdown_dashboard*/
 #sidebar-left #countdown_dashboard{
     overflow:hidden;
@@ -206,88 +97,9 @@ body iframe{
     -moz-transition:1s;
     transition:1s;
 }
-#footer{
-    border-top:2px solid #8C8C8C;
-    height:200px;
-    position:absolute;
-    bottom:0;
-    background:#1B1B1B;
-    background-image:linear-gradient(to bottom, #222222, #111111);
-    margin:0 auto;
-    display:inline;
-    clear:both;
-    padding:15px 15px 10px 15px;
-    color:#6C6A6A;
-    font-size:11px;
-    width:100%;
-}
-#footer .footer_box{
-    position:relative;
-    height:120px;
-    margin-bottom:10px;
-}
-#footer .footer-left{
-    font-size:12px;
-    
-}
-#footer .footer-center{
-    color:#5C5656;
-}
-#footer .footer-right{
-    
-}
-#footer_menu{
-    display:inline-block;
-    margin: 0 auto;
-    overflow:hidden;
-}
-#footer_menu li{
-    float:left;
-    list-style-type:none;
-    margin-right:15px;
-    margin-left:-2px;
-}
-#footer_menu li:before{
-    content:"|";
-    margin-right:12px;
-    line-height: 15px;
-}
-#footer_menu li a{
-    font-size:13px;
-    font-family:sans-serif;
-    color:#6C6A6A;
-}
-#footer_menu li a:hover{
-    text-decoration:underline;
-    color:#968F8F;
-}
-#footer .web_counters{
-    position:absolute;
-    right:0px;
-    display:inline-block;
-}
-#footer .web_counters img{
-    opacity:0.4;
-}
-#footer .web_counters img:hover{
-    opacity:1;
-}
-#footer .web_counters .liveinternet{
-    display:inline-block;
-    margin:0 5px;
-}
-#footer .web_counters .rambler100{
-    display:inline-block;
-    margin:0 5px;
-}
-#footer .web_counters .yandex{
-    display:inline-block;
-    margin:0 5px;
-}
-#footer .web_counters .mail_ru{
-    display:inline-block;
-    margin:0 5px;
-}
+
+
+
 #footer .copyright{
     font-family:monospace;
     text-align:left;
@@ -306,12 +118,6 @@ body iframe{
     padding:5px 20px;
     font-size:13px;
     color:#6C6A6A;
-}
-.footer-container{
-    border:1px solid #0E0E0E;
-    border-radius:5px;
-    background:rgba(113, 113, 113, 0.15);
-    padding:4px;
 }
 #footer-social{
     

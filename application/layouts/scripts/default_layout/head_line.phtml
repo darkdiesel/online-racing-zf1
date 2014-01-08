@@ -1,93 +1,95 @@
 <div id="head-line">
     <div id="top-navbar" class="navbar-static-top">
-	<div class="container">
-	    <div class="row">
-		<div class="col-lg-12">
-		    <div class="navbar navbar-default"  role="navigation">
-			<div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			    </button>
-			    <a class="navbar-brand" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>"><img src="/img/winter/santa_hat.png" />ONLINE-RACING.NET</a>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-			    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-				<?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
-    			    <ul class="nav navbar-nav navbar-right">
-    				<li class="dropdown">
-    				    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?> <b class="caret"></b></a>
-    				    <ul class="dropdown-menu">
-    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
-    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
-    					<li><a href="<?php echo$this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
-    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
-    					<li class="divider"></li>
-    					<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
-    				    </ul>
-    				</li>
-    			    </ul>
-			    <?php } else { ?> 
-    			    <ul class="nav navbar-nav navbar-collapse navbar-right">
-    				<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
-    				<button data-toggle="modal" href="#myModal" type="button" class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
-    			    </ul>
-			    <?php } ?>
-			    <form class="navbar-form navbar-right" action="" role="search">
-				<div class="form-group">
-				    <input type="text" class="form-control" placeholder="<?php echo $this->translate('Поиск'); ?>">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="navbar navbar-default"  role="navigation">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>"><img src="/img/winter/santa_hat.png" />ONLINE-RACING.NET</a>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse navbar-ex1-collapse">
+							<?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+								<?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?> <b class="caret"></b></a>
+										<ul class="dropdown-menu">
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
+											<li><a href="<?php echo$this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
+											<li class="divider"></li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
+										</ul>
+									</li>
+								</ul>
+							<?php } else { ?> 
+								<ul class="nav navbar-nav navbar-collapse navbar-right">
+									<li>
+										<form class="navbar-form" action="#" role="search">
+											<div class="form-group">
+												<input type="text" class="form-control" placeholder="<?php echo $this->translate('Поиск'); ?>">
+											</div>
+											<button type="submit" class="btn btn-default"><?php echo $this->translate('Поиск'); ?></button>
+										</form>
+									</li>
+									<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
+									<button data-toggle="modal" href="#myModal" type="button" class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
+								</ul>
+							<?php } ?>
+						</div><!-- /.navbar-collapse -->
+					</div>
 				</div>
-				<button type="submit" class="btn btn-default"><?php echo $this->translate('Поиск'); ?></button>
-			    </form>
-			</div><!-- /.navbar-collapse -->
-		    </div>
+			</div>
 		</div>
-	    </div>
-	</div>
     </div>
     <div id="sub-navbar" class="navbar-static-top">
-	<div class="container">
-	    <div class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex2-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		    </button>
+		<div class="container">
+			<div class="navbar navbar-default" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse navbar-ex2-collapse">
+					<?php
+					$partial = array('menu_layout/main_menu.phtml', 'default');
+					$this->navigation()->menu($this->main_menu)->setPartial($partial);
+					echo $this->navigation()->menu()->render();
+					?>
+				</div>
+			</div>
 		</div>
-		<div class="collapse navbar-collapse navbar-ex2-collapse">
-		    <?php
-		    $partial = array('menu_layout/main_menu.phtml', 'default');
-		    $this->navigation()->menu($this->main_menu)->setPartial($partial);
-		    echo $this->navigation()->menu()->render();
-		    ?>
-		</div>
-	    </div>
-	</div>
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-	    <div class="modal-content">
-		<div class="modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		    <h4 class="modal-title"><?php echo $this->translate("Авторизация") ?></h4>
-		</div>
-		<div class="modal-body">
-		    <?php
-		    $form = new Application_Form_Auth_Login();
-		    $form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
-		    echo $form;
-		    ?>
-			<br/>
-		</div>
-		<div class="modal-footer">
-		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-	    </div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title"><?php echo $this->translate("Авторизация") ?></h4>
+				</div>
+				<div class="modal-body">
+					<?php
+					$form = new Application_Form_Auth_Login();
+					$form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?returnUrl={$this->url()}");
+					echo $form;
+					?>
+					<br/>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 </div>

@@ -1,44 +1,44 @@
 <div id="footer">
     <div class="container">
-	<div class="row">
-	    <div class="col-lg-3 footer-left footer-container">
-		<div class="footer_logo block-align-center text-align-center">
-		    <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true) ?>"><img src="<?php echo $this->baseUrl('img/logo_190.png'); ?>" alt="<?php echo $this->translate('Online-Racing.net') ?>"></a>
+		<div class="row">
+			<div class="col-lg-3">
+				<div class="footer_logo block-align-center text-align-center">
+					<a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true) ?>"><img src="<?php echo $this->baseUrl('img/logo_190.png'); ?>" alt="<?php echo $this->translate('Online-Racing.net') ?>"></a>
+				</div>
+				<div class="block-align-center text-align-center"><?php echo $this->translate('Online-Racing.Net') ?></div>
+			</div>
+			<div class="col-lg-6">
+				<?php
+				if ($this->ft_menu) {
+					echo $this->render("default_layout/footer/ft_menu.phtml");
+				}
+				?>
+			</div>
+			<div class="col-lg-3">
+				<div class="socialNetworks_slogan block-align-center text-align-center">
+					<?php echo $this->translate('Наши ссылки в социальных сетях') ?>:
+				</div>
+				<?php
+				if ($this->ft_socialNetworks_block) {
+					echo $this->render("default_layout/footer/ft_socialNetworks_block.phtml");
+				}
+				?>
+			</div>
 		</div>
-		<div class="block-align-center text-align-center"><?php echo $this->translate('Online-Racing.Net') ?></div>
-	    </div>
-	    <div class="col-lg-6 footer-center footer-container">
-		<?php
-		if ($this->ft_menu) {
-		    echo $this->render("default_layout/footer/ft_menu.phtml");
-		}
-		?>
-	    </div>
-	    <div class="col-lg-3 footer-right footer-container">
-		<div class="socialNetworks_slogan block-align-center text-align-center">
-		    <?php echo $this->translate('Наши ссылки в социальных сетях') ?>:
+		<hr>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="copyright block-align-center text-align-center">
+					<?php echo $this->translate('Версия сайта') ?> 0.15.0b<br>
+					2012-2014 © Online-Racing.net
+				</div>
+				<?php
+				if ($this->ft_user_counters_block) {
+					echo $this->render("default_layout/footer/ft_web_counters_block.phtml");
+				}
+				?>
+			</div>
 		</div>
-		<?php
-		if ($this->ft_socialNetworks_block) {
-		    echo $this->render("default_layout/footer/ft_socialNetworks_block.phtml");
-		}
-		?>
-	    </div>
-	</div>
-	<hr>
-	<div class="row">
-	    <div class="col-lg-12">
-		<div class="copyright block-align-center text-align-center">
-		    <?php echo $this->translate('Версия сайта') ?> 0.15.0b<br>
-		    2012-2013 © Online-Racing.net
-		</div>
-		<?php
-		if ($this->ft_user_counters_block) {
-		    echo $this->render("default_layout/footer/ft_user_counters_block.phtml");
-		}
-		?>
-	    </div>
-	</div>
-	<div class="clearfix"></div>
+		<div class="clearfix"></div>
     </div>
 </div>
