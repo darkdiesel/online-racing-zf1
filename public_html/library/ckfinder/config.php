@@ -30,7 +30,7 @@ function CheckAuthentication()
 	// user logs in your system. To be able to use session variables don't
 	// forget to add session_start() at the top of this file.
 
-	return false;
+	return true;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
@@ -60,7 +60,7 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseUrl = '/data-content/';
+$baseUrl = 'http://online-racing/data-content/';
 
 /*
 $baseDir : the path to the local directory (in the server) which points to the
@@ -202,8 +202,24 @@ $config['ResourceType'][] = Array(
 
 $config['ResourceType'][] = Array(
 		'name' => 'Images',
-		'url' => $baseUrl . 'images',
-		'directory' => $baseDir . 'images',
+		'url' => $baseUrl . 'img',
+		'directory' => $baseDir . 'img',
+		'maxSize' => 0,
+		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
+		'deniedExtensions' => '');
+
+$config['ResourceType'][] = Array(
+		'name' => 'temp Content',
+		'url' => $baseUrl . '../img',
+		'directory' => $baseDir . '../img',
+		'maxSize' => 0,
+		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
+		'deniedExtensions' => '');
+
+$config['ResourceType'][] = Array(
+		'name' => 'Data-Uploads',
+		'url' => $baseUrl . 'data-uploads',
+		'directory' => $baseDir . 'data-uploads',
 		'maxSize' => 0,
 		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
 		'deniedExtensions' => '');
