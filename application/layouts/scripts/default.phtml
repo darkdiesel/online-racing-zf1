@@ -1,103 +1,91 @@
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-	<?php echo $this->headTitle() ?>
-	<?php echo $this->headMeta() ?>
-	<?php echo $this->headLink() ?>
-	<?php echo $this->headStyle() ?>
-	<?php echo $this->minifyHeadLink() ?>
-	<?php echo $this->headScript() ?>
-	<?php //echo $this->minifyHeadScript() ?>
+		<?php echo $this->headTitle() ?>
+		<?php echo $this->headMeta() ?>
+		<?php echo $this->headLink() ?>
+		<?php echo $this->headStyle() ?>
+		<?php echo $this->minifyHeadLink() ?>
+		<?php echo $this->headScript() ?>
+		<?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
         <!-- Head-Line -->
-	<?php echo $this->render("default_layout/head_line.phtml"); ?>
+		<?php echo $this->render("default_layout/head_line.phtml"); ?>
         <div id="page_wrapper">
             <div id="page">
-		<div id="header" class="container">
-		    <div class="row">
-			<?php echo $this->render("default_layout/header.phtml") ?>
-		    </div>
-		</div>
+				<div id="header" class="container">
+					<div class="row">
+						<?php echo $this->render("default_layout/header.phtml") ?>
+					</div>
+				</div>
                 <div id="main_wrapper" class="container">
                     <div id="main" class="row clearfix">
                         <!-- Content -->
                         <div class="col-lg-9 col-lg-push-3">
-			    <div id="content">
-				<?php
-				$breadcrumb = Zend_Registry::get('breadcrumb');
-				$page_title = $this->pageTitle();
-				
-				if ($breadcrumb['show']) {
-				    $breadcrumb_data = $this->render("default_layout/breadcrumb.phtml");
-				}
-				
-				if ($page_title != "" || (isset($breadcrumb_data))) : ?>
-    				<div id="page_title_wrapper" class="block-item">
-					<?php if ($this->pageTitle() != ""): ?>
-					    <div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
-					<?php endif; ?>
-					<?php
-					if ($breadcrumb['show']) {
-					    echo $breadcrumb_data;
-					}
-					?>
-    				</div>
-				<?php endif; ?>
-				<?php echo $this->showMessages(); ?>
-				<div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
-				    <div class="page_content">
-					<?php echo $this->layout()->content ?>
-				    </div>
-				</div>
-			    </div>
-			</div>
-			<!-- Left sidebar -->
-			<div class="col-lg-3 col-lg-pull-9">
-			    <div id="sidebar-left" class="block-item">
-				<?php echo $this->render("default_layout/left_sidebar.phtml") ?>
-			    </div>
-			</div>
+							<div id="content">
+								<?php
+								$breadcrumb = Zend_Registry::get('breadcrumb');
+								$page_title = $this->pageTitle();
+
+								if ($breadcrumb['show']) {
+									$breadcrumb_data = $this->render("default_layout/breadcrumb.phtml");
+								}
+
+								if ($page_title != "" || (isset($breadcrumb_data))) :
+									?>
+									<div id="page_title_wrapper" class="block-item">
+										<?php if ($this->pageTitle() != ""): ?>
+											<div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
+										<?php endif; ?>
+										<?php
+										if ($breadcrumb['show']) {
+											echo $breadcrumb_data;
+										}
+										?>
+									</div>
+								<?php endif; ?>
+								<?php echo $this->showMessages(); ?>
+								<div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
+									<div class="page_content">
+										<?php echo $this->layout()->content ?>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Left sidebar -->
+						<div class="col-lg-3 col-lg-pull-9">
+							<div id="sidebar-left" class="block-item">
+								<?php echo $this->render("default_layout/left_sidebar.phtml") ?>
+							</div>
+						</div>
                     </div>
                 </div>
-		<?php echo $this->render("default_layout/footer.phtml") ?>
+				<?php echo $this->render("default_layout/footer.phtml") ?>
             </div>
-	    <?php
-	    if ($this->back_to_top_btn) {
-		echo $this->render("common_blocks/back_to_top_btn.phtml");
-	    }
-	    ?>
-	    <?php
-	    if ($this->share_block) {
-		echo $this->render("common_blocks/share_block.phtml");
-	    }
-	    ?>
+			<?php
+			if ($this->back_to_top_btn) {
+				echo $this->render("common_blocks/back_to_top_btn.phtml");
+			}
+			?>
+			<?php
+			if ($this->share_block) {
+				echo $this->render("common_blocks/share_block.phtml");
+			}
+			?>
 
         </div>
-	<?php
-	if ($this->page_scroller_block) {
-	    echo $this->render("common_blocks/page_scroller_block.phtml");
-	}
-	?>
-	<?php
-	if ($this->slide_out_tabs_block) {
-	    echo $this->render("default_layout/blocks/slide_out_tabs_block.phtml");
-	}
-	?>
-	<div id="background-wrapper"></div>
-        <script type="text/javascript">
-	    var _gaq = _gaq || [];
-	    _gaq.push(['_setAccount', 'UA-32674101-2']);
-	    _gaq.push(['_trackPageview']);
-
-	    (function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	    })();
-        </script>
+		<?php
+		if ($this->page_scroller_block) {
+			echo $this->render("common_blocks/page_scroller_block.phtml");
+		}
+		?>
+		<?php
+		if ($this->slide_out_tabs_block) {
+			echo $this->render("default_layout/blocks/slide_out_tabs_block.phtml");
+		}
+		?>
+		<div id="background-wrapper"></div>
+		<?php echo $this->render("analyticstracking.phtml") ?>
     </body>
 </html>
