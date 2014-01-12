@@ -20,26 +20,29 @@ class AuthController extends App_Controller_LoaderController {
 
 		$request = $this->getRequest();
 		$form = new Application_Form_Auth_Login();
+		
+		echo "redirectTo: ".$request->getParam('rediretcTo');
+		echo "<pre>";
+		print_r($request->getParam('rediretcTo'));
+		echo "</pre>";
+		echo "<pre>";
+		print_r($request->getParams());
+		echo "</pre>";
+		$redirectToUrl = $request->getParams()['rediretcTo'];
 
-
-		if (!$request->getParam('returnUrl')) {
-			$user_url = $this->_helper->getHelper('UserServerData')->GetPreviousPage();
+		if (empty($redirectToUrl)) {
+			$redirectToUrl = $this->_helper->getHelper('UserServerData')->GetPreviousPage();
 
 			$config = Zend_Registry::get('config');
 
-			if (parse_url($user_url, PHP_URL_HOST) == parse_url($config->resources->frontController->baseUrl, PHP_URL_HOST)) {
-				$redirect_url = "?returnUrl=" . $user_url;
+			if (parse_url($redirectToUrl, PHP_URL_HOST) == parse_url($config->resources->frontController->baseUrl, PHP_URL_HOST)) {
+				$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)."?redirectTo=" . $redirectToUrl);
 			} else {
-				$redirect_url = "?returnUrl={$this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}";
+				$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true));
 			}
-
-			$form->setAction("{$this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}$redirect_url");
+			
 		} else {
-			$form->setAction(
-					$this->view->url(
-							array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true
-					)
-			);
+			$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)."?redirectTo=" . $redirectToUrl);
 		}
 
 		if ($this->getRequest()->isPost()) {
@@ -97,7 +100,7 @@ class AuthController extends App_Controller_LoaderController {
 							$this->view->showMessages()->clearMessages();
 							$this->messages->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
 
-							$this->redirect($request->getParam('returnUrl'));
+							$this->redirect($request->getParam('redirectTo'));
 						} else {
 							$form->populate($request->getPost());
 							$reg_url = $this->view->url(array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true);
@@ -154,12 +157,24 @@ class AuthController extends App_Controller_LoaderController {
 		$this->view->form = $form;
 	}
 
+	/**
+	 * function logoutAction
+	 * 	@todo Переделать перенаправление на предыдущую страницу после того как пользователь вылогинился
+	 */
 	public function logoutAction() {
 		Zend_Auth::getInstance()->clearIdentity();
 		Zend_Session::forgetMe();
 		Zend_Session::expireSessionCookie();
+
+		$ckFinderSession = new Zend_Session_Namespace('CKFinder');
+		/** Disable CKFinder * */
+		$ckFinderSession->allowed = false;
+
+		// Disable layout
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
+
+		// Redirect to main page
 		$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 	}
 

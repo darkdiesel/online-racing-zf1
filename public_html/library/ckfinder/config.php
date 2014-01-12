@@ -1,4 +1,5 @@
 <?php
+session_start();
 /*
  * ### CKFinder : Configuration File - Basic Instructions
  *
@@ -30,7 +31,14 @@ function CheckAuthentication()
 	// user logs in your system. To be able to use session variables don't
 	// forget to add session_start() at the top of this file.
 
-	return true;
+	if (empty($_SESSION['CKFinder']['allowed'])) {
+	   return false;
+	} else {
+	   if ($_SESSION['CKFinder']['allowed']) {
+	       return true;
+	   }
+	}
+	return false;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
@@ -196,7 +204,7 @@ $config['ResourceType'][] = Array(
 		'name' => 'Files',				// Single quotes not allowed
 		'url' => $baseUrl . 'files',
 		'directory' => $baseDir . 'files',
-		'maxSize' => 0,
+		'maxSize' => '100M',
 		'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
 		'deniedExtensions' => '');
 
@@ -204,7 +212,7 @@ $config['ResourceType'][] = Array(
 		'name' => 'Images',
 		'url' => $baseUrl . 'img',
 		'directory' => $baseDir . 'img',
-		'maxSize' => 0,
+		'maxSize' => "16M",
 		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
 		'deniedExtensions' => '');
 
@@ -212,7 +220,7 @@ $config['ResourceType'][] = Array(
 		'name' => 'temp Content',
 		'url' => $baseUrl . '../img',
 		'directory' => $baseDir . '../img',
-		'maxSize' => 0,
+		'maxSize' => "16M",
 		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
 		'deniedExtensions' => '');
 
@@ -220,7 +228,7 @@ $config['ResourceType'][] = Array(
 		'name' => 'Data-Uploads',
 		'url' => $baseUrl . 'data-uploads',
 		'directory' => $baseDir . 'data-uploads',
-		'maxSize' => 0,
+		'maxSize' => "16M",
 		'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
 		'deniedExtensions' => '');
 
@@ -228,7 +236,7 @@ $config['ResourceType'][] = Array(
 		'name' => 'Flash',
 		'url' => $baseUrl . 'flash',
 		'directory' => $baseDir . 'flash',
-		'maxSize' => 0,
+		'maxSize' => "16M",
 		'allowedExtensions' => 'swf,flv',
 		'deniedExtensions' => '');
 
