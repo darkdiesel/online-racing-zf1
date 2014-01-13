@@ -81,7 +81,7 @@
 				<div class="modal-body">
 					<?php
 					$form = new Application_Form_Auth_Login();
-					$form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?rediretcTo={$this->url()}");
+					$form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?redirectTo={$this->url()}");
 					echo $form;
 					?>
 					<br/>

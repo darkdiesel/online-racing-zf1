@@ -21,14 +21,9 @@ class AuthController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$form = new Application_Form_Auth_Login();
 		
-		echo "redirectTo: ".$request->getParam('rediretcTo');
-		echo "<pre>";
-		print_r($request->getParam('rediretcTo'));
-		echo "</pre>";
-		echo "<pre>";
-		print_r($request->getParams());
-		echo "</pre>";
-		$redirectToUrl = $request->getParams()['rediretcTo'];
+		
+		// Set  redirect url if user authorizing successful. 
+		$redirectToUrl = $request->getParam('redirectTo');
 
 		if (empty($redirectToUrl)) {
 			$redirectToUrl = $this->_helper->getHelper('UserServerData')->GetPreviousPage();
