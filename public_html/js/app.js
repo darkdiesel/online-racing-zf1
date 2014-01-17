@@ -141,6 +141,6 @@ $(document).ready(function() {
 
 });
 
-jQuery(document).ready(function(e){
-	jQuery('#page').snowfall({round : true, minSize: 3, maxSize:8}); // add rounded
-});
+//jQuery(document).ready(function(e){
+//	jQuery('#page').snowfall({round : true, minSize: 3, maxSize:8}); // add rounded
+//});

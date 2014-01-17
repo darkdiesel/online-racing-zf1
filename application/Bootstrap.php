@@ -63,8 +63,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$request = Zend_Controller_Front::getInstance()->getRequest();
 
 		// [MAIN SITE TITLE SETTINGS]
-		$view->headTitle('Online-Racing.net')
-				->setSeparator(' :: '); // setting a separator string for segments
+		$view->headTitle('Online-Racing.Net')
+				->setSeparator(' | '); // setting a separator string for segments
 
 		$view->addHelperPath(APPLICATION_PATH . '/../library/App/View/Helper/', "App_View_Helper");
 
@@ -101,7 +101,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
 
 		// [SNOW FALL]
-		$view->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js");
+		//$view->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js");
 
 		$view->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
 
