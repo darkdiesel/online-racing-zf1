@@ -148,21 +148,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 				), "league/all/page/%s.html"
 		));
 
-		//team controller routers
-		$router->addRoute(
-				'team', new Zend_Controller_Router_Route('team/:action/:id', array(
-			'module' => 'default',
-			'controller' => 'team',
-			'id' => 0)
-		));
 
-		$router->addRoute(
-				'teamAll', new Zend_Controller_Router_Route('team/all/:page', array(
-			'module' => 'default',
-			'controller' => 'team',
-			'action' => 'all',
-			'page' => 1)
-		));
 
 		//championship controller routers
 		$router->addRoute(

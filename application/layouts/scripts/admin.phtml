@@ -27,24 +27,13 @@
                         <div class="col-lg-9 col-lg-push-3">
 							<div id="content">
 								<?php
-								$breadcrumb = Zend_Registry::get('breadcrumb');
 								$page_title = $this->pageTitle();
-
-								if ($breadcrumb['show']) {
-									$breadcrumb_data = $this->render("admin_layout/breadcrumb.phtml");
-								}
-
-								if ($page_title != "" || ($breadcrumb_data)) :
+								if ($page_title != "") :
 									?>
 									<div id="page_title_wrapper" class="block-item">
 										<?php if ($this->pageTitle() != ""): ?>
 											<div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
 										<?php endif; ?>
-										<?php
-										if ($breadcrumb['show']) {
-											echo $breadcrumb_data;
-										}
-										?>
 									</div>
 								<?php endif; ?>
 								<?php echo $this->showMessages(); ?>
@@ -58,7 +47,7 @@
 						<!-- Left sidebar -->
 						<div class="col-lg-3 col-lg-pull-9">
 							<div id="sidebar-left" class="block-item">
-							<?php echo $this->render("admin_layout/left_sidebar.phtml") ?>
+								<?php echo $this->render("admin_layout/left_sidebar.phtml") ?>
 							</div>
 						</div>
                     </div>
@@ -72,6 +61,6 @@
 		}
 		?>
 		<div id="background-wrapper"></div>
-<?php echo $this->render("analyticstracking.phtml") ?>
+		<?php echo $this->render("analyticstracking.phtml") ?>
     </body>
 </html>
