@@ -32,17 +32,15 @@
 								</ul>
 							<?php } else { ?> 
 								<ul class="nav navbar-nav navbar-collapse navbar-right">
-									<li>
-										<form class="navbar-form" action="#" role="search">
-											<div class="form-group">
-												<input type="text" class="form-control" placeholder="<?php echo $this->translate('Поиск'); ?>">
-											</div>
-											<button type="submit" class="btn btn-default"><?php echo $this->translate('Поиск'); ?></button>
-										</form>
-									</li>
 									<a class="btn btn-info navbar-btn" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
-									<button data-toggle="modal" href="#myModal" type="button" class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
+									<button data-toggle="modal" href="#loginModalForm" type="button" class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
 								</ul>
+								<form class="navbar-form navbar-right m-r-5" action="#" role="search">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="<?php echo $this->translate('Поиск'); ?>">
+									</div>
+									<button type="submit" class="btn btn-default"><?php echo $this->translate('Поиск'); ?></button>
+								</form>
 							<?php } ?>
 						</div><!-- /.navbar-collapse -->
 					</div>
@@ -71,7 +69,7 @@
 			</div>
 		</div>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModalForm" tabindex="-1" role="dialog" aria-labelledby="loginModalFormLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
