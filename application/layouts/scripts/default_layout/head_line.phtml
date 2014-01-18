@@ -21,12 +21,12 @@
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?> <b class="caret"></b></a>
 										<ul class="dropdown-menu">
-											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="icon-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
-											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="icon-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
-											<li><a href="<?php echo$this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="icon-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
-											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="icon-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'userId', true) ?>"><i class="fa fa-briefcase"></i> <?php echo $this->translate('Профиль') ?></a><li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true); ?>"><i class="fa fa-envelope"></i> <?php echo $this->translate('Сообщения') ?></a><li>
+											<li><a href="<?php echo$this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true); ?>"><i class="fa fa-wrench"></i> <?php echo $this->translate('Настройки') ?></a></li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true); ?>"><i class="fa fa-edit"></i> <?php echo $this->translate('Редактировать') ?></a></li>
 											<li class="divider"></li>
-											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true); ?>"><i class="icon-remove"></i> <?php echo $this->translate('Выход') ?></a></li>
+											<li><a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true); ?>"><i class="fa fa-power-off"></i> <?php echo $this->translate('Выход') ?></a></li>
 										</ul>
 									</li>
 								</ul>

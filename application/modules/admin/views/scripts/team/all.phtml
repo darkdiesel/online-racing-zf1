@@ -1,48 +1,62 @@
-<div id="team_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Команды'); ?></div>
-    <div class="div_hr"></div>
-    <div class="page_content">
-        <?php
-        if (count($this->paginator)) {
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-            ?>
-            <table class="table table-bordered table-hover table-striped articles_table">
-                <thead>
-                    <tr>
-                        <td class="team_id"><span>#</span></td>
-                        <td class="team_name"><span><?php echo $this->translate('Название'); ?></span></td>
-                        <td class="team_descr"><span><?php echo $this->translate('Описание'); ?></span></td>
-                        <td class="team_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($this->paginator as $team): ?>
-                        <tr>
-                            <td class="team_id"><span><a href="<?php echo $this->baseUrl('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['id']) ?></a></span></td>
-                            <td class="team_name"><span><a href="<?php echo $this->baseUrl('team/id/' . $this->escape($team['id'])) ?>"><?php echo $this->escape($team['name']) ?></a></span></td>
-                            <td class="team_descr"><span><?php echo $this->truncate($this->escape($team['description']))->toLength(200); ?></span></td>
-                            <td class="team_action articles_table_action">
-                                <span>
-                                    <a href="<?php echo $this->baseUrl('team/id/' . $this->escape($team['id'])) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-                                    <a href="<?php echo $this->baseUrl('team/edit/' . $this->escape($team['id'])) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-                                    <a href="<?php echo $this->baseUrl('team/delete/' . $this->escape($team['id'])) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
-                                </span>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <?php
-            echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-            ?>
-            <?php
-        } else {
-            ?>
-            <div class="alert alert-warning alert-block">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-                <?php echo $this->translate('Команды на сайте не найдены!'); ?>
-            </div>
-        <?php } ?>
-    </div>
-</div>
+<?php if ($this->paginator) { ?>
+	<div class="clearfix m-b-10">
+		<?php
+		$team_id_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true);
+		?>
+		<a href="<?php echo $team_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?></a>
+	</div>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<i class="fa fa-list"></i>
+		</div>
+		<div class="panel-body">
+			<table class="table table-striped custab">
+				<thead>
+					<tr>
+						<th class="team_id"><span>ID</span></th>
+						<th class="team_name"><span><?php echo $this->translate('Название'); ?></span></th>
+						<th class="team_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+						<th class="team_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($this->paginator as $team): ?>
+						<?php
+						$team_id_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $this->escape($team->id)), 'team_id', true);
+						$team_edit_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'edit', 'team_id' => $this->escape($team->id)), 'team_action', true);
+						$team_delete_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'delete', 'team_id' => $this->escape($team->id)), 'team_action', true);
+						?>
+						<tr>
+							<td class="team_id"><span><a href="<?php echo $team_id_url; ?>"><?php echo $this->escape($team['id']) ?></a></span></td>
+							<td class="team_name"><span><a href="<?php echo $team_id_url ?>"><?php echo $this->escape($team['name']) ?></a></span></td>
+							<td class="team_descr"><span><?php echo $this->truncate($this->escape($team['description']))->toLength(200); ?></span></td>
+							<td class="team_action articles_table_action">
+								<span>
+									<div class="pull-right action-buttons">
+										<div class="btn-group pull-right">
+											<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+												<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+											</button>
+											<ul class="dropdown-menu slidedown">
+												<li><a href="<?php echo $team_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
+												<li><a href="<?php echo $team_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
+												<li><a href="<?php echo $team_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+											</ul>
+										</div>
+									</div>
+								</span>
+							</td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+		<div class="panel-footer">
+			<div class="pull-right">
+				<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<?php
+}?>

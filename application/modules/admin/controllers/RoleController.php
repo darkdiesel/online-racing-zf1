@@ -57,6 +57,7 @@ class Admin_RoleController extends App_Controller_LoaderController {
 						array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default', true
 				)
 		);
+		$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'country', 'action' => 'all'), 'country_all', true)}\"");
 
 		if ($this->getRequest()->isPost()) {
 			if ($form->isValid($request->getPost())) {

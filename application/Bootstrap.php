@@ -106,12 +106,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
 
 		// [FONT-AWESOME library]
-		$view->headLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css");
+		$view->headLink()->appendStylesheet("/library/font-awesome-4/css/font-awesome.min.css");
 
 		// [GOOGLE FONTS]
 		$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
 
 		// [COMMON CSS]
+		$view->minifyHeadLink()->appendStylesheet('/css/style.css');
 		$view->minifyHeadLink()->appendStylesheet('/css/items.css');
 		$view->minifyHeadLink()->appendStylesheet('/css/forms.css');
 

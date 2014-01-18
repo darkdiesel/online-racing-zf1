@@ -53,7 +53,6 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract
 	$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 
 	// [CSS Minify]
-	$view->minifyHeadLink()->appendStylesheet('/css/style.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/default.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/user_toolbar.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/articles.css');

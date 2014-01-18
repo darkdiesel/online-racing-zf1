@@ -31,17 +31,23 @@ class Admin_TeamController extends App_Controller_LoaderController {
 
 	// action for view all article types
 	public function allAction() {
-		$this->view->headTitle($this->view->translate('Просмотреть все'));
+		$this->view->headTitle($this->view->translate('Все'));
+		$this->view->pageTitle($this->view->translate('Команды'));
 
 		// pager settings
-		$page_count_items = 10;
-		$page_range = 5;
-		$items_order = 'ASC';
-		$page = $this->getRequest()->getParam('page');
+		$pager_args = array(
+			"page_count_items" => 10,
+			"page_range" => 5,
+			"page" => $this->getRequest()->getParam('page')
+		);
 
-		$team = new Application_Model_DbTable_Team();
+		$paginator = $this->db->get("team")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
-		$this->view->paginator = $team->getTeamsPager($page_count_items, $page, $page_range, $items_order);
+		if (count($paginator)) {
+			$this->view->paginator = $paginator;
+		} else {
+			$this->messages->addInfo("{$this->view->translate('Запрашиваемые команды на сайте не найдены!')}");
+		}
 	}
 
 	// action for add new team
@@ -57,6 +63,8 @@ class Admin_TeamController extends App_Controller_LoaderController {
 						array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true
 				)
 		);
+		$team_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true);
+		$form->cancel->setAttrib('onClick', "location.href='{$team_all_url}'");
 
 		if ($this->getRequest()->isPost()) {
 			if ($form->isValid($request->getPost())) {
@@ -140,37 +148,44 @@ class Admin_TeamController extends App_Controller_LoaderController {
 	// action for delete article type
 	public function deleteAction() {
 		$this->view->headTitle($this->view->translate('Удалить'));
+		$this->view->pageTitle($this->view->translate('Удалить страну'));
 
 		$request = $this->getRequest();
-		$team_id = (int) $request->getParam('id');
+		$team_id = (int) $request->getParam('team_id');
 
-		$team = new Application_Model_DbTable_Team();
-		$team_data = $team->fetchRow(array('id = ?' => $team_id));
+		$team_data = $this->db->get('team')->getItem($team_id);
 
-		if (count($team_data) != 0) {
+		if ($team_data) {
 			$this->view->headTitle($team_data->name);
 
+			$team_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'delete', 'team_id' => $team_id), 'team_action', true);
+			$team_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $team_id), 'team_id', true);
+
 			$form = new Application_Form_Team_Delete();
-			$form->setAction('/team/delete/' . $team_id);
-			$form->cancel->setAttrib('onClick', 'location.href="/team/id/' . $team_id . '"');
+			$form->setAction($team_delete_url);
+			$form->cancel->setAttrib('onClick', "location.href='{$team_id_url}'");
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
-					$team_where = $team->getAdapter()->quoteInto('id = ?', $team_id);
-					$team->delete($team_where);
+					$team_where = $this->db->get('team')->getAdapter()->quoteInto('id = ?', $team_id);
+					$this->db->get('team')->delete($team_where);
 
-					$this->_helper->redirector('all', 'team');
+					$this->messages->clearMessages();
+					$this->messages->addSuccess("{$this->view->translate("Команда <strong>\"{$team_data->name} \"</strong> успешно удалена")}");
+
+					$team_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all', 'page' => 1), 'team_all', true);
+					$this->redirect($team_all_url);
 				} else {
-					$this->view->errMessage = $this->view->translate("Произошла неожиданноя ошибка! Пожалуйста обратитесь к нам и сообщите о ней");
+					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
 			}
 
 			$this->view->form = $form;
 			$this->view->team = $team_data;
 		} else {
-			$this->view->errMessage = $this->view->translate('Команда не существует');
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Команда не существует'));
+			$this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
+			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не найдена!')}");
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
 	}
 
