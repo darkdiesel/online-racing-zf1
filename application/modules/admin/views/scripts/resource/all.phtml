@@ -1,42 +1,75 @@
-<?php
-if ($this->paginator) {
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-    ?>
-    <div class='block-item'>
-        <table class="table table-bordered table-hover table-striped articles_table">
-            <thead>
-    	    <tr>
-    		<th class="resource_id"><span>#</span></th>
-    		<th class="resource_name"><span><?php echo $this->translate('Название'); ?></span></th>
-    		<th class="resource_module"><span><?php echo $this->translate('Модуль'); ?></span></th>
-    		<th class="resource_controller"><span><?php echo $this->translate('Контроллер'); ?></span></th>
-    		<th class="resource_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-    		<th class="resource_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
-    		<th class="resource_action articles_table_action"><span><?php echo $this->translate('Операции'); ?></span></th>
-    	    </tr>
-            </thead>
-            <tbody>
-		<?php foreach ($this->paginator as $resource): ?>
-		    <tr>
-			<td class="resource_id"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $resource['id']), 'resource_id', true) ?>"><?php echo $this->escape($resource['id']) ?></a></span></td>
-			<td class="resource_name"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $resource['id']), 'resource_id', true) ?>"><?php echo $this->escape($resource['name']) ?></a></span></td>
-			<td class="resource_module"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $resource['id']), 'resource_id', true) ?>"><?php echo $this->escape($resource['module']) ?></a></span></td>
-			<td class="resource_controller"><span><?php echo $this->escape($resource['controller']) ?></span></td>
-			<td class="resource_action"><span><?php echo $this->escape($resource['action']) ?></span></td>
-			<td class="resource_descr"><span><?php echo $this->truncate($this->escape($resource['description']))->toLength(200); ?></span></td>
-			<td class="resource_action articles_table_action">
-			    <span>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $resource['id']), 'resource_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'edit', 'resource_id' => $resource['id']), 'resource_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'delete', 'resource_id' => $resource['id']), 'resource_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
-			    </span>
-			</td>
-		    </tr>
-		<?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <?php
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-}
-?>
+<?php if ($this->paginator) { ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="clearfix m-b-10">
+				<?php
+				$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add'), 'default', true);
+				?>
+				<a href="<?php echo $resource_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить ресурс'); ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-list"></i>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped custab">
+						<thead>
+							<tr>
+								<th class="resource_id"><span>ID</span></th>
+								<th class="resource_name"><span><?php echo $this->translate('Название'); ?></span></th>
+								<th class="resource_module"><span><?php echo $this->translate('Модуль'); ?></span></th>
+								<th class="resource_controller"><span><?php echo $this->translate('Контроллер'); ?></span></th>
+								<th class="resource_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+								<th class="resource_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+								<th class="resource_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($this->paginator as $resource): ?>
+								<?php
+								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($resource->id)), 'resource_id', true);
+								$resource_edit_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'edit', 'resource_id' => $this->escape($resource->id)), 'resource_action', true);
+								$resource_delete_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'delete', 'resource_id' => $this->escape($resource->id)), 'resource_action', true);
+								?>
+								<tr>
+									<td class="resource_id"><span><a href="<?php echo $resource_id_url; ?>"><?php echo $this->escape($resource['id']) ?></a></span></td>
+									<td class="resource_name"><span><a href="<?php echo $resource_id_url ?>"><?php echo $this->escape($resource['name']) ?></a></span></td>
+									<td class="resource_module"><span><?php echo $this->escape($resource['module']) ?></span></td>
+									<td class="resource_controller"><span><?php echo $this->escape($resource['controller']) ?></span></td>
+									<td class="resource_action"><span><?php echo $this->escape($resource['action']) ?></span></td>
+									<td class="resource_descr"><span><?php echo $this->truncate($this->escape($resource['description']))->toLength(200); ?></span></td>
+									<td class="resource_action">
+										<span>
+											<div class="pull-right action-buttons">
+												<div class="btn-group pull-right">
+													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+													</button>
+													<ul class="dropdown-menu slidedown">
+														<li><a href="<?php echo $resource_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?php echo $resource_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?php echo $resource_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+													</ul>
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
