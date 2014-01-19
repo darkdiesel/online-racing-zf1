@@ -423,8 +423,6 @@ class UserController extends App_Controller_LoaderController {
 
 		$this->messages->addInfo($this->view->translate('Измините настройки и нажмите "Сохранить".'));
 
-		echo $this->message;
-
 		$request = $this->getRequest();
 
 		$form = new Application_Form_User_Settings();
