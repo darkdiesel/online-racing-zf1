@@ -1,181 +1,130 @@
 <ul class="nav nav-pills nav-stacked">
     <li class="active">
-	<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
-	    <?php echo $this->translate('Сайт'); ?>
-	</a>
-    </li>
-    <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Типы контента'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
+		<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
+			<?php echo $this->translate('Сайт'); ?>
 		</a>
-	    </li>
-	    <li class="divider"></li>
-	    <li>
+    </li>
+    <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'content_type_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
+			<?php echo $this->translate('Типы контента'); ?>
 		</a>
-	    </li>
-	</ul>
     </li>
-    <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Типы постов'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
-		</a>
-	    </li>
-	    <li class="divider"></li>
-	    <li>
+    <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'post_type_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
+			<?php echo $this->translate('Типы постов'); ?>
 		</a>
-	    </li>
-	</ul>
     </li>
-    <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Команды'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
-		</a>
-	    </li>
-	    <li class="divider"></li>
-	    <li>
+    <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
+			<?php echo $this->translate('Команды'); ?>
 		</a>
-	    </li>
-	</ul>
     </li>
     <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Ресурсы сайта'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<?php echo $this->translate('Ресурсы сайта'); ?> <span class="caret"></span>
 		</a>
-	    </li>
-	    <li class="divider"></li>
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'resource_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
-		</a>
-	    </li>
-	</ul>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add'), 'default', true) ?>">
+					<?php echo $this->translate('Добавить'); ?>
+				</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'resource_all', true) ?>">
+					<?php echo $this->translate('Все'); ?>
+				</a>
+			</li>
+		</ul>
     </li>
     <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('События'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<?php echo $this->translate('События'); ?> <span class="caret"></span>
 		</a>
-	    <li class="divider"></li>
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'all'), 'event_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
-		</a>
-	    </li>
-	</ul>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'add'), 'default', true) ?>">
+					<?php echo $this->translate('Добавить'); ?>
+				</a>
+			<li class="divider"></li>
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'all'), 'event_all', true) ?>">
+					<?php echo $this->translate('Все'); ?>
+				</a>
+			</li>
+		</ul>
     </li>
-    <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Страны'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
-		</a>
-	    <li class="divider"></li>
-	    <li>
+    <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
+			<?php echo $this->translate('Страны'); ?>
 		</a>
-	    </li>
-	</ul>
     </li>
     <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Роли пользователей'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<?php echo $this->translate('Роли пользователей'); ?> <span class="caret"></span>
 		</a>
-	    <li class="divider"></li>
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'role_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
-		</a>
-	    </li>
-	</ul>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default', true) ?>">
+					<?php echo $this->translate('Добавить'); ?>
+				</a>
+			<li class="divider"></li>
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'role_all', true) ?>">
+					<?php echo $this->translate('Все'); ?>
+				</a>
+			</li>
+		</ul>
     </li>
     <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Права доступа'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<?php echo $this->translate('Права доступа'); ?> <span class="caret"></span>
 		</a>
-	    <li class="divider"></li>
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all'), 'right_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
-		</a>
-	    </li>
-	</ul>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'add'), 'default', true) ?>">
+					<?php echo $this->translate('Добавить'); ?>
+				</a>
+			<li class="divider"></li>
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all'), 'right_all', true) ?>">
+					<?php echo $this->translate('Все'); ?>
+				</a>
+			</li>
+		</ul>
     </li>
     <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Превилегии ролей пользователя'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true) ?>">
-		    <?php echo $this->translate('Добавить'); ?>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<?php echo $this->translate('Превилегии ролей пользователя'); ?> <span class="caret"></span>
 		</a>
-	    <li class="divider"></li>
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'privilege_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
-		</a>
-	    </li>
-	</ul>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true) ?>">
+					<?php echo $this->translate('Добавить'); ?>
+				</a>
+			<li class="divider"></li>
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'privilege_all', true) ?>">
+					<?php echo $this->translate('Все'); ?>
+				</a>
+			</li>
+		</ul>
     </li>
     <li class="dropdown">
-	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	    <?php echo $this->translate('Пользователи'); ?> <span class="caret"></span>
-	</a>
-	<ul class="dropdown-menu">
-	    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'user_all', true) ?>">
-		    <?php echo $this->translate('Все'); ?>
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			<?php echo $this->translate('Пользователи'); ?> <span class="caret"></span>
 		</a>
-	    </li>
-	</ul>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'user_all', true) ?>">
+					<?php echo $this->translate('Все'); ?>
+				</a>
+			</li>
+		</ul>
     </li>
-	 <li>
-	<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'), 'default', true) ?>">
-	    <?php echo $this->translate('Файловый Мэнеджер'); ?>
-	</a>
+	<li>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'), 'default', true) ?>">
+			<?php echo $this->translate('Файловый Мэнеджер'); ?>
+		</a>
     </li>
 </ul>
