@@ -22,9 +22,9 @@ if ($this->paginator) {
 			<td class="role_descr"><span><?php echo $this->truncate($this->escape($role['description']))->toLength(200); ?></span></td>
 			<td class="role_action articles_table_action">
 			    <span>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role['id']), 'role_id', true) ?>"><i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'edit', 'role_id' => $role['id']), 'role_action', true) ?>"><i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'role_id' => $role['id']), 'role_action', true) ?>"><i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role['id']), 'role_id', true) ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'edit', 'role_id' => $role['id']), 'role_action', true) ?>"><i class="fa fa-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'role_id' => $role['id']), 'role_action', true) ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
 			    </span>
 			</td>
 		    </tr>

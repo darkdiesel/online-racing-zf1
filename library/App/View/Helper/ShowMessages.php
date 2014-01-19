@@ -64,8 +64,8 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 
         if (count($this->_info_messages)) {
             $this->_messages_html .= "<div class=\"alert alert-block alert-info\">";
-            $this->_messages_html .= $button;
-            $this->_messages_html .= "<h4><i class=\"icon-info-sign\"></i> {$this->view->translate('Информация!')}</h4>";
+            $this->_messages_html .= $button; 
+            $this->_messages_html .= "<h4><i class=\"fa fa-info\"></i> {$this->view->translate('Информация!')}</h4>";
             $this->_messages_html .= "";
 
             foreach ($this->_info_messages as $message) {
@@ -78,7 +78,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
         if (count($this->_success_messages)) {
             $this->_messages_html .= "<div class=\"alert alert-block alert-success\">";
             $this->_messages_html .= $button;
-            $this->_messages_html .= "<h4><i class=\"icon-ok-sign\"></i> {$this->view->translate('Успех!')}</h4>";
+            $this->_messages_html .= "<h4><i class=\"fa fa-ok-sign\"></i> {$this->view->translate('Успех!')}</h4>";
             $this->_messages_html .= "";
 
             foreach ($this->_success_messages as $message) {
@@ -91,7 +91,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
         if (count($this->_warning_messages)) {
             $this->_messages_html .= "<div class=\"alert alert-block alert-warning\">";
             $this->_messages_html .= $button;
-            $this->_messages_html .= "<h4><i class=\"icon-warning-sign\"></i> {$this->view->translate('Предупреждение!')}</h4>";
+            $this->_messages_html .= "<h4><i class=\"fa fa-warning-sign\"></i> {$this->view->translate('Предупреждение!')}</h4>";
             $this->_messages_html .= "";
 
             foreach ($this->_warning_messages as $message) {
@@ -104,7 +104,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
         if (count($this->_error_messages)) {
             $this->_messages_html .= "<div class=\"alert alert-block alert-danger\">";
             $this->_messages_html .= $button;
-            $this->_messages_html .= "<h4><i class=\"icon-exclamation-sign\"></i> {$this->view->translate('Ошибка!')}</h4>";
+            $this->_messages_html .= "<h4><i class=\"fa fa-exclamation-sign\"></i> {$this->view->translate('Ошибка!')}</h4>";
 
             foreach ($this->_error_messages as $message) {
                 $this->_messages_html .= "<li>{$message}</li>";

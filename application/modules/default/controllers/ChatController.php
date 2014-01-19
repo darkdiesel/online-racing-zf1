@@ -81,7 +81,7 @@ class ChatController extends App_Controller_LoaderController {
                         $messages_html .= "<div class=\"chat_mesage_header\">";
 
                         $messages_html .= "<div class=\"chat_mesage_user_avatar\">";
-                        $messages_html .= "<a href=\"{$this->view->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $message->user_id), 'userId', true)}\" target=\"_blank\"><i class=\"icon-user icon-black\"></i></a>";
+                        $messages_html .= "<a href=\"{$this->view->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $message->user_id), 'userId', true)}\" target=\"_blank\"><i class=\"fa fa-user\"></i></a>";
                         $messages_html .= '</div>';
 
                         $messages_html .= '<div class="chat_mesage_user_nickname">';

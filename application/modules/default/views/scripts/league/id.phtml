@@ -67,16 +67,16 @@
 				?>
 				<div class="block-item_header">
 					<div class="block-item_title">
-						<i class="icon-trophy"></i>
+						<i class="fa fa-trophy"></i>
 						<a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
 					</div>
 					<div class="block-item_info_header">
 						<div class="content_category block-item_info_header_item">
-							<span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+							<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
 							<?php echo $this->translate('Чемпионат'); ?>
 						</div>
 						<div class="championship_author block-item_info_header_item">
-							<span class="font-bold font-color-black"><i class="icon-user font-color-gray"></i> <?php echo $this->translate('Администратор') ?>: </span>
+							<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор') ?>: </span>
 							<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'userId', true); ?>" target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
 						</div>
 					</div>

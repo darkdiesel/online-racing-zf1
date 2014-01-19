@@ -9,16 +9,16 @@ if ($this->paginator) {
             ?>
             <div class="block-item_header">
                 <div class="block-item_title">
-                    <i class="icon-book"></i>
+                    <i class="fa fa-book"></i>
                     <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>"><?php echo $this->escape($post['title']); ?>                    </a>
                 </div>
                 <div class="block-item_info_header">
                     <div class="content_category block-item_info_header_item">
-                        <span class="font-bold font-color-black"><i class="icon-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+                        <span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
                         <a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'post_type_id' => $this->escape($post['post_type_id']), 'page' => '1'), 'postByType', true) ?>" target="_blank"><?php echo $this->escape($post['post_type_name']); ?></a>
                     </div>
                     <div class="post_author block-item_info_header_item">
-                        <span class="font-bold font-color-black"><i class="icon-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
+                        <span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
                         <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ if ($this->paginator) {
                 </div>
                 <div class="pull-right">
                     <a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>" class = "btn btn-sm btn-primary block-content-button-more">
-                        <?php echo $this->translate('Читать дальше') ?> <i class="icon-double-angle-right"></i>
+                        <?php echo $this->translate('Читать дальше') ?> <i class="fa fa-angle-double-right"></i>
                     </a>
                 </div>
                 <div class="post_info block-item-info-bottom">

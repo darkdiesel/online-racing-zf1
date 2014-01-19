@@ -48,13 +48,13 @@
                             <td class="track_action articles_table_action">
                                 <span>
                                     <a href="<?php echo $this->url(array('controller' => 'track', 'action' => 'id', 'id' => $this->escape($track['id'])), 'track', true); ?>">
-                                        <i class="icon-eye-open"></i> <?php echo $this->translate('Просм.'); ?>
+                                        <i class="fa fa-eye"></i> <?php echo $this->translate('Просм.'); ?>
                                     </a><br/>
                                     <a href="<?php echo $this->url(array('controller' => 'track', 'action' => 'edit', 'id' => $this->escape($track['id'])), 'track', true); ?>">
-                                        <i class="icon-edit"></i> <?php echo $this->translate('Ред.'); ?>
+                                        <i class="fa fa-edit"></i> <?php echo $this->translate('Ред.'); ?>
                                     </a><br/>
                                     <a href="<?php echo $this->url(array('controller' => 'track', 'action' => 'delete', 'id' => $this->escape($track['id'])), 'track', true); ?>">
-                                        <i class="icon-remove"></i> <?php echo $this->translate('Удал.'); ?>
+                                        <i class="fa fa-trash-o"></i> <?php echo $this->translate('Удал.'); ?>
                                     </a><br/>
                                 </span>
                             </td>
