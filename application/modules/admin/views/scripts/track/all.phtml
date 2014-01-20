@@ -1,0 +1,67 @@
+<?php if ($this->paginator) { ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="clearfix m-b-10">
+				<?php
+				$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true);
+				?>
+				<a href="<?php echo $track_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-list"></i>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped custab">
+						<thead>
+							<tr>
+								<th class="track_id"><span>#</span></th>
+								<th class="track_name"><span><?php echo $this->translate('Название'); ?></span></th>
+								<th class="track_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($this->paginator as $track): ?>
+								<?php
+								$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $this->escape($track->id)), 'track_id', true);
+								$track_edit_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($track->id)), 'track_action', true);
+								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'track_action', true);
+								?>
+								<tr>
+									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track['id']) ?></a></span></td>
+									<td class="track_name"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track['name']) ?></a></span></td>
+									<td class="track_action">
+										<span>
+											<div class="pull-right action-buttons">
+												<div class="btn-group pull-right">
+													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+													</button>
+													<ul class="dropdown-menu slidedown">
+														<li><a href="<?php echo $track_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?php echo $track_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?php echo $track_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+													</ul>
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>

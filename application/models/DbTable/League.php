@@ -234,11 +234,15 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 				$paginator->setPageRange("5");
 			}
 
-			return $paginator;
+			if (count($paginator) > 0) {
+				return $paginator;
+			} else {
+				return FALSE;
+			}
 		} else {
 			$resources = $model->fetchAll($select);
 
-			if (count($resources) != 0) {
+			if (count($resources) > 0) {
 				return $resources;
 			} else {
 				return FALSE;

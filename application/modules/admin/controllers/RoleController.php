@@ -38,7 +38,7 @@ class Admin_RoleController extends App_Controller_LoaderController {
 
 		$paginator = $this->db->get("role")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
-		if (count($paginator)) {
+		if ($paginator) {
 			$this->view->paginator = $paginator;
 		} else {
 			$this->messages->addInfo("{$this->view->translate('Запрашиваемые роли пользователей на сайте не найдены!')}");

@@ -2,149 +2,197 @@
 
 class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
 
-    protected $_name = 'track';
-    protected $_primary = 'id';
+	protected $_name = 'track';
+	protected $_primary = 'id';
+	protected $db_href = 'track';
 
-    public function getTrackData($id) {
-        $model = new self;
-        $select = $model->select()
-                ->setIntegrityCheck(false)
-                ->from(array('t' => $this->_name))
-                ->where('t.id = ?', $id)
-                ->join(array('c' => 'country'), 't.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-                    'track_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-                    'track_url_image_round' => 'c.url_image_round',))
-                ->columns('*');
+	/*
+	 * Get Item by idencity field value and $field array of fields list.
+	 */
 
-        $track_data = $model->fetchRow($select);
+	public function getItem($idencity = array(), $fields = array()) {
+		$model = new self;
+		$idencity_data = "";
 
-        if (count($track_data) != 0) {
-            return $track_data;
-        } else {
-            return FALSE;
-        }
-    }
+		// idencity fields list
+		if (!count($idencity)) {
+			return FALSE;
+		} elseif (is_array($idencity)) {
+			foreach ($idencity as $field => $value) {
+				if (is_array($value)) {
+					if (isset($value['condition'])) {
+						if ($value['condition']) {
+							$condition = $value['condition'];
+						} else {
+							$condition = "OR";
+						}
+					} else {
+						$condition = "OR";
+					}
+					$value = $value['value'];
+				} else {
+					$condition = "OR";
+				}
 
-    public function getTracksPager($count, $page, $page_range, $order) {
-        $model = new self;
+				if ($idencity_data) {
+					$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
+				} else {
+					$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value);
+				}
+			}
+		} elseif (is_int($idencity) || is_string($idencity)) {
+			$idencity_data = sprintf("%s.id = '%s'", $this->db_href, $idencity);
+		}
 
-        $adapter = new Zend_Paginator_Adapter_DbTableSelect($model
-                        ->select()
-                        ->setIntegrityCheck(false)
-                        ->from(array('t' => $this->_name))
-                        ->where('t.id = ?', $id)
-                        ->join(array('c' => 'country'), 't.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-                            'track_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-                            'track_url_image_round' => 'c.url_image_round',))
-                        ->columns('*')
-                        ->order('id ' . $order));
+		// fields list
+		if ($fields) {
+			if (is_array($fields)) {
+				$fields = array_map('trim', $fields);
+			} elseif (is_string($fields)) {
+				if (strtolower($fields) == "all") {
+					$fields = "*";
+				} else {
+					$fields = array_map('trim', explode(",", $fields));
+				}
+			}
+		}
 
-        $paginator = new Zend_Paginator($adapter);
-        $paginator->setItemCountPerPage($count);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setPageRange($page_range);
+		$select = $model->select()
+				->setIntegrityCheck(false)
+				->from(array($this->db_href => $this->_name))
+				->where($idencity_data);
 
-        return $paginator;
-    }
+		if ($fields) {
+			$select->columns($fields);
+		} else {
+			$select->columns("*");
+		}
 
-    public function getTracksName($order) {
-        $model = new self;
+		$resource = $model->fetchRow($select);
 
-        $select = $model->select()
-                ->from($this->_name, 'name')
-                ->columns(array('id', 'name'))
-                ->order('name ' . $order);
+		if (count($resource) != 0) {
+			return $resource;
+		} else {
+			return FALSE;
+		}
+	}
 
-        $tracks = $model->fetchAll($select);
+	/*
+	 * Function returns array of Items with $fields array of fields list.
+	 * Sorted by $order value
+	 * 
+	 * If $pager == TRUE function return Pager with $pager_args parameters
+	 * 
+	 * Parameters:
+	 * $pager_args['page_count_items']	- Count items for page
+	 * $pager_args['page']		- Number of curent page
+	 * $pager_args['page_range']	- Range of pages displaying at the pager's block
+	 * 
+	 */
 
-        if (count($tracks) != 0) {
-            return $tracks;
-        } else {
-            return FALSE;
-        }
-    }
+	public function getAll($idencity = array(), $fields = array(), $order = "ASC", $pager = FALSE, array $pager_args = array()) {
+		$model = new self;
+		$idencity_data = "";
+		$order_data = "";
 
-    /*
-      public function checkExistCountryNativeName($country_name) {
-      $model = new self;
-      $select = $model->select()
-      ->from($this->_name, 'id')
-      ->where('native_name = ?', $country_name)
-      ->columns('id');
+		// idencity fields list
+		if ($idencity) {
+			if (is_array($idencity)) {
+				foreach ($idencity as $field => $value) {
+					if ($idencity_data) {
+						if (isset($value['condition'])) {
+							if ($value['condition']) {
+								$condition = $value['condition'];
+							} else {
+								$condition = "OR";
+							}
+						} else {
+							$condition = "OR";
+						}
 
-      $track_data = $model->fetchRow($select);
+						$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+					} else {
+						$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value['value']);
+					}
+				}
+			} elseif (is_int($idencity) || is_string($idencity)) {
+				$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
+			}
+		}
 
-      if (count($track_data) != 0) {
-      return $track_data->id;
-      } else {
-      return FALSE;
-      }
-      }
+		// fields list
+		if ($fields) {
+			if (is_array($fields)) {
+				$fields = array_map('trim', $fields);
+			} elseif (is_string($fields)) {
+				if (strtolower($fields) == "all") {
+					$fields = "*";
+				} else {
+					$fields = array_map('trim', explode(",", $fields));
+				}
+			}
+		}
 
-      public function checkExistCountryAbbreviation($country_abbreviation) {
-      $model = new self;
-      $select = $model->select()
-      ->from($this->_name, 'id')
-      ->where('abbreviation = ?', $country_abbreviation)
-      ->columns('id');
+		// order list
+		if ($order) {
+			if (is_array($order)) {
+				foreach ($order as $field => $value) {
+					if ($order_data) {
+						$order_data .= sprintf(", %s.%s %s", $this->db_href, $field, $value);
+					} else {
+						$order_data = sprintf("%s.%s %s", $this->db_href, $field, $value);
+					}
+				}
+			} elseif (is_string($order) && !empty($order)) {
+				$order_data = sprintf("%s.id %s", $this->db_href, $order);
+			}
+		}
 
-      $track_data = $model->fetchRow($select);
+		$select = $model->select()
+				->from(array($this->db_href => $this->_name));
 
-      if (count($track_data) != 0) {
-      return $track_data->id;
-      } else {
-      return FALSE;
-      }
-      }
+		if ($fields) {
+			$select->columns($fields);
+		} else {
+			$select->columns("*");
+		}
 
-      public function getCountryName($id) {
-      $model = new self;
-      $select = $model->select()
-      ->from($this->_name, 'id')
-      ->where('id = ?', $id)
-      ->columns(array('native_name'));
+		if ($idencity_data) {
+			$select->where($idencity_data);
+		}
 
-      $track_data = $model->fetchRow($select);
+		if ($order_data) {
+			$select->order($order_data);
+		}
 
-      if (count($track_data) != 0) {
-      return $track_data->native_name;
-      } else {
-      return FALSE;
-      }
-      }
+		if ($pager) {
+			$adapter = new Zend_Paginator_Adapter_DbTableSelect($select);
 
-      public function getCountriesName($order) {
-      $model = new self;
+			$paginator = new Zend_Paginator($adapter);
+			if (count($pager_args)) {
+				$paginator->setItemCountPerPage($pager_args['page_count_items']);
+				$paginator->setCurrentPageNumber($pager_args['page']);
+				$paginator->setPageRange($pager_args['page_range']);
+			} else {
+				$paginator->setItemCountPerPage("10");
+				$paginator->setCurrentPageNumber("1");
+				$paginator->setPageRange("5");
+			}
+			
+			if (count($paginator) > 0) {
+				return $paginator;
+			} else {
+				return FALSE;
+			}
+		} else {
+			$resources = $model->fetchAll($select);
 
-      $select = $model->select()
-      ->from($this->_name, 'native_name')
-      ->columns(array('id', 'native_name', 'english_name'))
-      ->order('native_name ' . $order);
+			if (count($resources) > 0) {
+				return $resources;
+			} else {
+				return FALSE;
+			}
+		}
+	}
 
-      $countries = $model->fetchAll($select);
-
-      if (count($countries) != 0) {
-      return $countries;
-      } else {
-      return FALSE;
-      }
-      }
-
-      public function getCountryId($country_name) {
-      $model = new self;
-      $select = $model->select()
-      ->from($this->_name, 'native_name')
-      ->where('native_name = ?', $country_name)
-      ->columns(array('id'));
-
-      $track_data = $model->fetchRow($select);
-
-      if (count($track_data) != 0) {
-      return $track_data->id;
-      } else {
-      return FALSE;
-      }
-      }
-
-     */
 }

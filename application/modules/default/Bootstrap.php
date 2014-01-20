@@ -251,21 +251,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		  'page' => 1)
 		  )); */
 
-		//track controller routers
-		$router->addRoute(
-				'track', new Zend_Controller_Router_Route('track/:action/:track_id', array(
-			'module' => 'default',
-			'controller' => 'track',
-			'track_id' => 0)
-		));
-
-		$router->addRoute(
-				'trackAll', new Zend_Controller_Router_Route('track/all/:page', array(
-			'module' => 'default',
-			'controller' => 'track',
-			'action' => 'all',
-			'page' => 1)
-		));
+		
 		/*
 		  Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');
 		  Zend_Controller_Front::getInstance()->registerPlugin(new App_Controller_Plugin_LangSelector());

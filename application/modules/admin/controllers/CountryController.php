@@ -26,10 +26,8 @@ class Admin_CountryController extends App_Controller_LoaderController {
 	}
 
 	public function allAction() {
-		$this->view->headTitle($this->view->translate('Все страны'));
-		$this->view->pageTitle($this->view->translate('Все страны'));
-
-		$country = new Application_Model_DbTable_Country();
+		$this->view->headTitle($this->view->translate('Все'));
+		$this->view->pageTitle($this->view->translate('Cтраны'));
 
 		// pager settings
 		$pager_args = array(
@@ -38,12 +36,12 @@ class Admin_CountryController extends App_Controller_LoaderController {
 			"page" => $this->getRequest()->getParam('page')
 		);
 
-		$paginator = $country->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
+		$paginator = $this->db->get("country")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
-		if (count($paginator)) {
+		if ($paginator) {
 			$this->view->paginator = $paginator;
 		} else {
-			$this->messages->addError("{$this->view->translate('Запрашиваемыt страны на сайте не найден!')}");
+			$this->messages->addError("{$this->view->translate('Запрашиваемые страны на сайте не найдены!')}");
 		}
 	}
 

@@ -354,6 +354,39 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'page' => 1,
 				), "admin/team/all/page/%s.html"
 		));
+
+		//TRACK CONTROLLER ROUTERS
+		$router->addRoute(
+				'track_id', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)\.html', array(
+			'module' => 'admin',
+			'controller' => 'track',
+			'action' => 'id',
+			1 => 0), array(
+			'track_id' => 1,
+				), "admin/track/%d.html"
+		));
+
+		$router->addRoute(
+				'track_action', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)/(\w*)\.html', array(
+			'module' => 'admin',
+			'controller' => 'track',
+			'action' => 'id',
+			1 => 0), array(
+			'track_id' => 1,
+			'action' => 2,
+				), "admin/track/%d/%s.html"
+		));
+
+		$router->addRoute(
+				'track_all', new Zend_Controller_Router_Route_Regex('admin/track/all/page/(\d+)\.html', array(
+			'module' => 'admin',
+			'controller' => 'track',
+			'action' => 'all',
+			1 => 1
+				), array(
+			'page' => 1,
+				), "admin/track/all/page/%s.html"
+		));
 	}
 
 }

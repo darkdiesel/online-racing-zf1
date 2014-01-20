@@ -42,7 +42,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
 	$paginator = $this->db->get("resource")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
 
-	if (count($paginator)) {
+	if ($paginator) {
 	    $this->view->paginator = $paginator;
 	} else {
 	    $this->messages->addInfo("{$this->view->translate('Запрашиваемые ресурсы на сайте не найдены!')}");

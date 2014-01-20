@@ -1,44 +1,77 @@
-<?php
-if ($this->paginator) {
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-    ?>
-    <div class='block-item'>
-        <table class="table table-bordered table-hover table-striped articles_table">
-            <thead>
-    	    <tr>
-    		<th class="resource_id"><span>#</span></th>
-    		<th class="user_login"><span><?php echo $this->translate('Логин'); ?></span></th>
-    		<th class="user_name"><span><?php echo $this->translate('Имя'); ?></span></th>
-    		<th class="user_surname"><span><?php echo $this->translate('Фамилия'); ?></span></th>
-    		<th class="user_last_login_ip"><span><?php echo $this->translate('Последний IP'); ?></span></th>
-    		<th class="user_role"><span><?php echo $this->translate('Роль'); ?></span></th>
-    		<th class="user_about"><span><?php echo $this->translate('О себе'); ?></span></th>
-    		<th class="user_action articles_table_action"><span><?php echo $this->translate('Операции'); ?></span></th>
-    	    </tr>
-            </thead>
-            <tbody>
-		<?php foreach ($this->paginator as $user): ?>
-		    <tr>
-			<td class="user_id"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'user_id', true) ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
-			<td class="user_login"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'user_id', true) ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
-			<td class="user_name"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'user_id', true) ?>"><?php echo $this->escape($user['name']) ?></a></span></td>
-			<td class="user_surname"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'user_id', true) ?>"><?php echo $this->escape($user['surname']) ?></a></span></td>
-			<td class="user_last_login_ip"><span><?php echo $this->escape($user['last_login_ip']) ?></span></td>
-			<td class="user_role"><span><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $user['user_role_id']), 'role_id', true) ?>"><?php echo $this->escape($user['user_role_name']) ?></a></span></td>
-			<td class="user_about"><span><?php echo $this->truncate($this->escape($user['about']))->toLength(200); ?></span></td>
-			<td class="user_action articles_table_action">
-			    <span>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'user_id', true) ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просм.'); ?></a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'edit', 'user_id' => $user['id']), 'user_action', true) ?>"><i class="fa fa-edit"></i> <?php echo $this->translate('Ред.'); ?></a><br/>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'delete', 'user_id' => $user['id']), 'user_action', true) ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удал.'); ?></a><br/>
-			    </span>
-			</td>
-		    </tr>
-		<?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    <?php
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-}
-?>
+<?php if ($this->paginator) { ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="clearfix m-b-10">
+				<?php
+				$user_id_url = $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'add'), 'default', true);
+				?>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-list"></i>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped custab">
+						<thead>
+							<tr>
+								<th class="resource_id"><span>ID</span></th>
+								<th class="user_login"><span><?php echo $this->translate('Логин'); ?></span></th>
+								<th class="user_name"><span><?php echo $this->translate('Имя'); ?></span></th>
+								<th class="user_surname"><span><?php echo $this->translate('Фамилия'); ?></span></th>
+								<th class="user_last_login_ip"><span><?php echo $this->translate('Последний IP'); ?></span></th>
+								<th class="user_role"><span><?php echo $this->translate('Роль'); ?></span></th>
+								<th class="user_about"><span><?php echo $this->translate('О себе'); ?></span></th>
+								<th class="user_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($this->paginator as $user): ?>
+								<?php
+								$user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($user->id)), 'user_id', true);
+								$user_edit_url = $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'edit', 'user_id' => $this->escape($user->id)), 'user_action', true);
+								$user_delete_url = $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'delete', 'user_id' => $this->escape($user->id)), 'user_action', true);
+								$user_role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $user['user_role_id']), 'role_id', true);
+								?>
+								<tr>
+									<td class="user_id"><span><a href="<?php echo $user_id_url ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
+									<td class="user_login"><span><a href="<?php echo $user_id_url ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
+									<td class="user_name"><span><?php echo $this->escape($user['name']) ?></span></td>
+									<td class="user_surname"><span><?php echo $this->escape($user['surname']) ?></span></td>
+									<td class="user_last_login_ip"><span><?php echo $this->escape($user['last_login_ip']) ?></span></td>
+									<td class="user_role"><span><a href="<?php echo $user_role_id_url; ?>"><?php echo $this->escape($user['user_role_name']) ?></a></span></td>
+									<td class="user_about"><span><?php echo $this->truncate($this->escape($user['about']))->toLength(200); ?></span></td>
+									<td class="user_action">
+										<span>
+											<div class="pull-right action-buttons">
+												<div class="btn-group pull-right">
+													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+													</button>
+													<ul class="dropdown-menu slidedown">
+														<li><a href="<?php echo $user_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?php echo $user_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?php echo $user_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+													</ul>
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
