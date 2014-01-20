@@ -629,6 +629,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 	public function teamEditAction() {
 		$this->view->headTitle($this->view->translate('Редактировать команду'));
+		$this->view->pageTitle($this->view->translate('Редактировать команду'));
 
 		$request = $this->getRequest();
 		$league_id = $request->getParam('league_id');
@@ -647,8 +648,6 @@ class ChampionshipController extends App_Controller_LoaderController {
 			$championship_data = $championship->getChampionshipData($league_id, $championship_id);
 
 			if ($championship_data) {
-
-
 				$championship_team = new Application_Model_DbTable_ChampionshipTeam();
 				$championship_team_data = $championship_team->getTeamData($championship_id, $team_id);
 
@@ -762,19 +761,36 @@ class ChampionshipController extends App_Controller_LoaderController {
 							);
 							$championship_team->update($new_championship_team_data, $championship_team_where);
 
+							// Update team drivers if base team changed
+							if ($new_championship_team_data['team_id'] != $team_id) {
+
+								$championship_team_driver = new Application_Model_DbTable_ChampionshipTeamDriver();
+								$championship_team_driver_data = $championship_team_driver->getChampionshipTeamDrivers(
+										$championship_id, $team_id
+								);
+
+								foreach ($championship_team_driver_data as $driver) {
+									$new_championship_team_driver_data['team_id'] = $new_championship_team_data['team_id'];
+									$new_championship_team_driver_data['date_edit'] = $date;
+
+									$championship_where = $championship_team_driver->getAdapter()->quoteInto(
+											"championship_id = {$championship_id} and team_id = {$team_id} and user_id = {$driver->user_id}"
+									);
+									$championship_team_driver->update(
+											$new_championship_team_driver_data, $championship_where
+									);
+								}
+							}
+
 							$this->redirect(
 									$this->view->url(
 											array('controller' => 'championship', 'action' => 'team',
 										'league_id' => $league_id, 'championship_id' => $championship_id,
-										'team_id' => $team_id), 'championshipTeam', true
+										'team_id' => $new_championship_team_data['team_id']), 'championshipTeam', true
 									)
 							);
 						} else {
-							$this->messages->addError(
-									$this->view->translate(
-											'Исправьте следующие ошибки для корректного завершения операции!'
-									)
-							);
+							$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 						}
 					}
 
@@ -1309,6 +1325,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 									$championship_where = $championship_team_driver->getAdapter()->quoteInto(
 											"championship_id = {$championship_id} and team_id = {$team_id} and user_id = {$user_id}"
 									);
+
 									$championship_team_driver->update(
 											$new_championship_team_driver_data, $championship_where
 									);
