@@ -1,14 +1,14 @@
-<?php if ($this->paginator) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $track_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?></a>
-			</div>
+<div class="row">
+	<div class="col-md-12 col-lg-12">
+		<div class="clearfix m-b-10">
+			<?php
+			$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true);
+			?>
+			<a href="<?php echo $track_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить трассу'); ?></a>
 		</div>
 	</div>
+</div>
+<?php if ($this->paginator) { ?>
 	<div class="row">
 		<div class="col-md-12 col-lg-12">
 			<div class="panel panel-primary">
@@ -19,8 +19,9 @@
 					<table class="table table-striped custab">
 						<thead>
 							<tr>
-								<th class="track_id"><span>#</span></th>
+								<th class="track_id"><span>ID</span></th>
 								<th class="track_name"><span><?php echo $this->translate('Название'); ?></span></th>
+								<th class="track_year"><span><?php echo $this->translate('Год'); ?></span></th>
 								<th class="track_action"><span><?php echo $this->translate('Действие'); ?></span></th>
 							</tr>
 						</thead>
@@ -34,6 +35,7 @@
 								<tr>
 									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track['id']) ?></a></span></td>
 									<td class="track_name"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track['name']) ?></a></span></td>
+									<td class="track_year"><span><?php echo $this->escape($track['track_year']) ?></span></td>
 									<td class="track_action">
 										<span>
 											<div class="pull-right action-buttons">

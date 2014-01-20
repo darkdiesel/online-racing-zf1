@@ -89,7 +89,7 @@ class Application_Form_Team_Edit extends Zend_Form {
 		$this->addDisplayGroup(array(
 			$this->getElement('submit'),
 			$this->getElement('reset'),
-			$this->getElement('cancel')
+			$this->getElement('cancel'),
 				), 'form_actions', array());
 
 		$this->getDisplayGroup('form_actions')->setDecorators(array(

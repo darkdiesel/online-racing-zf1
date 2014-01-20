@@ -8,15 +8,11 @@
 				</tr>
 				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Год трассы'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->year_track); ?></span></td>
+					<td><span><?php echo $this->escape($this->track->track_year); ?></span></td>
 				</tr>
 				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Город'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->city); ?></span></td>
-				</tr>
-				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Страна'); ?></span></td>
-					<td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->track_url_image_round)); ?>"></span></td>
+					<td><span><?php echo $this->escape($this->track->city_id); ?></span></td>
 				</tr>
 				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
@@ -29,20 +25,25 @@
 			</tbody>
 		</table>
 		<?php
-		$edit_access = $this->checkUserAccess('track/edit');
-		$delete_access = $this->checkUserAccess('track/delete');
+		$edit_access = $this->checkUserAccess('admin/track/edit');
+		$delete_access = $this->checkUserAccess('admin/track/delete');
 
 		if ($edit_access || $delete_access) {
 			?>
 			<div class="article_controls">
 				<?php if ($edit_access) { ?>
-
-					<a href = "<?php echo $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'track', true); ?>" class = "btn btn-sm btn-primary content_edit">
+					<?php
+					$track_edit_url = $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'track_action', true);
+					?>
+					<a href = "<?php echo $track_edit_url; ?>" class = "btn btn-sm btn-primary content_edit">
 						<?php echo $this->translate('Редактировать') ?>
 					</a>
 				<?php } ?>
 				<?php if ($delete_access) { ?>
-					<a href = "<?php echo $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'track', true); ?>" class = "btn btn-sm btn-primary content_delete">
+					<?php
+					$track_delete_url = $this->url(array('controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($this->track->id)), 'track_action', true);
+					?>
+					<a href = "<?php echo $track_delete_url; ?>" class = "btn btn-sm btn-primary content_delete">
 						<?php echo $this->translate('Удалить') ?>
 					</a>
 				<?php } ?>

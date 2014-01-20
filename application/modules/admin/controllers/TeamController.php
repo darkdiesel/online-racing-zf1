@@ -58,11 +58,8 @@ class Admin_TeamController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		// form
 		$form = new Application_Form_Team_Add();
-		$form->setAction(
-				$this->view->url(
-						array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true
-				)
-		);
+		$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true));
+		
 		$team_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true);
 		$form->cancel->setAttrib('onClick', "location.href='{$team_all_url}'");
 
@@ -79,12 +76,8 @@ class Admin_TeamController extends App_Controller_LoaderController {
 				$new_team = $this->db->get('team')->createRow($new_team_data);
 				$new_team->save();
 
-				$this->redirect(
-						$this->view->url(
-								array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
-							'team_id' => $new_team->id), 'team_id', true
-						)
-				);
+				$team_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id','team_id' => $new_team->id), 'team_id', true);
+				$this->redirect($team_id_url);
 			} else {
 				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 			}
@@ -103,11 +96,7 @@ class Admin_TeamController extends App_Controller_LoaderController {
 		if ($team_data) {
 			// form
 			$form = new Application_Form_Team_Edit();
-			$form->setAction($this->view->url(
-							array('module' => 'admin', 'controller' => 'team', 'action' => 'edit',
-						'team_id' => $team_id), 'team_action', true
-			));
-
+			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'edit', 'team_id' => $team_id), 'team_action', true));
 			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $team_id), 'team_id', true)}\"");
 
 			if ($this->getRequest()->isPost()) {
@@ -145,10 +134,10 @@ class Admin_TeamController extends App_Controller_LoaderController {
 		}
 	}
 
-	// action for delete article type
+	// action for delete team
 	public function deleteAction() {
 		$this->view->headTitle($this->view->translate('Удалить'));
-		$this->view->pageTitle($this->view->translate('Удалить страну'));
+		$this->view->pageTitle($this->view->translate('Удалить команду'));
 
 		$request = $this->getRequest();
 		$team_id = (int) $request->getParam('team_id');
@@ -157,6 +146,8 @@ class Admin_TeamController extends App_Controller_LoaderController {
 
 		if ($team_data) {
 			$this->view->headTitle($team_data->name);
+			
+			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить команду')} <strong>\"{$team_data->name}\"</strong> ?");
 
 			$team_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'delete', 'team_id' => $team_id), 'team_action', true);
 			$team_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $team_id), 'team_id', true);

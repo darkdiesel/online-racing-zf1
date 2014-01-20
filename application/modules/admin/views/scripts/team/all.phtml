@@ -1,14 +1,14 @@
-<?php if ($this->paginator) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$team_id_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $team_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?></a>
-			</div>
+<div class="row">
+	<div class="col-md-12 col-lg-12">
+		<div class="clearfix m-b-10">
+			<?php
+			$team_id_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true);
+			?>
+			<a href="<?php echo $team_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?></a>
 		</div>
 	</div>
+</div>
+<?php if ($this->paginator) { ?>
 	<div class="row">
 		<div class="col-md-12 col-lg-12">
 			<div class="panel panel-primary">
