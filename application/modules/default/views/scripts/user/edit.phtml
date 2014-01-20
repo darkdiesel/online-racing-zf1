@@ -1,8 +1,3 @@
-<div class="alert alert-info alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <h4><?php echo $this->translate('Информация'); ?></h4>
-    <?php echo $this->translate('Введите новые данные и нажмите "Сохранить".'); ?>
-</div>
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1"><?php echo $this->translate('Личное'); ?></a></li>
@@ -13,18 +8,18 @@
     </ul>
     <div id="tabs-1">
         <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-1" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>" enctype="<?php echo $this->form->getEnctype(); ?>">
-            <?php echo $this->form->getDisplayGroup('personal_Inf'); ?>
-            <?php echo $this->form->tab_name->setvalue('personal_Inf'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+			<?php echo $this->form->getDisplayGroup('personal_Inf'); ?>
+			<?php echo $this->form->tab_name->setvalue('personal_Inf'); ?>
+			<?php echo $this->form->getDisplayGroup('form_actions'); ?>
         </form>
         <script>
-            $(function() {
-                $("#birthday").datepicker({
-                    showButtonPanel: true,
-                    dateFormat: "yy-mm-dd",
-                    showAnim: "clip"
-                });
-            });
+			$(function() {
+				$("#birthday").datepicker({
+					showButtonPanel: true,
+					dateFormat: "yy-mm-dd",
+					showAnim: "clip"
+				});
+			});
         </script>
     </div>
     <div id="tabs-2">
@@ -43,35 +38,35 @@
                     </tr>
                 </tbody>
             </table>
-            <?php echo $this->form->getDisplayGroup('avatar'); ?>
-            <?php echo $this->form->tab_name->setvalue('avatar'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+			<?php echo $this->form->getDisplayGroup('avatar'); ?>
+			<?php echo $this->form->tab_name->setvalue('avatar'); ?>
+			<?php echo $this->form->getDisplayGroup('form_actions'); ?>
         </form>
     </div>
     <div id="tabs-3">
         <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-3" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>" enctype="<?php echo $this->form->getEnctype(); ?>">
-            <?php echo $this->form->getDisplayGroup('contacts_Inf'); ?>
-            <?php echo $this->form->tab_name->setvalue('contacts_Inf'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+			<?php echo $this->form->getDisplayGroup('contacts_Inf'); ?>
+			<?php echo $this->form->tab_name->setvalue('contacts_Inf'); ?>
+			<?php echo $this->form->getDisplayGroup('form_actions'); ?>
         </form>
     </div>
     <div id="tabs-4">
         <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-4" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>" enctype="<?php echo $this->form->getEnctype(); ?>">
-            <?php echo $this->form->getDisplayGroup('social_netwoks'); ?>
-            <?php echo $this->form->tab_name->setvalue('social_netwoks'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+			<?php echo $this->form->getDisplayGroup('social_netwoks'); ?>
+			<?php echo $this->form->tab_name->setvalue('social_netwoks'); ?>
+			<?php echo $this->form->getDisplayGroup('form_actions'); ?>
         </form>
     </div>
     <div id="tabs-5">
         <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-5" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>" enctype="<?php echo $this->form->getEnctype(); ?>">
-            <?php echo $this->form->getDisplayGroup('additional_Inf'); ?>
-            <?php echo $this->form->tab_name->setvalue('additional_Inf'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+			<?php echo $this->form->getDisplayGroup('additional_Inf'); ?>
+			<?php echo $this->form->tab_name->setvalue('additional_Inf'); ?>
+			<?php echo $this->form->getDisplayGroup('form_actions'); ?>
         </form>
     </div>
 </div>
 <script type="text/javascript" >
-    jQuery(document).ready(function() {
-        $('#tabs').tabs();
-    });
+	jQuery(document).ready(function() {
+		$('#tabs').tabs();
+	});
 </script>

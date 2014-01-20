@@ -179,7 +179,7 @@ class UserController extends App_Controller_LoaderController {
 				$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
 				$mail->setBodyHtml($bodyText);
 				$mail->send();
-				
+
 				//clear all messages on the page
 				$this->messages->clearMessages();
 
@@ -199,7 +199,7 @@ class UserController extends App_Controller_LoaderController {
 
 		$this->view->headTitle($this->view->translate('Создание нового пароля'));
 		$this->view->pageTitle($this->view->translate('Создание нового пароля'));
-		
+
 		$this->messages->addInfo($this->view->translate('Введите данные, полученные на ваш регистрационный e-mail в форму ниже для создания нового пароля.'));
 		$this->messages->addInfo($this->view->translate('Если вы не получали писем - проверьте папку спам на его наличия в ней и <strong>обозначте его как <u>"не смам"</u></strong>.'));
 
@@ -249,7 +249,7 @@ class UserController extends App_Controller_LoaderController {
 					$storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
 					$storage = $auth->getStorage();
 					$storage->write($storage_data);
-					
+
 					//clear all messages on the page
 					$this->messages->clearMessages();
 
@@ -271,21 +271,18 @@ class UserController extends App_Controller_LoaderController {
 		$this->view->headTitle($this->view->translate('Редактирование профиля'));
 		$this->view->pageTitle($this->view->translate('Редактирование профиля'));
 
+		$this->messages->addInfo($this->view->translate('Введите новые данные и нажмите "Сохранить".'));
+
 		$request = $this->getRequest();
-		$form = new Application_Form_User_Edit();
 
 		$user = new Application_Model_DbTable_User();
 
+		$form = new Application_Form_User_Edit();
 		$form->isValid($request->getPost());
-		$form->setAction(
-				$this->view->url(
-						array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true
-				)
-		);
+		$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true));
 
 		if ($this->getRequest()->isPost()) {
 			if ($form->isValidPartial($request->getPost())) {
-
 				$user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage()->read()->id);
 				$date = date('Y-m-d H:i:s');
 				switch ($request->getParam('tab_name')) {
@@ -302,7 +299,7 @@ class UserController extends App_Controller_LoaderController {
 								$filterRename->filter($file['avatar_load']['destination'] . '/' . $file['avatar_load']['name']);
 
 								$user_data = array(
-									'avatar_load' => '/img/data/users/avatars/' . $newName,
+									'avatar_load' => '/data-content/data-uploads/user/avatar_upload/' . $newName,
 								);
 
 								$user_avatar_file = $user->getUserAvatarLoad(Zend_Auth::getInstance()->getStorage()->read()->id);
@@ -352,11 +349,11 @@ class UserController extends App_Controller_LoaderController {
 						$user->update($user_data, $user_where);
 						break;
 					default:
-						$this->view->errMessage .= $this->view->translate('Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.');
+						$this->messages->addWarning($this->view->translate('Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.'));
 						break;
 				}
 			} else {
-				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+				$this->messages->addWarning($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 			}
 		}
 
@@ -368,7 +365,6 @@ class UserController extends App_Controller_LoaderController {
 			$form->birthday->setValue($user_data->birthday);
 			$form->city->setValue($user_data->city);
 			$form->avatar_type->setValue($user_data->avatar_type);
-			//$form->avatar_load->setValue($user_data->avatar_load);
 			$form->avatar_link->setValue($user_data->avatar_link);
 			$form->avatar_gravatar_email->setValue($user_data->avatar_gravatar_email);
 			$form->skype->setValue($user_data->skype);
@@ -378,7 +374,6 @@ class UserController extends App_Controller_LoaderController {
 			$form->about->setValue($user_data->about);
 			$this->view->user_id = $user_data->id;
 
-
 			$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'));
 
 			foreach ($countries as $country):
@@ -387,7 +382,7 @@ class UserController extends App_Controller_LoaderController {
 
 			$form->country->setValue($user_data->country_id);
 		} else {
-			$this->view->errMessage .= $this->view->translate('Произошла ошибка! Свяжитесь с администратором для ее устранения.');
+			$this->messages->addWarning($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 
 		$this->view->form = $form;
@@ -396,6 +391,7 @@ class UserController extends App_Controller_LoaderController {
 	public function allAction() {
 		$this->view->headTitle($this->view->translate('Все'));
 		$this->view->pageTitle($this->view->translate('Гонщики'));
+
 		// pager settings
 		$page_count_items = 12;
 		$page = $this->getRequest()->getParam('page');

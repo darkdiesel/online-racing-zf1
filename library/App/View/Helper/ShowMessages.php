@@ -48,9 +48,6 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 					case 'warning' :
 						$this->_warning_messages[] = $message ['text'];
 						break;
-					default :
-						//echo '<li>' . $message ['text'] . "</li>";
-						break;
 				}
 			}
 		}
@@ -60,13 +57,14 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 
 	public function __toString() {
 		$this->_messages_html = '';
-		$button = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button>";
+		$button = "<button type='button' class='close' data-dismiss='alert'>×</button>";
+		$devider = "<hr class='message-inner-separator'>";
 
 		if (count($this->_info_messages)) {
-			$this->_messages_html .= "<div class=\"alert alert-block alert-info\">";
+			$this->_messages_html .= "<div class='alert alert-block alert-info'>";
 			$this->_messages_html .= $button;
-			$this->_messages_html .= "<h4><i class=\"fa fa-info\"></i> {$this->view->translate('Информация!')}</h4>";
-			$this->_messages_html .= "";
+			$this->_messages_html .= "<h4><i class='fa fa-info fa-lg'></i> {$this->view->translate('Информация!')}</h4>";
+			$this->_messages_html .= $devider;
 
 			foreach ($this->_info_messages as $message) {
 				$this->_messages_html .= "<li>{$message}</li>";
@@ -76,10 +74,10 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 		}
 
 		if (count($this->_success_messages)) {
-			$this->_messages_html .= "<div class=\"alert alert-block alert-success\">";
+			$this->_messages_html .= "<div class'alert alert-block alert-success'>";
 			$this->_messages_html .= $button;
-			$this->_messages_html .= "<h4><i class=\"fa fa-check\"></i> {$this->view->translate('Успех!')}</h4>";
-			$this->_messages_html .= "";
+			$this->_messages_html .= "<h4><i class='fa fa-check fa-lg'></i> {$this->view->translate('Успех!')}</h4>";
+			$this->_messages_html .= $devider;
 
 			foreach ($this->_success_messages as $message) {
 				$this->_messages_html .= "<li>{$message}</li>";
@@ -89,10 +87,10 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 		}
 
 		if (count($this->_warning_messages)) {
-			$this->_messages_html .= "<div class=\"alert alert-block alert-warning\">";
+			$this->_messages_html .= "<div class='alert alert-block alert-warning'>";
 			$this->_messages_html .= $button;
-			$this->_messages_html .= "<h4><i class=\"fa fa-warning-sign\"></i> {$this->view->translate('Предупреждение!')}</h4>";
-			$this->_messages_html .= "";
+			$this->_messages_html .= "<h4><i class='fa fa-exclamation-triangle fa-lg'></i> {$this->view->translate('Предупреждение!')}</h4>";
+			$this->_messages_html .= $devider;
 
 			foreach ($this->_warning_messages as $message) {
 				$this->_messages_html .= "<li>{$message}</li>";
@@ -102,9 +100,10 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 		}
 
 		if (count($this->_error_messages)) {
-			$this->_messages_html .= "<div class=\"alert alert-block alert-danger\">";
+			$this->_messages_html .= "<div class='alert alert-block alert-danger'>";
 			$this->_messages_html .= $button;
-			$this->_messages_html .= "<h4><i class=\"fa fa-exclamation-sign\"></i> {$this->view->translate('Ошибка!')}</h4>";
+			$this->_messages_html .= "<h4><i class='fa fa-exclamation-sign fa-lg'></i> {$this->view->translate('Ошибка!')}</h4>";
+			$this->_messages_html .= $devider;
 
 			foreach ($this->_error_messages as $message) {
 				$this->_messages_html .= "<li>{$message}</li>";
