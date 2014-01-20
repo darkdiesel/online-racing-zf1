@@ -13,12 +13,10 @@
     background-image:url("../img/default_background.png");
 }
 /* Common class for item_block */
-.block-item{
-    position:relative;
-    margin:0 0 10px;
-    background:none repeat #FFFFFF;
-    box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
-    border:1px solid #E7E2E2;
+.block-item{position:relative; background:none repeat #FFFFFF;}
+.block-item-border{
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.15), -1px 0 0 rgba(0, 0, 0, 0.03), 1px 0 0 rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.12);
+	border:1px solid #E7E2E2;
 }
     .block-item .block-item_header{
         background-image:linear-gradient(to bottom, #3B3B3B, #292929);
@@ -26,19 +24,15 @@
         font-family:Verdana;
         color:#FFFFFF;
     }
-        .block-item .block-item_header .block-item_title{
-            padding:10px;
-        }
+        .block-item .block-item_header .block-item_title{padding:10px;}
         .block-item .block-item_header .block-item_title, .block-item .block-item_header .block-item_title a{
             color:#FFFFFF;
             font-size:14px;
             font-weight:bold;
         }
             
-    .block-item-content{
-        overflow:auto;
-        padding:7px;
-    }
+    .block-item-content{overflow:auto; padding:7px;}
+
 /* UI for blocks*/
 .block_ui_gray{
     border:1px solid #CACACA;
@@ -178,7 +172,7 @@
 }
     .configure-block-item-links .configure-block-item-link{
         opacity:0.5;
-        color:#B39434;
+        color:red;
     }
     .configure-block-item-links ul{
         margin:0;

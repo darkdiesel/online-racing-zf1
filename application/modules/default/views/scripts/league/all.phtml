@@ -1,57 +1,62 @@
 <?php
 if ($this->paginator) {
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-    foreach ($this->paginator as $league):
-        ?>
-        <div class="league_item block-item">
-            <?php
-            echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
-            ?>
-            <div class="block-item_header">
-                <div class="block-item_title">
-                    <i class="fa fa-refresh"></i>
-                    <a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>"><?php echo $this->escape($league['name']); ?></a>
-                </div>
-                <div class="block-item_info_header">
-                    <div class="content_category block-item_info_header_item">
-                        <span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-                        <?php echo $this->translate('Лига'); ?>
-                    </div>
-                    <div class="league_admin block-item_info_header_item">
-                        <span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор лиги') ?>: </span>
-                        <a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league['user_id'])), 'userId', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
-                    </div>
-                </div>
-            </div>
-            <div class="block-item-content">
-                <?php if ($this->escape($league['url_logo']) != '') { ?>
-                    <div class="league_all_logo_wrapper_200_200 img-wrapper-200-200 img-thumbnail pull-left overflow-hide">
-                        <img class="league_all_logo_200 img-size-200 img-responsive" src="<?php echo $this->baseUrl($this->escape($league['url_logo'])); ?>">
-                    </div>
-                <?php } ?>
-                <div class="league_description block-content-text">
-                    <?php
-                    if ($league['description']) {
-                        echo $this->RenderContentTypeText($league['description'], 'text', 500);
-                    } else {
-                        echo $this->translate("Нет описания.");
-                    }
-                    ?>
-                </div>
-                <div class="pull-right">
-                    <a href = "<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>" class = "btn btn-sm btn-primary block-content-button-more"><?php echo $this->translate('Подробнее...') ?></a>
-                </div>
-                <div class="league_info block-item-info-bottom">
-                    <div class="league_date league_info_item block-item-info-bottom-item">
-                        <span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
-                        </span><?php echo $this->escape($league['date_create']); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php
-    endforeach;
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-    ?>
+	echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+	foreach ($this->paginator as $league):
+		?>
+		<div class="panel panel-default panel-primary block-item">
+			<?php
+			echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
+			?>
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-refresh"></i>
+					<a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>"><?php echo $this->escape($league['name']); ?></a>
+				</h3>
+
+			</div>
+			<div class="panel-body">
+				<?php if ($this->escape($league['url_logo']) != '') { ?>
+					<div class="league_all_logo_wrapper_200_200 img-wrapper-200-200 img-thumbnail pull-left overflow-hide">
+						<img class="league_all_logo_200 img-size-200 img-responsive" src="<?php echo $this->baseUrl($this->escape($league['url_logo'])); ?>">
+					</div>
+				<?php } ?>
+				<div class="league_description">
+					<?php
+					if ($league['description']) {
+						echo $this->RenderContentTypeText($league['description'], 'text', 500);
+					}
+					?>
+				</div>
+
+				<div class="pull-right m-t-10">
+					<?php
+					$league_id_all_url = $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true);
+					?>
+					<a href = "<?php echo $league_id_all_url ?>" class = "btn btn-sm btn-primary block-content-button-more"><?php echo $this->translate('Подробнее') ?> <i class="fa fa-angle-double-right"></i></a>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<small>
+					<div class="pull-left">
+						<span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
+						</span><?php echo $this->escape($league['date_create']); ?>
+					</div>
+					<div class="pull-left m-l-10">
+						<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+						<?php echo $this->translate('Лига'); ?>
+					</div>
+					<div class="pull-left m-l-10">
+						<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор лиги') ?>: </span>
+						<a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league['user_id'])), 'userId', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
+					</div>
+				</small>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+		<?php
+	endforeach;
+	echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
+	?>
 <?php }
 ?>

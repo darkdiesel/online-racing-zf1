@@ -74,7 +74,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 		}
 
 		if (count($this->_success_messages)) {
-			$this->_messages_html .= "<div class'alert alert-block alert-success'>";
+			$this->_messages_html .= "<div class='alert alert-block alert-success'>";
 			$this->_messages_html .= $button;
 			$this->_messages_html .= "<h4><i class='fa fa-check fa-lg'></i> {$this->view->translate('Успех!')}</h4>";
 			$this->_messages_html .= $devider;
@@ -102,7 +102,7 @@ class App_View_Helper_ShowMessages extends Zend_View_Helper_Abstract {
 		if (count($this->_error_messages)) {
 			$this->_messages_html .= "<div class='alert alert-block alert-danger'>";
 			$this->_messages_html .= $button;
-			$this->_messages_html .= "<h4><i class='fa fa-exclamation-sign fa-lg'></i> {$this->view->translate('Ошибка!')}</h4>";
+			$this->_messages_html .= "<h4><i class='fa fa-exclamation-circle fa-lg'></i> {$this->view->translate('Ошибка!')}</h4>";
 			$this->_messages_html .= $devider;
 
 			foreach ($this->_error_messages as $message) {
