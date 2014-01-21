@@ -15,6 +15,8 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$league_data = $league->getLeagueData($league_id);
 
 		if ($league_data) {
+			$this->view->league_data = $league_data;
+			
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
 			$this->view->headTitle($this->view->translate('Чемпионат'));
 
@@ -22,7 +24,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 			$championship_data = $championship->getChampionshipData($league_id, $championship_id);
 
 			if ($championship_data) {
-				$this->view->championship = $championship_data;
+				$this->view->championship_data = $championship_data;
 				$this->view->headTitle($championship_data->name);
 				$this->view->pageTitle("{$this->view->translate('Чемпионат')} :: {$championship_data->name}");
 
