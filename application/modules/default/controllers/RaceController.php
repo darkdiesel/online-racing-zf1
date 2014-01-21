@@ -58,7 +58,7 @@ class RaceController extends App_Controller_LoaderController {
 						$newRace = $race->createRow($new_race_data);
 						$newRace->save();
 						
-						$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'leagueid' => $league_data->id, 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'championshipRaceId', true));
+						$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $league_data->id, 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'championshipRaceId', true));
 					} else {
 						$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 					}
