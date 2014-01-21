@@ -101,8 +101,8 @@
     	</div>
     </div>
     <!-- Races start -->
+	<?php if (count($this->paginator)) { ?>
     <div class="section-title"><?php echo $this->translate('Гонки чемпионата') ?></div>
-    <?php if (count($this->paginator)) { ?>
 	<?php foreach ($this->paginator as $race): ?>
 	    <div class="race_item block-item">
 		<?php
@@ -148,13 +148,6 @@
 	<?php endforeach; ?>
 	<?php
 	echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-    } else {
-	?>
-	<div class="alert alert-info alert-block">
-	    <button type="button" class="close" data-dismiss="alert">×</button>
-	    <h4><?php echo $this->translate('Информация!'); ?></h4>
-	    <?php echo $this->translate('Еще не создано гонок в этом чемпионате!'); ?>
-	</div>
-    <?php } ?>
+    } ?>
     <!-- Races end -->
 <?php } ?>

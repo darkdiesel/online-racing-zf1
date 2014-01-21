@@ -148,8 +148,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 				), "league/all/page/%s.html"
 		));
 
-
-
 		//championship controller routers
 		$router->addRoute(
 				'championship', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/([^\/]+)\.html', array(

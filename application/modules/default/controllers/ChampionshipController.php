@@ -39,6 +39,10 @@ class ChampionshipController extends App_Controller_LoaderController {
 				$this->view->paginator = $race->getRacesPagerByChampionship(
 						$page_count_items, $page, $page_range, $items_order, $championship_id
 				);
+				
+				if (!count($this->view->paginator)){
+					$this->messages->addInfo($this->view->translate('В чемпионате не найденого гонок!'));
+				}
 			} else {
 				$this->messages->addError($this->view->translate('Запрашиваемый чемпионат не существует!'));
 				$this->view->headTitle(
@@ -593,7 +597,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 						$this->redirect(
 								$this->view->url(
-										array('controller' => 'championship', 'action' => 'id', 'league_id' => $league_id,
+										array('module' => 'default','controller' => 'championship', 'action' => 'id', 'league_id' => $league_id,
 									'championship_id' => $championship_id), 'championship', true
 								)
 						);
@@ -621,9 +625,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 			$this->view->headTitle(
 					"{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}"
 			);
-			$this->view->pageTitle(
-					"{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}"
-			);
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
 	}
 
