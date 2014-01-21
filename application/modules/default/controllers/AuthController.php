@@ -94,12 +94,25 @@ class AuthController extends App_Controller_LoaderController {
 
 							$this->view->showMessages()->clearMessages();
 							$this->messages->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
+							
+							$ckfinder = $this->view->checkUserAccess('ckfinder');
+							
+							if ($ckfinder) {
+								$ckFinderSession = new Zend_Session_Namespace('CKFinder');
+								/** Disable CKFinder * */
+								$ckFinderSession->allowed = true;
+							} else {
+								$ckFinderSession = new Zend_Session_Namespace('CKFinder');
+								/** Disable CKFinder * */
+								$ckFinderSession->allowed = false;
+							}
 
 							$this->redirect($request->getParam('redirectTo'));
 						} else {
 							$form->populate($request->getPost());
 							$reg_url = $this->view->url(array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true);
 							$rest_pass_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true);
+							
 							$this->messages->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
 									. "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$rest_pass_url}\">{$this->view->translate('Забыли пароль?')}</a>"
 									. " <a class=\"btn btn-danger btn-sm\" href=\"{$reg_url}\">{$this->view->translate('Зарегистрироваться?')}</a>");

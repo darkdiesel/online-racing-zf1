@@ -2,7 +2,7 @@
     <span style="font-size:50px">Online-<span style="color:#C41D1D">Racing</span>.Net</span>
     <p><span style="color:#C41D1D">sim</span>-racing <span style="color:#C41D1D">portal</span></p>
 </div>
-<div class="block-item">
+<div class="block-item m-t-15">
     <div class="section-title m-b-15"><?php echo $this->translate('Наши лиги') ?>:</div>
     <div class="row">
 		<?php foreach ($this->leagues as $league): ?>
@@ -24,7 +24,7 @@
 		<?php endforeach; ?>
     </div>
 </div>
-<div class="block-item">
+<div class="block-item m-t-15">
     <div class="section-title m-b-15"><?php echo $this->translate('Новости нашего портала') ?>:</div>
 	<?php if (count($this->last_posts) != 0) { ?>
 		<div id="home-posts-last">
@@ -73,7 +73,7 @@
 		</div>
 	<?php } ?>
 </div>
-<div class="block-item">
+<div class="block-item m-t-15">
     <div class="section-title"><?php echo $this->translate('Новости из мира Формулы-1') ?>:</div>
     <div id="rss_block">
 		<?php for ($i = 1; $i < $this->rss_count; $i++) { ?>

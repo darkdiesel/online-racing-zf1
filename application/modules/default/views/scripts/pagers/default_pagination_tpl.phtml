@@ -1,44 +1,42 @@
 <?php if ($this->pageCount): ?>
-    <div class="block-item">
-        <ul class="pagination pagination-sm">
-            <li class="disabled"><a href="#"><?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?> <?php echo $this->translate('из'); ?> <?php echo $this->totalItemCount; ?></a></li>
+	<ul class="pagination pagination-sm">
+		<li class="disabled"><a href="#"><?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?> <?php echo $this->translate('из'); ?> <?php echo $this->totalItemCount; ?></a></li>
 
-            <!-- Ссылка на первую страницу -->
-	    <?php if (isset($this->previous)): ?>
-		<li><a href="<?php echo $this->url(array('page' => $this->first)); ?>"><?php echo $this->translate('Первая'); ?></a></li>
-	    <?php else: ?>
-		<li class="active"><a href="#"><?php echo $this->translate('Первая'); ?></a></li>
-	    <?php endif; ?>
-
-            <!-- Ссылка на предыдущую страницу -->
-	    <?php if (isset($this->previous)): ?>
-		<li><a href="<?php echo $this->url(array('page' => $this->previous)); ?>">«</a></li>
-	    <?php else: ?>
-		<li class="disabled"><a href="#">«</a></li>
-	    <?php endif; ?>
-
-            <!-- Нумерованные ссылки на страницы -->
-	    <?php foreach ($this->pagesInRange as $page): ?>
-		<?php if ($page != $this->current): ?>
-	    	<li><a href="<?php echo $this->url(array('page' => $page)); ?>"><?php echo $page; ?></a></li>
+		<!-- Ссылка на первую страницу -->
+		<?php if (isset($this->previous)): ?>
+			<li><a href="<?php echo $this->url(array('page' => $this->first)); ?>"><?php echo $this->translate('Первая'); ?></a></li>
 		<?php else: ?>
-	    	<li class="active"><a href="#"><?php echo $page; ?></a></li> 
+			<li class="active"><a href="#"><?php echo $this->translate('Первая'); ?></a></li>
 		<?php endif; ?>
-	    <?php endforeach; ?>
 
-            <!-- Ссылка на следующую страницу -->
-	    <?php if (isset($this->next)): ?>
-		<li><a href="<?php echo $this->url(array('page' => $this->next)); ?>">»</a></li>
-	    <?php else: ?>
-		<li class="disabled"><a href="#">»</a></li>
-	    <?php endif; ?>
-
-            <!-- Ссылка на последнюю страницу -->
-	    <?php if (isset($this->next)): ?>
-		<li><a href="<?php echo $this->url(array('page' => $this->last)); ?>"><?php echo $this->translate('Последняя'); ?></a></li>
-	    <?php else: ?>
-		<li class="active"><a href="#"><?php echo $this->translate('Последняя'); ?></a></li>
+		<!-- Ссылка на предыдущую страницу -->
+		<?php if (isset($this->previous)): ?>
+			<li><a href="<?php echo $this->url(array('page' => $this->previous)); ?>">«</a></li>
+		<?php else: ?>
+			<li class="disabled"><a href="#">«</a></li>
 		<?php endif; ?>
-        </ul>
-    </div>
+
+		<!-- Нумерованные ссылки на страницы -->
+		<?php foreach ($this->pagesInRange as $page): ?>
+			<?php if ($page != $this->current): ?>
+				<li><a href="<?php echo $this->url(array('page' => $page)); ?>"><?php echo $page; ?></a></li>
+			<?php else: ?>
+				<li class="active"><a href="#"><?php echo $page; ?></a></li> 
+			<?php endif; ?>
+		<?php endforeach; ?>
+
+		<!-- Ссылка на следующую страницу -->
+		<?php if (isset($this->next)): ?>
+			<li><a href="<?php echo $this->url(array('page' => $this->next)); ?>">»</a></li>
+		<?php else: ?>
+			<li class="disabled"><a href="#">»</a></li>
+		<?php endif; ?>
+
+		<!-- Ссылка на последнюю страницу -->
+		<?php if (isset($this->next)): ?>
+			<li><a href="<?php echo $this->url(array('page' => $this->last)); ?>"><?php echo $this->translate('Последняя'); ?></a></li>
+		<?php else: ?>
+			<li class="active"><a href="#"><?php echo $this->translate('Последняя'); ?></a></li>
+			<?php endif; ?>
+	</ul>
 <?php endif; ?>

@@ -40,7 +40,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 		if ($paginator) {
 			$this->view->paginator = $paginator;
 		} else {
-			$this->messages->addError("{$this->view->translate('Запрашиваемые трассы на сайте не найдены!')}");
+			$this->messages->addInfo("{$this->view->translate('Запрашиваемые трассы на сайте не найдены!')}");
 		}
 	}
 

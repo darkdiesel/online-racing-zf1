@@ -1,9 +1,7 @@
-<?php
-if ($this->paginator) {
-	echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-	foreach ($this->paginator as $league):
+<?php if ($this->paginator) { ?>
+	<?php foreach ($this->paginator as $league):
 		?>
-		<div class="panel panel-default panel-primary block-item">
+		<div class="panel panel-default panel-inverse block-item">
 			<?php
 			echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
 			?>
@@ -12,11 +10,10 @@ if ($this->paginator) {
 					<i class="fa fa-refresh"></i>
 					<a href="<?php echo $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true); ?>"><?php echo $this->escape($league['name']); ?></a>
 				</h3>
-
 			</div>
 			<div class="panel-body">
 				<?php if ($this->escape($league['url_logo']) != '') { ?>
-					<div class="league_all_logo_wrapper_200_200 img-wrapper-200-200 img-thumbnail pull-left overflow-hide">
+					<div class="league_all_logo_wrapper_200_200 img-wrapper-200-200 img-thumbnail pull-left overflow-hide m-r-5">
 						<img class="league_all_logo_200 img-size-200 img-responsive" src="<?php echo $this->baseUrl($this->escape($league['url_logo'])); ?>">
 					</div>
 				<?php } ?>
@@ -27,12 +24,11 @@ if ($this->paginator) {
 					}
 					?>
 				</div>
-
 				<div class="pull-right m-t-10">
 					<?php
 					$league_id_all_url = $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league['id']), 'page' => 1), 'leagueIdAll', true);
 					?>
-					<a href = "<?php echo $league_id_all_url ?>" class = "btn btn-sm btn-primary block-content-button-more"><?php echo $this->translate('Подробнее') ?> <i class="fa fa-angle-double-right"></i></a>
+					<a href = "<?php echo $league_id_all_url ?>" class = "btn btn-sm btn-inverse block-content-button-more"><?php echo $this->translate('Подробнее') ?> <i class="fa fa-angle-double-right"></i></a>
 				</div>
 			</div>
 			<div class="panel-footer">
@@ -53,10 +49,11 @@ if ($this->paginator) {
 				<div class="clearfix"></div>
 			</div>
 		</div>
-
-		<?php
-	endforeach;
-	echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-	?>
-<?php }
-?>
+	<?php endforeach; ?>
+	<div class="block-item m-t-15">
+		<div class="pull-right">
+			<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+<?php } ?>

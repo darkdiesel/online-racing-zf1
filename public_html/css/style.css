@@ -260,6 +260,23 @@ label.valid {
 .p-r-15{padding-right:15px!important;}
 .p-all-15{padding:15px!important;}
 
+/* Bootstrap 3 styles */
+/* Panels */
+.panel-inverse{border-color:#363636;}
+.panel-inverse > .panel-heading {background-color:#363636; border-color:#363636; color:#FFFFFF;}
+.panel-inverse > .panel-heading + .panel-collapse .panel-body{border-top-color:#363636;}
+.panel-inverse > .panel-footer + .panel-collapse .panel-body{border-bottom-color:#363636;}
+
+/* Buttons */
+.btn-inverse{background-color: #363636;; border-color: #444444; color: #FFFFFF;}
+.btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active, .btn-inverse.active, .open .dropdown-toggle.btn-inverse {
+	background-color:#222222; border-color:#444444; color:#FFFFFF;}
+.btn-inverse:active, .btn-inverse.active, .open .dropdown-toggle.btn-inverse {background-image:none;}
+.btn-inverse.disabled, .btn-inverse[disabled], fieldset[disabled] .btn-inverse, .btn-inverse.disabled:hover, .btn-inverse[disabled]:hover, fieldset[disabled] .btn-inverse:hover, .btn-inverse.disabled:focus, .btn-inverse[disabled]:focus, fieldset[disabled] .btn-inverse:focus, .btn-inverse.disabled:active, .btn-inverse[disabled]:active, fieldset[disabled] .btn-inverse:active, .btn-inverse.disabled.active, .btn-inverse.active[disabled], fieldset[disabled] .btn-inverse.active {
+	background-color:#363636;  border-color:#444444;
+}
+.btn-inverse .badge{background-color:#FFFFFF; color:#363636;}
+
 /* Classes for bootstrap messaages */
 hr.message-inner-separator{clear:both; margin-top:10px; margin-bottom:13px; border:0; height:1px;
 	background-image:-webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
