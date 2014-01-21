@@ -43,8 +43,12 @@ function CheckAuthentication()
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
 // fully functional, in demo mode.
-$config['LicenseName'] = '';
-$config['LicenseKey'] = '';
+
+$config['LicenseName'] = $_SERVER['HTTP_HOST'];
+//$config['LicenseName'] = "Online-Racing:8080";
+//$config['LicenseKey'] = 'CF010000L00AV000000000000Y0'; // For Online-Racing:8080
+//$config['LicenseKey'] = 'NU090000S00LD000000000000Q0'; // For Online-Racing
+$config['LicenseKey'] = 'CJ0K00001001100000000000060'; // For Online-Racing.Net
 
 /*
  Uncomment lines below to enable PHP error reporting and displaying PHP errors.
@@ -68,7 +72,8 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseUrl = 'http://online-racing/data-content/';
+//$baseUrl = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST'].'/data-content/';
+$baseUrl = "http://".$_SERVER['HTTP_HOST'].'/data-content/';
 
 /*
 $baseDir : the path to the local directory (in the server) which points to the
