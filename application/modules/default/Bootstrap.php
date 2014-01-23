@@ -226,26 +226,10 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		
 		//TRACK CONTROLLER ROUTERS
 		$router->addRoute(
-				'defaultChampionshipRaceId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)\.html', array(
-			'module' => 'default',
-			'controller' => 'race',
-			'controller' => 'id',
-			1 => 0,
-			2 => 0,
-			3 => 0,
-				), array(
-			'league_id' => 1,
-			'championship_id' => 2,
-			'race_id' => 3,
-				),
-			"league/%d/championship/%d/race/%d.html"
-				)
-		);
-		
-		$router->addRoute(
 				'defaultChampionshipRaceAction', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\w*)\.html', array(
 			'module' => 'default',
 			'controller' => 'race',
+			'action' => 'add',
 			1 => 0,
 			2 => 0,
 				), array(
@@ -258,10 +242,28 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 		
 		$router->addRoute(
+				'defaultChampionshipRaceId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)\.html', array(
+			'module' => 'default',
+			'controller' => 'race',
+			'action' => 'id',
+			1 => 0,
+			2 => 0,
+			3 => 0,
+				), array(
+			'league_id' => 1,
+			'championship_id' => 2,
+			'race_id' => 3,
+				),
+			"league/%d/championship/%d/race/%d.html"
+				)
+		);
+		
+		
+		
+		$router->addRoute(
 				'defaultChampionshipRaceIdAction', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)/(\w*)\.html', array(
 			'module' => 'default',
 			'controller' => 'race',
-			'controller' => 'id',
 			1 => 0,
 			2 => 0,
 			3 => 0,

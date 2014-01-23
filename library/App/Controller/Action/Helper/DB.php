@@ -22,7 +22,7 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			'privilege' => '',
 			'team' => '',
 			'track' => '',
-			'championship_race',
+			'championship_race' => '',
 		);
 	}
 

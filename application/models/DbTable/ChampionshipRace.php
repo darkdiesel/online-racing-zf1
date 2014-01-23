@@ -63,7 +63,7 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 				->join(array('t' => 'track'), $this->db_href . '.track_id = t.id', array('track_name' => 't.name',
 					'track_country_id' => 't.country_id',
 					'track_url_scheme' => 't.url_track_scheme'))
-				->join(array('c' => 'country'), 'c.id = t.country_id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+				->joinLeft(array('c' => 'country'), 'c.id = t.country_id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
 					'country_url_image_round' => 'c.url_image_round',))
 				->where($idencity_data);
 
@@ -104,7 +104,7 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 		if ($idencity) {
 			if (is_array($idencity)) {
 				foreach ($idencity as $field => $value) {
-					if ($idencity_data) {
+					if (is_array($value)) {
 						if (isset($value['condition'])) {
 							if ($value['condition']) {
 								$condition = $value['condition'];
@@ -114,10 +114,15 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 						} else {
 							$condition = "OR";
 						}
-
-						$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
+						$value = $value['value'];
 					} else {
-						$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value['value']);
+						$condition = "OR";
+					}
+
+					if ($idencity_data) {
+						$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
+					} else {
+						$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value);
 					}
 				}
 			} elseif (is_int($idencity) || is_string($idencity)) {
@@ -156,14 +161,13 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 		$select = $model->select()
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
-				->join(array('t' => 'track'), $this->db_href . '.track_id = t.id', 
-						array(
-							'track_name' => 't.name',
-							'track_country_id' => 't.country_id',
-							'track_url_scheme' => 't.url_track_scheme'
+				->join(array('t' => 'track'), $this->db_href . '.track_id = t.id', array(
+					'track_name' => 't.name',
+					'track_country_id' => 't.country_id',
+					'track_url_scheme' => 't.url_track_scheme'
 						)
 				)
-				->joinleft(array('c' => 'country'), 't.country_id = c.id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+				->joinLeft(array('c' => 'country'), 't.country_id = c.id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
 			'country_url_image_round' => 'c.url_image_round',));
 
 		if ($fields) {

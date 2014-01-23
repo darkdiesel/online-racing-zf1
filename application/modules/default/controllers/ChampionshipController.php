@@ -10,6 +10,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = (int) $request->getParam('championship_id');
+		//$page $request->getParam('page');
 
 		$league = new Application_Model_DbTable_League();
 		$league_data = $league->getLeagueData($league_id);
@@ -49,8 +50,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 				
 				if ($championship_races_data){
 					$this->view->championship_races_data = $championship_races_data;
-				}
-				else{
+				} else {
 					$this->messages->addInfo($this->view->translate('В этом чемпионате нет гонок!'));
 				}
 			} else {

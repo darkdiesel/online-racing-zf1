@@ -1,5 +1,15 @@
-<div id="race_page" class="page">
-    <div class="page_content">
-        
-    </div>
-</div>
+<?php if ($this->race_data): ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="block-item">
+				<div class="panel-body">
+					<?php if ($this->escape($this->race_data->track_url_scheme) != '') : ?>
+						<div class="m-b-15 block-align-center text-align-center">
+							<img class="img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_scheme)); ?>">
+						</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

@@ -1,0 +1,8 @@
+getItem:
+
+$this->db->get('championship_race')->getItem(
+				array(
+					'id' => $race_id,
+					'championship_id' => array('value' => $championship_id,
+						'condition' => "AND")
+				));

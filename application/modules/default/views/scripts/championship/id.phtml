@@ -117,15 +117,15 @@
 							</h3>
 						</div>
 						<div class="panel-body">
-							<?php if ($this->escape($race['track_url_scheme']) != '') : ?>
+							<?php if ($this->escape($race->track_url_scheme) != '') : ?>
 								<div class="championship_all_logo_wrapper_150_150 img-wrapper-150-150 pull-left overflow-hide m-r-5">
-									<img class="img-size-150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
+									<img class="img-size-150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race->track_url_scheme)); ?>">
 								</div>
 							<?php endif; ?>
 							<div class="race_description">
 								<?php
-								if ($race['description']) {
-									echo $this->RenderContentTypeText($race['description'], 'bbcode');
+								if ($race->description) {
+									echo $this->RenderContentTypeText($race->description, 'bbcode');
 								}
 								?>
 							</div>

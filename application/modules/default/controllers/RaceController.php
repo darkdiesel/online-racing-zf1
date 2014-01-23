@@ -8,7 +8,57 @@ class RaceController extends App_Controller_LoaderController {
 	}
 
 	public function idAction() {
-		// action body
+		$request = $this->getRequest();
+		$league_id = (int) $request->getParam('league_id');
+		$championship_id = $request->getParam('championship_id');
+		$race_id = $request->getParam('race_id');
+
+		$league = new Application_Model_DbTable_League();
+		$league_data = $league->getLeagueData($league_id);
+
+		if ($league_data) {
+			$championship = new Application_Model_DbTable_Championship();
+			$championship_data = $championship->getChampionshipData($league_id, $championship_id);
+
+			$this->view->headTitle($this->view->translate('Лига'));
+			$this->view->headTitle($league_data->name);
+
+			$this->view->league_data = $league_data;
+
+			if ($championship_data) {
+				$this->view->championship_data = $championship_data;
+				$this->view->headTitle($this->view->translate('Чемпионат'));
+				$this->view->headTitle($championship_data->name);
+				$this->view->headTitle($this->view->translate('Добавить гонку'));
+
+				$race_data = $this->db->get('championship_race')->getItem(array(
+					'id' => $race_id,
+					'championship_id' => array('value' => $championship_id,
+						'condition' => "AND")
+				));
+				
+				if ($race_data){
+					$this->view->pageTitle($race_data->name);
+					$this->view->race_data = $race_data;
+				} else {
+					$this->view->pageTitle($this->view->translate('Ошибка!'));
+					$this->messages->addError($this->view->translate('Запрашиваемая гонка не найдена!'));
+				}
+
+				
+			} else {
+				//error message if championship not found
+				$this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
+				$this->view->headTitle($this->view->translate('Ошибка!'));
+				$this->view->pageTitle($this->view->translate('Ошибка!'));
+			}
+		} else {
+			//error message if league not found
+			$this->messages->addError($this->view->translate('Запрашиваемая лига не существует!'));
+			//head title
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
+		}
 	}
 
 	public function addAction() {
@@ -26,18 +76,23 @@ class RaceController extends App_Controller_LoaderController {
 		if ($league_data) {
 			$championship = new Application_Model_DbTable_Championship();
 			$championship_data = $championship->getChampionshipData($league_id, $championship_id);
+			//Set titles for html head title
+			$this->view->headTitle($this->view->translate('Лига'));
+			$this->view->headTitle($league_data->name);
 
-			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
-			$this->view->headTitle($this->view->translate('Чемпионат'));
 			$this->view->league_data = $league_data;
 
 			if ($championship_data) {
-				$this->view->championship = $championship_data;
-				$this->view->headTitle("{$this->view->translate('Чемпионат')} :: {$championship_data->name} :: {$this->view->translate('Добавить гонку')}");
-				$this->view->pageTitle("{$championship_data->name} :: {$this->view->translate('Добавить гонку')}");
+				$this->view->championship_data = $championship_data;
+				//Set titles for html head title
+				$this->view->headTitle($this->view->translate('Чемпионат'));
+				$this->view->headTitle($championship_data->name);
+				$this->view->headTitle($this->view->translate('Добавить гонку'));
+				// Set page title
+				$this->view->pageTitle($this->view->translate('Добавить гонку'));
 
 				$form = new Application_Form_Race_Add();
-				$form->setAction($this->view->url(array('controller' => 'race', 'action' => 'add', 'championship_id' => $championship_id), 'championshipRace', true));
+				$form->setAction($this->view->url(array('module' => 'default','controller' => 'race', 'action' => 'add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipRaceAction', true));
 
 				if ($this->getRequest()->isPost()) {
 					if ($form->isValid($request->getPost())) {
@@ -57,8 +112,8 @@ class RaceController extends App_Controller_LoaderController {
 						$race = new Application_Model_DbTable_ChampionshipRace();
 						$newRace = $race->createRow($new_race_data);
 						$newRace->save();
-						
-						$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $league_data->id, 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'championshipRaceId', true));
+
+						$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $league_data->id, 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'defaultChampionshipRaceId', true));
 					} else {
 						$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 					}
@@ -83,14 +138,14 @@ class RaceController extends App_Controller_LoaderController {
 			} else {
 				//error message if championship not found
 				$this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
-				$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Чемпионат не найден!')}");
+				$this->view->headTitle($this->view->translate('Ошибка!'));
 				$this->view->pageTitle($this->view->translate('Ошибка!'));
 			}
 		} else {
 			//error message if league not found
 			$this->messages->addError($this->view->translate('Запрашиваемая лига не существует!'));
 			//head title
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не существует!')}");
+			$this->view->headTitle($this->view->translate('Ошибка!'));
 			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
 	}
