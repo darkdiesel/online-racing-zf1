@@ -1,17 +1,17 @@
-<?php if ($this->league) { ?>
+<?php if ($this->league_data) : ?>
 	<div class="league_item block-item">
 		<?php
-		echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($this->league->id));
+		echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($this->league_data->id));
 		?>
 		<div class="row">
 			<div class="block-item-content">
 				<div class="col-lg-4 col-lg-push-8">
 					<div class="thumbnail text-align-center">
 						<?php
-						if ($this->league->url_logo != '') {
+						if ($this->league_data->url_logo != '') {
 							?>
 							<div class="league_id_logo_wrapper_250 img-wrapper-250 overflow-hide">
-								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->league->url_logo); ?>">
+								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->league_data->url_logo); ?>">
 							</div>
 						<?php } ?>
 					</div>
@@ -22,22 +22,22 @@
 							<tbody>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Название') ?>:</td>
-									<td class="cell-text-align-vert"><?php echo $this->escape($this->league->name); ?></td>
+									<td class="cell-text-align-vert"><?php echo $this->escape($this->league_data->name); ?></td>
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Администратор лиги') ?>:</td>
-									<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->league->user_id)), 'userId', true); ?>"><?php echo $this->escape($this->league->user_login); ?></a></td>
+									<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->league_data->user_id)), 'userId', true); ?>"><?php echo $this->escape($this->league_data->user_login); ?></a></td>
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата создания') ?>:</td>
-									<td class="cell-text-align-vert"><?php echo $this->escape($this->league->date_create); ?></td>
+									<td class="cell-text-align-vert"><?php echo $this->escape($this->league_data->date_create); ?></td>
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Описание') ?>:</td>
 									<td class="cell-text-align-vert">
 										<?php
-										if ($this->league->description != "") {
-											echo $this->RenderContentTypeText($this->league->description, 'bbcode');
+										if ($this->league_data->description != "") {
+											echo $this->RenderContentTypeText($this->league_data->description, 'bbcode');
 										} else {
 											echo $this->translate("Нет описания.");
 										}
@@ -58,69 +58,73 @@
 		</div>
 	</div>
 	<!-- Championship start -->
-	<div class="section-title m-b-15"><?php echo $this->translate('Чемпионаты лиги') ?></div>
-	<?php if (count($this->paginator)) { ?>
-		<?php foreach ($this->paginator as $championship): ?>
-			<div class="championship_item block-item">
-				<?php
-				echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
-				?>
-				<div class="block-item_header">
-					<div class="block-item_title">
-						<i class="fa fa-trophy"></i>
-						<a href="<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
-					</div>
-					<div class="block-item_info_header">
-						<div class="content_category block-item_info_header_item">
-							<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-							<?php echo $this->translate('Чемпионат'); ?>
-						</div>
-						<div class="championship_author block-item_info_header_item">
-							<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор') ?>: </span>
-							<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'userId', true); ?>" target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
-						</div>
-					</div>
-				</div>
-				<div class="block-item-content">
-					<?php if ($this->escape($championship['url_logo']) != '') { ?>
-						<div class="championship_all_logo_wrapper_200_200 img-wrapper-200-200 pull-left overflow-hide">
-							<img class="img-thumbnail img-responsive" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
-						</div>
-					<?php } ?>
-					<div class="block-content-text">
+	<?php if ($this->championships_data) : ?>
+		<div class="section-title m-t-15 m-b-15"><?php echo $this->translate('Чемпионаты лиги') ?></div>
+		<?php foreach ($this->championships_data as $championship): ?>
+			<div class="row">
+				<div class="col-md-12 col-lg-12">
+					<div class="panel panel-default panel-inverse block-item">
 						<?php
-						if ($championship['description']) {
-							echo $this->RenderContentTypeText($championship['description'], 'bbcode');
-						} else {
-							echo $this->translate('Нет описания');
-						}
+						echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
 						?>
-					</div>
-					<div class="pull-right">
-						<a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ds', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-success" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
-						<a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'ts', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-warning" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
-						<a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-info" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
-						<a href = "<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($championship['post_id'])), 'postId', true); ?>" target="_blank" class = "btn btn-sm btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
-						<a href = "<?php echo $this->url(array('controller' => 'championship', 'action' => 'id', 'league_id' => $this->league->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>" class = "btn btn-sm btn-primary post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
-					</div>
-					<div class="championship-block-item-info block-item-info-bottom">
-						<div class="championship_date_create block-item-info-bottom-item">
-							<span class="font-bold font-color-black"><?php echo $this->translate('Создан') ?>: </span>
-							<?php echo $this->escape($championship['date_create']); ?>
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<i class="fa fa-trophy"></i>
+								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<?php if ($this->escape($championship['url_logo']) != '') { ?>
+								<div class="championship_all_logo_wrapper_200_200 img-wrapper-200-200 pull-left overflow-hide m-r-5">
+									<img class="img-thumbnail img-responsive" src="<?php echo $this->baseUrl($this->escape($championship['url_logo'])); ?>">
+								</div>
+							<?php } ?>
+							<div class="championship_description">
+								<?php
+								if ($championship['description']) {
+									echo $this->RenderContentTypeText($championship['description'], 'bbcode');
+								}
+								?>
+							</div>
+							<div class="pull-right m-t-10">
+								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'ds', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-success" title="<?php echo $this->translate('Личный зачет') ?>"><?php echo $this->translate('ЛЗ') ?></a>
+								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'ts', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-warning" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
+								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-info" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
+								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($championship['post_id'])), 'postId', true); ?>" target="_blank" class = "btn btn-sm btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
+								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>" class = "btn btn-sm btn-primary post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<small>
+								<div class="pull-left m-r-10">
+									<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+									<?php echo $this->translate('Чемпионат'); ?>
+								</div>
+								<div class="pull-left m-r-10">
+									<span class="font-bold font-color-black"><?php echo $this->translate('Создан') ?>: </span>
+									<?php echo $this->escape($championship['date_create']); ?>
+								</div>
+								<div class="pull-left m-r-10">
+									<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор') ?>: </span>
+									<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'userId', true); ?>" target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
+								</div>
+							</small>
+							<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php endforeach; ?>
-		<?php
-		echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-	} else {
-		?>
-		<div class="alert alert-info alert-block">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			<h4><?php echo $this->translate('Информация!'); ?></h4>
-			<?php echo $this->translate('Еще не создано ниодного чемпионата в этой лиге!'); ?>
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<div class="block-item m-t-15">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->championships_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
 		</div>
-	<?php } ?>
+	<?php endif; ?>
 	<!-- Championship end -->
-<?php } ?>
+<?php endif; ?>

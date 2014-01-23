@@ -39,8 +39,7 @@
 			<div class="block-item-content">
 				<div class="col-lg-4 col-lg-push-8">
 					<div class="thumbnail text-align-center">
-						<?php if ($this->championship_data->url_logo != '') {
-							?>
+						<?php if ($this->championship_data->url_logo != '') { ?>
 							<div class="img-thumbnail overflow-hide ">
 								<img class="championship_id_logo img-responsive" src="<?php echo $this->escape($this->championship_data->url_logo); ?>">
 							</div>
@@ -101,54 +100,69 @@
 		</div>
 	</div>
 	<!-- Races start -->
-	<?php if (count($this->paginator)) { ?>
-		<div class="section-title"><?php echo $this->translate('Гонки чемпионата') ?></div>
-		<?php foreach ($this->paginator as $race): ?>
-			<div class="race_item block-item">
-				<?php
-				echo $this->ConfigureBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($race['id']));
-				?>
-				<div class="block-item_header">
-					<div class="block-item_title">
-						<img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_round'])); ?>">
-						<i class="icon-flag-checkered"></i>
-						<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?></a>
-					</div>
-					<div class="block-item_info_header">
-						<div class="content_category block-item_info_header_item">
-							<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-							<?php echo $this->translate('Гонка'); ?>
-						</div>
-					</div>
-				</div>
-				<div class="block-item-content">
-					<div class="championship_all_logo_wrapper_150_150 img-wrapper-150-150 pull-left overflow-hide">
-						<img class="img-size-150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
-					</div>
-					<div class="block-content-text">
+	<?php if ($this->championship_races_data) : ?>
+		<div class="section-title m-t-15 m-b-15"><?php echo $this->translate('Гонки чемпионата') ?></div>
+		<?php foreach ($this->championship_races_data as $race): ?>
+			<div class="row">
+				<div class="col-md-12 col-lg-12">
+					<div class="panel panel-default panel-inverse block-item">
 						<?php
-						if ($race['description'] != NULL) {
-							echo $this->RenderContentTypeText($race['description'], 'bbcode');
-						} else {
-							echo $this->translate('Нет описания');
-						}
+						echo $this->ConfigureBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($race['id']));
 						?>
-					</div>
-					<div class="pull-right">
-						<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $this->escape($race['id'])), 'championshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?>" class = "btn btn-sm btn-primary block-content-button-more" title="<?php echo $this->translate('Детальная информация о гонке') ?>"><?php echo $this->translate('Подробнее...') ?></a>
-					</div>
-					<div class="championship-block-item-info block-item-info-bottom">
-						<div class="championship_date_create block-item-info-bottom-item">
-							<span class="font-bold font-color-black"><?php echo $this->translate('Создан') ?>: </span>
-							<?php echo $this->escape($race['date_create']); ?>
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								<img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_round'])); ?>">
+								<i class="fa fa-flag-checkered fa-lg"></i>
+								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?></a>
+							</h3>
+						</div>
+						<div class="panel-body">
+							<?php if ($this->escape($race['track_url_scheme']) != '') : ?>
+								<div class="championship_all_logo_wrapper_150_150 img-wrapper-150-150 pull-left overflow-hide m-r-5">
+									<img class="img-size-150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race['track_url_scheme'])); ?>">
+								</div>
+							<?php endif; ?>
+							<div class="race_description">
+								<?php
+								if ($race['description']) {
+									echo $this->RenderContentTypeText($race['description'], 'bbcode');
+								}
+								?>
+							</div>
+							<div class="pull-right m-t-10">
+								<?php
+								$championship_race_id_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true);
+								?>
+								<a href = "<?php echo $championship_race_id_url; ?>" class = "btn btn-sm btn-primary block-content-button-more" title="<?php echo $this->translate('Детальная информация о гонке') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<small>
+								<div class="pull-left m-r-10">
+									<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+									<?php echo $this->translate('Гонка'); ?>
+								</div>
+								<div class="pull-left m-r-10">
+									<span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: </span>
+									<?php echo $this->escape($race['date_create']); ?>
+								</div>
+							</small>
+							<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		<?php endforeach; ?>
-		<?php
-		echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-	}
-	?>
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<div class="block-item m-t-15">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->championship_races_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	<?php endif; ?>
 	<!-- Races end -->
 <?php } ?>

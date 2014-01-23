@@ -52,7 +52,7 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         }
 
         if ($this->view->checkUserAccess('default/race/add')) {
-            $link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championshipRace', true);
+            $link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipRaceAction', true);
             array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Добавить гонку')}</a>");
         }
 

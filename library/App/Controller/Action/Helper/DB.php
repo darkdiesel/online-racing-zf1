@@ -22,6 +22,7 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			'privilege' => '',
 			'team' => '',
 			'track' => '',
+			'championship_race',
 		);
 	}
 
@@ -66,6 +67,9 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 				break;
 			case "track":
 				$this->db[$db_name] = new Application_Model_DbTable_Track();
+				break;
+			case "championship_race":
+				$this->db[$db_name] = new Application_Model_DbTable_ChampionshipRace;
 				break;
 			default:
 				return FALSE;

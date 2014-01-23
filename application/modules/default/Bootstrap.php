@@ -210,8 +210,40 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 				)
 		);
 
+//		$router->addRoute(
+//				'championshipRace', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\w*)\.html', array(
+//			'module' => 'default',
+//			'controller' => 'race',
+//			1 => 0,
+//			2 => 0,
+//				), array(
+//			'league_id' => 1,
+//			'championship_id' => 2,
+//			'action' => 3,
+//				), "league/%d/championship/%d/race/%s.html"
+//				)
+//		);
+		
+		//TRACK CONTROLLER ROUTERS
 		$router->addRoute(
-				'championshipRace', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\w*)\.html', array(
+				'defaultChampionshipRaceId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)\.html', array(
+			'module' => 'default',
+			'controller' => 'race',
+			'controller' => 'id',
+			1 => 0,
+			2 => 0,
+			3 => 0,
+				), array(
+			'league_id' => 1,
+			'championship_id' => 2,
+			'race_id' => 3,
+				),
+			"league/%d/championship/%d/race/%d.html"
+				)
+		);
+		
+		$router->addRoute(
+				'defaultChampionshipRaceAction', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\w*)\.html', array(
 			'module' => 'default',
 			'controller' => 'race',
 			1 => 0,
@@ -220,26 +252,29 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'league_id' => 1,
 			'championship_id' => 2,
 			'action' => 3,
-				), "league/%d/championship/%d/race/%s.html"
+				),
+			"league/%d/championship/%d/race/%s.html"
 				)
 		);
-
+		
 		$router->addRoute(
-				'championshipRaceId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)/(\w*)\.html', array(
+				'defaultChampionshipRaceIdAction', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)/(\w*)\.html', array(
 			'module' => 'default',
 			'controller' => 'race',
+			'controller' => 'id',
 			1 => 0,
 			2 => 0,
-			3 => 'id',
+			3 => 0,
 				), array(
 			'league_id' => 1,
 			'championship_id' => 2,
 			'race_id' => 3,
 			'action' => 4,
-				), "league/%d/championship/%d/race/%d/%s.html"
+				),
+			"league/%d/championship/%d/race/%d/%s.html"
 				)
 		);
-
+		
 		/*
 		  $router->addRoute(
 		  'championshipAll', new Zend_Controller_Router_Route('championship/all/:page', array(

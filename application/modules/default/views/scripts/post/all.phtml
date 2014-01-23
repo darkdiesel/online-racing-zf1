@@ -1,67 +1,75 @@
 <?php if ($this->paginator) { ?>
 	<?php foreach ($this->paginator as $post): ?>
-		<div class="panel panel-default panel-inverse block-item">
-			<?php
-			echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($post['id']));
-			?>
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<i class="fa fa-book"></i>
-					<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>"><?php echo $this->escape($post['title']); ?></a>
-				</h3>
-			</div>
-			<div class="panel-body">
-				<?php if ($this->escape($post['image']) != '') { ?>
-					<div class="post_all_logo_wrapper_200_200 img-wrapper-200-200 thumbnail pull-left overflow-hide m-r-5">
-						<img class="post_all_logo_250 img-size-200 img-responsive" src="<?php echo $this->escape($post['image']); ?>">
-					</div>
-				<?php } ?>
-				<div class="post-text">
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<div class="panel panel-default panel-inverse block-item">
 					<?php
-					if ($post['annotation'] != '') {
-						echo $this->RenderContentTypeText($this->escape($post['annotation']), 'bbcode');
-					} else {
-						echo $this->RenderContentTypeText($this->escape($post['text']), 'bbcode', 250);
-					}
+					echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($post['id']));
 					?>
-				</div>
-				<div class="pull-right m-t-10">
-					<?php
-					$post_id_url = $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true);
-					?>
-					<a href = "<?php echo $post_id_url ?>" class = "btn btn-sm btn-inverse block-content-button-more"><?php echo $this->translate('Читать дальше') ?> <i class="fa fa-angle-double-right"></i></a>
-				</div>
-			</div>
-			<div class="panel-footer">
-				<small>
-					<div class="pull-left m-l-10">
-						<span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($post['views']); ?>
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<i class="fa fa-book"></i>
+							<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true) ?>"><?php echo $this->escape($post['title']); ?></a>
+						</h3>
 					</div>
-					<div class="pull-left m-l-10">
-						<span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($post['date_create']); ?>
-					</div>
-					<?php if ($post['date_create'] != $post['date_edit']) { ?>
-						<div class="pull-left m-l-10">
-							<span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($post['date_edit']); ?>
+					<div class="panel-body">
+						<?php if ($this->escape($post['image']) != '') { ?>
+							<div class="post_all_logo_wrapper_200_200 img-wrapper-200-200 thumbnail pull-left overflow-hide m-r-5">
+								<img class="post_all_logo_250 img-size-200 img-responsive" src="<?php echo $this->escape($post['image']); ?>">
+							</div>
+						<?php } ?>
+						<div class="post-text">
+							<?php
+							if ($post['annotation'] != '') {
+								echo $this->RenderContentTypeText($this->escape($post['annotation']), 'bbcode');
+							} else {
+								echo $this->RenderContentTypeText($this->escape($post['text']), 'bbcode', 250);
+							}
+							?>
 						</div>
-					<?php } ?>
-					<div class="pull-left m-l-10">
-						<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-						<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'post_type_id' => $this->escape($post['post_type_id']), 'page' => '1'), 'postByType', true) ?>" target="_blank"><?php echo $this->escape($post['post_type_name']); ?></a>
+						<div class="pull-right m-t-10">
+							<?php
+							$post_id_url = $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post['id'])), 'postId', true);
+							?>
+							<a href = "<?php echo $post_id_url ?>" class = "btn btn-sm btn-inverse block-content-button-more"><?php echo $this->translate('Читать дальше') ?> <i class="fa fa-angle-double-right"></i></a>
+						</div>
 					</div>
-					<div class="pull-left m-l-10">
-						<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
-						<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
+					<div class="panel-footer">
+						<small>
+							<div class="pull-left m-l-10">
+								<span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($post['views']); ?>
+							</div>
+							<div class="pull-left m-l-10">
+								<span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($post['date_create']); ?>
+							</div>
+							<?php if ($post['date_create'] != $post['date_edit']) { ?>
+								<div class="pull-left m-l-10">
+									<span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($post['date_edit']); ?>
+								</div>
+							<?php } ?>
+							<div class="pull-left m-l-10">
+								<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+								<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'post_type_id' => $this->escape($post['post_type_id']), 'page' => '1'), 'postByType', true) ?>" target="_blank"><?php echo $this->escape($post['post_type_name']); ?></a>
+							</div>
+							<div class="pull-left m-l-10">
+								<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
+								<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
+							</div>
+						</small>
+						<div class="clearfix"></div>
 					</div>
-				</small>
-				<div class="clearfix"></div>
+				</div>
 			</div>
 		</div>
 	<?php endforeach; ?>
-	<div class="block-item m-t-15">
-		<div class="pull-right">
-			<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="block-item m-t-15">
+				<div class="pull-right">
+					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+				</div>
+				<div class="clearfix"></div>
+			</div>
 		</div>
-		<div class="clearfix"></div>
 	</div>
 <?php } ?>

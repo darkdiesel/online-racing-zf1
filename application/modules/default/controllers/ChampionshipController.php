@@ -16,7 +16,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 		if ($league_data) {
 			$this->view->league_data = $league_data;
-			
+
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
 			$this->view->headTitle($this->view->translate('Чемпионат'));
 
@@ -28,22 +28,30 @@ class ChampionshipController extends App_Controller_LoaderController {
 				$this->view->headTitle($championship_data->name);
 				$this->view->pageTitle("{$this->view->translate('Чемпионат')} :: {$championship_data->name}");
 
-				$race = new Application_Model_DbTable_ChampionshipRace();
-
-				$page_count_items = 5;
-				$page_range = 5;
-				$items_order = 'DESC';
-				$page = $request->getParam('page');
-
+				// Set breadcrumbs for this page
 				$this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
 						->championship($league_id, $championship_id, $championship_data->name, $page);
+				
+				// settings for championship races pager
+				$pager_args = array(
+					"page_count_items" => 10,
+					"page_range" => 5,
+					"page" => $this->getRequest()->getParam('page')
+				);
 
-				$this->view->paginator = $race->getRacesPagerByChampionship(
-						$page_count_items, $page, $page_range, $items_order, $championship_id
+				$championship_races_data = $this->db->get('championship_race')->getAll(
+						array('championship_id' => 
+							array('value' => $championship_data->id)
+						),
+						"id, name, description",
+						"ASC", TRUE, $pager_args
 				);
 				
-				if (!count($this->view->paginator)){
-					$this->messages->addInfo($this->view->translate('В чемпионате не найденого гонок!'));
+				if ($championship_races_data){
+					$this->view->championship_races_data = $championship_races_data;
+				}
+				else{
+					$this->messages->addInfo($this->view->translate('В этом чемпионате нет гонок!'));
 				}
 			} else {
 				$this->messages->addError($this->view->translate('Запрашиваемый чемпионат не существует!'));
@@ -528,14 +536,14 @@ class ChampionshipController extends App_Controller_LoaderController {
 				$this->view->form = $form;
 
 				// add teams
-				$team = new Application_Model_DbTable_Team();
-				$teams = $team->getTeamNames('ASC');
-
-				$championship_team = new Application_Model_DbTable_ChampionshipTeam();
-
-				if ($teams) {
-					foreach ($teams as $team):
-						if (!$championship_team->checkTeamExist($championship_id, $team->id)) {
+				// add post types to the form
+				$teams_data = $this->db->get('team')->getAll(FALSE, array("id", "name"), "ASC");
+				
+				$championship_team_db = new Application_Model_DbTable_ChampionshipTeam();
+				
+				if ($teams_data) {
+					foreach ($teams_data as $team):
+						if (!$championship_team_db->checkTeamExist($championship_id, $team->id)) {
 							$form->team->addMultiOption($team->id, $team->name);
 						}
 					endforeach;
@@ -599,7 +607,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 						$this->redirect(
 								$this->view->url(
-										array('module' => 'default','controller' => 'championship', 'action' => 'id', 'league_id' => $league_id,
+										array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id,
 									'championship_id' => $championship_id), 'championship', true
 								)
 						);
