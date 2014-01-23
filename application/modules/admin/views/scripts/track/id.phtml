@@ -15,8 +15,26 @@
 					<td><span><?php echo $this->escape($this->track->city_id); ?></span></td>
 				</tr>
 				<tr>
+					<td class="header_column"><span><?php echo $this->translate('Страна'); ?></span></td>
+					<td>
+						<span><?php echo $this->escape($this->track->country_id); ?></span>
+						<span><?php echo $this->escape($this->track->country_native_name); ?></span>
+						<span>(<?php echo $this->escape($this->track->country_english_name); ?>)</span>
+						<span><img src="<?php echo $this->baseUrl($this->escape($this->track->country_url_image_glossy_wave)); ?>" ></span>
+						<span><img src="<?php echo $this->baseUrl($this->escape($this->track->country_url_image_round)); ?>" ></span>
+					</td>
+				</tr>
+				<tr>
+					<td class="header_column"><span><?php echo $this->translate('Длинна'); ?></span></td>
+					<td><span><?php echo $this->escape($this->track->track_length); ?></span></td>
+				</tr>
+				<tr>
+					<td class="header_column"><span><?php echo $this->translate('Год'); ?></span></td>
+					<td><span><?php echo $this->escape($this->track->track_year); ?></span></td>
+				</tr>
+				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->description); ?></span></td>
+					<td><span><?php echo $this->RenderContentTypeText($this->post->description, 'full_html'); ?></span></td>
 				</tr>
 				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Схема'); ?></span></td>

@@ -1,1 +1,11 @@
+<?php $this->CKEditor()->init(); ?>
+<?php $this->CKFinder()->init(); ?>
 <?php echo $this->form; ?>
+<script type= "text/javascript" >
+	$(document).ready(function() {
+		<?php
+		echo $this->CKEditor()->SetupFullHtmlEditor('description');
+		echo $this->CKFinder()->setupCKEditor('description');
+		?>
+	});
+</script>
