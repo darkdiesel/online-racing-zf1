@@ -37,7 +37,7 @@ class RaceController extends App_Controller_LoaderController {
 				$this->view->pageTitle("{$championship_data->name} :: {$this->view->translate('Добавить гонку')}");
 
 				$form = new Application_Form_Race_Add();
-				$form->setAction($this->view->url(array('controller' => 'race', 'action' => 'add', 'championship_id' => $championship_id), 'championshipRace', true));
+				$form->setAction($this->view->url(array('controller' => 'race', 'action' => 'add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipRaceAction', true));
 
 				if ($this->getRequest()->isPost()) {
 					if ($form->isValid($request->getPost())) {
