@@ -2,75 +2,76 @@
 
 class ErrorController extends App_Controller_LoaderController {
 
-    public function init(){
-	parent::init();
-	
-	$this->view->headTitle($this->view->translate('Ошибка'));
-	$this->view->pageTitle($this->view->translate('Ошибка'));
-    }
-    
-    public function errorAction() {
-	$this->_helper->layout->setLayout( 'no-column-layout' );
-        
-	$errors = $this->_getParam('error_handler');
+	public function init() {
+		parent::init();
 
-        if (!$errors || !$errors instanceof ArrayObject) {
-            switch ($errors['type']) {
-                case "access_denied":
-		    $this->messages->addError($this->view->translate('Доступ запрещен!'));
-                    break;
-                default:
-		    $this->messages->addError($this->view->translate('You have reached the error page!'));
-                    break;
-            }
-            return;
-        }
+		$this->view->headTitle($this->view->translate('Ошибка'));
+		$this->view->pageTitle($this->view->translate('Ошибка'));
+	}
 
-        //$requets = $this->getRequest();
-        //echo $requets->getParam('message');
+	public function errorAction() {
+		$this->_helper->layout->setLayout('no-column-layout');
 
-        switch ($errors->type) {
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
-            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-                // 404 error -- controller or action not found
-                $this->getResponse()->setHttpResponseCode(404);
-                $priority = Zend_Log::NOTICE;
-                $this->view->message = $this->view->translate('Ошибка 404. Страница не найдена');
-                break;
-            default:
-                // application error
-                $this->getResponse()->setHttpResponseCode(500);
-                $priority = Zend_Log::CRIT;
-                $this->view->message = 'Ошибка 500. Ошибка приложения';
-                break;
-        }
+		$errors = $this->_getParam('error_handler');
 
-        // Log exception, if logger available
-        if ($log = $this->getLog()) {
-            /* $log->log($this->view->message, $priority, $errors->exception);
-              $log->log('Request Parameters', $priority, $errors->request->getParams()); */
-            $log->log($this->view->message, $priority);
-            $log->log('Request params: ' . print_r($errors->request->getParams(), true), $priority);
-            $log->log($errors->exception, $priority);
-        }
+		if (!$errors || !$errors instanceof ArrayObject) {
+			switch ($errors['type']) {
+				case "access_denied":
+					$this->messages->addError($this->view->translate('Доступ запрещен!'));
+					break;
+				default:
+					$this->messages->addError($this->view->translate('You have reached the error page!'));
+					break;
+			}
+			return;
+		}
 
-        // conditionally display exceptions
-        if ($this->getInvokeArg('displayExceptions') == true) {
-            $this->view->exception = $errors->exception;
-        }
+		//$requets = $this->getRequest();
+		//echo $requets->getParam('message');
 
-        $this->view->request = $errors->request;
-    }
+		switch ($errors->type) {
+			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
+			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+			case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+				// 404 error -- controller or action not found
+				$this->getResponse()->setHttpResponseCode(404);
+				$priority = Zend_Log::NOTICE;
+				$this->messages->addError($this->view->translate('Ошибка 404. Страница не найдена'));
+				$this->_helper->layout->setLayout( 'error-404-layout' );
+				break;
+			default:
+				// application error
+				$this->getResponse()->setHttpResponseCode(500);
+				$priority = Zend_Log::CRIT;
+				$this->messages->addError($this->view->translate('Ошибка 500. Ошибка приложения'));
+				break;
+		}
 
-    public function getLog() {
-        //return Zend_Registry::get('logger');
-        $bootstrap = $this->getInvokeArg('bootstrap');
-        if (!$bootstrap->hasResource('Log')) {
-            return false;
-        }
-        $log = $bootstrap->getResource('Log');
-        return $log;
-    }
+		// Log exception, if logger available
+		if ($log = $this->getLog()) {
+			/* $log->log($this->view->message, $priority, $errors->exception);
+			  $log->log('Request Parameters', $priority, $errors->request->getParams()); */
+			$log->log($this->view->message, $priority);
+			$log->log('Request params: ' . print_r($errors->request->getParams(), true), $priority);
+			$log->log($errors->exception, $priority);
+		}
+
+		// conditionally display exceptions
+		if ($this->getInvokeArg('displayExceptions') == true) {
+			$this->view->exception = $errors->exception;
+		}
+
+		$this->view->request = $errors->request;
+	}
+
+	public function getLog() {
+		//return Zend_Registry::get('logger');
+		$bootstrap = $this->getInvokeArg('bootstrap');
+		if (!$bootstrap->hasResource('Log')) {
+			return false;
+		}
+		$log = $bootstrap->getResource('Log');
+		return $log;
+	}
 
 }

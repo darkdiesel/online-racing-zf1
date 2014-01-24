@@ -39,14 +39,16 @@ class Application_Form_Track_Add extends Zend_Form {
 		));
 
 		$this->addElement('text', 'track_year', array(
-			'label' => $this->translate('Год трассы (ГГГГ)'),
-			'placeholder' => $this->translate('Год трассы  (ГГГГ)'),
+			'label' => $this->translate('Год конфигурации трассы (ГГГГ)'),
+			'placeholder' => $this->translate('Год конфигурации трассы (ГГГГ)'),
 			'maxlength' => 4,
 			'filters' => array('StripTags', 'StringTrim'),
 			'required' => true,
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
+				'Int',
+				array('StringLength', true, array('min' => 4, 'max' => 4)),
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -65,6 +67,7 @@ class Application_Form_Track_Add extends Zend_Form {
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
+				'Float'
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -75,7 +78,7 @@ class Application_Form_Track_Add extends Zend_Form {
 		));
 
 		$this->addElement('file', 'track_logo', array(
-			'label' => $this->translate('Логотип трассы (32х24)'),
+			'label' => $this->translate('Логотип трассы (XXхXX)'),
 			'required' => false,
 			'class' => 'form-control',
 			'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/track/logos/',
@@ -93,7 +96,7 @@ class Application_Form_Track_Add extends Zend_Form {
 		));
 
 		$this->addElement('file', 'track_scheme', array(
-			'label' => $this->translate('Схема трассы (32х24)'),
+			'label' => $this->translate('Схема трассы (XXхXX)'),
 			'required' => false,
 			'class' => 'form-control',
 			'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/track/schemes/',
@@ -165,7 +168,7 @@ class Application_Form_Track_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -176,7 +179,7 @@ class Application_Form_Track_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -189,7 +192,7 @@ class Application_Form_Track_Add extends Zend_Form {
 			'FormElements',
 			//array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
 			//'Fieldset',
-			array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
+			array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-center clearfix')),
 		));
 	}
 

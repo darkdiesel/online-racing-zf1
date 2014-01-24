@@ -216,6 +216,15 @@ label.valid {
 .no_width{
     width:auto!important;
 }
+
+/* Text Align classes*/
+.text-center{text-align:center!important;}
+.text-vertical-m{vertical-align:middle!important;}
+.text-vertical-t{vertical-align:top!important;}
+.text-vertical-b{vertical-align:bottom!important;}
+
+.block-center{margin-right:auto!important; margin-left:auto!important; display:block;}
+
 /* classes for margin */
 .m-t-0{margin-top:0!important;}
 .m-b-0{margin-bottom:0!important;}

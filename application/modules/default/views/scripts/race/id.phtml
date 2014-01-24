@@ -1,13 +1,60 @@
 <?php if ($this->race_data): ?>
 	<div class="row">
 		<div class="col-md-12 col-lg-12">
-			<div class="block-item">
+			<div class="panel">
 				<div class="panel-body">
-					<?php if ($this->escape($this->race_data->track_url_scheme) != '') : ?>
-						<div class="m-b-15 block-align-center text-align-center">
-							<img class="img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_scheme)); ?>">
+					<div class="row">
+						<div class="col-lg-12">
+							<blockquote class="pull-right">
+								<h3><?php echo $this->escape($this->race_data->track_name); ?></h3>
+								<h1><small><?php echo $this->translate('Раунд'); ?>: <span class="label label-info"><?php echo $this->escape($this->race_data->race_number); ?></span></small></h1>
+							</blockquote>
 						</div>
-					<?php endif; ?>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<?php if ($this->escape($this->race_data->track_url_scheme) != '') : ?>
+								<div class="m-b-15 block-center text-center">
+									<img class="img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_scheme)); ?>">
+								</div>
+							<?php endif; ?>
+						</div>
+						<div class="col-lg-6">
+							<?php if ($this->race_data->track_url_logo): ?>
+								<div class="block-center text-center m-b-10">
+									<img class="img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_logo)); ?>">
+								</div>
+							<?php endif; ?>
+							<div>
+								<table class="table table-bordered table-condensed">
+									<tr>
+										<td class="success text-vertical-m">
+											<span><?php echo $this->translate('Страна'); ?></span>
+										</td>
+										<td class="warning text-center">
+											<span><img src="<?php echo $this->escape($this->race_data->country_url_image_round); ?>"></span>
+										</td>
+									</tr>
+									<tr>
+										<td class="success text-vertical-m">
+											<span><?php echo $this->translate('Год конфигурации'); ?></span>
+										</td>
+										<td class="warning text-center">
+											<span><?php echo $this->escape($this->race_data->track_year); ?></span>
+										</td>
+									</tr>
+									<tr>
+										<td class="success text-vertical-m">
+											<span><?php echo $this->translate('Длина круга'); ?></span>
+										</td>
+										<td class="warning text-center">
+											<span><?php echo $this->escape($this->race_data->track_length); ?></span>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

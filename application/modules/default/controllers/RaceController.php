@@ -105,12 +105,12 @@ class RaceController extends App_Controller_LoaderController {
 						$new_race_data['championship_id'] = $form->getValue('championship');
 						$new_race_data['track_id'] = $form->getValue('track');
 						$new_race_data['race_date'] = $form->getValue('race_date');
+						$new_race_data['race_laps'] = $form->getValue('race_laps');
 						$new_race_data['description'] = $form->getValue('description');
 						$new_race_data['date_create'] = $date;
 						$new_race_data['date_edit'] = $date;
 
-						$race = new Application_Model_DbTable_ChampionshipRace();
-						$newRace = $race->createRow($new_race_data);
+						$newRace = $race_data = $this->db->get('championship_race')->createRow($new_race_data);
 						$newRace->save();
 
 						$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $league_data->id, 'championship_id' => $championship_data->id, 'race_id' => $newRace->id), 'defaultChampionshipRaceId', true));

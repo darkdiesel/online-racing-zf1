@@ -7,7 +7,7 @@
 					<td><span><?php echo $this->escape($this->track->name); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Год трассы'); ?></span></td>
+					<td class="header_column"><span><?php echo $this->translate('Год конфигурации трассы'); ?></span></td>
 					<td><span><?php echo $this->escape($this->track->track_year); ?></span></td>
 				</tr>
 				<tr>
@@ -29,12 +29,12 @@
 					<td><span><?php echo $this->escape($this->track->track_length); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Год'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->track_year); ?></span></td>
-				</tr>
-				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
 					<td><span><?php echo $this->RenderContentTypeText($this->post->description, 'full_html'); ?></span></td>
+				</tr>
+				<tr>
+					<td class="header_column"><span><?php echo $this->translate('Логотип'); ?></span></td>
+					<td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->url_track_logo)); ?>"></span></td>
 				</tr>
 				<tr>
 					<td class="header_column"><span><?php echo $this->translate('Схема'); ?></span></td>

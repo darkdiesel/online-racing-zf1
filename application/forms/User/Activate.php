@@ -14,7 +14,7 @@ class Application_Form_User_Activate extends Zend_Form {
 		->setName('default-user-activate');
         
         $this->setAttribs(array(
-	    'class' => 'block-item block-item-form block-item-form-w-350 block-align-center',
+	    'class' => 'block-item block-item-form block-item-form-w-350 block-center',
 	    'id' => 'default-user-login',
 	));
         
@@ -103,7 +103,7 @@ class Application_Form_User_Activate extends Zend_Form {
             'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 	    )
         ));
 
@@ -114,7 +114,7 @@ class Application_Form_User_Activate extends Zend_Form {
             'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 	    )
         ));
 
@@ -127,7 +127,7 @@ class Application_Form_User_Activate extends Zend_Form {
 	    'FormElements',
 	    //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
 	    //'Fieldset',
-	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
+	    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-center clearfix')),
 	));
     }
 

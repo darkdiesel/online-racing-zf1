@@ -61,7 +61,10 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->join(array('t' => 'track'), $this->db_href . '.track_id = t.id', array('track_name' => 't.name',
+					'track_year' => 't.track_year',
+					'track_length' => 't.track_length',
 					'track_country_id' => 't.country_id',
+					'track_url_logo' => 't.url_track_logo',
 					'track_url_scheme' => 't.url_track_scheme'))
 				->joinLeft(array('c' => 'country'), 'c.id = t.country_id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
 					'country_url_image_round' => 'c.url_image_round',))

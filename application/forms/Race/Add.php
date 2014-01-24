@@ -47,6 +47,7 @@ class Application_Form_Race_Add extends Zend_Form {
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
+				'Int',
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -67,6 +68,25 @@ class Application_Form_Race_Add extends Zend_Form {
 			'validators' => array(
 				//array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
 				array('StringLength', true, array('min' => 19, 'max' => 19)),
+			),
+			'decorators' => array(
+				'ViewHelper', 'HtmlTag', 'label', 'Errors',
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
+			)
+		));
+		
+		$this->addElement('text', 'race_laps', array(
+			'label' => $this->translate('Количество кругов в гонке'),
+			'placeholder' => $this->translate('Количество кругов в гонке'),
+			'maxlength' => 255,
+			'filters' => array('StripTags', 'StringTrim'),
+			'required' => false,
+			'class' => 'form-control',
+			'validators' => array(
+				'NotEmpty',
+				'Int',
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -131,7 +151,7 @@ class Application_Form_Race_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -142,7 +162,7 @@ class Application_Form_Race_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -155,7 +175,7 @@ class Application_Form_Race_Add extends Zend_Form {
 			'FormElements',
 			//array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
 			//'Fieldset',
-			array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
+			array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-center clearfix')),
 		));
 	}
 

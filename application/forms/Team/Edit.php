@@ -60,7 +60,7 @@ class Application_Form_Team_Edit extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -70,7 +70,7 @@ class Application_Form_Team_Edit extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -82,7 +82,7 @@ class Application_Form_Team_Edit extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-align-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
 			)
 		));
 
@@ -96,7 +96,7 @@ class Application_Form_Team_Edit extends Zend_Form {
 			'FormElements',
 			//array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
 			//'Fieldset',
-			array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-align-center clearfix')),
+			array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'block-item-form-actions text-center clearfix')),
 		));
 	}
 

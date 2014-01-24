@@ -4,7 +4,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 
 	public function init() {
 		parent::init();
-		$this->view->headTitle($this->view->translate('Трассы'));
+		$this->view->headTitle($this->view->translate('Трасса'));
 	}
 
 	public function idAction() {
@@ -70,7 +70,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 
 						$filterRename->filter($file['track_logo']['destination'] . '/' . $file['track_logo']['name']);
 
-						$new_track_data['url_track_scheme'] = '/data-content/data-uploads/track/logos/' . $newName;
+						$new_track_data['url_track_logo'] = '/data-content/data-uploads/track/logos/' . $newName;
 					}
 				}
 
@@ -135,9 +135,11 @@ class Admin_TrackController extends App_Controller_LoaderController {
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
 
+
+
 					//receive and rename track_logo file
 					if ($form->getValue('track_logo')) {
-						if ($form->track_scheme->receive()) {
+						if ($form->track_logo->receive()) {
 							$file = $form->track_logo->getFileInfo();
 							$ext = pathinfo($file['track_logo']['name'], PATHINFO_EXTENSION);
 							$newName = Date('Y-m-d_H-i-s') . strtolower('_track_logo' . '.' . $ext);
@@ -147,7 +149,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 
 							$filterRename->filter($file['track_logo']['destination'] . '/' . $file['track_logo']['name']);
 
-							$new_track_data['url_track_scheme'] = '/data-content/data-uploads/track/logos/' . $newName;
+							$new_track_data['url_track_logo'] = '/data-content/data-uploads/track/logos/' . $newName;
 						}
 					}
 
@@ -167,15 +169,13 @@ class Admin_TrackController extends App_Controller_LoaderController {
 						}
 					}
 
-					$new_track_data = array(
-						'name' => $form->getValue('name'),
-						'track_year' => $form->getValue('track_year'),
-						'track_length' => $form->getValue('track_length'),
-						'city_id' => $form->getValue('city'),
-						'country_id' => $form->getValue('country'),
-						'description' => $form->getValue('description'),
-						'date_edit' => date('Y-m-d H:i:s'),
-					);
+					$new_track_data['name'] = $form->getValue('name');
+					$new_track_data['track_year'] = $form->getValue('track_year');
+					$new_track_data['track_length'] = $form->getValue('track_length');
+					$new_track_data['city_id'] = $form->getValue('city');
+					$new_track_data['country_id'] = $form->getValue('country');
+					$new_track_data['description'] = $form->getValue('description');
+					$new_track_data['date_edit'] = date('Y-m-d H:i:s');
 
 					$track_where = $this->db->get('track')->getAdapter()->quoteInto('id = ?', $track_id);
 					$this->db->get('track')->update($new_track_data, $track_where);
@@ -225,7 +225,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 
 		if ($track_data) {
 			$this->view->headTitle($track_data->name);
-			
+
 			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить трассу')} <strong>\"{$track_data->name}\"</strong> ?");
 
 			$track_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $track_id), 'track_action', true);

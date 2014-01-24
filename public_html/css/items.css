@@ -327,14 +327,7 @@
 .overflow-hide{
     overflow:hidden;
 }
-.text-align-center{
-    text-align:center;
-}
-.block-align-center{
-    margin-right:auto !important;
-    margin-left:auto !important;
-    display:block;
-}
+
 .break-word-wrap{
     word-wrap:break-word;
     overflow:hidden;
