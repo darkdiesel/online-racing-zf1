@@ -1,7 +1,7 @@
 <?php if ($this->post) { ?>
     <div class="post_item block-item">
         <?php
-        echo $this->ConfigureBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($this->post['id']));
+        echo $this->ConfigBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($this->post['id']));
         ?>
         <div class="block-item-content">
             <?php if ($this->post['image']) { ?>

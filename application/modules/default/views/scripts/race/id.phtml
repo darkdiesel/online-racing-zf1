@@ -1,7 +1,10 @@
 <?php if ($this->race_data): ?>
 	<div class="row">
 		<div class="col-md-12 col-lg-12">
-			<div class="panel">
+			<div class="panel block-item">
+				<?php
+				echo $this->ConfigBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($this->race_data->id));
+				?>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-12">

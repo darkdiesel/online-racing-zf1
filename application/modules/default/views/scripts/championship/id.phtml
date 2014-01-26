@@ -33,7 +33,7 @@
 
 	<div class="championship_item block-item">
 		<?php
-		echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship_data->league_id), $this->escape($this->championship_data->id));
+		echo $this->ConfigBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship_data->league_id), $this->escape($this->championship_data->id));
 		?>
 		<div class="row">
 			<div class="block-item-content">
@@ -107,13 +107,13 @@
 				<div class="col-md-12 col-lg-12">
 					<div class="panel panel-default panel-inverse block-item">
 						<?php
-						echo $this->ConfigureBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($race['id']));
+						echo $this->ConfigBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($race->id));
 						?>
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race['country_url_image_round'])); ?>">
+								<img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race->country_url_image_round)); ?>">
 								<i class="fa fa-flag-checkered fa-lg"></i>
-								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true); ?>"><?php echo $this->escape($race['name']); ?></a>
+								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true); ?>"><?php echo $this->escape($race->name); ?></a>
 							</h3>
 						</div>
 						<div class="panel-body">
@@ -144,7 +144,7 @@
 								</div>
 								<div class="pull-left m-r-10">
 									<span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: </span>
-									<?php echo $this->escape($race['date_create']); ?>
+									<?php echo $this->escape($race->date_create); ?>
 								</div>
 							</small>
 							<div class="clearfix"></div>

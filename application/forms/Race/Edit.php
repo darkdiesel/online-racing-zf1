@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Track_Edit extends Zend_Form {
+class Application_Form_Race_Edit extends Zend_Form {
 
 	protected function translate($str) {
 		$translate = new Zend_View_Helper_Translate();
@@ -10,11 +10,11 @@ class Application_Form_Track_Edit extends Zend_Form {
 
 	public function init() {
 		$this->setMethod('post')
-				->setName('admin-track-edit');
+				->setName('default-race-edit');
 
 		$this->setAttribs(array(
 			'class' => 'block-item block-item-form',
-			'id' => 'admin-track-edit',
+			'id' => 'default-race-edit',
 		));
 
 		// decorators for this form
@@ -38,15 +38,16 @@ class Application_Form_Track_Edit extends Zend_Form {
 			)
 		));
 
-		$this->addElement('text', 'track_year', array(
-			'label' => $this->translate('Год конфигурации трассы (ГГГГ)'),
-			'placeholder' => $this->translate('Год конфигурации трассы (ГГГГ)'),
-			'maxlength' => 4,
+		$this->addElement('text', 'race_number', array(
+			'label' => $this->translate('Номер гонки'),
+			'placeholder' => $this->translate('Номер гонки'),
+			'maxlength' => 255,
 			'filters' => array('StripTags', 'StringTrim'),
 			'required' => true,
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
+				'Int',
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -56,14 +57,36 @@ class Application_Form_Track_Edit extends Zend_Form {
 			)
 		));
 
-		$this->addElement('text', 'track_length', array(
-			'label' => $this->translate('Длинна трассы (Км)'),
-			'placeholder' => $this->translate('Длинна трассы (Км)'),
+		$this->addElement('text', 'race_date', array(
+			'label' => $this->translate('Дата гонки'),
+			'placeholder' => $this->translate('Дата гонки'),
+			'description' => $this->translate('Формат даты должен быть yyyy-mm-dd hh:mm:ss') . '. ' . $this->translate('Пример') . ': ' . date('Y-m-d H:i:s'),
+			'title' => $this->translate('Формат даты yyyy-mm-dd hh:mm:ss (yyyy - год, mm - месяц, dd - день, hh - часы (24), mm - минуты, ss - секунды)'),
+			'required' => true,
+			'filters' => array('StripTags', 'StringTrim'),
+			'class' => 'form-control tooltip-field',
+			'validators' => array(
+				//array('regex', false, '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/'),
+				array('StringLength', true, array('min' => 19, 'max' => 19)),
+			),
+			'decorators' => array(
+				'ViewHelper', 'HtmlTag', 'label', 'Errors',
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
+			)
+		));
+
+		$this->addElement('text', 'race_laps', array(
+			'label' => $this->translate('Количество кругов в гонке'),
+			'placeholder' => $this->translate('Количество кругов в гонке'),
+			'maxlength' => 255,
 			'filters' => array('StripTags', 'StringTrim'),
 			'required' => false,
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
+				'Int',
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -73,46 +96,10 @@ class Application_Form_Track_Edit extends Zend_Form {
 			)
 		));
 
-		$this->addElement('file', 'track_logo', array(
-			'label' => $this->translate('Логотип трассы (XXхXX)'),
-			'required' => false,
-			'class' => 'form-control',
-			'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/track/logos/',
-			'validators' => array(
-				array('Size', false, 1024 * 500),
-				array('Extension', false, 'jpg,png,gif'),
-				array('Count', false, 1)
-			),
-			'decorators' => array(
-				'File', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'control-label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('class' => '')),
-			)
-		));
-
-		$this->addElement('file', 'track_scheme', array(
-			'label' => $this->translate('Схема трассы (XXхXX)'),
-			'required' => false,
-			'class' => 'form-control',
-			'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/track/schemes/',
-			'validators' => array(
-				array('Size', false, 1024 * 500),
-				array('Extension', false, 'jpg,png,gif'),
-				array('Count', false, 1)
-			),
-			'decorators' => array(
-				'File', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'control-label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('class' => '')),
-			)
-		));
-
-		// list of countries
-		$this->addElement('select', 'city', array(
-			'label' => $this->translate('Город'),
-			'required' => false,
+		// artcile type
+		$this->addElement('select', 'championship', array(
+			'label' => $this->translate('Чемпионат'),
+			'required' => true,
 			'class' => 'form-control',
 			'registerInArrayValidator' => false,
 			'validators' => array('NotEmpty'),
@@ -124,10 +111,11 @@ class Application_Form_Track_Edit extends Zend_Form {
 			)
 		));
 
-		// list of countries
-		$this->addElement('select', 'country', array(
-			'label' => $this->translate('Страна'),
-			'required' => false,
+		// artcile type
+		$this->addElement('select', 'track', array(
+			'label' => $this->translate('Трасса для гонки'),
+			//'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
+			'required' => true,
 			'class' => 'form-control',
 			'registerInArrayValidator' => false,
 			'validators' => array('NotEmpty'),
@@ -140,8 +128,8 @@ class Application_Form_Track_Edit extends Zend_Form {
 		));
 
 		$this->addElement('textarea', 'description', array(
-			'label' => $this->translate('Описание трассы'),
-			'placeholder' => $this->translate('Описание трассы'),
+			'label' => $this->translate('Описание гонки'),
+			'placeholder' => $this->translate('Описание гонки'),
 			'cols' => 60,
 			'rows' => 10,
 			'maxlength' => 65535,
@@ -151,9 +139,8 @@ class Application_Form_Track_Edit extends Zend_Form {
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'control-label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('class' => '')),
+				array('Label', array('class' => 'aboutTextArea_Label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
 			)
 		));
 
@@ -182,7 +169,7 @@ class Application_Form_Track_Edit extends Zend_Form {
 		$this->addElement('button', 'cancel', array(
 			'ignore' => true,
 			'class' => 'btn btn-default',
-			'onClick' => "location.href='/admin/track/all'",
+			'onClick' => "location.href='/post-type/all'",
 			'label' => $this->translate('Отмена'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',

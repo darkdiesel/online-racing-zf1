@@ -114,7 +114,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 		$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'));
 		$form->country->addMultiOption("", "");
 		foreach ($countries as $country):
-			$form->country->addMultiOption($country->id, $country->native_name . " ({$country->english_name})");
+			$form->country->addMultiOption($country->id, $country->english_name . " ({$country->native_name})");
 		endforeach;
 
 		$this->view->form = $form;
@@ -127,16 +127,19 @@ class Admin_TrackController extends App_Controller_LoaderController {
 		$track_data = $this->db->get('track')->getItem($track_id);
 
 		if ($track_data) {
+			// Set Page Title and Heade Title
+			$this->view->headTitle($track_data->name);
+			$this->view->pageTitle($track_data->name);
+			
+			$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'track_id', true);
+			
 			// form
 			$form = new Application_Form_Track_Edit();
 			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $track_id), 'track_action', true));
-			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'track_id', true)}\"");
+			$form->cancel->setAttrib('onClick', "location.href=\"{$track_id_url}\"");
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
-
-
-
 					//receive and rename track_logo file
 					if ($form->getValue('track_logo')) {
 						if ($form->track_logo->receive()) {
@@ -180,24 +183,20 @@ class Admin_TrackController extends App_Controller_LoaderController {
 					$track_where = $this->db->get('track')->getAdapter()->quoteInto('id = ?', $track_id);
 					$this->db->get('track')->update($new_track_data, $track_where);
 
-					$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'track_id', true);
 					$this->redirect($track_id_url);
 				} else {
 					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
 			}
-			// Set Page Title and Heade Title
-			$this->view->headTitle($track_data->name);
-			$this->view->pageTitle($track_data->name);
-
-			// Fill list of countries
+			
+			// Fill form's list of countries
 			$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'));
 			$form->country->addMultiOption("", "");
 			foreach ($countries as $country):
-				$form->country->addMultiOption($country->id, $country->native_name . " ({$country->english_name})");
+				$form->country->addMultiOption($country->id, $country->english_name . " ({$country->native_name})");
 			endforeach;
 
-			// Fill form fields
+			// Fill form's fields
 			$form->name->setvalue($track_data->name);
 			$form->track_year->setvalue($track_data->track_year);
 			$form->track_length->setvalue($track_data->track_length);

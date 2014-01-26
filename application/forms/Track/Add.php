@@ -61,7 +61,6 @@ class Application_Form_Track_Add extends Zend_Form {
 		$this->addElement('text', 'track_length', array(
 			'label' => $this->translate('Длинна трассы (Км)'),
 			'placeholder' => $this->translate('Длинна трассы (Км)'),
-			'maxlength' => 4,
 			'filters' => array('StripTags', 'StringTrim'),
 			'required' => false,
 			'class' => 'form-control',

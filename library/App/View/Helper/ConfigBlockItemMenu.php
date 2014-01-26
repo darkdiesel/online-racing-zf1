@@ -1,12 +1,12 @@
 <?php
 
-class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
+class App_View_Helper_ConfigBlockItemMenu extends Zend_View_Helper_Abstract {
 
     private $_menu_html;
     private $_menu_empty;
     private $_links;
 
-    public function configureBlockItemMenu($menu_type) {
+    public function ConfigBlockItemMenu($menu_type) {
         $this->_links = array();
         $this->_menu_empty = "";
         $this->_menu_html = "";
@@ -59,8 +59,17 @@ class App_View_Helper_ConfigureBlockItemMenu extends Zend_View_Helper_Abstract {
         return $this;
     }
 
-    public function championship_race_menu($race_id) {
+    public function championship_race_menu($league_id, $championship_id, $race_id) {
+		if ($this->view->checkUserAccess('default/race/edit')) {
+            $link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'edit', 'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id), 'defaultChampionshipRaceIdAction', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+        }
 
+		if ($this->view->checkUserAccess('default/race/edit')) {
+            $link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'delete', 'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id), 'defaultChampionshipRaceIdAction', true);
+            array_push($this->_links, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
+        }
+		
         return $this;
     }
 

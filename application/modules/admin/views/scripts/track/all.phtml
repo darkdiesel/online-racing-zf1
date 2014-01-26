@@ -21,6 +21,7 @@
 							<tr>
 								<th class="track_id"><span>ID</span></th>
 								<th class="track_name"><span><?php echo $this->translate('Название'); ?></span></th>
+								<th class="track_length"><span><?php echo $this->translate('Длина круга (км)'); ?></span></th>
 								<th class="track_year"><span><?php echo $this->translate('Год'); ?></span></th>
 								<th class="track_action"><span><?php echo $this->translate('Действие'); ?></span></th>
 							</tr>
@@ -33,9 +34,10 @@
 								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'track_action', true);
 								?>
 								<tr>
-									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track['id']) ?></a></span></td>
-									<td class="track_name"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track['name']) ?></a></span></td>
-									<td class="track_year"><span><?php echo $this->escape($track['track_year']) ?></span></td>
+									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->id) ?></a></span></td>
+									<td class="track_name"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->name) ?></a></span></td>
+									<td class="track_year"><span><?php echo $this->escape($track->track_length) ?></span></td>
+									<td class="track_year"><span><?php echo $this->escape($track->track_year) ?></span></td>
 									<td class="track_action">
 										<span>
 											<div class="pull-right action-buttons">

@@ -38,7 +38,7 @@ class Application_Form_Championship_Add extends Zend_Form {
             'required' => true,
             'height' => '30px',
             'class' => 'white_box_el_size_m',
-            'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/championship/logo/',
+            'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/championship/logo',
             'decorators' => array(
                 'File', 'HtmlTag', 'label', 'Errors',
                 array('Label', array('class' => 'element_label')),

@@ -1,7 +1,7 @@
 <?php if ($this->league_data) : ?>
 	<div class="league_item block-item">
 		<?php
-		echo $this->ConfigureBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($this->league_data->id));
+		echo $this->ConfigBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($this->league_data->id));
 		?>
 		<div class="row">
 			<div class="block-item-content">
@@ -65,7 +65,7 @@
 				<div class="col-md-12 col-lg-12">
 					<div class="panel panel-default panel-inverse block-item">
 						<?php
-						echo $this->ConfigureBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
+						echo $this->ConfigBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
 						?>
 						<div class="panel-heading">
 							<h3 class="panel-title">

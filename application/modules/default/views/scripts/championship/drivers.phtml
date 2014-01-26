@@ -13,7 +13,7 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="well well-sm block-item">
-								<?php echo $this->ConfigureBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->escape($team->championship_id), $this->escape($team->team_id)); ?>
+								<?php echo $this->ConfigBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->escape($team->championship_id), $this->escape($team->team_id)); ?>
 								<div class="block-item-content media">
 									<?php if ($this->escape($team['url_logo']) != '') { ?>
 										<div class=" team_drivers_logo_wrapper_365 img-wrapper-150-150 overflow-hide pull-left">
@@ -52,7 +52,7 @@
 										<div class="team-driver-item block-item">
 											<?php
 												$driver_url = $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true);
-												echo $this->ConfigureBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
+												echo $this->ConfigBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
 											?>
 											<div class="block-item-content media well">
 												<div class="team_drivers_logo_wrapper img-wrapper-100-100 overflow-hide pull-left img-circle dp">
