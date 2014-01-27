@@ -109,7 +109,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 				$newCountry = $country->createRow($country_data);
 				$newCountry->save();
 
-				$this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'id' => $newCountry->id), 'country', true));
+				$this->redirect($this->view->url(array('module' => 'admin','controller' => 'country', 'action' => 'id', 'country_id' => $newCountry->id), 'country_id', true));
 			}
 		}
 

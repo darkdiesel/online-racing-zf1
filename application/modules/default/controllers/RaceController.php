@@ -29,7 +29,7 @@ class RaceController extends App_Controller_LoaderController {
 				$this->view->championship_data = $championship_data;
 				$this->view->headTitle($this->view->translate('Чемпионат'));
 				$this->view->headTitle($championship_data->name);
-				$this->view->headTitle($this->view->translate('Добавить гонку'));
+				$this->view->headTitle($this->view->translate('Гонка'));
 
 				$race_data = $this->db->get('championship_race')->getItem(array(
 					'id' => $race_id,
@@ -40,6 +40,12 @@ class RaceController extends App_Controller_LoaderController {
 				if ($race_data) {
 					$this->view->pageTitle($race_data->name);
 					$this->view->race_data = $race_data;
+
+					// Set breadcrumbs for this page
+					$this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
+							->championship($league_id, $championship_id, $championship_data->name, "1")
+							->championship_race($league_id, $championship_id, $race_id, $race_data->name);
+							//->championship_race($league_id, $championship_id, $race_id, $race_data->name);
 				} else {
 					$this->view->pageTitle($this->view->translate('Ошибка!'));
 					$this->messages->addError($this->view->translate('Запрашиваемая гонка не найдена!'));
@@ -200,7 +206,7 @@ class RaceController extends App_Controller_LoaderController {
 					$form = new Application_Form_Race_Edit();
 					$form->setAction($this->view->url(array('module' => 'deafult', 'controller' => 'race', 'action' => 'edit', 'league_id' => $league_data->id, 'championship_id' => $championship_data->id, 'race_id' => $race_id), 'defaultChampionshipRaceIdAction', true));
 					$form->cancel->setAttrib('onClick', "location.href=\"{$championship_race_id_url}\"");
-					
+
 					if ($this->getRequest()->isPost()) {
 						if ($form->isValid($request->getPost())) {
 							$date = date('Y-m-d H:i:s');
@@ -217,7 +223,7 @@ class RaceController extends App_Controller_LoaderController {
 							$new_race_data['race_date'] = $form->getValue('race_date');
 							$new_race_data['description'] = $form->getValue('description');
 							$new_race_data['date_edit'] = $date;
-							
+
 							$championship_race_where = $this->db->get('championship_race')->getAdapter()->quoteInto("id = {$race_id} and championship_id = {$championship_id}");
 							$this->db->get('championship_race')->update($new_race_data, $championship_race_where);
 
