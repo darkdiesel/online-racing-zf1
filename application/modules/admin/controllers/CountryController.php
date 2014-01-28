@@ -78,7 +78,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 
 						$filterRename->filter($file['image_round']['destination'] . '/' . $file['image_round']['name']);
 
-						$country_data['url_image_round'] = '/img/data/flags/' . $newName;
+						$country_data['url_image_round'] = '/data-content/data-uploads/flags/' . $newName;
 					}
 				}
 
@@ -94,7 +94,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 
 						$filterRename->filter($file['image_glossy_wave']['destination'] . '/' . $file['image_glossy_wave']['name']);
 
-						$country_data['url_image_glossy_wave'] = '/img/data/flags/' . $newName;
+						$country_data['url_image_glossy_wave'] = '/data-content/data-uploads/flags/' . $newName;
 					}
 				}
 

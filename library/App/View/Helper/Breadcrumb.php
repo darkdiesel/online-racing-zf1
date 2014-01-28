@@ -197,7 +197,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				'label' => $championship_name,
 				'title' => $championship_name,
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id, 'page' => $page), 'championshipId', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id, 'page' => $page), 'defaultChampionshipIdAll', true),
 				'pages' => array()
 			)
 		);

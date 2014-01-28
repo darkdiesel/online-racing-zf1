@@ -10,7 +10,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = (int) $request->getParam('championship_id');
-		//$page $request->getParam('page');
+		$page = $request->getParam('page');
 
 		$league = new Application_Model_DbTable_League();
 		$league_data = $league->getLeagueData($league_id);
@@ -35,7 +35,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 				// settings for championship races pager
 				$pager_args = array(
-					"page_count_items" => 10,
+					"page_count_items" => 5,
 					"page_range" => 5,
 					"page" => $this->getRequest()->getParam('page')
 				);
@@ -43,7 +43,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 				$championship_races_data = $this->db->get('championship_race')->getAll(
 						array(
 					'championship_id' => $championship_data->id
-						), "id, name, description", "ASC", TRUE, $pager_args
+						), "id, name, description", array('race_number' => 'ASC'), TRUE, $pager_args
 				);
 
 				if ($championship_races_data) {
@@ -136,7 +136,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 							$this->view->url(
 									array('controller' => 'championship', 'action' => 'id',
 								'league_id' => $newChampionship->league_id,
-								'championship_id' => $newChampionship->id), 'championshipId', true
+								'championship_id' => $newChampionship->id), 'defaultChampionshipIdAll', true
 							)
 					);
 				} else {
@@ -243,7 +243,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 				);
 				$form->cancel->setAttrib(
 						'onClick', "location.href=\"{$this->view->url(
-								array('controller' => 'championship', 'action' => 'id', 'id' => $championship_id), 'championship', true
+								array('module' => 'default','controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipIdAll', true
 						)}\""
 				);
 
@@ -307,7 +307,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 							$this->redirect(
 									$this->view->url(
-											array('controller' => 'championship', 'action' => 'id', 'id' => $championship_id), 'championship', true
+											array('module' => 'default','controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'chapmionship_id' => $championship_id), 'defaultChampionshipIdAll', true
 									)
 							);
 						} else {
@@ -682,7 +682,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 								'team_id' => $team_id), 'championshipTeam', true
 							)}\""
 					);
-					
+
 					if ($this->getRequest()->isPost()) {
 						if ($form->isValid($request->getPost())) {
 							//saving new data to DB

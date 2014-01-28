@@ -67,10 +67,14 @@
 						<?php
 						echo $this->ConfigBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
 						?>
+						
+						<?php 
+						$championshipIdAllUrl = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship->id), 'page' => 1), 'defaultChampionshipIdAll', true);
+						?>
 						<div class="panel-heading">
 							<h3 class="panel-title">
 								<i class="fa fa-trophy"></i>
-								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>"><?php echo $this->escape($championship['name']); ?></a>
+								<a href="<?php echo $championshipIdAllUrl; ?>"><?php echo $this->escape($championship['name']); ?></a>
 							</h3>
 						</div>
 						<div class="panel-body">
@@ -91,7 +95,7 @@
 								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'ts', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-warning" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('КЗ') ?></a>
 								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championship', true); ?>" class = "btn btn-sm btn-info" title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
 								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($championship['post_id'])), 'postId', true); ?>" target="_blank" class = "btn btn-sm btn-danger post_more" title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
-								<a href = "<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->escape($championship['id'])), 'championshipId', true); ?>" class = "btn btn-sm btn-primary post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+								<a href = "<?php echo $championshipIdAllUrl; ?>" class = "btn btn-sm btn-primary post_more" title="<?php echo $this->translate('Детальная информация о чемпионате') ?>"><?php echo $this->translate('Подробнее...') ?></a>
 							</div>
 						</div>
 						<div class="panel-footer">

@@ -111,7 +111,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 		}
 
 		// Fill list of countries
-		$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'));
+		$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'), array('english_name' => 'ASC'));
 		$form->country->addMultiOption("", "");
 		foreach ($countries as $country):
 			$form->country->addMultiOption($country->id, $country->english_name . " ({$country->native_name})");
@@ -190,7 +190,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 			}
 			
 			// Fill form's list of countries
-			$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'));
+			$countries = $this->db->get('country')->getAll(FALSE, array('id', 'native_name', 'english_name'), array('english_name' => 'ASC'));
 			$form->country->addMultiOption("", "");
 			foreach ($countries as $country):
 				$form->country->addMultiOption($country->id, $country->english_name . " ({$country->native_name})");

@@ -45,7 +45,7 @@ class RaceController extends App_Controller_LoaderController {
 					$this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
 							->championship($league_id, $championship_id, $championship_data->name, "1")
 							->championship_race($league_id, $championship_id, $race_id, $race_data->name);
-							//->championship_race($league_id, $championship_id, $race_id, $race_data->name);
+					//->championship_race($league_id, $championship_id, $race_id, $race_data->name);
 				} else {
 					$this->view->pageTitle($this->view->translate('Ошибка!'));
 					$this->messages->addError($this->view->translate('Запрашиваемая гонка не найдена!'));
@@ -133,11 +133,11 @@ class RaceController extends App_Controller_LoaderController {
 				$form->championship->setValue($championship_data->id);
 
 				// add tracks to the form
-				$tracks_data = $this->db->get('track')->getAll(FALSE, array("id", "name"), "ASC");
+				$tracks_data = $this->db->get('track')->getAll(FALSE, array("id", "name"), array('country_id' => "ASC"));
 
 				if ($tracks_data) {
 					foreach ($tracks_data as $track):
-						$form->track->addMultiOption($track->id, $track->name . " ({$track->track_year})");
+						$form->track->addMultiOption($track->id, $track->country_english_name . " - " . $track->name . " ({$track->track_year})");
 					endforeach;
 				} else {
 					$this->messages->addError($this->view->translate('Трассы не найдены!'));
@@ -237,12 +237,12 @@ class RaceController extends App_Controller_LoaderController {
 					$form->championship->addMultiOption($championship_data->id, $championship_data->name);
 					$form->championship->setValue($championship_data->id);
 
-					// add tracks to the form
-					$tracks_data = $this->db->get('track')->getAll(FALSE, array("id", "name"), "ASC");
+					/// add tracks to the form
+					$tracks_data = $this->db->get('track')->getAll(FALSE, array("id", "name"), array('country_id' => "ASC"));
 
 					if ($tracks_data) {
 						foreach ($tracks_data as $track):
-							$form->track->addMultiOption($track->id, $track->name . " ({$track->track_year})");
+							$form->track->addMultiOption($track->id, $track->country_english_name . " - " . $track->name . " ({$track->track_year})");
 						endforeach;
 					} else {
 						$this->messages->addError($this->view->translate('Трассы не найдены!'));

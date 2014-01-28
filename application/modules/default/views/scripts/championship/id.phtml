@@ -111,6 +111,7 @@
 						?>
 						<div class="panel-heading">
 							<h3 class="panel-title">
+								<span class="label label-danger"><?php echo $race->race_number?></span>
 								<img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race->country_url_image_round)); ?>">
 								<i class="fa fa-flag-checkered fa-lg"></i>
 								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true); ?>"><?php echo $this->escape($race->name); ?></a>

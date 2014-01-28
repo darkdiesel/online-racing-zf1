@@ -164,6 +164,22 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
+				'defaultChampionshipIdAll', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/page/(\d+)\.html', array(
+			'module' => 'default',
+			'controller' => 'championship',
+			'action' => 'id',
+			1 => 0,
+			2 => 0,
+			3 => 1,
+				), array(
+			'league_id' => 1,
+			'championship_id' => 2,
+			'page' => 3,
+				), "league/%d/championship/%d/page/%d.html"
+				)
+		);
+		
+		$router->addRoute(
 				'championshipId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'championship',

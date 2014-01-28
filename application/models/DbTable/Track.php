@@ -60,12 +60,11 @@ class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
 		$select = $model->select()
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
-				->joinLeft(array('c' => 'country'), $this->db_href.'.country_id = c.id', 
-						array('country_native_name' => 'c.native_name',
-							'country_english_name' => 'c.english_name',
-							'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-							'country_url_image_round' => 'c.url_image_round',
-							))
+				->joinLeft(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_native_name' => 'c.native_name',
+					'country_english_name' => 'c.english_name',
+					'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+					'country_url_image_round' => 'c.url_image_round',
+				))
 				->where($idencity_data);
 
 		if ($fields) {
@@ -155,7 +154,15 @@ class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
 		}
 
 		$select = $model->select()
-				->from(array($this->db_href => $this->_name));
+				->setIntegrityCheck(false)
+				->from(array($this->db_href => $this->_name))
+				->joinLeft(array('c' => 'country'), $this->db_href . '.country_id = c.id', array(
+			'country_native_name' => 'c.native_name',
+			'country_english_name' => 'c.english_name',
+			'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+			'country_url_image_round' => 'c.url_image_round',
+				)
+		);
 
 		if ($fields) {
 			$select->columns($fields);
@@ -184,7 +191,7 @@ class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
 				$paginator->setCurrentPageNumber("1");
 				$paginator->setPageRange("5");
 			}
-			
+
 			if (count($paginator) > 0) {
 				return $paginator;
 			} else {
