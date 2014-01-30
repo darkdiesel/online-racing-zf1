@@ -1,6 +1,6 @@
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
+	<head>
 		<?php echo $this->headTitle() ?>
 		<?php echo $this->headMeta() ?>
 		<?php echo $this->headLink() ?>
@@ -8,28 +8,40 @@
 		<?php echo $this->minifyHeadLink() ?>
 		<?php //echo $this->headScript() ?>
 		<?php echo $this->minifyHeadScript() ?>
-    </head>
-    <body>
-        <!-- Head-Line -->
-		<?php echo $this->render("default_layout/head_line.phtml"); ?>
-        <div id="page_wrapper">
-            <div id="page">
+	</head>
+	<body>
+		<!-- Head-Line -->
+		<?php echo $this->render("layout-default/head_line.phtml"); ?>
+		<div id="page-wrapper">
+			<div id="page">
 				<div id="header" class="container">
 					<div class="row">
-						<?php echo $this->render("default_layout/header.phtml") ?>
+						<div class="col-lg-12">
+							<?php echo $this->render("layout-default/header.phtml") ?>
+						</div>
 					</div>
 				</div>
-                <div id="main_wrapper" class="container">
-                    <div id="main" class="row clearfix">
-                        <!-- Content -->
-                        <div class="col-lg-9 col-lg-push-3 m-b-10">
-							<div id="content">
+				<div id="main-wrapper" class="container m-t-10">
+					<div id="main" class="row clearfix">
+						<!-- Content -->
+						<div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 m-b-10">
+							<div class="row">
+								<div class="col-lg-12">
+									<?php
+									$main_slider = Zend_Registry::get('slider');
+									if ($main_slider['show']) {
+										echo $this->render("layout-default/slider.phtml");
+									}
+									?>
+								</div>
+							</div>
+							<div id="content" class="m-t-10">
 								<?php
 								$breadcrumb = Zend_Registry::get('breadcrumb');
 								$page_title = $this->pageTitle();
 
 								if ($breadcrumb['show']) {
-									$breadcrumb_data = $this->render("default_layout/breadcrumb.phtml");
+									$breadcrumb_data = $this->render("layout-default/breadcrumb.phtml");
 								}
 
 								if ($page_title != "" || (isset($breadcrumb_data))) :
@@ -54,15 +66,15 @@
 							</div>
 						</div>
 						<!-- Left sidebar -->
-						<div class="col-lg-3 col-lg-pull-9">
-							<div id="sidebar-left" class="block-item">
-								<?php echo $this->render("default_layout/left_sidebar.phtml") ?>
+						<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 m-t-10 m-b-10">
+							<div id="sidebar-left" class="sidebar-left">
+								<?php echo $this->render("layout-default/sidebar-left.phtml") ?>
 							</div>
 						</div>
-                    </div>
-                </div>
-				<?php echo $this->render("default_layout/footer.phtml") ?>
-            </div>
+					</div>
+				</div>
+				<?php echo $this->render("layout-default/footer.phtml") ?>
+			</div>
 			<?php
 			if ($this->back_to_top_btn) {
 				echo $this->render("common_blocks/back_to_top_btn.phtml");
@@ -74,7 +86,7 @@
 			}
 			?>
 
-        </div>
+		</div>
 		<?php
 		if ($this->page_scroller_block) {
 			echo $this->render("common_blocks/page_scroller_block.phtml");
@@ -82,10 +94,10 @@
 		?>
 		<?php
 		if ($this->slide_out_tabs_block) {
-			echo $this->render("default_layout/blocks/slide_out_tabs_block.phtml");
+			echo $this->render("layout-default/blocks/slide_out_tabs_block.phtml");
 		}
 		?>
 		<div id="background-wrapper"></div>
-		<?php echo $this->render("analyticstracking.phtml") ?>
-    </body>
+		<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+	</body>
 </html>

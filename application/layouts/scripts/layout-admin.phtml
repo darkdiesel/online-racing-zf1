@@ -11,17 +11,17 @@
     </head>
     <body>
         <!-- HeadLine -->
-		<?php echo $this->render("admin_layout/head_line.phtml"); ?>
-        <div id="page_wrapper">
+		<?php echo $this->render("layout-admin/head_line.phtml"); ?>
+        <div id="page-wrapper">
             <div id="page">
 				<div id="header" class="container">
 					<div class="row">
 						<div class="col-lg-12">
-							<?php echo $this->render("admin_layout/header.phtml") ?>
+							<?php echo $this->render("layout-admin/header.phtml") ?>
 						</div>
 					</div>
 				</div>
-                <div id="main_wrapper" class="container">
+                <div id="main-wrapper" class="container">
                     <div id="main" class="row clearfix">
                         <!-- Content -->
                         <div class="col-lg-9 col-lg-push-3">
@@ -47,12 +47,12 @@
 						<!-- Left sidebar -->
 						<div class="col-lg-3 col-lg-pull-9">
 							<div id="sidebar-left" class="block-item">
-								<?php echo $this->render("admin_layout/left_sidebar.phtml") ?>
+								<?php echo $this->render("layout-admin/left_sidebar.phtml") ?>
 							</div>
 						</div>
                     </div>
                 </div>
-				<?php echo $this->render("admin_layout/footer.phtml") ?>
+				<?php echo $this->render("layout-admin/footer.phtml") ?>
             </div>
         </div>
 		<?php
@@ -61,6 +61,6 @@
 		}
 		?>
 		<div id="background-wrapper"></div>
-		<?php echo $this->render("analyticstracking.phtml") ?>
+		<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
     </body>
 </html>

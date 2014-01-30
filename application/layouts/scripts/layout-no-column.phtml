@@ -11,15 +11,15 @@
     </head>
     <body>
 		<!-- HeadLine -->
-		<?php echo $this->render("default_layout/head_line.phtml"); ?>
-        <div id="page_wrapper">
+		<?php echo $this->render("layout-default/head_line.phtml"); ?>
+        <div id="page-wrapper">
             <div id="page">
 				<div id="header" class="container">
 					<div class="row">
-						<?php echo $this->render("default_layout/header.phtml") ?>
+						<?php echo $this->render("layout-default/header.phtml") ?>
 					</div>
 				</div>
-                <div id="main_wrapper" class="container">
+                <div id="main-wrapper" class="container">
                     <div id="main" class="row clearfix">
                         <!-- Content -->
                         <div class="col-lg-12">
@@ -42,7 +42,7 @@
 						</div>
                     </div>
                 </div>
-				<?php echo $this->render("default_layout/footer.phtml") ?>
+				<?php echo $this->render("layout-default/footer.phtml") ?>
             </div>
 			<?php
 			if ($this->back_to_top_btn) {
@@ -57,7 +57,7 @@
 		?>
 		<?php
 		if ($this->slide_out_tabs_block) {
-			echo $this->render("default_layout/blocks/slide_out_tabs_block.phtml");
+			echo $this->render("layout-default/blocks/slide_out_tabs_block.phtml");
 		}
 		?>
 		<div id="background-wrapper"></div>

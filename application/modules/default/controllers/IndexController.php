@@ -27,11 +27,11 @@ class IndexController extends App_Controller_LoaderController {
 		$this->view->rss_index = $index;
 		$this->view->rss_element = $element;
 
-		$this->view->last_posts = $artiles_data;
+		$this->view->posts_data = $artiles_data;
 
 		$league = new Application_Model_DbTable_League();
 
-		$this->view->leagues = $league->getAll(FALSE, array('id', 'name', 'url_logo'));
+		$this->view->leagues_data = $league->getAll(FALSE, array('id', 'name', 'url_logo', 'description'));
 	}
 
 	public function sitemapAction() {

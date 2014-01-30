@@ -10,7 +10,7 @@ class Admin_ErrorController extends App_Controller_LoaderController {
     }
     
     public function errorAction() {
-	$this->_helper->layout->setLayout( 'no-column-layout' );
+	$this->_helper->layout->setLayout( 'layout-no-column' );
         
 	$errors = $this->_getParam('error_handler');
 

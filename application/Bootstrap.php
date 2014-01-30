@@ -98,6 +98,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		// [BOOTSTRAP library]
 		$view->headLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
+		$view->headLink()->appendStylesheet("/css/bootstrap-3-additional.css");
 		$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
 
 		// [SNOW FALL]
@@ -115,6 +116,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->minifyHeadLink()->appendStylesheet('/css/style.css');
 		$view->minifyHeadLink()->appendStylesheet('/css/items.css');
 		$view->minifyHeadLink()->appendStylesheet('/css/forms.css');
+		$view->minifyHeadLink()->appendStylesheet('/css/layout-common.css');
 
 		// [COMMON JS]
 		//$view->headScript()->appendFile("/js/app.js");

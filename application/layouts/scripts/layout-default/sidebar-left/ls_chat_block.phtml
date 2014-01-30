@@ -1,10 +1,12 @@
 <!-- start chat block -->
-<div id="chat" class="sidebar_box">
-    <div class="sidebar_box_title">
-        <i class="fa fa-book"></i> <a href="<?php echo $this->baseUrl('chat'); ?>"><?php echo $this->translate('Чат') ?></a>
-    </div>
-    <div class="sidebar_box_content">
-        <div id="chat_messages_box">
+<div id="chat" class="block block-ui-bordered block-sidebar m-b-10">
+	<div class="block-header">
+		<div class="block-title">
+			<i class="fa fa-book fa-lg"></i> <a href="<?php echo $this->baseUrl('chat'); ?>"><?php echo $this->translate('Чат') ?></a>
+		</div>
+	</div>
+	<div class="block-body">
+		<div id="chat_messages_box">
 			<?php
 			$user_chat = new Application_Model_DbTable_UserChat();
 			$user_chat_messages = $user_chat->fetchUserChatMsg();
@@ -37,7 +39,7 @@
 					<div class="chat_mesage_message"><?php echo $bbcode->render($message->message) ?></div>
 				</div>
 			<?php endforeach ?>
-        </div>
+		</div>
 		<?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
 			<div id="chat_textarea_count" class="chat_buttons">500</div>
 			<div id="chat_ajax_img" class="chat_buttons"><img src="<?php echo $this->baseUrl('img/ajax_chat_loader.gif'); ?>"></div>
@@ -47,7 +49,6 @@
 				echo $form;
 			}
 			?>
-    </div>
-    <hr />
+	</div>
 </div>
 <!-- end chat block-->

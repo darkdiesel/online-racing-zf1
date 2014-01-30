@@ -28,7 +28,7 @@ class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract
 	$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 
 	// [CSS Minify]
-	$view->minifyHeadLink()->appendStylesheet('/css/forum.css');
+	$view->minifyHeadLink()->appendStylesheet('/css/layout-forum.css');
 	$view->minifyHeadLink()->appendStylesheet('/css/forum-items.css');
 
 
