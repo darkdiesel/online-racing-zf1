@@ -29,13 +29,13 @@
 							<?php $post_id_url = $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true); ?>
 							<li class="media">
 								<?php if (!$post->image == "") { ?>
-									<a class="pull-left" href="<?php echo $league_url; ?>">
-										<img class="media-object img-thumbnail img-responsive img-size-150" src="<?php echo $post->image; ?>" alt="<?php echo $league->name; ?>">
+									<a class="pull-left" href="<?php echo $post_id_url; ?>">
+										<img class="media-object img-thumbnail img-responsive img-size-150" src="<?php echo $post->image; ?>" alt="<?php echo $post->title; ?>">
 									</a>
 
 								<?php } ?>
 								<div class="media-body">
-									<h4 class="media-heading"><a href="<?php echo $league_url; ?>"><?php echo $this->truncate($post->title)->toLength(100); ?></a></h4>
+									<h4 class="media-heading"><a href="<?php echo $post_id_url; ?>"><?php echo $this->truncate($post->title)->toLength(100); ?></a></h4>
 									<?php
 									if ($post->annotation != '') {
 										echo $this->escape($post->annotation);
