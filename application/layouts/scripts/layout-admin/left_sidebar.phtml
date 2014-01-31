@@ -1,17 +1,149 @@
+<div class="row m-b-10">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<a class="btn btn-danger btn-lg btn-block" href="<?php echo $this->baseUrl();?>">
+			<i class="fa fa-globe"></i> <?php echo $this->translate('Сайт'); ?>
+		</a>
+	</div>
+</div>
+<div class="row m-b-10">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							<i class="fa fa-folder"></i> <?php echo $this->translate('Контент сайта'); ?></a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td>
+									<i class="fa fa-file-text"></i>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'content_type_all', true) ?>">
+										<?php echo $this->translate('Типы контента'); ?>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<i class="fa fa-file-text"></i>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'post_type_all', true) ?>">
+										<?php echo $this->translate('Типы постов'); ?>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                            <i class="fa fa-exclamation-circle"></i> <?php echo $this->translate('Безопасность'); ?>
+						</a>
+					</h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'adminResourceAll', true) ?>">
+										<?php echo $this->translate('Ресурсы сайта'); ?>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'role_all', true) ?>">
+										<?php echo $this->translate('Роли пользователей'); ?>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
+                            </span>Account</a>
+					</h4>
+				</div>
+				<div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td>
+									<a href="http://www.jquery2dotnet.com">Change Password</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="http://www.jquery2dotnet.com">Import/Export</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
+										Delete Account</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
+                            </span>Reports</a>
+					</h4>
+				</div>
+				<div id="collapseFour" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td>
+									<span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="glyphicon glyphicon-shopping-cart"></span><a href="http://www.jquery2dotnet.com">Shopping Cart</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <ul class="nav nav-pills nav-stacked">
     <li class="active">
 		<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
 			<?php echo $this->translate('Сайт'); ?>
-		</a>
-    </li>
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'content_type_all', true) ?>">
-			<?php echo $this->translate('Типы контента'); ?>
-		</a>
-    </li>
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'post_type_all', true) ?>">
-			<?php echo $this->translate('Типы постов'); ?>
 		</a>
     </li>
     <li>
@@ -22,11 +154,6 @@
     <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all'), 'track_all', true) ?>">
 			<?php echo $this->translate('Трассы'); ?>
-		</a>
-    </li>
-    <li class="dropdown">
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'resource_all', true) ?>">
-			<?php echo $this->translate('Ресурсы сайта'); ?>
 		</a>
     </li>
     <li class="dropdown">
@@ -49,11 +176,6 @@
     <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
 			<?php echo $this->translate('Страны'); ?>
-		</a>
-    </li>
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'role_all', true) ?>">
-			<?php echo $this->translate('Роли пользователей'); ?>
 		</a>
     </li>
     <li class="dropdown">
@@ -91,9 +213,9 @@
 		</ul>
     </li>
     <li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'user_all', true) ?>">
-					<?php echo $this->translate('Пользователи'); ?>
-				</a>
+		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'adminUserAll', true) ?>">
+			<?php echo $this->translate('Пользователи'); ?>
+		</a>
     </li>
 	<li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'), 'default', true) ?>">

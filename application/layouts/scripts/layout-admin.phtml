@@ -46,7 +46,7 @@
 						</div>
 						<!-- Left sidebar -->
 						<div class="col-lg-3 col-lg-pull-9">
-							<div id="sidebar-left" class="block-item">
+							<div id="sidebar-left" class="block">
 								<?php echo $this->render("layout-admin/left_sidebar.phtml") ?>
 							</div>
 						</div>
@@ -57,7 +57,7 @@
         </div>
 		<?php
 		if ($this->page_scroller_block) {
-			echo $this->render("common_blocks/page_scroller_block.phtml");
+			echo $this->render("common/page-scroller-block.phtml");
 		}
 		?>
 		<div id="background-wrapper"></div>

@@ -1,71 +1,64 @@
-<ul id="list_sliding_tabs">
-    <li class="sliding_tab_item liveracers">
-        <div class="list_vertical_item_wraper">
-            <div class="sliding_tab_item_icon">
-                <img src="<?php echo $this->baseUrl('img/data/icons/life_racers_50.png'); ?>" />
-            </div>
-            <div class="sliding_tab_item_content">
-                <h4>LiveRacers</h4>
-                <div class="div_hr"></div>
-                <p>
-                    <a target="_blank" href="http://online-racing-net.liveracers.info/Live">Online-Racing Live</a>
-                </p>
-                <div id="lr-servers" orientation="horizontal" theme="dark"></div>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        window._lr = {
-                            domainKey: 'b999888a-6e33-4659-8d5b-d5602eadfd36',
-                            url: 'http://liveracers.info'
-                        };
-                        (function() {
-                            var lr = document.createElement('script');
-                            lr.type = 'text/javascript';
-                            lr.async = true;
-                            lr.src = window._lr.url + '/Scripts/api.js';
-                            var s = document.getElementsByTagName('script')[0];
-                            s.parentNode.insertBefore(lr, s);
-                        })();
-                    });
-
-                </script>
-            </div>
+<ul class="slide-out-tabs">
+    <li class="slide-out-tab liveracers">
+		<div class="slide-out-tab-icon">
+			<img src="<?php echo $this->baseUrl('data-content/ui/icons/life-racers-50.png'); ?>" />
+		</div>
+		<div class="slide-out-tab-body">
+			<h4>LiveRacers</h4>
+			<div class="div_hr"></div>
+			<p>
+				<a target="_blank" href="http://online-racing-net.liveracers.info/Live">Online-Racing Live</a>
+			</p>
+			<div id="lr-servers" orientation="horizontal" ></div>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					window._lr = {
+						domainKey: 'b999888a-6e33-4659-8d5b-d5602eadfd36',
+						url: 'http://liveracers.info'
+					};
+					(function() {
+						var lr = document.createElement('script');
+						lr.type = 'text/javascript';
+						lr.async = true;
+						lr.src = window._lr.url + '/Scripts/api.js';
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(lr, s);
+					})();
+				});
+			</script>
         </div>
     </li>
-    <li class="sliding_tab_item teamspeak">
-        <div class="list_vertical_item_wraper">
-            <div class="sliding_tab_item_icon">
-                <img src="<?php echo $this->baseUrl('img/data/icons/team_speak_50.png'); ?>" />
-            </div>
-            <div class="sliding_tab_item_content">
-                <h4>TeamSpeak Server</h4>
-                <div class="div_hr"></div>
-                <p>
-                    <strong>IP Сервера : </strong>85.112.55.36:9987<br/>
-                    <strong>Пароль: </strong><i>обратится к администраторам в личку.</i><br/>
-                </p>
-                <p>
-                    За подробной информацией обращатесь:
-                    <br/>
-                    <img src="<?php echo $this->baseUrl('img/logo/skype_20.png'); ?>"><strong>Skype: </strong><u>dark_diesel</u>
-                </p>
-            </div>
+    <li class="slide-out-tab teamspeak">
+		<div class="slide-out-tab-icon">
+			<img src="<?php echo $this->baseUrl('data-content/ui/icons/team-speak-50.png'); ?>" />
+		</div>
+		<div class="slide-out-tab-body">
+			<h4>TeamSpeak Server</h4>
+			<div class="div_hr"></div>
+			<p>
+				<strong>IP Сервера : </strong>85.112.55.36:9987<br/>
+				<strong>Пароль: </strong><i>обратится к администраторам в личку.</i><br/>
+			</p>
+			<p>
+				За подробной информацией обращатесь:
+				<br/>
+				<img src="<?php echo $this->baseUrl('data-content/ui/icons/skype-20.png'); ?>"><strong>Skype: </strong><u>dark_diesel</u>
+			</p>
         </div>
     </li>
-    <li class="sliding_tab_item question">
-        <div class="list_vertical_item_wraper">
-            <div class="sliding_tab_item_icon">
-                <img src="<?php echo $this->baseUrl('img/data/icons/question_50.png'); ?>" />
-            </div>
-            <div class="sliding_tab_item_content">
-                <h4>Помощь</h4>
-                <div class="div_hr"></div>
-                <p>
-                    При возникших вопросах обращайтесь по следущим контактам:<br/><br/>
-                    <img src="<?php echo $this->baseUrl('img/logo/skype_20.png'); ?>">Skype: dark_diesel
-                    <br/><br/>
-                    Или пишите в чат сайта.
-                </p>
-            </div>
-        </div>
-    </li>
+    <li class="slide-out-tab question">
+		<div class="slide-out-tab-icon">
+			<img src="<?php echo $this->baseUrl('data-content/ui/icons/question-50.png'); ?>" />
+		</div>
+		<div class="slide-out-tab-body">
+			<h4>Помощь</h4>
+			<div class="div_hr"></div>
+			<p>
+				При возникших вопросах обращайтесь по следущим контактам:<br/><br/>
+				<img src="<?php echo $this->baseUrl('data-content/ui/icons/skype-20.png'); ?>">Skype: dark_diesel
+				<br/><br/>
+				Или пишите в чат сайта.
+			</p>
+		</div>
+	</li>
 </ul>

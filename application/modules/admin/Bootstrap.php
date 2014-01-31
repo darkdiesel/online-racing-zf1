@@ -42,7 +42,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'user_all', new Zend_Controller_Router_Route_Regex('admin/user/all/page/(\d+)\.html', array(
+				'adminUserAll', new Zend_Controller_Router_Route_Regex('admin/user/all/page/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'user',
 			'action' => 'all',
@@ -78,7 +78,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'resource_all', new Zend_Controller_Router_Route_Regex('admin/resource/all/page/(\d+)\.html', array(
+				'adminResourceAll', new Zend_Controller_Router_Route_Regex('admin/resource/all/page/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'resource',
 			'action' => 'all',

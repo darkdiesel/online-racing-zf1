@@ -35,5 +35,10 @@
 					</div>
 			</div>
 		</div>
+		<?php
+		if ($this->page_scroller_block) {
+			echo $this->render("common/page-scroller-block.phtml");
+		}
+		?>
 		<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
     </body>

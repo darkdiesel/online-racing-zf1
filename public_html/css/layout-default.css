@@ -33,3 +33,11 @@ body{}
 #footer .web_counters img{opacity:0.4;}
 #footer .web_counters img:hover{opacity:1;}
 #footer .web_counters > div{display:inline-block; margin:0 5px;}
+
+
+/* RSS Block */
+.block-media-rss{}
+.block-media-rss .media-list{}
+.block-media-rss .media-list .media{}
+.block-media-rss .media-list .media p{}
+.block-media-rss .media-list .media img{float:left; margin-right:10px; border:1px solid #D2D2D2; border-radius:2px; padding:4px; background:#ffffff; box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);}

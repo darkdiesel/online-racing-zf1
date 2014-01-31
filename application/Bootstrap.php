@@ -74,17 +74,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				->setHttpEquiv('X-UA-Compatible', 'IE=edge')
 				->appendHttpEquiv('Content-Language', 'en-US')
 				->appendHttpEquiv('Content-Language', 'ru')
-				->appendName('description', 'Site for online racing competition with rFactor games and mods and F1 news.')
+				->appendName('description', 'Site about sim-racing competition with rFactor mods and F1 news.')
 				->appendName('keywords', 'F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
-                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rfactor lite')
-				->appendName('subject', 'Sim racing')
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rFactor lite')
+				->appendName('subject', 'Sim-Racing')
 				->appendName('title', 'Online-Racing')
 				->appendName('revisit', '5 days')
 				->appendName('resource-type', 'document')
-				->appendName('Copyright', 'Igor Peshkov. Copyright 2012')
-				->appendName('Author', 'Igor Peshkov. Copyright 2012')
+				->appendName('Copyright', 'Igor Peshkov. Copyright 2012-2014')
+				->appendName('Author', 'Igor Peshkov. Copyright 2012-2014')
 				->appendName('reply-to', 'Igor.Peshkov@gmail.com')
-				->appendName('Generator', 'Sublime Text 2, phpStorm, notepad++')
+				->appendName('Generator', 'NetBeans, notepad++')
 				->appendName('yandex-verification', '715d9bbdfc996f86')
 				->setHttpEquiv('Cache-Control', 'no-store');
 
@@ -97,8 +97,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->headScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js");
 
 		// [BOOTSTRAP library]
-		$view->headLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
-		$view->headLink()->appendStylesheet("/css/bootstrap-3-additional.css");
+		$view->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
+		$view->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css");
 		$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
 
 		// [SNOW FALL]
@@ -110,7 +110,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->headLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css");
 
 		// [GOOGLE FONTS]
-		$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
+		//$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
 
 		// [COMMON CSS]
 		$view->minifyHeadLink()->appendStylesheet('/css/style.css');

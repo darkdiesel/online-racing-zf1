@@ -37,7 +37,7 @@ class ErrorController extends App_Controller_LoaderController {
 				$this->getResponse()->setHttpResponseCode(404);
 				$priority = Zend_Log::NOTICE;
 				$this->messages->addError($this->view->translate('Ошибка 404. Страница не найдена'));
-				$this->_helper->layout->setLayout( 'error-404-layout' );
+				$this->_helper->layout->setLayout( 'layout-error-404' );
 				break;
 			default:
 				// application error

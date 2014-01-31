@@ -148,27 +148,7 @@ div.shareblock #shareblock a{border:3px solid #BCBBBB; border-radius:10px;}
 div.shareblock #shareblock:hover a{opacity:0.5;}
 div.shareblock #shareblock a:hover{opacity:1;}
 
-/* RSS Block */
-#rss_block{}
-#rss_block .rss_description{clear:both;}
-#rss_block p{}
-#rss_block img{    float:left;
-    margin-right:10px;
-    border:1px solid #D2D2D2;
-    border-radius:2px;
-    padding:4px;
-    background:#ffffff;
-    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
-}
-#rss_block .rss_more{
-    color:#FFFFFF;
-    font-size:12px;
-    margin-top:10px;
-    float:right;
-}
-#rss_block .rss_more:hover{
-    text-decoration:none;
-}
+
 
 /* */
 .break_word_wrap{

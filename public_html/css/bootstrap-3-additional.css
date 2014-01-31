@@ -7,6 +7,7 @@
 .panel-inverse > .panel-heading + .panel-collapse .panel-body{border-top-color:#363636;}
 .panel-inverse > .panel-footer + .panel-collapse .panel-body{border-bottom-color:#363636;}
 
+
 /* Buttons */
 .btn-inverse{background-color: #363636;; border-color: #444444; color: #FFFFFF;}
 .btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active, .btn-inverse.active, .open .dropdown-toggle.btn-inverse {
@@ -24,3 +25,5 @@ hr.message-inner-separator{clear:both; margin-top:10px; margin-bottom:13px; bord
 	background-image:-ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 	background-image:-o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
+
+

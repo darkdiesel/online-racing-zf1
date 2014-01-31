@@ -1,40 +1,41 @@
 <?php
 
-class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract
-{
+class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract {
 
-    private $_bootstrap;
+	private $_bootstrap;
 
-    function __construct($bootstrap)
-    {
-	$this->_bootstrap = $bootstrap;
-    }
-
-    public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
-    {
-	if ('forum' != $request->getModuleName()) {
-	    // If not in this module, return early
-	    return;
+	function __construct($bootstrap) {
+		$this->_bootstrap = $bootstrap;
 	}
 
-	$this->_bootstrap->bootstrap('layout');
-	$layout = $this->_bootstrap->getResource('layout');
-	$view = $layout->getView();
-	
-	$view->headTitle($view->translate('Форум'));
+	public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request) {
+		if ('forum' != $request->getModuleName()) {
+			// If not in this module, return early
+			return;
+		}
 
-	/* ===== [BLOCK DISPLAY SETTINGS] ===== */
+		$this->_bootstrap->bootstrap('layout');
+		$layout = $this->_bootstrap->getResource('layout');
+		$view = $layout->getView();
 
-	$view->addHelperPath('App/View/Helper', 'App_View_Helper');
+		$view->headTitle($view->translate('Форум'));
 
-	// [CSS Minify]
-	$view->minifyHeadLink()->appendStylesheet('/css/layout-forum.css');
-	$view->minifyHeadLink()->appendStylesheet('/css/forum-items.css');
+		/* ===== [BLOCK DISPLAY SETTINGS] ===== */
+		$view->page_scroller_block = true; // back to top block
 
+		$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 
-	// Change layout
-	Zend_Layout::getMvcInstance()->setLayout('forum');
-    }
+		// [CSS Minify]
+		$view->minifyHeadLink()->appendStylesheet('/css/layout-forum.css');
+
+		// Page scroller block
+		if ($view->page_scroller_block) {
+			$view->headScript()->appendFile("library/jquery.page-scroller/jquery.page-scroller.js");
+			$view->minifyHeadLink()->appendStylesheet("library/jquery.page-scroller/css/page-srcoller.css");
+		}
+
+		// Change layout
+		Zend_Layout::getMvcInstance()->setLayout('forum');
+	}
 
 }
-

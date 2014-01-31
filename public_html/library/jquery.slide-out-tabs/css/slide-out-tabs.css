@@ -1,0 +1,13 @@
+/* Page Vertical tabs */
+.slide-out-tabs{position:fixed; margin:0px; padding:0px; top:200px; right:0px; list-style:none; z-index:9999;font-family:Verdana;}
+.slide-out-tabs .slide-out-tab{width:260px; margin:5px 0; display:block; position:absolute; z-index:999;}
+.slide-out-tabs .slide-out-tab .slide-out-tab-icon{/*background:url("/img/backg-wrapper.png");
+	height:50px;*/
+	background:#fff; padding:5px 0 5px 5px; border-radius:2px 0 0 2px; border:2px solid #cccccc;
+	position:absolute; left:-59px; color:#fff;}
+.slide-out-tabs .slide-out-tab .slide-out-tab-icon img{max-width:50px; max-height:50px;}
+.slide-out-tabs .slide-out-tab .slide-out-tab-body{
+	background:#F8F8F8; border:2px solid #cccccc; position:relative; color:#777777;
+	padding:10px 5px; max-height:250px; overflow:auto; z-index:9999; font-size:12px;}
+.slide-out-tabs .slide-out-tab .slide-out-tab-body a{color:#777777;}
+.slide-out-tabs .slide-out-tab .slide-out-tab-body-hidden{display:none;}
