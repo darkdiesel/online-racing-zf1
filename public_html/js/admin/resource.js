@@ -1,19 +1,20 @@
 jQuery(document).ready(function(e) {
-    jQuery(".form-resource").on('keyup', 'input#module, input#controller, input#action', setName);
+	var resource_splitter = "::";
 
-    function setName() {
-	var module = jQuery(".form-resource").find('input#module').val();
-	var controller = jQuery(".form-resource").find('input#controller').val();
-	var action = jQuery(".form-resource").find('input#action').val();
+	jQuery("#admin-resource-add, #admin-resource-edit").on('keyup', 'input#module, input#controller', setName);
 
-	jQuery(".form-resource").find('input#name').val(module + folderSplitter(controller) + folderSplitter(action));
-    }
+	function setName() {
+		var module = jQuery("#admin-resource-add, #admin-resource-edit").find('input#module').val();
+		var controller = jQuery("#admin-resource-add, #admin-resource-edit").find('input#controller').val();
 
-    function folderSplitter(name) {
-	if (name !== "" || name == 'underfined') {
-	    return "/" + name;
-	} else {
-	    return "";
+		jQuery("#admin-resource-add, #admin-resource-edit").find('input#name').val(module + folderSplitter(controller));
 	}
-    }
+
+	function folderSplitter(name) {
+		if (name !== "" || name == 'underfined') {
+			return resource_splitter + name;
+		} else {
+			return "";
+		}
+	}
 });

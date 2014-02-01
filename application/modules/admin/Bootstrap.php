@@ -54,7 +54,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 
 		//RESOURCE CONTROLLER ROUTERS
 		$router->addRoute(
-				'resource_id', new Zend_Controller_Router_Route_Regex('admin/resource/(\d+)\.html', array(
+				'adminResourceId', new Zend_Controller_Router_Route_Regex('admin/resource/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'resource',
 			'action' => 'id',
@@ -66,7 +66,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'resource_action', new Zend_Controller_Router_Route_Regex('admin/resource/(\d+)/(\w*)\.html', array(
+				'adminResourceAction', new Zend_Controller_Router_Route_Regex('admin/resource/(\d+)/(\w*)\.html', array(
 			'module' => 'admin',
 			'controller' => 'resource',
 			1 => 0
@@ -126,40 +126,40 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 
 		//RIGHT CONTROLLER ROUTERS
 		$router->addRoute(
-				'right_id', new Zend_Controller_Router_Route_Regex('admin/right/(\d+)\.html', array(
+				'adminAccessId', new Zend_Controller_Router_Route_Regex('admin/access/(\d+)\.html', array(
 			'module' => 'admin',
-			'controller' => 'right',
+			'controller' => 'access',
 			'action' => 'id',
 			1 => 0), array(
-			'right_id' => 1,
-				), "admin/right/%d.html"
+			'access_id' => 1,
+				), "admin/access/%d.html"
 		));
 
 		$router->addRoute(
-				'right_action', new Zend_Controller_Router_Route_Regex('admin/right/(\d+)/(\w*)\.html', array(
+				'adminAccessAction', new Zend_Controller_Router_Route_Regex('admin/access/(\d+)/(\w*)\.html', array(
 			'module' => 'admin',
-			'controller' => 'right',
+			'controller' => 'access',
 			'action' => 'id',
 			1 => 0), array(
-			'right_id' => 1,
+			'access_id' => 1,
 			'action' => 2,
-				), "admin/right/%d/%s.html"
+				), "admin/access/%d/%s.html"
 		));
 
 		$router->addRoute(
-				'right_all', new Zend_Controller_Router_Route_Regex('admin/right/all/page/(\d+)\.html', array(
+				'adminAccessAll', new Zend_Controller_Router_Route_Regex('admin/access/all/page/(\d+)\.html', array(
 			'module' => 'admin',
-			'controller' => 'right',
+			'controller' => 'access',
 			'action' => 'all',
 			1 => 1
 				), array(
 			'page' => 1,
-				), "admin/right/all/page/%s.html"
+				), "admin/access/all/page/%s.html"
 		));
 
 		//PRIVILEGE CONTROLLER ROUTERS
 		$router->addRoute(
-				'privilege_id', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)\.html', array(
+				'adminPrivilegeId', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'privilege',
 			'action' => 'id',
@@ -169,7 +169,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'privilege_action', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)/(\w*)\.html', array(
+				'adminPrivilegeAction', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)/(\w*)\.html', array(
 			'module' => 'admin',
 			'controller' => 'privilege',
 			'action' => 'id',
@@ -180,7 +180,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'privilege_all', new Zend_Controller_Router_Route_Regex('admin/privilege/all/page/(\d+)\.html', array(
+				'adminPrivilegeAll', new Zend_Controller_Router_Route_Regex('admin/privilege/all/page/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'privilege',
 			'action' => 'all',

@@ -1,6 +1,6 @@
 <div class="row m-b-10">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<a class="btn btn-danger btn-lg btn-block" href="<?php echo $this->baseUrl();?>">
+		<a class="btn btn-danger btn-lg btn-block" href="<?php echo $this->baseUrl(); ?>">
 			<i class="fa fa-globe"></i> <?php echo $this->translate('Сайт'); ?>
 		</a>
 	</div>
@@ -60,6 +60,20 @@
 								<td>
 									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'role_all', true) ?>">
 										<?php echo $this->translate('Роли пользователей'); ?>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'adminPrivilegeAll', true) ?>">
+										<?php echo $this->translate('Привилегии ресурсов'); ?>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'access', 'action' => 'all'), 'adminAccessAll', true) ?>">
+										<?php echo $this->translate('Доступ к ресурсам'); ?>
 									</a>
 								</td>
 							</tr>
@@ -177,40 +191,6 @@
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
 			<?php echo $this->translate('Страны'); ?>
 		</a>
-    </li>
-    <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			<?php echo $this->translate('Права доступа'); ?> <span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			<li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'add'), 'default', true) ?>">
-					<?php echo $this->translate('Добавить'); ?>
-				</a>
-			<li class="divider"></li>
-			<li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'right', 'action' => 'all'), 'right_all', true) ?>">
-					<?php echo $this->translate('Все'); ?>
-				</a>
-			</li>
-		</ul>
-    </li>
-    <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			<?php echo $this->translate('Превилегии ролей пользователя'); ?> <span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			<li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true) ?>">
-					<?php echo $this->translate('Добавить'); ?>
-				</a>
-			<li class="divider"></li>
-			<li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'privilege_all', true) ?>">
-					<?php echo $this->translate('Все'); ?>
-				</a>
-			</li>
-		</ul>
     </li>
     <li>
 		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'adminUserAll', true) ?>">

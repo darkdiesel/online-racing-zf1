@@ -1,199 +1,200 @@
 <?php
 
-class Admin_PrivilegeController extends App_Controller_LoaderController
-{
+class Admin_PrivilegeController extends App_Controller_LoaderController {
 
-    public function init()
-    {
-	parent::init();
-	$this->view->headTitle($this->view->translate('Привилегии'));
-    }
-
-    // action for view content type
-    public function idAction()
-    {
-	$this->view->pageTitle($this->view->translate('Привилегии'));
-
-	$request = $this->getRequest();
-	$right_id = (int) $request->getParam('right_id');
-
-	$right_data = $this->db->get('right')->getItem($right_id);
-
-	if ($right_data) {
-	    $this->view->right = $right_data;
-	    $this->view->headTitle($right_data->name);
-	    $this->view->pageTitle($right_data->name);
-	    return;
-	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
+	public function init() {
+		parent::init();
+		$this->view->headTitle($this->view->translate('Привилегии ресурсов'));
 	}
-    }
 
-    // action for view all content types
-    public function allAction()
-    {
-	$this->view->headTitle($this->view->translate('Правила'));
-	$this->view->pageTitle($this->view->translate('Правила'));
+	// action for view privilege
+	public function idAction() {
+		$request = $this->getRequest();
+		$privilege_id = (int) $request->getParam('privilege_id');
 
-	// pager settings
-	$pager_args = array(
-	    "page_count_items" => 10,
-	    "page_range" => 5,
-	    "page" => $this->getRequest()->getParam('page')
-	);
+		$privilege_data = $this->db->get('privilege')->getItem($privilege_id);
 
-	$paginator = $this->db->get('right')->getAll(FALSE, "all", "ASC", "1", $pager_args);
-
-	if (count($paginator)) {
-	    $this->view->paginator = $paginator;
-	} else {
-	    $this->messages->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
+		if ($privilege_data) {
+			$this->view->privilege = $privilege_data;
+			$this->view->headTitle($privilege_data->name);
+			$this->view->pageTitle($privilege_data->name);
+			return;
+		} else {
+			$this->messages->addError($this->view->translate('Запрашиваемая привиллегия не найдена!'));
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->headTitle($this->view->translate('Привилегия не найдена!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
+		}
 	}
-    }
 
-    // action for add new content type
-    public function addAction()
-    {
-	$this->view->headTitle($this->view->translate('Добавить'));
-	$this->view->pageTitle($this->view->translate('Добавить привилегии'));
+	// action for view all privilege
+	public function allAction() {
+		$this->view->headTitle($this->view->translate('Все'));
+		$this->view->pageTitle($this->view->translate('Привилегии ресурсов'));
 
-	$request = $this->getRequest();
-	// form
-	$form = new Application_Form_Privilege_Add();
-	$form->setAction(
-		$this->view->url(
-			array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true
-		)
-	);
-
-	if ($this->getRequest()->isPost()) {
-	    if ($form->isValid($request->getPost())) {
-		$date = date('Y-m-d H:i:s');
-		$privilege_data = array(
-		    'role_id' => $form->getValue('role'),
-		    'resource_id' => $form->getValue('resource'),
-		    'right_id' => $form->getValue('right'),
+		// pager settings
+		$pager_args = array(
+			"page_count_items" => 10,
+			"page_range" => 5,
+			"page" => $this->getRequest()->getParam('page')
 		);
 
-                $exist_privilege = $this->db->get('privilege')->getItem(array('role_id' => $privilege_data['role_id'], 'resource_id' => array('value' => $privilege_data['resource_id'], 'condition' => 'AND')));
-                
-                if ($exist_privilege) {
-                    $this->messages->addError($this->view->translate('Привилегии для выбранного ресурса и роли уже существуют. Отредактируйте уже созданную либо поменяйте параметры для добавления новой привилегии.'));
-                } else {
-                    $new_privilege = $this->db->get('privilege')->createRow($privilege_data);
-                    $new_privilege->save();
+		$paginator = $this->db->get('privilege')->getAll(FALSE, "all", "ASC", "1", $pager_args);
 
-                    $this->redirect(
-                            $this->view->url(
-                                    array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'privilege_all', true
-                            )
-                    );
-                }
-            } else {
-		$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-	    }
-	}
-
-	$this->view->form = $form;
-    }
-
-    // action for edit content type
-    public function editAction()
-    {
-	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
-
-	$this->view->headTitle($this->view->translate('Редактировать'));
-
-	$content_type = new Application_Model_DbTable_ContentType();
-	$content_type_data = $content_type->getItem($content_type_id);
-
-	if ($content_type_data) {
-	    // form
-	    $form = new Application_Form_ContentType_Edit();
-	    $form->setAction($this->view->url(
-			    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit',
-			'content_type_id' => $content_type_id), 'content_type_action', true
-	    ));
-	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'default', true)}\"");
-
-	    if ($this->getRequest()->isPost()) {
-		if ($form->isValid($request->getPost())) {
-		    $new_content_type_data = array(
-			'name' => strtolower($form->getValue('name')),
-			'description' => $form->getValue('description'),
-			'date_edit' => date('Y-m-d H:i:s')
-		    );
-
-		    $content_type_where = $content_type->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $content_type->update($new_content_type_data, $content_type_where);
-
-		    $this->redirect($this->view->url(
-				    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-				'content_type_id' => $content_type_id), 'content_type_id', true
-		    ));
+		if (count($paginator)) {
+			$this->view->privileges_data = $paginator;
 		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+			$this->messages->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
 		}
-	    }
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$content_type_data->name}");
-
-	    $form->name->setvalue($content_type_data->name);
-	    $form->description->setvalue($content_type_data->description);
-
-	    $this->view->form = $form;
-	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
-    }
 
-    // action for delete content type
-    public function deleteAction()
-    {
-	$this->view->headTitle($this->view->translate('Удалить'));
+	// action for add new content type
+	public function addAction() {
+		$this->view->headTitle($this->view->translate('Добавить'));
+		$this->view->pageTitle($this->view->translate('Добавить привилегию'));
 
-	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+		$request = $this->getRequest();
+		// form
+		$form = new Application_Form_Privilege_Add();
+		$form->setAction(
+				$this->view->url(
+						array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true
+				)
+		);
+		$privilege_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'adminPrivilegeAll', true);
+		$form->cancel->setAttrib('onClick', "location.href=\"{$privilege_all_url}\"");
 
-	$content_type = new Application_Model_DbTable_ContentType();
-	$content_type_data = $content_type->getItem($content_type_id);
+		if ($this->getRequest()->isPost()) {
+			if ($form->isValid($request->getPost())) {
+				$privilege_data = $this->db->get('privilege')->getItem(
+						array(
+							'name' => strtolower($form->getValue('name')),
+							'resource_id' => $form->getValue('resource')
+						)
+				);
 
-	if ($content_type_data) {
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$content_type_data->name}");
+				if ($privilege_data) {
+					$this->messages->addError($this->view->translate('Данная привилегия уже присутствует в базе данных!'));
+					$add_privilege = FALSE;
+				} else {
+					$add_privilege = TRUE;
+				}
 
-	    $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$content_type_data->name}\"</strong> ?");
+				if ($add_privilege) {
+					$date = date('Y-m-d H:i:s');
+					$new_privilege_data = array(
+						'name' => strtolower($form->getValue('name')),
+						'resource_id' => $form->getValue('resource'),
+						'description' => $form->getValue('description'),
+						'date_create' => $date,
+						'date_edit' => $date,
+					);
 
-	    $form = new Application_Form_PostType_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
-	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'content_type_id' => $content_type_id), 'content_type_id', true) . '"');
+					$new_privilege = $this->db->get('privilege')->createRow($new_privilege_data);
+					$new_privilege->save();
 
-	    if ($this->getRequest()->isPost()) {
-		if ($form->isValid($request->getPost())) {
-		    $content_type_where = $content_type->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $content_type->delete($content_type_where);
+					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $new_privilege->id), 'adminPrivilegeId', true));
+				}
+			} else {
+				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+			}
+		}
 
-		    $this->view->showMessages()->clearMessages();
-		    $this->messages->addSuccess("{$this->view->translate("Правила <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
+		$this->view->form = $form;
+	}
 
-		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1), 'content_type_all', true));
+	// action for edit content type
+	public function editAction() {
+		$request = $this->getRequest();
+		$privilege_id = (int) $request->getParam('privilege_id');
+
+		$this->view->headTitle($this->view->translate('Редактировать'));
+
+		$privilege_data = $this->db->get('privilege')->getItem($privilege_id);
+
+		if ($privilege_data) {
+			// form
+			$form = new Application_Form_Right_Edit();
+			$form->setAction($this->view->url(
+							array('module' => 'admin', 'controller' => 'privilege', 'action' => 'edit',
+						'privilege_id' => $privilege_id), 'privilege_action', true
+			));
+			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $privilege_id), 'privilege_id', true)}\"");
+
+			if ($this->getRequest()->isPost()) {
+				if ($form->isValid($request->getPost())) {
+					$new_privilege_data = array(
+						'name' => strtolower($form->getValue('name')),
+						'description' => $form->getValue('description'),
+						'date_edit' => date('Y-m-d H:i:s')
+					);
+
+					$privilege_where = $this->db->get('privilege')->getAdapter()->quoteInto('id = ?', $privilege_id);
+					$this->db->get('privilege')->update($new_privilege_data, $privilege_where);
+
+					$this->redirect($this->view->url(
+									array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id',
+								'privilege_id' => $privilege_id), 'privilege_id', true
+					));
+				} else {
+					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+				}
+			}
+			$this->view->headTitle($privilege_data->name);
+			$this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$privilege_data->name}");
+
+			$form->name->setvalue($privilege_data->name);
+			$form->description->setvalue($privilege_data->description);
+
+			$this->view->form = $form;
 		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+			$this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->headTitle($this->view->translate('Правило не найдено!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
-	    }
-
-	    $this->view->form = $form;
-	    $this->view->content_type = $content_type_data;
-	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
 	}
-    }
+
+	// action for delete content type
+	public function deleteAction() {
+		$this->view->headTitle($this->view->translate('Удалить'));
+
+		$request = $this->getRequest();
+		$privilege_id = (int) $request->getParam('privilege_id');
+
+		$privilege_data = $this->db->get('privilege')->getItem($privilege_id);
+
+		if ($privilege_data) {
+			$this->view->headTitle($privilege_data->name);
+			$this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$privilege_data->name}");
+
+			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$privilege_data->name}\"</strong> ?");
+
+			$form = new Application_Form_Right_Delete();
+			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'delete', 'privilege_id' => $privilege_id), 'privilege_action', true));
+			$form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $privilege_id), 'privilege_id', true) . '"');
+
+			if ($this->getRequest()->isPost()) {
+				if ($form->isValid($request->getPost())) {
+					$privilege_where = $this->db->get('privilege')->getAdapter()->quoteInto('id = ?', $privilege_id);
+					$this->db->get('privilege')->delete($privilege_where);
+
+					$this->messages->clearMessages();
+					$this->messages->addSuccess("{$this->view->translate("Правило <strong>\"{$privilege_data->name}\"</strong> успешно удалено")}");
+
+					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all', 'page' => 1), 'privilege_all', true));
+				} else {
+					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+				}
+			}
+
+			$this->view->form = $form;
+			$this->view->privilege = $privilege_data;
+		} else {
+			$this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
+			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
+			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
+		}
+	}
 
 }

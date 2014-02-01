@@ -1,0 +1,34 @@
+<?php if ($this->privileges_data) { ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="clearfix m-b-10">
+				<?php
+				$privilege_id_url = $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true);
+				?>
+				<a href="<?php echo $privilege_id_url ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить привилегию ресурса'); ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-list"></i>
+				</div>
+				<div class="panel-body">
+					<?php foreach ($this->privileges_data as $privilege): ?>
+					<pre>
+						<?php print_r($privilege); ?>
+					</pre>
+					<?php endforeach; ?>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->privileges_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>

@@ -1,10 +1,10 @@
 <?php
 
-class Application_Model_DbTable_Privilege extends Zend_Db_Table_Abstract {
+class Application_Model_DbTable_Access extends Zend_Db_Table_Abstract {
 
-	protected $_name = 'privilege';
+	protected $_name = 'resources_access';
 	protected $_primary = 'id';
-	protected $db_href = 'p';
+	protected $db_href = 'ra';
 
 	/*
 	 * Get Item by idencity field value and $field array of fields list.

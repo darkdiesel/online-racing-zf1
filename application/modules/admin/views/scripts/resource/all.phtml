@@ -23,7 +23,6 @@
 								<th class="resource_name"><span><?php echo $this->translate('Название'); ?></span></th>
 								<th class="resource_module"><span><?php echo $this->translate('Модуль'); ?></span></th>
 								<th class="resource_controller"><span><?php echo $this->translate('Контроллер'); ?></span></th>
-								<th class="resource_action"><span><?php echo $this->translate('Действие'); ?></span></th>
 								<th class="resource_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
 								<th class="resource_action"><span><?php echo $this->translate('Действие'); ?></span></th>
 							</tr>
@@ -31,16 +30,15 @@
 						<tbody>
 							<?php foreach ($this->paginator as $resource): ?>
 								<?php
-								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($resource->id)), 'resource_id', true);
-								$resource_edit_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'edit', 'resource_id' => $this->escape($resource->id)), 'resource_action', true);
-								$resource_delete_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'delete', 'resource_id' => $this->escape($resource->id)), 'resource_action', true);
+								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($resource->id)), 'adminResourceId', true);
+								$resource_edit_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'edit', 'resource_id' => $this->escape($resource->id)), 'adminResourceAction', true);
+								$resource_delete_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'delete', 'resource_id' => $this->escape($resource->id)), 'adminResourceAction', true);
 								?>
 								<tr>
 									<td class="resource_id"><span><a href="<?php echo $resource_id_url; ?>"><?php echo $this->escape($resource['id']) ?></a></span></td>
 									<td class="resource_name"><span><a href="<?php echo $resource_id_url ?>"><?php echo $this->escape($resource['name']) ?></a></span></td>
 									<td class="resource_module"><span><?php echo $this->escape($resource['module']) ?></span></td>
 									<td class="resource_controller"><span><?php echo $this->escape($resource['controller']) ?></span></td>
-									<td class="resource_action"><span><?php echo $this->escape($resource['action']) ?></span></td>
 									<td class="resource_descr"><span><?php echo $this->truncate($this->escape($resource['description']))->toLength(200); ?></span></td>
 									<td class="resource_action">
 										<span>

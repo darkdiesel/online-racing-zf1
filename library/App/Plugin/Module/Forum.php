@@ -30,8 +30,8 @@ class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract {
 
 		// Page scroller block
 		if ($view->page_scroller_block) {
-			$view->headScript()->appendFile("library/jquery.page-scroller/jquery.page-scroller.js");
-			$view->minifyHeadLink()->appendStylesheet("library/jquery.page-scroller/css/page-srcoller.css");
+			$view->headScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js");
+			$view->minifyHeadLink()->appendStylesheet("/library/jquery.page-scroller/css/page-srcoller.css");
 		}
 
 		// Change layout

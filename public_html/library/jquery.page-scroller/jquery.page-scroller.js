@@ -2,7 +2,7 @@
 	$.fn.pageScroller = function(options) {
 		var settings = $.extend({
 			'position': 'left-middle',
-			'block-visible': '10',
+			'block-visible': '30',
 			'animation-speed-out': 500,
 			'animation-speed-in': 200,
 		}, options);

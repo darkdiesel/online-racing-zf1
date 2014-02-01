@@ -14,7 +14,7 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			'resource' => '',
 			'role' => '',
 			'user_role' => '',
-			'right' => '',
+			'access' => '',
 			'content_type' => '',
 			'post' => '',
 			'post_type' => '',
@@ -44,8 +44,8 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			case "user_role":
 				$this->db[$db_name] = new Application_Model_DbTable_UserRole();
 				break;
-			case "right":
-				$this->db[$db_name] = new Application_Model_DbTable_Right();
+			case "access":
+				$this->db[$db_name] = new Application_Model_DbTable_Access();
 				break;
 			case "content_type":
 				$this->db[$db_name] = new Application_Model_DbTable_ContentType();

@@ -58,14 +58,14 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract {
 			$view->minifyHeadLink()->appendStylesheet("/css/chat.css");
 		}
 		if ($view->slide_out_tabs_block) {
-			$view->minifyHeadLink()->appendStylesheet("library/jquery.slide-out-tabs/css/slide-out-tabs.css");
-			$view->headScript()->appendFile("library/jquery.slide-out-tabs/jquery.slide-out-tabs.js");
+			$view->minifyHeadLink()->appendStylesheet("/library/jquery.slide-out-tabs/css/slide-out-tabs.css");
+			$view->headScript()->appendFile("/library/jquery.slide-out-tabs/jquery.slide-out-tabs.js");
 		}
 
 		// Page scroller block
 		if ($view->page_scroller_block) {
-			$view->headScript()->appendFile("library/jquery.page-scroller/jquery.page-scroller.js");
-			$view->minifyHeadLink()->appendStylesheet("library/jquery.page-scroller/css/page-srcoller.css");
+			$view->headScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js");
+			$view->minifyHeadLink()->appendStylesheet("/library/jquery.page-scroller/css/page-srcoller.css");
 		}
 
 		// Share block script
