@@ -1,0 +1,7 @@
+<?php if ($this->resource_access) : ?>
+	<div class="block">
+		<?php foreach ($this->resource_access as $resource_access_fields): ?>
+			<?php echo $resource_access_fields . '<br/>'; ?>
+		<?php endforeach; ?>
+	</div>
+<?php endif; ?>

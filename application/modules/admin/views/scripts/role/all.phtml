@@ -1,14 +1,14 @@
-<?php if ($this->paginator) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $role_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить Роль'); ?></a>
-			</div>
+<div class="row">
+	<div class="col-md-12 col-lg-12">
+		<div class="clearfix m-b-10">
+			<?php
+			$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default', true);
+			?>
+			<a href="<?php echo $role_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить Роль'); ?></a>
 		</div>
 	</div>
+</div>
+<?php if ($this->roles_data) { ?>
 	<div class="row">
 		<div class="col-md-12 col-lg-12">
 			<div class="panel panel-primary">
@@ -27,17 +27,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach ($this->paginator as $role): ?>
+							<?php foreach ($this->roles_data as $role): ?>
 								<?php
-								$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $this->escape($role->id)), 'role_id', true);
-								$role_edit_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'edit', 'role_id' => $this->escape($role->id)), 'role_action', true);
-								$role_delete_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'role_id' => $this->escape($role->id)), 'role_action', true);
+								$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $this->escape($role->id)), 'adminRoleId', true);
+								$role_edit_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'edit', 'role_id' => $this->escape($role->id)), 'adminRoleAction', true);
+								$role_delete_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'role_id' => $this->escape($role->id)), 'adminRoleAction', true);
 								?>
 								<tr>
-									<td class="role_id"><span><a href="<?php echo $role_id_url; ?>"><?php echo $this->escape($role['id']) ?></a></span></td>
-									<td class="role_name"><span><a href="<?php echo $role_id_url ?>"><?php echo $this->escape($role['name']) ?></a></span></td>
-									<td class="role_parent"><span><?php echo $this->truncate($this->escape($role['parent_role_id']))->toLength(200); ?></span></td>
-									<td class="role_descr"><span><?php echo $this->truncate($this->escape($role['description']))->toLength(200); ?></span></td>
+									<td class="role_id"><span><a href="<?php echo $role_id_url; ?>"><?php echo $this->escape($role->id) ?></a></span></td>
+									<td class="role_name"><span><a href="<?php echo $role_id_url ?>"><?php echo $this->escape($role->name) ?></a></span></td>
+									<td class="role_parent"><span><?php echo $this->escape($role->parent_role_id); ?></span></td>
+									<td class="role_descr"><span><?php echo $this->truncate($this->escape($role->description))->toLength(200); ?></span></td>
 									<td class="role_action">
 										<span>
 											<div class="pull-right action-buttons">
@@ -61,7 +61,7 @@
 				</div>
 				<div class="panel-footer">
 					<div class="pull-right">
-						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+						<?php echo $this->paginationControl($this->roles_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
 					</div>
 					<div class="clearfix"></div>
 				</div>

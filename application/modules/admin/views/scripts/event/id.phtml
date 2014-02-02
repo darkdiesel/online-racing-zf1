@@ -24,8 +24,8 @@
 	<?php
 	$acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->getResource('Acl');
 
-	$edit_access = $acl->checkUserAccess('event/edit');
-	$delete_access = $acl->checkUserAccess('event/delete');
+	$edit_access = $acl->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'event', 'edit');
+	$delete_access = $acl->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'event', 'delete');
 
 	if ($edit_access || $delete_access) {
 	    ?>

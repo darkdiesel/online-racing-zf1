@@ -4,22 +4,20 @@ class Acl extends Zend_Acl {
 
 	protected $roles;
 	protected $resources;
-	protected $rights;
+
+	const RESOURCE_SEPARATOR = '::';
 
 	public function __construct() {
 		// Init roles array from DB
-//		$this->getRolesArray();
-//		$this->initRoles();
+		$this->getRolesArray();
+		$this->initRoles();
+
+		$this->getResourcesArray();
+		$this->initResources();
+
+		$this->deny();
 //
-//		$this->getResourcesArray();
-//		$this->initResources();
-//
-//		// Init rights array from db
-//		$this->initRights();
-//
-//		$this->deny();
-//
-//		$this->initPrivileges();
+		$this->initAccess();
 	}
 
 	protected function getRolesArray() {
@@ -98,41 +96,29 @@ class Acl extends Zend_Acl {
 		$this->resources[$resource_id]['added'] = 1;
 	}
 
-	protected function initRights() {
-		$right_db = new Application_Model_DbTable_Right();
-		$right_all = $right_db->getAll(FALSE, array("id", "name"));
+	protected function initAccess() {
+		$resource_access_db = new Application_Model_DbTable_ResourceAccess();
+		$resource_access_data = $resource_access_db->getAll(FALSE, "all");
 
-		if ($right_all) {
-			$this->rights = array();
+		if ($resource_access_data) {
+			foreach ($resource_access_data as $resource_access) {
+				if ($resource_access->allow) {
+					$operation = 'allow';
+				} else {
+					$operation = 'deny';
+				}
 
-			foreach ($right_all as $right) {
-				$this->rights[$right->id] = array(
-					'id' => $right->id,
-					'name' => $right->name,
-				);
+				$this->$operation($resource_access->role_name, $resource_access->resource_name, $resource_access->privilege_name);
 			}
 		}
 	}
 
-	protected function initPrivileges() {
-		$privilege_db = new Application_Model_DbTable_Privilege();
-		$privilege_all = $privilege_db->getAll(FALSE, "all");
-
-		if ($privilege_all) {
-			foreach ($privilege_all as $privilege) {
-				$role = $this->roles[$privilege->role_id]['name'];
-				$resource = $this->resources[$privilege->resource_id]['name'];
-				$right = $this->rights[$privilege->right_id]['name'];
-
-				$this->allow($role, $resource, $right);
-			}
-		}
-	}
-
-	public function can($privilege = 'show') {
+	public function can() {
 		//Инициируем ресурс
 		$request = Zend_Controller_Front::getInstance()->getRequest();
-		$resource = "{$request->getModuleName()}/{$request->getControllerName()}/{$request->getActionName()}";
+		$resource = $request->getModuleName() . self::RESOURCE_SEPARATOR . $request->getControllerName();
+		$privilege = $request->getActionName();
+
 		//Если ресурс не найден закрываем доступ
 		if (!$this->has($resource))
 			return true;
@@ -149,11 +135,9 @@ class Acl extends Zend_Acl {
 		return $this->isAllowed($role, $resource, $privilege);
 	}
 
-	public function checkUserAccess($resource) {
+	public function checkUserAccess($resource, $privilege) {
 		if (!$this->has($resource))
 			return true;
-
-		$privilege = 'show';
 
 		//Inicialize role
 		if (Zend_Auth::getInstance()->hasIdentity()) {

@@ -1,0 +1,89 @@
+<div class="row">
+	<div class="col-md-12 col-lg-12">
+		<div class="clearfix m-b-10">
+			<?php
+			$resource_access_add_url = $this->url(array('module' => 'admin', 'controller' => 'resource-access', 'action' => 'add'), 'default', true);
+			?>
+			<a href="<?php echo $resource_access_add_url ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить доступ к ресурсам'); ?></a>
+		</div>
+	</div>
+</div>
+<?php if ($this->resource_access_data) { ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-list"></i>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped custab">
+						<thead>
+							<tr>
+								<th class="resource_access_id"><span>ID</span></th>
+								<th class="resource_access_role"><span><?php echo $this->translate('Роль'); ?></span></th>
+								<th class="resource_access_resource"><span><?php echo $this->translate('Ресурс'); ?></span></th>
+								<th class="resource_access_privilege"><span><?php echo $this->translate('Привилегия'); ?></span></th>
+								<th class="resource_access_allow"><span><?php echo $this->translate('Доступ'); ?></span></th>
+								<th class="resource_access_date_create"><span><?php echo $this->translate('Дата создания'); ?></span></th>
+								<th class="resource_access_date_edit"><span><?php echo $this->translate('Дата редактирования'); ?></span></th>
+								<th class="resource_access_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($this->resource_access_data as $resource_access): ?>
+								<?php
+								$resource_access_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource_access', 'action' => 'id', 'resource_access_id' => $this->escape($resource_access->id)), 'adminResourceAccessId', true);
+								$resource_access_edit_url = $this->url(array('module' => 'admin', 'controller' => 'resource_access', 'action' => 'edit', 'resource_access_id' => $this->escape($resource_access->id)), 'adminResourceAccessAction', true);
+								$resource_access_delete_url = $this->url(array('module' => 'admin', 'controller' => 'resource_access', 'action' => 'delete', 'resource_access_id' => $this->escape($resource_access->id)), 'adminResourceAccessAction', true);
+
+								$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $this->escape($resource_access->resource_id)), 'adminRoleId', true);
+								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($resource_access->resource_id)), 'adminResourceId', true);
+								$privilege_id_url = $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $this->escape($resource_access->privilege_id)), 'adminPrivilegeId', true);
+								?>
+								<tr>
+									<td class="resource_access_id"><span><a href="<?php echo $resource_access_id_url; ?>"><?php echo $this->escape($resource_access->id) ?></a></span></td>
+									<td class="resource_access_role"><span><a href="<?php echo $role_id_url ?>"><?php echo $this->escape($resource_access->role_name) ?></a></span></td>
+									<td class="resource_access_resource"><span><a href="<?php echo $resource_id_url ?>"><?php echo $this->escape($resource_access->resource_name) ?></a></span></td>
+									<td class="resource_access_privilege"><span><a href="<?php echo $privilege_id_url ?>"><?php echo $this->escape($resource_access->privilege_name) ?></a></span></td>
+									<td class="resource_access_allow">
+										<span>
+											<?php if ($this->escape($resource_access->allow)) { ?>
+												<span class='label label-success'><i class="fa fa-check fa-lg"></i></i></span>
+											<?php } else { ?>
+												<span class='label label-danger'><i class="fa fa-times fa-lg"></i></span>
+											<?php } ?>
+										</span>
+									</td>
+									<td class="resource_access_date_create"><span><?php echo $this->escape($resource_access->date_create); ?></span></td>
+									<td class="resource_access_dae_edit"><span><?php echo $this->escape($resource_access->date_edit); ?></span></td>
+									<td class="resource_access_action">
+										<span>
+											<div class="pull-right action-buttons">
+												<div class="btn-group pull-right">
+													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+													</button>
+													<ul class="dropdown-menu slidedown">
+														<li><a href="<?php echo $resource_access_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?php echo $resource_access_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?php echo $resource_access_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+													</ul>
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->resource_access_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>

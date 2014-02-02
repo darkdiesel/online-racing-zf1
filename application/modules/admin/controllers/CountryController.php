@@ -109,7 +109,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 				$newCountry = $country->createRow($country_data);
 				$newCountry->save();
 
-				$this->redirect($this->view->url(array('module' => 'admin','controller' => 'country', 'action' => 'id', 'country_id' => $newCountry->id), 'country_id', true));
+				$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $newCountry->id), 'country_id', true));
 			}
 		}
 
@@ -137,32 +137,27 @@ class Admin_CountryController extends App_Controller_LoaderController {
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
 
-					$exist_country_native_name = $country->checkExistCountryNativeName($form->getValue('native_name'));
-					$exist_country_abbreviation = $country->checkExistCountryAbbreviation($form->getValue('abbreviation'));
+					$check_countries_data = $this->db->get('country')->getAll(
+							array(
+								'native_name' => $form->getValue('native_name'),
+								'abbreviation' => array(
+									'value' => $form->getValue('abbreviation'),
+									'condition' => 'OR',
+								)
+							)
+					);
 
-					if ($exist_country_native_name) {
-						if ($exist_country_native_name == $country_id) {
-							$update = TRUE;
-						} else {
-							$update = FALSE;
-						}
-					} else {
-						$update = TRUE;
-					}
-
-					if ($update) {
-						if ($exist_country_abbreviation) {
-							if ($exist_country_abbreviation == $country_id) {
-								$update = TRUE;
-							} else {
-								$update = FALSE;
+					$update_country = TRUE;
+					if ($check_countries_data) {
+						foreach ($check_countries_data as $country) {
+							if ($country->id != $country_id){
+								$update_country = FALSE;
+								$this->messages->addError($this->translate('Страна с такими данными уже существует!'));
 							}
-						} else {
-							$update = TRUE;
 						}
 					}
 
-					if ($update) {
+					if ($update_country) {
 						$new_country_data = array();
 
 						//receive and rename first file 
@@ -210,8 +205,8 @@ class Admin_CountryController extends App_Controller_LoaderController {
 						$new_country_data['abbreviation'] = $form->getValue('abbreviation');
 						$new_country_data['date_edit'] = $date;
 
-						$country_where = $country->getAdapter()->quoteInto('id = ?', $country_id);
-						$country->update($new_country_data, $country_where);
+						$country_where = $this->db->get('country')->getAdapter()->quoteInto('id = ?', $country_id);
+						$this->db->get('country')->update($new_country_data, $country_where);
 
 						$this->redirect($this->view->url(array('controller' => 'country', 'action' => 'id', 'country_id' => $country_id), 'country_id', true));
 					} else {
@@ -248,7 +243,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 		$country_id = (int) $request->getParam('country_id');
 
 		$country_data = $this->db->get('country')->getItem($country_id);
-		
+
 		if ($country_data) {
 			//page title
 			$this->view->headTitle("{$country_data->native_name} ({$country_data->english_name})");
@@ -258,7 +253,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 
 			$country_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'contry', 'action' => 'delete', 'country_id' => $country_id), 'country_action', true);
 			$country_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $country_id), 'country_id', true);
-			
+
 			//Create country delete form
 			$form = new Application_Form_Country_Delete();
 			$form->setAction($country_delete_url);
@@ -268,7 +263,7 @@ class Admin_CountryController extends App_Controller_LoaderController {
 				if ($form->isValid($request->getPost())) {
 					$country_where = $this->db->get('country')->getAdapter()->quoteInto('id = ?', $country_id);
 					$this->db->get('country')->delete($country_where);
-					
+
 					$this->messages->clearMessages();
 					$this->messages->addSuccess("{$this->view->translate("Страна <strong>\"{$country_data->native_name} ({$country_data->english_name})\"</strong> успешно удалена")}");
 

@@ -88,11 +88,40 @@
 						<li class="media">
 							<div class="media-body">
 								<h4 class="media-heading"><a href="<?php echo $rss_url; ?>" target="_blank"><?php echo $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?></a></h4>
-									<?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"]; ?>
+								<?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"]; ?>
 							</div>
 						</li>
 					<?php } ?>
 				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row m-t-10">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="block block-ui-bordered">
+			<div class="block-header">
+				<div class="block-title text-uppercase text-bold"><?php echo $this->translate('Друзья и Партнеры'); ?></div>
+			</div>
+			<div class="carousel slide media-carousel" id="our-friends-carousel">
+				<div class="carousel-inner">
+					<div class="item  active">
+						<div class="row">
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<a class="thumbnail" href="http://grtmotorsport.ru/" target="_blank"><img alt="<?php echo $this->translate('Интернет магазин гоночной атрибутики.');?>" src="/data-content/ui/icons/partners/grt-motorport-logo-250.png" class="img-responsive"></a>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<a class="thumbnail" href="http://pit-line.com.ua/" target="_blank"><img alt="" src="/data-content/ui/icons/partners/pit-line-com-ua-logo-250.png" class="img-responsive"></a>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+								<a class="thumbnail" href="http://www.vrc.ck.ua/" target="_blank"><img alt="" src="/data-content/ui/icons/partners/logo-vrc-250.png" class="img-responsive"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a data-slide="prev" href="#our-friends-carousel" class="left carousel-control">‹</a>
+				<a data-slide="next" href="#our-friends-carousel" class="right carousel-control">›</a>
 			</div>
 		</div>
 	</div>

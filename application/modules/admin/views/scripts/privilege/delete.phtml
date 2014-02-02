@@ -1,24 +1,10 @@
-<?php if ($this->right) { ?>
-    <?php echo $this->form; ?>
-    <div class="right_item block-item">
-        <table class="table table-striped table-bordered article_table">
-    	<tbody>
-    	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->right->name); ?></span></td>
-    	    </tr>
-    	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->right->description); ?></span></td>
-    	    </tr>
-    	</tbody>
-        </table>
-        <div class="article_info">
-    	<div class="right_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Правило'); ?></div>
-    	<div class="right_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->right->date_create); ?></div>
-	    <?php if ($this->escape($this->right->date_create) != $this->escape($this->right->date_edit)) { ?>
-		<div class="right_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->right->date_edit); ?></div>
-	    <?php } ?>
-        </div>
-    </div>
+<?php if ($this->privilege) { ?>
+	<?php echo $this->form; ?>
+	<?php if ($this->privilege) : ?>
+		<div class="block">
+			<?php foreach ($this->privilege as $privilege_field): ?>
+				<?php echo $privilege_field . '<br/>'; ?>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 <?php } ?>

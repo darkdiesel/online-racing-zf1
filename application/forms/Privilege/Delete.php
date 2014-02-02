@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Right_Delete extends Zend_Form {
+class Application_Form_Privilege_Delete extends Zend_Form {
 
 	protected function translate($str) {
 		$translate = new Zend_View_Helper_Translate();
@@ -10,11 +10,11 @@ class Application_Form_Right_Delete extends Zend_Form {
 
 	public function init() {
 		$this->setMethod('post')
-				->setName('admin-right-delete');
+				->setName('admin-privilege-delete');
 
 		$this->setAttribs(array(
 			'class' => 'block-item block-item-form block-item-form-delete block-item-form-w-350 block-center',
-			'id' => 'admin-right-delete',
+			'id' => 'admin-privilege-delete',
 		));
 
 		// decorators for this form

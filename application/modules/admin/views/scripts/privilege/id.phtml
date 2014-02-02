@@ -1,5 +1,7 @@
-<?php if ($this->privilege) :?>
-<pre>
-	<?php print_r($this->privilege) ?>
-</pre>
+<?php if ($this->privilege) : ?>
+	<div class="block">
+		<?php foreach ($this->privilege as $privilege_field): ?>
+			<?php echo $privilege_field . '<br/>'; ?>
+		<?php endforeach; ?>
+	</div>
 <?php endif; ?>

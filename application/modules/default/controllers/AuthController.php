@@ -20,8 +20,8 @@ class AuthController extends App_Controller_LoaderController {
 
 		$request = $this->getRequest();
 		$form = new Application_Form_Auth_Login();
-		
-		
+
+
 		// Set  redirect url if user authorizing successful. 
 		$redirectToUrl = $request->getParam('redirectTo');
 
@@ -31,13 +31,12 @@ class AuthController extends App_Controller_LoaderController {
 			$config = Zend_Registry::get('config');
 
 			if (parse_url($redirectToUrl, PHP_URL_HOST) == parse_url($config->resources->frontController->baseUrl, PHP_URL_HOST)) {
-				$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)."?redirectTo=" . $redirectToUrl);
+				$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true) . "?redirectTo=" . $redirectToUrl);
 			} else {
 				$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true));
 			}
-			
 		} else {
-			$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)."?redirectTo=" . $redirectToUrl);
+			$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true) . "?redirectTo=" . $redirectToUrl);
 		}
 
 		if ($this->getRequest()->isPost()) {
@@ -94,9 +93,9 @@ class AuthController extends App_Controller_LoaderController {
 
 							$this->view->showMessages()->clearMessages();
 							$this->messages->addSuccess("{$this->view->translate('Вы успешно авторизовались на сайте.')}");
-							
+
 							$ckfinder = $this->view->checkUserAccess('ckfinder');
-							
+
 							if ($ckfinder) {
 								$ckFinderSession = new Zend_Session_Namespace('CKFinder');
 								/** Disable CKFinder * */
@@ -112,7 +111,7 @@ class AuthController extends App_Controller_LoaderController {
 							$form->populate($request->getPost());
 							$reg_url = $this->view->url(array('module' => 'default', 'controller' => 'register', 'action' => 'user'), 'default', true);
 							$rest_pass_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true);
-							
+
 							$this->messages->addError("{$this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')}"
 									. "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$rest_pass_url}\">{$this->view->translate('Забыли пароль?')}</a>"
 									. " <a class=\"btn btn-danger btn-sm\" href=\"{$reg_url}\">{$this->view->translate('Зарегистрироваться?')}</a>");
@@ -170,6 +169,14 @@ class AuthController extends App_Controller_LoaderController {
 	 * 	@todo Переделать перенаправление на предыдущую страницу после того как пользователь вылогинился
 	 */
 	public function logoutAction() {
+		if (!Zend_Auth::getInstance()->hasIdentity()) {
+			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+		}
+		
+		// Disable layout
+		$this->_helper->layout()->disableLayout();
+		$this->_helper->viewRenderer->setNoRender(true);
+		
 		Zend_Auth::getInstance()->clearIdentity();
 		Zend_Session::forgetMe();
 		Zend_Session::expireSessionCookie();
@@ -177,11 +184,7 @@ class AuthController extends App_Controller_LoaderController {
 		$ckFinderSession = new Zend_Session_Namespace('CKFinder');
 		/** Disable CKFinder * */
 		$ckFinderSession->allowed = false;
-
-		// Disable layout
-		$this->_helper->layout()->disableLayout();
-		$this->_helper->viewRenderer->setNoRender(true);
-
+		
 		// Redirect to main page
 		$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 	}

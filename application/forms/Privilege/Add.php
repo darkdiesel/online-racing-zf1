@@ -63,8 +63,8 @@ class Application_Form_Privilege_Add extends Zend_Form {
 		}
 
 		$this->addElement('textarea', 'description', array(
-			'label' => $this->translate('Описание правила'),
-			'placeholder' => $this->translate('Описание правила'),
+			'label' => $this->translate('Описание привилегии'),
+			'placeholder' => $this->translate('Описание привилегии'),
 			'cols' => 60,
 			'rows' => 10,
 			'class' => 'form-control',

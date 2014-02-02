@@ -13,8 +13,8 @@
 			</tbody>
 		</table>
 		<?php
-		$edit_access = $this->checkUserAccess('admin/team/edit');
-		$delete_access = $this->checkUserAccess('admin/team/delete');
+		$edit_access = $this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'edit');
+		$delete_access = $this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'delete');
 
 		if ($edit_access || $delete_access) {
 			?>

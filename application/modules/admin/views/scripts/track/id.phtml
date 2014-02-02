@@ -43,8 +43,8 @@
 			</tbody>
 		</table>
 		<?php
-		$edit_access = $this->checkUserAccess('admin/track/edit');
-		$delete_access = $this->checkUserAccess('admin/track/delete');
+		$edit_access = $this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'edit');
+		$delete_access = $this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'delete');
 
 		if ($edit_access || $delete_access) {
 			?>
