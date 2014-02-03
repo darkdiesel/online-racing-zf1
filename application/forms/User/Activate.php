@@ -14,7 +14,7 @@ class Application_Form_User_Activate extends Zend_Form {
 		->setName('default-user-activate');
         
         $this->setAttribs(array(
-	    'class' => 'block-item block-item-form block-item-form-w-350 block-center',
+	    'class' => 'block-item block-item-form block-item-form-w-350 center-block',
 	    'id' => 'default-user-login',
 	));
         
@@ -103,7 +103,7 @@ class Application_Form_User_Activate extends Zend_Form {
             'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 	    )
         ));
 
@@ -114,7 +114,7 @@ class Application_Form_User_Activate extends Zend_Form {
             'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 	    )
         ));
 

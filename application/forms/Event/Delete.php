@@ -13,7 +13,7 @@ class Application_Form_Event_Delete extends Zend_Form {
 				->setName('admin-event-delete');
 
 		$this->setAttribs(array(
-			'class' => 'block-item block-item-form block-item-form-delete block-item-form-w-350 block-center',
+			'class' => 'block-item block-item-form block-item-form-delete block-item-form-w-350 center-block',
 			'id' => 'admin-event-delete',
 		));
 
@@ -27,7 +27,7 @@ class Application_Form_Event_Delete extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 
@@ -38,7 +38,7 @@ class Application_Form_Event_Delete extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 

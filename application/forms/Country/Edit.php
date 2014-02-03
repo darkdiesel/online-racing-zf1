@@ -116,7 +116,7 @@ class Application_Form_Country_Edit extends Zend_Form {
 	    'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 	    )
 	));
 
@@ -127,7 +127,7 @@ class Application_Form_Country_Edit extends Zend_Form {
 	    'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 	    )
 	));
 
@@ -138,7 +138,7 @@ class Application_Form_Country_Edit extends Zend_Form {
 	    'decorators' => array(
 		'ViewHelper', 'HtmlTag',
 		array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-		array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+		array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 	    )
 	));
 

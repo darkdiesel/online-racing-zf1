@@ -1,54 +1,58 @@
 <!-- start chat block -->
-<div id="chat" class="block block-ui-bordered block-sidebar m-b-10">
-	<div class="block-header">
-		<div class="block-title">
-			<i class="fa fa-book fa-lg"></i> <a href="<?php echo $this->baseUrl('chat'); ?>"><?php echo $this->translate('Чат') ?></a>
-		</div>
-	</div>
-	<div class="block-body">
-		<div id="chat_messages_box">
-			<?php
-			$user_chat = new Application_Model_DbTable_UserChat();
-			$user_chat_messages = $user_chat->fetchUserChatMsg();
-			$bbcode = Zend_Markup::factory('Bbcode');
-			$last_message_id = 0;
-			?>
-
-			<?php $order = count($user_chat_messages) % 2; ?>
-
-			<?php foreach ($user_chat_messages as $message): ?>
-				<?php
-				if ($this->escape($message->id) > $last_message_id) {
-					$last_message_id = $this->escape($message->id);
-				}
-				?>
-				<div class="chat_message_box <?php
-				echo ($order == 0) ? "even" : "odd";
-				($order == 0) ? $order = 1 : $order = 0
-				?>">
-					<div class="chat_mesage_header">
-						<div class="chat_mesage_user_avatar">
-							<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($message->user_id)), 'userId', true); ?>" target="_blank"><i class="fa fa-user"></i></a>
-						</div>
-						<div class="chat_mesage_user_nickname">
-							<a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]' + $(this).html() + '[/i], ');
-									$('#chat #userChat #messageTextArea').focus();"><?php echo $message->user_login ?></a>
-						</div>
-						<div class="chat_mesage_date"> <?php echo $this->escape($message->date_create) ?></div>
-					</div>
-					<div class="chat_mesage_message"><?php echo $bbcode->render($message->message) ?></div>
+<div class="row">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div id="chat" class="block block-ui-bordered block-sidebar m-b-10">
+			<div class="block-header">
+				<div class="block-title">
+					<i class="fa fa-book fa-lg"></i> <a href="<?php echo $this->baseUrl('chat'); ?>"><?php echo $this->translate('Чат') ?></a>
 				</div>
-			<?php endforeach ?>
+			</div>
+			<div class="block-body">
+				<div id="chat_messages_box">
+					<?php
+					$user_chat = new Application_Model_DbTable_UserChat();
+					$user_chat_messages = $user_chat->fetchUserChatMsg();
+					$bbcode = Zend_Markup::factory('Bbcode');
+					$last_message_id = 0;
+					?>
+
+					<?php $order = count($user_chat_messages) % 2; ?>
+
+					<?php foreach ($user_chat_messages as $message): ?>
+						<?php
+						if ($this->escape($message->id) > $last_message_id) {
+							$last_message_id = $this->escape($message->id);
+						}
+						?>
+						<div class="chat_message_box <?php
+						echo ($order == 0) ? "even" : "odd";
+						($order == 0) ? $order = 1 : $order = 0
+						?>">
+							<div class="chat_mesage_header">
+								<div class="chat_mesage_user_avatar">
+									<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($message->user_id)), 'userId', true); ?>" target="_blank"><i class="fa fa-user"></i></a>
+								</div>
+								<div class="chat_mesage_user_nickname">
+									<a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]' + $(this).html() + '[/i], ');
+											$('#chat #userChat #messageTextArea').focus();"><?php echo $message->user_login ?></a>
+								</div>
+								<div class="chat_mesage_date"> <?php echo $this->escape($message->date_create) ?></div>
+							</div>
+							<div class="chat_mesage_message"><?php echo $bbcode->render($message->message) ?></div>
+						</div>
+					<?php endforeach ?>
+				</div>
+				<?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+					<div id="chat_textarea_count" class="chat_buttons">500</div>
+					<div id="chat_ajax_img" class="chat_buttons"><img src="<?php echo $this->baseUrl('img/ajax_chat_loader.gif'); ?>"></div>
+						<?php
+						$form = new Application_Form_UserChat_AddMessage();
+						$form->last_load->setvalue($last_message_id);
+						echo $form;
+					}
+					?>
+			</div>
 		</div>
-		<?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-			<div id="chat_textarea_count" class="chat_buttons">500</div>
-			<div id="chat_ajax_img" class="chat_buttons"><img src="<?php echo $this->baseUrl('img/ajax_chat_loader.gif'); ?>"></div>
-				<?php
-				$form = new Application_Form_UserChat_AddMessage();
-				$form->last_load->setvalue($last_message_id);
-				echo $form;
-			}
-			?>
 	</div>
 </div>
 <!-- end chat block-->

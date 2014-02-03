@@ -65,7 +65,8 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 					'track_length' => 't.track_length',
 					'track_country_id' => 't.country_id',
 					'track_url_logo' => 't.url_track_logo',
-					'track_url_scheme' => 't.url_track_scheme'))
+					'track_url_scheme' => 't.url_track_scheme',
+					'track_description' => 't.description'))
 				->joinLeft(array('c' => 'country'), 'c.id = t.country_id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
 					'country_url_image_round' => 'c.url_image_round',))
 				->where($idencity_data);

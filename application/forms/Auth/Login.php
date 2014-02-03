@@ -14,7 +14,7 @@ class Application_Form_Auth_Login extends Zend_Form {
 				->setName('default-auth-login');
 
 		$this->setAttribs(array(
-			'class' => 'block-item block-item-form block-item-form-w-320 block-center',
+			'class' => 'block-item block-item-form block-item-form-w-320 center-block',
 			'id' => 'default-auth-login',
 		));
 
@@ -82,7 +82,7 @@ class Application_Form_Auth_Login extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 
@@ -94,7 +94,7 @@ class Application_Form_Auth_Login extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 		

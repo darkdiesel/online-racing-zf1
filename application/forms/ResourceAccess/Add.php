@@ -78,7 +78,7 @@ class Application_Form_ResourceAccess_Add extends Zend_Form {
 		$this->addElement('select', 'privilege', array(
 			'label' => $this->translate('Привилегия'),
 			'multiOptions' => array('' => ''),
-			'required' => true,
+			'required' => false,
 			'class' => 'form-control',
 			'registerInArrayValidator' => false,
 			'validators' => array('NotEmpty'),
@@ -119,7 +119,7 @@ class Application_Form_ResourceAccess_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 
@@ -130,7 +130,7 @@ class Application_Form_ResourceAccess_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 
@@ -141,7 +141,7 @@ class Application_Form_ResourceAccess_Add extends Zend_Form {
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'block-center')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
 

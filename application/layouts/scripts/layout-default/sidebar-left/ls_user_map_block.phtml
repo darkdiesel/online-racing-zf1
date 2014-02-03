@@ -1,13 +1,17 @@
 <!-- end user_map block -->
-<div id="chat" class="block block-ui-bordered block-sidebar m-b-10">
-	<div class="block-header">
-		<div class="block-title">
-			<i class="fa fa-eye fa-lg"></i> <?php echo $this->translate("Карта посетителей") ?>
+<div class="row">
+	<div class="col-lg-12 col-md-12 hidden-sm hidden-xs">
+		<div id="user-map" class="block block-ui-bordered block-sidebar m-b-10">
+			<div class="block-header">
+				<div class="block-title">
+					<i class="fa fa-eye fa-lg"></i> <?php echo $this->translate("Карта посетителей") ?>
+				</div>
+			</div>
+			<div class="block-body">
+				<script type="text/javascript" src="http://jd.revolvermaps.com/r.js"></script><script type="text/javascript">rm_f1st('1', '238', 'true', 'false', '000000', '37e0naemnzt', 'true', 'ff0000');</script>
+				<noscript><applet codebase="http://rd.revolvermaps.com/j" code="core.RE" width="238" height="238" archive="g.jar"><param name="cabbase" value="g.cab" /><param name="r" value="true" /><param name="n" value="false" /><param name="i" value="37e0naemnzt" /><param name="m" value="1" /><param name="s" value="238" /><param name="c" value="ff0000" /><param name="v" value="true" /><param name="b" value="000000" /><param name="rfc" value="true" /></applet></noscript>
+			</div>
 		</div>
-	</div>
-	<div class="block-body">
-		<script type="text/javascript" src="http://jd.revolvermaps.com/r.js"></script><script type="text/javascript">rm_f1st('1', '238', 'true', 'false', '000000', '37e0naemnzt', 'true', 'ff0000');</script>
-		<noscript><applet codebase="http://rd.revolvermaps.com/j" code="core.RE" width="238" height="238" archive="g.jar"><param name="cabbase" value="g.cab" /><param name="r" value="true" /><param name="n" value="false" /><param name="i" value="37e0naemnzt" /><param name="m" value="1" /><param name="s" value="238" /><param name="c" value="ff0000" /><param name="v" value="true" /><param name="b" value="000000" /><param name="rfc" value="true" /></applet></noscript>
 	</div>
 </div>
 <!-- start user_map block -->
