@@ -1,7 +1,7 @@
 <div class="row m-b-10">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<a class="btn btn-danger btn-lg btn-block" href="<?php echo $this->baseUrl(); ?>">
-			<i class="fa fa-globe"></i> <?php echo $this->translate('Сайт'); ?>
+			<i class="fa fa-globe"></i> <?php echo $this->translate('Вернуться на сайт'); ?>
 		</a>
 	</div>
 </div>
@@ -11,11 +11,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-1">
 							<i class="fa fa-folder"></i> <?php echo $this->translate('Контент сайта'); ?></a>
 					</h4>
 				</div>
-				<div id="collapseOne" class="panel-collapse collapse in">
+				<div id="collapse-1" class="panel-collapse collapse in">
 					<div class="panel-body">
 						<table class="table">
 							<tr>
@@ -41,12 +41,12 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            <i class="fa fa-exclamation-circle"></i> <?php echo $this->translate('Безопасность'); ?>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">
+							<i class="fa fa-exclamation-circle"></i> <?php echo $this->translate('Безопасность'); ?>
 						</a>
 					</h4>
 				</div>
-				<div id="collapseTwo" class="panel-collapse collapse">
+				<div id="collapse-2" class="panel-collapse collapse">
 					<div class="panel-body">
 						<table class="table">
 							<tr>
@@ -84,32 +84,92 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user">
-                            </span>Account</a>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-3">
+							<i class="fa fa-users"></i> <?php echo $this->translate('Пользователи'); ?>
+						</a>
 					</h4>
 				</div>
-				<div id="collapseThree" class="panel-collapse collapse">
+				<div id="collapse-3" class="panel-collapse collapse">
 					<div class="panel-body">
 						<table class="table">
 							<tr>
 								<td>
-									<a href="http://www.jquery2dotnet.com">Change Password</a>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'adminUserAll', true) ?>">
+										<?php echo $this->translate('Пользователи'); ?>
+									</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-4">
+							<i class="fa fa-trophy"></i> <?php echo $this->translate('Лиги и Чемпионаты'); ?>
+						</a>
+					</h4>
+				</div>
+				<div id="collapse-4" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table">
+							<tr>
+								<td>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true) ?>">
+										<?php echo $this->translate('Команды'); ?>
+									</a>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all'), 'track_all', true) ?>">
+										<?php echo $this->translate('Трассы'); ?>
+									</a>
 								</td>
 							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-5">
+							<i class="fa fa-gavel"></i> <?php echo $this->translate('Работа сайта'); ?>
+						</a>
+					</h4>
+				</div>
+				<div id="collapse-5" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table">
 							<tr>
 								<td>
-									<a href="http://www.jquery2dotnet.com">Import/Export</a>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
+										<?php echo $this->translate('Страны'); ?>
+									</a>
 								</td>
 							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-6">
+							<i class="fa fa-puzzle-piece"></i> <?php echo $this->translate('Утилиты'); ?>
+						</a>
+					</h4>
+				</div>
+				<div id="collapse-6" class="panel-collapse collapse">
+					<div class="panel-body">
+						<table class="table">
 							<tr>
 								<td>
-									<span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
-										Delete Account</a>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'), 'default', true) ?>">
+										<?php echo $this->translate('Файловый Мэнеджер'); ?>
+									</a>
 								</td>
 							</tr>
 						</table>
@@ -120,17 +180,8 @@
 	</div>
 </div>
 
+<h4>Будет переделано:</h4>
 <ul class="nav nav-pills nav-stacked">
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true) ?>">
-			<?php echo $this->translate('Команды'); ?>
-		</a>
-    </li>
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all'), 'track_all', true) ?>">
-			<?php echo $this->translate('Трассы'); ?>
-		</a>
-    </li>
     <li class="dropdown">
 		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			<?php echo $this->translate('События'); ?> <span class="caret"></span>
@@ -147,20 +198,5 @@
 				</a>
 			</li>
 		</ul>
-    </li>
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
-			<?php echo $this->translate('Страны'); ?>
-		</a>
-    </li>
-    <li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'adminUserAll', true) ?>">
-			<?php echo $this->translate('Пользователи'); ?>
-		</a>
-    </li>
-	<li>
-		<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'), 'default', true) ?>">
-			<?php echo $this->translate('Файловый Мэнеджер'); ?>
-		</a>
     </li>
 </ul>

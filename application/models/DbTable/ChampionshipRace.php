@@ -12,36 +12,16 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 
 	public function getItem($idencity = array(), $fields = array()) {
 		$model = new self;
+		$db = new App_Controller_Action_Helper_DB();
 		$idencity_data = "";
 
+		
+		
 		// idencity fields list
-		if (!count($idencity)) {
+		if (count($idencity)) {
+			$idencity_data = $db->getIdencity($idencity, $this->db_href);
+		} else {
 			return FALSE;
-		} elseif (is_array($idencity)) {
-			foreach ($idencity as $field => $value) {
-				if (is_array($value)) {
-					if (isset($value['condition'])) {
-						if ($value['condition']) {
-							$condition = $value['condition'];
-						} else {
-							$condition = "OR";
-						}
-					} else {
-						$condition = "OR";
-					}
-					$value = $value['value'];
-				} else {
-					$condition = "OR";
-				}
-
-				if ($idencity_data) {
-					$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
-				} else {
-					$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value);
-				}
-			}
-		} elseif (is_int($idencity) || is_string($idencity)) {
-			$idencity_data = sprintf("%s.id = '%s'", $this->db_href, $idencity);
 		}
 
 		// fields list
@@ -104,34 +84,11 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 		$idencity_data = "";
 		$order_data = "";
 
+		$db = new App_Controller_Action_Helper_DB();
+		
 		// idencity fields list
 		if ($idencity) {
-			if (is_array($idencity)) {
-				foreach ($idencity as $field => $value) {
-					if (is_array($value)) {
-						if (isset($value['condition'])) {
-							if ($value['condition']) {
-								$condition = $value['condition'];
-							} else {
-								$condition = "OR";
-							}
-						} else {
-							$condition = "OR";
-						}
-						$value = $value['value'];
-					} else {
-						$condition = "OR";
-					}
-
-					if ($idencity_data) {
-						$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
-					} else {
-						$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value);
-					}
-				}
-			} elseif (is_int($idencity) || is_string($idencity)) {
-				$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
-			}
+			$idencity_data = $db->getIdencity($idencity, $this->db_href);
 		}
 
 		// fields list
@@ -217,5 +174,7 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 			}
 		}
 	}
+
+	
 
 }

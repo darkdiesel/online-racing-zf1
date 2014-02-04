@@ -160,6 +160,10 @@ class RaceController extends App_Controller_LoaderController {
 	}
 
 	public function editAction() {
+		// css and js for date time picker script
+		$this->view->headLink()->appendStylesheet($this->view->baseUrl("/library/jquery/css/jquery-ui-timepicker-addon.min.css"));
+		$this->view->headScript()->appendFile($this->view->baseUrl("/library/jquery/js/jquery-ui-timepicker-addon.min.js"));
+
 		$request = $this->getRequest();
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');

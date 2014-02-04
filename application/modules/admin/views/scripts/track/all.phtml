@@ -4,7 +4,7 @@
 			<?php
 			$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true);
 			?>
-			<a href="<?php echo $track_id_url; ?>" class="btn btn-success btn-xs pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить трассу'); ?></a>
+			<a href="<?php echo $track_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить трассу'); ?></a>
 		</div>
 	</div>
 </div>
@@ -20,6 +20,7 @@
 						<thead>
 							<tr>
 								<th class="track_id"><span>ID</span></th>
+								<th class="track_country"><span><?php echo $this->translate('Страна'); ?></span></th>
 								<th class="track_name"><span><?php echo $this->translate('Название'); ?></span></th>
 								<th class="track_length"><span><?php echo $this->translate('Длина круга (км)'); ?></span></th>
 								<th class="track_year"><span><?php echo $this->translate('Год'); ?></span></th>
@@ -32,9 +33,12 @@
 								$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $this->escape($track->id)), 'track_id', true);
 								$track_edit_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($track->id)), 'track_action', true);
 								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'track_action', true);
+								
+								$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($track->country_id)), 'country_id', true);
 								?>
 								<tr>
 									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->id) ?></a></span></td>
+									<td class="track_country"><span><a href="<?php echo $country_id_url; ?>"><img src="<?php echo $this->escape($track->country_url_image_glossy_wave) ?>" class="img-responsive"/></a></span></td>
 									<td class="track_name"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->name) ?></a></span></td>
 									<td class="track_year"><span><?php echo $this->escape($track->track_length) ?></span></td>
 									<td class="track_year"><span><?php echo $this->escape($track->track_year) ?></span></td>

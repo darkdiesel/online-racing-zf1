@@ -1,32 +1,28 @@
-<?php
-
-if ($this->ls_next_event_block) {
-	echo $this->partial("layout-default/sidebar-left/ls_next_event_block.phtml");
-}
-?>
-<?php
-
-echo $this->partial("layout-default/sidebar-left/ls_calendar_block.phtml");
-?>
-<?php
-
-if ($this->ls_chat_block) {
-	echo $this->partial("layout-default/sidebar-left/ls_chat_block.phtml");
-}
-?>
-<?php
-
-echo $this->partial("layout-default/sidebar-left/ls_online_users_block.phtml");
-?>
-<?php
-
-if ($this->ls_user_map_block) {
-	echo $this->partial("layout-default/sidebar-left/ls_user_map_block.phtml");
-}
-?>
-<?php
-
-if ($this->ls_online_radio_block) {
-	echo $this->partial("layout-default/sidebar-left/ls_online_radio_block.phtml");
-}
-?>
+<div class="row">
+	<?php
+	if ($this->ls_next_event_block) {
+		echo $this->partial("layout-default/sidebar-left/ls_next_event_block.phtml");
+	}
+	?>
+	<?php
+	echo $this->partial("layout-default/sidebar-left/ls_calendar_block.phtml");
+	?>
+	<?php
+	if ($this->ls_chat_block) {
+		echo $this->partial("layout-default/sidebar-left/ls_chat_block.phtml");
+	}
+	?>
+	<?php
+	echo $this->partial("layout-default/sidebar-left/ls_online_users_block.phtml");
+	?>
+	<?php
+	if ($this->ls_user_map_block) {
+		echo $this->partial("layout-default/sidebar-left/ls_user_map_block.phtml");
+	}
+	?>
+	<?php
+	if ($this->ls_online_radio_block) {
+		echo $this->partial("layout-default/sidebar-left/ls_online_radio_block.phtml");
+	}
+	?>
+</div>

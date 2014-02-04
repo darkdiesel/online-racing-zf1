@@ -16,9 +16,9 @@ body{}
 
 /* Footer styles */
 #footer{border-top:2px solid #8C8C8C; background:#1B1B1B;
-    background-image:linear-gradient(to bottom, #222222, #111111);
-    margin:0 auto; padding:15px 15px 10px 15px; color:#6C6A6A;
-    font-size:11px;
+		background-image:linear-gradient(to bottom, #222222, #111111);
+		margin:0 auto; padding:15px 15px 10px 15px; color:#6C6A6A;
+		font-size:11px;
 }
 
 /* Footer menu styles */
@@ -41,3 +41,6 @@ body{}
 .block-media-rss .media-list .media{}
 .block-media-rss .media-list .media p{}
 .block-media-rss .media-list .media img{float:left; margin-right:10px; border:1px solid #D2D2D2; border-radius:2px; padding:4px; background:#ffffff; box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);}
+
+/* Background wrapper */
+#background-wrapper{ background-image:url("../img/default_background.png");}

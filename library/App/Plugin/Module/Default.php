@@ -49,9 +49,12 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract {
 
 		$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 
-		// [CSS Minify]
+		// [CSS]
 		$view->minifyHeadLink()->appendStylesheet('/css/layout-default.css');
 		$view->minifyHeadLink()->appendStylesheet('/css/user.css');
+
+		// [JS]
+		$view->headScript()->appendFile("/js/layout-default.js");
 
 		// [CHAT CSS]
 		if ($view->ls_chat_block) {

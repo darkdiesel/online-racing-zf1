@@ -1,98 +1,22 @@
-/* admin articles page */
-#admin_articles_page{
-    
+#page-wrapper{}
+#page{}
+
+#content-wrapper{}
+#content{}
+
+.page{}
+.page-content{}
+
+/* Background styles */
+#background-wrapper{background:#fff;}
+
+.sidebar{
+	background-color: #F5F5F5;
+    border-right: 1px solid #EEEEEE;
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: relative;
+    top: 0;
+    z-index:0;
 }
-    #admin_articles_page .articles_data{
-        width:705px;
-        position:relative;
-    }
-        #admin_articles_page .articles_data table{
-            display:block;
-            margin:0;
-        }
-            #admin_articles_page .articles_data table thead{
-                font-weight:bold;
-                font-family:monospace;
-                font-size:12px;
-            }
-            #admin_articles_page .articles_data table tbody{
-                font-size:12px;
-            }
-            #admin_articles_page .articles_data table .article_id > span{
-                font-weight:bold;
-                font-family:monospace;
-                width:30px;
-            }
-            #admin_articles_page .articles_data table .article_title > span{
-                width:315px;
-            }
-            #admin_articles_page .articles_data table .article_author > span{
-                width:85px;
-            }
-            #admin_articles_page .articles_data table .article_type > span{
-                width:55px;
-            }
-            #admin_articles_page .articles_data table .article_action > span{
-                width:60px;
-            }
-            #admin_articles_page .articles_data table .article_date > span{
-                width:55px;
-            }
-            #admin_articles_page .articles_data table tbody .article_date > span{
-                font-style:italic;
-                font-size:11px;
-            }
-                #admin_articles_page .articles_data table tr td{
-                    position:relative;
-                }
-                #admin_articles_page .articles_data table tr td span{
-                    overflow:hidden;
-                    word-wrap:break-word;
-                    display:block;
-                }
-/* admin users page */
-#admin_users_page{
-    
-}
-    #admin_users_page .users_data{
-        
-    }
-        #admin_users_page .users_data table{
-            margin:0;
-        }
-            #admin_users_page .users_data table thead{
-                font-weight:bold;
-                font-family:monospace;
-                font-size:12px;
-            }
-            #admin_users_page .users_data table tbody{
-                font-size:12px;
-            }
-                #admin_users_page .users_data table .user_id > span{
-                    font-weight:bold;
-                    font-family:monospace;
-                    width:30px;
-                }
-                #admin_users_page .users_data table .user_login > span{
-                    width:180px;
-                }
-                #admin_users_page .users_data table .user_activation > span{
-                    width:60px;
-                }
-                #admin_users_page .users_data table .user_status > span{
-                    width:60px;
-                }
-                #admin_users_page .users_data table .user_last_activity > span{
-                    width:60px;
-                }
-                #admin_users_page .users_data table .user_action > span{
-                    width:60px;
-                }
-                #admin_users_page .users_data table tr td{
-                    position:relative;
-                }
-                #admin_users_page .users_data table tr td span{
-                    overflow:hidden;
-                    word-wrap:break-word;
-                    display:block;
-                }

@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<div class="block-body">
-				<?php if (count($this->posts_data) > 0) { ?>
+				<?php if (count($this->post_data) > 0) { ?>
 					<?php
 					$filter = new Zend_Filter();
 					$filter->addFilter(new Zend_Filter_StripTags())
@@ -16,7 +16,7 @@
 					$bbcode = Zend_Markup::factory('Bbcode');
 					?>
 					<ul class="media-list">
-						<?php foreach ($this->posts_data as $post) : ?>
+						<?php foreach ($this->post_data as $post) : ?>
 							<?php $post_id_url = $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true); ?>
 							<li class="media">
 								<?php if ($post->image) { ?>
@@ -59,7 +59,7 @@
 			</div>
 			<div class="block-body">
 				<ul class="media-list">
-					<?php foreach ($this->leagues_data as $league): ?>
+					<?php foreach ($this->league_data as $league): ?>
 						<?php $league_url = $this->url(array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league->id)), 'leagueIdAll', true); ?>
 						<li class="media">
 							<a class="pull-left" href="<?php echo $league_url; ?>">
@@ -68,6 +68,30 @@
 							<div class="media-body">
 								<h4 class="media-heading"><a href="<?php echo $league_url; ?>"><?php echo $league->name; ?></a></h4>
 								<?php echo $league->description; ?>
+							</div>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+		<!-- Next Races  -->
+		<div class="block block-ui-bordered block-media m-t-15">
+			<div class="block-header">
+				<div class="block-title text-uppercase text-bold">
+					<?php echo $this->translate('Ближайшие события') ?>
+				</div>
+			</div>
+			<div class="block-body">
+				<ul class="media-list">
+					<?php foreach ($this->race_data as $race): ?>
+						<?php $race_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'championship_id' => $this->escape($race->championship_id),'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true); ?>
+						<li class="media">
+							<a class="pull-left" href="<?php echo $race_url; ?>">
+								<img class="media-object img-responsive img-size-50" src="<?php echo $race->country_url_image_round; ?>" alt="<?php echo $race->name; ?>">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading"><a href="<?php echo $race_url; ?>"><?php echo $race->name; ?></a></h4>
+								<?php echo $race->description; ?>
 							</div>
 						</li>
 					<?php endforeach; ?>
@@ -104,12 +128,12 @@
 			<div class="block-header">
 				<div class="block-title text-uppercase text-bold"><?php echo $this->translate('Друзья и Партнеры'); ?></div>
 			</div>
-			<div class="carousel slide media-carousel" id="our-friends-carousel">
+			<div class="carousel slide media-carousel" id="our-friends-carousel" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="item  active">
 						<div class="row">
 							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-								<a class="thumbnail" href="http://grtmotorsport.ru/" target="_blank"><img alt="<?php echo $this->translate('Интернет магазин гоночной атрибутики.');?>" src="/data-content/ui/icons/partners/grt-motorport-logo-250.png" class="img-responsive"></a>
+								<a class="thumbnail" href="http://grtmotorsport.ru/" target="_blank"><img alt="<?php echo $this->translate('Интернет магазин гоночной атрибутики.'); ?>" src="/data-content/ui/icons/partners/grt-motorport-logo-250.png" class="img-responsive"></a>
 							</div>
 							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 								<a class="thumbnail" href="http://pit-line.com.ua/" target="_blank"><img alt="" src="/data-content/ui/icons/partners/pit-line-com-ua-logo-250.png" class="img-responsive"></a>

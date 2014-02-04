@@ -25,8 +25,10 @@ class App_Plugin_Module_Admin extends Zend_Controller_Plugin_Abstract {
 
 		$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 
-		// [CSS Minify]
+		// [CSS]
 		$view->minifyHeadLink()->appendStylesheet('/css/layout-admin.css');
+		// [JS]
+		$view->headScript()->appendFile("/js/layout-admin.js");
 
 		// Page scroller block
 		if ($view->page_scroller_block) {
@@ -35,7 +37,7 @@ class App_Plugin_Module_Admin extends Zend_Controller_Plugin_Abstract {
 		}
 
 		// Change layout
-		Zend_Layout::getMvcInstance()->setLayout('admin');
+		Zend_Layout::getMvcInstance()->setLayout('layout-admin');
 	}
 
 }

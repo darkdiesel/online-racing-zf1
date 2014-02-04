@@ -23,6 +23,7 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			'team' => '',
 			'track' => '',
 			'championship_race' => '',
+			'league' => '',
 		);
 	}
 
@@ -71,6 +72,9 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			case "championship_race":
 				$this->db[$db_name] = new Application_Model_DbTable_ChampionshipRace;
 				break;
+			case "league":
+				$this->db[$db_name] = new Application_Model_DbTable_League();
+				break;
 			default:
 				return FALSE;
 		}
@@ -92,6 +96,68 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 			$this->createDB($db_name);
 			return $this->getDB($db_name);
 		}
+	}
+
+	public function getIdencity($idencity = array(), $db_href) {
+		$idencity_data = "";
+		if (is_array($idencity)) {
+			// if idencity - array
+			foreach ($idencity as $field => $conditions) {
+				if (is_array($conditions)) {
+					$field_idencity = "";
+					// if conitions is array
+					foreach ($conditions as $condition) {
+						//get value
+						$value = $condition['value'];
+
+						//get sign
+						if (isset($condition['sign'])) {
+							$sign = $condition['sign'];
+						} else {
+							$sign = '=';
+						}
+
+						//get compare condition
+						if (isset($condition['condition'])) {
+							if ($condition['condition']) {
+								$condition = $condition['condition'];
+							} else {
+								$condition = "OR";
+							}
+						} else {
+							$condition = "OR";
+						}
+
+						if ($field_idencity) {
+							$field_idencity .= sprintf(" %s %s.%s %s '%s'", $condition, $db_href, $field, $sign, $value);
+						} else {
+							$field_idencity = sprintf("%s.%s %s '%s'", $db_href, $field, $sign, $value);
+						}
+					}
+				} else {
+					$condition = "OR";
+					$sign = "=";
+				}
+
+				if ($idencity_data) {
+					if ($field_idencity) {
+						$idencity_data .= " (".$field_idencity.")";
+					} else {
+						$idencity_data .= sprintf(" %s %s.%s %s '%s'", $condition, $db_href, $field, $sign, $value);
+					}
+				} else {
+					if ($field_idencity) {
+						$idencity_data = "(".$field_idencity.")";
+					} else {
+						$idencity_data = sprintf("%s.%s %s '%s'", $db_href, $field, $sign, $value);
+					}
+				}
+			}
+		} elseif (is_int($idencity) || is_string($idencity)) {
+			$idencity_data = sprintf("%s.id = %s", $db_href, $idencity);
+		}
+
+		return $idencity_data;
 	}
 
 }

@@ -40,4 +40,4 @@ hr.message-inner-separator{clear:both; margin-top:10px; margin-bottom:13px; bord
 /* Changes the colour of the indicators */
 .media-carousel .carousel-indicators li{background:#c0c0c0;}
 .media-carousel .carousel-indicators .active{background:#333333;}
-.media-carousel img{width: 250px; height:100px}
+.media-carousel img{width: 250px; height:auto;}

@@ -10,57 +10,62 @@
 		<?php //echo $this->minifyHeadScript() ?>
     </head>
     <body>
-        <!-- HeadLine -->
-		<?php echo $this->render("layout-admin/head_line.phtml"); ?>
-        <div id="page-wrapper">
-            <div id="page">
-				<div id="header" class="container">
+		<div id="page-wrapper">
+			<div id="page">
+				<div class="container-fluid">
+					<!-- HeadLine -->
+					<?php echo $this->render("layout-admin/head-line.phtml"); ?>
+					<!-- END -->
 					<div class="row">
-						<div class="col-lg-12">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-all-0">
 							<?php echo $this->render("layout-admin/header.phtml") ?>
 						</div>
 					</div>
-				</div>
-                <div id="main-wrapper" class="container">
-                    <div id="main" class="row clearfix">
-                        <!-- Content -->
-                        <div class="col-lg-9 col-lg-push-3">
-							<div id="content">
-								<?php
-								$page_title = $this->pageTitle();
-								if ($page_title != "") :
-									?>
-									<div id="page_title_wrapper" class="block-item m-b-10">
-										<?php if ($this->pageTitle() != ""): ?>
-											<div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
-										<?php endif; ?>
-									</div>
-								<?php endif; ?>
+					<div class="row p-t-50">
+						<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 p-all-0">
+							<div class="sidebar sidebar-left p-all-15">
+								<?php echo $this->render("layout-admin/left-sidebar.phtml") ?>
+								<h4>временный тестовый пример навигации:</h4>
+								<ul class="nav nav-sidebar">
+									<li class="active"><a href="#">Overview</a></li>
+									<li><a href="#">Reports</a></li>
+									<li><a href="#">Analytics</a></li>
+									<li><a href="#">Export</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 p-all-0">
+							<div id="content-wrapper" class="p-all-20">
+								<div id="content">
+									<?php if ($this->pageTitle() != "") : ?>
+										<div class="page-header">
+											<h2><?php echo $this->pageTitle() ?></h2>
+										</div>
+									<?php endif; ?>
+								</div>
 								<?php echo $this->showMessages(); ?>
-								<div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
-									<div class="page_content">
+								<div id="<?php echo $this->module . "-" . $this->controller . "-" . $this->action; ?>" class="page">
+									<div class="page-content">
 										<?php echo $this->layout()->content ?>
 									</div>
 								</div>
 							</div>
 						</div>
-						<!-- Left sidebar -->
-						<div class="col-lg-3 col-lg-pull-9">
-							<div id="sidebar-left" class="block">
-								<?php echo $this->render("layout-admin/left_sidebar.phtml") ?>
-							</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<?php echo $this->render("layout-admin/footer.phtml") ?>
 						</div>
-                    </div>
-                </div>
-				<?php echo $this->render("layout-admin/footer.phtml") ?>
-            </div>
-        </div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php
 		if ($this->page_scroller_block) {
 			echo $this->render("common/page-scroller-block.phtml");
 		}
 		?>
-		<div id="background-wrapper"></div>
+		<div id="background-wrapper" class="background-wrapper"></div>
 		<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
     </body>
 </html>

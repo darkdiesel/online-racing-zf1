@@ -62,6 +62,37 @@
 							</div>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<i class="fa fa-list"></i> <?php echo $this->translate('Информация о гонке'); ?>
+								</div>
+								<div class="panel-body">
+									<span><?php echo $this->RenderContentTypeText($this->race_data->description, 'full_html'); ?></span>
+								</div>
+								<!-- Table -->
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th><span><?php echo $this->translate('Номер этапа'); ?></span></th>
+												<th><span><?php echo $this->translate('Дата проведения'); ?></span></th>
+												<th><span><span><?php echo $this->translate('Количество кругов'); ?></span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="text-vertical-m"><span><img src="<?php echo $this->escape($this->race_data->race_number); ?>"></span></td>
+												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_date); ?></span></td>
+												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_laps); ?></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

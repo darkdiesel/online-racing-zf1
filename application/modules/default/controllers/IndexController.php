@@ -27,11 +27,30 @@ class IndexController extends App_Controller_LoaderController {
 		$this->view->rss_index = $index;
 		$this->view->rss_element = $element;
 
-		$this->view->posts_data = $artiles_data;
+		$this->view->post_data = $artiles_data;
+		// Gel Leagues
+		$this->view->league_data = $this->db->get('league')->getAll(FALSE, array('id', 'name', 'url_logo', 'description'));
 
-		$league = new Application_Model_DbTable_League();
+		// Get Next Races
+		$date = new Zend_Date();
+		$date_start = $date->toString('yyyy-MM-dd HH:mm:ss');
+		$date_end = $date->add(7, Zend_Date::DAY)->toString('yyyy-MM-dd HH:mm:ss');
 
-		$this->view->leagues_data = $league->getAll(FALSE, array('id', 'name', 'url_logo', 'description'));
+		$this->view->race_data = $this->db->get('championship_race')->getAll(
+				array(
+			'race_date' => array(
+					array(
+						'value' => $date_start,
+						'sign' => ">"
+					),
+					array(
+						'value' => $date_end,
+						'sign' => "<",
+						'condition' => "AND"
+					)
+				)
+				), "id, name, description, championship_id", array('race_number' => 'ASC')
+		);
 	}
 
 	public function sitemapAction() {

@@ -25,8 +25,10 @@ class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract {
 
 		$view->addHelperPath('App/View/Helper', 'App_View_Helper');
 
-		// [CSS Minify]
+		// [CSS]
 		$view->minifyHeadLink()->appendStylesheet('/css/layout-forum.css');
+		// [JS]
+		$view->headScript()->appendFile("/js/layout-forum.js");
 
 		// Page scroller block
 		if ($view->page_scroller_block) {

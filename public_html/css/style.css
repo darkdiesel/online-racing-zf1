@@ -1,6 +1,4 @@
-body iframe{
-    display:inline;
-}
+body iframe{display:inline;}
 
 #moving_text{
     background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
@@ -98,8 +96,6 @@ body iframe{
     transition:1s;
 }
 
-
-
 #footer .copyright{
     font-family:monospace;
     text-align:left;
@@ -147,8 +143,6 @@ div.shareblock #shareblock{background:#F0F0F0; padding:10px; border-radius:10px;
 div.shareblock #shareblock a{border:3px solid #BCBBBB; border-radius:10px;}
 div.shareblock #shareblock:hover a{opacity:0.5;}
 div.shareblock #shareblock a:hover{opacity:1;}
-
-
 
 /* */
 .break_word_wrap{
