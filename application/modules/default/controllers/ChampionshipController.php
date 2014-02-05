@@ -243,7 +243,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 				);
 				$form->cancel->setAttrib(
 						'onClick', "location.href=\"{$this->view->url(
-								array('module' => 'default','controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipIdAll', true
+								array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipIdAll', true
 						)}\""
 				);
 
@@ -307,7 +307,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 							$this->redirect(
 									$this->view->url(
-											array('module' => 'default','controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'chapmionship_id' => $championship_id), 'defaultChampionshipIdAll', true
+											array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'chapmionship_id' => $championship_id), 'defaultChampionshipIdAll', true
 									)
 							);
 						} else {
@@ -534,7 +534,6 @@ class ChampionshipController extends App_Controller_LoaderController {
 				$this->view->form = $form;
 
 				// add teams
-				// add post types to the form
 				$teams_data = $this->db->get('team')->getAll(FALSE, array("id", "name"), "ASC");
 
 				$championship_team_db = new Application_Model_DbTable_ChampionshipTeam();
@@ -600,6 +599,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 						$new_championship_team_data['date_create'] = $date;
 						$new_championship_team_data['date_edit'] = $date;
 
+						$championship_team = new Application_Model_DbTable_ChampionshipTeam();
 						$newChampionshipTeam = $championship_team->createRow($new_championship_team_data);
 						$newChampionshipTeam->save();
 
@@ -791,12 +791,11 @@ class ChampionshipController extends App_Controller_LoaderController {
 					$form->name->setValue($championship_team_data->name);
 					$form->team_number->setValue($championship_team_data->team_number);
 
-					// add form's list teams
-					$team = new Application_Model_DbTable_Team();
-					$teams = $team->getTeamNames('ASC');
+					// add teams
+					$teams_data = $this->db->get('team')->getAll(FALSE, array("id", "name"), "ASC");
 
-					if ($teams) {
-						foreach ($teams as $team):
+					if ($teams_data) {
+						foreach ($teams_data as $team):
 							if (!$championship_team->checkTeamExist($championship_id, $team->id)) {
 								$form->team->addMultiOption($team->id, $team->name);
 							} elseif ($team->id == $championship_team_data->team_id) {
@@ -804,7 +803,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 							}
 						endforeach;
 					} else {
-						$this->view->errMessage .= $this->view->translate('Команды не найдены!') . '<br />';
+						$this->messages->addError("{$this->view->translate('Команды не найдены!')}");
 					}
 
 					$form->team->setValue($championship_team_data->team_id);

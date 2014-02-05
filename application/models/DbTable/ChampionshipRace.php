@@ -128,6 +128,11 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 					'track_url_scheme' => 't.url_track_scheme'
 						)
 				)
+				->join(array('champ' => 'championship'), $this->db_href . '.championship_id = champ.id', array(
+					'league_id' => 'champ.league_id',
+					'championship_name' => 'champ.name'
+						)
+				)
 				->joinLeft(array('c' => 'country'), 't.country_id = c.id', array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
 			'country_url_image_round' => 'c.url_image_round',));
 

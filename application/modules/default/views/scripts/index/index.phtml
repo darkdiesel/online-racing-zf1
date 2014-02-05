@@ -1,7 +1,7 @@
 
 <div class="row m-t-15">
 	<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-		<div class="block block-ui-bordered block-media">
+		<div class="block block-ui-bordered block-media-list">
 			<div class="block-header">
 				<div class="block-title text-uppercase text-bold">
 					<?php echo $this->translate('Новости портала') ?>
@@ -51,7 +51,7 @@
 		</div>
 	</div>
 	<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-		<div class="block block-ui-bordered block-media">
+		<div class="block block-ui-bordered block-media-list">
 			<div class="block-header">
 				<div class="block-title text-uppercase text-bold">
 					<?php echo $this->translate('Лиги портала') ?>
@@ -75,31 +75,42 @@
 			</div>
 		</div>
 		<!-- Next Races  -->
-		<div class="block block-ui-bordered block-media m-t-15">
+		<div class="block block-ui-bordered block-table m-t-15">
 			<div class="block-header">
 				<div class="block-title text-uppercase text-bold">
 					<?php echo $this->translate('Ближайшие события') ?>
 				</div>
 			</div>
 			<div class="block-body">
-				<ul class="media-list">
-					<?php foreach ($this->race_data as $race): ?>
-						<?php $race_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'championship_id' => $this->escape($race->championship_id),'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true); ?>
-						<li class="media">
-							<a class="pull-left" href="<?php echo $race_url; ?>">
-								<img class="media-object img-responsive img-size-50" src="<?php echo $race->country_url_image_round; ?>" alt="<?php echo $race->name; ?>">
-							</a>
-							<div class="media-body">
-								<h4 class="media-heading"><a href="<?php echo $race_url; ?>"><?php echo $race->name; ?></a></h4>
-								<?php echo $race->description; ?>
-							</div>
-						</li>
-					<?php endforeach; ?>
-				</ul>
+				<table class="table">
+					<tbody>
+						<?php foreach ($this->race_data as $race): ?>
+							<?php
+							$race_id_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->escape($race->league_id), 'championship_id' => $this->escape($race->championship_id), 'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true);
+							$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->escape($race->league_id), 'championship_id' => $this->escape($race->championship_id)), 'defaultChampionshipIdAll', true);
+							?>
+							<tr>
+								<td>
+									<a href="<?php echo $race_id_url; ?>">
+										<img class="media-object img-responsive img-size-32" src="<?php echo $race->country_url_image_round; ?>" alt="<?php echo $race->name; ?>">
+									</a>
+								</td>
+								<td>
+									<span class="text-bold"><a href="<?php echo $race_id_url; ?>"><?php echo $race->name; ?></a></span><br/>
+									<small><a class="text-black" href="<?php echo $championship_id_url; ?>"><?php echo $race->championship_name; ?></a></small>
+								</td>
+								<td class="text-italic">
+									<?php echo $race->race_date; ?>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
 			</div>
 		</div>
+		<!-- End Next Races -->
 		<!-- RSS news from F1news.ru -->
-		<div class="block block-ui-bordered block-media block-media-rss m-t-15">
+		<div class="block block-ui-bordered block-media-list block-media-list-rss m-t-15">
 			<div class="block-header">
 				<div class="block-title text-uppercase text-bold">
 					<?php echo $this->translate('Новости из мира автоспорта') ?>
@@ -121,7 +132,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="row m-t-10">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="block block-ui-bordered">

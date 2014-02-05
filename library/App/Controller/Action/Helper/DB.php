@@ -100,54 +100,72 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 
 	public function getIdencity($idencity = array(), $db_href) {
 		$idencity_data = "";
+		$field_idencity = "";
+		
 		if (is_array($idencity)) {
 			// if idencity - array
 			foreach ($idencity as $field => $conditions) {
 				if (is_array($conditions)) {
-					$field_idencity = "";
-					// if conitions is array
-					foreach ($conditions as $condition) {
+					if (isset($conditions['value']) || isset($conditions['condition']) || isset($conditions['sign'])) {
 						//get value
-						$value = $condition['value'];
+							$value = $conditions['value'];
 
-						//get sign
-						if (isset($condition['sign'])) {
-							$sign = $condition['sign'];
-						} else {
-							$sign = '=';
-						}
+							//get sign
+							if (isset($conditions['sign'])) {
+								$sign = $conditions['sign'];
+							} else {
+								$sign = '=';
+							}
 
-						//get compare condition
-						if (isset($condition['condition'])) {
-							if ($condition['condition']) {
+							//get compare condition
+							if (isset($conditions['condition'])) {
+								$condition = $conditions['condition'];
+							} else {
+								$condition = "OR";
+							}
+					} else {
+						$field_idencity = "";
+						// if conitions is array
+						foreach ($conditions as $condition) {
+							//get value
+							$value = $condition['value'];
+
+							//get sign
+							if (isset($condition['sign'])) {
+								$sign = $condition['sign'];
+							} else {
+								$sign = '=';
+							}
+
+							//get compare condition
+							if (isset($condition['condition'])) {
 								$condition = $condition['condition'];
 							} else {
 								$condition = "OR";
 							}
-						} else {
-							$condition = "OR";
-						}
 
-						if ($field_idencity) {
-							$field_idencity .= sprintf(" %s %s.%s %s '%s'", $condition, $db_href, $field, $sign, $value);
-						} else {
-							$field_idencity = sprintf("%s.%s %s '%s'", $db_href, $field, $sign, $value);
+							if ($field_idencity) {
+								$field_idencity .= sprintf(" %s %s.%s %s '%s'", $condition, $db_href, $field, $sign, $value);
+							} else {
+								$field_idencity = sprintf("%s.%s %s '%s'", $db_href, $field, $sign, $value);
+							}
 						}
 					}
 				} else {
 					$condition = "OR";
 					$sign = "=";
+					$value = $conditions;
 				}
 
 				if ($idencity_data) {
 					if ($field_idencity) {
-						$idencity_data .= " (".$field_idencity.")";
+						$idencity_data .= " (" . $field_idencity . ")";
 					} else {
 						$idencity_data .= sprintf(" %s %s.%s %s '%s'", $condition, $db_href, $field, $sign, $value);
 					}
 				} else {
 					if ($field_idencity) {
-						$idencity_data = "(".$field_idencity.")";
+						$idencity_data = "(" . $field_idencity . ")";
 					} else {
 						$idencity_data = sprintf("%s.%s %s '%s'", $db_href, $field, $sign, $value);
 					}

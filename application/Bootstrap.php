@@ -111,7 +111,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		// [GOOGLE FONTS]
 		//$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
-
 		// [COMMON CSS]
 		$view->minifyHeadLink()->appendStylesheet('/css/style.css');
 		$view->minifyHeadLink()->appendStylesheet('/css/items.css');
@@ -194,11 +193,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		/* $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/application.ini', 'staging');
 
-		$locales = $config->locales->toArray();
-		$locale = new Zend_Locale('auto');
+		  $locales = $config->locales->toArray();
+		  $locale = new Zend_Locale('auto');
 
-		$lang = array_key_exists($locale->getLanguage(), $locales) ? $locale->getLanguage() : $config->locales->key();
+		  $lang = array_key_exists($locale->getLanguage(), $locales) ? $locale->getLanguage() : $config->locales->key();
 		 */
+	}
+
+	public function _initCache() {
+		$this->bootstrap('cachemanager');
+		$manager = $this->getResource('cachemanager');
+
+		//кеш метаданных
+		//Zend_Db_Table_Abstract::setDefaultMetadataCache($manager->getCache('long'));
+		//время кеширования для кеша обновляемой рывками инфы 
+		//$manager->getCache('up')->setLifetime($time);
+		$cache = Zend_Cache::factory(
+						'Core', 'File', array(
+					'lifetime' => 3600 * 24, //cache is cleaned once a day
+					'automatic_serialization' => true
+						), array('cache_dir' => APPLICATION_PATH . '/../cache/')
+		);
+		Zend_Db_Table_Abstract::setDefaultMetadataCache($cache); //cache database table schemata metadata for faster SQL queries
+		Zend_Registry::set('Cache', $cache);
+
+		Zend_Registry::set('cache', $cache);
 	}
 
 }

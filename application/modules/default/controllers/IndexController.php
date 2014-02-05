@@ -39,18 +39,29 @@ class IndexController extends App_Controller_LoaderController {
 		$this->view->race_data = $this->db->get('championship_race')->getAll(
 				array(
 			'race_date' => array(
-					array(
-						'value' => $date_start,
-						'sign' => ">"
-					),
-					array(
-						'value' => $date_end,
-						'sign' => "<",
-						'condition' => "AND"
-					)
+				array(
+					'value' => $date_start,
+					'sign' => ">"
+				),
+				array(
+					'value' => $date_end,
+					'sign' => "<",
+					'condition' => "AND"
 				)
-				), "id, name, description, championship_id", array('race_number' => 'ASC')
+			)
+				), "id, name, description, championship_id", array('race_date' => 'ASC')
 		);
+
+		$cache = Zend_Registry::get('cache');
+		if (!$result = $cache->load('mydata')) {
+			echo 'caching the data…..';
+			$data = array('1', ' 2', ' 3');
+			$cache->save($data, 'mydata');
+		} else {
+
+			echo 'retrieving cache data…….';
+			Zend_Debug::dump($result);
+		}
 	}
 
 	public function sitemapAction() {

@@ -14,6 +14,11 @@
 .text-underline{text-decoration:underline;}
 .text-italic{font-style:italic;}
 
+/* text color styles */
+.text-black{color:#000!important;}
+.text-white{color:#fff!important;}
+.text-gray{color:#C8C8C8!important;}
+
 /* block align classes */
 .center-block{margin-right:auto!important; margin-left:auto!important; display:block;}
 
@@ -131,14 +136,16 @@
 .block-sidebar .block-header{padding-top:0;text-align:center;}
 .block-sidebar .block-title{font-weight:bold; background-color:#C41D1D; border-bottom:2px solid #D6D6D6; color:#FFFFFF; display:inline-block; line-height:32px; padding:0 12px 0 14px;}
 
-.block-media{}
-.block-media .media-list{}
-.block-media .media-list .media{background: url("../data-content/ui/border-pattern.gif") repeat-x left top; padding: 20px 0 10px; margin-top:5px;}
-.block-media .media-list .media:first-child{background:none; padding-top:5px;}
-.block-media .media-list .media .media-body{ font-size:13px;}
-.block-media .media-list .media .media-body .media-heading{font-family: Georgia,"Times New Roman",Times,serif; font-size:15px; font-weight: bold; color:#C41D1D;}
-.block-media .media-list .media .media-body .media-heading a{color:#C41D1D;}
+.block-media-list{}
+.block-media-list .media-list{}
+.block-media-list .media-list .media{background: url("../data-content/ui/border-pattern.gif") repeat-x left top; padding: 20px 0 10px; margin-top:5px;}
+.block-media-list .media-list .media:first-child{background:none; padding-top:5px;}
+.block-media-list .media-list .media .media-body{ font-size:13px;}
+.block-media-list .media-list .media .media-body .media-heading{font-family: Georgia,"Times New Roman",Times,serif; font-size:15px; font-weight: bold; color:#C41D1D;}
+.block-media-list .media-list .media .media-body .media-heading a{color:#C41D1D;}
 
 
+.block-table {}
+.block-table a{color:#C41D1D;}
 /* Background wrapper */
 .background-wrapper{z-index:-9999; border:0 none; left:0; margin:0; max-height:initial !important; max-width:initial !important; min-height:100%; min-width:100%; padding:0; position:fixed; top:0;}
