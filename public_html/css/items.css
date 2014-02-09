@@ -67,35 +67,6 @@
     margin-right:20px;
 }
 
-/* configure block */    
-.block-item:hover .configure-block-item-links{
-    display:block;
-}
-.configure-block-item-links{
-    position:absolute;
-    right:5px;
-    top:0px;
-    display:none;
-    z-index:99;
-}
-    .configure-block-item-links .configure-block-item-link{
-        opacity:0.5;
-        color:red;
-    }
-    .configure-block-item-links ul{
-        margin:0;
-        right:5px;
-        left:auto;
-        opacity:1;
-    }
-    .configure-block-item-links .contextual-links-trigger{
-        color:gray;
-        opacity:0.5;
-    }
-        .configure-block-item-links .contextual-links-trigger .caret{
-            color:black;
-        }
-
 /* block item info footer */
 .block-item-info-bottom{
     border-top:1px solid #E6E0E0;

@@ -52,16 +52,16 @@ class IndexController extends App_Controller_LoaderController {
 				), "id, name, description, championship_id", array('race_date' => 'ASC')
 		);
 
-		$cache = Zend_Registry::get('cache');
-		if (!$result = $cache->load('mydata')) {
-			echo 'caching the data…..';
-			$data = array('1', ' 2', ' 3');
-			$cache->save($data, 'mydata');
-		} else {
-
-			echo 'retrieving cache data…….';
-			Zend_Debug::dump($result);
-		}
+//		$cache = Zend_Registry::get('cache');
+//		if (!$result = $cache->load('mydata')) {
+//			echo 'caching the data…..';
+//			$data = array('1', ' 2', ' 3');
+//			$cache->save($data, 'mydata');
+//		} else {
+//
+//			echo 'retrieving cache data…….';
+//			Zend_Debug::dump($result);
+//		}
 	}
 
 	public function sitemapAction() {

@@ -566,7 +566,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 								$filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
 
-								$new_championship_team_data['url_logo'] = '/img/data/logos/teams/logo/' . $newName;
+								$new_championship_team_data['url_logo'] = '/data-content/data-uploads/championship/team/logo/' . $newName;
 							}
 						}
 
@@ -585,7 +585,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 										$file['logo_team']['destination'] . '/' . $file['logo_team']['name']
 								);
 
-								$new_championship_team_data['url_logo_car'] = '/img/data/logos/teams/car/' . $newName;
+								$new_championship_team_data['url_logo_car'] = '/data-content/data-uploads/championship/team/car/' . $newName;
 							}
 						}
 
@@ -702,7 +702,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 									$filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
 
-									$new_championship_team_data['url_logo'] = '/img/data/logos/teams/logo/' . $newName;
+									$new_championship_team_data['url_logo'] = '/data-content/data-uploads/championship/team/logo/' . $newName;
 
 									if ($new_championship_team_data['url_logo'] != $championship_team_data['url_logo']
 									) {
@@ -730,7 +730,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 											$file['logo_team']['destination'] . '/' . $file['logo_team']['name']
 									);
 
-									$new_championship_team_data['url_logo_car'] = '/img/data/logos/teams/car/' . $newName;
+									$new_championship_team_data['url_logo_car'] = '/data-content/data-uploads/championship/team/car/' . $newName;
 
 									if ($new_championship_team_data['url_logo_car'] != $championship_team_data['url_logo_car']
 									) {

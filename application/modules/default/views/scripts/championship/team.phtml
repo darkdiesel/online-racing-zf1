@@ -1,9 +1,9 @@
 <?php if ($this->team_data) { ?>
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="team-item block-item">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="team-item block">
 				<?php
-				echo $this->ConfigBlockItemMenu($this->translate("Команда"))->championship_team_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id);
+				echo $this->BlockConfigMenu($this->translate("Команда"))->championshipTeamMenu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id);
 				?>
 				<div class="block-item-content">
 					<div>
@@ -22,14 +22,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="section-title m-b-15"><?php echo $this->translate('Состав команды') ?>:</div>
+	<div class="section-title m-t-15 m-b-15"><?php echo $this->translate('Состав команды') ?>:</div>
 	<div class="row">
 		<?php
 		if ($this->team_driver_data) {
 			foreach ($this->team_driver_data as $driver):
 				?>
-				<div class="col-lg-12">
-					<div class="team-driver-item block-item ">
+				<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
+					<div class="team-driver-item block m-b-15">
 						<?php
 						$user_name = "";
 						if (isset($driver->user_name) && !empty($driver->user_name)) {
@@ -40,9 +40,9 @@
 						}
 						?>
 						<?php
-						echo $this->ConfigBlockItemMenu($this->translate("Гонщик"))->championship_team_driver_menu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
+						echo $this->BlockConfigMenu($this->translate("Гонщик"))->championshipTeamDriverMenu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
 						?>
-						<div class="block-item-content">
+						<div class="block-body">
 							<div class="media">
 								<div class="team-driver-img img-wrapper-200-200 overflow-hide pull-left">
 									<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">

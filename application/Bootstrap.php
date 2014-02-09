@@ -121,6 +121,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		//$view->headScript()->appendFile("/js/app.js");
 
 		$view->MinifyHeadScript()->appendFile("/js/app.js");
+		$view->MinifyHeadScript()->appendFile("/js/common.js");
 
 		Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
 

@@ -29,7 +29,6 @@ class Application_Form_Championship_Team_Edit extends Zend_Form {
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
-				new App_Validate_NoDbRecordExists('championship', 'name')
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -77,7 +76,7 @@ class Application_Form_Championship_Team_Edit extends Zend_Form {
 			'required' => false,
 			'height' => '30px',
 			'class' => 'form-control',
-			'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/teams/logo',
+			'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/championship/team/logo',
 			'validators' => array(
 				array('Size', false, 5120000),
 				array('Extension', false, 'jpg,png,gif'),
@@ -96,7 +95,7 @@ class Application_Form_Championship_Team_Edit extends Zend_Form {
 			'required' => false,
 			'height' => '30px',
 			'class' => 'form-control',
-			'destination' => APPLICATION_PATH . '/../public_html/img/data/logos/teams/car',
+			'destination' => APPLICATION_PATH . '/../public_html/data-content/data-uploads/championship/team/car',
 			'validators' => array(
 				array('Size', false, 5120000),
 				array('Extension', false, 'jpg,png,gif'),
@@ -135,7 +134,7 @@ class Application_Form_Championship_Team_Edit extends Zend_Form {
 		$this->addElement('button', 'cancel', array(
 			'ignore' => true,
 			'class' => 'btn btn-default',
-			'onClick' => "location.href='/article/all'",
+			'onClick' => "location.href='/'",
 			'label' => $this->translate('Отмена'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',

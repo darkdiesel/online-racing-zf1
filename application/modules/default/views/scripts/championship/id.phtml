@@ -31,12 +31,12 @@
 		</div>
 	<?php } ?>
 
-	<div class="championship_item block-item">
+	<div class="championship_item block">
 		<?php
-		echo $this->ConfigBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($this->championship_data->league_id), $this->escape($this->championship_data->id));
+		echo $this->BlockConfigMenu($this->translate("Чемпионат"))->championshipMenu($this->escape($this->championship_data->league_id), $this->escape($this->championship_data->id));
 		?>
 		<div class="row">
-			<div class="block-item-content">
+			<div class="block-body">
 				<div class="col-lg-4 col-lg-push-8">
 					<div class="thumbnail text-center">
 						<?php if ($this->championship_data->url_logo != '') { ?>
@@ -105,9 +105,9 @@
 		<?php foreach ($this->championship_races_data as $race): ?>
 			<div class="row">
 				<div class="col-md-12 col-lg-12">
-					<div class="panel panel-default panel-inverse block-item">
+					<div class="panel panel-default panel-inverse block">
 						<?php
-						echo $this->ConfigBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($race->id));
+						echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($race->id));
 						?>
 						<div class="panel-heading">
 							<h3 class="panel-title">

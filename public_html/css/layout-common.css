@@ -120,7 +120,7 @@
 .img-wrapper-700{width:700px;}
 
 /* blocks styles */
-.block{background:#ffffff;}
+.block{background:#ffffff; position:relative;}
 .block-no-background{background:none;}
 .block-ui-bordered{border-width:2px 1px 1px;border-style:solid;border-color:#C41D1D #C8C8C8 #C8C8C8;}
 .block-ui-rounded{border-radius:3px;}
@@ -147,5 +147,18 @@
 
 .block-table {}
 .block-table a{color:#C41D1D;}
+
 /* Background wrapper */
 .background-wrapper{z-index:-9999; border:0 none; left:0; margin:0; max-height:initial !important; max-width:initial !important; min-height:100%; min-width:100%; padding:0; position:fixed; top:0;}
+
+/* Block Config Menu */
+.block-config-menu{display:none; position: absolute; right:0; top:0;}
+.block-config-menu .block-config-btn{opacity:0.3;}
+.block-config-menu .block-config-btn:hover{opacity:1;}
+.block:hover .block-config-menu{display:block;}
+.configure-block-item-links{position:absolute; right:5px; top:0px; display:none; z-index:99;}
+.configure-block-item-links .configure-block-item-link{opacity:0.5; color:red;}
+
+.configure-block-item-links ul{margin:0; right:5px; left:auto; opacity:1;}
+.configure-block-item-links .contextual-links-trigger{color:gray; opacity:0.5;}
+.configure-block-item-links .contextual-links-trigger .caret{color:black;}

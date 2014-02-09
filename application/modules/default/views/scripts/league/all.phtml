@@ -1,10 +1,10 @@
 <?php if ($this->leagues_data) : ?>
 	<?php foreach ($this->leagues_data as $league): ?>
 		<div class="row">
-			<div class="col-md-12 col-lg-12">
-				<div class="panel panel-default panel-inverse block-item">
+			<div class="col-md-12 col-lg-12 col-md-12 col-xs-12">
+				<div class="panel panel-default panel-inverse block">
 					<?php
-					echo $this->ConfigBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($league['id']));
+					echo $this->BlockConfigMenu($this->translate("Лига"))->leagueMenu($this->escape($league['id']));
 					?>
 					<div class="panel-heading">
 						<h3 class="panel-title">

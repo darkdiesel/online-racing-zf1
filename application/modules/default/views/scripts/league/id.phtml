@@ -1,10 +1,10 @@
 <?php if ($this->league_data) : ?>
-	<div class="league_item block-item">
+	<div class="league_item block">
 		<?php
-		echo $this->ConfigBlockItemMenu($this->translate("Лига"))->league_menu($this->escape($this->league_data->id));
+		echo $this->BlockConfigMenu($this->translate("Лига"))->leagueMenu($this->escape($this->league_data->id));
 		?>
 		<div class="row">
-			<div class="block-item-content">
+			<div class="block-body">
 				<div class="col-lg-4 col-lg-push-8">
 					<div class="thumbnail text-center">
 						<?php
@@ -63,9 +63,9 @@
 		<?php foreach ($this->championships_data as $championship): ?>
 			<div class="row">
 				<div class="col-md-12 col-lg-12">
-					<div class="panel panel-default panel-inverse block-item">
+					<div class="panel panel-default panel-inverse block">
 						<?php
-						echo $this->ConfigBlockItemMenu($this->translate("Чемпионат"))->championship_menu($this->escape($championship['league_id']), $this->escape($championship['id']));
+						echo $this->BlockConfigMenu($this->translate("Чемпионат"))->championshipMenu($this->escape($championship['league_id']), $this->escape($championship['id']));
 						?>
 						
 						<?php 

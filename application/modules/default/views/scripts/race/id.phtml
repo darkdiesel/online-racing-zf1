@@ -1,9 +1,9 @@
 <?php if ($this->race_data): ?>
 	<div class="row">
 		<div class="col-md-12 col-lg-12">
-			<div class="panel block-item">
+			<div class="panel block">
 				<?php
-				echo $this->ConfigBlockItemMenu($this->translate("Гонка"))->championship_race_menu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($this->race_data->id));
+				echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($this->race_data->id));
 				?>
 				<div class="panel-body">
 					<div class="row">
@@ -15,15 +15,13 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-12">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<?php if ($this->escape($this->race_data->track_url_scheme) != '') : ?>
 								<div class="m-b-15 center-block text-center">
 									<img class="img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_scheme)); ?>">
 								</div>
 							<?php endif; ?>
 						</div>
-					</div>
-					<div class="row">
 						<?php if ($this->race_data->track_url_logo): ?>
 							<div class="col-lg-6">
 								<div class="center-block text-center m-b-10">
@@ -31,64 +29,67 @@
 								</div>
 							</div>
 						<?php endif; ?>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="panel panel-default">
-								<!-- Default panel contents -->
-								<div class="panel-heading">
-									<i class="fa fa-list"></i> <?php echo $this->translate('Информация о трассе'); ?>
-								</div>
-								<div class="panel-body">
-									<span><?php echo $this->RenderContentTypeText($this->race_data->track_description, 'full_html'); ?></span>
-								</div>
-								<!-- Table -->
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-											<tr>
-												<th><span><?php echo $this->translate('Страна'); ?></span></th>
-												<th><span><?php echo $this->translate('Год конфигурации'); ?></span></th>
-												<th><span><span><?php echo $this->translate('Длина круга'); ?></span></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="text-vertical-m"><span><img src="<?php echo $this->escape($this->race_data->country_url_image_round); ?>"></span></td>
-												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->track_year); ?></span></td>
-												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->track_length); ?></span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="panel panel-success">
-								<div class="panel-heading">
-									<i class="fa fa-list"></i> <?php echo $this->translate('Информация о гонке'); ?>
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#track-description" data-toggle="tab"><?php echo $this->translate('О трассе'); ?></a></li>
+								<li><a href="#race-description" data-toggle="tab"><?php echo $this->translate('О гонке'); ?></a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane active" id="track-description">
+									<div class="panel">
+										<div class="panel-body">
+											<span><?php echo $this->RenderContentTypeText($this->race_data->track_description, 'full_html'); ?></span>
+										</div>
+										<!-- Table -->
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th><span><?php echo $this->translate('Страна'); ?></span></th>
+														<th><span><?php echo $this->translate('Год конфигурации'); ?></span></th>
+														<th><span><span><?php echo $this->translate('Длина круга'); ?></span></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="text-vertical-m"><span><img src="<?php echo $this->escape($this->race_data->country_url_image_round); ?>"></span></td>
+														<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->track_year); ?></span></td>
+														<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->track_length); ?></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 								</div>
-								<div class="panel-body">
-									<span><?php echo $this->RenderContentTypeText($this->race_data->description, 'full_html'); ?></span>
-								</div>
-								<!-- Table -->
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-											<tr>
-												<th><span><?php echo $this->translate('Номер этапа'); ?></span></th>
-												<th><span><?php echo $this->translate('Дата проведения'); ?></span></th>
-												<th><span><span><?php echo $this->translate('Количество кругов'); ?></span></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_number); ?></span></td>
-												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_date); ?></span></td>
-												<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_laps); ?></span></td>
-											</tr>
-										</tbody>
-									</table>
+								<div class="tab-pane" id="race-description">
+									<div class="panel">
+										<div class="panel-body">
+											<span><?php echo $this->RenderContentTypeText($this->race_data->description, 'full_html'); ?></span>
+										</div>
+										<!-- Table -->
+										<div class="table-responsive">
+											<table class="table table-bordered">
+												<thead>
+													<tr>
+														<th><span><?php echo $this->translate('Номер этапа'); ?></span></th>
+														<th><span><?php echo $this->translate('Дата проведения'); ?></span></th>
+														<th><span><span><?php echo $this->translate('Количество кругов'); ?></span></th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_number); ?></span></td>
+														<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_date); ?></span></td>
+														<td class="text-vertical-m"><span><?php echo $this->escape($this->race_data->race_laps); ?></span></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

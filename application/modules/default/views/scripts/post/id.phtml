@@ -1,9 +1,9 @@
 <?php if ($this->post) { ?>
-    <div class="post_item block-item">
+    <div class="post_item block">
         <?php
-        echo $this->ConfigBlockItemMenu($this->translate("Контент"))->post_menu($this->escape($this->post['id']));
+        echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu($this->escape($this->post['id']));
         ?>
-        <div class="block-item-content">
+        <div class="block-body">
             <?php if ($this->post['image']) { ?>
                 <div class="center-block text-center">
                     <div class="post_id_logo_wrapper_690 img-wrapper-690 overflow-hide">
