@@ -84,26 +84,32 @@
 			<div class="block-body">
 				<table class="table">
 					<tbody>
-						<?php foreach ($this->race_data as $race): ?>
-							<?php
-							$race_id_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->escape($race->league_id), 'championship_id' => $this->escape($race->championship_id), 'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true);
-							$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->escape($race->league_id), 'championship_id' => $this->escape($race->championship_id)), 'defaultChampionshipIdAll', true);
-							?>
-							<tr>
-								<td>
-									<a href="<?php echo $race_id_url; ?>">
-										<img class="media-object img-responsive img-size-32" src="<?php echo $race->country_url_image_round; ?>" alt="<?php echo $race->name; ?>">
-									</a>
-								</td>
-								<td>
-									<span class="text-bold"><a href="<?php echo $race_id_url; ?>"><?php echo $race->name; ?></a></span><br/>
-									<small><a class="text-black" href="<?php echo $championship_id_url; ?>"><?php echo $race->championship_name; ?></a></small>
-								</td>
-								<td class="text-italic">
-									<?php echo $race->race_date; ?>
-								</td>
-							</tr>
-						<?php endforeach; ?>
+						<?php
+						if ($this->race_data):
+							foreach ($this->race_data as $race):
+								?>
+								<?php
+								$race_id_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->escape($race->league_id), 'championship_id' => $this->escape($race->championship_id), 'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true);
+								$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $this->escape($race->league_id), 'championship_id' => $this->escape($race->championship_id)), 'defaultChampionshipIdAll', true);
+								?>
+								<tr>
+									<td>
+										<a href="<?php echo $race_id_url; ?>">
+											<img class="media-object img-responsive img-size-32" src="<?php echo $race->country_url_image_round; ?>" alt="<?php echo $race->name; ?>">
+										</a>
+									</td>
+									<td>
+										<span class="text-bold"><a href="<?php echo $race_id_url; ?>"><?php echo $race->name; ?></a></span><br/>
+										<small><a class="text-black" href="<?php echo $championship_id_url; ?>"><?php echo $race->championship_name; ?></a></small>
+									</td>
+									<td class="text-italic">
+										<?php echo $race->race_date; ?>
+									</td>
+								</tr>
+								<?php
+							endforeach;
+						endif;
+						?>
 					</tbody>
 				</table>
 			</div>

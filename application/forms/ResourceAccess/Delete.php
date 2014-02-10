@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Role_Delete extends Zend_Form {
+class Application_Form_ResourceAccess_Delete extends Zend_Form {
 
 	protected function translate($str) {
 		$translate = new Zend_View_Helper_Translate();
@@ -10,11 +10,11 @@ class Application_Form_Role_Delete extends Zend_Form {
 
 	public function init() {
 		$this->setMethod('post')
-				->setName('admin-role-delete');
+				->setName('admin-resource-access-delete');
 
 		$this->setAttribs(array(
 			'class' => 'block-item block-item-form block-item-form-delete block-item-form-w-350 center-block',
-			'id' => 'admin-role-delete',
+			'id' => 'admin-resource-access-delete',
 		));
 
 		// decorators for this form
