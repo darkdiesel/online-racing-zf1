@@ -71,13 +71,15 @@ class AuthController extends App_Controller_LoaderController {
 							// Set the time of user logged in
 							if ($form->remember->getValue() == 1) {
 								$session = new Zend_Session_Namespace('Zend_Auth');
-								$session->setExpirationSeconds(60 * 60 * 48);
+								$session->setExpirationSeconds(60 * 60 * 120);
 
-								Zend_Session::rememberMe(60 * 60 * 48);
+								Zend_Session::rememberMe(60 * 60 * 120);
 								Zend_Session::setOptions(array(
-									'cookie_lifetime' => 60 * 60 * 48,
-									'gc_maxlifetime' => 60 * 60 * 48));
+									'cookie_lifetime' => 60 * 60 * 120,
+									'gc_maxlifetime' => 60 * 60 * 120));
+								setcookie('RememberMe', 1, 60 * 60 * 120, '/');
 							} else {
+								setcookie('RememberMe', 0, 0, '/');
 								Zend_Session::forgetMe();
 							}
 
@@ -172,11 +174,11 @@ class AuthController extends App_Controller_LoaderController {
 		if (!Zend_Auth::getInstance()->hasIdentity()) {
 			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 		}
-		
+
 		// Disable layout
 		$this->_helper->layout()->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(true);
-		
+
 		Zend_Auth::getInstance()->clearIdentity();
 		Zend_Session::forgetMe();
 		Zend_Session::expireSessionCookie();
@@ -184,7 +186,7 @@ class AuthController extends App_Controller_LoaderController {
 		$ckFinderSession = new Zend_Session_Namespace('CKFinder');
 		/** Disable CKFinder * */
 		$ckFinderSession->allowed = false;
-		
+
 		// Redirect to main page
 		$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 	}

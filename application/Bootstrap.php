@@ -33,6 +33,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 	protected function _initSessions() {
 		$this->bootstrap('session');
+		
+//		$session = new Zend_Session_Namespace('Zend_Auth');
+//		$session->getNamespace();
+		
+		if (Zend_Auth::getInstance()->hasIdentity()) {
+			if (isset($_COOKIE['RememberMe'])){
+				$rememberMe = $_COOKIE['RememberMe'];
+			} else {
+				$rememberMe = 0;
+			}
+			
+			if ($rememberMe) {
+				Zend_Session::rememberMe(60 * 60 * 120);
+				setcookie('RememberMe', 1, 60 * 60 * 120, '/');
+			}
+		}
 	}
 
 	// Initialisation Authorisation
