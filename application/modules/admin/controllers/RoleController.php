@@ -19,8 +19,9 @@ class Admin_RoleController extends App_Controller_LoaderController {
 			$this->view->pageTitle($role_data->name);
 		} else {
 			$this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Роль пользователя не найдена!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Роль пользователя не найдена!')}");
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->headTitle($this->view->translate('Роль пользователя не найдена!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
 	}
 
@@ -41,7 +42,7 @@ class Admin_RoleController extends App_Controller_LoaderController {
 		if ($paginator) {
 			$this->view->roles_data = $paginator;
 		} else {
-			$this->messages->addInfo("{$this->view->translate('Запрашиваемые роли пользователей на сайте не найдены!')}");
+			$this->messages->addInfo($this->view->translate('Запрашиваемые роли пользователей на сайте не найдены!'));
 		}
 	}
 
@@ -57,7 +58,7 @@ class Admin_RoleController extends App_Controller_LoaderController {
 						array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default', true
 				)
 		);
-		$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin','controller' => 'role', 'action' => 'all'), 'adminRoleAll', true)}\"");
+		$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'adminRoleAll', true)}\"");
 
 		if ($this->getRequest()->isPost()) {
 			if ($form->isValid($request->getPost())) {
@@ -76,7 +77,7 @@ class Admin_RoleController extends App_Controller_LoaderController {
 				$this->redirect(
 						$this->view->url(
 								array('module' => 'admin', 'controller' => 'role', 'action' => 'id',
-							'role_id' => $new_role->id), 'role_id', true
+							'role_id' => $new_role->id), 'adminRoleId', true
 						)
 				);
 			} else {
@@ -101,9 +102,10 @@ class Admin_RoleController extends App_Controller_LoaderController {
 			$form = new Application_Form_Role_Edit();
 			$form->setAction($this->view->url(
 							array('module' => 'admin', 'controller' => 'role', 'action' => 'edit',
-						'role_id' => $role_id), 'role_action', true
+						'role_id' => $role_id), 'adminRoleAction', true
 			));
-			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role_id), 'role_id', true)}\"");
+			$admin_role_id = $this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role_id), 'adminRoleId', true);
+			$form->cancel->setAttrib('onClick', "location.href=\"{$admin_role_id}\"");
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
@@ -117,10 +119,7 @@ class Admin_RoleController extends App_Controller_LoaderController {
 					$role_where = $this->db->get('role')->getAdapter()->quoteInto('id = ?', $role_id);
 					$this->db->get('role')->update($new_role_data, $role_where);
 
-					$this->redirect($this->view->url(
-									array('module' => 'admin', 'controller' => 'role', 'action' => 'id',
-								'role_id' => $role_id), 'role_id', true
-					));
+					$this->redirect($admin_role_id);
 				} else {
 					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
@@ -135,8 +134,9 @@ class Admin_RoleController extends App_Controller_LoaderController {
 			$this->view->form = $form;
 		} else {
 			$this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Роль пользователя не найдена!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Роль пользователя не найдена!')}");
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->headTitle($this->view->translate('Роль пользователя не найдена!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
 	}
 
@@ -177,8 +177,9 @@ class Admin_RoleController extends App_Controller_LoaderController {
 			$this->view->role = $role_data;
 		} else {
 			$this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Роль пользователя не существует!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Роль пользователя не существует!')}");
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->headTitle($this->view->translate('Роль пользователя не найдена!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
 		}
 	}
 

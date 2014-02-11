@@ -9,17 +9,23 @@ class Application_Form_Role_Add extends Zend_Form {
 	}
 
 	public function init() {
-		$this->setMethod('post');
-		$this->setAction('/role/add');
-		$this->setName('role_add');
-		$this->setAttrib('class', 'form-role white_box white_box_size_m');
+		$this->setMethod('post')
+				->setName('admin-role-add');
+
+		$this->setAttribs(array(
+			'class' => 'block-item block-item-form',
+			'id' => 'admin-role-add',
+		));
+
+		// decorators for this form
+		$this->addDecorators(array('formElements', 'form'));
 
 		$this->addElement('text', 'name', array(
 			'label' => $this->translate('Название'),
 			'filters' => array('StripTags', 'StringTrim'),
 			'required' => true,
 			'placeholder' => $this->translate('Название'),
-			'class' => 'form-control  white_box_el_size_s',
+			'class' => 'form-control',
 			'maxlength' => 255,
 			'validators' => array(
 				'NotEmpty',
@@ -27,9 +33,9 @@ class Application_Form_Role_Add extends Zend_Form {
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-				array('HtmlTag', array('class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
@@ -43,9 +49,9 @@ class Application_Form_Role_Add extends Zend_Form {
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-				array('HtmlTag', array('class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
@@ -64,15 +70,16 @@ class Application_Form_Role_Add extends Zend_Form {
 			'placeholder' => $this->translate('Описание ресурса'),
 			'cols' => 60,
 			'rows' => 10,
-			'class' => 'form-control white_box_el_size_m',
+			'class' => 'form-control',
 			'maxlength' => 500,
 			'required' => false,
 			'filters' => array('StringTrim'),
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'aboutTextArea_Label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
