@@ -34,9 +34,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	protected function _initSessions() {
 		$this->bootstrap('session');
 		
-//		$session = new Zend_Session_Namespace('Zend_Auth');
-//		$session->getNamespace();
-		
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			if (isset($_COOKIE['RememberMe'])){
 				$rememberMe = $_COOKIE['RememberMe'];
