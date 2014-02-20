@@ -43,4 +43,4 @@ body{}
 .block-media-list-rss .media-list .media img{float:left; margin-right:10px; border:1px solid #D2D2D2; border-radius:2px; padding:4px; background:#ffffff; box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);}
 
 /* Background wrapper */
-#background-wrapper{ background-image:url("../img/default_background.png");}
+#background-wrapper{ background-image:url("../data-content/ui/default/default_background.png");}
