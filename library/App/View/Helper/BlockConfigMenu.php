@@ -18,12 +18,12 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 
 	public function postMenu($post_id) {
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'edit')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'edit', 'post_id' => $post_id), 'post', true);
+			$link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'edit', 'post_id' => $post_id), 'defaultPostAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
 		}
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'delete')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'post', true);
+			$link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'defaultPostAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
 		}
 
@@ -117,7 +117,7 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 		return $this;
 	}
 
-	private function buildMenu($links) {
+	private function buildMenu() {
 		$this->_menuHtml = '<div class = "pull-right action-buttons block-config-menu">';
 		$this->_menuHtml .= '<div class = "btn-group pull-right">';
 		$this->_menuHtml .= '<button type = "button" class = "btn btn-default btn-xs dropdown-toggle block-config-btn" data-toggle = "dropdown">';
@@ -128,6 +128,15 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 			$this->_menuHtml .= '<li class="dropdown-header">' . $this->_menuHeader . '</li>';
 			$this->_menuHtml .= '<li class="divider"></li>';
 		}
+
+		$links = "";
+
+		foreach ($this->_menuLinks as $link) {
+			$links .= "<li>";
+			$links .= $link;
+			$links .= "</li>";
+		}
+
 		$this->_menuHtml .= $links;
 		$this->_menuHtml .= '</ul>';
 		$this->_menuHtml .= '</div>';
@@ -135,16 +144,9 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 	}
 
 	public function render() {
-		$links = "";
+
 		if (count($this->_menuLinks) > 0) {
-
-			foreach ($this->_menuLinks as $link) {
-				$links .= "<li>";
-				$links .= $link;
-				$links .= "</li>";
-			}
-
-			$this->buildMenu($links);
+			$this->buildMenu();
 
 			return $this->_menuHtml;
 		} else {

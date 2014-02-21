@@ -189,10 +189,43 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'page' => 1,
 				), "admin/privilege/all/page/%s.html"
 		));
+		
+		//POSTS CONTROLLER ROUTERS
+		$router->addRoute(
+				'adminPostId', new Zend_Controller_Router_Route_Regex('admin/post/(\d+)\.html', array(
+			'module' => 'admin',
+			'controller' => 'post',
+			'action' => 'id',
+			1 => 0), array(
+			'post_id' => 1,
+				), "admin/post/%d.html"
+		));
+
+		$router->addRoute(
+				'adminPostAction', new Zend_Controller_Router_Route_Regex('admin/post/(\d+)/(\w*)\.html', array(
+			'module' => 'admin',
+			'controller' => 'post',
+			'action' => 'id',
+			1 => 0), array(
+			'post_id' => 1,
+			'action' => 2,
+				), "admin/post/%d/%s.html"
+		));
+
+		$router->addRoute(
+				'adminPostAll', new Zend_Controller_Router_Route_Regex('admin/post/all/page/(\d+)\.html', array(
+			'module' => 'admin',
+			'controller' => 'post',
+			'action' => 'all',
+			1 => 1
+				), array(
+			'page' => 1,
+				), "admin/post/all/page/%s.html"
+		));
 
 		//POST TYPE CONTROLLER ROUTERS
 		$router->addRoute(
-				'post_type_id', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)\.html', array(
+				'adminPostTypeId', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'post-type',
 			'action' => 'id',
@@ -202,7 +235,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'post_type_action', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)/(\w*)\.html', array(
+				'adminPostTypeAction', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)/(\w*)\.html', array(
 			'module' => 'admin',
 			'controller' => 'post-type',
 			'action' => 'id',
@@ -213,7 +246,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'post_type_all', new Zend_Controller_Router_Route_Regex('admin/post-type/all/page/(\d+)\.html', array(
+				'adminPostTypeAll', new Zend_Controller_Router_Route_Regex('admin/post-type/all/page/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'post-type',
 			'action' => 'all',

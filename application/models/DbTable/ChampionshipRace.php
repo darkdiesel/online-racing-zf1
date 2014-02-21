@@ -14,8 +14,6 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract 
 		$model = new self;
 		$db = new App_Controller_Action_Helper_DB();
 		$idencity_data = "";
-
-		
 		
 		// idencity fields list
 		if (count($idencity)) {

@@ -51,9 +51,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 				), "user/all/page/%s.html"
 		));
 
-		//post controller routers
+		//POST CONTROLLER ROUTERS
 		$router->addRoute(
-				'postId', new Zend_Controller_Router_Route_Regex('post/(\d+)\.html', array(
+				'defaultPostId', new Zend_Controller_Router_Route_Regex('post/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'post',
 			'action' => 'id',
@@ -65,7 +65,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'post', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
+				'defaultPostAction', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
 			'module' => 'default',
 			'controller' => 'post',
 			1 => 0
@@ -77,7 +77,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'postAll', new Zend_Controller_Router_Route_Regex('post/all/page/(\d+)\.html', array(
+				'defaultPostAll', new Zend_Controller_Router_Route_Regex('post/all/page/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'post',
 			'action' => 'all',
@@ -88,7 +88,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'postByType', new Zend_Controller_Router_Route_Regex('post/by-type/(\d+)/page/(\d+)\.html', array(
+				'defaultPostAllByType', new Zend_Controller_Router_Route_Regex('post/by-type/(\d+)/page/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'post',
 			'action' => 'by-type',
@@ -428,7 +428,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 				'module' => 'default',
 				'controller' => 'post',
 				'action' => 'all',
-				'route' => 'postAll',
+				'route' => 'defaultPostAll',
 			),
 			array(
 				'label' => _('Файлы'),
@@ -438,10 +438,10 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 					array(
 						'label' => _('Игры и Моды'),
 						'title' => _('Игры и Моды'),
-						'controller' => 'post',
 						'module' => 'default',
+						'controller' => 'post',
 						'action' => 'by-type',
-						'route' => 'postByType',
+						'route' => 'defaultPostAllByType',
 						'params' => array(
 							'post_type_id' => '3'
 						),

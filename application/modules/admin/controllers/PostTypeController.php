@@ -77,7 +77,7 @@ class Admin_PostTypeController extends App_Controller_LoaderController {
 				$this->redirect(
 						$this->view->url(
 								array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-							'post_type_id' => $new_post_type->id), 'post_type_id', true
+							'post_type_id' => $new_post_type->id), 'adminPostTypeId', true
 						)
 				);
 			} else {
@@ -102,7 +102,7 @@ class Admin_PostTypeController extends App_Controller_LoaderController {
 			$form = new Application_Form_ContentType_Edit();
 			$form->setAction($this->view->url(
 							array('module' => 'admin', 'controller' => 'post-type', 'action' => 'edit',
-						'post_type_id' => $post_type_id), 'post_type_action', true
+						'post_type_id' => $post_type_id), 'adminPostTypeAction', true
 			));
 			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'default', true)}\"");
 
@@ -119,7 +119,7 @@ class Admin_PostTypeController extends App_Controller_LoaderController {
 
 					$this->redirect($this->view->url(
 									array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-								'post_type_id' => $post_type_id), 'post_type_id', true
+								'post_type_id' => $post_type_id), 'adminPostTypeId', true
 					));
 				} else {
 					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
@@ -155,8 +155,8 @@ class Admin_PostTypeController extends App_Controller_LoaderController {
 			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить тип статьи')} <strong>\"{$post_type_data->name}\"</strong> ?");
 
 			$form = new Application_Form_PostType_Delete();
-			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $post_type_id), 'post_type_action', true));
-			$form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type_id), 'post_type_id', true) . '"');
+			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $post_type_id), 'adminPostTypeAction', true));
+			$form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type_id), 'adminPostTypeId', true) . '"');
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
@@ -166,7 +166,7 @@ class Admin_PostTypeController extends App_Controller_LoaderController {
 					$this->view->showMessages()->clearMessages();
 					$this->messages->addSuccess("{$this->view->translate("Тип статьи <strong>\"{$post_type_data->name}\"</strong> успешно удален")}");
 
-					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all', 'page' => 1), 'post_type_all', true));
+					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all', 'page' => 1), 'adminPostTypeAll', true));
 				} else {
 					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
 				}

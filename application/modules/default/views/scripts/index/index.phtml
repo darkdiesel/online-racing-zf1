@@ -17,7 +17,7 @@
 					?>
 					<ul class="media-list">
 						<?php foreach ($this->post_data as $post) : ?>
-							<?php $post_id_url = $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'postId', true); ?>
+							<?php $post_id_url = $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true); ?>
 							<li class="media">
 								<?php if ($post->image) { ?>
 									<a class="pull-left" href="<?php echo $post_id_url; ?>">

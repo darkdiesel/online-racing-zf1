@@ -20,6 +20,9 @@
 							<?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
 								<?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
 								<ul class="nav navbar-nav navbar-right">
+									<?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'index', 'index')) : ?>
+										<a class="btn btn-inverse navbar-btn" href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true); ?>"><i class="fa fa-bolt"></i> <?php echo $this->translate('Админ. Панель') ?></a>
+									<?php endif; ?>
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo Zend_Auth::getInstance()->getStorage()->read()->login ?> <b class="caret"></b></a>
 										<ul class="dropdown-menu">

@@ -28,13 +28,13 @@
 						<tbody>
 							<?php foreach ($this->paginator as $post_type): ?>
 								<?php
-								$post_type_id_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $this->escape($post_type->id)), 'post_type_id', true);
-								$post_type_edit_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'edit', 'post_type_id' => $this->escape($post_type->id)), 'post_type_action', true);
-								$post_type_delete_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $this->escape($post_type->id)), 'post_type_action', true);
+								$post_type_id_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $this->escape($post_type->id)), 'adminPostTypeId', true);
+								$post_type_edit_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'edit', 'post_type_id' => $this->escape($post_type->id)), 'adminPostTypeAction', true);
+								$post_type_delete_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $this->escape($post_type->id)), 'adminPostTypeAction', true);
 								?>
 								<tr>
-									<td class="post_type_id"><span><a href="<?php echo $this->url(array('controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type['id']), 'post_type_id', true) ?>"><?php echo $this->escape($post_type['id']) ?></a></span></td>
-									<td class="post_type_name"><span><a href="<?php echo $this->url(array('controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type['id']), 'post_type_id', true) ?>"><?php echo $this->escape($post_type['name']) ?></a></span></td>
+									<td class="post_type_id"><span><a href="<?php echo $this->url(array('controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type->id), 'adminPostTypeId', true) ?>"><?php echo $this->escape($post_type['id']) ?></a></span></td>
+									<td class="post_type_name"><span><a href="<?php echo $this->url(array('controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type->id), 'adminPostTypeId', true) ?>"><?php echo $this->escape($post_type['name']) ?></a></span></td>
 									<td class="post_type_descr"><span><?php echo $this->truncate($this->escape($post_type['description']))->toLength(200); ?></span></td>
 									<td class="post_type_action">
 										<span>

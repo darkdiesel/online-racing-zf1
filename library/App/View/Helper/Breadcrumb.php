@@ -17,15 +17,18 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				// Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
 				'label' => _('Главная'),
+				'title' => _('Главная'),
+				'module' => 'default',
 				'controller' => 'index',
 				'action' => 'index',
 				'route' => 'default',
 				'pages' => array(
 					array(
-						'controller' => 'user',
-						'action' => 'all',
 						'label' => _('Гонщики'),
 						'title' => _('Гонщики'),
+						'module' => 'default',
+						'controller' => 'user',
+						'action' => 'all',
 						'route' => 'userAll',
 						'pages' => array(
 						)
@@ -33,6 +36,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 					array(
 						'label' => _('Новости'),
 						'title' => _('Новости'),
+						'module' => 'default',
 						'controller' => 'post',
 						'action' => 'all',
 						'route' => 'postAll',
@@ -46,22 +50,14 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 						'pages' => array(
 							array(
 								'label' => _('Игры и Моды'),
+								'title' => _('Игры и Моды'),
+								'module' => 'default',
 								'controller' => 'post',
 								'action' => 'all-by-type',
 								'route' => 'postAllByType',
 								'params' => array(
 									'post_type_id' => '3'
 								),
-								'pages' => array(
-									array(
-										'label' => _('Игра'),
-										'title' => _('Игра'),
-										'controller' => 'post',
-										'action' => 'id',
-										'route' => 'post',
-										'params' => array()
-									)
-								)
 							),
 						)
 					),
@@ -73,6 +69,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 					array(
 						'label' => _('Чат'),
 						'title' => _('Чат'),
+						'module' => 'default',
 						'controller' => 'chat',
 						'action' => 'index',
 						'route' => 'default',
@@ -80,7 +77,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 					array(
 						'label' => _('Админ. панель'),
 						'title' => _('Панель администратора'),
-						'controller' => 'admin',
+						'module' => 'admin',
+						'controller' => 'index',
 						'action' => 'index',
 						'route' => 'default',
 						'pages' => array(
@@ -98,7 +96,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				'label' => $post_title,
 				'title' => $post_title,
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'postId', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'defaultPostId', true),
 				'pages' => array()
 			)
 		);
@@ -112,7 +110,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				'label' => _('Контент сайта'),
 				'title' => _('Контент сайта'),
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'all', 'page' => $page), 'postAll', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'all', 'page' => $page), 'defaultPostAll', true),
 				'pages' => array()
 			)
 		);

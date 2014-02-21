@@ -14,8 +14,8 @@
         </table>
         <div class="article_controls">
 	    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-		<a href = "<?php echo $this->url(array('controller' => 'post-type', 'action' => 'edit', 'post_type_id' => $this->post_type->id), 'post_type_action', true) ?>" class = "btn btn-sm btn-primary post_edit"><?php echo $this->translate('Редактировать') ?></a>
-		<a href = "<?php echo $this->url(array('controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $this->post_type->id), 'post_type_action', true) ?>" class = "btn btn-sm btn-primary post_delete"><?php echo $this->translate('Удалить') ?></a>
+		<a href = "<?php echo $this->url(array('controller' => 'post-type', 'action' => 'edit', 'post_type_id' => $this->post_type->id), 'adminPostTypeAction', true) ?>" class = "btn btn-sm btn-primary post_edit"><?php echo $this->translate('Редактировать') ?></a>
+		<a href = "<?php echo $this->url(array('controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $this->post_type->id), 'adminPostTypeAction', true) ?>" class = "btn btn-sm btn-primary post_delete"><?php echo $this->translate('Удалить') ?></a>
 	    <?php } ?>
         </div>
         <div class="article_info">

@@ -21,6 +21,14 @@
 							<tr>
 								<td>
 									<i class="fa fa-file-text"></i>
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'all'), 'adminPostAll', true) ?>">
+										<?php echo $this->translate('Посты'); ?>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<i class="fa fa-file-text"></i>
 									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'content_type_all', true) ?>">
 										<?php echo $this->translate('Типы контента'); ?>
 									</a>
@@ -29,7 +37,7 @@
 							<tr>
 								<td>
 									<i class="fa fa-file-text"></i>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'post_type_all', true) ?>">
+									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'adminPostTypeAll', true) ?>">
 										<?php echo $this->translate('Типы постов'); ?>
 									</a>
 								</td>
