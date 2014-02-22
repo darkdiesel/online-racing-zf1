@@ -20,28 +20,40 @@
 						<thead>
 							<tr>
 								<th class="post_id"><span>ID</span></th>
+								<th class="post_publish"><span><?php echo $this->translate('Опубликован'); ?></span></th>
 								<th class="post_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="post_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
+								<th class="post_post_type"><span><?php echo $this->translate('Тип Поста'); ?></span></th>
 								<th class="post_action"><span><?php echo $this->translate('Действие'); ?></span></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach ($this->post_data as $post): ?>
 								<?php
-								$post_id_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'adminPostId', true);
+								$post_id_url = $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true);
 								$post_edit_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'post_id' => $this->escape($post->id)), 'adminPostAction', true);
 								$post_delete_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'delete', 'post_id' => $this->escape($post->id)), 'adminPostAction', true);
+								
+								$post_type_id_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $this->escape($post->post_type_id)), 'adminPostTypeId', true);
 								?>
 								<tr>
-									<td class="post_id"><span><a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post['id']), 'adminPostId', true) ?>"><?php echo $this->escape($post->id) ?></a></span></td>
-									<td class="post_name"><span><a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post['id']), 'adminPostId', true) ?>"><?php echo $this->escape($post->title) ?></a></span></td>
-									<td class="post_descr"><span><?php //echo $this->truncate($this->escape($post['description']))->toLength(200); ?></span></td>
+									<td class="post_id"><span><a href="<?php echo $post_id_url; ?>" target="_blank"><?php echo $this->escape($post->id) ?></a></span></td>
+									<td class="post_publish">
+										<span>
+											<?php if ($this->escape($post->publish)) { ?>
+												<span class='label label-success'><i class="fa fa-check fa-lg"></i></i></span>
+											<?php } else { ?>
+												<span class='label label-danger'><i class="fa fa-times fa-lg"></i></span>
+											<?php } ?>
+										</span>
+									</td>
+									<td class="post_name"><span><a href="<?php echo $post_id_url; ?>" target="_blank"><?php echo $this->escape($post->name) ?></a></span></td>
+									<td class="post_descr"><span><a href="<?php echo $post_type_id_url; ?>" target="_blank"><?php echo $this->escape($post->post_type_name); ?></a></span></td>
 									<td class="post_action">
 										<span>
 											<div class="pull-right action-buttons">
 												<div class="btn-group pull-right">
 													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+														<span class="fa fa-cog fa-lg"></span>
 													</button>
 													<ul class="dropdown-menu slidedown">
 														<li><a href="<?php echo $post_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>

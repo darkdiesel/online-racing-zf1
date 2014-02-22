@@ -22,15 +22,15 @@
 								<?php if ($post->image) { ?>
 									<a class="pull-left" href="<?php echo $post_id_url; ?>">
 										<div class="img-wrapper-100-100">
-											<img class="media-object img-thumbnail img-responsive img-size-100" src="<?php echo $post->image; ?>" alt="<?php echo $post->title; ?>">
+											<img class="media-object img-thumbnail img-responsive img-size-100" src="<?php echo $post->image; ?>" alt="<?php echo $post->name; ?>">
 										</div>
 									</a>
 								<?php } ?>
 								<div class="media-body">
-									<h4 class="media-heading"><a href="<?php echo $post_id_url; ?>"><?php echo $this->truncate($post->title)->toLength(100); ?></a></h4>
+									<h4 class="media-heading"><a href="<?php echo $post_id_url; ?>"><?php echo $this->truncate($post->name)->toLength(100); ?></a></h4>
 									<?php
-									if ($post->annotation != '') {
-										echo $this->escape($post->annotation);
+									if ($post->preview != '') {
+										echo $this->escape($post->preview);
 									} else {
 										echo $bbcode->render((string) ($this->truncate($this->escape($post->text))->toLength(250)));
 									}

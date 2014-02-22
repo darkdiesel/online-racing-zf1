@@ -94,14 +94,6 @@ form.white_box{
     }
 
     /* styles for checkbox element */
-    form.white_box .checkbox{
-        margin:15px 0;
-    }
-        form.white_box .checkbox label{
-            display:inline;
-            font-size:12px;
-        }
-        
     form.white_box .form_actions{
         margin:20px 0 10px 0;
         text-align:center;

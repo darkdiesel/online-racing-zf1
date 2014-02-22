@@ -3,7 +3,7 @@
 <?php echo $this->form; ?>
 <script type= "text/javascript" >
 	$(document).ready(function() {
-<?php echo $this->CKEditor()->setupBBCodeEditor('annotation'); ?>
+<?php echo $this->CKEditor()->setupBBCodeEditor('preview'); ?>
 
 		content_type = $("#content_type").find(':selected').text();
 		switch (content_type) {

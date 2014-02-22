@@ -16,12 +16,12 @@ class PostController extends App_Controller_LoaderController {
 
 		if ($post_data) {
 			//Set breadcrumb for this page
-			$this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data['title']);
-			
+			$this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->name);
+
 			$this->view->post_data = $post_data;
 			// Set head and page titles
-			$this->view->headTitle($post_data['title']);
-			$this->view->pageTitle($post_data['title']);
+			$this->view->headTitle($post_data->name);
+			$this->view->pageTitle($post_data->name);
 		} else {
 			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не найден!'));
 			$this->view->headTitle($this->view->translate('Ошибка!'));
@@ -49,100 +49,9 @@ class PostController extends App_Controller_LoaderController {
 		if (count($paginator)) {
 			$this->view->paginator = $paginator;
 		} else {
-			$this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
+			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не найден!'));
 		}
 	}
-
-	// action for add new post
-	public function addAction() {
-		// page title
-		$this->view->headTitle($this->view->translate('Добавить'));
-		$this->view->pageTitle($this->view->translate('Добавить контент'));
-
-		$request = $this->getRequest();
-		// form
-		$form = new Application_Form_Post_Add();
-
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($request->getPost())) {
-				// save new post to db
-				$date = date('Y-m-d H:i:s');
-				$post_data = array(
-					'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
-					'post_type_id' => $form->getValue('post_type'),
-					'content_type_id' => $form->getValue('content_type'),
-					'title' => $form->getValue('title'),
-					'annotation' => $form->getValue('annotation'),
-					'text' => $form->getValue('text'),
-					'image' => $form->getValue('image'),
-					'publish' => $form->getValue('publish'),
-					'publish_to_slider' => $form->getValue('publish_to_slider'),
-					'date_create' => $date,
-					'date_edit' => $date,
-				);
-
-				$newPost = $this->db->get('post')->createRow($post_data);
-				$newPost->save();
-
-				$post_type_name = $this->db->get('post_type')->getItem($form->getValue('post_type'), array('id', 'name'));
-
-				// save additional information corespondig post_type to db
-				switch ($post_type_name) {
-					case 'game':
-						$game = new Application_Model_DbTable_Game();
-						$game_data = array(
-							'name' => $form->getValue('title'),
-							'post_id' => $newPost->id
-						);
-						$newGame = $game->createRow($game_data);
-						$newGame->save();
-						break;
-					default :
-						break;
-				}
-
-				$this->redirect($this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $newPost->id), 'defaultPostId', true));
-			} else {
-				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-			}
-		}
-
-		// add post types to the form
-		$post_types_data = $this->db->get('post_type')->getAll(FALSE, array("id", "name"), "ASC");
-
-		if ($post_types_data) {
-			foreach ($post_types_data as $post_type):
-				$form->post_type->addMultiOption($post_type->id, $post_type->name);
-
-				if (strtolower($post_type->name) == 'news') {
-					$form->post_type->setvalue($post_type->id);
-				}
-			endforeach;
-		} else {
-			$this->messages->addError("{$this->view->translate('Типы статей на сайте не найдены!')}"
-					. "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'article-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
-		}
-
-		// add content types to the form
-		$content_types_data = $this->db->get('content_type')->getAll(FALSE, array("id", "name"), "ASC");
-
-		if ($content_types_data) {
-			foreach ($content_types_data as $content_type):
-				$form->content_type->addMultiOption($content_type->id, $content_type->name);
-
-				if (strtolower($content_type->name) == 'full html') {
-					$form->content_type->setvalue($content_type->id);
-				}
-			endforeach;
-		} else {
-			$this->messages->addError("{$this->view->translate('Типы контента на сайте не найдены!')}"
-					. "<br/><a class=\"btn btn-danger btn-sm\" href=\"{$this->view->url(array('controller' => 'content-type', 'action' => 'add'), 'default', true)}\">{$this->view->translate('Создать?')}</a>");
-		}
-
-		$this->view->form = $form;
-	}
-
-	
 
 	// action for delete post
 	public function deleteAction() {
@@ -206,8 +115,8 @@ class PostController extends App_Controller_LoaderController {
 	}
 
 	public function byTypeAction() {
-		$this->_helper->viewRenderer->setRender('all'); 
-		
+		$this->_helper->viewRenderer->setRender('all');
+
 		$request = $this->getRequest();
 		$post_type_id = (int) $request->getParam('post_type_id');
 

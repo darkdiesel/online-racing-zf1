@@ -103,7 +103,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		// CSS setups
 		// [JQUERY library]                             
-		$view->headScript()->appendFile("/library/jquery/js/jquery-1.10.2.min.js");
+		$view->headScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js");
 
 		// [JQUERY UI library]
 		$view->headLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");

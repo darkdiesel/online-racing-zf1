@@ -14,8 +14,8 @@ class Application_Model_DbTable_Championship extends Zend_Db_Table_Abstract {
 				->from(array('c' => $this->_name), 'c.id')
 				->where("c.league_id = {$league_id} and c.id = {$championship_id}")
 				->join(array('l' => 'league'), 'c.league_id = l.id', array('league_name' => 'l.name'))
-				->join(array('p' => 'post'), 'c.post_id = p.id', array('rule_name' => 'p.title'))
-				->join(array('g' => 'game'), 'c.game_id = g.post_id', array('game_name' => 'g.name'))
+				->join(array('p1' => 'post'), 'c.rule_id = p1.id', array('rule_name' => 'p1.name'))
+				->join(array('p2' => 'post'), 'c.game_id = p2.id', array('game_name' => 'p2.name'))
 				->join(array('u' => 'user'), 'c.user_id = u.id', array('user_login' => 'u.login'))
 				->columns('*');
 
@@ -37,8 +37,8 @@ class Application_Model_DbTable_Championship extends Zend_Db_Table_Abstract {
 						->from(array('c' => $this->_name), 'c.id')
 						->where('c.league_id = ?', $league_id)
 						->join(array('l' => 'league'), 'c.league_id = l.id', array('league_name' => 'l.name'))
-						->join(array('p' => 'post'), 'c.post_id = p.id', array('rule_name' => 'p.title'))
-						->join(array('g' => 'game'), 'c.game_id = g.post_id', array('game_name' => 'g.name'))
+						->join(array('p1' => 'post'), 'c.rule_id = p1.id', array('rule_name' => 'p1.name'))
+						->join(array('p2' => 'post'), 'c.game_id = p2.id', array('game_name' => 'p2.name'))
 						->join(array('u' => 'user'), 'c.user_id = u.id', array('user_login' => 'u.login'))
 						->columns('*')
 						->order('c.id ' . $order)

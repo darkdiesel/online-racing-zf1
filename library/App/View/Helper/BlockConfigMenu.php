@@ -18,12 +18,12 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 
 	public function postMenu($post_id) {
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'edit')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'edit', 'post_id' => $post_id), 'defaultPostAction', true);
+			$link = $this->view->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'post_id' => $post_id), 'adminPostAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
 		}
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'delete')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'defaultPostAction', true);
+			$link = $this->view->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'adminPostAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
 		}
 

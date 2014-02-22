@@ -147,7 +147,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
 				->select()
 				->from($this->_name, 'id')
 				->where('publish = 1')
-				->columns(array('title', 'annotation', 'text', 'image', 'content_type_id'))
+				->columns(array('name', 'preview', 'text', 'image', 'content_type_id'))
 				->limit($count, 0)
 				->order('id ' . $order);
 
@@ -166,8 +166,8 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
 			$select = $model->select()
 					->from($this->_name, 'id')
 					->where('publish = 1 and post_type_id = ' . $post_type_data->id)
-					->order('title ' . $order)
-					->columns(array('id', 'title'));
+					->order('name ' . $order)
+					->columns(array('id', 'name'));
 
 			$posts = $model->fetchAll($select);
 

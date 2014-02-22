@@ -9,24 +9,30 @@ class Application_Form_Post_Add extends Zend_Form {
 	}
 
 	public function init() {
-		$this->setMethod('post');
-		$this->setAction('/post/add');
-		$this->setName('postAdd');
-		$this->setAttrib('class', 'white_box white_box_size_max');
+		$this->setMethod('post')
+				->setName('admin-post-add');
 
-		$this->addElement('text', 'title', array(
+		$this->setAttribs(array(
+			'class' => 'block-item block-item-form',
+			'id' => 'admin-post-add',
+		));
+
+		// decorators for this form
+		$this->addDecorators(array('formElements', 'form'));
+
+		$this->addElement('text', 'name', array(
 			'label' => $this->translate('Заголовок'),
 			'placeholder' => $this->translate('Заголовок'),
 			'maxlength' => 255,
 			'filters' => array('StripTags', 'StringTrim'),
 			'required' => true,
-			'class' => 'form-control white_box_el_size_xxl',
+			'class' => 'form-control',
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-				array('HtmlTag', array('class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
@@ -40,9 +46,9 @@ class Application_Form_Post_Add extends Zend_Form {
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-				array('HtmlTag', array('class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
@@ -56,9 +62,9 @@ class Application_Form_Post_Add extends Zend_Form {
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-				array('HtmlTag', array('class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
@@ -68,46 +74,47 @@ class Application_Form_Post_Add extends Zend_Form {
 			'class' => 'form-control',
 			'maxlength' => 255,
 			'filters' => array('StripTags', 'StringTrim'),
-			'class' => 'form-control white_box_el_size_l',
+			'class' => 'form-control',
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box')),
-				array('HtmlTag', array('class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
-		$this->addElement('textarea', 'annotation', array(
-			'label' => $this->translate('Аннотация статьи'),
-			'placeholder' => $this->translate('Аннотация статьи'),
+		$this->addElement('textarea', 'preview', array(
+			'label' => $this->translate('Анонс'),
+			'placeholder' => $this->translate('Анонс'),
 			'cols' => 60,
 			'rows' => 10,
-			'class' => 'form-control white_box_el_size_xxl',
-			'maxlength' => 250,
+			'class' => 'form-control',
+			'maxlength' => 500,
 			'required' => true,
 			'filters' => array('StringTrim'),
 			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'aboutTextArea_Label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
 		$this->addElement('textarea', 'text', array(
-			'label' => $this->translate('Текст статьи'),
-			'placeholder' => $this->translate('Текст статьи'),
+			'label' => $this->translate('Текст'),
+			'placeholder' => $this->translate('Текст'),
 			'cols' => 60,
 			'rows' => 10,
-			'class' => 'form-control white_box_el_size_xxl',
+			'class' => 'form-control',
 			'maxlength' => 50000,
 			'required' => true,
 			'filters' => array('StringTrim'),
-			'validators' => array('NotEmpty'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'aboutTextArea_Label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box textTextArea_box')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('class' => '')),
 			)
 		));
 
@@ -116,9 +123,9 @@ class Application_Form_Post_Add extends Zend_Form {
 			'value' => 1,
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group checkbox')),
+				array('HtmlTag', array('tag' => 'span','class' => '')),
 			)
 		));
 
@@ -127,9 +134,9 @@ class Application_Form_Post_Add extends Zend_Form {
 			'value' => 0,
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
-				array('Label', array('class' => 'element_label')),
-				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'element_box checkbox')),
-				array('HtmlTag', array('tag' => 'span', 'class' => 'element_tag')),
+				array('Label', array('class' => 'control-label')),
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group checkbox')),
+				array('HtmlTag', array('tag' => 'span','class' => '')),
 			)
 		));
 
@@ -155,9 +162,21 @@ class Application_Form_Post_Add extends Zend_Form {
 			)
 		));
 
+		$this->addElement('button', 'cancel', array(
+			'ignore' => true,
+			'class' => 'btn btn-default',
+			'label' => $this->translate('Отмена'),
+			'decorators' => array(
+				'ViewHelper', 'HtmlTag',
+				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
+			)
+		));
+
 		$this->addDisplayGroup(array(
 			$this->getElement('submit'),
-			$this->getElement('reset')
+			$this->getElement('reset'),
+			$this->getElement('cancel'),
 				), 'form_actions', array());
 
 		$this->getDisplayGroup('form_actions')->setDecorators(array(

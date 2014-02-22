@@ -4,26 +4,26 @@
 			<div class="col-md-12 col-lg-12">
 				<div class="panel panel-default panel-inverse block">
 					<?php
-					echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu($this->escape($post['id']));
+					echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu($this->escape($post->id));
 					?>
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							<i class="fa fa-book"></i>
-							<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true) ?>"><?php echo $this->escape($post['title']); ?></a>
+							<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true) ?>"><?php echo $this->escape($post->name); ?></a>
 						</h3>
 					</div>
 					<div class="panel-body">
-						<?php if ($this->escape($post['image']) != '') { ?>
+						<?php if ($this->escape($post->image) != '') { ?>
 							<div class="post_all_logo_wrapper_200_200 img-wrapper-200-200 thumbnail pull-left overflow-hide m-r-5">
 								<img class="post_all_logo_250 img-size-200 img-responsive" src="<?php echo $this->escape($post->image); ?>">
 							</div>
 						<?php } ?>
 						<div class="post-text">
 							<?php
-							if ($post['annotation'] != '') {
-								echo $this->RenderContentTypeText($this->escape($post['annotation']), 'bbcode');
+							if ($post->preview != '') {
+								echo $this->RenderContentTypeText($this->escape($post->preview), 'bbcode');
 							} else {
-								echo $this->RenderContentTypeText($this->escape($post['text']), 'bbcode', 250);
+								echo $this->RenderContentTypeText($this->escape($post->text), 'bbcode', 250);
 							}
 							?>
 						</div>

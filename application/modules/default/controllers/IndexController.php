@@ -3,15 +3,8 @@
 class IndexController extends App_Controller_LoaderController {
 
 	public function indexAction() {
-		// js and css for Skitter slider
-		//$this->view->headScript()->appendFile($this->view->baseUrl("library/skitter/jquery.skitter.min.js"));
-		//$this->view->headLink()->appendStylesheet($this->view->baseUrl("library/skitter/css/skitter.styles.min.css"));
 		// page title
 		$this->view->headTitle($this->view->translate('SIM-Racing Портал'));
-
-		// get last publish posts
-		$post = new Application_Model_DbTable_Post();
-		$artiles_data = $post->getLastPublishPost(10, 'DESC');
 
 		// get 10 rss news
 		$url = 'http://www.f1news.ru/export/news.xml';
@@ -27,7 +20,11 @@ class IndexController extends App_Controller_LoaderController {
 		$this->view->rss_index = $index;
 		$this->view->rss_element = $element;
 
-		$this->view->post_data = $artiles_data;
+		// get last publish posts
+		$post = new Application_Model_DbTable_Post();
+		$post_data = $post->getLastPublishPost(10, 'DESC');
+		$this->view->post_data = $post_data;
+		
 		// Gel Leagues
 		$this->view->league_data = $this->db->get('league')->getAll(FALSE, array('id', 'name', 'url_logo', 'description'));
 

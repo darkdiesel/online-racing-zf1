@@ -119,7 +119,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 					$championship_data['name'] = $form->getValue('name');
 					$championship_data['league_id'] = $form->getValue('league');
-					$championship_data['post_id'] = $form->getValue('rule');
+					$championship_data['rule_id'] = $form->getValue('rule');
 					$championship_data['game_id'] = $form->getValue('game');
 					$championship_data['user_id'] = $form->getValue('admin');
 					$championship_data['date_start'] = $form->getValue('date_start');
@@ -155,7 +155,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 			if ($posts) {
 				foreach ($posts as $post):
-					$form->rule->addMultiOption($post->id, $post->title);
+					$form->rule->addMultiOption($post->id, $post->name);
 				endforeach;
 			} else {
 				$this->messages->addError(
@@ -167,12 +167,12 @@ class ChampionshipController extends App_Controller_LoaderController {
 			}
 
 			// add games
-			$game = new Application_Model_DbTable_Game();
-			$games = $game->getGameNames('ASC');
+			$post = new Application_Model_DbTable_Post();
+			$posts = $post->getPublishPostTitlesByTypeName('game', 'ASC');
 
-			if ($games) {
-				foreach ($games as $game):
-					$form->game->addMultiOption($game->post_id, $game->name);
+			if ($posts) {
+				foreach ($posts as $game):
+					$form->game->addMultiOption($game->id, $game->name);
 				endforeach;
 			} else {
 				$this->messages->addError(
@@ -293,7 +293,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 							$new_championship_data['name'] = $form->getValue('name');
 							$new_championship_data['league_id'] = $form->getValue('league');
-							$new_championship_data['post_id'] = $form->getValue('rule');
+							$new_championship_data['rule_id'] = $form->getValue('rule');
 							$new_championship_data['game_id'] = $form->getValue('game');
 							$new_championship_data['user_id'] = $form->getValue('admin');
 							$new_championship_data['date_start'] = $form->getValue('date_start');
@@ -348,7 +348,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 				if ($posts) {
 					foreach ($posts as $post):
-						$form->rule->addMultiOption($post->id, $post->title);
+						$form->rule->addMultiOption($post->id, $post->name);
 					endforeach;
 				} else {
 					$this->view->errMessage .= $this->view->translate(
@@ -356,15 +356,15 @@ class ChampionshipController extends App_Controller_LoaderController {
 							) . '<br />';
 				}
 
-				$form->rule->setValue($championship_data->post_id);
+				$form->rule->setValue($championship_data->rule_id);
 
 				// set game value
-				$game = new Application_Model_DbTable_Game();
-				$games = $game->getGameNames('ASC');
+				$post = new Application_Model_DbTable_Post();
+				$posts = $post->getPublishPostTitlesByTypeName('game', 'ASC');
 
-				if ($games) {
-					foreach ($games as $game):
-						$form->game->addMultiOption($game->post_id, $game->name);
+				if ($posts) {
+					foreach ($posts as $game):
+						$form->game->addMultiOption($game->id, $game->name);
 					endforeach;
 				} else {
 					$this->view->errMessage .= $this->view->translate('Игры не найдены') . '<br />';
