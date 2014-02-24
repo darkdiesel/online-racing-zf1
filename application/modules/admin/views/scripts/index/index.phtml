@@ -13,8 +13,14 @@
 							<div class="panel-body">
 								<?php
 								$resources_all_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'adminResourceAll', true);
+								$privilege_all_url = $this->url(array('module' => 'admin', 'controller' => 'prvilege', 'action' => 'all'), 'adminPrivilegeAll', true);
+								$resource_access_all_url = $this->url(array('module' => 'admin', 'controller' => 'resource-access', 'action' => 'all'), 'adminResourceAccessAll', true);
+								$role_all_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'adminRoleAll', true);
 								?>
-								<a href="<?php echo $resources_all_url; ?>" class="btn btn-danger btn-lg m-b-5" role="button"><i class="fa fa-sitemap"></i><br/><?php echo $this->translate('Ресурсы'); ?></a>
+								<a href="<?php echo $resources_all_url; ?>" class="btn btn-success btn-lg m-b-5" role="button"><i class="fa fa-sitemap"></i><br/><?php echo $this->translate('Ресурсы'); ?></a>
+								<a href="<?php echo $privilege_all_url; ?>" class="btn btn-success btn-lg m-b-5" role="button"><i class="fa fa-sitemap"></i><br/><?php echo $this->translate('Привилегии ресурсов'); ?></a>
+								<a href="<?php echo $resource_access_all_url; ?>" class="btn btn-danger btn-lg m-b-5" role="button"><i class="fa fa-sitemap"></i><br/><?php echo $this->translate('Доступ к ресурсам'); ?></a>
+								<a href="<?php echo $role_all_url; ?>" class="btn btn-danger btn-lg m-b-5" role="button"><i class="fa fa-sitemap"></i><br/><?php echo $this->translate('Роли пользователей'); ?></a>
 							</div>
 						</div>
 					</div>
@@ -45,42 +51,8 @@
 						</div>
 					</div>
 				</div>
-				<a href="<?php echo $this->baseUrl(); ?>" class="btn btn-success btn-lg btn-block" role="button"><i class="fa fa-globe"></i> <?php echo $this->translate('Сайт'); ?></a>
+				<a href="<?php echo $this->baseUrl(); ?>" class="btn btn-inverse btn-lg btn-block" role="button"><i class="fa fa-globe"></i> <?php echo $this->translate('Перейти на сайт'); ?></a>
 			</div>
 		</div>
 	</div>
 </div>
-
-
-<div>
-    <h2>Контент</h2>
-
-    <strong>Действия:</strong>
-    <ul>
-        <li><a href="<?php echo $this->baseUrl('post/all') ?>">Просмотреть на сайте</a></li>
-        <li><a href="<?php echo $this->baseUrl('post/add') ?>">Создать</a></li>
-    </ul>
-</div>
-<div>
-    <h2>Управление соревнованиями</h2>
-
-    <strong>Лиги:</strong>
-    <ul>
-        <li><a href="<?php echo $this->baseUrl('league/all') ?>">Просмотреть на сайте</a></li>
-        <li><a href="<?php echo $this->baseUrl('league/add') ?>">Создать</a></li>
-    </ul>
-
-    <strong>Соревнования:</strong>
-    <ul>
-        <li><a href="<?php echo $this->baseUrl('championship/all') ?>">Просмотреть все</a></li>
-        <li><a href="<?php echo $this->baseUrl('championship/add') ?>">Создать</a></li>
-    </ul>
-
-	<strong>Гонки и результаты:</strong>
-    <ul>
-        <li><a href="<?php echo $this->baseUrl('admin/users') ?>">Просмотреть все</a></li>
-        <li><a href="<?php echo $this->baseUrl('user/all') ?>">Создать гонку</a></li>
-        <li><a href="<?php echo $this->baseUrl('user/all') ?>">Добавить результат</a></li>
-    </ul>
-</div>
-

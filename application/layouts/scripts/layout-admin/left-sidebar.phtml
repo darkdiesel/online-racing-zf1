@@ -4,6 +4,11 @@
 			<i class="fa fa-globe"></i> <?php echo $this->translate('Вернуться на сайт'); ?>
 		</a>
 	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-5">
+		<a class="btn btn-success btn-lg btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
+			<i class="fa fa-desktop"></i> <?php echo $this->translate('Панель администрирования'); ?>
+		</a>
+	</div>
 </div>
 <div class="row m-b-10">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -22,7 +27,7 @@
 								<td>
 									<i class="fa fa-file-text"></i>
 									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'all'), 'adminPostAll', true) ?>">
-										<?php echo $this->translate('Посты'); ?>
+										<?php echo $this->translate('Контент сайта'); ?>
 									</a>
 								</td>
 							</tr>
