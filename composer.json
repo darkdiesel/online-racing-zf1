@@ -1,0 +1,13 @@
+{
+    "name": "online-racing/online-racing-net",
+    "description": "Description of project Online-Racing.net.",
+    "authors": [
+        {
+            "name": "Igor Peshkov",
+            "email": "Igor.Peshkov@gmail.com"
+        }
+    ],
+    "require": {
+		"php": ">=5.3.0"
+    }
+}
