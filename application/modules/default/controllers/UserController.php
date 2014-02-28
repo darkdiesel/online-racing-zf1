@@ -391,17 +391,20 @@ class UserController extends App_Controller_LoaderController {
 	public function allAction() {
 		$this->view->headTitle($this->view->translate('Все'));
 		$this->view->pageTitle($this->view->translate('Гонщики'));
-
+		
 		// pager settings
-		$page_count_items = 12;
-		$page = $this->getRequest()->getParam('page');
-		$page_range = 10;
-		$items_order = 'DESC';
-
+		$pager_args = array(
+			"page_count_items" => 12,
+			"page_range" => 5,
+			"page" => $this->getRequest()->getParam('page')
+		);
+		
 		$this->view->breadcrumb()->UserAll($page);
-
-		$user = new Application_Model_DbTable_User();
-		$this->view->paginator = $user->getSimpleEnableUsersPager($page_count_items, $page, $page_range, $items_order);
+		
+		$user_data = $this->db->get('user')->getAll(array(
+			'enable' => array('value' => '1'),
+			'code_activate' => array('value' => '', 'condition' => 'AND')), 'all', 'ASC', TRUE, $pager_args);
+		$this->view->user_data = $user_data;
 	}
 
 	public function messageAction() {

@@ -9,13 +9,32 @@
 		<div class="block-body">
 			<i><?php echo $this->translate('Cейчас в паддоке'); ?>:</i>
 			<span>
-				<strong>
-					<?php
-					$user = new Application_Model_DbTable_User();
-					echo $user->getCountOnlineUsers();
-					?>
-				</strong>
-				<?php echo $this->translate('гонщик(-а, -ов)'); ?>
+				<?php
+				$user = new Application_Model_DbTable_User();
+
+				$date = new Zend_Date();
+				$date->sub(7, Zend_Date::MINUTE);
+				$date = $date->toString('yyyy-MM-dd HH:mm:ss');
+
+				$user_data = $user->getAll(array('date_last_activity' => array('value' => $date, 'sign' => '>=')));
+
+				if ($user_data) {
+					$user_count = count($user_data);
+				} else {
+					$user_count = '0';
+				}
+				?>
+				<strong><?php echo $user_count; ?></strong> <?php echo $this->translate('гонщик(-а, -ов)'); ?>
+
+				<?php
+				if ($user_data) {
+					foreach ($user_data as $user):
+						?>
+						<?php echo $user->login; ?>
+						<?php
+					endforeach;
+				}
+				?>
 			</span>
 		</div>
 	</div>

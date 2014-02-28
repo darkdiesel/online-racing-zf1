@@ -1,40 +1,41 @@
-<?php
-if (count($this->paginator)) {
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-    ?>
-    <div class="row">
-	<?php
-	$date1 = new Zend_Date();
-	foreach ($this->paginator as $user):
-	    ?>
-	    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-		<div class="user_item block-item center-block">
-		    <?php
-		    $date2 = new Zend_Date($user['date_last_activity']);
-		    if (($date1->toValue() - $date2->toValue()) <= 420) {
+<?php if ($this->user_data): ?>
+	<div class="row">
+		<?php
+		$date_now = new Zend_Date ();
+		foreach ($this->user_data as $user):
+			$user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user->id), 'defaultUserId', true);
 			?>
-	    	    <img src="/img/user_online.png" class="user_light_status img-thumbnail img-responsive">
-		    <?php } else { ?>
-	    	    <img src="/img/user_ofline.png" class="user_light_status img-thumbnail img-responsive">
-		    <?php } ?>
-		    <div class="user_image">
-			<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $this->setupUserAvatar($user['id'], $user['avatar_type']); ?></a>
-		    </div>
-		    <div class="user_flag"><img src="<?php echo $user['country_url_image_round']; ?>" title="<?php echo $user['country_name']; ?>"></div>
-		    <div class="user_login"><a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $user['id']), 'userId', true) ?>"><?php echo $user['login']; ?></a></div>
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+				<div class="block center-block user-block">
+					<div class="block-body">
+						<div class="img-wrapper-100-100 overflow-hide img-circle dp">
+							<a href="<?php echo $user_id_url; ?>"><?php echo $this->setupUserAvatar($user->id, $user->avatar_type); ?></a>
+						</div>
+						<?php
+						$date_last_active = new Zend_Date($user['date_last_activity']);
+						if (($date_now->toValue() - $date_last_active->toValue()) <= 420) {
+							?>
+							<img src="/img/user_online.png" class="user_light_status img-thumbnail img-responsive">
+						<?php } else { ?>
+							<img src="/img/user_ofline.png" class="user_light_status img-thumbnail img-responsive">
+						<?php } ?>
+						<div class="user_flag"><img src="<?php echo $user->country_url_image_round; ?>" title="<?php echo $user->country_english_name . ' (' . country_native_name . ')'; ?>"></div>
+						<div class="user_login"><a href="<?php echo $user_id_url; ?>"><?php echo $user->login; ?></a></div>
+					</div>
+				</div>
+			</div>
+			<?php
+		endforeach;
+		?>
+	</div>
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="block-item m-t-15">
+				<div class="pull-right">
+					<?php echo $this->paginationControl($this->user_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+				</div>
+				<div class="clearfix"></div>
+			</div>
 		</div>
-	    </div>
-	    <?php
-	endforeach;
-	?>
-    </div>
-    <?php
-    echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml');
-} else {
-    ?>
-    <div class="alert alert-warning alert-block">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <h4><?php echo $this->translate('Ошибка!'); ?></h4>
-	<?php echo $this->translate('Пользователи на сайте не найдены!'); ?>
-    </div>
-<?php } ?>
+	</div>
+<?php endif; ?>

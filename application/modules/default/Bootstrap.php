@@ -17,7 +17,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		$router = $frontController->getRouter();
 
 		$router->addRoute(
-				'userId', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html', array(
+				'defaultUserId', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'user',
 			'action' => 'id',
@@ -29,7 +29,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'user', new Zend_Controller_Router_Route_Regex('user/(\d+)/(\w*)\.html', array(
+				'defaultUserAction', new Zend_Controller_Router_Route_Regex('user/(\d+)/(\w*)\.html', array(
 			'module' => 'default',
 			'controller' => 'user',
 			1 => 0
@@ -41,7 +41,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'userAll', new Zend_Controller_Router_Route_Regex('user/all/page/(\d+)\.html', array(
+				'defaultUserAll', new Zend_Controller_Router_Route_Regex('user/all/page/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'user',
 			'action' => 'all',
@@ -420,7 +420,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 				'module' => 'default',
 				'controller' => 'user',
 				'action' => 'all',
-				'route' => 'userAll',
+				'route' => 'defaultUserAll',
 			),
 			array(
 				'label' => _('Новости'),

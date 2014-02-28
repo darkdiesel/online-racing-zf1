@@ -19,10 +19,10 @@ class Admin_PostController extends App_Controller_LoaderController {
 			"page" => $this->getRequest()->getParam('page')
 		);
 
-		$paginator = $this->db->get('post')->getAll(FALSE, "id, name", "DESC", TRUE, $pager_args);
+		$post_data = $this->db->get('post')->getAll(FALSE, "id, name", "DESC", TRUE, $pager_args);
 
 		if (count($paginator)) {
-			$this->view->post_data = $paginator;
+			$this->view->post_data = $post_data;
 		} else {
 			$this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найдены!'));
 		}

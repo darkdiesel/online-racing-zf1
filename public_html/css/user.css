@@ -102,7 +102,7 @@
     #default_user_all .user_item{
         padding:9px;
         display:block;
-	width:195px;
+		width:195px;
         position:relative;
     }
     .user_item:hover{
