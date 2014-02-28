@@ -22,7 +22,7 @@ class UserController extends App_Controller_LoaderController {
 			$this->view->headTitle($user_data->login);
 			$this->view->pageTitle($user_data->login);
 
-			$this->view->avatar = $this->view->setupUserAvatar($user_data->id, $user_data->avatar_type);
+			$this->view->avatar = $this->view->getUserAvatar($user_data->id, $user_data->avatar_type);
 		} else {
 			$this->messages->addError("{$this->view->translate("Пользователь не существует!")}");
 			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Пользователь не существует!')}");
@@ -399,12 +399,17 @@ class UserController extends App_Controller_LoaderController {
 			"page" => $this->getRequest()->getParam('page')
 		);
 		
-		$this->view->breadcrumb()->UserAll($page);
+		$this->view->breadcrumb()->UserAll($this->getRequest()->getParam('page'));
 		
 		$user_data = $this->db->get('user')->getAll(array(
 			'enable' => array('value' => '1'),
-			'code_activate' => array('value' => '', 'condition' => 'AND')), 'all', 'ASC', TRUE, $pager_args);
-		$this->view->user_data = $user_data;
+			'code_activate' => array('value' => '', 'condition' => 'AND')), 'all', array('date_last_activity' => 'DESC'), TRUE, $pager_args);
+		
+		if (count($user_data)) {
+			$this->view->user_data = $user_data;
+		} else {
+			$this->messages->addInfo($this->view->translate('Гонщики на сайте не найдены!'));
+		}
 	}
 
 	public function messageAction() {

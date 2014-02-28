@@ -45,13 +45,13 @@
 						<div class="block-body">
 							<div class="media">
 								<div class="team-driver-img img-wrapper-200-200 overflow-hide pull-left">
-									<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
+									<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserId', true) ?>" target="_blank">
 										<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'img-thumbnail img-rounded img-responsive', 200); ?>
 									</a>
 								</div>
 								<div class="media-body">
 									<h4 class="media-heading">
-										<a class="font-color-black" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true) ?>" target="_blank">
+										<a class="font-color-black" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserId', true) ?>" target="_blank">
 											<?php echo $user_name; ?>
 										</a>
 									</h4>

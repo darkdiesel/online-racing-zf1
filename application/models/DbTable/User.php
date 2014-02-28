@@ -468,7 +468,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->from(array($this->db_href => $this->_name))
 				->join(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
 					'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-					'country_url_image_round' => 'c.url_image_glossy_wave',
+					'country_url_image_round' => 'c.url_image_round',
 					'country_native_name' => 'c.native_name',
 					'country_english_name' => 'c.english_name',))
 				->joinLeft(array('ur' => 'user_role'), $this->db_href . '.id = ur.user_id', array('user_role_id' => 'ur.role_id'))

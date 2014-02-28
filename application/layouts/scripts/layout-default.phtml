@@ -46,7 +46,7 @@
 
 								if ($page_title != "" || (isset($breadcrumb_data))) :
 									?>
-									<div id="page_title_wrapper" class="block-item m-b-10">
+									<div id="page_title_wrapper" class="block-item m-b-10 shadow-bottom-2-corners">
 										<?php if ($this->pageTitle() != ""): ?>
 											<div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
 										<?php endif; ?>
@@ -58,7 +58,7 @@
 									</div>
 								<?php endif; ?>
 								<?php echo $this->showMessages(); ?>
-								<div id="<?php echo ("{$this->module}_{$this->controller}_{$this->action}"); ?>" class="page">
+								<div id="<?php echo $this->module.'-'.$this->controller.'-'.$this->action; ?>" class="page">
 									<div class="page_content">
 										<?php echo $this->layout()->content ?>
 									</div>

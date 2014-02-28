@@ -8,5 +8,8 @@ $(document).ready(function() {
 			"outline": "none"
 		});
 	});
+	
+	$('.tooltip-field').tooltip();
+
 
 });

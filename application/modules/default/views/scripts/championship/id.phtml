@@ -64,7 +64,7 @@
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Администратор чемпионата') ?>:</td>
-									<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->championship_data->user_id)), 'userId', true); ?>"><?php echo $this->escape($this->championship_data->user_login); ?></a></td>
+									<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->championship_data->user_id)), 'defaultUserId', true); ?>"><?php echo $this->escape($this->championship_data->user_login); ?></a></td>
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата старта') ?>:</td>

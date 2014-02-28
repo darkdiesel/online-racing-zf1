@@ -26,7 +26,7 @@
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Администратор лиги') ?>:</td>
-									<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->league_data->user_id)), 'userId', true); ?>"><?php echo $this->escape($this->league_data->user_login); ?></a></td>
+									<td class="cell-text-align-vert"><a target="_blank" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->league_data->user_id)), 'defaultUserId', true); ?>"><?php echo $this->escape($this->league_data->user_login); ?></a></td>
 								</tr>
 								<tr>
 									<td class="font-bold cell-text-align-vert cell-width-150"><?php echo $this->translate('Дата создания') ?>:</td>
@@ -110,7 +110,7 @@
 								</div>
 								<div class="pull-left m-r-10">
 									<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор') ?>: </span>
-									<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'userId', true); ?>" target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
+									<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'defaultUserId', true); ?>" target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
 								</div>
 							</small>
 							<div class="clearfix"></div>

@@ -124,7 +124,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				'label' => $user_login,
 				'title' => $user_login,
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user_id), 'userId', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user_id), 'defaultUserId', true),
 				'pages' => array()
 			)
 		);

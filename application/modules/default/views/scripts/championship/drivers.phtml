@@ -59,7 +59,7 @@
 										?>
 										<div class="team-driver-item block">
 											<?php
-											$driver_url = $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'userId', true);
+											$driver_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserId', true);
 											echo $this->BlockConfigMenu($this->translate("Гонщик"))->championshipTeamDriverMenu($this->escape($this->league_data->id), $team->championship_id, $team->team_id, $driver->user_id);
 											?>
 											<div class="block-body media well">

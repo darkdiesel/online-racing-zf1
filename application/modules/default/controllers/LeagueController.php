@@ -211,7 +211,7 @@ class LeagueController extends App_Controller_LoaderController {
 		if (count($leagues_data)) {
 			$this->view->leagues_data = $leagues_data;
 		} else {
-			$this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не существует!')}");
+			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не существует!'));
 		}
 	}
 

@@ -20,7 +20,7 @@
     	    </div>
     	    <div class="post_author block-item-info-bottom-item">
     		<span class="font-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
-    		<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $this->escape($this->post['user_login']); ?></a>
+    		<a href="<?php echo $this->url(array('module' => 'default','controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->post->user_id)), 'defaultUserId', true) ?>" target="_blank"><?php echo $this->escape($this->post->user_login); ?></a>
     	    </div>
     	    <div class="post_views block-item-info-bottom-item">
     		<span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->post['views']); ?>

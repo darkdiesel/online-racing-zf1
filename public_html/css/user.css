@@ -1,51 +1,36 @@
 /* user info page */
-    #default_user_id .user_info_ava{
-    }
-    #default_user_id .user_info_ava:after{
-        background: url("../img/shadow_sprite.png") no-repeat scroll -250px -29px transparent;
-        content: "";
-        display: block;
-        height: 20px;
-    }
-    #default_user_id .user_info_avatar{
-         margin:0 0 5px 0;
-    }
-        #default_user_id .user_info_avatar img{
-            min-width:100%;
-	}
-        #default_user_id .user_info_ava .nationality{
-            text-transform:uppercase;
-        }
-    #default_user_id table{
-        font-family:monospace;
-    }
+#default-user-id .user_info_ava{}
+#default-user-id .user_info_avatar{margin:0 0 5px 0;}
+#default-user-id .user_info_avatar img{min-width:100%;}
+#default-user-id .user_info_ava .nationality{text-transform:uppercase;}
+#default-user-id table{font-family:monospace;}
     
-    #default_user_id .user_info_data{
+    #default-user-id .user_info_data{
         position:relative;
         margin:0 0 20px 0;
     }
-        #default_user_id .user_info_data table{
+        #default-user-id .user_info_data table{
             margin:0;
             font-size:14px;
         }
-            #default_user_id .user_info_data table td.header_column{
+            #default-user-id .user_info_data table td.header_column{
                 width:180px;
                 font-weight:bold;
                 vertical-align:middle;
                 font-size:15px;
             }
-            #default_user_id .user_info_data table tr{
+            #default-user-id .user_info_data table tr{
             }
-            #default_user_id .user_info_data table tr td{
+            #default-user-id .user_info_data table tr td{
             }
-                #default_user_id .user_info_data table tr td div{
+                #default-user-id .user_info_data table tr td div{
                     width:400px;
                 }
     
-    #default_user_id #tabs{
+    #default-user-id #tabs{
         clear:both;
     }
-        #default_user_id #tabs table td.header_column{
+        #default-user-id #tabs table td.header_column{
             clear:both;
             font-weight:bold;
             vertical-align:middle;
@@ -95,52 +80,6 @@
                 color:#828282;
                 font-size:13px;
             }
-/* All users page */
-    #default_user_all .pagination{
-        clear:both;
-    }
-    #default_user_all .user_item{
-        padding:9px;
-        display:block;
-		width:195px;
-        position:relative;
-    }
-    .user_item:hover{
-        background:none repeat scroll 0 0 #fff;
-    }
-        .user_item .user_image{
-            text-align:center;
-            margin:0 0 10px 0;
-            width:175px;
-            height:175px;
-            overflow:hidden;
-        }
-            .user_item .user_image img{
-                width:165px;
-            }
-       .user_item .user_image_x{
-           width:145px;
-           height:145px;
-       }
-        .user_item .user_image_x img{
-            width:135px;
-        }
-        .user_item .user_login{
-            
-        }
-        .user_item .user_flag{
-            display:inline-block;
-            float:left;
-        }
-            .user_item .user_flag img{
-                width:32px;
-            }
-        .user_flag_s{
-            width:32px;
-        }
-        .user_flag_x{
-            width:48px;
-        }
 .user_item{
         border:1px solid #CACACA;
         padding:9px;

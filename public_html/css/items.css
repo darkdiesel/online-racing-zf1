@@ -133,38 +133,16 @@
             width:165px;
         }
 /* championship team drivers*/
-#default_championship_drivers{
-    
-}
-    #default_championship_drivers .block-item{
-        margin:5px 0;
-    }
-    #default_championship_drivers .team-item .team-name{
-        text-transform:uppercase;
-    }
-        #default_championship_drivers .team-item .team-name a{
-            font-weight:bold;
-            color:#636262;
-            text-decoration:none;
-            font: bold 20px/24px sans-serif;
-            text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;
-        }
-            #default_championship_drivers .team-item .team-name a:hover{
-                color:#D33B3D;
-            }
-    #default_championship_drivers .team-driver-item{}
-    #default_championship_drivers .team-driver-item .well{margin:0; padding:12px;min-height:140px;}
-	#default_championship_drivers .team-driver-item .dp{
-        border:10px solid #eee;
-        transition: all 0.2s ease-in-out;
-    }
-    #default_championship_drivers .team-driver-item .dp:hover{
-        border:2px solid #eee;
-        transform:rotate(360deg);
-        -ms-transform:rotate(360deg);  
-        -webkit-transform:rotate(360deg);  
-        /*-webkit-font-smoothing:antialiased;*/
-    }
+#default-championship-drivers{}
+#default-championship-drivers .block-item{margin:5px 0;}
+#default-championship-drivers .team-item .team-name{text-transform:uppercase;}
+#default-championship-drivers .team-item .team-name a{font-weight:bold; color:#636262; text-decoration:none; font: bold 20px/24px sans-serif; text-shadow: 1px 1px 0 #FFFFFF, 0 1px 3px #9A9A9A;}
+#default-championship-drivers .team-item .team-name a:hover{color:#D33B3D;}
+
+#default-championship-drivers .team-driver-item{}
+#default-championship-drivers .team-driver-item .well{margin:0; padding:12px;min-height:140px;}
+#default-championship-drivers .team-driver-item .dp{border:10px solid #eee; transition: all 0.2s ease-in-out;}
+#default-championship-drivers .team-driver-item .dp:hover{border:2px solid #eee; transform:rotate(360deg); -ms-transform:rotate(360deg); -webkit-transform:rotate(360deg); -webkit-font-smoothing:antialiased;}
 /*post*/
 .post_id_logo_wrapper_690{
     width:auto;
@@ -178,46 +156,24 @@
     max-width:690px;
 }
 /* Championship team driver*/
-#default_championship_team-show{
-    
-}
-    #default_championship_team-show .team_show_logo_wrapper_210{
-        position:relative;
-        top:-50px;
-        right:-100px;
-    }
-/* Slider block */
-#slider_block{
-    border-bottom:none;
-    margin:0;
-    border:2px solid #fff;
-}
-    #slider_block > .carousel{
-	margin:0;
-    }
-/* additional common styles */
-.overflow-hide{
-    overflow:hidden;
-}
+#default-championship-team-show{}
+#default-championship-team-show .team_show_logo_wrapper_210{position:relative; top:-50px; right:-100px;}
 
-.break-word-wrap{
-    word-wrap:break-word;
-    overflow:hidden;
-}
+/* Slider block */
+#slider_block{border-bottom:none; margin:0; border:2px solid #fff;}
+#slider_block > .carousel{margin:0;}
+
+/* additional common styles */
+.overflow-hide{overflow:hidden;}
+
+.break-word-wrap{word-wrap:break-word; overflow:hidden;}
 
 /* Fonts styles */
-.font-veradana{
-    font-family:verdana;
-}
-.font-monospace{
-    font-family:monospace;
-}
-.font-size-11{
-    font-size:11px;
-}
-.font-bold{
-    font-weight:bold;
-}
+.font-veradana{font-family:verdana;}
+.font-monospace{font-family:monospace;}
+.font-size-11{font-size:11px;}
+
+.font-bold{font-weight:bold;}
     .font-bold a{
         font-weight:bold;
     }

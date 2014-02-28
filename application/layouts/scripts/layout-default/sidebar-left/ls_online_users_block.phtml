@@ -25,17 +25,32 @@
 				}
 				?>
 				<strong><?php echo $user_count; ?></strong> <?php echo $this->translate('гонщик(-а, -ов)'); ?>
-
+			</span>
+			<div class="row m-t-10">
 				<?php
 				if ($user_data) {
 					foreach ($user_data as $user):
+						$user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user->id), 'defaultUserId', true);
+
+						if ($this->getUserStatus($user->date_last_activity) == 'online') {
+							$user_status_class = 'user-online';
+						} else {
+							$user_status_class = 'user-offline';
+						}
 						?>
-						<?php echo $user->login; ?>
+
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="block block-user m-b-10">
+								<div class="img-wrapper-50-50 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $user_status_class; ?>" data-title="<?php echo $user->login; ?>" data-placement="bottom">
+									<a href="<?php echo $user_id_url; ?>" target="_blank"><?php echo $this->getUserAvatar($user->id, $user->avatar_type, 'media-object img-responsive img-size-50', 50); ?></a>
+								</div>
+							</div>
+						</div>
 						<?php
 					endforeach;
 				}
 				?>
-			</span>
+			</div>
 		</div>
 	</div>
 </div>

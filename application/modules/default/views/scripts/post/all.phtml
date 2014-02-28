@@ -53,7 +53,7 @@
 							</div>
 							<div class="pull-left m-l-10">
 								<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
-								<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'userId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
+								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'defaultUserId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
 							</div>
 						</small>
 						<div class="clearfix"></div>

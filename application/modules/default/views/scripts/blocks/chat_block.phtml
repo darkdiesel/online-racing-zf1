@@ -24,7 +24,7 @@
                 ?>">
                     <div class="chat_mesage_header">
                         <div class="chat_mesage_user_avatar">
-                            <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($message->user_id)), 'userId', true); ?>" target="_blank"><i class="fa fa-user"></i></a>
+                            <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($message->user_id)), 'defaultUserId', true); ?>" target="_blank"><i class="fa fa-user"></i></a>
                         </div>
                         <div class="chat_mesage_user_nickname">
                             <a href="javascript:void('Apply to')" class="nick" onClick="$('#chat #userChat #messageTextArea').val($('#chat #userChat #messageTextArea').val() + '[i]' + $(this).html() + '[/i], ');

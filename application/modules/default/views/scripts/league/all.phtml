@@ -44,7 +44,7 @@
 							</div>
 							<div class="pull-left m-r-10">
 								<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор лиги') ?>: </span>
-								<a target="_blank" href="<?php echo $this->url(array('controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league['user_id'])), 'userId', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
+								<a target="_blank" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league['user_id'])), 'defaultUserId', true); ?>"><?php echo $this->escape($league['user_login']); ?></a>
 							</div>
 						</small>
 						<div class="clearfix"></div>

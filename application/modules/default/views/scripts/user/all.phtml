@@ -1,26 +1,26 @@
 <?php if ($this->user_data): ?>
 	<div class="row">
 		<?php
-		$date_now = new Zend_Date ();
+		
 		foreach ($this->user_data as $user):
 			$user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user->id), 'defaultUserId', true);
+			
+			if ($this->getUserStatus($user->date_last_activity) == 'online'){
+				$user_status_class = 'user-online';
+			} else {
+				$user_status_class = 'user-offline';
+			}
+			
 			?>
 			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-				<div class="block center-block user-block">
+				<div class="block center-block block-ui-shadow block-user m-b-10">
 					<div class="block-body">
-						<div class="img-wrapper-100-100 overflow-hide img-circle dp">
-							<a href="<?php echo $user_id_url; ?>"><?php echo $this->setupUserAvatar($user->id, $user->avatar_type); ?></a>
+						<div class="img-wrapper-150-150 overflow-hide img-circle center-block user-avatar <?php echo $user_status_class; ?>">
+							<a href="<?php echo $user_id_url; ?>"><?php echo $this->getUserAvatar($user->id, $user->avatar_type, 'media-object img-responsive img-size-150', 150); ?></a>
 						</div>
-						<?php
-						$date_last_active = new Zend_Date($user['date_last_activity']);
-						if (($date_now->toValue() - $date_last_active->toValue()) <= 420) {
-							?>
-							<img src="/img/user_online.png" class="user_light_status img-thumbnail img-responsive">
-						<?php } else { ?>
-							<img src="/img/user_ofline.png" class="user_light_status img-thumbnail img-responsive">
-						<?php } ?>
-						<div class="user_flag"><img src="<?php echo $user->country_url_image_round; ?>" title="<?php echo $user->country_english_name . ' (' . country_native_name . ')'; ?>"></div>
-						<div class="user_login"><a href="<?php echo $user_id_url; ?>"><?php echo $user->login; ?></a></div>
+						<div class="user-flag"><img class="img-size-64" src="<?php echo $user->country_url_image_glossy_wave; ?>" title="<?php echo $user->country_english_name . ' (' . $user->country_native_name . ')'; ?>"></div>
+						<div class="user-login text-center"><a href="<?php echo $user_id_url; ?>"><?php echo $user->login; ?></a></div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
