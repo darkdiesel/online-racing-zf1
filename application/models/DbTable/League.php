@@ -42,61 +42,20 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 		}
 	}
 
-	public function getLeagueData($id) {
-		$model = new self;
-
-		$select = $model->select()
-				->setIntegrityCheck(false)
-				->from(array('l' => $this->_name), 'l.id')
-				->where('l.id = ?', $id)
-				->join(array('u' => 'user'), 'l.user_id = u.id', array('user_login' => 'u.login'))
-				->columns('*');
-
-		$league = $model->fetchRow($select);
-
-		if (count($league) != 0) {
-			return $league;
-		} else {
-			return FALSE;
-		}
-	}
-
 	/*
 	 * Get Item by idencity field value and $field array of fields list.
 	 */
 
 	public function getItem($idencity = array(), $fields = array()) {
 		$model = new self;
+		$db = new App_Controller_Action_Helper_DB();
 		$idencity_data = "";
 
 		// idencity fields list
-		if (!count($idencity)) {
+		if (count($idencity)) {
+			$idencity_data = $db->getIdencity($idencity, $this->db_href);
+		} else {
 			return FALSE;
-		} elseif (is_array($idencity)) {
-			foreach ($idencity as $field => $value) {
-				if (is_array($value)) {
-					if (isset($value['condition'])) {
-						if ($value['condition']) {
-							$condition = $value['condition'];
-						} else {
-							$condition = "OR";
-						}
-					} else {
-						$condition = "OR";
-					}
-					$value = $value['value'];
-				} else {
-					$condition = "OR";
-				}
-
-				if ($idencity_data) {
-					$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value);
-				} else {
-					$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value);
-				}
-			}
-		} elseif (is_int($idencity) || is_string($idencity)) {
-			$idencity_data = sprintf("%s.id = '%s'", $this->db_href, $idencity);
 		}
 
 		// fields list
@@ -115,6 +74,7 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 		$select = $model->select()
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
+				->join(array('u' => 'user'), $this->db_href . '.user_id = u.id', array('user_login' => 'u.login'))
 				->where($idencity_data);
 
 		if ($fields) {
@@ -150,29 +110,11 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 		$idencity_data = "";
 		$order_data = "";
 
+		$db = new App_Controller_Action_Helper_DB();
+
 		// idencity fields list
 		if ($idencity) {
-			if (is_array($idencity)) {
-				foreach ($idencity as $field => $value) {
-					if ($idencity_data) {
-						if (isset($value['condition'])) {
-							if ($value['condition']) {
-								$condition = $value['condition'];
-							} else {
-								$condition = "OR";
-							}
-						} else {
-							$condition = "OR";
-						}
-
-						$idencity_data .= sprintf(" %s %s.%s = '%s'", $condition, $this->db_href, $field, $value['value']);
-					} else {
-						$idencity_data = sprintf("%s.%s = '%s'", $this->db_href, $field, $value['value']);
-					}
-				}
-			} elseif (is_int($idencity) || is_string($idencity)) {
-				$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
-			}
+			$idencity_data = $db->getIdencity($idencity, $this->db_href);
 		}
 
 		// fields list
@@ -204,7 +146,9 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 		}
 
 		$select = $model->select()
-				->from(array($this->db_href => $this->_name));
+				->setIntegrityCheck(false)
+				->from(array($this->db_href => $this->_name))
+				->join(array('u' => 'user'), $this->db_href . '.user_id = u.id', array('user_login' => 'u.login'));
 
 		if ($fields) {
 			$select->columns($fields);

@@ -100,17 +100,17 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 
 	public function leagueMenu($league_id) {
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'add')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'add', 'league_id' => $league_id), 'leagueActionAddChamp', true);
+			$link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'add', 'league_id' => $league_id), 'defaultLeagueActionAddChamp', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Добавить чемпионат')}</a>");
 		}
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'edit')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'league', true);
+			$link = $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'edit', 'league_id' => $league_id), 'defaultLeagueAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
 		}
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'delete')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'delete', 'league_id' => $league_id), 'league', true);
+			$link = $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'delete', 'league_id' => $league_id), 'defaultLeagueAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Удалить')} (не реализовано)</a>");
 		}
 

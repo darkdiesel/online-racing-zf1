@@ -84,13 +84,11 @@ class ChampionshipController extends App_Controller_LoaderController {
 			$this->view->headTitle("{$this->view->translate('Чемпионат')} :: {$this->view->translate('Добавить')}");
 			$this->view->pageTitle($this->view->translate('Добавить чемпионат'));
 
+			$league_league_action_add_champ_url = $this->view->url(array('module' => 'default','controller' => 'championship', 'action' => 'add', 'league_id' => $league_id), 'defaultLeagueActionAddChamp', true);
+			
 			// form
 			$form = new Application_Form_Championship_Add();
-			$form->setAction(
-					$this->view->url(
-							array('controller' => 'championship', 'action' => 'add', 'league_id' => $league_id), 'leagueActionAddChamp', true
-					)
-			);
+			$form->setAction($league_league_action_add_champ_url);
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {

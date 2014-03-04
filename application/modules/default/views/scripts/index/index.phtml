@@ -60,7 +60,7 @@
 			<div class="block-body">
 				<ul class="media-list">
 					<?php foreach ($this->league_data as $league): ?>
-						<?php $league_url = $this->url(array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league->id)), 'leagueIdAll', true); ?>
+						<?php $league_url = $this->url(array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league->id)), 'defaultLeagueIdAll', true); ?>
 						<li class="media">
 							<a class="pull-left" href="<?php echo $league_url; ?>">
 								<img class="media-object img-thumbnail img-responsive img-size-100" src="<?php echo $league->url_logo; ?>" alt="<?php echo $league->name; ?>">
