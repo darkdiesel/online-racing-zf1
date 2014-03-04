@@ -10,7 +10,7 @@ class Application_Form_Post_Edit extends Zend_Form {
 
 	public function init() {
 		$this->setMethod('post')
-				->setName('admin-post-увше');
+				->setName('admin-post-edit');
 
 		$this->setAttribs(array(
 			'class' => 'block-item block-item-form',
