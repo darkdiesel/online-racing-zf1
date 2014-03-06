@@ -209,7 +209,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				'label' => $league_name,
 				'title' => $league_name,
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id, 'page' => $page), 'leagueIdAll', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id, 'page' => $page), 'defaultLeagueIdAll', true),
 				'pages' => array()
 			)
 		);
@@ -223,7 +223,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 			array(
 				'label' => _('Все лиги'),
 				'title' => _('Все лиги'),
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'all', 'page' => $page), 'leagueAll', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'league', 'action' => 'all', 'page' => $page), 'defaultLeagueAll', true),
 				'pages' => array()
 			)
 		);
