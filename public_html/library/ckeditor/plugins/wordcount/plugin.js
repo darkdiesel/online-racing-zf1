@@ -4,8 +4,8 @@
  */
 
 CKEDITOR.plugins.add('wordcount', {
-    lang: ['ca', 'de', 'en', 'es', 'fr', 'it', 'jp', 'no', 'pl', 'pt-BR'],
-    version : 1.08,
+    lang: ['ca', 'de', 'en', 'es', 'fr', 'it', 'jp', 'nl', 'no', 'pl', 'pt-BR', 'ru'],
+    version : 1.09,
     init: function (editor) {
         if (editor.elementMode === CKEDITOR.ELEMENT_MODE_INLINE) {
             return;
@@ -73,6 +73,7 @@ CKEDITOR.plugins.add('wordcount', {
             if (tmp.textContent == '' && typeof tmp.innerText == 'undefined') {
 				return '0';
             }
+
             return tmp.textContent || tmp.innerText;
         }
 
@@ -87,12 +88,23 @@ CKEDITOR.plugins.add('wordcount', {
                     if (config.countHTML) {
                         charCount = text.length;
                     } else {
+						// strip body tags
+                        if (editor.config.fullPage) {
+                            var i = text.search(new RegExp("<body>", "i"));
+                            if (i != -1) {
+                                var j = text.search(new RegExp("</body>", "i"));
+                                text = text.substring(i + 6, j);
+                            }
+
+                        }
+
                         normalizedText = text.
                             replace(/(\r\n|\n|\r)/gm, "").
                             replace(/^\s+|\s+$/g, "").
                             replace("&nbsp;", "").
-                            replace(" ", "");
-                        normalizedText = strip(normalizedText);
+                            replace(/\s/g, "");
+
+                        normalizedText = strip(normalizedText).replace(/^([\s\t\r\n]*)$/, "");
 
                         charCount = normalizedText.length;
                     }
@@ -106,7 +118,15 @@ CKEDITOR.plugins.add('wordcount', {
 
                     normalizedText = strip(normalizedText);
 
-                    wordCount = normalizedText.split(/\s+/).length;
+                    var words = normalizedText.split(/\s+/);
+
+                    for (var wordIndex = words.length - 1; wordIndex >= 0; wordIndex--) {
+                        if (words[wordIndex].match(/^([\s\t\r\n]*)$/)) {
+                            words.splice(wordIndex, 1);
+                        }
+                    }
+
+                    wordCount = words.length;
                 }
             }
 
@@ -168,24 +188,27 @@ CKEDITOR.plugins.add('wordcount', {
 			
             counterElement(editorInstance).className = "cke_wordcount";
         }
-        
+
         editor.on('key', function (event) {
+            if (editor.mode === 'source') {
+                updateCounter(event.editor);
+            }
+        }, editor, null, 100);
+        
+        editor.on('change', function (event) {
 
             updateCounter(event.editor);
         }, editor, null, 100);
-
-        editor.on('uiSpace', function (event) {
+		
+		editor.on('uiSpace', function (event) {
             if (event.data.space == 'bottom') {
                 event.data.html += '<div id="' + counterId(event.editor) + '" class="cke_wordcount" style=""' + ' title="' + editor.lang.wordcount.title + '"' + '>&nbsp;</div>';
             }
         }, editor, null, 100);
+
         editor.on('dataReady', function (event) {
             updateCounter(event.editor);
         }, editor, null, 100);
-        /*editor.on('change', function (event) {
-			
-            updateCounter(event.editor);
-        }, editor, null, 100);*/
 
         editor.on('afterPaste', function (event) {
             updateCounter(event.editor);
