@@ -13,8 +13,7 @@ class RaceController extends App_Controller_LoaderController {
 		$championship_id = $request->getParam('championship_id');
 		$race_id = $request->getParam('race_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$championship = new Application_Model_DbTable_Championship();
@@ -74,8 +73,7 @@ class RaceController extends App_Controller_LoaderController {
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->league_data = $league_data;
@@ -169,8 +167,7 @@ class RaceController extends App_Controller_LoaderController {
 		$championship_id = $request->getParam('championship_id');
 		$race_id = $request->getParam('race_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->league_data = $league_data;

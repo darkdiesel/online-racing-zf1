@@ -12,8 +12,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$championship_id = (int) $request->getParam('championship_id');
 		$page = $request->getParam('page');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->league_data = $league_data;
@@ -76,8 +75,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$league_id = (int) $request->getParam('league_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -217,8 +215,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -428,9 +425,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$championship_id = $request->getParam('championship_id');
 		$team_id = $request->getParam('team_id');
 
-
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -506,8 +501,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -641,8 +635,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$championship_id = $request->getParam('championship_id');
 		$team_id = $request->getParam('team_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->league_data = $league_data;
@@ -843,8 +836,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -916,8 +908,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$championship_id = $request->getParam('championship_id');
 		$team_id = $request->getParam('team_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -1082,8 +1073,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$team_id = $request->getParam('team_id');
 		$user_id = $request->getParam('user_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
@@ -1234,8 +1224,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$team_id = $request->getParam('team_id');
 		$user_id = $request->getParam('user_id');
 
-		$league = new Application_Model_DbTable_League();
-		$league_data = $league->getLeagueData($league_id);
+		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
