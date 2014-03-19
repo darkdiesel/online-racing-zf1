@@ -255,6 +255,39 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'page' => 1,
 				), "admin/league/all/page/%s.html"
 		));
+		
+		//CHAMPIONSHIP CONTROLLER ROUTERS
+		$router->addRoute(
+				'adminChampionshipId', new Zend_Controller_Router_Route_Regex('admin/championship/(\d+)\.html', array(
+			'module' => 'admin',
+			'controller' => 'championship',
+			'action' => 'id',
+			1 => 0), array(
+			'championship_id' => 1,
+				), "admin/championship/%d.html"
+		));
+
+		$router->addRoute(
+				'adminChampionshipAction', new Zend_Controller_Router_Route_Regex('admin/championship/(\d+)/(\w*)\.html', array(
+			'module' => 'admin',
+			'controller' => 'championship',
+			'action' => 'id',
+			1 => 0), array(
+			'championship_id' => 1,
+			'action' => 2,
+				), "admin/championship/%d/%s.html"
+		));
+
+		$router->addRoute(
+				'adminChampionshipAll', new Zend_Controller_Router_Route_Regex('admin/championship/all/page/(\d+)\.html', array(
+			'module' => 'admin',
+			'controller' => 'championship',
+			'action' => 'all',
+			1 => 1
+				), array(
+			'page' => 1,
+				), "admin/championship/all/page/%s.html"
+		));
 
 		//POST TYPE CONTROLLER ROUTERS
 		$router->addRoute(

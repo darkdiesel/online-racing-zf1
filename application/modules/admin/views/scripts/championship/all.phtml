@@ -1,0 +1,67 @@
+<?php if ($this->championship_data) { ?>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="clearfix m-b-10">
+				<?php
+				$championship_id_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'add'), 'default', true);
+				?>
+				<a href="<?php echo $championship_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить чемпионат'); ?></a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<i class="fa fa-list"></i>
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped custab">
+						<thead>
+							<tr>
+								<th class="championship_id"><span>ID</span></th>
+								<th class="championship_name"><span><?php echo $this->translate('Название'); ?></span></th>
+								<th class="championship_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ($this->championship_data as $championship): ?>
+								<?php
+								$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' =>  $this->escape($championship->league_id),'championship_id' => $this->escape($championship->id)), 'defaultChampionshipIdAll', true);
+								$championship_edit_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'championship_id' => $this->escape($championship->id)), 'adminChampionshipAction', true);
+								$championship_delete_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'delete', 'championship_id' => $this->escape($championship->id)), 'adminChampionshipAction', true);
+								?>
+								<tr>
+									<td class="championship_id"><span><a href="<?php echo $championship_id_url; ?>" target="_blank"><?php echo $this->escape($championship->id) ?></a></span></td>
+									<td class="championship_name"><span><a href="<?php echo $championship_id_url; ?>" target="_blank"><?php echo $this->escape($championship->name) ?></a></span></td>
+									<td class="championship_action">
+										<span>
+											<div class="pull-right action-buttons">
+												<div class="btn-group pull-right">
+													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+														<span class="fa fa-cog fa-lg"></span>
+													</button>
+													<ul class="dropdown-menu slidedown">
+														<li><a href="<?php echo $championship_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?php echo $championship_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?php echo $championship_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+													</ul>
+												</div>
+											</div>
+										</span>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel-footer">
+					<div class="pull-right">
+						<?php echo $this->paginationControl($this->championship_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
