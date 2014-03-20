@@ -112,7 +112,7 @@ class Application_Form_Championship_Team_Edit extends Zend_Form {
 		$this->addElement('submit', 'submit', array(
 			'ignore' => true,
 			'class' => 'btn btn-primary',
-			'label' => $this->translate('Редактировать'),
+			'label' => $this->translate('Сохранить'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',
 				array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
