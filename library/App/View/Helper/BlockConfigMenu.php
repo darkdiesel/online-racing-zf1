@@ -34,12 +34,12 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'edit')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'edit', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true);
+			$link = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'league_id' => $league_id, 'championship_id' => $championship_id), 'adminChampionshipAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
 		}
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'delete')) {
-			$link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'delete', 'league_id' => $league_id, 'championship_id' => $championship_id), 'championship', true);
+			$link = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'delete', 'league_id' => $league_id, 'championship_id' => $championship_id), 'adminChampionshipAction', true);
 			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
 		}
 

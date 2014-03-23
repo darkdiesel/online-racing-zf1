@@ -134,6 +134,14 @@ class Application_Model_DbTable_Championship extends Zend_Db_Table_Abstract {
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->join(array('u' => 'user'), $this->db_href . '.user_id = u.id', array('user_login' => 'u.login'))
+				->join(array('lg' => 'league'), $this->db_href . '.league_id = u.id', array(
+					'legue_login' => 'lg.login',
+					'league_url_logo' => 'lg.url_logo',
+					'league_description' => 'lg.description',
+					'league_user_id' => 'lg.user_id',
+					'league_date_create' => 'lg.date_create',
+					'league'
+					))
 				->where($idencity_data);
 
 		if ($fields) {
