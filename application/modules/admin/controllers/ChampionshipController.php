@@ -168,36 +168,123 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 
 	public function editAction() {
 		$request = $this->getRequest();
-		$league_id = (int) $request->getParam('league_id');
+//		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');
 
-		$league_data = $this->db->get('league')->getItem($league_id);
+		$championship_data = $this->db->get('championship')->getItem($championship_id);
 
-		if ($league_data) {
+		if ($championship_data) {
+			$form = new Application_Form_Championship_Edit();
+			$this->view->pageTitle($championship_data->name);
+
+			$admin_championship_action_url = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'id' => $championship_id), 'adminChampionshipAction', true);
+			$admin_championship_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'all'), 'adminChampionshipAll', true);
+
+			$form->setAction($admin_championship_action_url);
+			$form->cancel->setAttrib('onClick', 'location.href="' . $admin_championship_all_url . '"');
+
+			if ($this->getRequest()->isPost()) {
+				if ($form->isValid($request->getPost())) {
+					
+				} else {
+					$this->messages->addError(
+							$this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+					);
+				}
+			}
+			//set championship name value
+			$form->name->setValue($championship_data->name);
+
+			//set league value
+			$league_data = $this->db->get('league')->getAll(FALSE, "id, name", "ASC");
+
+			if ($league_data) {
+				foreach ($league_data as $league):
+					$form->league->addMultiOption($league->id, $league->name);
+				endforeach;
+			} else {
+				$this->messages->addError($this->view->translate('Лиги на сайте не найдены!'));
+				$this->messages->addWarnign($this->view->translate('Добавьте лигу, чтобы иметь возможность создания чемпионата!'));
+			}
+
+			$form->league->setValue($championship_data->league_id);
+			
+			// set reglament value
+			/*
+			 * TODO: Add request to get posts by post type
+			 */
+			$post_data = $this->db->get('post')->getAll(FALSE, "id, name", "ASC");
+
+			if ($post_data) {
+				foreach ($post_data as $post):
+					$form->rule->addMultiOption($post->id, $post->name);
+				endforeach;
+			} else {
+				$this->messages->addError($this->view->translate('Регламенты на сайте не найдены!'));
+				$this->messages->addWarnign($this->view->translate('Добавьте регламент, чтобы иметь возможность создания чемпионата!'));
+			}
+
+			$form->rule->setValue($championship_data->rule_id);
+			
+			// set game value
+			/*
+			 * TODO: Add request to get posts by post type
+			 */
+			$post_data = $this->db->get('post')->getAll(FALSE, "id, name", "ASC");
+
+			if ($post_data) {
+				foreach ($post_data as $game):
+					$form->game->addMultiOption($game->id, $game->name);
+				endforeach;
+			} else {
+				$this->messages->addError($this->view->translate('Игры на сайте не найдены!'));
+				$this->messages->addWarnign($this->view->translate('Добавьте игру, чтобы иметь возможность создания чемпионата!'));
+			}
+
+			$form->game->setValue($championship_data->game_id);
+			
+			// set championship admin value
+			/*
+			 * TODO: Add request to get users by user role
+			 */
+			
+			$user_data = $this->db->get('user')->getAll(FALSE, "id, name", "ASC");
+
+			if ($user_data) {
+				foreach ($user_data as $user) {
+					$form->admin->addMultiOption(
+							$user->id, $user->surname . ' ' . $user->name . ' (' . $user->login . ')'
+					);
+				}
+			} else {
+				$this->messages->addError($this->view->translate('Администраторы на сайте не найдены!'));
+				$this->messages->addWarnign($this->view->translate('Добавьте администратора, чтобы иметь возможность создания чемпионата!'));
+			}
+
+			$form->admin->setValue($championship_data->user_id);
+
+			$form->date_start->setValue($championship_data->date_start);
+			$form->date_end->setValue($championship_data->date_end);
+			$form->hotlap_ip->setValue($championship_data->hotlap_ip);
+			$form->description->setValue($championship_data->description);
+
+			$this->view->form = $form;
+		} else {
+			$this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
+			$this->view->headTitle($this->view->translate('Ошибка!'));
+			$this->view->headTitle($this->view->translate('Чемпионат не найден!'));
+			$this->view->pageTitle($this->view->translate('Ошибка!'));
+		}
+
+//		$league_data = $this->db->get('league')->getItem($league_id);
+
+		if (0) {
 			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
 			$this->view->headTitle(
 					"{$this->view->translate('Чемпионат')} :: {$this->view->translate('Редактировать')}"
 			);
 
-
-			$championship = new Application_Model_DbTable_Championship();
-			$championship_data = $championship->getChampionshipData($league_id, $championship_id);
-
 			if ($championship_data) {
-				$form = new Application_Form_Championship_Edit();
-				$this->view->pageTitle($championship_data->name);
-
-				$form->setAction(
-						$this->view->url(
-								array('controller' => 'championship', 'action' => 'edit', 'id' => $championship_id), 'championship', true
-						)
-				);
-				$form->cancel->setAttrib(
-						'onClick', "location.href=\"{$this->view->url(
-								array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipIdAll', true
-						)}\""
-				);
-
 				if ($this->getRequest()->isPost()) {
 					if ($form->isValid($request->getPost())) {
 
@@ -269,98 +356,9 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 											'Название чемпионата уже существуют в базе данных!'
 									) . '<br/>';
 						}
-					} else {
-						$this->messages->addError(
-								$this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
-						);
 					}
 				}
-
-				//set championship name value
-				$form->name->setValue($championship_data->name);
-
-				//set league value
-				$league = new Application_Model_DbTable_League();
-				$leagues = $league->getLeaguesName('ASC');
-
-				if ($leagues) {
-					foreach ($leagues as $league):
-						$form->league->addMultiOption($league->id, $league->name);
-					endforeach;
-				} else {
-					$this->view->errMessage .= $this->view->translate('Лиги не найдены') . '<br />';
-				}
-
-				$form->league->setValue($championship_data->league_id);
-
-				// set reglament value
-				$post = new Application_Model_DbTable_Post();
-				$posts = $post->getPublishPostTitlesByTypeName('rule', 'ASC');
-
-				if ($posts) {
-					foreach ($posts as $post):
-						$form->rule->addMultiOption($post->id, $post->name);
-					endforeach;
-				} else {
-					$this->view->errMessage .= $this->view->translate(
-									'Регламенты на сайте не найдены. Добавьте регламент, чтобы создать чемпионат!'
-							) . '<br />';
-				}
-
-				$form->rule->setValue($championship_data->rule_id);
-
-				// set game value
-				$post = new Application_Model_DbTable_Post();
-				$posts = $post->getPublishPostTitlesByTypeName('game', 'ASC');
-
-				if ($posts) {
-					foreach ($posts as $game):
-						$form->game->addMultiOption($game->id, $game->name);
-					endforeach;
-				} else {
-					$this->view->errMessage .= $this->view->translate('Игры не найдены') . '<br />';
-				}
-
-				$form->game->setValue($championship_data->game_id);
-
-				// set championship admin value
-				$user = new Application_Model_DbTable_User();
-				$users = $user->getUsersByRoleName('admin', 'ASC');
-
-				if ($users) {
-					foreach ($users as $user) {
-						$form->admin->addMultiOption(
-								$user->id, $user->surname . ' ' . $user->name . ' (' . $user->login . ')'
-						);
-					}
-				} else {
-					$this->view->errMessage .= $this->view->translate(
-							'Администраторы на сайте не найдены! Создайте администратора, чтобы добавить чемпионат.'
-					);
-				}
-
-				$form->admin->setValue($championship_data->user_id);
-
-				$form->date_start->setValue($championship_data->date_start);
-				$form->date_end->setValue($championship_data->date_end);
-				$form->hotlap_ip->setValue($championship_data->hotlap_ip);
-				$form->description->setValue($championship_data->description);
-
-				$this->view->form = $form;
-			} else {
-				$this->view->errMessage .= $this->view->translate('Чемпионат не существует!') . '<br/>';
-				$this->view->headTitle($this->view->translate('Ошибка!'));
-				$this->view->headTitle($this->view->translate('Чемпионат не существует!'));
 			}
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
-
-			$this->view->headTitle(
-					"{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не найдена!')}"
-			);
-			$this->view->pageTitle(
-					"{$this->view->translate('Ошибка!')} :: {$this->view->translate('Лига не найдена!')}"
-			);
 		}
 	}
 
