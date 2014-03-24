@@ -27,7 +27,7 @@
 						<tbody>
 							<?php foreach ($this->championship_data as $championship): ?>
 								<?php
-								$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' =>  $this->escape($championship->league_id),'championship_id' => $this->escape($championship->id)), 'defaultChampionshipIdAll', true);
+								$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' =>  $this->escape($championship->league_id),'championship_id' => $this->escape($championship->id)), 'defaultChampionshipId', true);
 								$championship_edit_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'championship_id' => $this->escape($championship->id)), 'adminChampionshipAction', true);
 								$championship_delete_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'delete', 'championship_id' => $this->escape($championship->id)), 'adminChampionshipAction', true);
 								?>

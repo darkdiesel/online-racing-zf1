@@ -4,7 +4,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 
 	public function init() {
 		parent::init();
-//		$this->view->headTitle($this->view->translate('Чемпионат'));
+		$this->view->headTitle($this->view->translate('Чемпионат'));
 	}
 
 	public function allAction() {
@@ -88,7 +88,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 							$this->view->url(
 									array('controller' => 'championship', 'action' => 'id',
 								'league_id' => $newChampionship->league_id,
-								'championship_id' => $newChampionship->id), 'defaultChampionshipIdAll', true
+								'championship_id' => $newChampionship->id), 'defaultChampionshipId', true
 							)
 					);
 				} else {
@@ -168,15 +168,18 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 
 	public function editAction() {
 		$request = $this->getRequest();
-//		$league_id = (int) $request->getParam('league_id');
 		$championship_id = $request->getParam('championship_id');
 
 		$championship_data = $this->db->get('championship')->getItem($championship_id);
 
 		if ($championship_data) {
+			$this->view->headTitle($championship_data->name);
+			$this->view->headTitle($this->view->translate('Редактировать'));
+
 			$form = new Application_Form_Championship_Edit();
 			$this->view->pageTitle($championship_data->name);
 
+			$default_championship_id_url = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $championship_data->league_id, 'championship_id' => $championship_id), 'defaultChampionshipId', true);
 			$admin_championship_action_url = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'id' => $championship_id), 'adminChampionshipAction', true);
 			$admin_championship_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'all'), 'adminChampionshipAll', true);
 
@@ -185,7 +188,76 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {
-					
+					//Check Existing championships by name 
+					$exist_championship_name = $this->db->get('championship')->getItem(
+							array(
+						'name' => array(
+							'value' => $form->getValue('name')
+						)
+							), 'id, name');
+
+					if ($exist_championship_name) {
+						if ($exist_championship_name->id == $championship_id) {
+							$update = true;
+						} else {
+							$update = false;
+						}
+					} else {
+						$update = true;
+					}
+
+					if ($update) {
+						//saving new data to DB
+						$new_championship_data = array();
+
+						//receive and rename logo file
+						if ($form->getValue('logo')) {
+							if ($form->logo->receive()) {
+								$file = $form->logo->getFileInfo();
+								$ext = pathinfo($file['logo']['name'], PATHINFO_EXTENSION);
+								$newName = Date('Y-m-d_H-i-s') . strtolower('_logo' . '.' . $ext);
+
+								$filterRename = new Zend_Filter_File_Rename(array('target'
+									=>
+									$file['logo']['destination'] . '/'
+									. $newName, 'overwrite' => true));
+
+								$filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
+
+								$new_championship_data['url_logo'] = '/data-content/data-uploads/championship/logo/' . $newName;
+
+								if ($new_championship_data['url_logo'] != $championship_data['url_logo']) {
+									unlink(APPLICATION_PATH . '/../public_html' . $championship_data['url_logo']);
+								}
+							}
+						}
+
+						// save new championship to db
+						$date = date('Y-m-d H:i:s');
+
+						$new_championship_data['name'] = $form->getValue('name');
+						$new_championship_data['league_id'] = $form->getValue('league');
+						$new_championship_data['rule_id'] = $form->getValue('rule');
+						$new_championship_data['game_id'] = $form->getValue('game');
+						$new_championship_data['user_id'] = $form->getValue('admin');
+						$new_championship_data['date_start'] = $form->getValue('date_start');
+						$new_championship_data['date_end'] = $form->getValue('date_end');
+						$new_championship_data['hotlap_ip'] = $form->getValue('hotlap_ip');
+						$new_championship_data['description'] = $form->getValue('description');
+						$new_championship_data['date_edit'] = $date;
+
+						$championship_where = $this->db->get('championship')->getAdapter()->quoteInto('id = ?', $championship_id);
+						$this->db->get('championship')->update($new_championship_data, $championship_where);
+
+						$this->redirect($default_championship_id_url);
+					} else {
+						$this->messages->addError(
+							$this->view->translate(sprintf('Название чемпионата "%s" уже существуют в базе данных!', $form->getValue('name')))
+						);
+						$this->messages->addError(
+							$this->view->translate('Исправьте название чемпионата!')
+						);
+					}
 				} else {
 					$this->messages->addError(
 							$this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -208,7 +280,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 			}
 
 			$form->league->setValue($championship_data->league_id);
-			
+
 			// set reglament value
 			/*
 			 * TODO: Add request to get posts by post type
@@ -225,7 +297,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 			}
 
 			$form->rule->setValue($championship_data->rule_id);
-			
+
 			// set game value
 			/*
 			 * TODO: Add request to get posts by post type
@@ -242,12 +314,12 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 			}
 
 			$form->game->setValue($championship_data->game_id);
-			
+
 			// set championship admin value
 			/*
 			 * TODO: Add request to get users by user role
 			 */
-			
+
 			$user_data = $this->db->get('user')->getAll(FALSE, "id, name", "ASC");
 
 			if ($user_data) {
@@ -274,91 +346,6 @@ class Admin_ChampionshipController extends App_Controller_LoaderController {
 			$this->view->headTitle($this->view->translate('Ошибка!'));
 			$this->view->headTitle($this->view->translate('Чемпионат не найден!'));
 			$this->view->pageTitle($this->view->translate('Ошибка!'));
-		}
-
-//		$league_data = $this->db->get('league')->getItem($league_id);
-
-		if (0) {
-			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
-			$this->view->headTitle(
-					"{$this->view->translate('Чемпионат')} :: {$this->view->translate('Редактировать')}"
-			);
-
-			if ($championship_data) {
-				if ($this->getRequest()->isPost()) {
-					if ($form->isValid($request->getPost())) {
-
-						$exist_championship_name = $championship->checkExistChampionshipName($form->getValue('name'));
-
-						if ($exist_championship_name) {
-							if ($exist_championship_name == $championship_id) {
-								$update = true;
-							} else {
-								$update = false;
-							}
-						} else {
-							$update = true;
-						}
-
-						if ($update) {
-							//saving new data to DB
-							$new_championship_data = array();
-
-							//receive and rename logo file
-							if ($form->getValue('logo')) {
-								if ($form->logo->receive()) {
-									$file = $form->logo->getFileInfo();
-									$ext = pathinfo($file['logo']['name'], PATHINFO_EXTENSION);
-									$newName = Date('Y-m-d_H-i-s') . strtolower('_logo' . '.' . $ext);
-
-									$filterRename = new Zend_Filter_File_Rename(array('target'
-										=>
-										$file['logo']['destination'] . '/'
-										. $newName, 'overwrite' => true));
-
-									$filterRename->filter($file['logo']['destination'] . '/' . $file['logo']['name']);
-
-									$new_championship_data['url_logo'] = '/data-content/data-uploads/championship/logo/' . $newName;
-
-									if ($new_championship_data['url_logo'] != $championship_data['url_logo']) {
-										unlink(APPLICATION_PATH . '/../public_html' . $championship_data['url_logo']);
-									}
-								}
-							}
-
-							// save new championship to db
-							$date = date('Y-m-d H:i:s');
-
-							$new_championship_data['name'] = $form->getValue('name');
-							$new_championship_data['league_id'] = $form->getValue('league');
-							$new_championship_data['rule_id'] = $form->getValue('rule');
-							$new_championship_data['game_id'] = $form->getValue('game');
-							$new_championship_data['user_id'] = $form->getValue('admin');
-							$new_championship_data['date_start'] = $form->getValue('date_start');
-							$new_championship_data['date_end'] = $form->getValue('date_end');
-							$new_championship_data['hotlap_ip'] = $form->getValue('hotlap_ip');
-							$new_championship_data['description'] = $form->getValue('description');
-							$new_championship_data['date_edit'] = $date;
-
-							$championship_where = $championship->getAdapter()->quoteInto('id = ?', $championship_id);
-							$championship->update($new_championship_data, $championship_where);
-
-							$this->redirect(
-									$this->view->url(
-											array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'chapmionship_id' => $championship_id), 'defaultChampionshipIdAll', true
-									)
-							);
-						} else {
-							$this->view->errMessage .= $this->view->translate(
-											'Неверное название'
-									) . ": {$form->getValue('name')} <br/>";
-							$this->view->errMessage .= $this->view->translate(
-											'Название чемпионата уже существуют в базе данных!'
-									) . '<br/>';
-						}
-					}
-				}
-			}
 		}
 	}
 

@@ -164,21 +164,19 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		);
 
 		$router->addRoute(
-				'defaultChampionshipIdAll', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/page/(\d+)\.html', array(
+				'defaultChampionshipId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)\.html', array(
 			'module' => 'default',
 			'controller' => 'championship',
 			'action' => 'id',
 			1 => 0,
 			2 => 0,
-			3 => 1,
 				), array(
 			'league_id' => 1,
 			'championship_id' => 2,
-			'page' => 3,
-				), "league/%d/championship/%d/page/%d.html"
+				), "league/%d/championship/%d.html"
 				)
 		);
-		
+
 		$router->addRoute(
 				'championshipId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)\.html', array(
 			'module' => 'default',
@@ -238,11 +236,10 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'league_id' => 1,
 			'championship_id' => 2,
 			'action' => 3,
-				),
-			"league/%d/championship/%d/race/%s.html"
+				), "league/%d/championship/%d/race/%s.html"
 				)
 		);
-		
+
 		$router->addRoute(
 				'defaultChampionshipRaceId', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)\.html', array(
 			'module' => 'default',
@@ -255,11 +252,10 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'league_id' => 1,
 			'championship_id' => 2,
 			'race_id' => 3,
-				),
-			"league/%d/championship/%d/race/%d.html"
+				), "league/%d/championship/%d/race/%d.html"
 				)
 		);
-		
+
 		$router->addRoute(
 				'defaultChampionshipRaceIdAction', new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)/(\w*)\.html', array(
 			'module' => 'default',
@@ -272,11 +268,10 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'championship_id' => 2,
 			'race_id' => 3,
 			'action' => 4,
-				),
-			"league/%d/championship/%d/race/%d/%s.html"
+				), "league/%d/championship/%d/race/%d/%s.html"
 				)
 		);
-		
+
 		/*
 		  $router->addRoute(
 		  'championshipAll', new Zend_Controller_Router_Route('championship/all/:page', array(
@@ -286,7 +281,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap {
 		  'page' => 1)
 		  )); */
 
-		
+
 		/*
 		  Zend_Loader::loadClass('App_Controller_Plugin_LangSelector');
 		  Zend_Controller_Front::getInstance()->registerPlugin(new App_Controller_Plugin_LangSelector());

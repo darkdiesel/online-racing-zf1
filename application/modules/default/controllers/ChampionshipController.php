@@ -10,14 +10,14 @@ class ChampionshipController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$league_id = (int) $request->getParam('league_id');
 		$championship_id = (int) $request->getParam('championship_id');
-		$page = $request->getParam('page');
 
 		$league_data = $this->db->get('league')->getItem($league_id);
 
 		if ($league_data) {
 			$this->view->league_data = $league_data;
 
-			$this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+			$this->view->headTitle($this->view->translate('Лига'));
+			$this->view->headTitle($league_data->name);
 			$this->view->headTitle($this->view->translate('Чемпионат'));
 
 			$championship = new Application_Model_DbTable_Championship();
@@ -30,7 +30,7 @@ class ChampionshipController extends App_Controller_LoaderController {
 
 				// Set breadcrumbs for this page
 				$this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
-						->championship($league_id, $championship_id, $championship_data->name, $page);
+						->championship($league_id, $championship_id, $championship_data->name);
 
 				// settings for championship races pager
 				$pager_args = array(

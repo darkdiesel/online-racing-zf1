@@ -190,12 +190,12 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract {
 		return $this;
 	}
 
-	public function Championship($league_id, $championship_id, $championship_name, $page) {
+	public function Championship($league_id, $championship_id, $championship_name) {
 		$pages = array(
 			array(
 				'label' => $championship_name,
 				'title' => $championship_name,
-				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id, 'page' => $page), 'defaultChampionshipIdAll', true),
+				'uri' => $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipId', true),
 				'pages' => array()
 			)
 		);
