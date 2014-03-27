@@ -8,8 +8,14 @@ $(document).ready(function() {
 			"outline": "none"
 		});
 	});
-	
+	/* Tooltip fields supports by bootstrap js library */
 	$('.tooltip-field').tooltip();
-
+	
+	/* Add responsive class for images */
+	$('#default-post-id').find('img').each(function(el){
+		if (!$(this).hasClass('img-responsive')){
+			$(this).addClass('img-responsive');
+		}
+	});
 
 });

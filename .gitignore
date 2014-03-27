@@ -1,5 +1,4 @@
 /.idea/
-/idea/
 /nbproject/*
 
 !/cache/
@@ -24,6 +23,7 @@ public_html/data-content/_thumbs/
 !/public_html/data-content/data-uploads/track/logos/
 public_html/data-content/data-uploads/track/logos/*
 !/public_html/data-content/data-uploads/track/logos/index.php
+
 !/public_html/data-content/data-uploads/flags/
 /public_html/data-content/data-uploads/flags/*
 

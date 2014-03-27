@@ -224,10 +224,21 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
 			$select->columns("*");
 		}
 
-		$resource = $model->fetchRow($select);
+		$item = $model->fetchRow($select);
 
-		if (count($resource) != 0) {
-			return $resource;
+		if (count($item) != 0) {
+			// update count of views
+			if ($item->last_ip != $_SERVER['REMOTE_ADDR']) {
+				$post_data = array(
+					'views' => ($item->views + 1),
+					'last_ip' => $_SERVER['REMOTE_ADDR']
+				);
+
+				$post_where = $model->getAdapter()->quoteInto('id = ?', $item->id);
+				$model->update($post_data, $post_where);
+			}
+
+			return $item;
 		} else {
 			return FALSE;
 		}

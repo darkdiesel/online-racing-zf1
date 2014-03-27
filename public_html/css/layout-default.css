@@ -56,3 +56,9 @@ body{}
 #online-drivers .block-user{}
 #online-drivers .block-user .user-avatar{border-width:3px; border-style:solid;}
 #online-drivers .block-user .user-avatar:hover{border-color:#C41D1D; transform:rotate(360deg); -ms-transform:rotate(360deg); -webkit-transform:rotate(360deg); -webkit-font-smoothing:antialiased;}
+
+/* Block Hotlap on championship page */
+.block-hotlap{}
+.block-hotlap .hotlap-marquee{background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent; margin:0; padding:4px 0 0 0;}
+.block-hotlap .navbar{margin:0; min-height:100%;}
+.block-hotlap .navbar-nav > li > a{text-transform:uppercase; padding-bottom:12px; padding-top:12px; font:bold 13px/10px arial;}
