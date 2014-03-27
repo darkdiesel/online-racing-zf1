@@ -1,0 +1,57 @@
+<!-- Races start -->
+<?php if ($this->championship_races_data) : ?>
+	<div class="section-title m-t-15 m-b-15"><?php echo $this->translate('Гонки чемпионата') ?></div>
+	<?php foreach ($this->championship_races_data as $race): ?>
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<div class="panel panel-default panel-inverse block">
+					<?php
+					echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($race->id));
+					?>
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<span class="label label-danger"><?php echo $race->race_number ?></span>
+							<img class="img-size-40-40" src="<?php echo $this->baseUrl($this->escape($race->country_url_image_round)); ?>">
+							<i class="fa fa-flag-checkered fa-lg"></i>
+							<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true); ?>"><?php echo $this->escape($race->name); ?></a>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<?php if ($this->escape($race->track_url_scheme) != '') : ?>
+							<div class="championship_all_logo_wrapper_150_150 img-wrapper-150-150 pull-left overflow-hide m-r-5">
+								<img class="img-size-150 img-responsive img-thumbnail" src="<?php echo $this->baseUrl($this->escape($race->track_url_scheme)); ?>">
+							</div>
+						<?php endif; ?>
+						<div class="race_description">
+							<?php
+							if ($race->description) {
+								echo $this->RenderContentTypeText($race->description, 'bbcode');
+							}
+							?>
+						</div>
+						<div class="pull-right m-t-10">
+							<?php
+							$championship_race_id_url = $this->url(array('module' => 'default', 'controller' => 'race', 'action' => 'id', 'league_id' => $this->league_data->id, 'championship_id' => $this->championship_data->id, 'race_id' => $race->id), 'defaultChampionshipRaceId', true);
+							?>
+							<a href = "<?php echo $championship_race_id_url; ?>" class = "btn btn-sm btn-primary block-content-button-more" title="<?php echo $this->translate('Детальная информация о гонке') ?>"><?php echo $this->translate('Подробнее...') ?></a>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<small>
+							<div class="pull-left m-r-10">
+								<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+								<?php echo $this->translate('Гонка'); ?>
+							</div>
+							<div class="pull-left m-r-10">
+								<span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: </span>
+								<?php echo $this->escape($race->date_create); ?>
+							</div>
+						</small>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php endforeach; ?>
+<?php endif; ?>
+<!-- Races end -->
