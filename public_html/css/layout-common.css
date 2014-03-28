@@ -29,7 +29,6 @@
 .m-r-0{margin-right:0!important;}
 .m-all-0{margin:0!important;}
 .m-t-5{margin-top:5px!important;}
-.m-b-5{margin-bottom:5px!important;}
 .m-l-5{margin-left:5px!important;}
 .m-r-5{margin-right:5px!important;}
 .m-all-5{margin:5px!important;}
@@ -88,6 +87,7 @@
 
 /* image size classes */
 .img-size-32{width:32px;}
+.img-size-30-30{width:30px; max-height:30px;}
 .img-size-40-40{width:40px; max-height:40px;}
 .img-size-50{width:50px;}
 .img-size-64{width:64px;}

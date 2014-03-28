@@ -73,10 +73,11 @@ class ChampionshipController extends App_Controller_LoaderController
             $this->view->headTitle($this->view->translate('Чемпионат'));
             $this->view->league_data = $league_data;
 
-            $championship = new Application_Model_DbTable_Championship();
-            $championship_data = $championship->getChampionshipData($league_id, $championship_id);
+            $championship_data = $this->db->get('championship')->getItem($championship_id);
 
             if ($championship_data) {
+                $this->view->championship_data = $championship_data;
+
                 $this->view->headTitle($championship_data->name);
 
                 $championship_team = new Application_Model_DbTable_ChampionshipTeam();
@@ -502,10 +503,11 @@ class ChampionshipController extends App_Controller_LoaderController
 
             $this->view->league_data = $league_data;
 
-            $championship = new Application_Model_DbTable_Championship();
-            $championship_data = $championship->getChampionshipData($league_id, $championship_id);
+            $championship_data = $this->db->get('championship')->getItem($championship_id);
 
             if ($championship_data) {
+                $this->view->championship_data = $championship_data;
+
                 // Set breadcrumbs for this page
                 $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
                     ->championship($league_id, $championship_id, $championship_data->name, '1')
@@ -576,8 +578,7 @@ class ChampionshipController extends App_Controller_LoaderController
 
             $this->view->league_data = $league_data;
 
-            $championship = new Application_Model_DbTable_Championship();
-            $championship_data = $championship->getChampionshipData($league_id, $championship_id);
+            $championship_data = $this->db->get('championship')->getItem($championship_id);
 
             if ($championship_data) {
                 //head title
@@ -1107,8 +1108,7 @@ class ChampionshipController extends App_Controller_LoaderController
             $this->view->headTitle($this->view->translate('Лига'));
             $this->view->headTitle($league_data->name);
 
-            $championship = new Application_Model_DbTable_Championship();
-            $championship_data = $championship->getChampionshipData($league_id, $championship_id);
+            $championship_data = $this->db->get('championship')->getItem($championship_id);
 
             if ($championship_data) {
                 $this->view->championship_data = $championship_data;
