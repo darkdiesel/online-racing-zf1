@@ -423,7 +423,7 @@ class ChampionshipController extends App_Controller_LoaderController
                                 $this->view->url(
                                     array('controller' => 'championship', 'action' => 'team',
                                           'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                          'team_id'    => $new_championship_team_data['team_id']), 'championshipTeam',
+                                          'team_id'    => $new_championship_team_data['team_id']), 'defaultChampionshipTeam',
                                     true
                                 )
                             );
@@ -607,14 +607,14 @@ class ChampionshipController extends App_Controller_LoaderController
                         $this->view->url(
                             array('controller' => 'championship', 'action' => 'driver-add',
                                   'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                  'team_id'    => $team_id), 'championshipTeam', true
+                                  'team_id'    => $team_id), 'defaultChampionshipTeam', true
                         )
                     );
                     $form->cancel->setAttrib(
                         'onClick', "location.href=\"{$this->view->url(
                             array('controller' => 'championship', 'action' => 'team',
                                   'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                  'team_id'    => $team_id), 'championshipTeam', true
+                                  'team_id'    => $team_id), 'defaultChampionshipTeam', true
                         )}\""
                     );
 
@@ -673,7 +673,7 @@ class ChampionshipController extends App_Controller_LoaderController
                                     $this->view->url(
                                         array('controller' => 'championship', 'action' => 'team',
                                               'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                              'team_id'    => $team_id), 'championshipTeam', true
+                                              'team_id'    => $team_id), 'defaultChampionshipTeam', true
                                     )
                                 );
                             }
@@ -779,14 +779,14 @@ class ChampionshipController extends App_Controller_LoaderController
                             $this->view->url(
                                 array('controller' => 'championship', 'action' => 'driver-delete',
                                       'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                      'team_id'    => $team_id, 'user_id' => $user_id), 'championshipTeamDriver', true
+                                      'team_id'    => $team_id, 'user_id' => $user_id), 'defaultChampionshipTeamDriver', true
                             )
                         );
                         $form->cancel->setAttrib(
                             'onClick', "location.href=\"{$this->view->url(
                                 array('controller' => 'championship', 'action' => 'team',
                                       'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                      'team_id'    => $team_id), 'championshipTeam', true
+                                      'team_id'    => $team_id), 'defaultChampionshipTeam', true
                             )}\""
                         );
 
@@ -815,7 +815,7 @@ class ChampionshipController extends App_Controller_LoaderController
                                     $this->view->url(
                                         array('controller' => 'championship', 'action' => 'team',
                                               'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                              'team_id'    => $team_id), 'championshipTeam', true
+                                              'team_id'    => $team_id), 'defaultChampionshipTeam', true
                                     )
                                 );
                             } else {
@@ -931,14 +931,14 @@ class ChampionshipController extends App_Controller_LoaderController
                             $this->view->url(
                                 array('controller' => 'championship', 'action' => 'driver-edit',
                                       'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                      'team_id'    => $team_id, 'user_id' => $user_id), 'championshipTeamDriver', true
+                                      'team_id'    => $team_id, 'user_id' => $user_id), 'defaultChampionshipTeamDriver', true
                             )
                         );
                         $form->cancel->setAttrib(
                             'onClick', "location.href=\"{$this->view->url(
                                 array('controller' => 'championship', 'action' => 'team',
                                       'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                      'team_id'    => $team_id), 'championshipTeam', true
+                                      'team_id'    => $team_id), 'defaultChampionshipTeam', true
                             )}\""
                         );
 
@@ -1007,7 +1007,7 @@ class ChampionshipController extends App_Controller_LoaderController
                                         $this->view->url(
                                             array('controller' => 'championship', 'action' => 'team',
                                                   'league_id'  => $league_id, 'championship_id' => $championship_id,
-                                                  'team_id'    => $team_id), 'championshipTeam', true
+                                                  'team_id'    => $team_id), 'defaultChampionshipTeam', true
                                         )
                                     );
                                 }
