@@ -30,13 +30,18 @@
                                     <?php if ($this->escape($race->track_url_scheme) != '') : ?>
                                         <div
                                             class="img-wrapper-200-200 pull-left overflow-hide m-r-5">
-                                            <a href="<?php echo $championship_race_id_url; ?>"
+                                            <a href="#" data-toggle="modal" data-target=".champ-race-<?php print $race->id; ?>"
                                                title="<?php echo $this->escape($race->name); ?>" class="thumbnail">
                                                 <img class="media-object img-size-200 img-responsive"
                                                      src="<?php echo $this->baseUrl(
                                                          $this->escape($race->track_url_scheme)
                                                      ); ?>">
                                             </a>
+                                            <?php echo $this->modal(array(
+                                                'title' => $race->track_name,
+                                                'class' => 'champ-race-'.$race->id,
+                                                'content' => '<img src="'.$this->baseUrl($this->escape($race->track_url_scheme)).'" class="img-responsive img-rounded center-block" alt="">'
+                                            )); ?>
                                         </div>
                                     <?php endif; ?>
                                 </div>

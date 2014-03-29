@@ -11,6 +11,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 	protected function _initNameSpace() {
 		Zend_Loader_Autoloader::getInstance()->registerNamespace('App');
+		Zend_Loader_Autoloader::getInstance()->registerNamespace('Bootstrap');
 	}
 
 	protected function _initDb() {
@@ -33,14 +34,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 	protected function _initSessions() {
 		$this->bootstrap('session');
-		
+
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			if (isset($_COOKIE['RememberMe'])){
 				$rememberMe = $_COOKIE['RememberMe'];
 			} else {
 				$rememberMe = 0;
 			}
-			
+
 			if ($rememberMe) {
 				Zend_Session::rememberMe(60 * 60 * 120);
 				setcookie('RememberMe', 1, 60 * 60 * 120, '/');
@@ -54,24 +55,41 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	}
 
 	protected function _initSiteModules() {
-		//Don't forget to bootstrap the front controller as the resource may not been created yet...  
+		//Don't forget to bootstrap the front controller as the resource may not been created yet...
 		$this->bootstrap("frontController");
 		$front = $this->getResource("frontController");
 
-		//Add modules dirs to the controllers for default routes...  
+		//Add modules dirs to the controllers for default routes...
 		$front->addModuleDirectory(APPLICATION_PATH . '/modules');
 	}
 
 	protected function _initPlugins() {
-		// plugin for view 
+		// plugin for view
 		$frontController = Zend_Controller_Front::getInstance();
 		$frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
 
 		$frontController->registerPlugin(new App_Plugin_SessionTrack());
 	}
 
+    public function _initViewHelpers() {
+        //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
+        $this->bootstrap('layout');
+        $layout = $this->getResource('layout');
+        $view = $layout->getView();
+        $view->doctype('XHTML1_STRICT');
+        //$view->doctype('HTML5');
+        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
+        $view->addHelperPath('Bootstrap/View/Helper', 'Bootstrap_View_Helper');
+    }
+
+    public function _initActionHelpers() {
+        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
+    }
+
 	protected function _initView() {
-		$view = new Zend_View();
+        $this->bootstrap('layout');
+        $layout = $this->getResource('layout');
+        $view = $layout->getView();
 
 		$request = Zend_Controller_Front::getInstance()->getRequest();
 
@@ -79,7 +97,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->headTitle('Online-Racing.Net')
 				->setSeparator(' | '); // setting a separator string for segments
 
-		$view->addHelperPath(APPLICATION_PATH . '/../library/App/View/Helper/', "App_View_Helper");
+//		$view->addHelperPath(APPLICATION_PATH . '/../library/App/View/Helper/', "App_View_Helper");
 
 		// [HEAD META SETTINGS]
 		$view->headMeta()
@@ -102,7 +120,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				->setHttpEquiv('Cache-Control', 'no-store');
 
 		// CSS setups
-		// [JQUERY library]                             
+		// [JQUERY library]
 		$view->headScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js");
 
 		// [JQUERY UI library]
@@ -136,35 +154,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->MinifyHeadScript()->appendFile("/js/app.js");
 		$view->MinifyHeadScript()->appendFile("/js/common.js");
 
-		Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
+//		Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
 
 		// ViewRenderer
-		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
-						'ViewRenderer'
-		);
-		$viewRenderer->setView($view);
-
-		return $view;
+//		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
+//						'ViewRenderer'
+//		);
+//		$viewRenderer->setView($view);
+//
+//		return $view;
 	}
 
+    /*
+     * Helper load layout for modules
+     */
 	protected function _initLayoutHelper() {
 		$this->bootstrap('frontController');
 		$layout = Zend_Controller_Action_HelperBroker::addHelper(
 						new App_Controller_Action_Helper_LayoutLoader());
-	}
-
-	public function _initViewHelpers() {
-		//$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
-		$this->bootstrap('layout');
-		$layout = $this->getResource('layout');
-		$view = $layout->getView();
-		$view->doctype('XHTML1_STRICT');
-		//$view->doctype('HTML5');
-		$view->addHelperPath('App/View/Helper', 'App_View_Helper');
-	}
-
-	public function _initActionHelpers() {
-		Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
 	}
 
 	public function _initAcl() {
@@ -220,7 +227,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		//кеш метаданных
 		//Zend_Db_Table_Abstract::setDefaultMetadataCache($manager->getCache('long'));
-		//время кеширования для кеша обновляемой рывками инфы 
+		//время кеширования для кеша обновляемой рывками инфы
 		//$manager->getCache('up')->setLifetime($time);
 		$cache = Zend_Cache::factory(
 						'Core', 'File', array(
