@@ -143,21 +143,6 @@
 #default-championship-drivers .team-driver-item .well{margin:0; padding:12px;min-height:140px;}
 #default-championship-drivers .team-driver-item .dp{border:10px solid #eee; transition: all 0.2s ease-in-out;}
 #default-championship-drivers .team-driver-item .dp:hover{border:2px solid #eee; transform:rotate(360deg); -ms-transform:rotate(360deg); -webkit-transform:rotate(360deg); -webkit-font-smoothing:antialiased;}
-/*post*/
-.post_id_logo_wrapper_690{
-    width:auto;
-    max-width:690px!important;
-    height:auto;
-    max-height:740px;
-    display:inline-block;
-}
-.post_id_logo{
-    width:auto;
-    max-width:690px;
-}
-/* Championship team driver*/
-#default-championship-team-show{}
-#default-championship-team-show .team_show_logo_wrapper_210{position:relative; top:-50px; right:-100px;}
 
 /* Slider block */
 #slider_block{border-bottom:none; margin:0; border:2px solid #fff;}
@@ -173,10 +158,7 @@
 .font-monospace{font-family:monospace;}
 .font-size-11{font-size:11px;}
 
-.font-bold{font-weight:bold;}
-    .font-bold a{
-        font-weight:bold;
-    }
+
 .font-color-black{
     color:#000;
 }

@@ -37,6 +37,7 @@ class RegController extends App_Controller_LoaderController {
 
 				$user_data['login'] = $form->getValue('login');
 				$user_data['email'] = $form->getValue('email');
+				$user_data['avatar_type'] = 0;
 				//$user_data['user_role_id'] = 3;
 				$user_data['country_id'] = 1;
 				$user_data['enable'] = 1;

@@ -41,3 +41,13 @@ hr.message-inner-separator{clear:both; margin-top:10px; margin-bottom:13px; bord
 .media-carousel .carousel-indicators li{background:#c0c0c0;}
 .media-carousel .carousel-indicators .active{background:#333333;}
 .media-carousel img{width: 250px; height:auto;}
+
+/* tooltip-field */
+.tooltip-field{display:inline-block;}
+
+/* Head line */
+.navbar-content{width:320px; padding:15px; padding-bottom:0px;}
+.navbar-content:before, .navbar-content:after{display:table; content:""; line-height: 0;}
+.navbar-nav.navbar-right:last-child{margin-right: 15px!important;}
+.navbar-footer{background-color:#DDD; margin-left:-15px; margin-right:-15px;}
+.navbar-footer-content{padding:15px 15px 15px 15px;}

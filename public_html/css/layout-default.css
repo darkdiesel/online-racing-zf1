@@ -48,9 +48,17 @@ body{}
 
 /*Drivers*/
 #default-user-all .block-user{min-height:230px;}
-#default-user-all .block-user .user-avatar{border-width:10px; border-style:solid;}
+#default-user-all .block-user .user-avatar{border-width:5px; border-style:solid;}
 #default-user-all .block-user .user-avatar:hover{border-color:#C41D1D; transform:rotate(360deg); -ms-transform:rotate(360deg); -webkit-transform:rotate(360deg); -webkit-font-smoothing:antialiased;}
 #default-user-all .block-user .user-flag{position:absolute;top:5px;right:5px;}
+
+/*User*/
+#default-user-id .user-cover{height:150px; overflow:hidden; border-radius:5px;}
+#default-user-id .user-avatar{border-width:5px; border-style:solid; position:absolute; left:50px; top:150px; margin-top:-60px;}
+#default-user-id .user-avatar:hover{border-color:#C41D1D;}
+#default-user-id .user-name{padding-left:180px; font-size:30px;}
+#default-user-id .change-user-cover-btn{position:absolute; top:15px; right:15px;}
+#default-user-id table{font-family:monospace;}
 
 /*Sidebar online-drivers block*/
 #online-drivers .block-user{}
@@ -86,3 +94,28 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 #default-championship-calendar .block-race span.plus a:hover { background-color: #414141; }
 #default-championship-calendar .block-race span.plus a i { color: #fff !important; }
 #default-championship-calendar .block-race span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
+
+/* user id */
+.panel
+{
+    background-image:url("");
+}
+.dropdown
+{
+    position:absolute;
+}
+
+.change
+{
+    position:relative;
+    bottom:20px;
+    padding:1px;
+    color:white;
+    text-decoration:none;
+}
+.change:hover
+{
+    text-decoration:none;
+    background-color:black;
+    color:white;
+}

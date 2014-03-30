@@ -29,6 +29,7 @@
 .m-r-0{margin-right:0!important;}
 .m-all-0{margin:0!important;}
 .m-t-5{margin-top:5px!important;}
+.m-b-5{margin-bottom:5px!important;}
 .m-l-5{margin-left:5px!important;}
 .m-r-5{margin-right:5px!important;}
 .m-all-5{margin:5px!important;}
@@ -93,6 +94,7 @@
 .img-size-64{width:64px;}
 .img-size-70{width:70px;}
 .img-size-100{width:100px;}
+.img-size-120{width:120px;}
 .img-size-150{width:150px;}
 .img-size-200{width:200px;}
 .img-size-250{width:250px;}
@@ -103,23 +105,26 @@
 .img-size-400{width:400px;}
 .img-size-500{width:500px;}
 .img-size-600{width:600px;}
+.img-size-640{width:640px;}
 .img-size-690{width:690px;}
 
 /* image wrapper classes */
+.img-wrapper-30-30{width:30px; max-height:30px;}
 .img-wrapper-50-50{width:50px; max-height:50px;}
 .img-wrapper-70{width:70px;  max-height:70px;}
-.img-wrapper-100{width:100px;}
+.img-wrapper-100{max-width:100px;}
 .img-wrapper-100-100{width:100px; max-height:100px;}
+.img-wrapper-120-120{width:120px; max-height:120px;}
 .img-wrapper-150-150{width:150px; max-height:150px;}
-.img-wrapper-200{width:200px;}
+.img-wrapper-200{max-width:200px;}
 .img-wrapper-200-200{width:200px; max-height:200px;}
 .img-wrapper-210-210{ width:210px; max-height:210px;}
-.img-wrapper-250{ width:250px;}
+.img-wrapper-250{max-width:250px;}
 .img-wrapper-250-250{width:250px; max-height:250px;}
-.img-wrapper-365{width:365px;}
-.img-wrapper-690{width:690px;}
-.img-wrapper-700{width:700px;}
-
+.img-wrapper-365{max-width:365px;}
+.img-wrapper-450{max-width:450px;}
+.img-wrapper-690{max-width:690px;}
+.img-wrapper-700{max-width:700px;}
 
 /* box shadows */
 .shadow-bottom{-webkit-box-shadow: 0 10px 6px -6px #777; -moz-box-shadow: 0 10px 6px -6px #777; box-shadow: 0 10px 6px -6px #777;}
@@ -191,7 +196,9 @@
 .configure-block-item-links .contextual-links-trigger{color:gray; opacity:0.5;}
 .configure-block-item-links .contextual-links-trigger .caret{color:black;}
 
-
 /* user common styles */
 .user-online{border-color:#00cc22;}
 .user-offline{border-color:#C8C8C8;}
+
+/* bootstrap magnify */
+.container-magnify{}

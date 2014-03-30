@@ -18,4 +18,9 @@ $(document).ready(function() {
 		}
 	});
 
+    $('.img-magnify').each(function(e){
+        //$(this).attr('data-toggle', 'magnify');
+        $(this).magnify();
+    });
+
 });

@@ -30,7 +30,7 @@
                                     <?php if ($this->escape($race->track_url_scheme) != '') : ?>
                                         <div
                                             class="img-wrapper-200-200 pull-left overflow-hide m-r-5">
-                                            <a href="#" data-toggle="modal" data-target=".champ-race-<?php print $race->id; ?>"
+                                            <a href="#" data-toggle="modal" data-target=".champ-race-<?php echo $race->id; ?>"
                                                title="<?php echo $this->escape($race->name); ?>" class="thumbnail">
                                                 <img class="media-object img-size-200 img-responsive"
                                                      src="<?php echo $this->baseUrl(
@@ -48,27 +48,27 @@
                                 <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
                                     <ul class="meta-search">
                                         <li><i class="glyphicon glyphicon-calendar"></i>
-                                            <span><?php print $this->escape($race->race_date); ?></span></li>
+                                            <span><?php echo $this->escape($race->race_date); ?></span></li>
                                         <li><i class="glyphicon glyphicon-time"></i> <span></span></li>
-                                        <li><i class="glyphicon glyphicon-tags"></i> <span><?php print $this->translate(
+                                        <li><i class="glyphicon glyphicon-tags"></i> <span><?php echo $this->translate(
                                                     'Гонка'
                                                 ); ?></span></li>
                                         <li>
                                             <i class="glyphicon glyphicon-map-marker"></i>
                                         <span class="tooltip-field" data-placement="bottom"
-                                              data-title="<?php print $this->escape($race->country_english_name); ?>">
+                                              data-title="<?php echo $this->escape($race->country_english_name); ?>">
                                             <img class="img-size-30-30" src="<?php echo $this->baseUrl(
                                                 $this->escape($race->country_url_image_round)
-                                            ); ?>" alt="<?php print $this->escape($race->country_english_name); ?>">
+                                            ); ?>" alt="<?php echo $this->escape($race->country_english_name); ?>">
                                         </span>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7  excerpet">
                                     <h3>
-                                        <a href="<?php print $championship_race_id_url; ?>"
+                                        <a href="<?php echo $championship_race_id_url; ?>"
                                            title="">
-                                            <?php print $this->escape($race->name); ?>
+                                            <?php echo $this->escape($race->name); ?>
                                         </a>
                                     </h3>
                                     <!-- detail information for race  -->
@@ -77,16 +77,16 @@
                                             <thead>
                                             <tr>
                                                 <th>
-                                                    <?php print $this->translate('Номер'); ?>
+                                                    <?php echo $this->translate('Номер'); ?>
                                                 </th>
                                                 <th>
-                                                    <?php print $this->translate('Круги'); ?>
+                                                    <?php echo $this->translate('Круги'); ?>
                                                 </th>
                                                 <th>
-                                                    <?php print $this->translate('Конфиг. трассы (год)'); ?>
+                                                    <?php echo $this->translate('Конфиг. трассы (год)'); ?>
                                                 </th>
                                                 <th>
-                                                    <?php print $this->translate('Длина круга (км)'); ?>
+                                                    <?php echo $this->translate('Длина круга (км)'); ?>
                                                 </th>
                                             </tr>
                                             </thead>
@@ -97,13 +97,13 @@
                                                         class="label label-danger"><?php echo $race->race_number ?></span>
                                                 </td>
                                                 <td>
-                                                    <?php print $this->escape($race->race_laps); ?>
+                                                    <?php echo $this->escape($race->race_laps); ?>
                                                 </td>
                                                 <td>
-                                                    <?php print $this->escape($race->track_year); ?>
+                                                    <?php echo $this->escape($race->track_year); ?>
                                                 </td>
                                                 <td>
-                                                    <?php print $this->escape($race->track_length); ?>
+                                                    <?php echo $this->escape($race->track_length); ?>
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -112,8 +112,8 @@
                                     <!-- end detail information for race  -->
                                     <!-- More btn -->
                                 <span class="plus">
-                                    <a href="<?php print $championship_race_id_url; ?>"
-                                       title="<?php print $this->translate('Подробнее...'); ?>" class="pull-right">
+                                    <a href="<?php echo $championship_race_id_url; ?>"
+                                       title="<?php echo $this->translate('Подробнее...'); ?>" class="pull-right">
                                         <i class="glyphicon glyphicon-share-alt"></i>
                                     </a>
                                 </span><!-- More btn -->

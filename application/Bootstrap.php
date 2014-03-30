@@ -132,6 +132,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$view->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css");
 		$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
 
+        // [BOOTSTRAP MAGNIFY]
+        $view->minifyHeadLink()->appendStylesheet("/library/bootstrap-magnify/css/bootstrap-magnify.min.css");
+        $view->headScript()->appendFile("/library/bootstrap-magnify/js/bootstrap-magnify.min.js");
+
 		// [SNOW FALL]
 		//$view->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js");
 

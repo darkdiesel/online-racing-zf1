@@ -16,13 +16,11 @@ class UserController extends App_Controller_LoaderController {
 		$user_data = $user->getUserData($user_id);
 
 		if ($user_data) {
-			$this->view->user = $user_data;
+			$this->view->user_data = $user_data;
 			$this->view->breadcrumb()->UserAll('1')->User($user_id, $user_data->login);
 
 			$this->view->headTitle($user_data->login);
 			$this->view->pageTitle($user_data->login);
-
-			$this->view->avatar = $this->view->getUserAvatar($user_data->id, $user_data->avatar_type);
 		} else {
 			$this->messages->addError("{$this->view->translate("Пользователь не существует!")}");
 			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Пользователь не существует!')}");
