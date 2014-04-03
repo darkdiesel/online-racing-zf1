@@ -32,7 +32,6 @@ body{}
 #footer .web_counters{position:absolute; right:0px; display:inline-block;}
 #footer .web_counters img{opacity:0.4;}
 #footer .web_counters img:hover{opacity:1;}
-#footer .web_counters > div{display:inline-block; margin:0 5px;}
 
 /* RSS Block */
 .block-media-list-rss{}

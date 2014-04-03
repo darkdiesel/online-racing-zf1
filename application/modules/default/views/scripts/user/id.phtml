@@ -41,7 +41,7 @@
                             class="img-wrapper-120-120 overflow-hide img-circle user-avatar pic <?php echo $user_status_class; ?>">
                             <a href="#" data-toggle="modal" data-target=".user-<?php echo $this->user_data->id; ?>"
                                title="<?php echo $this->escape($this->user_data->id); ?>">
-                            <?php echo $this->getUserAvatar($this->user_data->id, $this->user_data->avatar_type, 'img-responsive img-size-120 img-circle', 120); ?>
+                            <?php echo $this->getUserAvatar($this->user_data->id, $this->user_data->avatar_type, 'img-responsive img-size-120', 120); ?>
                             </a>
                             <?php echo $this->modal(array(
                                 'title' => $this->user_data->login,
