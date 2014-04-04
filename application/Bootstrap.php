@@ -66,13 +66,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	protected function _initPlugins() {
 		// plugin for view
 		$frontController = Zend_Controller_Front::getInstance();
+
+        //Register variables for views
 		$frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
 
-		$frontController->registerPlugin(new App_Plugin_SessionTrack());
+		//$frontController->registerPlugin(new App_Plugin_SessionTrack());
 	}
 
     public function _initViewHelpers() {
-        //$layout = Zend_Layout::startMvc(array('layoutPath' => '../application/layouts'));
         $this->bootstrap('layout');
         $layout = $this->getResource('layout');
         $view = $layout->getView();
@@ -105,9 +106,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				->setHttpEquiv('X-UA-Compatible', 'IE=edge')
 				->appendHttpEquiv('Content-Language', 'en-US')
 				->appendHttpEquiv('Content-Language', 'ru')
-				->appendName('description', 'Site about sim-racing competition with rFactor mods and F1 news.')
-				->appendName('keywords', 'F1, F-1, Online F1, F1 News, Формула-1, Formula One, rfactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
-                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rFactor lite')
+				->appendName('description', 'Sim-Racing Portal with unique functionality that provides opportunities as a social network.')
+				->appendName('keywords', 'F1, F-1, Online F1, F1 News, Формула-1, Formula One, rFactor, Online-Racing, Онлайн гонки, RFT, Sim Racing, Race,
+                               Гонки, Новости Формулы 1, сим-рейсинг, championship, formula1 скачать, русификатор, rFactor lite, ORM ')
 				->appendName('subject', 'Sim-Racing')
 				->appendName('title', 'Online-Racing')
 				->appendName('revisit', '5 days')
@@ -115,11 +116,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				->appendName('Copyright', 'Igor Peshkov. Copyright 2012-2014')
 				->appendName('Author', 'Igor Peshkov. Copyright 2012-2014')
 				->appendName('reply-to', 'Igor.Peshkov@gmail.com')
-				->appendName('Generator', 'NetBeans, notepad++')
+				->appendName('Generator', 'NetBeans, notepad++, PHPStorm')
 				->appendName('yandex-verification', '715d9bbdfc996f86')
 				->setHttpEquiv('Cache-Control', 'no-store');
 
-		// CSS setups
+        // Modernize
+        $view->headScript()->appendFile("/library/modernizr/modernizr.min.js");
+
 		// [JQUERY library]
 		$view->headScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js");
 
@@ -157,8 +160,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		$view->MinifyHeadScript()->appendFile("/js/app.js");
 		$view->MinifyHeadScript()->appendFile("/js/common.js");
-
-//		Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
 
 		// ViewRenderer
 //		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
