@@ -18,6 +18,10 @@
 }
 .btn-inverse .badge{background-color:#FFFFFF; color:#363636;}
 
+.btn-ds{display:inline-block;}
+.btn-ds a span{padding-left:15px;padding-right:5px;display:inline-block; text-align:left;}
+.btn-ds a span small{display:inline-block; text-align:left;}
+
 /* Classes for bootstrap messaages */
 hr.message-inner-separator{clear:both; margin-top:10px; margin-bottom:13px; border:0; height:1px;
 	background-image:-webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));

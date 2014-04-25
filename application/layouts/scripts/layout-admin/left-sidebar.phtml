@@ -1,229 +1,277 @@
 <div class="row m-b-10">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<a class="btn btn-danger btn-lg btn-block" href="<?php echo $this->baseUrl(); ?>">
-			<i class="fa fa-globe"></i> <?php echo $this->translate('Вернуться на сайт'); ?>
-		</a>
-	</div>
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-t-5">
-		<a class="btn btn-success btn-lg btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
-			<i class="fa fa-desktop"></i> <?php echo $this->translate('Панель администрирования'); ?>
-		</a>
-	</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 m-b-5">
+        <a class="btn btn-success btn-lg btn-block" href="<?php echo $this->url(
+            array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true
+        ) ?>">
+            <i class="fa fa-desktop"></i> <?php echo $this->translate('Панель администрирования'); ?>
+        </a>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 m-b-5">
+        <a class="btn btn-danger btn-lg btn-block" href="<?php echo $this->baseUrl(); ?>">
+            <i class="fa fa-globe"></i> <?php echo $this->translate('Вернуться на сайт'); ?>
+        </a>
+    </div>
 </div>
 <div class="row m-b-10">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-1">
-							<i class="fa fa-folder"></i> <?php echo $this->translate('Контент сайта'); ?></a>
-					</h4>
-				</div>
-				<div id="collapse-1" class="panel-collapse collapse in">
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<td>
-									<i class="fa fa-file-text"></i>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'all'), 'adminPostAll', true) ?>">
-										<?php echo $this->translate('Контент сайта'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fa fa-file-text"></i>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'content_type_all', true) ?>">
-										<?php echo $this->translate('Типы контента'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<i class="fa fa-file-text"></i>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'adminPostTypeAll', true) ?>">
-										<?php echo $this->translate('Типы постов'); ?>
-									</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">
-							<i class="fa fa-exclamation-circle"></i> <?php echo $this->translate('Безопасность'); ?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapse-2" class="panel-collapse collapse">
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'), 'adminResourceAll', true) ?>">
-										<?php echo $this->translate('Ресурсы сайта'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'adminRoleAll', true) ?>">
-										<?php echo $this->translate('Роли пользователей'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'), 'adminPrivilegeAll', true) ?>">
-										<?php echo $this->translate('Привилегии ресурсов'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'resource-access', 'action' => 'all'), 'adminResourceAccessAll', true) ?>">
-										<?php echo $this->translate('Доступ к ресурсам'); ?>
-									</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-3">
-							<i class="fa fa-users"></i> <?php echo $this->translate('Пользователи'); ?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapse-3" class="panel-collapse collapse">
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1), 'adminUserAll', true) ?>">
-										<?php echo $this->translate('Пользователи'); ?>
-									</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-4">
-							<i class="fa fa-trophy"></i> <?php echo $this->translate('Лиги и Чемпионаты'); ?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapse-4" class="panel-collapse collapse">
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'league', 'action' => 'all'), 'adminLeagueAll', true) ?>">
-										<?php echo $this->translate('Лиги'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'all'), 'adminChampionshipAll', true) ?>">
-										<?php echo $this->translate('Чемпионаты'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true) ?>">
-										<?php echo $this->translate('Команды'); ?>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all'), 'track_all', true) ?>">
-										<?php echo $this->translate('Трассы'); ?>
-									</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-5">
-							<i class="fa fa-gavel"></i> <?php echo $this->translate('Работа сайта'); ?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapse-5" class="panel-collapse collapse">
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all', true) ?>">
-										<?php echo $this->translate('Страны'); ?>
-									</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse-6">
-							<i class="fa fa-puzzle-piece"></i> <?php echo $this->translate('Утилиты'); ?>
-						</a>
-					</h4>
-				</div>
-				<div id="collapse-6" class="panel-collapse collapse">
-					<div class="panel-body">
-						<table class="table">
-							<tr>
-								<td>
-									<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'), 'default', true) ?>">
-										<?php echo $this->translate('Файловый Мэнеджер'); ?>
-									</a>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-1">
+                            <i class="fa fa-folder"></i> <?php echo $this->translate('Контент сайта'); ?></a>
+                    </h4>
+                </div>
+                <div id="collapse-1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <i class="fa fa-file-text"></i>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'post', 'action' => 'all'),
+                                        'adminPostAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Контент сайта'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-file-text"></i>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'),
+                                        'content_type_all', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Типы контента'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <i class="fa fa-file-text"></i>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'),
+                                        'adminPostTypeAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Типы постов'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">
+                            <i class="fa fa-exclamation-circle"></i> <?php echo $this->translate('Безопасность'); ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'),
+                                        'adminResourceAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Ресурсы сайта'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'role', 'action' => 'all'),
+                                        'adminRoleAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Роли пользователей'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all'),
+                                        'adminPrivilegeAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Привилегии ресурсов'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'resource-access',
+                                              'action' => 'all'), 'adminResourceAccessAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Доступ к ресурсам'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-3">
+                            <i class="fa fa-users"></i> <?php echo $this->translate('Пользователи'); ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'user', 'action' => 'all',
+                                              'page'   => 1), 'adminUserAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Пользователи'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-4">
+                            <i class="fa fa-trophy"></i> <?php echo $this->translate('Лиги и Чемпионаты'); ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'league', 'action' => 'all'),
+                                        'adminLeagueAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Лиги'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'championship', 'action' => 'all'),
+                                        'adminChampionshipAll', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Чемпионаты'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'team', 'action' => 'all'),
+                                        'team_all', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Команды'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'track', 'action' => 'all'),
+                                        'track_all', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Трассы'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-5">
+                            <i class="fa fa-gavel"></i> <?php echo $this->translate('Работа сайта'); ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-5" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'country', 'action' => 'all'),
+                                        'country_all', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Страны'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-6">
+                            <i class="fa fa-puzzle-piece"></i> <?php echo $this->translate('Утилиты'); ?>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-6" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="<?php echo $this->url(
+                                        array('module' => 'admin', 'controller' => 'file-manager', 'action' => 'index'),
+                                        'default', true
+                                    ) ?>">
+                                        <?php echo $this->translate('Файловый Мэнеджер'); ?>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <h4>Будет переделано:</h4>
 <ul class="nav nav-pills nav-stacked">
     <li class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-			<?php echo $this->translate('События'); ?> <span class="caret"></span>
-		</a>
-		<ul class="dropdown-menu">
-			<li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'add'), 'default', true) ?>">
-					<?php echo $this->translate('Добавить'); ?>
-				</a>
-			<li class="divider"></li>
-			<li>
-				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'all'), 'event_all', true) ?>">
-					<?php echo $this->translate('Все'); ?>
-				</a>
-			</li>
-		</ul>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <?php echo $this->translate('События'); ?> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="<?php echo $this->url(
+                    array('module' => 'admin', 'controller' => 'event', 'action' => 'add'), 'default', true
+                ) ?>">
+                    <?php echo $this->translate('Добавить'); ?>
+                </a>
+            <li class="divider"></li>
+            <li>
+                <a href="<?php echo $this->url(
+                    array('module' => 'admin', 'controller' => 'event', 'action' => 'all'), 'event_all', true
+                ) ?>">
+                    <?php echo $this->translate('Все'); ?>
+                </a>
+            </li>
+        </ul>
     </li>
 </ul>
