@@ -51,7 +51,7 @@
 			<div class="article_controls">
 				<?php if ($edit_access) { ?>
 					<?php
-					$track_edit_url = $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'track_action', true);
+					$track_edit_url = $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'adminTrackAction', true);
 					?>
 					<a href = "<?php echo $track_edit_url; ?>" class = "btn btn-sm btn-primary content_edit">
 						<?php echo $this->translate('Редактировать') ?>
@@ -59,7 +59,7 @@
 				<?php } ?>
 				<?php if ($delete_access) { ?>
 					<?php
-					$track_delete_url = $this->url(array('controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($this->track->id)), 'track_action', true);
+					$track_delete_url = $this->url(array('controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($this->track->id)), 'adminTrackAction', true);
 					?>
 					<a href = "<?php echo $track_delete_url; ?>" class = "btn btn-sm btn-primary content_delete">
 						<?php echo $this->translate('Удалить') ?>

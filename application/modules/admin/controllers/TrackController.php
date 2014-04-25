@@ -103,7 +103,7 @@ class Admin_TrackController extends App_Controller_LoaderController {
 				$new_track = $this->db->get('track')->createRow($new_track_data);
 				$new_track->save();
 
-				$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $new_track->id), 'track_id', true);
+				$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $new_track->id), 'adminTrackId', true);
 				$this->redirect($track_id_url);
 			} else {
 				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
@@ -131,11 +131,11 @@ class Admin_TrackController extends App_Controller_LoaderController {
 			$this->view->headTitle($track_data->name);
 			$this->view->pageTitle($track_data->name);
 			
-			$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'track_id', true);
+			$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'adminTrackId', true);
 			
 			// form
 			$form = new Application_Form_Track_Edit();
-			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $track_id), 'track_action', true));
+			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $track_id), 'adminTrackAction', true));
 			$form->cancel->setAttrib('onClick', "location.href=\"{$track_id_url}\"");
 
 			if ($this->getRequest()->isPost()) {
@@ -225,10 +225,10 @@ class Admin_TrackController extends App_Controller_LoaderController {
 		if ($track_data) {
 			$this->view->headTitle($track_data->name);
 
-			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить трассу')} <strong>\"{$track_data->name}\"</strong> ?");
+			$this->messages->addWarning($this->view->translate('Вы действительно хотите удалить трассу').'<strong>'.$track_data->name.'</strong> ?');
 
-			$track_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $track_id), 'track_action', true);
-			$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'track_id', true);
+			$track_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $track_id), 'adminTrackAction', true);
+			$track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'adminTrackId', true);
 
 			$form = new Application_Form_Track_Delete();
 			$form->setAction($track_delete_url);
@@ -240,9 +240,9 @@ class Admin_TrackController extends App_Controller_LoaderController {
 					$this->db->get('track')->delete($track_where);
 
 					$this->messages->clearMessages();
-					$this->messages->addSuccess("{$this->view->translate("Трасса <strong>\"{$track_data->name} \"</strong> успешно удалена")}");
+					$this->messages->addSuccess($this->view->translate('Трасса <strong>"'.$track_data->name.'"</strong> успешно удалена'));
 
-					$track_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all', 'page' => 1), 'track_all', true);
+					$track_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all', 'page' => 1), 'adminTrackAll', true);
 					$this->redirect($track_all_url);
 				} else {
 					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
