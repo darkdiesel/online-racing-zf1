@@ -8,7 +8,12 @@
         <div class="col-md-12 col-lg-12">
             <div class="panel block">
                 <?php
-                echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu($this->escape($this->league_data->id), $this->escape($this->championship_data->id), $this->escape($this->race_data->id));
+                echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu(
+                    $this->escape($this->league_data->id),
+                    $this->escape($this->championship_data->id),
+                    $this->escape($this->race_data->id),
+                    $this->escape($this->race_data->track_id)
+                );
                 ?>
                 <div class="panel-body">
                     <div class="row">

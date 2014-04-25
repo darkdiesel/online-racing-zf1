@@ -456,7 +456,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 
 		//TRACK CONTROLLER ROUTERS
 		$router->addRoute(
-				'track_id', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)\.html', array(
+				'adminTrackId', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'track',
 			'action' => 'id',
@@ -466,7 +466,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'track_action', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)/(\w*)\.html', array(
+				'adminTrackAction', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)/(\w*)\.html', array(
 			'module' => 'admin',
 			'controller' => 'track',
 			'action' => 'id',
@@ -477,7 +477,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		$router->addRoute(
-				'track_all', new Zend_Controller_Router_Route_Regex('admin/track/all/page/(\d+)\.html', array(
+				'adminTrackAll', new Zend_Controller_Router_Route_Regex('admin/track/all/page/(\d+)\.html', array(
 			'module' => 'admin',
 			'controller' => 'track',
 			'action' => 'all',

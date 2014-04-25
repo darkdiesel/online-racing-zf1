@@ -30,9 +30,9 @@
 						<tbody>
 							<?php foreach ($this->paginator as $track): ?>
 								<?php
-								$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $this->escape($track->id)), 'track_id', true);
-								$track_edit_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($track->id)), 'track_action', true);
-								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'track_action', true);
+								$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $this->escape($track->id)), 'adminTrackId', true);
+								$track_edit_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($track->id)), 'adminTrackAction', true);
+								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'adminTrackAction', true);
 								
 								$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($track->country_id)), 'country_id', true);
 								?>

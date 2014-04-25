@@ -10,17 +10,22 @@
             <?php foreach ($this->championship_races_data as $race): ?>
                 <?php
                 $championship_race_id_url = $this->url(
-                    array('module'          => 'default', 'controller' => 'race', 'action' => 'id',
+                    array('module'          => 'default',
+                          'controller' => 'race',
+                          'action' => 'id',
                           'league_id'       => $this->league_data->id,
-                          'championship_id' => $this->championship_data->id, 'race_id' => $race->id),
+                          'championship_id' => $this->championship_data->id,
+                          'race_id' => $race->id),
                     'defaultChampionshipRaceId', true
                 );
                 ?>
                 <div class="block block-ui-bordered block-ui-shadow m-b-15">
                     <?php
                     echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu(
-                        $this->escape($this->league_data->id), $this->escape($this->championship_data->id),
-                        $this->escape($race->id)
+                        $this->escape($this->league_data->id),
+                        $this->escape($this->championship_data->id),
+                        $this->escape($race->id),
+                        $this->escape($race->track_id)
                     );
                     ?>
                     <div class="block-body">
