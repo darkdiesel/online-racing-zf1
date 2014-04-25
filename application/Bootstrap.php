@@ -73,16 +73,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		//$frontController->registerPlugin(new App_Plugin_SessionTrack());
 	}
 
-    public function _initViewHelpers() {
-        $this->bootstrap('layout');
-        $layout = $this->getResource('layout');
-        $view = $layout->getView();
-        $view->doctype('XHTML1_STRICT');
-        //$view->doctype('HTML5');
-        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
-        $view->addHelperPath('Bootstrap/View/Helper', 'Bootstrap_View_Helper');
-    }
-
     public function _initActionHelpers() {
         Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
     }
@@ -93,6 +83,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view = $layout->getView();
 
 		$request = Zend_Controller_Front::getInstance()->getRequest();
+
+        // Init DocType
+        $view->doctype('XHTML1_STRICT');
+
+        // Init View Helpers
+        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
+        $view->addHelperPath('Bootstrap/View/Helper', 'Bootstrap_View_Helper');
 
 		// [MAIN SITE TITLE SETTINGS]
 		$view->headTitle('Online-Racing.Net')
