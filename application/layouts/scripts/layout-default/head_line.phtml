@@ -5,155 +5,48 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top-main-menu"
                                 data-target=".navbar-ex1-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <div class="pull-left">
-                            <a href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index'), 'default', true); ?>"><img
-                                    src="<?php echo $this->baseUrl('data-content/ui/logo_orn.png'); ?>"
-                                    class="img-responsive"/></a>
-                        </div>
+                        <?php
+                         $default_index_url = $this->url(array('module' => 'default','controller' => 'index', 'action' => 'index'), 'default', true);
+                        ?>
+                        <a href="<?php echo $default_index_url; ?>" class="pull-left">
+                            <img src="<?php echo $this->baseUrl('data-content/ui/logo_orn.png'); ?>" class="img-responsive"/>
+                        </a>
                     </div>
                     <!-- User Navbar -->
-                    <div class="collapse navbar-collapse navbar-ex1-collapse">
-                        <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-                            <?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
+                    <div id="top-main-menu" class="collapse navbar-collapse">
 
-                            <!-- New user navbar -->
+                        <!-- User Navigation menu  -->
+                        <?php echo $this->render("common/user-nav-menu.phtml") ?>
+                        <!-- /User Navigation menu  -->
+                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'index', 'index')) : ?>
                             <?php
-                            $default_auth_logout_url = $this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true);
-                            $default_user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $storage_data->id), 'defaultUserId', true);
-                            $default_user_edit_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true);
-                            $default_user_settings_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true);
-                            $default_user_mssages_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true);
-                            $admin_url = $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true);
-
-                            $user_db = new Application_Model_DbTable_User();
-                            $user_data = $user_db->getItem(Zend_Auth::getInstance()->getStorage()->read()->id);
+                            $admin_index_url = $this->url(
+                                array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true
+                            );
                             ?>
                             <ul class="nav navbar-nav navbar-right">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <span class="glyphicon glyphicon-user"></span>
-                                        <?php echo $this->translate('Профиль'); ?>
-                                        <b class="caret"></b>
+                                <li>
+                                    <a href="<?php echo $admin_index_url;?>">
+                                        <i class="fa fa-bolt"></i> <?php echo $this->translate('Админ. Панель'); ?>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <div class="navbar-content">
-                                                <div class="row">
-                                                    <div class="col-md-5">
-                                                        <div class="img-wrapper-100 thumbnail m-b-0">
-                                                            <?php echo $this->getUserAvatar($user_data->id, $user_data->avatar_type, 'img-responsive img-size-100', 100); ?>
-                                                        </div>
-                                                        <p class="text-center small">
-                                                            <a href="<?php echo $default_user_edit_url, '#tabs-2' ?>">
-                                                                <?php echo $this->translate('Изменить аватар'); ?>
-                                                            </a>
-                                                        </p>
-                                                        <div class="text-center">
-                                                            <a href="<?php echo $default_user_mssages_url; ?>"
-                                                               class="btn btn-default btn-sm m-b-5">
-                                                                <i class="fa fa-envelope"></i> <?php echo $this->translate('Сообщения') ?>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                            <span>
-                                                                <?php
-                                                                if (!empty($user_data->name) && !empty($user_data->surname)) {
-                                                                    ?>
-                                                                    <strong>
-                                                                        <?php echo $user_data->surname . ' ' . $user_data->name; ?>
-                                                                    </strong>
-                                                                <?
-                                                                } else {
-                                                                    ?>
-                                                                    <div>
-                                                                            <span class="label label-warning">
-                                                                            <?php echo $this->translate('< БЕЗ ИМЕНИ >'); ?>
-                                                                            </span>
-                                                                    </div>
-                                                                    <div>
-                                                                        <a href="<?php echo $default_user_edit_url ?>">
-                                                                            <span class="label label-danger">
-                                                                                    >> <?php echo $this->translate('Добавить ИМЯ') ?>
-                                                                                <<
-                                                                            </span>
-                                                                        </a>
-                                                                    </div>
-                                                                <?php
-                                                                }
-                                                                ?>
-                                                            </span>
-
-                                                        <p class="text-muted small">
-                                                            <?php echo Zend_Auth::getInstance()->getStorage()->read()->login; ?>
-                                                            <a href="<?php echo $default_user_edit_url ?>">
-                                                                <i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать профиль') ?>
-                                                            </a>
-                                                        </p>
-
-                                                        <div class="divider">
-                                                        </div>
-                                                        <div>
-                                                            <a href="<?php echo $default_user_id_url; ?>"
-                                                               class="btn btn-primary btn-sm active m-b-5">
-                                                                <i class="fa fa-briefcase"></i> <?php echo $this->translate('Профиль') ?>
-                                                            </a>
-
-                                                        </div>
-                                                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'index', 'index')) : ?>
-                                                            <div>
-                                                                <a href="<?php echo $admin_url; ?>"
-                                                                   class="btn btn-danger btn-sm active m-b-5">
-                                                                    <i class="fa fa-bolt"></i> <?php echo $this->translate('Админ. Панель') ?>
-                                                                </a>
-                                                            </div>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                                <div class="navbar-footer">
-                                                    <div class="navbar-footer-content">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <a href="<?php echo $default_user_settings_url ?>"
-                                                                   class="btn btn-default btn-sm">
-                                                                    <i class="fa fa-cog"></i> <?php echo $this->translate('Настройки') ?>
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <a href="<?php echo $default_auth_logout_url; ?>"
-                                                                   class="btn btn-default btn-sm pull-right">
-                                                                    <i class="fa fa-power-off"></i> <?php echo $this->translate('Выход') ?>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        </li>
-                                    </ul>
                                 </li>
-                            </ul><!-- / User Navbar -->
-                        <?php } else { ?>
-                            <ul class="nav navbar-nav navbar-collapse navbar-right">
-                                <a class="btn btn-info navbar-btn"
-                                   href="<?php echo $this->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true); ?>"><?php echo $this->translate('Регистрация') ?></a>
-                                <button data-toggle="modal" href="#loginModalForm" type="button"
-                                        class="btn btn-primary navbar-btn"><?php echo $this->translate('Войти') ?></button>
                             </ul>
-                        <?php } ?>
+                        <?php endif; ?>
                         <form class="navbar-form navbar-right m-r-5" action="#" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control"
                                        placeholder="<?php echo $this->translate('Поиск'); ?>">
                             </div>
-                            <button type="submit"
-                                    class="btn btn-default"><?php echo $this->translate('Поиск'); ?></button>
+                            <button type="submit" class="btn btn-default">
+                                <?php echo $this->translate('Поиск'); ?>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -167,7 +60,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bottom-main-menu"
                                 data-target=".navbar-ex2-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -175,7 +68,7 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <div class="collapse navbar-collapse navbar-ex2-collapse">
+                    <div id="bottom-main-menu" class="collapse navbar-collapse">
                         <?php
                         $partial = array('menu_layout/main_menu.phtml', 'default');
                         $this->navigation()->menu($this->main_menu)->setPartial($partial);
