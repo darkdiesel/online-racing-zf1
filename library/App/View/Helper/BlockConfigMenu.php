@@ -56,16 +56,21 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 		return $this;
 	}
 
-	public function championshipRaceMenu($league_id, $championship_id, $race_id) {
+	public function championshipRaceMenu($league_id, $championship_id, $race_id, $track_id) {
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race', 'edit')) {
 			$link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'edit', 'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id), 'defaultChampionshipRaceIdAction', true);
-			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+			array_push($this->_menuLinks, '<a href="'.$link.'">'.$this->view->translate('Редактировать гонку').'</a>');
 		}
 
 		if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race', 'edit')) {
 			$link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'delete', 'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id), 'defaultChampionshipRaceIdAction', true);
-			array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
+            array_push($this->_menuLinks, '<a href="'.$link.'">'.$this->view->translate('Удалить гонку').'</a>');
 		}
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'edit')) {
+            $link = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $track_id), 'adminTrackAction', true);
+            array_push($this->_menuLinks, '<a href="'.$link.'">'.$this->view->translate('Редактировать трассу').'</a>');
+        }
 
 		return $this;
 	}
