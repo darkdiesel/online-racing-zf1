@@ -197,8 +197,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
         $this->view->form = $form;
     }
 
-    public
-    function editAction()
+    public function editAction()
     {
         $request = $this->getRequest();
         $championship_id = $request->getParam('championship_id');
@@ -410,8 +409,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
         }
     }
 
-    public
-    function deleteAction()
+    public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));
 

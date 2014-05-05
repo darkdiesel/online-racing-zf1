@@ -14,9 +14,6 @@
     $default_user_settings_url = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true
     );
-    $default_reg_user_url = $this->url(
-        array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true
-    );
     $default_user_mssages_url = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true
     );
@@ -119,6 +116,11 @@
         </li>
     </ul>
 <?php } else { ?>
+    <?php
+        $default_reg_user_url = $this->url(
+            array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true
+        );
+    ?>
     <ul class="nav navbar-nav navbar-collapse navbar-right">
         <a class="btn btn-info navbar-btn" href="<?php echo $default_reg_user_url; ?>">
             <?php echo $this->translate('Регистрация'); ?>
