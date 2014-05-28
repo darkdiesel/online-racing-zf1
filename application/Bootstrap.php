@@ -129,6 +129,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
 		// [BOOTSTRAP library]
 		$view->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
+		$view->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css");
 		$view->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css");
 		$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
 
