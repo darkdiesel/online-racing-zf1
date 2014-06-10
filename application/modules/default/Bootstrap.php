@@ -473,14 +473,14 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                 'title' => _('Блог'),
                 'uri'   => 'http://onlineracingnet.blogspot.com/',
             ),
-            array(
-                'label'      => _('Rush TV'),
-                'title'      => _('Rush TV'),
-                'module'     => 'default',
-                'controller' => 'rush-tv',
-                'action'     => 'index',
-                'route'      => 'default',
-            ),
+//            array(
+//                'label'      => _('Rush TV'),
+//                'title'      => _('Rush TV'),
+//                'module'     => 'default',
+//                'controller' => 'rush-tv',
+//                'action'     => 'index',
+//                'route'      => 'default',
+//            ),
             array(
                 'label' => _('Форум'),
                 'title' => _('Форум'),
