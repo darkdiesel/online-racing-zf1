@@ -36,7 +36,7 @@ class ChatController extends App_Controller_LoaderController {
 					$date = date('Y-m-d H:i:s');
 					$user_chat_data = array(
 						'message' => $message_text,
-						'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
+						'user_id' => Zend_Auth::getInstance()->getStorage()->read()->id,
 						'date_create' => $date,
 						'date_edit' => $date,
 					);

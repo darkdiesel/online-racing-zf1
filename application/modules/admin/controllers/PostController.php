@@ -49,7 +49,7 @@ class Admin_PostController extends App_Controller_LoaderController {
 				// save new post to db
 				$date = date('Y-m-d H:i:s');
 				$new_post_data = array(
-					'user_id' => Zend_Auth::getInstance()->getStorage('online-racing')->read()->id,
+					'user_id' => Zend_Auth::getInstance()->getStorage()->read()->id,
 					'post_type_id' => $form->getValue('post_type'),
 					'content_type_id' => $form->getValue('content_type'),
 					'name' => $form->getValue('name'),

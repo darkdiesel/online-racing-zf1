@@ -12,16 +12,20 @@ class PostController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$post_id = (int) $request->getParam('post_id');
 
+        //get post
 		$post_data = $this->db->get('post')->getItem($post_id);
 
 		if ($post_data) {
 			//Set breadcrumb for this page
 			$this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->name);
 
-			$this->view->post_data = $post_data;
 			// Set head and page titles
 			$this->view->headTitle($post_data->name);
 			$this->view->pageTitle($post_data->name);
+
+            //get posts comment
+            $comment_idencity_args = array('post_id' => $post_id);
+            $post_comment_data = $this->db->get('comment')->getAll($comment_idencity_args);
 
             //create and setup comment_add form
             $comment_add_form = new Application_Form_Comment_Add();
@@ -29,6 +33,8 @@ class PostController extends App_Controller_LoaderController {
 
             $comment_add_form->post_id->setvalue($post_id);
 
+            $this->view->post_data = $post_data;
+            $this->view->post_comment_data = $post_comment_data;
             $this->view->comment_add_form = $comment_add_form;
 		} else {
 			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не найден!'));
