@@ -22,6 +22,14 @@ class PostController extends App_Controller_LoaderController {
 			// Set head and page titles
 			$this->view->headTitle($post_data->name);
 			$this->view->pageTitle($post_data->name);
+
+            //create and setup comment_add form
+            $comment_add_form = new Application_Form_Comment_Add();
+            $comment_add_form->setAction($this->view->url(array('controller' => 'comment', 'action' => 'add'), 'default', true));
+
+            $comment_add_form->post_id->setvalue($post_id);
+
+            $this->view->comment_add_form = $comment_add_form;
 		} else {
 			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не найден!'));
 			$this->view->headTitle($this->view->translate('Ошибка!'));
@@ -72,8 +80,8 @@ class PostController extends App_Controller_LoaderController {
 
 			//create delete form
 			$form = new Application_Form_Post_Delete();
-			$form->setAction($this->view->url(array('controller' => 'defaultPostAction', 'action' => 'delete', 'post_id' => $post_id), 'defaultPostAction', true));
-			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'defaultPostId', true)}\"");
+			$form->setAction($this->view->url(array('module' => 'default','controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'defaultPostAction', true));
+			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'defaultPostId', true)}\"");
 
 			if ($this->getRequest()->isPost()) {
 				if ($form->isValid($request->getPost())) {

@@ -46,22 +46,36 @@ class Application_Form_Comment_Add extends Zend_Form
 
         $this->addElement(
             'textarea', 'content', array(
-                                     'label'       => $this->translate('Текст комментария'),
-                                     'placeholder' => $this->translate('Текст комментария'),
-                                     'cols'        => 60,
-                                     'rows'        => 10,
-                                     'class'       => 'form-control',
-                                     'maxlength'   => 50000,
-                                     'required'    => true,
-                                     'filters'     => array('StripTags', 'StringTrim'),
-                                     'decorators'  => array(
-                                         'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                                         array('Label', array('class' => 'control-label')),
-                                         array(array('elementDiv' => 'HtmlTag'),
-                                               array('tag' => 'div', 'class' => 'form-group')),
-                                         array('HtmlTag', array('class' => '')),
-                                     )
-                                )
+                                        'label'       => $this->translate('Текст комментария'),
+                                        'placeholder' => $this->translate('Текст комментария'),
+                                        'cols'        => 60,
+                                        'rows'        => 10,
+                                        'class'       => 'form-control',
+                                        'maxlength'   => 50000,
+                                        'required'    => true,
+                                        'filters'     => array('StripTags', 'StringTrim'),
+                                        'decorators'  => array(
+                                            'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                                            array('Label', array('class' => 'control-label')),
+                                            array(array('elementDiv' => 'HtmlTag'),
+                                                  array('tag' => 'div', 'class' => 'form-group')),
+                                            array('HtmlTag', array('class' => '')),
+                                        )
+                                   )
+        );
+
+        $this->addElement(
+            'hidden', 'post_id', array(
+                                      'filters'    => array('StripTags', 'StringTrim', 'Digits'),
+                                      'validators' => array(),
+                                      'decorators' => array(
+                                          'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                                          array('Label', array('class' => 'control-label')),
+                                          array(array('elementDiv' => 'HtmlTag'),
+                                                array('tag' => 'div', 'class' => 'form-group')),
+                                          array('HtmlTag', array('class' => '')),
+                                      )
+                                 )
         );
 
         $this->addElement(
