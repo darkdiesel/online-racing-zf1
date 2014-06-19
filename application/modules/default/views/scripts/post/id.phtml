@@ -1,117 +1,133 @@
 <?php if ($this->post_data) { ?>
-    <div class="post_item block">
-        <?php
-        echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu($this->escape($this->post_data['id']));
-        ?>
-        <div class="block-body">
-            <?php if ($this->post_data['image']) { ?>
-                <div class="center-block text-center">
-                    <div class="m-b-15 center-block text-center">
-                        <img class="img-thumbnail img-responsive img-magnify"
-                             src="<?php echo $this->escape($this->post_data['image']); ?>"/>
-                    </div>
-                </div>
-            <?php } ?>
-            <div class="block-content-text">
+    <?php
+    $default_user_id_url = $this->url(
+        array('module'  => 'default', 'controller' => 'user', 'action' => 'id',
+              'user_id' => $this->escape($this->post_data['user_id'])), 'defaultUserId', true
+    );
+    ?>
+    <div class="row m-t-10">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="block">
                 <?php
-                echo $this->RenderContentTypeText($this->post_data['text'], $this->post_data['content_type_name']);
+                echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
+                    $this->escape($this->post_data['id'])
+                );
                 ?>
-            </div>
-            <div class="button-like-wrapper">
-                <div id="vk-like-button" class="button-like">
-                    <!-- VK Like -->
-                    <script type="text/javascript" src="//vk.com/js/api/openapi.js?96"></script>
-                    <script type="text/javascript">
-                        VK.init({apiId: 3649896, onlyWidgets: true});
-                    </script>
-                    <div id="vk_like"></div>
-                    <script type="text/javascript">
-                        VK.Widgets.Like("vk_like", {type: "mini", height: 18});
-                    </script>
-                </div>
-                <div class="fb-like-button button-like">
-                    <!-- Facebook like-->
-                    <div id="fb-root"></div>
-                    <script>(function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id))
-                                return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));</script>
-                    <div class="fb-like" data-href="<?php echo $this->url() ?>" data-width="450"
-                         data-layout="button_count" data-show-faces="true" data-send="false"></div>
-                    <!-- Facebook like END-->
-                </div>
-                <div class="gp-like-button button-like">
-                    <div class="g-plusone" data-size="medium"></div>
-                    <script type="text/javascript">
-                        window.___gcfg = {lang: 'en-GB'};
+                <div class="block-body">
+                    <?php if ($this->post_data['image']) { ?>
+                        <div class="center-block text-center">
+                            <div class="m-b-15 center-block text-center">
+                                <img class="img-thumbnail img-responsive"
+                                     src="<?php echo $this->escape($this->post_data['image']); ?>"/>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <div class="block-content-text">
+                        <?php
+                        echo $this->RenderContentTypeText(
+                            $this->post_data['text'], $this->post_data['content_type_name']
+                        );
+                        ?>
+                    </div>
+                    <div class="button-like-wrapper">
+                        <div id="vk-like-button" class="button-like">
+                            <!-- VK Like -->
+                            <script type="text/javascript" src="//vk.com/js/api/openapi.js?96"></script>
+                            <script type="text/javascript">
+                                VK.init({apiId: 3649896, onlyWidgets: true});
+                            </script>
+                            <div id="vk_like"></div>
+                            <script type="text/javascript">
+                                VK.Widgets.Like("vk_like", {type: "mini", height: 18});
+                            </script>
+                        </div>
+                        <div class="fb-like-button button-like">
+                            <!-- Facebook like-->
+                            <div id="fb-root"></div>
+                            <script>(function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id))
+                                        return;
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="fb-like" data-href="<?php echo $this->url() ?>" data-width="450"
+                                 data-layout="button_count" data-show-faces="true" data-send="false"></div>
+                            <!-- Facebook like END-->
+                        </div>
+                        <div class="gp-like-button button-like">
+                            <div class="g-plusone" data-size="medium"></div>
+                            <script type="text/javascript">
+                                window.___gcfg = {lang: 'en-GB'};
 
-                        (function () {
-                            var po = document.createElement('script');
-                            po.type = 'text/javascript';
-                            po.async = true;
-                            po.src = 'https://apis.google.com/js/plusone.js';
-                            var s = document.getElementsByTagName('script')[0];
-                            s.parentNode.insertBefore(po, s);
-                        })();
-                    </script>
-                </div>
-                <div class="tw-like-button button-like">
-                    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-                    <script>!function (d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                            if (!d.getElementById(id)) {
-                                js = d.createElement(s);
-                                js.id = id;
-                                js.src = p + '://platform.twitter.com/widgets.js';
-                                fjs.parentNode.insertBefore(js, fjs);
-                            }
-                        }(document, 'script', 'twitter-wjs');</script>
-                </div>
-                <div class="all-like-button button-like">
-                    <!-- AddThis Button BEGIN -->
-                    <div class="addthis_toolbox addthis_default_style">
-                        <a class="addthis_counter addthis_pill_style"></a>
+                                (function () {
+                                    var po = document.createElement('script');
+                                    po.type = 'text/javascript';
+                                    po.async = true;
+                                    po.src = 'https://apis.google.com/js/plusone.js';
+                                    var s = document.getElementsByTagName('script')[0];
+                                    s.parentNode.insertBefore(po, s);
+                                })();
+                            </script>
+                        </div>
+                        <div class="tw-like-button button-like">
+                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                            <script>!function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                                    if (!d.getElementById(id)) {
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = p + '://platform.twitter.com/widgets.js';
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                }(document, 'script', 'twitter-wjs');</script>
+                        </div>
+                        <div class="all-like-button button-like">
+                            <!-- AddThis Button BEGIN -->
+                            <div class="addthis_toolbox addthis_default_style">
+                                <a class="addthis_counter addthis_pill_style"></a>
+                            </div>
+                            <script type="text/javascript"
+                                    src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
+                            <!-- AddThis Button END -->
+                        </div>
                     </div>
-                    <script type="text/javascript"
-                            src="//s7.addthis.com/js/300/addthis_widget.js#pubid=undefined"></script>
-                    <!-- AddThis Button END -->
                 </div>
-            </div>
-            <div class="post_info block-item-info-bottom">
-                <div class="content_category block-item-info-bottom-item">
-                    <span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>
-                        : </span><?php echo $this->escape($this->post_data['post_type_name']); ?>
+                <div class="block-footer">
+                    <small>
+                        <div class="clearfix">
+                            <div class="pull-left m-r-15">
+                                <i class="fa fa-user font-color-gray"></i>
+                                <a href="<?php echo $default_user_id_url; ?>" target="_blank">
+                                    <?php echo $this->escape($this->post_data['user_login']); ?>
+                                </a>
+                            </div>
+                            <div class="pull-left m-r-15">
+                                <i class="fa fa-filter font-color-gray"></i>
+                                <?php echo $this->escape($this->post_data['post_type_name']); ?>
+                            </div>
+                            <div class="pull-left m-r-15">
+                                <i class="fa fa-eye font-color-gray"></i>
+                                <?php echo $this->escape($this->post_data['views']); ?>
+                            </div>
+                            <div class="pull-left m-r-15">
+                                <i class="fa fa-calendar font-color-gray"></i>
+                                <?php echo $this->escape($this->post_data['date_create']); ?>
+                            </div>
+                            <?php if ($this->escape($this->post_data['date_create']) != $this->escape(
+                                    $this->post_data['date_edit']
+                                )
+                            ) : ?>
+                                <div class="pull-left m-r-15">
+                                    <i class="fa fa-pencil font-color-gray"></i>
+                                    <?php echo $this->escape($this->post_data['date_edit']); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </small>
                 </div>
-                <div class="post_author block-item-info-bottom-item">
-                    <span class="font-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
-                    <a href="<?php echo $this->url(
-                        array('module'  => 'default', 'controller' => 'user', 'action' => 'id',
-                              'user_id' => $this->escape($this->post_data['user_id'])), 'defaultUserId', true
-                    ) ?>" target="_blank"><?php echo $this->escape($this->post_data['user_login']); ?></a>
-                </div>
-                <div class="post_views block-item-info-bottom-item">
-                    <span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>
-                        : </span><?php echo $this->escape($this->post_data['views']); ?>
-                </div>
-                <div class="post_date_create block-item-info-bottom-item">
-                    <span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>
-                        : </span><?php echo $this->escape($this->post_data['date_create']); ?>
-                </div>
-                <?php if ($this->escape($this->post_data['date_create']) != $this->escape(
-                        $this->post_data['date_edit']
-                    )
-                ) {
-                    ?>
-                    <div class="post_date_edit block-item-info-bottom-item">
-                        <span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>
-                            : </span><?php echo $this->escape($this->post_data['date_edit']); ?>
-                    </div>
-                <?php } ?>
             </div>
         </div>
     </div>
@@ -169,14 +185,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="user-detail">
                                                 <?php if ($comment->title) { ?>
                                                     <h5 class="text-bold handle">
                                                         <?php echo $comment->title; ?>
                                                     </h5>
                                                 <?php } ?>
-
                                                 <div class="post-meta">
                                                     <div class="asker-meta">
                                                         <span class="qa-message-what"></span>
@@ -188,7 +202,8 @@
                                                         <span class="qa-message-who">
                                                             <span class="qa-message-who-pad"> </span>
                                                             <span class="qa-message-who-data">
-                                                                <a href="<?php echo $default_user_id_url; ?>" target="_blank">
+                                                                <a href="<?php echo $default_user_id_url; ?>"
+                                                                   target="_blank">
                                                                     <?php echo $user_data->login; ?>
                                                                 </a>
                                                             </span>
