@@ -89,6 +89,7 @@
 /* image size classes */
 .img-size-32{width:32px;}
 .img-size-30-30{width:30px; max-height:30px;}
+.img-size-40{width:40px;}
 .img-size-40-40{width:40px; max-height:40px;}
 .img-size-50{width:50px;}
 .img-size-64{width:64px;}
@@ -110,6 +111,7 @@
 
 /* image wrapper classes */
 .img-wrapper-30-30{width:30px; max-height:30px;}
+.img-wrapper-30-30{width:40px; max-height:40px;}
 .img-wrapper-50-50{width:50px; max-height:50px;}
 .img-wrapper-70{width:70px;  max-height:70px;}
 .img-wrapper-100{max-width:100px;}
@@ -208,8 +210,6 @@
 .comments .block-user{}
 .comments .block-user .user-avatar{border-width:3px; border-style:solid;}
 .comments .block-user .user-avatar:hover{border-color:#C41D1D; transform:rotate(360deg); -ms-transform:rotate(360deg); -webkit-transform:rotate(360deg); -webkit-font-smoothing:antialiased;}
-
-
 
 .message-item {
     margin-bottom: 25px;
@@ -315,8 +315,4 @@
     color: #777;
     font-size: 12px;
     line-height: 22px;
-}
-img {
-    min-height: 40px;
-    max-height: 40px;
 }

@@ -123,7 +123,7 @@
     );
     ?>
 
-    <!-- ======================================================================== -->
+    <!-- post comments list -->
     <div class="row m-t-10">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="block block-ui-bordered comment-block">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="block-body">
-                    <div class="comments qa-message-list" id="wallmessages">
+                    <div class="comments" id="post-comments">
                         <?php if ($this->post_comment_data) { ?>
                             <?php foreach ($this->post_comment_data as $comment): ?>
                                 <?php
@@ -157,13 +157,13 @@
                                             <div class="avatar pull-left">
                                                 <div class="block-user">
                                                     <div
-                                                        class="img-wrapper-50-50 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $user_status_class; ?>"
+                                                        class="img-wrapper-40-40 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $user_status_class; ?>"
                                                         data-title="<?php echo $user_data->login; ?>"
                                                         data-placement="bottom">
                                                         <a href="<?php echo $default_user_id_url; ?>" target="_blank">
                                                             <?php echo $this->getUserAvatar(
                                                                 $user_data->id, $user_data->avatar_type,
-                                                                'media-object img-responsive img-size-50', 50
+                                                                'media-object img-responsive img-size-40', 40
                                                             ); ?>
                                                         </a>
                                                     </div>
@@ -180,19 +180,19 @@
                                                 <div class="post-meta">
                                                     <div class="asker-meta">
                                                         <span class="qa-message-what"></span>
-											<span class="qa-message-when">
-												<span class="qa-message-when-data">
-                                                    <?php echo $comment->date_create; ?>
-												</span>
-											</span>
-											<span class="qa-message-who">
-												<span class="qa-message-who-pad">by </span>
-												<span class="qa-message-who-data">
-                                                    <a href="<?php echo $default_user_id_url; ?>" target="_blank">
-                                                        <?php echo $user_data->login; ?>
-                                                    </a>
-                                                </span>
-											</span>
+                                                        <span class="qa-message-when">
+                                                            <span class="qa-message-when-data">
+                                                                <?php echo $comment->date_create; ?>
+                                                            </span>
+                                                        </span>
+                                                        <span class="qa-message-who">
+                                                            <span class="qa-message-who-pad"> </span>
+                                                            <span class="qa-message-who-data">
+                                                                <a href="<?php echo $default_user_id_url; ?>" target="_blank">
+                                                                    <?php echo $user_data->login; ?>
+                                                                </a>
+                                                            </span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,8 +213,9 @@
             </div>
         </div>
     </div>
-    <!-- ======================================================================== -->
+    <!-- ./ post comments list -->
 
+    <!-- post comment form -->
     <div class="row m-t-10">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="block block-ui-bordered">
@@ -237,5 +238,6 @@
             </div>
         </div>
     </div>
+    <!-- ./ post comment form -->
     <!-- ./ comments -->
 <?php } ?>
