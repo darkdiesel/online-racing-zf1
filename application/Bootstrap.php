@@ -115,6 +115,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				->appendName('reply-to', 'Igor.Peshkov@gmail.com')
 				->appendName('Generator', 'NetBeans, notepad++, PHPStorm')
 				->appendName('yandex-verification', '715d9bbdfc996f86')
+				->appendName('viewport', 'width=device-width, initial-scale=1')
 				->setHttpEquiv('Cache-Control', 'no-store');
 
         // Modernize
