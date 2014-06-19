@@ -14,15 +14,15 @@
                                 <?php
                                 // section links
                                 $admin_post_add_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'role', 'action' => 'all'),
-                                    'adminRoleAll', true
+                                    array('module' => 'admin', 'controller' => 'post', 'action' => 'add'),
+                                    'default', true
                                 );
                                 ?>
                                 <span class="btn-ds m-all-5">
                                     <a class="btn btn-lg btn-primary" href="<?php echo $admin_post_add_url; ?>">
                                         <i class="fa fa-plus fa-3x pull-left"></i>
                                         <span>
-                                            <?php echo $this->translate('Добавить контент'); ?><br>
+                                            <?php echo $this->translate('Добавить контент'); ?><br />
                                             <small><?php echo $this->translate('Создание нового контента'); ?></small>
                                         </span>
                                     </a>
@@ -40,16 +40,16 @@
                             <div class="panel-body">
                                 <?php
                                 // section links
-                                $user_all_url = $this->url(
+                                $admin_user_all_url = $this->url(
                                     array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1),
                                     'adminUserAll', true
                                 );
                                 ?>
                                 <span class="btn-ds m-all-5">
-                                    <a class="btn btn-lg btn-primary" href=<?php echo $user_all_url; ?>">
+                                    <a class="btn btn-lg btn-primary" href=<?php echo $admin_user_all_url; ?>">
                                         <i class=" fa fa-user fa-3x pull-left"></i>
                                         <span>
-                                            <?php echo $this->translate('Пользователи'); ?><br>
+                                            <?php echo $this->translate('Пользователи'); ?><br />
                                             <small><?php echo $this->translate('Управление пользователями'); ?></small>
                                         </span>
                                     </a>
@@ -61,54 +61,53 @@
                         <div class="panel panel-success">
                             <div class="panel-heading">
                                 <div class="panel-title">
-                                    <i class="fa fa-exclamation-circle"></i> <?php echo $this->translate(
-                                        'Безопасность'
-                                    ); ?>
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <?php echo $this->translate('Безопасность'); ?>
                                 </div>
                             </div>
                             <div class="panel-body">
                                 <?php
                                 //section links
-                                $resources_all_url = $this->url(
+                                $admin_resources_all_url = $this->url(
                                     array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'),
                                     'adminResourceAll', true
                                 );
-                                $privilege_all_url = $this->url(
+                                $admin_privilege_all_url = $this->url(
                                     array('module' => 'admin', 'controller' => 'prvilege', 'action' => 'all'),
                                     'adminPrivilegeAll', true
                                 );
-                                $resource_access_all_url = $this->url(
+                                $admin_resource_access_all_url = $this->url(
                                     array('module' => 'admin', 'controller' => 'resource-access', 'action' => 'all'),
                                     'adminResourceAccessAll', true
                                 );
-                                $role_all_url = $this->url(
+                                $admin_role_all_url = $this->url(
                                     array('module' => 'admin', 'controller' => 'role', 'action' => 'all'),
                                     'adminRoleAll', true
                                 );
                                 ?>
                                 <span class="btn-ds m-all-5">
-                                    <a class="btn btn-success btn-lg" href=<?php echo $resources_all_url; ?>">
-                                        <i class=" fa fa-sitemap fa-3x pull-left"></i>
+                                    <a class="btn btn-success btn-lg" href="<?php echo $admin_resources_all_url; ?>">
+                                        <i class="fa fa-sitemap fa-3x pull-left"></i>
                                         <span>
-                                            <?php echo $this->translate('Ресурсы'); ?><br>
+                                            <?php echo $this->translate('Ресурсы'); ?><br />
                                             <small><?php echo $this->translate('Управление ресурсами'); ?></small>
                                         </span>
                                     </a>
                                 </span>
                                 <span class="btn-ds m-all-5">
-                                    <a class="btn btn-success btn-lg" href=<?php echo $privilege_all_url; ?>">
-                                        <i class=" fa fa-tasks fa-3x pull-left"></i>
+                                    <a class="btn btn-success btn-lg" href="<?php echo $admin_privilege_all_url; ?>">
+                                        <i class="fa fa-tasks fa-3x pull-left"></i>
                                         <span>
-                                            <?php echo $this->translate('Привилегии ресурсов'); ?><br>
+                                            <?php echo $this->translate('Привилегии ресурсов'); ?><br />
                                             <small><?php echo $this->translate(''); ?></small>
                                         </span>
                                     </a>
                                 </span>
                                 <span class="btn-ds m-all-5">
-                                    <a class="btn btn-danger btn-lg" href=<?php echo $resource_access_all_url; ?>">
-                                        <i class=" fa fa-ban fa-3x pull-left"></i>
+                                    <a class="btn btn-danger btn-lg" href="<?php echo $admin_resource_access_all_url; ?>">
+                                        <i class="fa fa-ban fa-3x pull-left"></i>
                                         <span>
-                                            <?php echo $this->translate('Доступ к ресурсам'); ?><br>
+                                            <?php echo $this->translate('Доступ к ресурсам'); ?><br />
                                             <small><?php echo $this->translate(
                                                     'Настройка прав пользователей'
                                                 ); ?></small>
@@ -116,10 +115,10 @@
                                     </a>
                                 </span>
                                 <span class="btn-ds m-all-5">
-                                    <a class="btn btn-danger btn-lg" href=<?php echo $role_all_url; ?>">
-                                        <i class=" fa fa-users fa-3x pull-left"></i>
+                                    <a class="btn btn-danger btn-lg" href="<?php echo $admin_role_all_url; ?>">
+                                        <i class="fa fa-users fa-3x pull-left"></i>
                                         <span>
-                                            <?php echo $this->translate('Роли пользователей'); ?><br>
+                                            <?php echo $this->translate('Роли пользователей'); ?><br />
                                             <small><?php echo $this->translate('Управление ролями'); ?></small>
                                         </span>
                                     </a>
