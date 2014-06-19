@@ -6,13 +6,15 @@ class CommentController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
+        $this->view->headTitle($this->view->translate('Комментарий'));
     }
 
     public function addAction(){
-        // disable layout for this action
-        $this->_helper->layout->disableLayout();
-
         $request = $this->getRequest();
+
+        // Set head and page titles
+        $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить комментарий'));
 
         //create comment_add form
         $comment_add_form = new Application_Form_Comment_Add();
@@ -41,6 +43,8 @@ class CommentController extends App_Controller_LoaderController
                 $this->redirect($post_id_url);
             }
         }
+
+        $this->view->comment_add_form = $comment_add_form;
     }
 
 }
