@@ -31,7 +31,7 @@ class Application_Form_Comment_Add extends Zend_Form
                                   'placeholder' => $this->translate('Заголовок комментария'),
                                   'maxlength'   => 255,
                                   'filters'     => array('StripTags', 'StringTrim'),
-                                  'required'    => true,
+                                  'required'    => false,
                                   'class'       => 'form-control',
                                   'validators'  => array(),
                                   'decorators'  => array(

@@ -38,7 +38,6 @@ class Application_Model_DbTable_Comment extends Zend_Db_Table_Abstract {
         $select = $model->select()
             ->setIntegrityCheck(false)
             ->from(array($this->db_href => $this->_name))
-            ->join(array('u' => 'user'), $this->db_href . '.user_id = u.id', array('user_login' => 'u.login'))
             ->where($idencity_data);
 
         if ($fields) {
@@ -111,8 +110,7 @@ class Application_Model_DbTable_Comment extends Zend_Db_Table_Abstract {
 
         $select = $model->select()
             ->setIntegrityCheck(false)
-            ->from(array($this->db_href => $this->_name))
-            ->join(array('u' => 'user'), $this->db_href . '.user_id = u.id', array('user_login' => 'u.login'));
+            ->from(array($this->db_href => $this->_name));
 
         if ($fields) {
             $select->columns($fields);
