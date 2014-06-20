@@ -2,7 +2,7 @@
 	<?php foreach ($this->league_data as $league): ?>
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-md-12 col-xs-12">
-				<div class="panel panel-default panel-inverse block">
+				<div class="panel panel-default panel-inverse block block-default">
 					<?php
 					echo $this->BlockConfigMenu($this->translate("Лига"))->leagueMenu($this->escape($league->id));
 					$league_id_all_url = $this->url(array('controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league->id), 'page' => 1), 'defaultLeagueIdAll', true);

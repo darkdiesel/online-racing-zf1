@@ -6,8 +6,8 @@
     );
     ?>
     <div class="row m-t-10">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="block block-default">
                 <?php
                 echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
                     $this->escape($this->post_data->id)
@@ -147,8 +147,8 @@
 
     <!-- post comments list -->
     <div class="row m-t-10">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="block block-ui-bordered comment-block">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="block block-default block-ui-bordered comment-block">
                 <div class="block-header">
                     <div class="block-title text-uppercase text-bold">
                         <?php echo $this->translate('Комментарии'); ?>
@@ -239,7 +239,7 @@
     <!-- post comment form -->
     <div class="row m-t-10">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="block block-ui-bordered">
+            <div class="block block-default block-ui-bordered">
                 <div class="block-header">
                     <div class="block-title text-uppercase text-bold">
                         <?php echo $this->translate('Добавить комментарий'); ?>

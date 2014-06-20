@@ -1,75 +1,108 @@
-<?php if ($this->paginator) { ?>
-	<?php foreach ($this->paginator as $post): ?>
-		<div class="row">
-			<div class="col-md-12 col-lg-12">
-				<div class="panel panel-default panel-inverse block">
-					<?php
-					echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu($this->escape($post->id));
-					?>
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							<i class="fa fa-book"></i>
-							<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true) ?>"><?php echo $this->escape($post->name); ?></a>
-						</h3>
-					</div>
-					<div class="panel-body">
-						<?php if ($this->escape($post->image) != '') { ?>
-							<div class="post_all_logo_wrapper_200_200 img-wrapper-200-200 thumbnail pull-left overflow-hide m-r-5">
-								<img class="post_all_logo_250 img-size-200 img-responsive" src="<?php echo $this->escape($post->image); ?>">
-							</div>
-						<?php } ?>
-						<div class="post-text">
-							<?php
-							if ($post->preview != '') {
-								echo $this->RenderContentTypeText($this->escape($post->preview), 'bbcode');
-							} else {
-								echo $this->RenderContentTypeText($this->escape($post->text), 'bbcode', 250);
-							}
-							?>
-						</div>
-						<div class="pull-right m-t-10">
-							<?php
-							$post_id_url = $this->url(array('controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true);
-							?>
-							<a href = "<?php echo $post_id_url ?>" class = "btn btn-sm btn-inverse block-content-button-more"><?php echo $this->translate('Читать дальше') ?> <i class="fa fa-angle-double-right"></i></a>
-						</div>
-					</div>
-					<div class="panel-footer">
-						<small>
-							<div class="pull-left m-l-10">
-								<span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($post['views']); ?>
-							</div>
-							<div class="pull-left m-l-10">
-								<span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($post['date_create']); ?>
-							</div>
-							<?php if ($post['date_create'] != $post['date_edit']) { ?>
-								<div class="pull-left m-l-10">
-									<span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($post['date_edit']); ?>
-								</div>
-							<?php } ?>
-							<div class="pull-left m-l-10">
-								<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
-								<a href="<?php echo $this->url(array('controller' => 'post', 'action' => 'all-by-type', 'post_type_id' => $this->escape($post['post_type_id']), 'page' => '1'), 'defaultPostAllByType', true) ?>" target="_blank"><?php echo $this->escape($post['post_type_name']); ?></a>
-							</div>
-							<div class="pull-left m-l-10">
-								<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Автор') ?>: </span>
-								<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($post['user_id'])), 'defaultUserId', true) ?>" target="_blank"><?php echo $post['user_login']; ?></a>
-							</div>
-						</small>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	<?php endforeach; ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="block-item m-t-15">
-				<div class="pull-right">
-					<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-<?php } ?>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <?php if ($this->paginator) : ?>
+            <div class="block block-timeline">
+                <?php
+                $block_class = 'block-timeline-inverted';
+
+                $comment_db = new Application_Model_DbTable_Comment();
+
+                ?>
+                <?php foreach ($this->paginator as $post): ?>
+                    <?php
+                    if ($block_class == 'block-timeline-inverted') {
+                        $block_class = '';
+                    } else {
+                        $block_class = 'block-timeline-inverted';
+                    }
+                    $default_post_id_url = $this->url(
+                        array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)),
+                        'defaultPostId', true
+                    );
+                    $default_user_id_url = $this->url(
+                        array('module'  => 'default', 'controller' => 'user', 'action' => 'id',
+                              'user_id' => $this->escape($post->user_id)), 'defaultUserId', true
+                    );
+                    $comment_idencity_args = array('post_id' => $post->id);
+                    $post_comment_data = $comment_db->getAll($comment_idencity_args);
+                    if ($post_comment_data){
+                        $comments_count = count($post_comment_data);
+                    } else {
+                        $comments_count = 0;
+                    }
+
+                    ?>
+                <div class="block-timeline-item <?php echo  $block_class; ?>">
+                    <div class="block-timeline-badge primary">
+                        <a>
+                            <i class="fa fa-dot-circle-o fa-lg"" rel="tooltip"
+                               title="<?php echo $this->translate('Добавлено').': '.$this->escape($post->date_create); ?>" id=""></i>
+                        </a>
+                    </div>
+                    <div class="block block-default block-ui-bordered">
+                        <div class="block-header">
+                            <h4>
+                                <div class="block-title text-boldt">
+                                    <a href="<?php echo $default_post_id_url; ?>">
+                                        <?php echo $this->escape($post->name); ?>
+                                    </a>
+                                </div>
+                            </h4>
+                            <?php if ($this->escape($post->image) != '') { ?>
+                                <div class="img-wrapper-250-250 overflow-hide center-block">
+                                    <img class="img-thumbnail img-responsive img-size-250"
+                                         src="<?php echo $this->escape($post->image); ?>" />
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <div class="block-body">
+                            <?php
+                            if ($post->preview) {
+                                echo $this->RenderContentTypeText($this->escape($post->preview), 'bbcode');
+                            } else {
+                                echo $this->RenderContentTypeText($this->escape($post->text), 'bbcode', 250);
+                            }
+                            ?>
+                        </div>
+                        <div class="block-footer clearfix">
+                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Просмотров');?>" data-placement="bottom">
+                                <i class="fa fa-eye font-color-gray"></i>
+                                <?php echo $this->escape($post->views); ?>
+                            </div>
+                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Комментарии');?>" data-placement="bottom">
+                                <i class="fa fa-comments-o fa-lg"></i>
+                                <?php echo $comments_count; ?>
+                            </div>
+                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор');?>" data-placement="bottom">
+                                <a href="<?php echo $default_user_id_url; ?>" target="_blank">
+                                    <i class="fa fa-user fa-lg"></i>
+                                    <?php echo $this->escape($post->user_login); ?>
+                                </a>
+                            </div>
+                            <div class="pull-right tooltip-field" data-title="<?php echo $this->translate('Читать дальше');?>" data-placement="bottom">
+                                <a href="<?php echo $default_post_id_url ?>"
+                                   class="block-content-button-more">
+                                    <i class="fa fa-hand-o-right fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="block-item m-t-15">
+                        <div class="pull-right">
+                            <?php echo $this->paginationControl(
+                                $this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                            ); ?>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
