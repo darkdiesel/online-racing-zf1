@@ -1,195 +1,236 @@
 <div class="row">
-    <!-- List of portal news -->
-    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 m-t-10">
-        <div class="block block-default block-ui-bordered block-media-list">
-            <div class="block-header">
-                <div class="block-title text-uppercase text-bold">
-                    <?php echo $this->translate('Новости портала') ?>
-                </div>
-            </div>
-            <div class="block-body">
-                <?php if (count($this->post_data) > 0) { ?>
-                    <?php
-                    $filter = new Zend_Filter();
-                    $filter->addFilter(new Zend_Filter_StripTags())
-                        ->addFilter(new Zend_Filter_StringTrim());
-                    $bbcode = Zend_Markup::factory('Bbcode');
-                    ?>
-                    <ul class="media-list">
-                        <?php foreach ($this->post_data as $post) : ?>
-                            <?php $post_id_url = $this->url(
-                                array('module'  => 'default', 'controller' => 'post', 'action' => 'id',
-                                      'post_id' => $this->escape($post->id)), 'defaultPostId', true
-                            ); ?>
-                            <li class="media">
-                                <?php if ($post->image) { ?>
-                                    <a class="pull-left" href="<?php echo $post_id_url; ?>">
-                                        <div class="img-wrapper-100-100">
-                                            <img class="media-object img-thumbnail img-responsive img-size-100"
-                                                 src="<?php echo $post->image; ?>" alt="<?php echo $post->name; ?>">
-                                        </div>
-                                    </a>
-                                <?php } ?>
-                                <div class="media-body">
-                                    <h4 class="media-heading"><a href="<?php echo $post_id_url; ?>"><?php echo $this
-                                                ->truncate($post->name)->toLength(100); ?></a></h4>
-                                    <?php
-                                    if ($post->preview != '') {
-                                        echo $this->escape($post->preview);
-                                    } else {
-                                        echo $bbcode->render(
-                                            (string)($this->truncate($this->escape($post->text))->toLength(250))
-                                        );
-                                    }
-                                    ?>
-                                </div>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php } else { ?>
-                    <?php
-                    /*
-                     * TODO: Сделать хелпер для вывода ошибок.
-                     */
-                    ?>
-                    <div class="alert alert-error">
-                        <?php echo $this->translate('Ошибка!'); ?>
-                    </div>
-                <?php } ?>
+<!-- List of portal news -->
+<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 m-t-10">
+    <div class="block block-default block-ui-bordered block-list">
+        <div class="block-header">
+            <div class="block-title text-uppercase text-bold">
+                <?php echo $this->translate('Новости портала') ?>
             </div>
         </div>
-    </div>
-    <!-- ./ List of portal news -->
-    <!-- Next Races  -->
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
-        <div class="block block-default block-ui-bordered block-table">
-            <div class="block-header">
-                <div class="block-title text-uppercase text-bold">
-                    <?php echo $this->translate('Ближайшие события') ?>
-                </div>
-            </div>
-            <div class="block-body">
-                <?php if ($this->race_data) { ?>
-                    <table class="table">
-                        <tbody>
-                        <?php foreach ($this->race_data as $race): ?>
+        <div class="block-body">
+            <?php if (count($this->post_data) > 0) { ?>
+                <?php
+                $filter = new Zend_Filter();
+                $filter->addFilter(new Zend_Filter_StripTags())
+                    ->addFilter(new Zend_Filter_StringTrim());
+                $bbcode = Zend_Markup::factory('Bbcode');
+
+                //create comment db model
+                $comment_db = new Application_Model_DbTable_Comment();
+                ?>
+                <?php foreach ($this->post_data as $post) : ?>
+                    <?php
+                    $default_post_id_url = $this->url(
+                        array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                            'post_id' => $this->escape($post->id)), 'defaultPostId', true
+                    );
+
+                    /*
+                     * TODO: Add method for comment model for countiong comments
+                     */
+                    $comment_idencity_args = array('post_id' => $post->id);
+                    $post_comment_data = $comment_db->getAll($comment_idencity_args);
+                    if ($post_comment_data) {
+                        $comments_count = count($post_comment_data);
+                    } else {
+                        $comments_count = 0;
+                    }
+                    ?>
+                    <div class="block block-default block-ui-bordered m-b-5">
+                        <?php
+                        echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
+                            $this->escape($post->id)
+                        );
+                        ?>
+                        <div class="block-body clearfix">
+                            <?php if ($post->image) : ?>
+                                <a class="pull-left m-r-10" href="<?php echo $default_post_id_url; ?>">
+                                    <div class="img-wrapper-100-100">
+                                        <img class="media-object img-thumbnail img-responsive img-size-100"
+                                             src="<?php echo $post->image; ?>" alt="<?php echo $post->name; ?>"/>
+                                    </div>
+                                </a>
+                            <?php endif; ?>
+                            <h4 class="block-title m-b-10">
+                                <a href="<?php echo $default_post_id_url; ?>">
+                                    <?php echo $this->truncate($this->escape($post->name))->toLength(100); ?>
+                                </a>
+                            </h4>
                             <?php
-                            $race_id_url = $this->url(
-                                array('module'          => 'default', 'controller' => 'race', 'action' => 'id',
-                                      'league_id'       => $this->escape($race->league_id),
-                                      'championship_id' => $this->escape($race->championship_id),
-                                      'race_id'         => $this->escape($race->id)), 'defaultChampionshipRaceId', true
-                            );
-                            $championship_id_url = $this->url(
-                                array('module'          => 'default', 'controller' => 'championship', 'action' => 'id',
-                                      'league_id'       => $this->escape($race->league_id),
-                                      'championship_id' => $this->escape($race->championship_id)),
-                                'defaultChampionshipId',
-                                true
-                            );
+                            if ($post->preview != '') {
+                                echo $this->escape($post->preview);
+                            } else {
+                                echo $bbcode->render(
+                                    (string)($this->truncate($this->escape($post->text))->toLength(250))
+                                );
+                            }
                             ?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo $race_id_url; ?>">
-                                        <img class="media-object img-responsive img-size-32"
-                                             src="<?php echo $race->country_url_image_round; ?>"
-                                             alt="<?php echo $race->name; ?>">
-                                    </a>
-                                </td>
-                                <td>
+                        </div>
+                        <div class="block-footer clearfix">
+                            <div class="pull-left m-r-15 tooltip-field"
+                                 data-title="<?php echo $this->translate('Просмотров'); ?>" data-placement="bottom">
+                                <i class="fa fa-eye fa-lg"></i>
+                                <?php echo $this->escape($post->views); ?>
+                            </div>
+                            <div class="pull-left m-r-15 tooltip-field"
+                                 data-title="<?php echo $this->translate('Комментарии'); ?>" data-placement="bottom">
+                                <i class="fa fa-comments-o fa-lg"></i>
+                                <?php echo $comments_count; ?>
+                            </div>
+                            <div class="pull-right tooltip-field"
+                                 data-title="<?php echo $this->translate('Читать дальше'); ?>" data-placement="bottom">
+                                <a href="<?php echo $default_post_id_url ?>"
+                                   class="block-content-button-more">
+                                    <i class="fa fa-hand-o-right fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php } else { ?>
+                <?php
+                /*
+                 * TODO: Сделать хелпер для вывода ошибок.
+                 */
+                ?>
+                <div class="alert alert-error">
+                    <?php echo $this->translate('Ошибка!'); ?>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+<!-- ./ List of portal news -->
+<!-- Next Races  -->
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
+    <div class="block block-default block-ui-bordered block-table">
+        <div class="block-header">
+            <div class="block-title text-uppercase text-bold">
+                <?php echo $this->translate('Ближайшие события') ?>
+            </div>
+        </div>
+        <div class="block-body">
+            <?php if ($this->race_data) { ?>
+                <table class="table">
+                    <tbody>
+                    <?php foreach ($this->race_data as $race): ?>
+                        <?php
+                        $race_id_url = $this->url(
+                            array('module' => 'default', 'controller' => 'race', 'action' => 'id',
+                                'league_id' => $this->escape($race->league_id),
+                                'championship_id' => $this->escape($race->championship_id),
+                                'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true
+                        );
+                        $championship_id_url = $this->url(
+                            array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                                'league_id' => $this->escape($race->league_id),
+                                'championship_id' => $this->escape($race->championship_id)),
+                            'defaultChampionshipId',
+                            true
+                        );
+                        ?>
+                        <tr>
+                            <td>
+                                <a href="<?php echo $race_id_url; ?>">
+                                    <img class="media-object img-responsive img-size-32"
+                                         src="<?php echo $race->country_url_image_round; ?>"
+                                         alt="<?php echo $race->name; ?>">
+                                </a>
+                            </td>
+                            <td>
                                 <span class="text-bold">
                                     <a href="<?php echo $race_id_url; ?>"><?php echo $race->name; ?></a>
                                 </span>
-                                    <br/>
-                                    <small>
-                                        <a class="text-black" href="<?php echo $championship_id_url; ?>">
-                                            <?php echo $race->championship_name; ?>
-                                        </a>
-                                    </small>
-                                </td>
-                                <td class="text-italic">
-                                    <?php echo $race->race_date; ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                <?php } else { ?>
-                    <?php
-                    /*
-                    * TODO: Сделать хелпер для вывода ошибок.
-                    */
-                    ?>
-                    <div class="alert alert-info">
-                        <?php echo $this->translate('В ближайшее время события отсутствуют.'); ?>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-    <!-- ./ Next Races -->
-    <!-- List of leagues -->
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
-        <div class="block block-default block-ui-bordered block-media-list">
-            <div class="block-header">
-                <div class="block-title text-uppercase text-bold">
-                    <?php echo $this->translate('Лиги портала') ?>
-                </div>
-            </div>
-            <div class="block-body">
-                <ul class="media-list">
-                    <?php foreach ($this->league_data as $league): ?>
-                        <?php $league_url = $this->url(
-                            array('module'    => 'default', 'controller' => 'league', 'action' => 'id',
-                                  'league_id' => $this->escape($league->id)), 'defaultLeagueIdAll', true
-                        ); ?>
-                        <li class="media">
-                            <a class="pull-left" href="<?php echo $league_url; ?>">
-                                <img class="media-object img-thumbnail img-responsive img-size-100"
-                                     src="<?php echo $league->url_logo; ?>" alt="<?php echo $league->name; ?>">
-                            </a>
-
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <a href="<?php echo $league_url; ?>"><?php echo $league->name; ?></a>
-                                </h4>
-                                <?php echo $league->description; ?>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- ./ List of leagues -->
-    <!-- RSS news from F1news.ru -->
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
-        <div class="block block-default block-ui-bordered block-media-list block-media-list-rss">
-            <div class="block-header">
-                <div class="block-title text-uppercase text-bold">
-                    <?php echo $this->translate('Новости из мира автоспорта') ?>
-                </div>
-            </div>
-            <div class="block-body">
-                <ul class="media-list">
-                    <?php for ($i = 1; $i < $this->rss_count; $i++) : ?>
-                        <?php $rss_url = $this->rss_element[$this->rss_index["LINK"][$i + 1]]["value"]; ?>
-                        <li class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading">
-                                    <a href="<?php echo $rss_url; ?>" target="_blank">
-                                        <?php echo $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?>
+                                <br/>
+                                <small>
+                                    <a class="text-black" href="<?php echo $championship_id_url; ?>">
+                                        <?php echo $race->championship_name; ?>
                                     </a>
-                                </h4>
-                                <?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"]; ?>
-                            </div>
-                        </li>
-                    <?php endfor; ?>
-                </ul>
-            </div>
+                                </small>
+                            </td>
+                            <td class="text-italic">
+                                <?php echo $race->race_date; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <?php
+                /*
+                * TODO: Сделать хелпер для вывода ошибок.
+                */
+                ?>
+                <div class="alert alert-info">
+                    <?php echo $this->translate('В ближайшее время события отсутствуют.'); ?>
+                </div>
+            <?php } ?>
         </div>
     </div>
-    <!-- ./ RSS news from F1news.ru -->
+</div>
+<!-- ./ Next Races -->
+<!-- List of leagues -->
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
+    <div class="block block-default block-ui-bordered block-media-list">
+        <div class="block-header">
+            <div class="block-title text-uppercase text-bold">
+                <?php echo $this->translate('Лиги портала') ?>
+            </div>
+        </div>
+        <div class="block-body">
+            <ul class="media-list">
+                <?php foreach ($this->league_data as $league): ?>
+                    <?php $league_url = $this->url(
+                        array('module' => 'default', 'controller' => 'league', 'action' => 'id',
+                            'league_id' => $this->escape($league->id)), 'defaultLeagueIdAll', true
+                    ); ?>
+                    <li class="media">
+                        <a class="pull-left" href="<?php echo $league_url; ?>">
+                            <img class="media-object img-thumbnail img-responsive img-size-100"
+                                 src="<?php echo $league->url_logo; ?>" alt="<?php echo $league->name; ?>">
+                        </a>
+
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <a href="<?php echo $league_url; ?>"><?php echo $league->name; ?></a>
+                            </h4>
+                            <?php echo $league->description; ?>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- ./ List of leagues -->
+<!-- RSS news from F1news.ru -->
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
+    <div class="block block-default block-ui-bordered block-media-list block-media-list-rss">
+        <div class="block-header">
+            <div class="block-title text-uppercase text-bold">
+                <?php echo $this->translate('Новости из мира автоспорта') ?>
+            </div>
+        </div>
+        <div class="block-body">
+            <ul class="media-list">
+                <?php for ($i = 1; $i < $this->rss_count; $i++) : ?>
+                    <?php $rss_url = $this->rss_element[$this->rss_index["LINK"][$i + 1]]["value"]; ?>
+                    <li class="media">
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <a href="<?php echo $rss_url; ?>" target="_blank">
+                                    <?php echo $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?>
+                                </a>
+                            </h4>
+                            <?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"]; ?>
+                        </div>
+                    </li>
+                <?php endfor; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- ./ RSS news from F1news.ru -->
 </div>
 <!-- Slider with partners -->
 <div class="row">

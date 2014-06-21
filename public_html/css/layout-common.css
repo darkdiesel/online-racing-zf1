@@ -526,17 +526,20 @@
 }
 
 .block-title {
-    color: inherit;
+    color: #363636;
     font-size: 16px;
     margin-bottom: 0;
     margin-top: 0;
     font-family: Georgia, "Times New Roman", Times, serif;
-    display: inline-block;
 }
 
 .block-title a {
     color: inherit;
     font-size: 16px;
+}
+
+.block-header-info{
+
 }
 
 .block-body {
@@ -548,7 +551,36 @@
 }
 /* ========== block default ========== */
 .block-default{
-    background: #ffffff;
+    background-color: #ffffff;
+}
+.block-default .block-header{
+    background-color:#fff;
+    color:#000;
+}
+.block-default .block-header a{
+    color:#000;
+}
+.block-default .block-header a:hover{
+    color: #858585;
+}
+.block-default .block-header-info{
+    background-color:#FBFBFB;
+    color:#A7A7A7;
+}
+.block-default .block-header-info a{
+    color:#A7A7A7;
+}
+.block-default .block-header-info a:hover{
+    color: #858585;
+}
+.block-default .block-title{
+    color:#363636;
+}
+.block-default .block-title a{
+    color:#363636;
+}
+.block-default .block-title a:hover{
+    color:#363636;
 }
 .block-default .block-footer{
     background-color:#f4f4f4;
@@ -557,19 +589,20 @@
 .block-default .block-footer a{
     color:#ababab;
 }
-.block-default .block-footer a:default{
-    color: #677bab;
+.block-default .block-footer a:hover{
+    color: #858585;
 }
 /* ========== ./ block default ========== */
 
 /* ========== block sidebar ========== */
 .block-sidebar {
-    background: #ffffff;
+    background: #fff;
 }
 
 .block-sidebar .block-header {
     padding-top: 0;
     text-align: center;
+    background: #fff;
 }
 
 .block-sidebar .block-title {
@@ -616,6 +649,20 @@
     color: #C41D1D;
 }
 /* ========== ./ block media-list ========== */
+
+/* ========== block-list ========== */
+.block-list{}
+.block-list .block{}
+.block-list .block .block-title,
+.block-list .block .block-title a{
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #C41D1D;
+}
+/* ========== ./ block-list ========== */
+
+
 
 /* ========== ./ block table ========== */
 .block-table {
@@ -780,8 +827,8 @@
 .block-config-menu {
     display: none;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 2px;
+    top: 2px;
 }
 
 .block-config-menu .block-config-btn {

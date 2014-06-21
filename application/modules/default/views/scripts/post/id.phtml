@@ -4,6 +4,13 @@
         array('module'  => 'default', 'controller' => 'user', 'action' => 'id',
               'user_id' => $this->escape($this->post_data->user_id)), 'defaultUserId', true
     );
+
+    if ($this->post_comment_data) {
+        $comments_count = count($this->post_comment_data);
+    } else {
+        $comments_count = 0;
+    }
+
     ?>
     <div class="row m-t-10">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -13,6 +20,22 @@
                     $this->escape($this->post_data->id)
                 );
                 ?>
+                <div class="block-header block-header-info clearfix">
+                    <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Просмотров');?>" data-placement="bottom">
+                        <i class="fa fa-eye fa-lg"></i>
+                        <?php echo $this->escape($this->post_data->views); ?>
+                    </div>
+                    <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Комментарии');?>" data-placement="bottom">
+                        <i class="fa fa-comments-o fa-lg"></i>
+                        <?php echo $comments_count; ?>
+                    </div>
+                    <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор');?>" data-placement="bottom">
+                        <a href="<?php echo $default_user_id_url; ?>" target="_blank">
+                            <i class="fa fa-user fa-lg"></i>
+                            <?php echo $this->escape($this->post_data->user_login); ?>
+                        </a>
+                    </div>
+                </div>
                 <div class="block-body">
                     <?php if ($this->escape($this->post_data->image)) { ?>
                         <div class="m-b-15 center-block text-center">
@@ -101,38 +124,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-footer">
-                    <small>
-                        <div class="clearfix">
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор');?>" data-placement="bottom">
-                                <i class="fa fa-user font-color-gray"></i>
-                                <a href="<?php echo $default_user_id_url; ?>" target="_blank">
-                                    <?php echo $this->escape($this->post_data->user_login); ?>
-                                </a>
-                            </div>
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента');?>" data-placement="bottom">
-                                <i class="fa fa-filter font-color-gray"></i>
-                                <?php echo $this->escape($this->post_data->post_type_name); ?>
-                            </div>
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Просмотров');?>" data-placement="bottom">
-                                <i class="fa fa-eye font-color-gray"></i>
-                                <?php echo $this->escape($this->post_data->views); ?>
-                            </div>
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания');?>" data-placement="bottom">
-                                <i class="fa fa-calendar font-color-gray"></i>
-                                <?php echo $this->escape($this->post_data->date_create); ?>
-                            </div>
-                            <?php if ($this->escape($this->post_data->date_create) != $this->escape(
-                                    $this->post_data->date_edit
-                                )
-                            ) : ?>
-                                <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата редактирования');?>" data-placement="bottom">
-                                    <i class="fa fa-pencil font-color-gray"></i>
-                                    <?php echo $this->escape($this->post_data['date_edit']); ?>
-                                </div>
-                            <?php endif; ?>
+                <div class="block-footer clearfix">
+                    <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента');?>" data-placement="bottom">
+                        <i class="fa fa-filter fa-lg"></i>
+                        <?php echo $this->escape($this->post_data->post_type_name); ?>
+                    </div>
+                    <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания');?>" data-placement="bottom">
+                        <i class="fa fa-calendar fa-lg"></i>
+                        <?php echo $this->escape($this->post_data->date_create); ?>
+                    </div>
+                    <?php if ($this->escape($this->post_data->date_create) != $this->escape($this->post_data->date_edit)) : ?>
+                        <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата редактирования');?>" data-placement="bottom">
+                            <i class="fa fa-pencil fa-lg"></i>
+                            <?php echo $this->escape($this->post_data['date_edit']); ?>
                         </div>
-                    </small>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

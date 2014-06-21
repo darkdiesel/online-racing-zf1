@@ -78,9 +78,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     }
 
 	protected function _initView() {
-        $config = Zend_Registry::get('config');
-        Zend_Registry::set('default_layout_sidebar', $config->layout->sidebar);
-
         $this->bootstrap('layout');
         $layout = $this->getResource('layout');
         $view = $layout->getView();

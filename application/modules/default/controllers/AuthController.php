@@ -8,7 +8,7 @@ class AuthController extends App_Controller_LoaderController {
 
 	public function loginAction() {
         // set layout without sidebar
-        Zend_Registry::set('default_layout_sidebar', 'no-sidebar');
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
@@ -23,7 +23,6 @@ class AuthController extends App_Controller_LoaderController {
 
 		$request = $this->getRequest();
 		$form = new Application_Form_Auth_Login();
-
 
 		// Set  redirect url if user authorizing successful. 
 		$redirectToUrl = $request->getParam('redirectTo');
