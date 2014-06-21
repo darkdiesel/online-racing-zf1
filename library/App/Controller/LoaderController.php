@@ -9,12 +9,12 @@ class App_Controller_LoaderController extends Zend_Controller_Action {
 
 	public function init() {
 		// configure main menu
-		//$uri = $this->_request->getPathInfo();
+//		$uri = $this->_request->getPathInfo();
 
-		/* $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
-		  if ($activeNav != NULL) {
-		  $activeNav->active = true;
-		  } */
+//		 $activeNav = $this->view->navigation($this->view->main_menu)->findByUri($uri);
+//		  if ($activeNav != NULL) {
+//		  $activeNav->active = true;
+//		  }
 
 		// configure breadcrumb
 		if (($this->_request->getControllerName() . '/' . $this->_request->getActionName()) == "index/index") {

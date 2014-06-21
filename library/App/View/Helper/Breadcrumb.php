@@ -3,7 +3,7 @@
 class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
 {
 
-    private $_breadcrumb_pages;
+    public $_pages;
     private $_add_pages;
 
     public function breadcrumb()
@@ -15,7 +15,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 )
             );
         }
-        $this->_breadcrumb_pages = array(
+        $this->_pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
                 'label'      => _('Главная'),
@@ -31,6 +31,9 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                         'module'     => 'default',
                         'controller' => 'user',
                         'action'     => 'all',
+                        'params'     => array(
+                            'page' => '1'
+                        ),
                         'route'      => 'userAll',
                         'pages'      => array()
                     ),
@@ -83,7 +86,19 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                         'route'      => 'default',
                         'pages'      => array()
                     ),
+                    array(
+                        'label'      => _('Помощь порталу'),
+                        'title'      => _('Помощь порталу'),
+                        'controller' => 'donate',
+                        'action'     => 'index',
+                    ),
                 )
+            ),
+            array(
+                'label'      => _('Помощь порталу'),
+                'title'      => _('Помощь порталу'),
+                'controller' => 'donate',
+                'action'     => 'index',
             ),
         );
 
@@ -295,16 +310,19 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function build()
+    public function init()
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->init();
 
         if (count($this->_add_pages)) {
-            $this->_breadcrumb_pages[0]['pages'] = $this->_add_pages[0]['pages'];
+            $this->_pages[0]['pages'] = $this->_add_pages[0]['pages'];
         }
 
-        $breadcrumb_container = new Zend_Navigation($this->_breadcrumb_pages);
+        // Create container from array
+        $breadcrumb_container = new Zend_Navigation($this->_pages);
+
+        // Set container for view
         $viewRenderer->view->breadcrumb = $breadcrumb_container;
     }
 

@@ -369,7 +369,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
         $layout = $this->getResource('layout');
         $view = $layout->getView();
 
-        $main_menu_pages = array(
+        $pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
                 'label'      => _('Главная'),
@@ -385,6 +385,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                 'controller' => 'league',
                 'action'     => 'all',
                 'route'      => 'defaultLeagueAll',
+                'params'     => array(
+                    'page' => '1'
+                ),
                 'pages'      => array(
                     array(
                         'label'      => _('F1 ORL'),
@@ -395,7 +398,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'route'      => 'defaultLeagueIdAll',
                         'params'     => array(
                             'league_id' => '1'
-                        ),
+                        )
                     ),
                     array(
                         'label'      => _('F1 ORS League'),
@@ -406,7 +409,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'route'      => 'defaultLeagueIdAll',
                         'params'     => array(
                             'league_id' => '2'
-                        ),
+                        )
                     ),
                     array(
                         'label'      => _('ORT League'),
@@ -417,7 +420,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'route'      => 'defaultLeagueIdAll',
                         'params'     => array(
                             'league_id' => '3'
-                        ),
+                        )
                     ),
                     array(
                         'label'      => _('Все лиги'),
@@ -425,25 +428,28 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'module'     => 'default',
                         'controller' => 'league',
                         'action'     => 'all',
-                        'route'      => 'defaultLeagueAll',
+                        'route'      => 'defaultLeagueAll'
                     )
                 )
             ),
             array(
                 'label'      => _('Гонщики'),
-                'title'      => _('Все гонщики нашего портала'),
+                'title'      => _('Все гонщики портала'),
                 'module'     => 'default',
                 'controller' => 'user',
                 'action'     => 'all',
                 'route'      => 'defaultUserAll',
+                'params'     => array(
+                    'page' => '1'
+                ),
             ),
             array(
                 'label'      => _('Новости'),
-                'title'      => _('Все статьи опубликованные на нашем портале'),
+                'title'      => _('Весь контент портала'),
                 'module'     => 'default',
                 'controller' => 'post',
                 'action'     => 'all',
-                'route'      => 'defaultPostAll',
+                'route'      => 'defaultPostAll'
             ),
             array(
                 'label' => _('Файлы'),
@@ -459,19 +465,19 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'route'      => 'defaultPostAllByType',
                         'params'     => array(
                             'post_type_id' => '3'
-                        ),
+                        )
                     ),
                     array(
                         'label' => _('FTP'),
                         'title' => _('FTP'),
                         'uri'   => 'http://85.112.55.36:8080/http/',
-                    ),
+                    )
                 )
             ),
             array(
                 'label' => _('Блог'),
                 'title' => _('Блог'),
-                'uri'   => 'http://onlineracingnet.blogspot.com/',
+                'uri'   => 'http://onlineracingnet.blogspot.com/'
             ),
 //            array(
 //                'label'      => _('Rush TV'),
@@ -484,14 +490,14 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             array(
                 'label' => _('Форум'),
                 'title' => _('Форум'),
-                'uri'   => 'http://f1orl.forum2x2.ru/',
-            ),
+                'uri'   => 'http://f1orl.forum2x2.ru/'
+            )
         );
 
-        // Создаем новый контейнер на основе нашей структуры
-        $main_menu_container = new Zend_Navigation($main_menu_pages);
+        // Create container from array
+        $main_menu_container = new Zend_Navigation($pages);
 
-        // Передаем контейнер в View
+        // Set container for view
         $view->main_menu = $main_menu_container;
 
         //return $main_menu_container;

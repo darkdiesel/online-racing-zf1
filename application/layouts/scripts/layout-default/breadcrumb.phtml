@@ -1,22 +1,25 @@
 <?php
 
-if (!$this->breadcrumb) {
-    $this->breadcrumb()->build();
+if (!isset($this->breadcrumb)) {
+    $this->breadcrumb()->init();
 }
 
+// Store the container in the proxy helper:
+//$this->getHelper('navigation')->setContainer($this->breadcrumb);
+
 $activeNav = $this->navigation($this->breadcrumb)->findByUri($this->url());
+
 if ($activeNav != NULL) {
     $activeNav->active = true;
 }
+
 $partial = array('menu_layout/breadcrumb.phtml', 'default');
-//$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
+
+//$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
 //$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setLinkLast(false)->setPartial($partial)->render();
-$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setLinkLast(false);
-//$this->navigation()->menu($this->main_menu)->setPartial($partial);
+$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setLinkLast(false)->render();
 
-
-if ($breadcrumb != '') {
-    ?>
-
-    <?php echo($breadcrumb); ?>
-<?php } ?>
+if ($breadcrumb ) :
+    echo($breadcrumb);
+ endif;
+?>

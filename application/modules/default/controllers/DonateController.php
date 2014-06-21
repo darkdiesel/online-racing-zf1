@@ -10,6 +10,9 @@ class DonateController extends App_Controller_LoaderController
     }
 
     public function indexAction(){
+        //Set breadcrumb for this page
+        $this->view->breadcrumb();
+
         $this->messages->addInfo($this->view->translate('<p>Доброго времени суток, посетитель портала.</p>'
             .'<p>Наш портал не так давно вышел на арену SIM-Racing и уже смог завоевать симпатии многих людей, как самый современный и быстро-развивающийся проект. '
             .'Мы постоянно развиваемся и поднимаем портал на более высокий уровень, что влечет за собой все большие затраты, время и нужда в ответственных людях. '
