@@ -7,6 +7,9 @@ class AuthController extends App_Controller_LoaderController {
 	}
 
 	public function loginAction() {
+        // set layout without sidebar
+        Zend_Registry::set('default_layout_sidebar', 'no-sidebar');
+
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 		}
