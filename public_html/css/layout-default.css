@@ -5,6 +5,22 @@ body{}
 #page{}
 
 #head-line{margin:0;}
+#head-line .navbar-default{
+    background-image: -webkit-linear-gradient(top, #fff 0%, #fff 100%);
+    background-image:         linear-gradient(to bottom, #fff 0%, #fff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    background-repeat: repeat-x;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+#head-line #top-navbar .navbar-default{
+    background-image: -webkit-linear-gradient(top, #f8f8f8 0%, #f8f8f8 100%);
+    background-image:         linear-gradient(to bottom, #f8f8f8 0%, #f8f8f8 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#f8f8f8', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
 
 #header{position:relative; margin:0 auto;}
 
