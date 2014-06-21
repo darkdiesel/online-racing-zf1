@@ -7,6 +7,9 @@ class AuthController extends App_Controller_LoaderController {
 	}
 
 	public function loginAction() {
+        // set layout without column
+        $this->_helper->layout->setLayout('layout-default-no-column');
+
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 		}
