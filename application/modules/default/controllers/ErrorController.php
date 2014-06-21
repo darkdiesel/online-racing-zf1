@@ -10,7 +10,8 @@ class ErrorController extends App_Controller_LoaderController {
 	}
 
 	public function errorAction() {
-		$this->_helper->layout->setLayout('layout-no-column');
+        // set layout without sidebar
+        Zend_Registry::set('default_layout_sidebar', 'no-sidebar');
 
 		$errors = $this->_getParam('error_handler');
 
