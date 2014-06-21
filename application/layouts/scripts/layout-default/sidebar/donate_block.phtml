@@ -1,0 +1,21 @@
+<!-- start calendar block -->
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-12">
+    <div id="calendar" class="block block-sidebar block-ui-bordered  m-b-10">
+        <div class="block-header">
+            <div class="block-title">
+                <i class="fa fa-money"></i>
+                <?php echo $this->translate("Помощь проекту") ?>
+            </div>
+        </div>
+        <div class="block-body text-center">
+            <?php
+                $default_donate_url = $this->url(array('module' => 'default', 'controller' => 'donate', 'action' => 'index'), 'default', true);
+            ?>
+            <a  class="btn btn-gold btn-lg btn-block" href="<?php echo $default_donate_url; ?>">
+                <i class="fa fa-money"></i>
+                <?php echo $this->translate('Помочь!'); ?>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- end calendar block -->

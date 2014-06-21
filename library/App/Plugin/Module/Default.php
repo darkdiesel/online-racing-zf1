@@ -25,12 +25,6 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract {
 		$view->slide_out_tabs_block = true; // back to top block
 		$view->page_scroller_block = true; // back to top block
 
-		/* [LEFT SIDEBAR] */
-		$view->ls_next_event_block = true; // count down block
-		$view->ls_chat_block = true; // chat block
-		$view->ls_user_map_block = true; // user map block
-		$view->ls_online_radio_block = true; // search block
-
 		/* [HEADER] */
 		$view->hd_hot_lap_block = true; // hot lap block
 		$view->hd_moving_text_block = true; // moving text block
@@ -51,10 +45,9 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract {
 		$view->headScript()->appendFile("/js/layout-default.js");
 
 		// [CHAT CSS]
-		if ($view->ls_chat_block) {
-			$view->minifyHeadLink()->appendStylesheet("/css/chat.css");
-		}
-		if ($view->slide_out_tabs_block) {
+        $view->minifyHeadLink()->appendStylesheet("/css/chat.css");
+
+        if ($view->slide_out_tabs_block) {
 			$view->minifyHeadLink()->appendStylesheet("/library/jquery.slide-out-tabs/css/slide-out-tabs.css");
 			$view->headScript()->appendFile("/library/jquery.slide-out-tabs/jquery.slide-out-tabs.js");
 		}

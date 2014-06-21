@@ -46,20 +46,6 @@ body iframe{display:inline;}
     text-decoration:none;
 }
 
-
-/*countdown_dashboard*/
-#sidebar-left #countdown_dashboard{
-    overflow:hidden;
-    text-align:center;
-    padding:1px 0 10px;
-}
-.div_hr{
-    background:none repeat scroll 0 0 #D9D9D9;
-    border-bottom:1px solid #FFFFFF;
-    font-size:0;
-    height:1px;
-    margin:15px 5px;
-}
 /*scroll to top button*/
 #back-top {
     position:fixed;
