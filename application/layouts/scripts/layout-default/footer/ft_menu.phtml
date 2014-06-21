@@ -4,6 +4,15 @@
         <li><a href="<?php echo $this->baseUrl("league/all") ?>"><?php echo $this->translate('Лиги') ?></a></li>
         <li><a href="<?php echo $this->baseUrl("user/all") ?>"><?php echo $this->translate('Гонщики') ?></a></li>
         <li><a href="<?php echo $this->baseUrl("post/all") ?>"><?php echo $this->translate('Новости') ?></a></li>
-        <li><a href="http://f1orl.forum2x2.ru"><?php echo $this->translate('Форум') ?></a></li>
+        <li>
+            <a href="http://f1orl.forum2x2.ru">
+                <?php echo $this->translate('Форум') ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo $this->url(array('module' => 'default','controller' => 'donate', 'action' => 'index'), 'default', true); ?>">
+                <?php echo $this->translate('Помощь проекту') ?>
+            </a>
+        </li>
     </ul>
 </div>
