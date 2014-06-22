@@ -34,15 +34,15 @@
 					<div class="panel-footer">
 						<small>
 							<div class="pull-left m-r-10">
-								<span class="font-bold font-color-black"><?php echo $this->translate('Создана') ?>: 
+								<span class="text-bold font-color-black"><?php echo $this->translate('Создана') ?>:
 								</span><?php echo $this->escape($league->date_create); ?>
 							</div>
 							<div class="pull-left m-r-10">
-								<span class="font-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
+								<span class="text-bold font-color-black"><i class="fa fa-filter font-color-gray"></i> <?php echo $this->translate('Категория контента') ?>: </span>
 								<?php echo $this->translate('Лига'); ?>
 							</div>
 							<div class="pull-left m-r-10">
-								<span class="font-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор лиги') ?>: </span>
+								<span class="text-bold font-color-black"><i class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор лиги') ?>: </span>
 								<a target="_blank" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($league->user_id)), 'defaultUserId', true); ?>"><?php echo $this->escape($league->user_login); ?></a>
 							</div>
 						</small>

@@ -16,21 +16,21 @@
     	</div>
     	<div class="post_info block-item-info-bottom">
     	    <div class="content_category block-item-info-bottom-item">
-    		<span class="font-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->escape($this->post['post_type_name']); ?>
+    		<span class="text-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->escape($this->post['post_type_name']); ?>
     	    </div>
     	    <div class="post_author block-item-info-bottom-item">
-    		<span class="font-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
+    		<span class="text-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
     		<a href="<?php echo $this->url(array('module' => 'default','controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->post->user_id)), 'defaultUserId', true) ?>" target="_blank"><?php echo $this->escape($this->post->user_login); ?></a>
     	    </div>
     	    <div class="post_views block-item-info-bottom-item">
-    		<span class="font-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->post['views']); ?>
+    		<span class="text-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->post['views']); ?>
     	    </div>
     	    <div class="post_date_create block-item-info-bottom-item">
-    		<span class="font-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->post['date_create']); ?>
+    		<span class="text-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->post['date_create']); ?>
     	    </div>
 		<?php if ($this->escape($this->post['date_create']) != $this->escape($this->post['date_edit'])) { ?>
 		    <div class="post_date_edit block-item-info-bottom-item">
-			<span class="font-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->post['date_edit']); ?>
+			<span class="text-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->post['date_edit']); ?>
 		    </div>
 		<?php } ?>
     	</div>
