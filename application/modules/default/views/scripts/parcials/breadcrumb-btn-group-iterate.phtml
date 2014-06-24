@@ -15,15 +15,18 @@
             ?>
             <a href="<?php echo $page->getHref(); ?>" class="<?php echo $page->getClass(); ?>"
                title="<?php echo $title; ?>">
-                <?php echo $label; ?>
+                <div><?php echo $label; ?></div>
             </a>
         <?php // otherwise, just output the name
         else:
             ?>
-            <span class="<?php echo $page->getClass(); ?>"
+            <span class="<?php echo $page->getClass(); ?> active"
                   title="<?php echo $title; ?>">
-                <?php echo $label; ?>
+                <div><?php echo $label; ?></div>
             </span>
+        <?php endif; ?>
+        <?php if ($key =0): ?>
+            <div class="btn btn-default">...</div>
         <?php endif; ?>
     <?php endforeach; ?>
 </div>

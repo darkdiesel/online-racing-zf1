@@ -120,9 +120,15 @@ $(document).ready(function() {
         }
     });
 
+    //respons_breadcrumbs();
+
     $(window).resize(function() {
+        respons_breadcrumbs();
+    })
+
+    function respons_breadcrumbs(){
         var ellipses = $("#breadcrumb :nth-child(2)")
         if ($("#breadcrumb a:hidden").length >0) {ellipses.show()} else {ellipses.hide()}
-    })
+    };
 
 });
