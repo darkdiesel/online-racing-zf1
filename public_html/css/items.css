@@ -196,58 +196,8 @@
             margin:0 10px;
             width:90px;
         }
-/* breadcrumb bootstrap3 */
-.breadcrumb{margin:0;font-size:12px;padding:8px 10px;}
-.breadcrumb li{color:#6D6D6D;}
-.breadcrumb li a{color:#E00000;}
-
-/* pagination bootstrap3 */
-.block-item .pagination{
-    margin:20px;
-    text-align:right;
-}
 
 
-/* container bootstrap3 */
-.container{
-
-}
-/* navbar bootstrap3 */
-#top-navbar{
-    margin:0;
-    background-color:#F8F8F8;
-}
-    #top-navbar .navbar{
-	margin-bottom:0;
-	border:none;
-	background-color:#F8F8F8;
-	z-index:1001;
-    }
-#sub-navbar{
-    background-color:#fff;
-}
-    #sub-navbar .navbar{
-	margin-bottom:0;
-	border:none;
-	background-color:#fff;
-	min-height:40px;
-    }
-#sub-navbar .nav > li > a{
-    text-transform:uppercase;
-    letter-spacing:0;
-    font:bold 13px arial;
-    line-height:10px;
-    padding-bottom:10px;
-    border-bottom:5px solid #fff;
-}
-#sub-navbar .nav > li.active > a{
-    border-bottom:5px solid gray;
-}
-
-#sub-navbar .nav > li > a:hover{
-    background:#F9F9F9;
-    border-bottom:5px solid #ccc;
-}
 /* titles */
 .page_title{
     background:none #333333;

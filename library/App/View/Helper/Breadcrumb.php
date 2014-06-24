@@ -18,12 +18,13 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
         $this->_pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
-                'label'      => _('Главная'),
+                'label'      => '<i class="fa fa-home"></i>',
                 'title'      => _('Главная'),
                 'module'     => 'default',
                 'controller' => 'index',
                 'action'     => 'index',
                 'route'      => 'default',
+                'class' => 'btn btn-default',
                 'pages'      => array(
                     array(
                         'label'      => _('Гонщики'),
@@ -35,7 +36,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                             'page' => '1'
                         ),
                         'route'      => 'userAll',
-                        'pages'      => array()
+                        'pages'      => array(),
+                        'class' => 'btn btn-default',
                     ),
                     array(
                         'label'      => _('Новости'),
@@ -44,7 +46,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                         'controller' => 'post',
                         'action'     => 'all',
                         'route'      => 'postAll',
-                        'pages'      => array()
+                        'pages'      => array(),
+                        'class' => 'btn btn-default',
                     ),
                     array(
                         'label' => _('Файлы'),
@@ -61,13 +64,16 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                                 'params'     => array(
                                     'post_type_id' => '3'
                                 ),
+                                'class' => 'btn btn-default',
                             ),
-                        )
+                        ),
+                        'class' => 'btn btn-default',
                     ),
                     array(
                         'label' => _('Форум'),
                         'title' => _('Форум'),
                         'uri'   => 'http://f1orl.forum2x2.ru/',
+                        'class' => 'btn btn-default',
                     ),
                     array(
                         'label'      => _('Чат'),
@@ -76,6 +82,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                         'controller' => 'chat',
                         'action'     => 'index',
                         'route'      => 'default',
+                        'class' => 'btn btn-default',
                     ),
                     array(
                         'label'      => _('Админ. панель'),
@@ -84,13 +91,15 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                         'controller' => 'index',
                         'action'     => 'index',
                         'route'      => 'default',
-                        'pages'      => array()
+                        'pages'      => array(),
+                        'class' => 'btn btn-default',
                     ),
                     array(
                         'label'      => _('Помощь порталу'),
                         'title'      => _('Помощь порталу'),
                         'controller' => 'donate',
                         'action'     => 'index',
+                        'class' => 'btn btn-default',
                     ),
                 )
             ),
@@ -99,6 +108,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'title'      => _('Помощь порталу'),
                 'controller' => 'donate',
                 'action'     => 'index',
+                'class' => 'btn btn-default',
             ),
         );
 
@@ -115,7 +125,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id),
                     'defaultPostId', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -133,7 +144,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array('module' => 'default', 'controller' => 'post', 'action' => 'all', 'page' => $page),
                     'defaultPostAll', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -151,7 +163,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user_id),
                     'defaultUserId', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -169,7 +182,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array('module' => 'default', 'controller' => 'user', 'action' => 'all', 'page' => $page),
                     'defaultUserAll', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -188,7 +202,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                           'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id),
                     'defaultChampionshipTeam', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -207,7 +222,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                           'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id),
                     'defaultChampionshipRaceId', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -227,7 +243,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                           'league_id' => $league_id, 'championship_id' => $championship_id),
                     'defaultChampionshipAction', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -247,7 +264,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'label' => 'Календарь',
                 'title' => 'Календарь',
                 'uri'   => $default_calendar_url,
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -266,7 +284,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                           'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipId',
                     true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -284,7 +303,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id,
                           'page'   => $page), 'defaultLeagueIdAll', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 
@@ -302,7 +322,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array('module' => 'default', 'controller' => 'league', 'action' => 'all', 'page' => $page),
                     'defaultLeagueAll', true
                 ),
-                'pages' => array()
+                'pages' => array(),
+                'class' => 'btn btn-default',
             )
         );
 

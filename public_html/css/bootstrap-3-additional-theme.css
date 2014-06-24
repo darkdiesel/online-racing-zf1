@@ -1,0 +1,72 @@
+.btn-inverse {
+    text-shadow: 0 1px 0 #494949;
+    background-image: -webkit-linear-gradient(top, #363636 0%, #494949 100%);
+    background-image:         linear-gradient(to bottom, #363636 0%, #494949 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#363636', endColorstr='#494949', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    background-repeat: repeat-x;
+    border-color: #5d5d5d;
+    border-color: #747474;
+}
+.btn-inverse:hover,
+.btn-inverse:focus {
+    background-color: #494949;
+    background-position: 0 -15px;
+}
+.btn-inverse:active,
+.btn-inverse.active {
+    background-color: #494949;
+    border-color: #5d5d5d;
+}
+
+.btn-gold {
+    text-shadow: 0 1px 0 #ffc578;
+    background-image: -webkit-linear-gradient(top, #ffc578 0%, #fb9d23 100%);
+    background-image:         linear-gradient(to bottom, #ffc578 0%, #fb9d23 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc578', endColorstr='#fb9d23', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    background-repeat: repeat-x;
+    border-color: #fb9d23;
+    border-color: #fb941c;
+}
+.btn-gold:hover,
+.btn-gold:focus {
+    background-color: #fb9d23;
+    background-position: 0 -15px;
+    border-color: #fb941c;
+}
+.btn-gold:active,
+.btn-gold.active {
+    background-color: #fb9d23;
+    border-color: #fb941c;
+}
+
+/** Default button **/
+.btn-breadcrumb .btn.btn-default {
+    background-image: none;
+}
+
+/** Primary button **/
+.btn-breadcrumb .btn.btn-primary {
+    background-image: none;
+}
+
+/** Success button **/
+.btn-breadcrumb .btn.btn-success {
+    background-image: none;
+}
+
+/** Danger button **/
+.btn-breadcrumb .btn.btn-danger:not(:last-child):after {
+    background-image: none;
+}
+
+/** Warning button **/
+.btn-breadcrumb .btn.btn-warning {
+    background-image: none;
+}
+
+/** Info button **/
+.btn-breadcrumb .btn.btn-info {
+    background-image: none;
+}

@@ -120,4 +120,9 @@ $(document).ready(function() {
         }
     });
 
+    $(window).resize(function() {
+        var ellipses = $("#breadcrumb :nth-child(2)")
+        if ($("#breadcrumb a:hidden").length >0) {ellipses.show()} else {ellipses.hide()}
+    })
+
 });

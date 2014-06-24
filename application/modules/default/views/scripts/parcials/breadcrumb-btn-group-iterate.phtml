@@ -1,0 +1,29 @@
+<div id="breadcrumb" class="btn-group btn-breadcrumb breadcrumb">
+    <?php foreach ($this->pages as $key => $page): ?>
+        <?php
+        if ($this->breadcrumbs()->getUseTranslator() && $t = $this->breadcrumbs()->getTranslator()) {
+            $title = $t->translate($page->getTitle());
+            $label = $t->translate($page->getLabel());
+        } else {
+            $title = $page->getTitle();
+            $label = $page->getTigetLabeltle();
+        }
+        ?>
+        <?php
+        // if this isn't the last page, add a link and the separator
+        if ($key < count($this->pages) - 1):
+            ?>
+            <a href="<?php echo $page->getHref(); ?>" class="<?php echo $page->getClass(); ?>"
+               title="<?php echo $title; ?>">
+                <?php echo $label; ?>
+            </a>
+        <?php // otherwise, just output the name
+        else:
+            ?>
+            <span class="<?php echo $page->getClass(); ?>"
+                  title="<?php echo $title; ?>">
+                <?php echo $label; ?>
+            </span>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>

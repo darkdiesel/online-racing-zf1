@@ -9,17 +9,19 @@ if (!isset($this->breadcrumb)) {
 
 $activeNav = $this->navigation($this->breadcrumb)->findByUri($this->url());
 
-if ($activeNav != NULL) {
+if ($activeNav != null) {
     $activeNav->active = true;
 }
 
-$partial = array('menu_layout/breadcrumb.phtml', 'default');
+$partial = array('parcials/breadcrumb-btn-group-iterate.phtml', 'default');
 
 //$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setSeparator("<span class='divider'> / </span>")->setLinkLast(false);
 //$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setLinkLast(false)->setPartial($partial)->render();
-$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setLinkLast(false)->render();
+$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setLinkLast(
+    false
+)->render();
 
-if ($breadcrumb ) :
+if ($breadcrumb) :
     echo($breadcrumb);
- endif;
+endif;
 ?>

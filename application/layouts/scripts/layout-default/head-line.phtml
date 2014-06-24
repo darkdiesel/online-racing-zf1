@@ -74,7 +74,7 @@
                         </div>
                         <div id="bottom-main-menu" class="collapse navbar-collapse">
                             <?php
-                            $partial = array('menu_layout/main_menu.phtml', 'default');
+                            $partial = array('parcials/main-menu.phtml', 'default');
                             $this->navigation()->menu($this->main_menu)->setPartial($partial);
                             echo $this->navigation()->menu()->render();
                             ?>
