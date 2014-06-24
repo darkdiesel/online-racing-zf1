@@ -70,7 +70,7 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract {
 			$view->headLink()->appendStylesheet("/library/jquery.countdown/css/jquery.countdown.css");
 		}
 
-		if ((Zend_Auth::getInstance()->hasIdentity()) && ($view->ls_chat_block)) {
+		if ((Zend_Auth::getInstance()->hasIdentity())) {
 			//chat script
 			$view->headScript()->appendFile("/js/chat.js");
 		}
