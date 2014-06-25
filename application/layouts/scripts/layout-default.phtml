@@ -4,7 +4,7 @@
  */
 
 // js library files
-//$this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
+$this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
 $this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js"); // jquery
 $this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js"); // jquery ui
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js"); // twitter bootstrap js
@@ -17,6 +17,7 @@ $this->MinifyHeadScript()->appendFile("/library/jquery.slide-out-tabs/jquery.sli
 $this->MinifyHeadScript()->appendFile("/js/app.js");
 $this->MinifyHeadScript()->appendFile("/js/common.js");
 $this->MinifyHeadScript()->appendFile("/js/layout-default.js");
+
 if ((Zend_Auth::getInstance()->hasIdentity())) {
     //chat script
     $this->MinifyHeadScript()->appendFile("/js/chat.js"); // chat block logic
