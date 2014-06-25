@@ -20,19 +20,6 @@ class App_Plugin_Module_Forum extends Zend_Controller_Plugin_Abstract {
 
 		$view->headTitle($view->translate('Форум'));
 
-		/* ===== [BLOCK DISPLAY SETTINGS] ===== */
-
-		// [CSS]
-		$view->minifyHeadLink()->appendStylesheet('/css/layout-forum.css');
-		// [JS]
-		$view->headScript()->appendFile("/js/layout-forum.js");
-
-		// Page scroller block
-		if ($view->page_scroller_block) {
-			$view->headScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js");
-			$view->minifyHeadLink()->appendStylesheet("/library/jquery.page-scroller/css/page-srcoller.css");
-		}
-
 		// Change layout
 		Zend_Layout::getMvcInstance()->setLayout('forum');
 	}
