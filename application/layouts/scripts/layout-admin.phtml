@@ -1,68 +1,114 @@
+<?php
+/*
+ * Add scripts and css files
+ */
+
+// js library files
+$this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
+$this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js"); // jquery
+$this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js"); // jquery ui
+$this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js"); // twitter bootstrap js
+$this->MinifyHeadScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js"); // page-scroller block js
+
+// js app files
+$this->MinifyHeadScript()->appendFile("/js/app.js");
+$this->MinifyHeadScript()->appendFile("/js/common.js");
+$this->MinifyHeadScript()->appendFile("/js/layout-admin.js");
+
+// IE js files
+$this->headScript()->appendFile("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", 'text/javascript', array('conditional' => 'lt IE 9'));
+$this->headScript()->appendFile("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js", 'text/javascript', array('conditional' => 'lt IE 9'));
+
+// css library files
+$this->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
+$this->minifyHeadLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");
+$this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css"); // twitter bootstrap css
+$this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css"); // twitter bootstrap css theme
+$this->minifyHeadLink()->appendStylesheet("/library/bootstrap-magnify/css/bootstrap-magnify.min.css"); // twitter bootsrap magnify
+$this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css"); //font-awesome fonts
+$this->minifyHeadLink()->appendStylesheet("/library/jquery.page-scroller/css/page-srcoller.css"); // page-scroller block styles
+
+// css app files
+$this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css"); // twitter bootstrap additional css
+$this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional-theme.css"); // twitter bootstrap additional theme css
+$this->minifyHeadLink()->appendStylesheet('/css/style.css');
+$this->minifyHeadLink()->appendStylesheet('/css/items.css');
+$this->minifyHeadLink()->appendStylesheet('/css/forms.css');
+$this->minifyHeadLink()->appendStylesheet('/css/layout-common.css');
+$this->minifyHeadLink()->appendStylesheet('/css/layout-admin.css');
+
+// IE css files
+$this->headLink()->appendStylesheet("/css/ie9.css",'screen', 'IE 9');
+$this->headLink()->appendStylesheet("/css/ie8.css",'screen', 'IE 8');
+$this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
+
+?>
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-		<?php echo $this->headTitle() ?>
-		<?php echo $this->headMeta() ?>
-		<?php echo $this->headLink() ?>
-		<?php echo $this->headStyle() ?>
-		<?php echo $this->minifyHeadLink() ?>
-		<?php echo $this->headScript() ?>
-		<?php //echo $this->minifyHeadScript() ?>
-    </head>
-    <body>
-		<div id="page-wrapper">
-			<div id="page">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 p-all-0">
-							<?php echo $this->render("layout-admin/header.phtml") ?>
-						</div>
-					</div>
-					<div class="row p-t-50">
-						<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 p-all-0">
-							<div class="sidebar sidebar-left p-all-15">
-								<?php echo $this->render("layout-admin/left-sidebar.phtml") ?>
-								<h4>временный тестовый пример навигации:</h4>
-								<ul class="nav nav-sidebar">
-									<li class="active"><a href="#">Overview</a></li>
-									<li><a href="#">Reports</a></li>
-									<li><a href="#">Analytics</a></li>
-									<li><a href="#">Export</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 p-all-0">
-							<div id="content-wrapper" class="p-all-20">
-								<div id="content">
-									<?php if ($this->pageTitle() != "") : ?>
-										<div class="page-header">
-											<h2><?php echo $this->pageTitle() ?></h2>
-										</div>
-									<?php endif; ?>
-								</div>
-								<?php echo $this->showMessages(); ?>
-								<div id="<?php echo $this->module.'-'.$this->controller.'-'.$this->action; ?>" class="page">
-									<div class="page-content">
-										<?php echo $this->layout()->content ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
-							<?php echo $this->render("layout-admin/footer.phtml") ?>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<?php
-		if ($this->page_scroller_block) {
-			echo $this->render("common/page-scroller-block.phtml");
-		}
-		?>
-		<div id="background-wrapper" class="background-wrapper"></div>
-		<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
-    </body>
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+    <?php echo $this->minifyHeadLink() ?>
+    <?php echo $this->headScript() ?>
+    <?php //echo $this->minifyHeadScript() ?>
+</head>
+<body>
+<div id="page-wrapper">
+    <div id="page">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 p-all-0">
+                    <?php echo $this->render("layout-admin/header.phtml") ?>
+                </div>
+            </div>
+            <div class="row p-t-50">
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 p-all-0">
+                    <div class="sidebar sidebar-left p-all-15">
+                        <?php echo $this->render("layout-admin/left-sidebar.phtml") ?>
+                        <h4>временный тестовый пример навигации:</h4>
+                        <ul class="nav nav-sidebar">
+                            <li class="active"><a href="#">Overview</a></li>
+                            <li><a href="#">Reports</a></li>
+                            <li><a href="#">Analytics</a></li>
+                            <li><a href="#">Export</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 p-all-0">
+                    <div id="content-wrapper" class="p-all-20">
+                        <div id="content">
+                            <?php if ($this->pageTitle() != "") : ?>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="page-header">
+                                            <h2><?php echo $this->pageTitle() ?></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php echo $this->showMessages(); ?>
+                        <div id="<?php echo $this->module . '-' . $this->controller . '-' . $this->action; ?>"
+                             class="page">
+                            <div class="page-content">
+                                <?php echo $this->layout()->content ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <?php echo $this->render("layout-admin/footer.phtml") ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $this->render("common/page-scroller-block.phtml"); ?>
+<div id="background-wrapper" class="background-wrapper"></div>
+<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+</body>
 </html>

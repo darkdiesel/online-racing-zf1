@@ -1,5 +1,5 @@
 <!-- footer -->
-<footer id="footer" class="m-t-10">
+<div id="footer" class="m-t-10">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -7,7 +7,10 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                             <div class="footer_logo center-block text-center">
-                                <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true) ?>">
+                                <a href="<?php echo $this->url(
+                                    array('module' => 'default', 'controller' => 'index', 'action' => 'index'),
+                                    'default', true
+                                ) ?>">
                                     <img src="<?php echo $this->baseUrl('img/logo_190.png'); ?>"
                                          alt="<?php echo $this->translate('Online-Racing.net') ?>"/>
                                 </a>
@@ -18,9 +21,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                             <?php
-                            if ($this->ft_menu) {
-                                echo $this->render("layout-default/footer/ft_menu.phtml");
-                            }
+                            echo $this->render("layout-default/footer/ft_menu.phtml");
                             ?>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
@@ -28,9 +29,7 @@
                                 <?php echo $this->translate('Наши ссылки в социальных сетях') ?>:
                             </div>
                             <?php
-                            if ($this->ft_socialNetworks_block) {
-                                echo $this->render("layout-default/footer/ft_socialNetworks_block.phtml");
-                            }
+                            echo $this->render("layout-default/footer/ft_socialNetworks_block.phtml");
                             ?>
                         </div>
                     </div>
@@ -47,9 +46,7 @@
                                 2012-2014 © Online-Racing.net
                             </div>
                             <?php
-                            if ($this->ft_web_counters_block) {
-                                echo $this->render("layout-default/footer/ft_web_counters_block.phtml");
-                            }
+                            echo $this->render("layout-default/footer/ft_web_counters_block.phtml");
                             ?>
                         </div>
                     </div>
@@ -57,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <div class="clearfix"></div>
-</footer>
+</div>
 <!-- ./ footer -->

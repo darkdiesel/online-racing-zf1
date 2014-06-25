@@ -21,17 +21,24 @@
                     $breadcrumb_data = $this->render("layout-default/breadcrumb.phtml");
                 }
 
-                if ($page_title != "" || (isset($breadcrumb_data))) :
-                    ?>
-                    <div id="page_title_wrapper" class="block-item m-b-10">
+                if ($page_title != "" || (isset($breadcrumb_data))) : ?>
+                    <div id="page_title_wrapper" class="block block-default m-b-10 shadow-bottom-2-corners">
                         <?php if ($this->pageTitle() != ""): ?>
-                            <div class="page_title"><h4><?php echo $this->pageTitle() ?></h4></div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="page_title">
+                                        <h4><?php echo $this->pageTitle() ?></h4>
+                                    </div>
+                                </div>
+                            </div>
                         <?php endif; ?>
-                        <?php
-                        if ($breadcrumb['show']) {
-                            echo $breadcrumb_data;
-                        }
-                        ?>
+                        <?php if ($breadcrumb['show']) : ?>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <?php echo $breadcrumb_data; ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
                 <?php echo $this->showMessages(); ?>
