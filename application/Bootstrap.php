@@ -118,48 +118,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 				->appendName('viewport', 'width=device-width, initial-scale=1')
 				->setHttpEquiv('Cache-Control', 'no-store');
 
-        // Modernize
-        $view->headScript()->appendFile("/library/modernizr/modernizr.min.js");
 
-		// [JQUERY library]
-		$view->headScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js");
-
-		// [JQUERY UI library]
-		$view->headLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");
-		$view->headScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js");
-
-		// [BOOTSTRAP library]
-		$view->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
-		$view->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css");
-		$view->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css");
-		$view->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional-theme.css");
-		$view->headScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
-
-        // [BOOTSTRAP MAGNIFY]
-        $view->minifyHeadLink()->appendStylesheet("/library/bootstrap-magnify/css/bootstrap-magnify.min.css");
-        $view->headScript()->appendFile("/library/bootstrap-magnify/js/bootstrap-magnify.min.js");
-
-		// [SNOW FALL]
-		//$view->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js");
-
-		$view->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
-
-		// [FONT-AWESOME library]
-		$view->headLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css");
-
-		// [GOOGLE FONTS]
-		//$view->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
-		// [COMMON CSS]
-		$view->minifyHeadLink()->appendStylesheet('/css/style.css');
-		$view->minifyHeadLink()->appendStylesheet('/css/items.css');
-		$view->minifyHeadLink()->appendStylesheet('/css/forms.css');
-		$view->minifyHeadLink()->appendStylesheet('/css/layout-common.css');
-
-		// [COMMON JS]
-		//$view->headScript()->appendFile("/js/app.js");
-
-		$view->MinifyHeadScript()->appendFile("/js/app.js");
-		$view->MinifyHeadScript()->appendFile("/js/common.js");
 
 		// ViewRenderer
 //		$viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
