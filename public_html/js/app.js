@@ -131,4 +131,16 @@ $(document).ready(function() {
         if ($("#breadcrumb a:hidden").length >0) {ellipses.show()} else {ellipses.hide()}
     };
 
+    //liveracers
+
+    window._lr = {
+        url: 'http://online-racing-net.liveracers.info'
+    };
+    (function () {
+        var lr = document.createElement('script');
+        lr.type = 'text/javascript';
+        lr.async = true;
+        lr.src = window._lr.url + '/Scripts/api.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lr, s);
+    })();
 });
