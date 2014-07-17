@@ -19,9 +19,12 @@ $partial = array('parcials/breadcrumb-btn-group-iterate.phtml', 'default');
 //$breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setMinDepth(0)->setLinkLast(false)->setPartial($partial)->render();
 $breadcrumb = $this->navigation($this->breadcrumb)->breadcrumbs()->setPartial($partial)->setMinDepth(0)->setLinkLast(
     false
-)->render();
+)->render();?>
 
-if ($breadcrumb) :
-    echo($breadcrumb);
-endif;
-?>
+<?php if ($breadcrumb) : ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <?php echo($breadcrumb); ?>
+        </div>
+    </div>
+<?php endif; ?>
