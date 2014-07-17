@@ -1,77 +1,77 @@
 <script type="text/javascript">
-    $(document).ready(function() {
-	$('#userRegister').validate({
-	    rules: {
-		'login': {
-		    minlength: 5,
-		    maxlength: 20,
-		    required: true,
-		    regex: '^[a-zA-Z0-9_-]{3,16}$'
-		},
-		'email': {
-		    required: true,
-		    email: true,
-		    minlength: 5,
-		    maxlength: 100
-		},
-		'password': {
-		    required: true,
-		    minlength: 6,
-		    maxlength: 25
-		},
-		'confirmpassword': {
-		    required: true,
-		    minlength: 6,
-		    maxlength: 25,
-		    equalTo: '#password'
-		}
-	    },
-	    messages: {
-		'login': {
-		    required: "<?php echo $this->translate("Поле обязательно для заполнения"); ?>",
-		    minlength: "<?php echo $this->translate("Длина поля должна быть от 5 до 20 символов"); ?>",
-		    maxlength: "<?php echo $this->translate("Длина поля должна быть от 5 до 20 символов"); ?>",
-		    regex: "<?php echo $this->translate("Поле должно содержать только буквы и цивры, а также символы '-' и '_'"); ?>"
-		},
-		'email': {
-		    required: "<?php echo $this->translate("Поле обязательно для заполнения"); ?>",
-		    minlength: "<?php echo $this->translate("Длина поля должна быть от 5 до 50 символов"); ?>",
-		    maxlength: "<?php echo $this->translate("Длина поля должна быть от 5 до 50 символов"); ?>",
-		    email: "<?php echo $this->translate("Пожалуйста введите правильный e-mail адрес. Например user@domain.com"); ?>"
-		},
-		'password': {
-		    required: "<?php echo $this->translate("Поле обязательно для заполнения"); ?>",
-		    minlength: "<?php echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?>",
-		    maxlength: "<?php echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?>"
-		},
-		'confirmpassword': {
-		    required: "<?php echo $this->translate("Поле обязательно для заполнения"); ?>",
-		    minlength: "<?php echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?>",
-		    maxlength: "<?php echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?>",
-		    equalTo: "<?php echo $this->translate("Пароли должны совпадать"); ?>"
-		}
-	    },
-	    errorElement: 'label',
-	    errorClass: 'error',
-	    errorPlacement: function(error, element) {
-		var el = $(element.parent().parent().parent());
-		if (!(el.children('ul')).length) {
-		    el.append('<ul class="errors"></ul>');
-		}
-
-		error.appendTo(el.children('.controls'));
-	    },
-	    highlight: function(label) {
-		$(label).closest('.control-group').removeClass('success');
-		$(label).closest('.control-group').addClass('error');
-		$(label).removeClass("valid");
-	    },
-	    success: function(label) {
-		label.closest('.control-group').removeClass('error');
-		label.closest('.control-group').addClass('success');
-		label.addClass("valid");
-	    }
-	});
-    });
+<!--    $(document).ready(function () {-->
+<!--        $('#default-register-user').validate({-->
+<!--            rules: {-->
+<!--                'login': {-->
+<!--                    minlength: 5,-->
+<!--                    maxlength: 20,-->
+<!--                    required: true,-->
+<!--                    regex: '^[a-zA-Z0-9_-]{3,16}$'-->
+<!--                },-->
+<!--                'email': {-->
+<!--                    required: true,-->
+<!--                    email: true,-->
+<!--                    minlength: 5,-->
+<!--                    maxlength: 100-->
+<!--                },-->
+<!--                'password': {-->
+<!--                    required: true,-->
+<!--                    minlength: 6,-->
+<!--                    maxlength: 25-->
+<!--                },-->
+<!--                'confirmpassword': {-->
+<!--                    required: true,-->
+<!--                    minlength: 6,-->
+<!--                    maxlength: 25,-->
+<!--                    equalTo: '#password'-->
+<!--                }-->
+<!--            },-->
+<!--            messages: {-->
+<!--                'login': {-->
+<!--                    required: "--><?php //echo $this->translate("Поле обязательно для заполнения"); ?><!--",-->
+<!--                    minlength: "--><?php //echo $this->translate("Длина поля должна быть от 5 до 20 символов"); ?><!--",-->
+<!--                    maxlength: "--><?php //echo $this->translate("Длина поля должна быть от 5 до 20 символов"); ?><!--",-->
+<!--                    regex: "--><?php //echo $this->translate("Поле должно содержать только буквы и цивры, а также символы '-' и '_'"); ?><!--"-->
+<!--                },-->
+<!--                'email': {-->
+<!--                    required: "--><?php //echo $this->translate("Поле обязательно для заполнения"); ?><!--",-->
+<!--                    minlength: "--><?php //echo $this->translate("Длина поля должна быть от 5 до 50 символов"); ?><!--",-->
+<!--                    maxlength: "--><?php //echo $this->translate("Длина поля должна быть от 5 до 50 символов"); ?><!--",-->
+<!--                    email: "--><?php //echo $this->translate("Пожалуйста введите правильный e-mail адрес. Например user@domain.com"); ?><!--"-->
+<!--                },-->
+<!--                'password': {-->
+<!--                    required: "--><?php //echo $this->translate("Поле обязательно для заполнения"); ?><!--",-->
+<!--                    minlength: "--><?php //echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?><!--",-->
+<!--                    maxlength: "--><?php //echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?><!--"-->
+<!--                },-->
+<!--                'confirmpassword': {-->
+<!--                    required: "--><?php //echo $this->translate("Поле обязательно для заполнения"); ?><!--",-->
+<!--                    minlength: "--><?php //echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?><!--",-->
+<!--                    maxlength: "--><?php //echo $this->translate("Длина поля должна быть от 6 до 25 символов"); ?><!--",-->
+<!--                    equalTo: "--><?php //echo $this->translate("Пароли должны совпадать"); ?><!--"-->
+<!--                }-->
+<!--            },-->
+<!--            errorElement: 'label',-->
+<!--            errorClass: 'error',-->
+<!--            errorPlacement: function (error, element) {-->
+<!--                var el = $(element.parent().parent().parent());-->
+<!--                if (!(el.children('ul')).length) {-->
+<!--                    el.append('<ul class="errors"></ul>');-->
+<!--                }-->
+<!---->
+<!--                error.appendTo(el.children('.controls'));-->
+<!--            },-->
+<!--            highlight: function (label) {-->
+<!--                $(label).closest('.control-group').removeClass('success');-->
+<!--                $(label).closest('.control-group').addClass('error');-->
+<!--                $(label).removeClass("valid");-->
+<!--            },-->
+<!--            success: function (label) {-->
+<!--                label.closest('.control-group').removeClass('error');-->
+<!--                label.closest('.control-group').addClass('success');-->
+<!--                label.addClass("valid");-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
 </script>
 <?php echo $this->form; ?>

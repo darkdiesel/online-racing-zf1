@@ -5,7 +5,6 @@
 
 // js library files
 $this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
-$this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js"); // jquery
 $this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js"); // jquery ui
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js"); // twitter bootstrap js
 $this->MinifyHeadScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js"); // page-scroller block js
@@ -51,8 +50,8 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
     <?php echo $this->minifyHeadLink() ?>
-    <?php echo $this->headScript() ?>
-    <?php //echo $this->minifyHeadScript() ?>
+
+    <script src="/library/jquery/js/jquery-1.11.0.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="page-wrapper">
@@ -108,7 +107,15 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
     </div>
 </div>
 <?php echo $this->render("common/page-scroller-block.phtml"); ?>
+
 <div id="background-wrapper" class="background-wrapper"></div>
+
+<!-- scripts -->
+<?php //echo $this->headScript() ?>
+<?php echo $this->minifyHeadScript() ?>
+
+<?php //echo $this->render("common/site-heart-js.phtml") ?>
 <?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+<!-- ./ scripts -->
 </body>
 </html>
