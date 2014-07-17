@@ -4,13 +4,17 @@
  */
 
 // js library files
-$this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
-$this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-1.11.0.min.js"); // jquery
+$this->headScript()->prependFile("/library/modernizr/modernizr.min.js"); // modernizr
+$this->MinifyHeadScript()->prependFile("/library/jquery/js/jquery-1.11.0.min.js"); // jquery
 $this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js"); // jquery ui
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js"); // twitter bootstrap js
-$this->MinifyHeadScript()->appendFile("/library/bootstrap-magnify/js/bootstrap-magnify.min.js"); // twitter bootsrap magnify
+$this->MinifyHeadScript()->appendFile(
+    "/library/bootstrap-magnify/js/bootstrap-magnify.min.js"
+); // twitter bootsrap magnify
 //$this->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js"); // snowfall library
-$this->MinifyHeadScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js"); // page-scroller block js
+$this->MinifyHeadScript()->appendFile(
+    "/library/jquery.page-scroller/jquery.page-scroller.js"
+); // page-scroller block js
 $this->MinifyHeadScript()->appendFile("/library/jquery.slide-out-tabs/jquery.slide-out-tabs.js"); // slide out tabs
 
 // js app files
@@ -24,23 +28,35 @@ if ((Zend_Auth::getInstance()->hasIdentity())) {
 }
 
 // IE js files
-$this->headScript()->appendFile("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", 'text/javascript', array('conditional' => 'lt IE 9'));
-$this->headScript()->appendFile("https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js", 'text/javascript', array('conditional' => 'lt IE 9'));
+$this->headScript()->appendFile(
+    "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", 'text/javascript', array('conditional' => 'lt IE 9')
+);
+$this->headScript()->appendFile(
+    "https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js", 'text/javascript', array('conditional' => 'lt IE 9')
+);
 //$this->headScript()->appendFile("/library/ie7/IE7.js", 'text/javascript', array('conditional' => 'lt IE 7'));
 
 // css library files
 $this->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
 $this->minifyHeadLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css"); // twitter bootstrap css
-$this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css"); // twitter bootstrap css theme
-$this->minifyHeadLink()->appendStylesheet("/library/bootstrap-magnify/css/bootstrap-magnify.min.css"); // twitter bootsrap magnify
+$this->minifyHeadLink()->appendStylesheet(
+    "/library/bootstrap/css/bootstrap-theme.min.css"
+); // twitter bootstrap css theme
+$this->minifyHeadLink()->appendStylesheet(
+    "/library/bootstrap-magnify/css/bootstrap-magnify.min.css"
+); // twitter bootsrap magnify
 $this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css"); //font-awesome fonts
-$this->minifyHeadLink()->appendStylesheet("/library/jquery.page-scroller/css/page-srcoller.css"); // page-scroller block styles
+$this->minifyHeadLink()->appendStylesheet(
+    "/library/jquery.page-scroller/css/page-srcoller.css"
+); // page-scroller block styles
 $this->minifyHeadLink()->appendStylesheet("/library/jquery.slide-out-tabs/css/slide-out-tabs.css"); // slide out tabs
 
 // css app files
 $this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css"); // twitter bootstrap additional css
-$this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional-theme.css"); // twitter bootstrap additional theme css
+$this->minifyHeadLink()->appendStylesheet(
+    "/css/bootstrap-3-additional-theme.css"
+); // twitter bootstrap additional theme css
 $this->minifyHeadLink()->appendStylesheet('/css/style.css');
 $this->minifyHeadLink()->appendStylesheet('/css/items.css');
 $this->minifyHeadLink()->appendStylesheet('/css/forms.css');
@@ -50,9 +66,9 @@ $this->minifyHeadLink()->appendStylesheet('/css/user.css');
 $this->minifyHeadLink()->appendStylesheet("/css/chat.css"); // chat block styles
 
 // IE css files
-$this->headLink()->appendStylesheet("/css/ie9.css",'screen', 'IE 9');
-$this->headLink()->appendStylesheet("/css/ie8.css",'screen', 'IE 8');
-$this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
+$this->headLink()->appendStylesheet("/css/ie9.css", 'screen', 'IE 9');
+$this->headLink()->appendStylesheet("/css/ie8.css", 'screen', 'IE 8');
+$this->headLink()->appendStylesheet("/css/ie7.css", 'screen', 'IE 7');
 
 // google fonts
 //$this->headLink()->appendStylesheet("http://fonts.googleapis.com/css?family=Faster+One", "screen, print");
@@ -76,6 +92,8 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
     <?php echo $this->headLink() ?>
     <?php echo $this->headStyle() ?>
     <?php echo $this->minifyHeadLink() ?>
+
+    <!-- scripts -->
     <?php //echo $this->headScript() ?>
     <?php echo $this->minifyHeadScript() ?>
 </head>
@@ -94,17 +112,12 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
     <!-- ./ #page -->
 </div>
 <!-- ./ #page-wrapper -->
-<?php
-if ($this->page_scroller_block) {
-    echo $this->render("common/page-scroller-block.phtml");
-}
-?>
-<?php
-if ($this->slide_out_tabs_block) {
-    echo $this->render("layout-default/blocks/slide-out-tabs-block.phtml");
-}
-?>
+
+<?php echo $this->render("common/page-scroller-block.phtml"); ?>
+<?php echo $this->render("layout-default/blocks/slide-out-tabs-block.phtml"); ?>
+
 <div id="background-wrapper" class="background-wrapper"></div>
+
 <?php echo $this->render("common/site-heart-js.phtml") ?>
 <?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
 </body>
