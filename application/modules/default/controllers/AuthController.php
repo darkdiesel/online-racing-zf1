@@ -24,7 +24,7 @@ class AuthController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$form = new Application_Form_Auth_Login();
 
-		// Set  redirect url if user authorizing successful. 
+		// Set  redirect url if user authorizing successful.
 		$redirectToUrl = $request->getParam('redirectTo');
 
 		if (empty($redirectToUrl)) {
@@ -166,6 +166,7 @@ class AuthController extends App_Controller_LoaderController {
 			}
 		}
 		$this->view->form = $form;
+        $this->view->display_header_login_form = FALSE;
 	}
 
 	/**

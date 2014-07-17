@@ -68,6 +68,7 @@
                                         </div>
                                     <?php } ?>
                                 </span>
+
                                 <p class="text-muted small">
                                     <?php echo Zend_Auth::getInstance()->getStorage()->read()->login; ?>
                                     <a href="<?php echo $default_user_edit_url ?>">
@@ -83,7 +84,7 @@
                                         <i class="fa fa-briefcase"></i> <?php echo $this->translate('Профиль'); ?>
                                     </a>
                                 </div>
-                                <div >
+                                <div>
                                     <a href="<?php echo $default_user_mssages_url; ?>"
                                        class="btn btn-default btn-sm m-b-5">
                                         <i class="fa fa-envelope"></i> <?php echo $this->translate('Сообщения'); ?>
@@ -103,7 +104,8 @@
                                         </a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="<?php echo $default_auth_logout_url; ?>" class="btn btn-default btn-sm pull-right">
+                                        <a href="<?php echo $default_auth_logout_url; ?>"
+                                           class="btn btn-default btn-sm pull-right">
                                             <i class="fa fa-power-off"></i> <?php echo $this->translate('Выход'); ?>
                                         </a>
                                     </div>
@@ -117,16 +119,18 @@
     </ul>
 <?php } else { ?>
     <?php
-        $default_reg_user_url = $this->url(
-            array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true
-        );
+    $default_reg_user_url = $this->url(
+        array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true
+    );
     ?>
     <ul class="nav navbar-nav navbar-collapse navbar-right">
         <a class="btn btn-info navbar-btn" href="<?php echo $default_reg_user_url; ?>">
             <?php echo $this->translate('Регистрация'); ?>
         </a>
-        <button data-toggle="modal" href="#loginModalForm" type="button" class="btn btn-primary navbar-btn">
-            <?php echo $this->translate('Войти') ?>
-        </button>
+        <?php if (isset($this->display_header_login_form) && ($this->display_header_login_form)) : ?>
+            <button data-toggle="modal" href="#loginModalForm" type="button" class="btn btn-primary navbar-btn">
+                <?php echo $this->translate('Войти') ?>
+            </button>
+        <?php endif; ?>
     </ul>
 <?php } ?>

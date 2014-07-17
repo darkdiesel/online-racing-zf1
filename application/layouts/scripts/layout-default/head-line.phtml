@@ -15,7 +15,10 @@
                                 <span class="icon-bar"></span>
                             </button>
                             <?php
-                            $default_index_url = $this->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true);
+                            $default_index_url = $this->url(
+                                array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default',
+                                true
+                            );
                             ?>
                             <a href="<?php echo $default_index_url; ?>" class="pull-left">
                                 <img src="<?php echo $this->baseUrl('data-content/ui/logo_orn.png'); ?>"
@@ -31,7 +34,8 @@
                             <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'index', 'index')) : ?>
                                 <?php
                                 $admin_index_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true
+                                    array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default',
+                                    true
                                 );
                                 ?>
                                 <ul class="nav navbar-nav navbar-right">
@@ -84,30 +88,38 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="loginModalForm" tabindex="-1" role="dialog" aria-labelledby="loginModalFormLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><?php echo $this->translate("Авторизация") ?></h4>
-                </div>
-                <div class="modal-body">
-                    <?php
-                    $form = new Application_Form_Auth_Login();
-                    $form->setAction("{$this->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}?redirectTo={$this->url()}");
-                    echo $form;
-                    ?>
-                    <br/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <?php if (isset($this->display_header_login_form) && ($this->display_header_login_form)) : ?>
+        <!-- Modal with login form -->
+        <div class="modal fade" id="loginModalForm" tabindex="-1" role="dialog"
+             aria-labelledby="loginModalFormLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title"><?php echo $this->translate("Авторизация") ?></h4>
+                    </div>
+                    <div class="modal-body">
+                        <?php
+                        $form = new Application_Form_Auth_Login();
+                        $form->setAction(
+                            "{$this->url(
+                                array('module' => 'default', 'controller' => 'auth', 'action' => 'login'),
+                                'default',
+                                true
+                            )}?redirectTo={$this->url()}"
+                        );
+                        echo $form;
+                        ?>
+                        <br/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
+        <!-- ./ Modal with login form -->
+    <?php endif; ?>
 </div>
 <!-- ./ head-line -->
