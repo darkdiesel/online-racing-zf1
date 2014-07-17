@@ -78,6 +78,16 @@ class Application_Form_Comment_Add extends Zend_Form
                                  )
         );
 
+        $csrfToken = new Zend_Form_Element_Hash('default_comment_add_csrf_token');
+        $csrfToken->setSalt('asdfasdfasd')
+            ->setDecorators(
+                array(
+                     'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                     array('Label', array('class' => 'control-label')),
+                     array(array('elementDiv' => 'HtmlTag'),
+                           array('tag' => 'div', 'class' => 'form-group')),
+                     array('HtmlTag', array('class' => ''))));
+
         $this->addElement(
             'submit', 'submit', array(
                                      'ignore'     => true,
@@ -105,6 +115,9 @@ class Application_Form_Comment_Add extends Zend_Form
                                    )
                               )
         );
+
+        // add elements to form
+        $this->addElement($csrfToken);
 
         $this->addDisplayGroup(
             array(

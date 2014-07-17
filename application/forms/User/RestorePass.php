@@ -80,6 +80,16 @@ class Application_Form_User_RestorePass extends Zend_Form {
 			)
 		)));
 
+        $csrfToken = new Zend_Form_Element_Hash('default_user_restore_pass_csrf_token');
+        $csrfToken->setSalt(md5(microtime() . uniqid()))
+            ->setDecorators(
+                array(
+                     'ViewHelper', 'HtmlTag', 'label', 'Errors',
+                     array('Label', array('class' => 'control-label')),
+                     array(array('elementDiv' => 'HtmlTag'),
+                           array('tag' => 'div', 'class' => 'form-group')),
+                     array('HtmlTag', array('class' => ''))));
+
 		$this->addElement('submit', 'submit', array(
 			'ignore' => true,
 			'class' => 'btn btn-primary',
@@ -101,6 +111,9 @@ class Application_Form_User_RestorePass extends Zend_Form {
 				array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
 			)
 		));
+
+        // add elements to form
+        $this->addElement($csrfToken);
 
 		$this->addDisplayGroup(array(
 			$this->getElement('submit'),

@@ -33,6 +33,9 @@ class UserController extends App_Controller_LoaderController {
 			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 		}
 
+        // set layout without sidebar
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
+
 		// page title
 		$this->view->headTitle($this->view->translate('Активация пользователя'));
 		$this->view->pageTitle($this->view->translate('Активация пользователя'));
@@ -141,6 +144,10 @@ class UserController extends App_Controller_LoaderController {
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->_helper->redirector('index', 'index');
 		}
+
+        // set layout without sidebar
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
+
 		$this->view->headTitle($this->view->translate('Восстановление пароля'));
 		$this->view->pageTitle($this->view->translate('Восстановление пароля'));
 
@@ -194,6 +201,9 @@ class UserController extends App_Controller_LoaderController {
 		if (Zend_Auth::getInstance()->hasIdentity()) {
 			$this->_helper->redirector('index', 'index');
 		}
+
+        // set layout without sidebar
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
 		$this->view->headTitle($this->view->translate('Создание нового пароля'));
 		$this->view->pageTitle($this->view->translate('Создание нового пароля'));

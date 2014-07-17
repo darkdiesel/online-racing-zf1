@@ -11,6 +11,9 @@ class RegController extends App_Controller_LoaderController {
 			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
 		}
 
+        // set layout without sidebar
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
+
 		// page title
 		$this->view->headTitle($this->view->translate('Регистрация пользователя'));
 		$this->view->pageTitle($this->view->translate('Регистрация пользователя'));
