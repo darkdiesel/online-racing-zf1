@@ -93,10 +93,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $layout = $this->getResource('layout');
         $view = $layout->getView();
 
+        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+
         // Init DocType
         $view->doctype('XHTML1_STRICT');
 
         // Init View Helpers
+        $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
         $view->addHelperPath('App/View/Helper', 'App_View_Helper');
         $view->addHelperPath('Bootstrap/View/Helper', 'Bootstrap_View_Helper');
 
@@ -130,6 +133,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ->appendName('yandex-verification', '715d9bbdfc996f86')
             ->appendName('viewport', 'width=device-width, initial-scale=1')
             ->setHttpEquiv('Cache-Control', 'no-store');
+
+        // setup JQuery
+        $view->jQuery()
+            ->enable()
+            ->uiEnable()
+            ->setVersion('1.11.1')
+            ->setUiVersion('1.11.0')
+            //->setLocalPath('/library/jquery/js/jquery.min.js')
+            //->setUiLocalPath('/library/jquery/js/jquery-ui.min.js')
+            ->addStylesheet('/library/jquery/css/jquery-ui.min.css');
+
+        $viewRenderer->setView($view);
+        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
     }
 
     /*

@@ -5,7 +5,6 @@
 
 // js library files
 $this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
-$this->MinifyHeadScript()->appendFile("/library/jquery/js/jquery-ui-1.10.3.custom.min.js"); // jquery ui
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js"); // twitter bootstrap js
 $this->MinifyHeadScript()->appendFile("/library/bootstrap-magnify/js/bootstrap-magnify.min.js"); // twitter bootsrap magnify
 //$this->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js"); // snowfall library
@@ -28,8 +27,6 @@ $this->headScript()->appendFile("https://oss.maxcdn.com/libs/respond.js/1.4.2/re
 //$this->headScript()->appendFile("/library/ie7/IE7.js", 'text/javascript', array('conditional' => 'lt IE 7'));
 
 // css library files
-$this->minifyHeadLink()->appendStylesheet("/library/normalize/normalize.css");
-$this->minifyHeadLink()->appendStylesheet("/library/jquery/css/flick/jquery-ui-1.10.3.custom.min.css");
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css"); // twitter bootstrap css
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css"); // twitter bootstrap css theme
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap-magnify/css/bootstrap-magnify.min.css"); // twitter bootsrap magnify
@@ -76,7 +73,7 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
     <?php echo $this->headStyle() ?>
     <?php echo $this->minifyHeadLink() ?>
 
-    <script src="/library/jquery/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <?php echo $this->jQuery(); ?>
 </head>
 <body>
 <!-- head-line -->
