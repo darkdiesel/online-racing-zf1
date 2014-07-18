@@ -4,7 +4,7 @@
  */
 
 // js library files
-$this->headScript()->appendFile("/library/modernizr/modernizr.min.js"); // modernizr
+$this->headScript()->prependFile("/library/modernizr/modernizr.min.js"); // modernizr
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js"); // twitter bootstrap js
 $this->MinifyHeadScript()->appendFile("/library/bootstrap-magnify/js/bootstrap-magnify.min.js"); // twitter bootsrap magnify
 //$this->headScript()->appendFile("/library/jquery.snowfall/snowfall.min.jquery.js"); // snowfall library
@@ -27,10 +27,10 @@ $this->headScript()->appendFile("https://oss.maxcdn.com/libs/respond.js/1.4.2/re
 //$this->headScript()->appendFile("/library/ie7/IE7.js", 'text/javascript', array('conditional' => 'lt IE 7'));
 
 // css library files
+$this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css"); //font-awesome fonts
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css"); // twitter bootstrap css
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css"); // twitter bootstrap css theme
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap-magnify/css/bootstrap-magnify.min.css"); // twitter bootsrap magnify
-$this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css"); //font-awesome fonts
 $this->minifyHeadLink()->appendStylesheet("/library/jquery.page-scroller/css/page-srcoller.css"); // page-scroller block styles
 $this->minifyHeadLink()->appendStylesheet("/library/jquery.slide-out-tabs/css/slide-out-tabs.css"); // slide out tabs
 

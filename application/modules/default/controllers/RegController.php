@@ -21,7 +21,7 @@ class RegController extends App_Controller_LoaderController {
 		$this->messages->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.')}");
 
 		// jQuery validate script
-		$this->view->MinifyHeadScript()->appendFile("/js/jquery.validate.my.js");
+		$this->view->MinifyHeadScript()->appendFile("/library/jquery.validate/jquery.validate.min.js");
 
 		$request = $this->getRequest();
 		$form = new Application_Form_Reg_User();

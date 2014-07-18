@@ -35,6 +35,7 @@ $this->headScript()->appendFile(
 //$this->headScript()->appendFile("/library/ie7/IE7.js", 'text/javascript', array('conditional' => 'lt IE 7'));
 
 // css library files
+$this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css"); //font-awesome fonts
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css"); // twitter bootstrap css
 $this->minifyHeadLink()->appendStylesheet(
     "/library/bootstrap/css/bootstrap-theme.min.css"
@@ -42,7 +43,7 @@ $this->minifyHeadLink()->appendStylesheet(
 $this->minifyHeadLink()->appendStylesheet(
     "/library/bootstrap-magnify/css/bootstrap-magnify.min.css"
 ); // twitter bootsrap magnify
-$this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css"); //font-awesome fonts
+
 $this->minifyHeadLink()->appendStylesheet(
     "/library/jquery.page-scroller/css/page-srcoller.css"
 ); // page-scroller block styles
