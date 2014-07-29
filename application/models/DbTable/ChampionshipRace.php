@@ -54,8 +54,8 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
                 array('c' => 'country'), 'c.id = t.country_id',
                 array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                       'country_url_image_round'       => 'c.url_image_round',
-                      'country_native_name'           => 'c.native_name',
-                      'country_english_name'          => 'c.english_name',)
+                      'country_NativeName'           => 'c.NativeName',
+                      'country_EnglishName'          => 'c.EnglishName',)
             )
             ->where($idencity_data);
 
@@ -153,8 +153,8 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
                 array('c' => 'country'), 't.country_id = c.id',
                 array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
                       'country_url_image_round'       => 'c.url_image_round',
-                      'country_native_name'           => 'c.native_name',
-                      'country_english_name'          => 'c.english_name',)
+                      'country_NativeName'           => 'c.NativeName',
+                      'country_EnglishName'          => 'c.EnglishName',)
             );
 
         if ($fields) {

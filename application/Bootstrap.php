@@ -61,16 +61,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
     }
 
-    protected function _initSiteModules()
-    {
-        //Don't forget to bootstrap the front controller as the resource may not been created yet...
-        $this->bootstrap("frontController");
-        $front = $this->getResource("frontController");
-
-        //Add modules dirs to the controllers for default routes...
-        $front->addModuleDirectory(APPLICATION_PATH . '/modules');
-    }
-
     protected function _initPlugins()
     {
         // plugin for view

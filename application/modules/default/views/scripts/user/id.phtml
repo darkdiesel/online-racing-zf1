@@ -51,11 +51,11 @@
                         </div>
                         <div class="user-name">
                             <span class="tooltip-field pull-left m-t-5" data-placement="bottom"
-                                  data-title="<?php echo $this->escape($this->user_data->country_english_name); ?>">
+                                  data-title="<?php echo $this->escape($this->user_data->country_EnglishName); ?>">
                                 <div class="img-wrapper-50-50">
                                     <img class="img-size-50-50 img-responsive" src="<?php echo $this->baseUrl(
                                         $this->escape($this->user_data->country_url_image_glossy_wave)
-                                    ); ?>" alt="<?php echo $this->escape($this->user_data->country_english_name); ?>">
+                                    ); ?>" alt="<?php echo $this->escape($this->user_data->country_EnglishName); ?>">
                                 </div>
                             </span>
                             <?php if (!empty($this->user_data->name) && !empty($this->user_data->surname)) { ?>
@@ -135,7 +135,7 @@
                                             <td class="text-bold"><?php echo $this->translate('Страна') ?>:</td>
                                             <td>
                                                 <div class="break_word_wrap">
-                                                    <?php echo $this->user_data->country_native_name . " ({$this->user_data->country_english_name})" ?>
+                                                    <?php echo $this->user_data->country_NativeName . " ({$this->user_data->country_EnglishName})" ?>
                                                 </div>
                                             </td>
                                         </tr>

@@ -20,7 +20,7 @@ class Application_Form_Country_Add extends Zend_Form {
 		// decorators for this form
 		$this->addDecorators(array('formElements', 'form'));
 
-		$this->addElement('text', 'native_name', array(
+		$this->addElement('text', 'NativeName', array(
 			'label' => $this->translate('Родное название'),
 			'placeholder' => $this->translate('Родное название'),
 			'maxlength' => 255,
@@ -29,7 +29,7 @@ class Application_Form_Country_Add extends Zend_Form {
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
-				new App_Validate_NoDbRecordExists('country', 'native_name')
+				new App_Validate_NoDbRecordExists('country', 'NativeName')
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',
@@ -39,7 +39,7 @@ class Application_Form_Country_Add extends Zend_Form {
 			)
 		));
 
-		$this->addElement('text', 'english_name', array(
+		$this->addElement('text', 'EnglishName', array(
 			'label' => $this->translate('Английское название'),
 			'placeholder' => $this->translate('Английское название'),
 			'maxlength' => 255,
@@ -48,7 +48,7 @@ class Application_Form_Country_Add extends Zend_Form {
 			'class' => 'form-control',
 			'validators' => array(
 				'NotEmpty',
-				new App_Validate_NoDbRecordExists('country', 'english_name')
+				new App_Validate_NoDbRecordExists('country', 'EnglishName')
 			),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag', 'label', 'Errors',

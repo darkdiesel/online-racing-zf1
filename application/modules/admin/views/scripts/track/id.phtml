@@ -18,8 +18,8 @@
 					<td class="header_column"><span><?php echo $this->translate('Страна'); ?></span></td>
 					<td>
 						<span><?php echo $this->escape($this->track->country_id); ?></span>
-						<span><?php echo $this->escape($this->track->country_native_name); ?></span>
-						<span>(<?php echo $this->escape($this->track->country_english_name); ?>)</span>
+						<span><?php echo $this->escape($this->track->country_NativeName); ?></span>
+						<span>(<?php echo $this->escape($this->track->country_EnglishName); ?>)</span>
 						<span><img src="<?php echo $this->baseUrl($this->escape($this->track->country_url_image_glossy_wave)); ?>" ></span>
 						<span><img src="<?php echo $this->baseUrl($this->escape($this->track->country_url_image_round)); ?>" ></span>
 					</td>

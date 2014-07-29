@@ -17,7 +17,7 @@ class Application_Form_Country_Edit extends Zend_Form {
 	    'id' => 'admin-country-edit',
 	));
 
-	$this->addElement('text', 'native_name', array(
+	$this->addElement('text', 'NativeName', array(
 	    'label' => $this->translate('Родное название'),
 	    'placeholder' => $this->translate('Родное название'),
 	    'maxlength' => 255,
@@ -36,7 +36,7 @@ class Application_Form_Country_Edit extends Zend_Form {
 	    )
 	));
 
-	$this->addElement('text', 'english_name', array(
+	$this->addElement('text', 'EnglishName', array(
 	    'label' => $this->translate('Английское название'),
 	    'placeholder' => $this->translate('Английское название'),
 	    'maxlength' => 255,

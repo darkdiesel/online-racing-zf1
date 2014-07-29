@@ -18,7 +18,7 @@
 						<div class="img-wrapper-150-150 overflow-hide img-circle center-block user-avatar <?php echo $user_status_class; ?>">
 							<a href="<?php echo $user_id_url; ?>"><?php echo $this->getUserAvatar($user->id, $user->avatar_type, 'media-object img-responsive img-size-150', 150); ?></a>
 						</div>
-						<div class="user-flag"><img class="img-size-64" src="<?php echo $user->country_url_image_glossy_wave; ?>" title="<?php echo $user->country_english_name . ' (' . $user->country_native_name . ')'; ?>"></div>
+						<div class="user-flag"><img class="img-size-64" src="<?php echo $user->country_url_image_glossy_wave; ?>" title="<?php echo $user->country_EnglishName . ' (' . $user->country_NativeName . ')'; ?>"></div>
 						<div class="user-login text-center"><a href="<?php echo $user_id_url; ?>"><?php echo $user->login; ?></a></div>
 						<div class="clearfix"></div>
 					</div>

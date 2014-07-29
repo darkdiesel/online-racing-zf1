@@ -135,7 +135,7 @@ class RaceController extends App_Controller_LoaderController {
 
 				if ($tracks_data) {
 					foreach ($tracks_data as $track):
-						$form->track->addMultiOption($track->id, $track->country_english_name . " - " . $track->name . " ({$track->track_year})");
+						$form->track->addMultiOption($track->id, $track->country_EnglishName . " - " . $track->name . " ({$track->track_year})");
 					endforeach;
 				} else {
 					$this->messages->addError($this->view->translate('Трассы не найдены!'));
@@ -243,7 +243,7 @@ class RaceController extends App_Controller_LoaderController {
 
 					if ($tracks_data) {
 						foreach ($tracks_data as $track):
-							$form->track->addMultiOption($track->id, $track->country_english_name . " - " . $track->name . " ({$track->track_year})");
+							$form->track->addMultiOption($track->id, $track->country_EnglishName . " - " . $track->name . " ({$track->track_year})");
 						endforeach;
 					} else {
 						$this->messages->addError($this->view->translate('Трассы не найдены!'));
