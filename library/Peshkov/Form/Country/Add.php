@@ -156,7 +156,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->setDecorators($this->buttonDecorators);
 
         $countyAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all'
+            array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'adminCountryAll'
         );
 
         $cancel = new Zend_Form_Element_Button('Cancel');

@@ -122,6 +122,20 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 		return $this;
 	}
 
+    public function countryMenu($countryID) {
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'country', 'edit')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'country', 'action' => 'edit', 'countryID' => $countryID), 'adminCountryAction', true);
+            array_push($this->_menuLinks, '<a href="'.$url.'">'.$this->view->translate('Редактировать').'</a>');
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'country', 'delete')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'country', 'action' => 'delete', 'countryID' => $countryID), 'adminCountryAction', true);
+            array_push($this->_menuLinks, '<a href="'.$url.'">'.$this->view->translate('Удалить').' (не реализовано)'.'</a>');
+        }
+
+        return $this;
+    }
+
 	private function buildMenu() {
 		$this->_menuHtml = '<div class = "pull-right action-buttons block-config-menu">';
 		$this->_menuHtml .= '<div class = "btn-group pull-right">';

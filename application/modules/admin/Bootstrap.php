@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Module's bootstrap file. 
- * Notice the bootstrap class' name is "Modulename_"Bootstrap. 
- * When creating your own modules make sure that you are using the correct namespace 
+ * Module's bootstrap file.
+ * Notice the bootstrap class' name is "Modulename_"Bootstrap.
+ * When creating your own modules make sure that you are using the correct namespace
  */
 class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 
@@ -189,7 +189,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'page' => 1,
 				), "admin/privilege/all/page/%s.html"
 		));
-		
+
 		//POST CONTROLLER ROUTERS
 		$router->addRoute(
 				'adminPostId', new Zend_Controller_Router_Route_Regex('admin/post/(\d+)\.html', array(
@@ -222,7 +222,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'page' => 1,
 				), "admin/post/all/page/%s.html"
 		));
-		
+
 		//LEAGUE CONTROLLER ROUTERS
 		$router->addRoute(
 				'adminLeagueId', new Zend_Controller_Router_Route_Regex('admin/league/(\d+)\.html', array(
@@ -255,7 +255,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 			'page' => 1,
 				), "admin/league/all/page/%s.html"
 		));
-		
+
 		//CHAMPIONSHIP CONTROLLER ROUTERS
 		$router->addRoute(
 				'adminChampionshipId', new Zend_Controller_Router_Route_Regex('admin/championship/(\d+)\.html', array(
@@ -389,37 +389,39 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap {
 		));
 
 		//COUNTRY CONTROLLER ROUTERS
-		$router->addRoute(
-				'country_id', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)\.html', array(
-			'module' => 'admin',
-			'controller' => 'country',
-			'action' => 'id',
-			1 => 0), array(
-			'country_id' => 1,
-				), "admin/country/%d.html"
-		));
+        $router->addRoute(
+            'adminCountryID',
+            new Zend_Controller_Router_Route_Regex('admin/country/(\d+)\.html',
+                array(
+                                                                                                   'module' => 'admin',
+                                                                                                   'controller' => 'country',
+                                                                                                   'action' => 'id',
+                                                                                                   1 => 0), array(
+                                                                                                                 'countryID' => 1,
+                                                                                                            ), "admin/country/%d.html"
+            ));
 
-		$router->addRoute(
-				'country_action', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)/(\w*)\.html', array(
-			'module' => 'admin',
-			'controller' => 'country',
-			'action' => 'id',
-			1 => 0), array(
-			'country_id' => 1,
-			'action' => 2,
-				), "admin/country/%d/%s.html"
-		));
+        $router->addRoute(
+            'adminCountryAction', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)/(\w*)\.html', array(
+                                                                                                             'module' => 'admin',
+                                                                                                             'controller' => 'country',
+                                                                                                             'action' => 'id',
+                                                                                                             1 => 0), array(
+                                                                                                                           'countryID' => 1,
+                                                                                                                           'action' => 2,
+                                                                                                                      ), "admin/country/%d/%s.html"
+            ));
 
-		$router->addRoute(
-				'country_all', new Zend_Controller_Router_Route_Regex('admin/country/all/page/(\d+)\.html', array(
-			'module' => 'admin',
-			'controller' => 'country',
-			'action' => 'all',
-			1 => 1
-				), array(
-			'page' => 1,
-				), "admin/country/all/page/%s.html"
-		));
+        $router->addRoute(
+            'adminCountryAll', new Zend_Controller_Router_Route_Regex('admin/country/all/page/(\d+)\.html', array(
+                                                                                                             'module' => 'admin',
+                                                                                                             'controller' => 'country',
+                                                                                                             'action' => 'all',
+                                                                                                             1 => 1
+                                                                                                        ), array(
+                                                                                                                'page' => 1,
+                                                                                                           ), "admin/country/all/page/%s.html"
+            ));
 
 		//TEAM CONTROLLER ROUTERS
 		$router->addRoute(
