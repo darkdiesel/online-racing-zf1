@@ -84,16 +84,29 @@ class Admin_CountryController extends App_Controller_LoaderController
 
         // form
         $form = new Peshkov_Form_Country_Add();
+        $this->view->form = $form;
 
+        // test for valid input
+        // if valid, populate model
+        // assign default values for some fields
+        // save to database
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
 
-                $countryData = array();
+                $date = date('Y-m-d H:i:s');
+
+                $item = new Peshkov_Model_Country();
+
+//                die(var_dump($item));
+
+                $item->fromArray($form->getValues());
+                $item->DateCreate = $date;
+                $item->DateEdit = $date;
 
                 //receive and rename image_round file
                 if ($form->getValue('UrlImageRound')) {
-                    if ($form->image_round->receive()) {
-                        $file = $form->image_round->getFileInfo();
+                    if ($form->UrlImageRound->receive()) {
+                        $file = $form->UrlImageRound->getFileInfo();
                         $ext = pathinfo($file['UrlImageRound']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
@@ -105,14 +118,14 @@ class Admin_CountryController extends App_Controller_LoaderController
                             $file['UrlImageRound']['destination'] . '/' . $file['UrlImageRound']['name']
                         );
 
-                        $countryData['UrlImageRound'] = '/data-content/data-uploads/flags/' . $newName;
+                        $item->UrlImageRound = '/data-content/data-uploads/flags/' . $newName;
                     }
                 }
 
                 //receive and rename image_glossy_wave file
                 if ($form->getValue('UrlImageGlossyWave')) {
-                    if ($form->image_glossy_wave->receive()) {
-                        $file = $form->image_glossy_wave->getFileInfo();
+                    if ($form->UrlImageGlossyWave->receive()) {
+                        $file = $form->UrlImageGlossyWave->getFileInfo();
                         $ext = pathinfo($file['UrlImageGlossyWave']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
@@ -124,27 +137,20 @@ class Admin_CountryController extends App_Controller_LoaderController
                             $file['UrlImageGlossyWave']['destination'] . '/' . $file['UrlImageGlossyWave']['name']
                         );
 
-                        $countryData['UrlImageGlossyWave'] = '/data-content/data-uploads/flags/' . $newName;
+                        $item->UrlImageGlossyWave = '/data-content/data-uploads/flags/' . $newName;
                     }
                 }
 
-                $date = date('Y-m-d H:i:s');
-                $countryData['NativeName'] = $form->getValue('NativeName');
-                $countryData['EnglishName'] = $form->getValue('EnglishName');
-                $countryData['Abbreviation'] = $form->getValue('Abbreviation');
-                $countryData['DateCreate'] = $date;
-                $countryData['DateEdit'] = $date;
-
-                $country = new Application_Model_DbTable_Country();
-                $newCountry = $country->createRow($countryData);
-                $newCountry->save();
+                $item->save();
 
                 $this->redirect(
                     $this->view->url(
-                        array('module'     => 'admin', 'controller' => 'country', 'action' => 'id',
-                              'countryID' => $newCountry->id), 'adminCountryID', true
+                        array('module'    => 'admin', 'controller' => 'country', 'action' => 'id',
+                              'countryID' => $item->ID), 'adminCountryID'
                     )
                 );
+
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
                     $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -152,7 +158,6 @@ class Admin_CountryController extends App_Controller_LoaderController
             }
         }
 
-        $this->view->form = $form;
     }
 
     public function editAction()
@@ -170,13 +175,13 @@ class Admin_CountryController extends App_Controller_LoaderController
             $form = new Application_Form_Country_Edit();
             $form->setAction(
                 $this->view->url(
-                    array('module'     => 'admin', 'controller' => 'country', 'action' => 'edit',
+                    array('module'    => 'admin', 'controller' => 'country', 'action' => 'edit',
                           'countryID' => $country_id), 'adminCountryAction', true
                 )
             );
             $form->cancel->setAttrib(
                 'onClick', "location.href=\"{$this->view->url(
-                    array('module'     => 'admin', 'controller' => 'country', 'action' => 'id',
+                    array('module'    => 'admin', 'controller' => 'country', 'action' => 'id',
                           'countryID' => $country_id), 'adminCountryID', true
                 )}\""
             );
