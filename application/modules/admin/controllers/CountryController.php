@@ -7,6 +7,8 @@ class Admin_CountryController extends App_Controller_LoaderController
     {
         parent::init();
         $this->view->headTitle($this->view->translate('Страна'));
+
+        $this->view->doctype('XHTML1_STRICT');
     }
 
     public function idAction()
@@ -57,58 +59,57 @@ class Admin_CountryController extends App_Controller_LoaderController
         // form
         $form = new Peshkov_Form_Country_Add();
 
-        $countyAllUrl = $this->view->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'country_all');
-        $form->cancel->setAttrib('onClick', "location.href='{$countyAllUrl}'");
-
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($this->getRequest()->getPost())) {
 
                 $countryData = array();
 
                 //receive and rename image_round file
-                if ($form->getValue('image_round')) {
+                if ($form->getValue('UrlImageRound')) {
                     if ($form->image_round->receive()) {
                         $file = $form->image_round->getFileInfo();
-                        $ext = pathinfo($file['image_round']['name'], PATHINFO_EXTENSION);
+                        $ext = pathinfo($file['UrlImageRound']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['image_round']['destination'] . '/' . $newName, 'overwrite' => true));
+                        => $file['UrlImageRound']['destination'] . '/' . $newName, 'overwrite' => true));
 
-                        $filterRename->filter($file['image_round']['destination'] . '/' . $file['image_round']['name']);
+                        $filterRename->filter($file['UrlImageRound']['destination'] . '/' . $file['UrlImageRound']['name']);
 
-                        $countryData['url_image_round'] = '/data-content/data-uploads/flags/' . $newName;
+                        $countryData['UrlImageRound'] = '/data-content/data-uploads/flags/' . $newName;
                     }
                 }
 
                 //receive and rename image_glossy_wave file
-                if ($form->getValue('image_glossy_wave')) {
+                if ($form->getValue('UrlImageGlossyWave')) {
                     if ($form->image_glossy_wave->receive()) {
                         $file = $form->image_glossy_wave->getFileInfo();
-                        $ext = pathinfo($file['image_glossy_wave']['name'], PATHINFO_EXTENSION);
+                        $ext = pathinfo($file['UrlImageGlossyWave']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['image_glossy_wave']['destination'] . '/' . $newName, 'overwrite' => true));
+                        => $file['UrlImageGlossyWave']['destination'] . '/' . $newName, 'overwrite' => true));
 
-                        $filterRename->filter($file['image_glossy_wave']['destination'] . '/' . $file['image_glossy_wave']['name']);
+                        $filterRename->filter($file['UrlImageGlossyWave']['destination'] . '/' . $file['UrlImageGlossyWave']['name']);
 
-                        $countryData['url_image_glossy_wave'] = '/data-content/data-uploads/flags/' . $newName;
+                        $countryData['UrlImageGlossyWave'] = '/data-content/data-uploads/flags/' . $newName;
                     }
                 }
 
                 $date = date('Y-m-d H:i:s');
                 $countryData['NativeName'] = $form->getValue('NativeName');
                 $countryData['EnglishName'] = $form->getValue('EnglishName');
-                $countryData['abbreviation'] = $form->getValue('abbreviation');
-                $countryData['date_create'] = $date;
-                $countryData['date_edit'] = $date;
+                $countryData['Abbreviation'] = $form->getValue('Abbreviation');
+                $countryData['DateCreate'] = $date;
+                $countryData['DateEdit'] = $date;
 
                 $country = new Application_Model_DbTable_Country();
                 $newCountry = $country->createRow($countryData);
                 $newCountry->save();
 
                 $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $newCountry->id), 'country_id', true));
+            } else {
+                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -140,8 +141,8 @@ class Admin_CountryController extends App_Controller_LoaderController
                     $check_countries_data = $this->db->get('country')->getAll(
                         array(
                             'NativeName' => $form->getValue('NativeName'),
-                            'abbreviation' => array(
-                                'value' => $form->getValue('abbreviation'),
+                            'Abbreviation' => array(
+                                'value' => $form->getValue('Abbreviation'),
                                 'condition' => 'OR',
                             )
                         )
@@ -172,10 +173,10 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                                 $filterRename->filter($file['image_round']['destination'] . '/' . $file['image_round']['name']);
 
-                                $new_country_data['url_image_round'] = '/data-content/data-uploads/flags/' . $newName;
+                                $new_country_data['UrlImageRound'] = '/data-content/data-uploads/flags/' . $newName;
 
-                                if ($new_country_data['url_image_round'] != $countryData['url_image_round']) {
-                                    unlink(APPLICATION_PATH . '/../public_html' . $countryData['url_image_round']);
+                                if ($new_country_data['UrlImageRound'] != $countryData['UrlImageRound']) {
+                                    unlink(APPLICATION_PATH . '/../public_html' . $countryData['UrlImageRound']);
                                 }
                             }
                         }
@@ -191,10 +192,10 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                                 $filterRename->filter($file['image_glossy_wave']['destination'] . '/' . $file['image_glossy_wave']['name']);
 
-                                $new_country_data['url_image_glossy_wave'] = '/data-content/data-uploads/flags/' . $newName;
+                                $new_country_data['UrlImageGlossyWave'] = '/data-content/data-uploads/flags/' . $newName;
 
-                                if ($new_country_data['url_image_glossy_wave'] != $countryData['url_image_glossy_wave']) {
-                                    unlink(APPLICATION_PATH . '/../public_html' . $countryData['url_image_glossy_wave']);
+                                if ($new_country_data['UrlImageGlossyWave'] != $countryData['UrlImageGlossyWave']) {
+                                    unlink(APPLICATION_PATH . '/../public_html' . $countryData['UrlImageGlossyWave']);
                                 }
                             }
                         }

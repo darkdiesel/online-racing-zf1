@@ -62,8 +62,8 @@ class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
 				->from(array($this->db_href => $this->_name))
 				->joinLeft(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',
-					'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-					'country_url_image_round' => 'c.url_image_round',
+					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+					'country_UrlImageRound' => 'c.UrlImageRound',
 				))
 				->where($idencity_data);
 
@@ -159,8 +159,8 @@ class Application_Model_DbTable_Track extends Zend_Db_Table_Abstract {
 				->joinLeft(array('c' => 'country'), $this->db_href . '.country_id = c.id', array(
 			'country_NativeName' => 'c.NativeName',
 			'country_EnglishName' => 'c.EnglishName',
-			'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-			'country_url_image_round' => 'c.url_image_round',
+			'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+			'country_UrlImageRound' => 'c.UrlImageRound',
 				)
 		);
 

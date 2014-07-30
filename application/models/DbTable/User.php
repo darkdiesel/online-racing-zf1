@@ -13,7 +13,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->from(array('u' => $this->_name), 'u.id')
 				->where('u.id = ? and u.enable = 1', $id)
 				->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-					'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->columns(array('login', 'email', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
@@ -388,7 +388,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->join(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-					'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
+					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->joinLeft(array('ur' => 'user_role'), $this->db_href . '.id = ur.user_id', array('user_role_id' => 'ur.role_id'))
@@ -467,8 +467,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->join(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-					'country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-					'country_url_image_round' => 'c.url_image_round',
+					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+					'country_UrlImageRound' => 'c.UrlImageRound',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->joinLeft(array('ur' => 'user_role'), $this->db_href . '.id = ur.user_id', array('user_role_id' => 'ur.role_id'))

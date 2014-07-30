@@ -37,6 +37,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $db;
     }
 
+    protected function _initDoctrine()
+    {
+        require_once 'Doctrine/Doctrine.php';
+        $this->getApplication()
+            ->getAutoloader()
+            ->pushAutoloader(array('Doctrine', 'autoload'), 'Doctrine');
+
+        $manager = Doctrine_Manager::getInstance();
+        $manager->setAttribute(
+            Doctrine::ATTR_MODEL_LOADING,
+            Doctrine::MODEL_LOADING_CONSERVATIVE
+        );
+
+        $config = $this->getOption('doctrine');
+        $conn = Doctrine_Manager::connection($config['dsn'], 'doctrine');
+        return $conn;
+    }
+
     protected function _initSessions()
     {
         $this->bootstrap('session');

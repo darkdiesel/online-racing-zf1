@@ -1,95 +1,152 @@
 <?php if ($this->paginator) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $country_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить страну'); ?></a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-list"></i>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped custab">
-						<thead>
-							<tr>
-								<th class="country_id"><span>ID</span></th>
-								<th class="country_name"><span><?php echo $this->translate('Родное название'); ?></span></th>
-								<th class="country_name"><span><?php echo $this->translate('Английское название'); ?></span></th>
-								<th class="country_descr"><span><?php echo $this->translate('Аббревиатура'); ?></span></th>
-								<th class="country_descr"><span><?php echo $this->translate('Круговая картинка'); ?></span></th>
-								<th class="country_descr"><span><?php echo $this->translate('Волнистая картинка'); ?></span></th>
-								<th class="country_action articles_table_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($this->paginator as $country): ?>
-								<?php
-								$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($country->id)), 'country_id', true);
-								$country_edit_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'country_id' => $this->escape($country->id)), 'country_action', true);
-								$country_delete_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'delete', 'country_id' => $this->escape($country->id)), 'country_action', true);
-								?>
-								<tr>
-									<td class="country_id">
-										<span><a href="<?php echo $country_id_url; ?>">
-												<?php echo $this->escape($country['id']) ?>
-											</a></span>
-									</td>
-									<td class="country_name">
-										<span><a href="<?php echo $country_id_url; ?>">
-												<?php echo $this->escape($country['NativeName']) ?>
-											</a></span>
-									</td>
-									<td class="country_name">
-										<span><a href="<?php echo $country_id_url; ?>">
-												<?php echo $this->escape($country['EnglishName']) ?>
-											</a></span>
-									</td>
-									<td class="country_name">
-										<span><a href="<?php echo $country_id_url ?>">
-												<?php echo $this->escape($country['abbreviation']) ?>
-											</a></span>
-									</td>
-									<td class="country_img_round">
-										<span><img src="<?php echo $this->baseUrl($this->escape($country['url_image_round'])); ?>"></span>
-									</td>
-									<td class="country_img_glossy_wave">
-										<span><img src="<?php echo $this->baseUrl($this->escape($country['url_image_glossy_wave'])); ?>"></span>
-									</td>
-									<td class="country_action">
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="clearfix m-b-10">
+                <?php
+                $country_id_url = $this->url(
+                    array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default', true
+                );
+                ?>
+                <a href="<?php echo $country_id_url; ?>" class="btn btn-success pull-right ">
+                    <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить страну'); ?>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-list"></i>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped custab">
+                        <thead>
+                        <tr>
+                            <th class="country_id">
+                                <span>ID</span>
+                            </th>
+                            <th class="country_name">
+                                <span><?php echo $this->translate('Родное название'); ?></span>
+                            </th>
+                            <th class="country_name">
+                                <span><?php echo $this->translate('Английское название'); ?></span>
+                            </th>
+                            <th class="country_descr">
+                                <span><?php echo $this->translate('Аббревиатура'); ?></span>
+                            </th>
+                            <th class="country_descr">
+                                <span><?php echo $this->translate('Круговая картинка'); ?></span>
+                            </th>
+                            <th class="country_descr">
+                                <span><?php echo $this->translate('Волнистая картинка'); ?></span>
+                            </th>
+                            <th class="country_action articles_table_action">
+                                <span><?php echo $this->translate('Действие'); ?></span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($this->paginator as $country): ?>
+                            <?php
+                            $country_id_url = $this->url(
+                                array('module'     => 'admin', 'controller' => 'country', 'action' => 'id',
+                                      'country_id' => $this->escape($country->ID)), 'country_id'
+                            );
+                            $country_edit_url = $this->url(
+                                array('module'     => 'admin', 'controller' => 'country', 'action' => 'edit',
+                                      'country_id' => $this->escape($country->ID)), 'country_action'
+                            );
+                            $country_delete_url = $this->url(
+                                array('module'     => 'admin', 'controller' => 'country', 'action' => 'delete',
+                                      'country_id' => $this->escape($country->ID)), 'country_action'
+                            );
+                            ?>
+                            <tr>
+                                <td class="country_id">
+										<span>
+                                            <a href="<?php echo $country_id_url; ?>">
+                                                <?php echo $this->escape($country['ID']) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="country_name">
+										<span>
+                                            <a href="<?php echo $country_id_url; ?>">
+                                                <?php echo $this->escape($country['NativeName']) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="country_name">
+										<span>
+                                            <a href="<?php echo $country_id_url; ?>">
+                                                <?php echo $this->escape($country['EnglishName']) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="country_name">
+										<span>
+                                            <a href="<?php echo $country_id_url ?>">
+                                                <?php echo $this->escape($country->Abbreviation) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="country_img_round">
+                                    <span><img src="<?php echo $this->baseUrl(
+                                            $this->escape($country['UrlImageRound'])
+                                        ); ?>"></span>
+                                </td>
+                                <td class="country_img_glossy_wave">
+                                    <span><img src="<?php echo $this->baseUrl(
+                                            $this->escape($country['UrlImageGlossyWave'])
+                                        ); ?>"></span>
+                                </td>
+                                <td class="country_action">
 										<span>
 											<div class="pull-right action-buttons">
-												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
-													</button>
-													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $country_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $country_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $country_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
-													</ul>
-												</div>
-											</div>
+                                                <div class="btn-group pull-right">
+                                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                        <span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu slidedown">
+                                                        <li>
+                                                            <a href="<?php echo $country_id_url ?>">
+                                                                <i class="fa fa-eye"></i> <?php echo $this->translate(
+                                                                    'Просмотреть'
+                                                                ); ?></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?php echo $country_edit_url ?>"><i
+                                                                    class="fa fa-pencil"></i> <?php echo $this->translate(
+                                                                    'Редактировать'
+                                                                ); ?></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?php echo $country_delete_url ?>"><i
+                                                                    class="fa fa-trash-o"></i> <?php echo $this->translate(
+                                                                    'Удалить'
+                                                                ); ?></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 										</span>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-					<div class="pull-right">
-						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="pull-right">
+                        <?php echo $this->paginationControl(
+                            $this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php } ?>

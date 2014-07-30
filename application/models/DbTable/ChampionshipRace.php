@@ -52,8 +52,8 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
             )
             ->joinLeft(
                 array('c' => 'country'), 'c.id = t.country_id',
-                array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-                      'country_url_image_round'       => 'c.url_image_round',
+                array('country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+                      'country_UrlImageRound'       => 'c.UrlImageRound',
                       'country_NativeName'           => 'c.NativeName',
                       'country_EnglishName'          => 'c.EnglishName',)
             )
@@ -151,8 +151,8 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
             )
             ->joinLeft(
                 array('c' => 'country'), 't.country_id = c.id',
-                array('country_url_image_glossy_wave' => 'c.url_image_glossy_wave',
-                      'country_url_image_round'       => 'c.url_image_round',
+                array('country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+                      'country_UrlImageRound'       => 'c.UrlImageRound',
                       'country_NativeName'           => 'c.NativeName',
                       'country_EnglishName'          => 'c.EnglishName',)
             );

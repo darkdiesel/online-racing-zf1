@@ -3,7 +3,7 @@
 class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
 
 	protected $_name = 'country';
-	protected $_primary = 'id';
+	protected $_primary = 'ID';
 	protected $db_href = 'c';
 
 	/*
@@ -41,7 +41,7 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
 				}
 			}
 		} elseif (is_int($idencity) || is_string($idencity)) {
-			$idencity_data = sprintf("%s.id = '%s'", $this->db_href, $idencity);
+			$idencity_data = sprintf("%s.ID = '%s'", $this->db_href, $idencity);
 		}
 
 		// fields list
@@ -121,7 +121,7 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
 					}
 				}
 			} elseif (is_int($idencity) || is_string($idencity)) {
-				$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
+				$idencity_data = sprintf("%s.ID = %s", $this->db_href, $idencity);
 			}
 		}
 
@@ -149,7 +149,7 @@ class Application_Model_DbTable_Country extends Zend_Db_Table_Abstract {
 					}
 				}
 			} elseif (is_string($order) && !empty($order)) {
-				$order_data = sprintf("%s.id %s", $this->db_href, $order);
+				$order_data = sprintf("%s.ID %s", $this->db_href, $order);
 			}
 		}
 
