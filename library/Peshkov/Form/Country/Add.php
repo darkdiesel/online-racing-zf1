@@ -1,6 +1,6 @@
 <?php
 
-class BLP_Form_Country_Add extends Zend_Form
+class Peshkov_Form_Country_Add extends Zend_Form
 {
 
     protected function translate($str)
