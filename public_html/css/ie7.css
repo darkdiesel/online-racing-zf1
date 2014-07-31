@@ -1,3 +1,10 @@
 .btn, .block {
     behavior: url("/library/pie/PIE.htc");
 }
+
+/* ========== block-form ========== */
+.block-form .form-actions .form-group{
+    display: inline;
+    zoom:1
+}
+/* ========== ./ block-form ========== */

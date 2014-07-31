@@ -68,10 +68,10 @@ class Admin_CountryController extends App_Controller_LoaderController
             "page"             => $this->getRequest()->getParam('page')
         );
 
-        $paginator = $this->db->get("country")->getAll(false, "all", "ASC", true, $pager_args);
+        $countryData = $this->db->get("country")->getAll(false, "all", "ASC", true, $pager_args);
 
-        if ($paginator) {
-            $this->view->paginator = $paginator;
+        if ($countryData) {
+            $this->view->countryData = $countryData;
         } else {
             $this->messages->addError("{$this->view->translate('Запрашиваемые страны на сайте не найдены!')}");
         }

@@ -10,45 +10,11 @@ class Peshkov_Form_Country_Add extends Zend_Form
         return $translate->translate($str, $lang);
     }
 
-    public $formDecorators
-        = array(
-            array('FormErrors'),
-            array('FormElements'),
-            array('Form')
-        );
-
-    public $elementDecorators
-        = array(
-            array('ViewHelper'),
-            //array('HtmlTag', array('tag' => 'div', 'class' => '')),
-            array('Label', array('class' => 'control-label')),
-            array('Errors'),
-            array(array('elementWrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-
-        );
-
-    public $buttonDecorators
-        = array(
-            array('ViewHelper'),
-            array('HtmlTag', array('tag' => 'span', 'class' => 'center-block')),
-            array(array('elementWrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-        );
-
-    public $fileDecorators
-        = array(
-            array('File'),
-            //array('HtmlTag', array('tag' => 'div', 'class' => '')),
-            array('Label', array('class' => 'control-label')),
-            array('Errors'),
-            array(array('elementWrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-
-        );
-
     public function init()
     {
         $this->setAttribs(
             array(
-                 'class' => 'block-item block-item-form',
+                 'class' => 'block-form block-form-default',
                  'id'    => 'admin-country-add'
             )
         )
@@ -59,7 +25,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
                 )
             )
             ->setMethod('post')
-            ->addDecorators($this->formDecorators);
+            ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
         $nativeName = new Zend_Form_Element_Text('NativeName');
         $nativeName->setLabel($this->translate('Родное название'))
@@ -79,7 +45,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->addFilter('StripTags')
             ->addFilter(new App_Filter_Upper())
-            ->setDecorators($this->elementDecorators);
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
         $englishName = new Zend_Form_Element_Text('EnglishName');
         $englishName->setLabel($this->translate('Английское название'))
@@ -99,7 +65,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addFilter(new App_Filter_Upper())
-            ->setDecorators($this->elementDecorators);
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
         $abbreviation = new Zend_Form_Element_Text('Abbreviation');
         $abbreviation->setLabel($this->translate('Аббревиатура'))
@@ -119,7 +85,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addFilter(new App_Filter_Upper())
-            ->setDecorators($this->elementDecorators);
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
         $urlImageRound = new Zend_Form_Element_File('UrlImageRound');
         $urlImageRound->setLabel($this->translate('Круговая картинка флага (32х24)'))
@@ -130,7 +96,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addValidator('Extension', false, 'jpg,png,gif')
             //->addValidator('IsImage')
             ->addValidator('Count', false, 1)
-            ->setDecorators($this->fileDecorators);
+            ->setDecorators($this->getView()->getDecorator()->fileDecorators());
 
         $urlImageGlossyWave = new Zend_Form_Element_File('UrlImageGlossyWave');
         $urlImageGlossyWave->setLabel($this->translate('Волнистая картинка флага (64х48)'))
@@ -141,19 +107,19 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addValidator('Extension', false, 'jpg,png,gif')
             //->addValidator('IsImage')
             ->addValidator('Count', false, 1)
-            ->setDecorators($this->fileDecorators);
+            ->setDecorators($this->getView()->getDecorator()->fileDecorators());
 
         $submit = new Zend_Form_Element_Submit('Submit');
         $submit->setLabel($this->translate('Добавить'))
             ->setAttrib('class', 'btn btn-primary')
             ->setIgnore(true)
-            ->setDecorators($this->buttonDecorators);
+            ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $reset = new Zend_Form_Element_Reset('Reset');
         $reset->setLabel($this->translate('Сбросить'))
             ->setAttrib('class', 'btn btn-default')
             ->setIgnore(true)
-            ->setDecorators($this->buttonDecorators);
+            ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $countyAllUrl = $this->getView()->url(
             array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'adminCountryAll'
@@ -164,7 +130,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->setAttrib('onClick', "location.href='{$countyAllUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
-            ->setDecorators($this->buttonDecorators);
+            ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($nativeName)
             ->addElement($englishName)
@@ -178,21 +144,40 @@ class Peshkov_Form_Country_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                 $this->getElement('Submit'),
-                 $this->getElement('Reset'),
-                 $this->getElement('Cancel'),
-            ), 'FormActions', array()
+                'NativeName',
+                'EnglishName',
+                'Abbreviation'
+            ),'CountryInfo'
         );
 
-        $this->getDisplayGroup('FormActions')->setDecorators(
+        $this->getDisplayGroup('CountryInfo')
+            ->setOrder(10)
+            ->setLegend('Информация о стране')
+            ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
+
+        $this->addDisplayGroup(
             array(
-                 'FormElements',
-                 //array(array('innerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
-                 //'Fieldset',
-                 array(array('outerHtmlTag' => 'HtmlTag'),
-                       array('tag' => 'div', 'class' => 'block-item-form-actions text-center clearfix')),
-            )
+                'UrlImageRound',
+                'UrlImageGlossyWave'
+            ),'CountryImg'
         );
+
+        $this->getDisplayGroup('CountryImg')
+            ->setOrder(20)
+            ->setLegend('Изоброжения флагов страны')
+            ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
+
+        $this->addDisplayGroup(
+            array(
+                 'Submit',
+                 'Reset',
+                 'Cancel',
+            ), 'FormActions'
+        );
+
+        $this->getDisplayGroup('FormActions')
+            ->setOrder(100)
+            ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
     }
 
 }

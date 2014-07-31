@@ -844,36 +844,34 @@
 .block:hover .block-config-menu {
     display: block;
 }
-
-.configure-block-item-links {
-    position: absolute;
-    right: 5px;
-    top: 0px;
-    display: none;
-    z-index: 99;
-}
-
-.configure-block-item-links .configure-block-item-link {
-    opacity: 0.5;
-    color: red;
-}
-
-.configure-block-item-links ul {
-    margin: 0;
-    right: 5px;
-    left: auto;
-    opacity: 1;
-}
-
-.configure-block-item-links .contextual-links-trigger {
-    color: gray;
-    opacity: 0.5;
-}
-
-.configure-block-item-links .contextual-links-trigger .caret {
-    color: black;
-}
 /* ========== ./ block ========== */
+
+/* ========== block-form ========== */
+.block-form{
+
+}
+.block-form label.required:after{
+    content:" *";
+    color: #ff0000;
+}
+.block-form .form-actions{
+    text-align: left;
+}
+.block-form .form-actions .form-group{
+    display: inline-block;
+    margin: 0 7px;
+}
+.block-form .form-actions .form-group:first-child{
+    margin-left: 0px;
+}
+
+.block-form-default .form-actions{
+    margin-top: 15px;
+}
+.block-form-default fieldset{
+    margin-top: 8px;
+}
+/* ========== ./ block-form ========== */
 
 /* user common styles */
 .user-online {
@@ -1002,7 +1000,7 @@
     padding: 0 15px 0 0;
 }
 
-.message-item .message-head .post-meta >div {
+.message-item .message-head .post-meta > div {
     color: #333;
     font-weight: bold;
     text-align: right;

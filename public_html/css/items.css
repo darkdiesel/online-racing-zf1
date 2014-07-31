@@ -19,41 +19,7 @@
             
     .block-item-content{overflow:auto; padding:7px;}
 
-/* UI for blocks*/
-.block_ui_gray{
-    border:1px solid #CACACA;
-    background-color:#EDEDED;
-    background-image:linear-gradient(to bottom, #FFFFFF, #E0E0E0);
-    display:block;
-    border:2px solid #CBCBCB;
-}
-.block-ui-border-dark{
-    border:2px solid #959595;
-}
-.block_ui_rounded_3{
-    border-radius:3px;
-}
-.block_ui_rounded_5{
-    border-radius:5px;
-}
-.block_ui_rounded_7{
-    border-radius:7px;
-}
-.block_ui_rounded_10{
-    border-radius:10px;
-}
-.block-width-135{
-    width:135px;
-}
-.block-width-290{
-    width:290px;
-}
-.block-width-300{
-    width:300px;
-}
-.block-width-390{
-    width:390px;
-}
+
 .block-inline{
     display:inline-block;
 }
@@ -99,26 +65,7 @@
             color:#7D270D;
         }
         
-/* League */
-.league_all_logo_wrapper_200_200{
-    margin:0 15px 15px 0;
-}
-.league_id_logo_wrapper_250{
-    margin:0 0 15px 0;
-}
-.league_id_info_block{
-    margin-bottom:5px;
-}
-    .league_id_info_block table{
-        margin:0;
-    }
-/* championship */
-.championship_id_info_block{
-    margin-bottom:5px;
-}
-    .championship_id_info_block table{
-        margin:0;
-    }
+
 /* team_user */
 .team_user_full_info_item{
     
@@ -144,9 +91,6 @@
 #default-championship-drivers .team-driver-item .dp{border:10px solid #eee; transition: all 0.2s ease-in-out;}
 #default-championship-drivers .team-driver-item .dp:hover{border:2px solid #eee; transform:rotate(360deg); -ms-transform:rotate(360deg); -webkit-transform:rotate(360deg); -webkit-font-smoothing:antialiased;}
 
-/* Slider block */
-#slider_block{border-bottom:none; margin:0; border:2px solid #fff;}
-#slider_block > .carousel{margin:0;}
 
 /* additional common styles */
 .overflow-hide{overflow:hidden;}

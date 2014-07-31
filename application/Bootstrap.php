@@ -51,7 +51,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
 
         $config = $this->getOption('doctrine');
-        $conn = Doctrine_Manager::connection($config['dsn'], 'doctrine');
+        $conn = Doctrine_Manager::connection($config['dsn'], 'doctrine')
+            ->setCharset('utf8');
+
         return $conn;
     }
 
@@ -110,6 +112,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
         $view->addHelperPath('App/View/Helper', 'App_View_Helper');
         $view->addHelperPath('Bootstrap/View/Helper', 'Bootstrap_View_Helper');
+        $view->addHelperPath('Peshkov/View/Helper', 'Peshkov_View_Helper');
 
         // setting the site in the title; possibly in the layout script:
         $view->headTitle('Online-Racing.Net');

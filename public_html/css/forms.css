@@ -178,19 +178,4 @@ input[type="file"] {
 form ul.errors{margin:10px auto; word-wrap:break-word;}
 form ul.errors li{color:#EA0000; font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif; font-size:14px; line-height:17px; text-align:left;}
 
-.block-item-form{margin:0; padding:10px 20px;}
-.block-item-form-delete{margin:10px 0 15px;}
-.block-item-form .block-item-form-actions{margin:10px 0; padding:5px;}
-.block-item-form .block-item-form-actions > .form-group{display:inline-block; margin:0 10px;}
-
-/* Form width */
-.block-item-form-w-270{width:270px;}
-.block-item-form-w-290{width:290px;}
-.block-item-form-w-320{width:320px;}
-.block-item-form-w-350{width:350px;}
-.block-item-form-w-355{width:355px;}
-.block-item-form-w-370{width:370px;}
-.block-item-form-w-400{width:400px;}
-
 /* From Labels */
-form label.required:after{content:" *"; color:red;}

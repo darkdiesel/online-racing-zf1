@@ -1,13 +1,13 @@
-<?php if ($this->paginator) { ?>
+<?php if ($this->countryData) { ?>
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="clearfix m-b-10">
                 <?php
-                $country_id_url = $this->url(
-                    array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default', true
+                $adminCountryAddUrl = $this->url(
+                    array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default'
                 );
                 ?>
-                <a href="<?php echo $country_id_url; ?>" class="btn btn-success pull-right ">
+                <a href="<?php echo $adminCountryAddUrl; ?>" class="btn btn-success pull-right ">
                     <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить страну'); ?>
                 </a>
             </div>
@@ -47,47 +47,47 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->paginator as $country): ?>
+                        <?php foreach ($this->countryData as $country): ?>
                             <?php
-                            $country_id_url = $this->url(
-                                array('module'     => 'admin', 'controller' => 'country', 'action' => 'id',
-                                      'country_id' => $this->escape($country->ID)), 'country_id'
+                            $adminCountryIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'country', 'action' => 'id',
+                                    'countryID' => $this->escape($country->ID)), 'adminCountryID'
                             );
-                            $country_edit_url = $this->url(
-                                array('module'     => 'admin', 'controller' => 'country', 'action' => 'edit',
-                                      'country_id' => $this->escape($country->ID)), 'country_action'
+                            $adminCountryEditUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'country', 'action' => 'edit',
+                                    'countryID' => $this->escape($country->ID)), 'adminCountryAction'
                             );
-                            $country_delete_url = $this->url(
-                                array('module'     => 'admin', 'controller' => 'country', 'action' => 'delete',
-                                      'country_id' => $this->escape($country->ID)), 'country_action'
+                            $adminCountryDeleteUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'country', 'action' => 'delete',
+                                    'countryID' => $this->escape($country->ID)), 'adminCountryAction'
                             );
                             ?>
                             <tr>
                                 <td class="country_id">
 										<span>
-                                            <a href="<?php echo $country_id_url; ?>">
+                                            <a href="<?php echo $adminCountryIdUrl; ?>">
                                                 <?php echo $this->escape($country['ID']) ?>
                                             </a>
                                         </span>
                                 </td>
                                 <td class="country_name">
 										<span>
-                                            <a href="<?php echo $country_id_url; ?>">
+                                            <a href="<?php echo $adminCountryIdUrl; ?>">
                                                 <?php echo $this->escape($country['NativeName']) ?>
                                             </a>
                                         </span>
                                 </td>
                                 <td class="country_name">
 										<span>
-                                            <a href="<?php echo $country_id_url; ?>">
+                                            <a href="<?php echo $adminCountryIdUrl; ?>">
                                                 <?php echo $this->escape($country['EnglishName']) ?>
                                             </a>
                                         </span>
                                 </td>
                                 <td class="country_name">
 										<span>
-                                            <a href="<?php echo $country_id_url ?>">
-                                                <?php echo $this->escape($country->Abbreviation) ?>
+                                            <a href="<?php echo $adminCountryIdUrl ?>">
+                                                <?php echo $this->escape($country['Abbreviation']) ?>
                                             </a>
                                         </span>
                                 </td>
@@ -97,9 +97,11 @@
                                         ); ?>"></span>
                                 </td>
                                 <td class="country_img_glossy_wave">
-                                    <span><img src="<?php echo $this->baseUrl(
+                                    <span>
+                                        <img src="<?php echo $this->baseUrl(
                                             $this->escape($country['UrlImageGlossyWave'])
-                                        ); ?>"></span>
+                                        ); ?>">
+                                    </span>
                                 </td>
                                 <td class="country_action">
 										<span>
@@ -111,22 +113,25 @@
                                                     </button>
                                                     <ul class="dropdown-menu slidedown">
                                                         <li>
-                                                            <a href="<?php echo $country_id_url ?>">
+                                                            <a href="<?php echo $adminCountryIdUrl ?>">
                                                                 <i class="fa fa-eye"></i> <?php echo $this->translate(
                                                                     'Просмотреть'
-                                                                ); ?></a>
+                                                                ); ?>
+                                                            </a>
                                                         </li>
                                                         <li>
-                                                            <a href="<?php echo $country_edit_url ?>"><i
-                                                                    class="fa fa-pencil"></i> <?php echo $this->translate(
+                                                            <a href="<?php echo $adminCountryEditUrl ?>">
+                                                                <i class="fa fa-pencil"></i> <?php echo $this->translate(
                                                                     'Редактировать'
-                                                                ); ?></a>
+                                                                ); ?>
+                                                            </a>
                                                         </li>
                                                         <li>
-                                                            <a href="<?php echo $country_delete_url ?>"><i
-                                                                    class="fa fa-trash-o"></i> <?php echo $this->translate(
+                                                            <a href="<?php echo $adminCountryDeleteUrl ?>">
+                                                                <i class="fa fa-trash-o"></i> <?php echo $this->translate(
                                                                     'Удалить'
-                                                                ); ?></a>
+                                                                ); ?>
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -141,7 +146,7 @@
                 <div class="panel-footer">
                     <div class="pull-right">
                         <?php echo $this->paginationControl(
-                            $this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                            $this->countryData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>
                     <div class="clearfix"></div>
