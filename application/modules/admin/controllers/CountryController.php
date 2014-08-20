@@ -64,8 +64,8 @@ class Admin_CountryController extends App_Controller_LoaderController
         // pager settings
         $pager_args = array(
             "page_count_items" => 10,
-            "page_range"       => 5,
-            "page"             => $this->getRequest()->getParam('page')
+            "page_range" => 5,
+            "page" => $this->getRequest()->getParam('page')
         );
 
         $countryData = $this->db->get("country")->getAll(false, "all", "ASC", true, $pager_args);
@@ -111,8 +111,8 @@ class Admin_CountryController extends App_Controller_LoaderController
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                                                                          => $file['UrlImageRound']['destination'] . '/'
-                        . $newName, 'overwrite'                           => true));
+                        => $file['UrlImageRound']['destination'] . '/'
+                            . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
                             $file['UrlImageRound']['destination'] . '/' . $file['UrlImageRound']['name']
@@ -130,8 +130,8 @@ class Admin_CountryController extends App_Controller_LoaderController
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                                                                          => $file['UrlImageGlossyWave']['destination']
-                        . '/' . $newName, 'overwrite'                     => true));
+                        => $file['UrlImageGlossyWave']['destination']
+                            . '/' . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
                             $file['UrlImageGlossyWave']['destination'] . '/' . $file['UrlImageGlossyWave']['name']
@@ -145,8 +145,8 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                 $this->redirect(
                     $this->view->url(
-                        array('module'    => 'admin', 'controller' => 'country', 'action' => 'id',
-                              'countryID' => $item->ID), 'adminCountryID'
+                        array('module' => 'admin', 'controller' => 'country', 'action' => 'id',
+                            'countryID' => $item->ID), 'adminCountryID'
                     )
                 );
 
@@ -175,14 +175,14 @@ class Admin_CountryController extends App_Controller_LoaderController
             $form = new Application_Form_Country_Edit();
             $form->setAction(
                 $this->view->url(
-                    array('module'    => 'admin', 'controller' => 'country', 'action' => 'edit',
-                          'countryID' => $country_id), 'adminCountryAction', true
+                    array('module' => 'admin', 'controller' => 'country', 'action' => 'edit',
+                        'countryID' => $country_id), 'adminCountryAction', true
                 )
             );
             $form->cancel->setAttrib(
                 'onClick', "location.href=\"{$this->view->url(
-                    array('module'    => 'admin', 'controller' => 'country', 'action' => 'id',
-                          'countryID' => $country_id), 'adminCountryID', true
+                    array('module' => 'admin', 'controller' => 'country', 'action' => 'id',
+                        'countryID' => $country_id), 'adminCountryID', true
                 )}\""
             );
 
@@ -191,11 +191,11 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                     $check_countries_data = $this->db->get('country')->getAll(
                         array(
-                             'NativeName'   => $form->getValue('NativeName'),
-                             'Abbreviation' => array(
-                                 'value'     => $form->getValue('Abbreviation'),
-                                 'condition' => 'OR',
-                             )
+                            'NativeName' => $form->getValue('NativeName'),
+                            'Abbreviation' => array(
+                                'value' => $form->getValue('Abbreviation'),
+                                'condition' => 'OR',
+                            )
                         )
                     );
 
@@ -220,8 +220,8 @@ class Admin_CountryController extends App_Controller_LoaderController
                                 $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
                                 $filterRename = new Zend_Filter_File_Rename(array('target'
-                                                                                  => $file['image_round']['destination']
-                                . '/' . $newName, 'overwrite'                     => true));
+                                => $file['image_round']['destination']
+                                    . '/' . $newName, 'overwrite' => true));
 
                                 $filterRename->filter(
                                     $file['image_round']['destination'] . '/' . $file['image_round']['name']
@@ -242,10 +242,10 @@ class Admin_CountryController extends App_Controller_LoaderController
                                 $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
                                 $filterRename = new Zend_Filter_File_Rename(array('target'
-                                                                                              =>
-                                                                                  $file['image_glossy_wave']['destination']
-                                                                                  . '/' . $newName,
-                                                                                  'overwrite' => true));
+                                =>
+                                    $file['image_glossy_wave']['destination']
+                                    . '/' . $newName,
+                                    'overwrite' => true));
 
                                 $filterRename->filter(
                                     $file['image_glossy_wave']['destination'] . '/' . $file['image_glossy_wave']['name']
@@ -320,73 +320,103 @@ class Admin_CountryController extends App_Controller_LoaderController
     {
         $this->view->headTitle($this->view->translate('Удалить'));
 
-        $request = $this->getRequest();
-        $country_id = (int)$request->getParam('country_id');
+        // set filters and validators for POST input
+        $filters = array(
+            'countryID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'countryID' => array('NotEmpty', 'Int')
+        );
+        $input = new Zend_Filter_Input($filters, $validators);
+        $input->setData($this->getRequest()->getParams());
 
-        $countryData = $this->db->get('country')->getItem($country_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($input->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Peshkov_Model_Country c')
+                ->where('c.ID = ?', $input->countryID);
+            $result = $query->fetchArray();
 
-        if ($countryData) {
-            //page title
-            $this->view->headTitle("{$countryData->NativeName} ({$countryData->EnglishName})");
-            $this->view->pageTitle(
-                "{$this->view->translate('Удалить страну')} :: {$countryData->NativeName} ({$countryData->EnglishName})"
-            );
+            if (count($result) == 1) {
 
-            $this->messages->addWarning(
-                "{$this->view->translate(
-                    'Вы действительно хотите удалить страну'
-                )} <strong>\"{$countryData->NativeName} ({$countryData->EnglishName})\"</strong> ?"
-            );
+                $countryDeleteUrl = $this->view->url(
+                    array('module' => 'admin', 'controller' => 'contry', 'action' => 'delete', 'countryID' => $input->countryID),
+                    'adminCountryAction', true
+                );
+                $countryIDUrl = $this->view->url(
+                    array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $input->countryID),
+                    'adminCountryID', true
+                );
 
-            $country_delete_url = $this->view->url(
-                array('module' => 'admin', 'controller' => 'contry', 'action' => 'delete', 'country_id' => $country_id),
-                'country_action', true
-            );
-            $country_id_url = $this->view->url(
-                array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $country_id),
-                'country_id', true
-            );
+                $countryDeleteForm = new Peshkov_Form_Country_Delete();
+                $countryDeleteForm->setAction($countryDeleteUrl);
+                $countryDeleteForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$countryIDUrl}'");
 
-            //Create country delete form
-            $form = new Application_Form_Country_Delete();
-            $form->setAction($country_delete_url);
-            $form->cancel->setAttrib('onClick', "location.href='{$country_id_url}'");
+                $this->view->countryData = $result[0];
+                $this->view->countryDeleteForm = $countryDeleteForm;
 
-            if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-                    $country_where = $this->db->get('country')->getAdapter()->quoteInto('id = ?', $country_id);
-                    $this->db->get('country')->delete($country_where);
+                $this->view->headTitle($result[0]['NativeName']);
+                $this->view->pageTitle(
+                    $this->view->translate('Удалить страну') . ' :: ' . $result[0]['EnglishName'] . ' ('
+                    . $result[0]['NativeName'] . ')'
+                );
 
-                    $this->messages->clearMessages();
-                    $this->messages->addSuccess(
-                        "{$this->view->translate(
-                            "Страна <strong>\"{$countryData->NativeName} ({$countryData->EnglishName})\"</strong> успешно удалена"
-                        )}"
-                    );
+                $this->messages->addWarning(
+                    $this->view->translate('Вы действительно хотите удалить страну')
+                    . "<strong>" . $result[0]['NativeName'] . " (" . $result[0]['EnglishName'] . ")</strong> ?"
+                );
 
-                    $country_all_url = $this->view->url(
-                        array('module' => 'admin', 'controller' => 'country', 'action' => 'all', 'page' => 1),
-                        'adminCountryAll'
-                    );
-                    $this->redirect($country_all_url);
-                } else {
-                    $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
-                    );
+                //Create country delete form
+
+                if ($this->getRequest()->isPost()) {
+                    if ($countryDeleteForm->isValid($this->getRequest()->getPost())) {
+                        $q = Doctrine_Query::create()
+                            ->delete('Peshkov_Model_Country c')
+                            ->whereIn('c.ID', $input->countryID);
+
+                        $result = $q->execute();
+
+                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageRound']);
+                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageGlossyWave']);
+
+                        $countryAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'country', 'action' => 'all', 'page' => 1),
+                            'adminCountryAll'
+                        );
+
+                        //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
+
+                        $this->messages->clearMessages();
+                        $this->messages->addSuccess(
+                            $this->view->translate("Страна <strong>" . $this->view->countryData['NativeName'] . " (" . $this->view->countryData['EnglishName'] . ")</strong> успешно удалена"
+                            )
+                        );
+
+                        $this->redirect($countryAllUrl);
+                    } else {
+                        $this->messages->addError(
+                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        );
+                    }
                 }
-            }
 
-            $this->view->country = $countryData;
-            $this->view->form = $form;
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!!'));
+
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Страна не найдена!'));
+
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Страна не найдена!'));
+            }
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
-            $this->view->headTitle(
-                "{$this->view->translate('Ошибка!')} :: {$this->view->translate('Страна не найдена!')}"
-            );
-            $this->view->pageTitle(
-                "{$this->view->translate('Ошибка!')} {$this->view->translate('Страна не найдена!')}"
-            );
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
+
     }
 
 }

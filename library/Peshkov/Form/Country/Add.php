@@ -14,11 +14,11 @@ class Peshkov_Form_Country_Add extends Zend_Form
     {
         $this->setAttribs(
             array(
-                 'class' => 'block-form block-form-default',
-                 'id'    => 'admin-country-add'
+                'class' => 'block-form block-form-default',
+                'id' => 'country-add'
             )
         )
-            ->setName('adminCountryAdd')
+            ->setName('countryAdd')
             ->setAction(
                 $this->getView()->url(
                     array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default'
@@ -37,8 +37,8 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addValidator(
                 'Db_NoRecordExists', false,
                 array(
-                     'table' => 'country',
-                     'field' => 'NativeName',
+                    'table' => 'country',
+                    'field' => 'NativeName',
                 )
             )
             //->addValidator(new App_Validate_NoDbRecordExists('country', 'NativeName'))
@@ -57,8 +57,8 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addValidator(
                 'Db_NoRecordExists', false,
                 array(
-                     'table' => 'country',
-                     'field' => 'EnglishName',
+                    'table' => 'country',
+                    'field' => 'EnglishName',
                 )
             )
             //->addValidator(new App_Validate_NoDbRecordExists('country', 'EnglishName'))
@@ -77,8 +77,8 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addValidator(
                 'Db_NoRecordExists', false,
                 array(
-                     'table' => 'country',
-                     'field' => 'Abbreviation',
+                    'table' => 'country',
+                    'field' => 'Abbreviation',
                 )
             )
             //->addValidator(new App_Validate_NoDbRecordExists('country', 'Abbreviation'))
@@ -144,10 +144,10 @@ class Peshkov_Form_Country_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                'NativeName',
-                'EnglishName',
-                'Abbreviation'
-            ),'CountryInfo'
+                $this->getElement('NativeName'),
+                $this->getElement('EnglishName'),
+                $this->getElement('Abbreviation')
+            ), 'CountryInfo'
         );
 
         $this->getDisplayGroup('CountryInfo')
@@ -157,9 +157,9 @@ class Peshkov_Form_Country_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                'UrlImageRound',
-                'UrlImageGlossyWave'
-            ),'CountryImg'
+                $this->getElement('UrlImageRound'),
+                $this->getElement('UrlImageGlossyWave')
+            ), 'CountryImg'
         );
 
         $this->getDisplayGroup('CountryImg')
@@ -169,9 +169,9 @@ class Peshkov_Form_Country_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                 'Submit',
-                 'Reset',
-                 'Cancel',
+                $this->getElement('Submit'),
+                $this->getElement('Reset'),
+                $this->getElement('Cancel'),
             ), 'FormActions'
         );
 
