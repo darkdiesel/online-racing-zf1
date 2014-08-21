@@ -84,7 +84,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             //->addValidator(new App_Validate_NoDbRecordExists('country', 'Abbreviation'))
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
-            ->addFilter(new App_Filter_Upper())
+            ->addFilter('StringToUpper')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
         $urlImageRound = new Zend_Form_Element_File('UrlImageRound');
