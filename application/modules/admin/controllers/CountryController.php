@@ -370,6 +370,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                         $result = $query->execute();
 
+                        // remove country images
                         unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageRound']);
                         unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageGlossyWave']);
 
