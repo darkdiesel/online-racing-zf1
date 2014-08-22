@@ -44,17 +44,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ->getAutoloader()
             ->pushAutoloader(array('Doctrine', 'autoload'), 'Doctrine');
 
+        $config = $this->getOption('doctrine');
+
         $manager = Doctrine_Manager::getInstance();
         $manager->setAttribute(
             Doctrine::ATTR_MODEL_LOADING,
             Doctrine::MODEL_LOADING_CONSERVATIVE
         );
 
-        $config = $this->getOption('doctrine');
-        $conn = Doctrine_Manager::connection($config['dsn'], 'doctrine')
+//        $manager->setAttribute(Doctrine_Core::ATTR_MODEL_CLASS_PREFIX, 'Model_');
+//        $manager->setAttribute(Doctrine_Core::ATTR_MODEL_LOADING, Doctrine_Core::MODEL_LOADING_PEAR);
+//        $manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_ALL);
+//        $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
+//        $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, true);
+//        $manager->setAttribute(Doctrine_Core::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
+//        $manager->setAttribute(Doctrine_Core::ATTR_AUTOLOAD_TABLE_CLASSES, true);
+
+        if (isset($config['cache']) && $config['cache'] == true) {
+            $cacheDriver = new Doctrine_Cache_Apc();
+            $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CACHE, $cacheDriver);
+        }
+
+        $connection = Doctrine_Manager::connection($config['dsn'], 'doctrine')
             ->setCharset('utf8');
 
-        return $conn;
+        return $connection;
     }
 
     protected function _initSessions()
