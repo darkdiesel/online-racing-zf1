@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('Peshkov_Model_ChampionshipTeamDriver', 'doctrine');
 
 /**
  * Peshkov_Model_BaseChampionshipTeamDriver

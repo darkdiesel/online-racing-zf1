@@ -1,6 +1,4 @@
 <?php
-// Connection Component Binding
-Doctrine_Manager::getInstance()->bindComponent('Peshkov_Model_ResourcesAccess', 'doctrine');
 
 /**
  * Peshkov_Model_BaseResourcesAccess
