@@ -5,6 +5,10 @@
     <applicationDirectory classNamePrefix="Application_">
       <configsDirectory>
         <applicationConfigFile type="ini"/>
+        <yamlSchemaDirectory/>
+        <dataFixturesDirectory/>
+        <migrationsDirectory/>
+        <sqlDirectory/>
       </configsDirectory>
       <controllersDirectory>
         <controllerFile controllerName="Index">
