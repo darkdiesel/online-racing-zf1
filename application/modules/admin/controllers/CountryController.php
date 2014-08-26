@@ -29,7 +29,7 @@ class Admin_CountryController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Peshkov_Model_Country c')
+                ->from('Application_Model_Country c')
                 ->where('c.ID = ?', $requestData->countryID);
             $result = $query->fetchArray();
 
@@ -96,7 +96,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                 $date = date('Y-m-d H:i:s');
 
-                $item = new Peshkov_Model_Country();
+                $item = new Application_Model_Country();
 
 //                die(var_dump($item));
 
@@ -206,7 +206,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 if ($countryEditForm->isValid($this->getRequest()->getPost())) {
                     $formData = $countryEditForm->getValues();
 
-                    $item = Doctrine::getTable('Peshkov_Model_Country')->find($requestData->countryID);
+                    $item = Doctrine::getTable('Application_Model_Country')->find($requestData->countryID);
 
                     //receive and rename image_round file
                     if ($formData['UrlImageRound']) {
@@ -282,7 +282,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 // retrieve requested record
                 // pre-populate form
                 $query = Doctrine_Query::create()
-                    ->from('Peshkov_Model_Country c')
+                    ->from('Application_Model_Country c')
                     ->where('c.ID = ?', $requestData->countryID);
 
                 $result = $query->fetchArray();
@@ -327,7 +327,7 @@ class Admin_CountryController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Peshkov_Model_Country c')
+                ->from('Application_Model_Country c')
                 ->where('c.ID = ?', $requestData->countryID);
             $result = $query->fetchArray();
 
@@ -365,7 +365,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 if ($this->getRequest()->isPost()) {
                     if ($countryDeleteForm->isValid($this->getRequest()->getPost())) {
                         $query = Doctrine_Query::create()
-                            ->delete('Peshkov_Model_Country c')
+                            ->delete('Application_Model_Country c')
                             ->whereIn('c.ID', $requestData->countryID);
 
                         $result = $query->execute();

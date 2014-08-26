@@ -40,10 +40,10 @@ resources.modules[] =
 resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
 
 ;NameSpaces
+autoloaderNamespaces[] = "ZendX"
 autoloaderNamespaces[] = "Doctrine_"
 autoloaderNamespaces[] = "ZFDoctrine_"
-;autoloaderNamespaces[] = "ZendX"
-;autoloaderNamespaces[] = "Peshkov"
+autoloaderNamespaces[] = "Peshkov"
 
 ; locale config
 locales.ru = ru_RU
@@ -56,13 +56,13 @@ includePaths.classes = APPLICATION_PATH "/classes"
 ;DB config
 resources.db.adapter         = "PDO_MYSQL"
 resources.db.params.host     = localhost
-resources.db.params.dbname   = online-racing
-resources.db.params.username = root
-resources.db.params.password = root
+resources.db.params.dbname   = wm1624_online-racing
+resources.db.params.username = wm1624_oradmindb
+resources.db.params.password = 4qKxq3ALsFiaqOjx
 resources.db.params.driver_options.1002 = "SET NAMES utf8"
 
 ;Doctrine configs
-resources.doctrine.connections.default.dsn = "mysql://root:root@localhost/online-racing"
+resources.doctrine.connections.default.dsn = "mysql://root:4qKxq3ALsFiaqOjx@localhost/wm1624_online-racing"
 resources.doctrine.connections.default.charset = "utf8"
 resources.doctrine.manager.attributes.ATTR_MODEL_LOADING = "model_loading_zend"
 pluginpaths.ZFDoctrine_Application_Resource = "ZFDoctrine/Application/Resource"
@@ -117,16 +117,3 @@ phpSettings.display_errors = 1
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
 resources.frontController.params.displayExceptions = 1
-
-[i.peshkov : development]
-;baseUrl config
-resources.frontController.baseUrl = http://online-racing:8080
-resources.frontController.params.displayExceptions = 1
-
-;DB config
-resources.db.params.dbname   = online-racing
-resources.db.params.username = root
-resources.db.params.password = root
-
-;Doctrine configs
-resources.doctrine.connections.default.dsn = "mysql://root:root@localhost/online-racing"

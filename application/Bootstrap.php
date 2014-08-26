@@ -5,16 +5,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     public function _initConfig()
     {
+        $config_options = array('allowModifications' => true);
+
         $config = new Zend_Config_Ini(APPLICATION_PATH
-        . '/configs/application.ini', APPLICATION_ENV, array('allowModifications' => true));
-        $config->domain = $_SERVER['HTTP_HOST'];
-        $config->setReadOnly();
+            . '/configs/application.ini',
+            $this->getEnvironment(),
+            $config_options);
+
+        if (isset($_SERVER['HTTP_HOST'])){
+            $config->domain = $_SERVER['HTTP_HOST'];
+        }
+
         Zend_Registry::set('config', $config);
+
+        $config->setReadOnly();
     }
 
     protected function _initNameSpace()
     {
         Zend_Loader_Autoloader::getInstance()->registerNamespace('App');
+        Zend_Loader_Autoloader::getInstance()->registerNamespace('Peshkov');
         Zend_Loader_Autoloader::getInstance()->registerNamespace('Bootstrap');
     }
 
@@ -37,103 +47,73 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         return $db;
     }
 
-    protected function _initDoctrine()
+    public function _initModuleLoaders()
     {
-        require_once 'Doctrine/Doctrine.php';
-        $this->getApplication()
-            ->getAutoloader()
-            ->pushAutoloader(array('Doctrine', 'autoload'), 'Doctrine');
+        $this->bootstrap('Frontcontroller');
 
-        $config = $this->getOption('doctrine');
+        $fc = $this->getResource('Frontcontroller');
+        $modules = $fc->getControllerDirectory();
 
-        $manager = Doctrine_Manager::getInstance();
-        $manager->setAttribute(
-            Doctrine::ATTR_MODEL_LOADING,
-            Doctrine::MODEL_LOADING_CONSERVATIVE
-        );
+        foreach ($modules AS $module => $dir) {
+            $moduleName = strtolower($module);
+            $moduleName = str_replace(array('-', '.'), ' ', $moduleName);
+            $moduleName = ucwords($moduleName);
+            $moduleName = str_replace(' ', '', $moduleName);
 
-//        $manager->setAttribute(Doctrine_Core::ATTR_MODEL_CLASS_PREFIX, 'Model_');
-//        $manager->setAttribute(Doctrine_Core::ATTR_MODEL_LOADING, Doctrine_Core::MODEL_LOADING_PEAR);
-//        $manager->setAttribute(Doctrine_Core::ATTR_VALIDATE, Doctrine_Core::VALIDATE_ALL);
-//        $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
-//        $manager->setAttribute(Doctrine_Core::ATTR_AUTO_FREE_QUERY_OBJECTS, true);
-//        $manager->setAttribute(Doctrine_Core::ATTR_AUTO_ACCESSOR_OVERRIDE, true);
-//        $manager->setAttribute(Doctrine_Core::ATTR_AUTOLOAD_TABLE_CLASSES, true);
-
-        if (isset($config['cache']) && $config['cache'] == true) {
-            $cacheDriver = new Doctrine_Cache_Apc();
-            $manager->setAttribute(Doctrine_Core::ATTR_QUERY_CACHE, $cacheDriver);
-        }
-
-        $connection = Doctrine_Manager::connection($config['dsn'], 'doctrine')
-            ->setCharset('utf8');
-
-        return $connection;
-    }
-
-    protected function _initSessions()
-    {
-        $this->bootstrap('session');
-
-        if (Zend_Auth::getInstance()->hasIdentity()) {
-            if (isset($_COOKIE['RememberMe'])) {
-                $rememberMe = $_COOKIE['RememberMe'];
-            } else {
-                $rememberMe = 0;
-            }
-
-            if ($rememberMe) {
-                Zend_Session::rememberMe(60 * 60 * 120);
-                setcookie('RememberMe', 1, 60 * 60 * 120, '/');
-            }
+            $loader = new Zend_Application_Module_Autoloader(array(
+                'namespace' => $moduleName,
+                'basePath' => realpath($dir . "/../"),
+            ));
         }
     }
+
+//    protected function _initSessions()
+//    {
+//        $this->bootstrap('session');
+//
+//        if (Zend_Auth::getInstance()->hasIdentity()) {
+//            if (isset($_COOKIE['RememberMe'])) {
+//                $rememberMe = $_COOKIE['RememberMe'];
+//            } else {
+//                $rememberMe = 0;
+//            }
+//
+//            if ($rememberMe) {
+//                Zend_Session::rememberMe(60 * 60 * 120);
+//                setcookie('RememberMe', 1, 60 * 60 * 120, '/');
+//            }
+//        }
+//    }
 
     // Initialisation Authorisation
-    public function _initAuth()
+//    public function _initAuth()
+//    {
+//        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
+//    }
+
+//    protected function _initPlugins()
+//    {
+//        // plugin for view
+//        $frontController = Zend_Controller_Front::getInstance();
+//
+//        //Register variables for views
+//        $frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
+//
+//        $frontController->registerPlugin(new App_Plugin_SessionTrack());
+//    }
+
+    protected function _initDoctype()
     {
-        //Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
-    }
-
-    protected function _initPlugins()
-    {
-        // plugin for view
-        $frontController = Zend_Controller_Front::getInstance();
-
-        //Register variables for views
-        $frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
-
-        //$frontController->registerPlugin(new App_Plugin_SessionTrack());
-    }
-
-    public function _initActionHelpers()
-    {
-        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
-    }
-
-    protected function _initView()
-    {
-        $this->bootstrap('layout');
-        $layout = $this->getResource('layout');
-        $view = $layout->getView();
-
-        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
-
-        // Init DocType
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
         $view->doctype('XHTML1_STRICT');
+    }
 
-        // Init View Helpers
-        $view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
-        $view->addHelperPath('App/View/Helper', 'App_View_Helper');
-        $view->addHelperPath('Bootstrap/View/Helper', 'Bootstrap_View_Helper');
-        $view->addHelperPath('Peshkov/View/Helper', 'Peshkov_View_Helper');
+    protected function _initheadMeta()
+    {
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
 
-        // setting the site in the title; possibly in the layout script:
-        $view->headTitle('Online-Racing.Net');
-        // setting a separator string for segments:
-        $view->headTitle()->setSeparator(' | ');
-
-        // Init head meta
         $view->headMeta()
             ->appendHttpEquiv('Content-Type', 'text/html; charset=UTF-8')
             ->setHttpEquiv('X-UA-Compatible', 'IE=edge')
@@ -158,8 +138,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             ->appendName('yandex-verification', '715d9bbdfc996f86')
             ->appendName('viewport', 'width=device-width, initial-scale=1')
             ->setHttpEquiv('Cache-Control', 'no-store');
+    }
 
-        // setup JQuery
+    protected function _initPageTitle()
+    {
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
+
+        // setting the site in the title; possibly in the layout script:
+        $view->headTitle('Online-Racing.Net');
+        // setting a separator string for segments:
+        $view->headTitle()->setSeparator(' | ');
+    }
+
+    protected function _initjQuery()
+    {
+        $this->bootstrap('view');
+        $view = $this->getResource('view');
+
         $view->jQuery()
             ->enable()
             ->uiEnable()
@@ -168,20 +164,35 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             //->setLocalPath('/library/jquery/js/jquery.min.js')
             //->setUiLocalPath('/library/jquery/js/jquery-ui.min.js')
             ->addStylesheet('/library/jquery/css/jquery-ui.min.css');
-
-        $viewRenderer->setView($view);
-        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
     }
+
+//    protected function _initView()
+//    {
+//        $view = new Zend_View($this->getOption('resources')['view']);
+//
+//        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+//
+//        $viewRenderer->setView($view);
+//        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
+//
+//        return $view;
+//    }
 
     /*
      * Helper load layout for modules
      */
     protected function _initLayoutHelper()
     {
+        $layoutLoader = new Peshkov_Controller_Action_Helper_LayoutLoader();
+
         $this->bootstrap('frontController');
-        $layout = Zend_Controller_Action_HelperBroker::addHelper(
-            new App_Controller_Action_Helper_LayoutLoader()
-        );
+        $layout = Zend_Controller_Action_HelperBroker::addHelper($layoutLoader);
+    }
+
+    public function _initActionHelpers()
+    {
+        Zend_Controller_Action_HelperBroker::addPrefix('App_Controller_Action_Helper');
+        Zend_Controller_Action_HelperBroker::addPrefix('Peshkov_Controller_Action_Helper');
     }
 
     public function _initAcl()
