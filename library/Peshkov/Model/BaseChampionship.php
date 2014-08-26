@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Peshkov_Model_Championship', 'default');
 
 /**
  * Peshkov_Model_BaseChampionship

@@ -1,4 +1,6 @@
 <?php
+// Connection Component Binding
+Doctrine_Manager::getInstance()->bindComponent('Application_Model_Resource', 'default');
 
 /**
  * Application_Model_BaseResource
