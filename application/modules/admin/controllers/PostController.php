@@ -24,7 +24,7 @@ class Admin_PostController extends App_Controller_LoaderController {
 		if (count($post_data)) {
 			$this->view->post_data = $post_data;
 		} else {
-			$this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найдены!'));
+			$this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
 		}
 	}
 

@@ -29,7 +29,7 @@ class Admin_CountryController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Application_Model_Country c')
+                ->from('Default_Model_Country c')
                 ->where('c.ID = ?', $requestData->countryID);
             $result = $query->fetchArray();
 
@@ -59,22 +59,43 @@ class Admin_CountryController extends App_Controller_LoaderController
 
     public function allAction()
     {
-        $this->view->headTitle($this->view->translate('Все'));
-        $this->view->pageTitle($this->view->translate('Cтраны'));
-
-        // pager settings
-        $pager_args = array(
-            "page_count_items" => 10,
-            "page_range" => 5,
-            "page" => $this->getRequest()->getParam('page')
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        $countryData = $this->db->get("country")->getAll(false, "all", "ASC", true, $pager_args);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $this->view->headTitle($this->view->translate('Все'));
+            $this->view->pageTitle($this->view->translate('Cтраны'));
 
-        if ($countryData) {
-            $this->view->countryData = $countryData;
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Country c')
+                ->orderBy('c.ID ASC');
+
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
+
+            $countryPaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $countryPaginator->setItemCountPerPage("10");
+            $countryPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $countryPaginator->setPageRange("5");
+
+            $this->view->countryData = $countryPaginator;
+
+            if ($countryPaginator->count() == 0) {
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            }
+
         } else {
-            $this->messages->addError("{$this->view->translate('Запрашиваемые страны на сайте не найдены!')}");
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
     }
 
@@ -96,9 +117,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                 $date = date('Y-m-d H:i:s');
 
-                $item = new Application_Model_Country();
-
-//                die(var_dump($item));
+                $item = new Default_Model_Country();
 
                 $item->fromArray($form->getValues());
                 $item->DateCreate = $date;
@@ -206,7 +225,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 if ($countryEditForm->isValid($this->getRequest()->getPost())) {
                     $formData = $countryEditForm->getValues();
 
-                    $item = Doctrine::getTable('Application_Model_Country')->find($requestData->countryID);
+                    $item = Doctrine_Core::getTable('Default_Model_Country')->find($requestData->countryID);
 
                     //receive and rename image_round file
                     if ($formData['UrlImageRound']) {
@@ -282,7 +301,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 // retrieve requested record
                 // pre-populate form
                 $query = Doctrine_Query::create()
-                    ->from('Application_Model_Country c')
+                    ->from('Default_Model_Country c')
                     ->where('c.ID = ?', $requestData->countryID);
 
                 $result = $query->fetchArray();
@@ -327,7 +346,7 @@ class Admin_CountryController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Application_Model_Country c')
+                ->from('Default_Model_Country c')
                 ->where('c.ID = ?', $requestData->countryID);
             $result = $query->fetchArray();
 
@@ -357,7 +376,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                 $this->messages->addWarning(
                     $this->view->translate('Вы действительно хотите удалить страну')
-                    . "<strong>" . $result[0]['NativeName'] . " (" . $result[0]['EnglishName'] . ")</strong> ?"
+                    . " <strong>" . $result[0]['NativeName'] . " (" . $result[0]['EnglishName'] . ")</strong>?"
                 );
 
                 //Create country delete form
@@ -365,7 +384,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 if ($this->getRequest()->isPost()) {
                     if ($countryDeleteForm->isValid($this->getRequest()->getPost())) {
                         $query = Doctrine_Query::create()
-                            ->delete('Application_Model_Country c')
+                            ->delete('Default_Model_Country c')
                             ->whereIn('c.ID', $requestData->countryID);
 
                         $result = $query->execute();

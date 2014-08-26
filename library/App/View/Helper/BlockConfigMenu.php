@@ -130,7 +130,7 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract {
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'country', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'country', 'action' => 'delete', 'countryID' => $countryID), 'adminCountryAction', true);
-            array_push($this->_menuLinks, '<a href="'.$url.'">'.$this->view->translate('Удалить').' (не реализовано)'.'</a>');
+            array_push($this->_menuLinks, '<a href="'.$url.'">'.$this->view->translate('Удалить').'</a>');
         }
 
         return $this;
