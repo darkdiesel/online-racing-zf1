@@ -12,6 +12,18 @@ class Peshkov_Form_ContentType_Delete extends Zend_Form
 
     public function init()
     {
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+
+        $adminContentTypeIDUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $request->getParam('contentTypeID')),
+            'adminContentTypeID'
+        );
+
+        $adminContentTypeDeleteUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'contentTypeID' => $request->getParam('contentTypeID')),
+            'adminContentTypeAction'
+        );
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +31,7 @@ class Peshkov_Form_ContentType_Delete extends Zend_Form
             )
         )
             ->setName('contentTypeDelete')
-//            ->setAction(
-//                $this->getView()->url(
-//                    array('module' => 'admin', 'controller' => 'country', 'action' => 'delete'), 'default'
-//                )
-//            )
+            ->setAction($adminContentTypeDeleteUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -35,7 +43,7 @@ class Peshkov_Form_ContentType_Delete extends Zend_Form
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            //->setAttrib('onClick', "location.href='{$countyAllUrl}'")
+            ->setAttrib('onClick', "location.href='{$adminContentTypeIDUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

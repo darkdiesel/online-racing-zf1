@@ -168,18 +168,6 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
             $contentTypeEditForm->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->contentTypeID);
 
-            $adminContentTypeEditUrl = $this->view->url(
-                array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit', 'contentTypeID' => $requestData->contentTypeID),
-                'adminContentTypeAction'
-            );
-            $adminContentTypeIDUrl = $this->view->url(
-                array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
-                'adminContentTypeID'
-            );
-
-            $contentTypeEditForm->setAction($adminContentTypeEditUrl);
-            $contentTypeEditForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminContentTypeIDUrl}'");
-
             $this->view->contentTypeEditForm = $contentTypeEditForm;
 
             if ($this->getRequest()->isPost()) {
@@ -195,6 +183,11 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
                     $item->save();
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
+
+                    $adminContentTypeIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
+                        'adminContentTypeID'
+                    );
 
                     $this->redirect($adminContentTypeIDUrl);
                 } else {
@@ -259,11 +252,6 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-
-                $adminContentTypeDeleteUrl = $this->view->url(
-                    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'contentTypeID' => $requestData->contentTypeID),
-                    'adminContentTypeAction'
-                );
                 $adminContentTypeIDUrl = $this->view->url(
                     array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
                     'adminContentTypeID'
@@ -271,14 +259,11 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                 // Create content-type delete form
                 $contentTypeDeleteForm = new Peshkov_Form_ContentType_Delete();
-                $contentTypeDeleteForm->setAction($adminContentTypeDeleteUrl);
-                $contentTypeDeleteForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminContentTypeIDUrl}'");
 
                 $this->view->contentTypeData = $result[0];
                 $this->view->contentTypeDeleteForm = $contentTypeDeleteForm;
 
                 $this->view->headTitle($result[0]['Name']);
-
 
                 $this->messages->addWarning(
                     $this->view->translate('Вы действительно хотите удалить тип контента')
