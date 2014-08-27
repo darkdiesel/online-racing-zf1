@@ -5,7 +5,7 @@
     </div>
     <div class="block block-default block-ui-bordered">
         <div>
-            <table class="table table-striped table-bordered article_table m-b-0">
+            <table class="table table-striped table-bordered m-b-0">
                 <tbody>
                 <tr>
                     <td class="text-bold">
@@ -32,12 +32,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="text-bold"
-                        ><span><?php echo $this->translate('Круговая картинка'); ?></span
-                            ></td>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Круговая картинка'); ?></span>
+                    </td>
                     <td>
-                        <span><img
-                                src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageRound'])); ?>"></span>
+                        <span><img src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageRound'])); ?>"></span>
                     </td>
                 </tr>
                 <tr>
@@ -45,8 +44,7 @@
                         <span><?php echo $this->translate('Волнистая картинка'); ?></span>
                     </td>
                     <td>
-                        <span><img
-                                src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageGlossyWave'])); ?>"></span>
+                        <span><img src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageGlossyWave'])); ?>"></span>
                     </td>
                 </tr>
                 </tbody>

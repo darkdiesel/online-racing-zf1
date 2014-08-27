@@ -40,10 +40,10 @@ resources.modules[] =
 resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
 
 ;NameSpaces
-autoloaderNamespaces[] = "ZendX"
 autoloaderNamespaces[] = "Doctrine_"
 autoloaderNamespaces[] = "ZFDoctrine_"
-autoloaderNamespaces[] = "Peshkov"
+;autoloaderNamespaces[] = "ZendX"
+;autoloaderNamespaces[] = "Peshkov"
 
 ; locale config
 locales.ru = ru_RU
@@ -62,7 +62,7 @@ resources.db.params.password = 4qKxq3ALsFiaqOjx
 resources.db.params.driver_options.1002 = "SET NAMES utf8"
 
 ;Doctrine configs
-resources.doctrine.connections.default.dsn = "mysql://root:4qKxq3ALsFiaqOjx@localhost/wm1624_online-racing"
+resources.doctrine.connections.default.dsn = "mysql://wm1624_oradmindb:4qKxq3ALsFiaqOjx@localhost/wm1624_online-racing"
 resources.doctrine.connections.default.charset = "utf8"
 resources.doctrine.manager.attributes.ATTR_MODEL_LOADING = "model_loading_zend"
 pluginpaths.ZFDoctrine_Application_Resource = "ZFDoctrine/Application/Resource"

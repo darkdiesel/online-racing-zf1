@@ -1,29 +1,50 @@
-<?php if ($this->content_type) { ?>
-    <div class="content_type_item">
-        <table class="table table-striped table-bordered article_table">
-    	<tbody>
-    	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->content_type->name); ?></span></td>
-    	    </tr>
-    	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->content_type->description); ?></span></td>
-    	    </tr>
-    	</tbody>
-        </table>
-        <div class="article_controls">
-	    <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-		<a href = "<?php echo $this->url(array('controller' => 'content-type', 'action' => 'edit', 'content_type_id' => $this->content_type->id), 'content_type_action', true) ?>" class = "btn btn-sm btn-primary content_edit"><?php echo $this->translate('Редактировать') ?></a>
-		<a href = "<?php echo $this->url(array('controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $this->content_type->id), 'content_type_action', true) ?>" class = "btn btn-sm btn-primary content_delete"><?php echo $this->translate('Удалить') ?></a>
-	    <?php } ?>
+<?php if ($this->contentTypeData) : ?>
+    <div class="block block-default block-ui-bordered">
+        <?php
+        echo $this->BlockConfigMenu($this->translate("Контент"))->contentTypeyMenu(
+            $this->escape($this->contentTypeData['ID'])
+        );
+        ?>
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->contentTypeData['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->RenderContentTypeText($this->contentTypeData['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-        <div class="article_info">
-    	<div class="content_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Тип контента'); ?></div>
-    	<div class="content_type_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->content_type->date_create); ?></div>
-	    <?php if ($this->escape($this->content_type->date_create) != $this->escape($this->content_type->date_edit)) { ?>
-		<div class="content_type_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->content_type->date_edit); ?></div>
-	    <?php } ?>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Тип контента'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->contentTypeData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->contentTypeData['DateCreate']) != $this->escape($this->contentTypeData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->contentTypeData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
-<?php } ?>
+<?php endif; ?>

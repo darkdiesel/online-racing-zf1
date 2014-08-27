@@ -5,189 +5,329 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
     public function init()
     {
-	parent::init();
-	$this->view->headTitle($this->view->translate('Тип контента'));
+        parent::init();
+        $this->view->headTitle($this->view->translate('Тип контента'));
+
+        // set doctype for correctly displaying forms
+        $this->view->doctype('XHTML1_STRICT');
     }
 
     // action for view content type
     public function idAction()
     {
-	$this->view->pageTitle($this->view->translate('Тип контента'));
+        // set filters and validators for GET input
+        $filters = array(
+            'contentTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'contentTypeID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_ContentType ct')
+                ->where('ct.ID = ?', $requestData->contentTypeID);
+            $result = $query->fetchArray();
 
-	$content_type_data = $this->db->get('content_type')->getItem($content_type_id);
+            if (count($result) == 1) {
+                $this->view->contentTypeData = $result[0];
 
-	if ($content_type_data) {
-	    $this->view->content_type = $content_type_data;
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle($content_type_data->name);
-	    return;
-	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
-	}
+                $this->view->headTitle($result[0]['Name']);
+                $this->view->pageTitle(
+                    $this->view->translate('Тип Контента') . ' :: ' . $result[0]['Name']
+                );
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Тип контента не найден!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
     }
 
     // action for view all content types
     public function allAction()
     {
-	$this->view->headTitle($this->view->translate('Все'));
-	$this->view->pageTitle($this->view->translate('Типы контента'));
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-	// pager settings
-	$pager_args = array(
-	    "page_count_items" => 10,
-	    "page_range" => 5,
-	    "page" => $this->getRequest()->getParam('page')
-	);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $this->view->headTitle($this->view->translate('Все'));
+            $this->view->pageTitle($this->view->translate('Типы контента'));
 
-	$paginator = $this->db->get('content_type')->getAll(FALSE, "id, name, description", "ASC", TRUE, $pager_args);
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_ContentType ct')
+                ->orderBy('ct.ID ASC');
 
-	if (count($paginator)) {
-	    $this->view->paginator = $paginator;
-	} else {
-	    $this->messages->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
-	}
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
+
+            $contentTypePaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $contentTypePaginator->setItemCountPerPage("10");
+            $contentTypePaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $contentTypePaginator->setPageRange("5");
+
+            $this->view->contentTypeData = $contentTypePaginator;
+
+            if ($contentTypePaginator->count() == 0) {
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            }
+
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
     }
 
     // action for add new content type
     public function addAction()
     {
-	$this->view->headTitle($this->view->translate('Добавить'));
-	$this->view->pageTitle($this->view->translate('Добавить тип контента'));
+        $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить тип контента'));
 
-	$request = $this->getRequest();
-	// form
-	$form = new Application_Form_ContentType_Add();
-	$form->setAction(
-		$this->view->url(
-			array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default', true
-		)
-	);
+        // form
+        $contentTypeAddForm = new Peshkov_Form_ContentType_Add();
+        $this->view->contentTypeAddForm = $contentTypeAddForm;
 
-	if ($this->getRequest()->isPost()) {
-	    if ($form->isValid($request->getPost())) {
-		$date = date('Y-m-d H:i:s');
-		$content_type_data = array(
-		    'name' => strtolower($form->getValue('name')),
-		    'description' => $form->getValue('description'),
-		    'date_create' => $date,
-		    'date_edit' => $date,
-		);
+        // test for valid input
+        // if valid, populate model
+        // assign default values for some fields
+        // save to database
+        if ($this->getRequest()->isPost()) {
+            if ($contentTypeAddForm->isValid($this->getRequest()->getPost())) {
 
-		$new_content_type = $this->db->get('content_type')->createRow($content_type_data);
-		$new_content_type->save();
+                $date = date('Y-m-d H:i:s');
 
-		$this->redirect(
-			$this->view->url(
-				array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-			    'content_type_id' => $new_content_type->id), 'content_type_id', true
-			)
-		);
-	    } else {
-		$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-	    }
-	}
+                $item = new Default_Model_ContentType();
 
-	$this->view->form = $form;
+                $item->fromArray($contentTypeAddForm->getValues());
+                $item->DateCreate = $date;
+                $item->DateEdit = $date;
+
+                $item->save();
+
+                $this->redirect(
+                    $this->view->url(
+                        array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
+                            'contentTypeID' => $item->ID), 'adminContentTypeID'
+                    )
+                );
+
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
+            } else {
+                $this->messages->addError(
+                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                );
+            }
+        }
     }
 
     // action for edit content type
     public function editAction()
     {
-	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+        $this->view->headTitle($this->view->translate('Редактировать'));
+        $this->view->pageTitle($this->view->translate('Редактировать тип контента'));
 
-	$this->view->headTitle($this->view->translate('Редактировать'));
+        // set filters and validators for GET input
+        $filters = array(
+            'contentTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'contentTypeID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-	$content_type_data = $this->db->get('content_type')->getItem($content_type_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
 
-	if ($content_type_data) {
-	    // form
-	    $form = new Application_Form_ContentType_Edit();
-	    $form->setAction($this->view->url(
-			    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit',
-			'content_type_id' => $content_type_id), 'content_type_action', true
-	    ));
-	    $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'default', true)}\"");
+            $contentTypeEditForm = new Peshkov_Form_ContentType_Edit();
 
-	    if ($this->getRequest()->isPost()) {
-		if ($form->isValid($request->getPost())) {
-		    $new_content_type_data = array(
-			'name' => strtolower($form->getValue('name')),
-			'description' => $form->getValue('description'),
-			'date_edit' => date('Y-m-d H:i:s')
-		    );
+            $contentTypeEditForm->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->contentTypeID);
 
-		    $content_type_where = $content_type->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $content_type->update($new_content_type_data, $content_type_where);
+            $adminContentTypeEditUrl = $this->view->url(
+                array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit', 'contentTypeID' => $requestData->contentTypeID),
+                'adminContentTypeAction'
+            );
+            $adminContentTypeIDUrl = $this->view->url(
+                array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
+                'adminContentTypeID'
+            );
 
-		    $this->redirect($this->view->url(
-				    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-				'content_type_id' => $content_type_id), 'content_type_id', true
-		    ));
-		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-		}
-	    }
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$content_type_data->name}");
+            $contentTypeEditForm->setAction($adminContentTypeEditUrl);
+            $contentTypeEditForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminContentTypeIDUrl}'");
 
-	    $form->name->setvalue($content_type_data->name);
-	    $form->description->setvalue($content_type_data->description);
+            $this->view->contentTypeEditForm = $contentTypeEditForm;
 
-	    $this->view->form = $form;
-	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
-	}
+            if ($this->getRequest()->isPost()) {
+                if ($contentTypeEditForm->isValid($this->getRequest()->getPost())) {
+                    $formData = $contentTypeEditForm->getValues();
+
+                    $item = Doctrine_Core::getTable('Default_Model_ContentType')->find($requestData->contentTypeID);
+
+                    // set edit date
+                    $formData['DateEdit'] = date('Y-m-d H:i:s');
+
+                    $item->fromArray($formData);
+                    $item->save();
+
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
+
+                    $this->redirect($adminContentTypeIDUrl);
+                } else {
+                    $this->messages->addError(
+                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    );
+                }
+            } else {
+                // if GET request
+                // retrieve requested record
+                // pre-populate form
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_ContentType ct')
+                    ->where('ct.ID = ?', $requestData->contentTypeID);
+
+                $result = $query->fetchArray();
+
+                if (count($result) == 1) {
+                    $this->view->contentTypeData = $result[0];
+                    $this->view->contentTypeEditForm->populate($result[0]);
+                } else {
+//                    throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                    $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+
+                    $this->view->headTitle($this->view->translate('Ошибка!'));
+                    $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+
+                    $this->view->pageTitle($this->view->translate('Ошибка!'));
+                    $this->view->pageTitle($this->view->translate('Тип контента не найден!'));
+                }
+            }
+
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
     }
 
     // action for delete content type
     public function deleteAction()
     {
-	$this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->pageTitle($this->view->translate('Удалить тип контента'));
 
-	$request = $this->getRequest();
-	$content_type_id = (int) $request->getParam('content_type_id');
+        // set filters and validators for GET input
+        $filters = array(
+            'contentTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'contentTypeID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-	$content_type_data = $this->db->get('content_type')->getItem($content_type_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_ContentType ct')
+                ->where('ct.ID = ?', $requestData->contentTypeID);
+            $result = $query->fetchArray();
 
-	if ($content_type_data) {
-	    $this->view->headTitle($content_type_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Удалить тип контента')} :: {$content_type_data->name}");
+            if (count($result) == 1) {
 
-	    $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить тип контента')} <strong>\"{$content_type_data->name}\"</strong> ?");
+                $adminContentTypeDeleteUrl = $this->view->url(
+                    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'contentTypeID' => $requestData->contentTypeID),
+                    'adminContentTypeAction'
+                );
+                $adminContentTypeIDUrl = $this->view->url(
+                    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
+                    'adminContentTypeID'
+                );
 
-	    $form = new Application_Form_ContentType_Delete();
-	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
-	    $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'content_type_id' => $content_type_id), 'content_type_id', true) . '"');
+                // Create content-type delete form
+                $contentTypeDeleteForm = new Peshkov_Form_ContentType_Delete();
+                $contentTypeDeleteForm->setAction($adminContentTypeDeleteUrl);
+                $contentTypeDeleteForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminContentTypeIDUrl}'");
 
-	    if ($this->getRequest()->isPost()) {
-		if ($form->isValid($request->getPost())) {
-		    $content_type_where = $this->db->get('content_type')->getAdapter()->quoteInto('id = ?', $content_type_id);
-		    $this->db->get('content_type')->delete($content_type_where);
+                $this->view->contentTypeData = $result[0];
+                $this->view->contentTypeDeleteForm = $contentTypeDeleteForm;
 
-		    $this->view->showMessages()->clearMessages();
-		    $this->messages->addSuccess("{$this->view->translate("Тип контента <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
+                $this->view->headTitle($result[0]['Name']);
 
-		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1), 'content_type_all', true));
-		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-		}
-	    }
 
-	    $this->view->form = $form;
-	    $this->view->content_type = $content_type_data;
-	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не найден!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип контента не найден!')}");
-	}
+                $this->messages->addWarning(
+                    $this->view->translate('Вы действительно хотите удалить тип контента')
+                    . " <strong>" . $result[0]['Name'] . "</strong>?"
+                );
+
+                if ($this->getRequest()->isPost()) {
+                    if ($contentTypeDeleteForm->isValid($this->getRequest()->getPost())) {
+                        $query = Doctrine_Query::create()
+                            ->delete('Default_Model_ContentType ct')
+                            ->whereIn('ct.ID', $requestData->contentTypeID);
+
+                        $result = $query->execute();
+
+                        $adminContentTypeAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1),
+                            'adminContentTypeAll'
+                        );
+
+                        //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
+
+                        $this->messages->clearMessages();
+                        $this->messages->addSuccess(
+                            $this->view->translate("Тип контента <strong>" . $this->view->contentTypeData['Name'] ."</strong> успешно удален."
+                            )
+                        );
+
+                        $this->redirect($adminContentTypeAllUrl);
+                    } else {
+                        $this->messages->addError(
+                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        );
+                    }
+                }
+
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Тип контента не найден!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
     }
 
 }

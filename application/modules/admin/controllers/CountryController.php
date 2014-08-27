@@ -44,7 +44,7 @@ class Admin_CountryController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!!'));
+                $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
 
                 $this->view->headTitle($this->view->translate('Ошибка!'));
                 $this->view->headTitle($this->view->translate('Страна не найдена!'));
@@ -105,28 +105,28 @@ class Admin_CountryController extends App_Controller_LoaderController
         $this->view->pageTitle($this->view->translate('Добавить страну'));
 
         // form
-        $form = new Peshkov_Form_Country_Add();
-        $this->view->form = $form;
+        $countryAddForm = new Peshkov_Form_Country_Add();
+        $this->view->countryaddForm = $countryAddForm;
 
         // test for valid input
         // if valid, populate model
         // assign default values for some fields
         // save to database
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($this->getRequest()->getPost())) {
+            if ($countryAddForm->isValid($this->getRequest()->getPost())) {
 
                 $date = date('Y-m-d H:i:s');
 
                 $item = new Default_Model_Country();
 
-                $item->fromArray($form->getValues());
+                $item->fromArray($countryAddForm->getValues());
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
                 //receive and rename image_round file
-                if ($form->getValue('UrlImageRound')) {
-                    if ($form->UrlImageRound->receive()) {
-                        $file = $form->UrlImageRound->getFileInfo();
+                if ($countryAddForm->getValue('UrlImageRound')) {
+                    if ($countryAddForm->UrlImageRound->receive()) {
+                        $file = $countryAddForm->UrlImageRound->getFileInfo();
                         $ext = pathinfo($file['UrlImageRound']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
@@ -143,9 +143,9 @@ class Admin_CountryController extends App_Controller_LoaderController
                 }
 
                 //receive and rename image_glossy_wave file
-                if ($form->getValue('UrlImageGlossyWave')) {
-                    if ($form->UrlImageGlossyWave->receive()) {
-                        $file = $form->UrlImageGlossyWave->getFileInfo();
+                if ($countryAddForm->getValue('UrlImageGlossyWave')) {
+                    if ($countryAddForm->UrlImageGlossyWave->receive()) {
+                        $file = $countryAddForm->UrlImageGlossyWave->getFileInfo();
                         $ext = pathinfo($file['UrlImageGlossyWave']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
@@ -206,18 +206,18 @@ class Admin_CountryController extends App_Controller_LoaderController
             $countryEditForm->getElement('EnglishName')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->countryID);
             $countryEditForm->getElement('Abbreviation')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->countryID);
 
-            $countryIDUrl = $this->view->url(
-                array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
-                'adminCountryID'
-            );
-
-            $countryEditUrl = $this->view->url(
+            $adminCountryEditUrl = $this->view->url(
                 array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'countryID' => $requestData->countryID),
                 'adminCountryAction'
             );
 
-            $countryEditForm->setAction($countryEditUrl);
-            $countryEditForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$countryIDUrl}'");
+            $adminCountryIDUrl = $this->view->url(
+                array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
+                'adminCountryID'
+            );
+
+            $countryEditForm->setAction($adminCountryEditUrl);
+            $countryEditForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminCountryIDUrl}'");
 
             $this->view->countryEditForm = $countryEditForm;
 
@@ -285,12 +285,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
 
-                    $this->redirect(
-                        $this->view->url(
-                            array('controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
-                            'adminCountryID'
-                        )
-                    );
+                    $this->redirect($adminCountryIDUrl);
                 } else {
                     $this->messages->addError(
                         $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -312,7 +307,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!!'));
+                    $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
 
                     $this->view->headTitle($this->view->translate('Ошибка!'));
                     $this->view->headTitle($this->view->translate('Страна не найдена!'));
@@ -330,6 +325,7 @@ class Admin_CountryController extends App_Controller_LoaderController
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->pageTitle($this->view->translate('Удалить страну'));
 
         // set filters and validators for POST input
         $filters = array(
@@ -352,34 +348,29 @@ class Admin_CountryController extends App_Controller_LoaderController
 
             if (count($result) == 1) {
 
-                $countryDeleteUrl = $this->view->url(
+                $adminCountryDeleteUrl = $this->view->url(
                     array('module' => 'admin', 'controller' => 'contry', 'action' => 'delete', 'countryID' => $requestData->countryID),
                     'adminCountryAction'
                 );
-                $countryIDUrl = $this->view->url(
+                $adminCountryIDUrl = $this->view->url(
                     array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
                     'adminCountryID'
                 );
 
+                //Create country delete form
                 $countryDeleteForm = new Peshkov_Form_Country_Delete();
-                $countryDeleteForm->setAction($countryDeleteUrl);
-                $countryDeleteForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$countryIDUrl}'");
+                $countryDeleteForm->setAction($adminCountryDeleteUrl);
+                $countryDeleteForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminCountryIDUrl}'");
 
                 $this->view->countryData = $result[0];
                 $this->view->countryDeleteForm = $countryDeleteForm;
 
                 $this->view->headTitle($result[0]['NativeName']);
-                $this->view->pageTitle(
-                    $this->view->translate('Удалить страну') . ' :: ' . $result[0]['EnglishName'] . ' ('
-                    . $result[0]['NativeName'] . ')'
-                );
 
                 $this->messages->addWarning(
                     $this->view->translate('Вы действительно хотите удалить страну')
                     . " <strong>" . $result[0]['NativeName'] . " (" . $result[0]['EnglishName'] . ")</strong>?"
                 );
-
-                //Create country delete form
 
                 if ($this->getRequest()->isPost()) {
                     if ($countryDeleteForm->isValid($this->getRequest()->getPost())) {
@@ -393,7 +384,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                         unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageRound']);
                         unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageGlossyWave']);
 
-                        $countryAllUrl = $this->view->url(
+                        $adminCountryAllUrl = $this->view->url(
                             array('module' => 'admin', 'controller' => 'country', 'action' => 'all', 'page' => 1),
                             'adminCountryAll'
                         );
@@ -402,11 +393,11 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Страна <strong>" . $this->view->countryData['NativeName'] . " (" . $this->view->countryData['EnglishName'] . ")</strong> успешно удалена"
+                            $this->view->translate("Страна <strong>" . $this->view->countryData['NativeName'] . " (" . $this->view->countryData['EnglishName'] . ")</strong> успешно удалена."
                             )
                         );
 
-                        $this->redirect($countryAllUrl);
+                        $this->redirect($adminCountryAllUrl);
                     } else {
                         $this->messages->addError(
                             $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -428,7 +419,6 @@ class Admin_CountryController extends App_Controller_LoaderController
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
         }
-
     }
 
 }

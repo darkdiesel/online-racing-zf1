@@ -170,11 +170,11 @@ abstract class Default_Model_BasePost extends Doctrine_Record
 
         $this->hasOne('Default_Model_ContentType as ContentType', array(
              'local' => 'content_type_id',
-             'foreign' => 'id'));
+             'foreign' => 'ID'));
 
         $this->hasOne('Default_Model_PostType as PostType', array(
              'local' => 'post_type_id',
-             'foreign' => 'id'));
+             'foreign' => 'ID'));
 
         $this->hasMany('Default_Model_Championship as Championship', array(
              'local' => 'id',
