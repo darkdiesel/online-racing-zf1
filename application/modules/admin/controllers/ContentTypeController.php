@@ -165,9 +165,6 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
         if ($requestData->isValid()) {
 
             $contentTypeEditForm = new Peshkov_Form_ContentType_Edit();
-
-            $contentTypeEditForm->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->contentTypeID);
-
             $this->view->contentTypeEditForm = $contentTypeEditForm;
 
             if ($this->getRequest()->isPost()) {

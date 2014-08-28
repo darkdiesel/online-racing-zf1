@@ -201,24 +201,6 @@ class Admin_CountryController extends App_Controller_LoaderController
         if ($requestData->isValid()) {
 
             $countryEditForm = new Peshkov_Form_Country_Edit();
-
-            $countryEditForm->getElement('NativeName')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->countryID);
-            $countryEditForm->getElement('EnglishName')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->countryID);
-            $countryEditForm->getElement('Abbreviation')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $requestData->countryID);
-
-            $adminCountryEditUrl = $this->view->url(
-                array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'countryID' => $requestData->countryID),
-                'adminCountryAction'
-            );
-
-            $adminCountryIDUrl = $this->view->url(
-                array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
-                'adminCountryID'
-            );
-
-            $countryEditForm->setAction($adminCountryEditUrl);
-            $countryEditForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminCountryIDUrl}'");
-
             $this->view->countryEditForm = $countryEditForm;
 
             if ($this->getRequest()->isPost()) {
@@ -285,6 +267,11 @@ class Admin_CountryController extends App_Controller_LoaderController
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
 
+                    $adminCountryIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
+                        'adminCountryID'
+                    );
+
                     $this->redirect($adminCountryIDUrl);
                 } else {
                     $this->messages->addError(
@@ -347,20 +334,8 @@ class Admin_CountryController extends App_Controller_LoaderController
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-
-                $adminCountryDeleteUrl = $this->view->url(
-                    array('module' => 'admin', 'controller' => 'contry', 'action' => 'delete', 'countryID' => $requestData->countryID),
-                    'adminCountryAction'
-                );
-                $adminCountryIDUrl = $this->view->url(
-                    array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $requestData->countryID),
-                    'adminCountryID'
-                );
-
                 //Create country delete form
                 $countryDeleteForm = new Peshkov_Form_Country_Delete();
-                $countryDeleteForm->setAction($adminCountryDeleteUrl);
-                $countryDeleteForm->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminCountryIDUrl}'");
 
                 $this->view->countryData = $result[0];
                 $this->view->countryDeleteForm = $countryDeleteForm;
