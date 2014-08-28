@@ -26,5 +26,24 @@
                 </tbody>
             </table>
         </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Тип контента'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->contentTypeData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->contentTypeData['DateCreate']) != $this->escape($this->contentTypeData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->contentTypeData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
 <?php } ?>

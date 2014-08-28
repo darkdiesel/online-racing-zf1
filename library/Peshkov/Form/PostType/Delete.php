@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_Country_Delete extends Zend_Form
+class Peshkov_Form_PostType_Delete extends Zend_Form
 {
 
     protected function translate($str)
@@ -14,24 +14,24 @@ class Peshkov_Form_Country_Delete extends Zend_Form
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $adminCountryIDUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $request->getParam('countryID')),
-            'adminCountryID'
+        $adminPostTypeIDUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $request->getParam('postTypeID')),
+            'adminPostTypeID'
         );
 
-        $adminCountryDeleteUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'contry', 'action' => 'delete', 'countryID' => $request->getParam('countryID')),
-            'adminCountryAction'
+        $adminPostTypeDeleteUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete', 'postTypeID' => $request->getParam('postTypeID')),
+            'adminPostTypeAction'
         );
 
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'country-delete'
+                'id' => 'post-type-delete'
             )
         )
-            ->setName('countryDelete')
-            ->setAction($adminCountryDeleteUrl)
+            ->setName('postTypeDelete')
+            ->setAction($adminPostTypeDeleteUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -43,7 +43,7 @@ class Peshkov_Form_Country_Delete extends Zend_Form
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminCountryIDUrl}'")
+            ->setAttrib('onClick', "location.href='{$adminPostTypeIDUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

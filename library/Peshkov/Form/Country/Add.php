@@ -121,13 +121,13 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $countyAllUrl = $this->getView()->url(
+        $adminCountyAllUrl = $this->getView()->url(
             array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'adminCountryAll'
         );
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$countyAllUrl}'")
+            ->setAttrib('onClick', "location.href='{$adminCountyAllUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

@@ -1,24 +1,49 @@
-<?php if ($this->post_type) { ?>
-    <?php echo $this->form; ?>
-    <div class="post_type_item">
-        <table class="table table-striped table-bordered article_table">
-    	<tbody>
-    	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->post_type->name); ?></span></td>
-    	    </tr>
-    	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->post_type->description); ?></span></td>
-    	    </tr>
-    	</tbody>
-        </table>
-        <div class="article_info">
-    	<div class="post_type_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Тип контента'); ?></div>
-    	<div class="post_type_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->post_type->date_create); ?></div>
-	    <?php if ($this->escape($this->post_type->date_create) != $this->escape($this->post_type->date_edit)) { ?>
-		<div class="post_type_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->post_type->date_edit); ?></div>
-	    <?php } ?>
+<?php if ($this->postTypeData) { ?>
+    <div class="m-b-10">
+        <?php echo $this->postTypeDeleteForm; ?>
+        <hr/>
+    </div>
+    <div class="block block-default block-ui-bordered">
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->postTypeData['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->RenderContentTypeText($this->postTypeData['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Тип статьи'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->postTypeData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->postTypeData['DateCreate']) != $this->escape($this->postTypeData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->postTypeData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 <?php } ?>

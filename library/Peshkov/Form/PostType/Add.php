@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_ContentType_Add extends Zend_Form
+class Peshkov_Form_PostType_Add extends Zend_Form
 {
 
     protected function translate($str)
@@ -15,13 +15,13 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'content-type-add'
+                'id' => 'post-type-add'
             )
         )
-            ->setName('contentTypeAdd')
+            ->setName('postTypeAdd')
             ->setAction(
                 $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default'
+                    array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default'
                 )
             )
             ->setMethod('post')
@@ -37,11 +37,10 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
             ->addValidator(
                 'Db_NoRecordExists', false,
                 array(
-                    'table' => 'content_type',
+                    'table' => 'post_type',
                     'field' => 'Name',
                 )
             )
-            //->addValidator(new App_Validate_NoDbRecordExists('country', 'NativeName'))
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
@@ -67,13 +66,13 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminContentTypeAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'adminContentTypeAll'
+        $adminPostTypeAllUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'adminPostTypeAll'
         );
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminContentTypeAllUrl}'")
+            ->setAttrib('onClick', "location.href='{$adminPostTypeAllUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
@@ -89,12 +88,12 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
             array(
                 $this->getElement('Name'),
                 $this->getElement('Description')
-            ), 'ContentTypeInfo'
+            ), 'PostTypeInfo'
         );
 
-        $this->getDisplayGroup('ContentTypeInfo')
+        $this->getDisplayGroup('PostTypeInfo')
             ->setOrder(10)
-            ->setLegend('Информация о типе контента')
+            ->setLegend('Информация о типе статьи')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(

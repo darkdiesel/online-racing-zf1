@@ -19,8 +19,8 @@ class Peshkov_Form_ContentType_Edit extends Peshkov_Form_ContentType_Add
             'adminContentTypeAction'
         );
 
-        $this->setAttrib('id', 'country-edit')
-            ->setName('countryEdit')
+        $this->setAttrib('id', 'content-type-edit')
+            ->setName('contentTypeEdit')
             ->setAction($adminContentTypeEditUrl);
 
         $this->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('contentTypeID'));

@@ -106,7 +106,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
         // form
         $countryAddForm = new Peshkov_Form_Country_Add();
-        $this->view->countryaddForm = $countryAddForm;
+        $this->view->countryAddForm = $countryAddForm;
 
         // test for valid input
         // if valid, populate model
@@ -359,17 +359,17 @@ class Admin_CountryController extends App_Controller_LoaderController
                         unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageRound']);
                         unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageGlossyWave']);
 
-                        $adminCountryAllUrl = $this->view->url(
-                            array('module' => 'admin', 'controller' => 'country', 'action' => 'all', 'page' => 1),
-                            'adminCountryAll'
-                        );
-
                         //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
                             $this->view->translate("Страна <strong>" . $this->view->countryData['NativeName'] . " (" . $this->view->countryData['EnglishName'] . ")</strong> успешно удалена."
                             )
+                        );
+
+                        $adminCountryAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'country', 'action' => 'all', 'page' => 1),
+                            'adminCountryAll'
                         );
 
                         $this->redirect($adminCountryAllUrl);

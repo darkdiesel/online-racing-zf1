@@ -249,11 +249,6 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                $adminContentTypeIDUrl = $this->view->url(
-                    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
-                    'adminContentTypeID'
-                );
-
                 // Create content-type delete form
                 $contentTypeDeleteForm = new Peshkov_Form_ContentType_Delete();
 
@@ -275,17 +270,17 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                         $result = $query->execute();
 
-                        $adminContentTypeAllUrl = $this->view->url(
-                            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1),
-                            'adminContentTypeAll'
-                        );
-
                         //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
                             $this->view->translate("Тип контента <strong>" . $this->view->contentTypeData['Name'] ."</strong> успешно удален."
                             )
+                        );
+
+                        $adminContentTypeAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1),
+                            'adminContentTypeAll'
                         );
 
                         $this->redirect($adminContentTypeAllUrl);

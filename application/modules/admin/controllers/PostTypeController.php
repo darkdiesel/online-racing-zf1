@@ -106,91 +106,120 @@ class Admin_PostTypeController extends App_Controller_LoaderController
         $this->view->headTitle($this->view->translate('Добавить'));
         $this->view->pageTitle($this->view->translate('Добавить тип статьи'));
 
-        $request = $this->getRequest();
         // form
-        $form = new Application_Form_PostType_Add();
-        $form->setAction(
-            $this->view->url(
-                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default', true
-            )
-        );
+        $postTypeAddForm = new Peshkov_Form_PostType_Add();
+        $this->view->postTypeAddForm = $postTypeAddForm;
 
+        // test for valid input
+        // if valid, populate model
+        // assign default values for some fields
+        // save to database
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $date = date('Y-m-d H:i:s');
-                $post_type_data = array(
-                    'name' => strtolower($form->getValue('name')),
-                    'description' => $form->getValue('description'),
-                    'date_create' => $date,
-                    'date_edit' => $date,
-                );
+            if ($postTypeAddForm->isValid($this->getRequest()->getPost())) {
 
-                $new_post_type = $this->db->get('post_type')->createRow($post_type_data);
-                $new_post_type->save();
+                $date = date('Y-m-d H:i:s');
+
+                $item = new Default_Model_PostType();
+
+                $item->fromArray($postTypeAddForm->getValues());
+                $item->DateCreate = $date;
+                $item->DateEdit = $date;
+
+                $item->save();
 
                 $this->redirect(
                     $this->view->url(
                         array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-                            'post_type_id' => $new_post_type->id), 'adminPostTypeID', true
+                            'postTypeID' => $item->ID), 'adminPostTypeID'
                     )
                 );
+
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
-                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError(
+                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                );
             }
         }
-
-        $this->view->form = $form;
     }
 
     // action for edit post type
     public function editAction()
     {
-        $request = $this->getRequest();
-        $post_type_id = $request->getParam('post_type_id');
-
         $this->view->headTitle($this->view->translate('Редактировать'));
+        $this->view->pageTitle($this->view->translate('Редактировать тип статьи'));
 
-        $post_type_data = $this->db->get('post_type')->getItem($post_type_id);
+        // set filters and validators for GET input
+        $filters = array(
+            'postTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'postTypeID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        if ($post_type_data) {
-            // form
-            $form = new Application_Form_ContentType_Edit();
-            $form->setAction($this->view->url(
-                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'edit',
-                    'post_type_id' => $post_type_id), 'adminPostTypeAction', true
-            ));
-            $form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'default', true)}\"");
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+
+            $postTypeEditForm = new Peshkov_Form_PostType_Edit();
+            $this->view->postTypeEditForm = $postTypeEditForm;
 
             if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-                    $new_post_type_data = array(
-                        'name' => strtolower($form->getValue('name')),
-                        'description' => $form->getValue('description'),
-                        'date_edit' => date('Y-m-d H:i:s')
+                if ($postTypeEditForm->isValid($this->getRequest()->getPost())) {
+                    $formData = $postTypeEditForm->getValues();
+
+                    $item = Doctrine_Core::getTable('Default_Model_PostType')->find($requestData->postTypeID);
+
+                    // set edit date
+                    $formData['DateEdit'] = date('Y-m-d H:i:s');
+
+                    $item->fromArray($formData);
+                    $item->save();
+
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
+
+                    $adminPostTypeIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $requestData->postTypeID),
+                        'adminPostTypeID'
                     );
 
-                    $post_type_where = $post_type->getAdapter()->quoteInto('id = ?', $post_type_id);
-                    $post_type->update($new_post_type_data, $post_type_where);
-
-                    $this->redirect($this->view->url(
-                        array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-                            'post_type_id' => $post_type_id), 'adminPostTypeId', true
-                    ));
+                    $this->redirect($adminPostTypeIDUrl);
                 } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError(
+                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    );
+                }
+            } else {
+                // if GET request
+                // retrieve requested record
+                // pre-populate form
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_PostType pt')
+                    ->where('pt.ID = ?', $requestData->postTypeID);
+
+                $result = $query->fetchArray();
+
+                if (count($result) == 1) {
+                    $this->view->postTypeData = $result[0];
+                    $this->view->postTypeEditForm->populate($result[0]);
+                } else {
+//                    throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                    $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
+
+                    $this->view->headTitle($this->view->translate('Ошибка!'));
+                    $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+
+                    $this->view->pageTitle($this->view->translate('Ошибка!'));
+                    $this->view->pageTitle($this->view->translate('Тип статьи не найден!'));
                 }
             }
-            $this->view->headTitle($post_type_data->name);
-            $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$post_type_data->name}");
 
-            $form->name->setvalue($post_type_data->name);
-            $form->description->setvalue($post_type_data->description);
-
-            $this->view->form = $form;
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
-            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип статьи не найден!')}");
-            $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип статьи не найден!')}");
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
     }
 
@@ -198,42 +227,83 @@ class Admin_PostTypeController extends App_Controller_LoaderController
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->pageTitle($this->view->translate('Удалить тип статьи'));
 
-        $request = $this->getRequest();
-        $post_type_id = (int)$request->getParam('post_type_id');
+        // set filters and validators for GET input
+        $filters = array(
+            'postTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'postTypeID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        $post_type_data = $this->db->get('post_type')->getItem($post_type_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_PostType pt')
+                ->where('pt.ID = ?', $requestData->postTypeID);
+            $result = $query->fetchArray();
 
-        if ($post_type_data) {
-            $this->view->headTitle($post_type_data->name);
-            $this->view->pageTitle("{$this->view->translate('Удалить тип статьи')} :: {$post_type_data->name}");
+            if (count($result) == 1) {
+                // Create content-type delete form
+                $postTypeDeleteForm = new Peshkov_Form_PostType_Delete();
 
-            $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить тип статьи')} <strong>\"{$post_type_data->name}\"</strong> ?");
+                $this->view->postTypeData = $result[0];
+                $this->view->postTypeDeleteForm = $postTypeDeleteForm;
 
-            $form = new Application_Form_PostType_Delete();
-            $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete', 'post_type_id' => $post_type_id), 'adminPostTypeAction', true));
-            $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $post_type_id), 'adminPostTypeID', true) . '"');
+                $this->view->headTitle($result[0]['Name']);
 
-            if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-                    $post_type_where = $this->db->get('post_type')->getAdapter()->quoteInto('id = ?', $post_type_id);
-                    $this->db->get('post_type')->delete($post_type_where);
+                $this->messages->addWarning(
+                    $this->view->translate('Вы действительно хотите удалить тип статьи')
+                    . " <strong>" . $result[0]['Name'] . "</strong>?"
+                );
 
-                    $this->view->showMessages()->clearMessages();
-                    $this->messages->addSuccess("{$this->view->translate("Тип статьи <strong>\"{$post_type_data->name}\"</strong> успешно удален")}");
+                if ($this->getRequest()->isPost()) {
+                    if ($postTypeDeleteForm->isValid($this->getRequest()->getPost())) {
+                        $query = Doctrine_Query::create()
+                            ->delete('Default_Model_PostType pt')
+                            ->whereIn('pt.ID', $requestData->postTypeID);
 
-                    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all', 'page' => 1), 'adminPostTypeAll', true));
-                } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                        $result = $query->execute();
+
+                        //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
+
+                        $this->messages->clearMessages();
+                        $this->messages->addSuccess(
+                            $this->view->translate("Тип статьи <strong>" . $this->view->postTypeData['Name'] ."</strong> успешно удален."
+                            )
+                        );
+
+                        $adminPostTypeAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all', 'page' => 1),
+                            'adminPostTypeAll'
+                        );
+
+                        $this->redirect($adminPostTypeAllUrl);
+                    } else {
+                        $this->messages->addError(
+                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        );
+                    }
                 }
-            }
 
-            $this->view->form = $form;
-            $this->view->post_type = $post_type_data;
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
+
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Тип статьи не найден!'));
+            }
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
-            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип статьи не найден!')}");
-            $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Тип статьи не найден!')}");
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
     }
 

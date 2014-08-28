@@ -36,7 +36,8 @@
                         <span><?php echo $this->translate('Круговая картинка'); ?></span>
                     </td>
                     <td>
-                        <span><img src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageRound'])); ?>"></span>
+                        <span><img
+                                src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageRound'])); ?>"></span>
                     </td>
                 </tr>
                 <tr>
@@ -44,11 +45,31 @@
                         <span><?php echo $this->translate('Волнистая картинка'); ?></span>
                     </td>
                     <td>
-                        <span><img src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageGlossyWave'])); ?>"></span>
+                        <span><img
+                                src="<?php echo $this->baseUrl($this->escape($this->countryData['UrlImageGlossyWave'])); ?>"></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Страна'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->countryData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->countryData['DateCreate']) != $this->escape($this->countryData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->countryData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 <?php } ?>
