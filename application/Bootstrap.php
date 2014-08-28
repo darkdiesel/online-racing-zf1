@@ -91,16 +91,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 //        Zend_Auth::getInstance()->setStorage(new Zend_Auth_Storage_Session());
 //    }
 
-//    protected function _initPlugins()
-//    {
-//        // plugin for view
-//        $frontController = Zend_Controller_Front::getInstance();
-//
-//        //Register variables for views
-//        $frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
-//
+    protected function _initPlugins()
+    {
+        // plugin for view
+        $frontController = Zend_Controller_Front::getInstance();
+
+        //Register variables for views
+        $frontController->registerPlugin(new App_Controller_Plugin_ViewSetup());
+
 //        $frontController->registerPlugin(new App_Plugin_SessionTrack());
-//    }
+    }
 
     protected function _initDoctype()
     {

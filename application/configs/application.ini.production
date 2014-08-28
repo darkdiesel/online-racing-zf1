@@ -105,7 +105,7 @@ resources.cachemanager.up.backend.options.server.one.port = 11211
 resources.cachemanager.up.frontendBackendAutoload = false
 
 ;site settings
-site.version = "0.9.1 (17.07.2014)"
+site.version = "0.9.4 (28.08.2014)"
 
 [staging : production]
 
