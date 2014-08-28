@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
 
@@ -22,7 +22,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     //config for smiley plugin
     config.smiley_columns = 6;
-    config.smiley_path = 'http://online-racing/img/smileys/';
+    config.smiley_path = 'http://online-racing.net/img/smileys/';
     config.smiley_images =
 	    [
 		'blum1.gif', 'biggrin.gif', 'smile.gif', 'sad.gif'
