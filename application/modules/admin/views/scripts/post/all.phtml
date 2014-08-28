@@ -33,7 +33,7 @@
 								$post_edit_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'post_id' => $this->escape($post->id)), 'adminPostAction', true);
 								$post_delete_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'delete', 'post_id' => $this->escape($post->id)), 'adminPostAction', true);
 								
-								$post_type_id_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'post_type_id' => $this->escape($post->post_type_id)), 'adminPostTypeId', true);
+								$post_type_id_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $this->escape($post->post_type_id)), 'adminPostTypeID', true);
 								?>
 								<tr>
 									<td class="post_id"><span><a href="<?php echo $post_id_url; ?>" target="_blank"><?php echo $this->escape($post->id) ?></a></span></td>

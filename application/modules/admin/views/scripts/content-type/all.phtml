@@ -43,15 +43,15 @@
                             <?php
                             $adminContentTypeIdUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-                                    'contentTypeID' => $this->escape($contentType->ID)), 'adminContentTypeID'
+                                    'contentTypeID' => $this->escape($contentType['ID'])), 'adminContentTypeID'
                             );
                             $adminContentTypeEditUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'content-type', 'action' => 'edit',
-                                    'contentTypeID' => $this->escape($contentType->ID)), 'adminContentTypeAction'
+                                    'contentTypeID' => $this->escape($contentType['ID'])), 'adminContentTypeAction'
                             );
                             $adminContentTypeDeleteUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete',
-                                    'contentTypeID' => $this->escape($contentType->ID)), 'adminContentTypeAction'
+                                    'contentTypeID' => $this->escape($contentType['ID'])), 'adminContentTypeAction'
                             );
                             ?>
                             <tr>

@@ -467,11 +467,11 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                             'post_type_id' => '3'
                         )
                     ),
-                    array(
-                        'label' => _('FTP'),
-                        'title' => _('FTP'),
-                        'uri'   => 'http://85.112.55.36:8080/http/',
-                    )
+//                    array(
+//                        'label' => _('FTP'),
+//                        'title' => _('FTP'),
+//                        'uri'   => 'http://85.112.55.36:8080/http/',
+//                    )
                 )
             ),
             array(

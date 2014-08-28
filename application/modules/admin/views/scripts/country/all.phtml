@@ -51,15 +51,15 @@
                             <?php
                             $adminCountryIdUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'country', 'action' => 'id',
-                                    'countryID' => $this->escape($country->ID)), 'adminCountryID'
+                                    'countryID' => $this->escape($country['ID'])), 'adminCountryID'
                             );
                             $adminCountryEditUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'country', 'action' => 'edit',
-                                    'countryID' => $this->escape($country->ID)), 'adminCountryAction'
+                                    'countryID' => $this->escape($country['ID'])), 'adminCountryAction'
                             );
                             $adminCountryDeleteUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'country', 'action' => 'delete',
-                                    'countryID' => $this->escape($country->ID)), 'adminCountryAction'
+                                    'countryID' => $this->escape($country['ID'])), 'adminCountryAction'
                             );
                             ?>
                             <tr>

@@ -160,6 +160,21 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
+    public function postTypeMenu($postTypeID)
+    {
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'edit')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'edit', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'delete')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'delete', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+        }
+
+        return $this;
+    }
+
     private function buildMenu()
     {
         $this->_menuHtml = '<div class = "pull-right action-buttons block-config-menu">';

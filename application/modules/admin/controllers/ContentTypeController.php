@@ -39,7 +39,7 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Тип Контента') . ' :: ' . $result[0]['Name']
+                    $this->view->translate('Тип контента') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);

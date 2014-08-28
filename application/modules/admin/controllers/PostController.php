@@ -73,14 +73,14 @@ class Admin_PostController extends App_Controller_LoaderController {
 		}
 
 		// add post types to the form
-		$post_types_data = $this->db->get('post_type')->getAll(FALSE, array("id", "name"), "ASC");
+		$post_types_data = $this->db->get('post_type')->getAll(FALSE, array("ID", "Name"), "ASC");
 
 		if ($post_types_data) {
 			foreach ($post_types_data as $post_type):
-				$form->post_type->addMultiOption($post_type->id, $post_type->name);
+				$form->post_type->addMultiOption($post_type->ID, $post_type->Name);
 
-				if (strtolower($post_type->name) == 'news') {
-					$form->post_type->setvalue($post_type->id);
+				if (strtolower($post_type->Name) == 'news') {
+					$form->post_type->setvalue($post_type->ID);
 				}
 			endforeach;
 		} else {
@@ -88,14 +88,14 @@ class Admin_PostController extends App_Controller_LoaderController {
 		}
 
 		// add content types to the form
-		$content_types_data = $this->db->get('content_type')->getAll(FALSE, array("id", "name"), "ASC");
+		$content_types_data = $this->db->get('content_type')->getAll(FALSE, array("ID", "Name"), "ASC");
 
 		if ($content_types_data) {
 			foreach ($content_types_data as $content_type):
-				$form->content_type->addMultiOption($content_type->id, $content_type->name);
+				$form->content_type->addMultiOption($content_type->ID, $content_type->Name);
 
-				if (strtolower($content_type->name) == 'full html') {
-					$form->content_type->setvalue($content_type->id);
+				if (strtolower($content_type->Name) == 'full html') {
+					$form->content_type->setvalue($content_type->ID);
 				}
 			endforeach;
 		} else {
@@ -147,14 +147,14 @@ class Admin_PostController extends App_Controller_LoaderController {
 			}
 
 			// add post types to the form
-			$post_types_data = $this->db->get('post_type')->getAll(FALSE, array("id", "name"), "ASC");
+			$post_types_data = $this->db->get('post_type')->getAll(FALSE, array("ID", "Name"), "ASC");
 
 			if ($post_types_data) {
 				foreach ($post_types_data as $post_type):
-					$form->post_type->addMultiOption($post_type->id, $post_type->name);
+					$form->post_type->addMultiOption($post_type->ID, $post_type->Name);
 
-					if (strtolower($post_type->name) == 'news') {
-						$form->post_type->setvalue($post_type->id);
+					if (strtolower($post_type->Name) == 'news') {
+						$form->post_type->setvalue($post_type->ID);
 					}
 				endforeach;
 			} else {
@@ -166,10 +166,10 @@ class Admin_PostController extends App_Controller_LoaderController {
 
 			if ($content_types_data) {
 				foreach ($content_types_data as $content_type):
-					$form->content_type->addMultiOption($content_type->id, $content_type->name);
+					$form->content_type->addMultiOption($content_type->ID, $content_type->Name);
 
-					if (strtolower($content_type->name) == 'full html') {
-						$form->content_type->setvalue($content_type->id);
+					if (strtolower($content_type->Name) == 'full html') {
+						$form->content_type->setvalue($content_type->ID);
 					}
 				endforeach;
 			} else {

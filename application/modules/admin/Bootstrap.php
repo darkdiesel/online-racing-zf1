@@ -294,14 +294,16 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //POST TYPE CONTROLLER ROUTERS
         $router->addRoute(
-            'adminPostTypeId', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)\.html', array(
-                'module' => 'admin',
-                'controller' => 'post-type',
-                'action' => 'id',
-                1 => 0), array(
-                'post_type_id' => 1,
-            ), "admin/post-type/%d.html"
-        ));
+            'adminPostTypeID',
+            new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)\.html',
+                array(
+                    'module' => 'admin',
+                    'controller' => 'post-type',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'postTypeID' => 1,
+                ), "admin/post-type/%d.html"
+            ));
 
         $router->addRoute(
             'adminPostTypeAction', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)/(\w*)\.html', array(
@@ -309,7 +311,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
                 'controller' => 'post-type',
                 'action' => 'id',
                 1 => 0), array(
-                'post_type_id' => 1,
+                'postTypeID' => 1,
                 'action' => 2,
             ), "admin/post-type/%d/%s.html"
         ));

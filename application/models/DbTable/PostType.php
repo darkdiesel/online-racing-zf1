@@ -3,7 +3,7 @@
 class Application_Model_DbTable_PostType extends Zend_Db_Table_Abstract {
 
 	protected $_name = 'post_type';
-	protected $_primary = 'id';
+	protected $_primary = 'ID';
 	protected $db_href = 'pstt';
 
 	/*
@@ -41,7 +41,7 @@ class Application_Model_DbTable_PostType extends Zend_Db_Table_Abstract {
 				}
 			}
 		} elseif (is_int($idencity) || is_string($idencity)) {
-			$idencity_data = sprintf("%s.id = '%s'", $this->db_href, $idencity);
+			$idencity_data = sprintf("%s.ID = '%s'", $this->db_href, $idencity);
 		}
 
 		// fields list
@@ -116,7 +116,7 @@ class Application_Model_DbTable_PostType extends Zend_Db_Table_Abstract {
 					}
 				}
 			} elseif (is_int($idencity) || is_string($idencity)) {
-				$idencity_data = sprintf("%s.id = %s", $this->db_href, $idencity);
+				$idencity_data = sprintf("%s.ID = %s", $this->db_href, $idencity);
 			}
 		}
 

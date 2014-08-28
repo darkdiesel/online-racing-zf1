@@ -137,8 +137,8 @@ class PostController extends App_Controller_LoaderController {
 		$post_type_data = $this->db->get('post_type')->getItem($post_type_id);
 
 		if ($post_type_data) {
-			$this->view->headTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->name}");
-			$this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->name}");
+			$this->view->headTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->Name}");
+			$this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->Name}");
 
 			// setup pager settings
 			$page_count_items = 10;
