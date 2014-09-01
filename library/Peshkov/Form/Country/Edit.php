@@ -9,14 +9,14 @@ class Peshkov_Form_Country_Edit extends Peshkov_Form_Country_Add
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $adminCountryIDUrl = $this->view->url(
+        $adminCountryIDUrl = $this->getView()->url(
             array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'countryID' => $request->getParam('countryID')),
             'adminCountryID'
         );
 
-        $adminCountryEditUrl = $this->view->url(
+        $adminCountryEditUrl = $this->getView()->url(
             array('module' => 'admin', 'controller' => 'country', 'action' => 'edit', 'countryID' => $request->getParam('countryID')),
-            $request
+            'adminCountryAction'
         );
 
         $this->setAttrib('id', 'content-type-edit')

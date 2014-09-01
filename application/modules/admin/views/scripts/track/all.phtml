@@ -34,7 +34,7 @@
 								$track_edit_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($track->id)), 'adminTrackAction', true);
 								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'adminTrackAction', true);
 								
-								$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($track->country_id)), 'country_id', true);
+								$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($track->country_id)), 'adminCountryID', true);
 								?>
 								<tr>
 									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->id) ?></a></span></td>
