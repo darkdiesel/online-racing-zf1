@@ -160,12 +160,12 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
 		$model = new self;
 
 		$post_type = new Application_Model_DbTable_PostType();
-		$post_type_data = $post_type->getItem(array('name' => $post_type_name));
+		$post_type_data = $post_type->getItem(array('Name' => $post_type_name));
 
 		if (count($post_type_data) > 0) {
 			$select = $model->select()
 					->from($this->_name, 'id')
-					->where('publish = 1 and post_type_id = ' . $post_type_data->id)
+					->where('publish = 1 and post_type_id = ' . $post_type_data->ID)
 					->order('name ' . $order)
 					->columns(array('id', 'name'));
 
