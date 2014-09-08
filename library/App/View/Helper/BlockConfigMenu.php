@@ -145,7 +145,7 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function contentTypeyMenu($contentTypeID)
+    public function contentTypeMenu($contentTypeID)
     {
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'content-type', 'edit')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'content-type', 'action' => 'edit', 'contentTypeID' => $contentTypeID), 'adminContentTypeAction', true);
@@ -169,6 +169,21 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'delete', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+        }
+
+        return $this;
+    }
+
+    public function racingSeriesMenu($racingSeriesID)
+    {
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'edit')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'racing-series', 'action' => 'edit', 'racingSeriesID' => $racingSeriesID), 'adminRacingSeriesAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'delete')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'racing-series', 'action' => 'delete', 'racingSeriesID' => $racingSeriesID), 'adminRacingSeriesAction', true);
             array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
         }
 

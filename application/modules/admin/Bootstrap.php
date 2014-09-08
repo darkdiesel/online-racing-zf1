@@ -362,6 +362,41 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             ), "admin/content-type/all/page/%s.html"
         ));
 
+        //RACING SERIES CONTROLLER ROUTERS
+        $router->addRoute(
+            'adminRacingSeriesID',
+            new Zend_Controller_Router_Route_Regex('admin/racing-series/(\d+)\.html',
+                array(
+                    'module' => 'admin',
+                    'controller' => 'racing-series',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'racingSeriesID' => 1,
+                ), "admin/racing-series/%d.html"
+            ));
+
+        $router->addRoute(
+            'adminRacingSeriesAction', new Zend_Controller_Router_Route_Regex('admin/racing-series/(\d+)/(\w*)\.html', array(
+                'module' => 'admin',
+                'controller' => 'racing-series',
+                'action' => 'id',
+                1 => 0), array(
+                'racingSeriesID' => 1,
+                'action' => 2,
+            ), "admin/racing-series/%d/%s.html"
+        ));
+
+        $router->addRoute(
+            'adminRacingSeriesAll', new Zend_Controller_Router_Route_Regex('admin/racing-series/all/page/(\d+)\.html', array(
+                'module' => 'admin',
+                'controller' => 'racing-series',
+                'action' => 'all',
+                1 => 1
+            ), array(
+                'page' => 1,
+            ), "admin/racing-series/all/page/%s.html"
+        ));
+
         // EVENT CONTROLLER ROUTERS
         $router->addRoute(
             'event_id', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)\.html', array(

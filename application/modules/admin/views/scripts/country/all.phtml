@@ -1,18 +1,18 @@
-<?php if ($this->countryData) { ?>
-    <div class="row">
-        <div class="col-md-12 col-lg-12">
-            <div class="clearfix m-b-10">
-                <?php
-                $adminCountryAddUrl = $this->url(
-                    array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default'
-                );
-                ?>
-                <a href="<?php echo $adminCountryAddUrl; ?>" class="btn btn-success pull-right ">
-                    <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить страну'); ?>
-                </a>
-            </div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="clearfix m-b-10">
+            <?php
+            $adminCountryAddUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default'
+            );
+            ?>
+            <a href="<?php echo $adminCountryAddUrl; ?>" class="btn btn-success pull-right ">
+                <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить страну'); ?>
+            </a>
         </div>
     </div>
+</div>
+<?php if ($this->countryData) { ?>
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="panel panel-primary">

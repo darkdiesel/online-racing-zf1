@@ -1,12 +1,12 @@
 <?php
 
-class Admin_ContentTypeController extends App_Controller_LoaderController
+class Admin_RacingSeriesController extends App_Controller_LoaderController
 {
 
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Тип контента'));
+        $this->view->headTitle($this->view->translate('Гоночная серия'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -17,10 +17,10 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
     {
         // set filters and validators for GET input
         $filters = array(
-            'contentTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+            'racingSeriesID' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
         $validators = array(
-            'contentTypeID' => array('NotEmpty', 'Int')
+            'racingSeriesID' => array('NotEmpty', 'Int')
         );
         $requestData = new Zend_Filter_Input($filters, $validators);
         $requestData->setData($this->getRequest()->getParams());
@@ -30,27 +30,27 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Default_Model_ContentType ct')
-                ->where('ct.ID = ?', $requestData->contentTypeID);
+                ->from('Default_Model_RacingSeries rs')
+                ->where('rs.ID = ?', $requestData->racingSeriesID);
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                $this->view->contentTypeData = $result[0];
+                $this->view->racingSeriesData = $result[0];
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Тип контента') . ' :: ' . $result[0]['Name']
+                    $this->view->translate('Гоночная серия') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+                $this->messages->addError($this->view->translate('Запрашиваемая гоночная серия не найдена!'));
 
                 $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+                $this->view->headTitle($this->view->translate('Гоночная серия не найдена!'));
 
                 $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Тип контента не найден!'));
+                $this->view->pageTitle($this->view->translate('Гоночная серия не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -75,25 +75,25 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Типы контента'));
+            $this->view->pageTitle($this->view->translate('Гоночные серии'));
 
             $query = Doctrine_Query::create()
-                ->from('Default_Model_ContentType ct')
-                ->orderBy('ct.ID ASC');
+                ->from('Default_Model_RacingSeries rs')
+                ->orderBy('rs.ID ASC');
 
             $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-            $contentTypePaginator = new Zend_Paginator($adapter);
+            $racingSeriesPaginator = new Zend_Paginator($adapter);
             // pager settings
-            $contentTypePaginator->setItemCountPerPage("10");
-            $contentTypePaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
-            $contentTypePaginator->setPageRange("5");
+            $racingSeriesPaginator->setItemCountPerPage("10");
+            $racingSeriesPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $racingSeriesPaginator->setPageRange("5");
 
-            if ($contentTypePaginator->count() == 0) {
-                $this->view->contentTypeData = false;
+            if ($racingSeriesPaginator->count() == 0) {
+                $this->view->racingSeriesData = false;
                 $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
             } else {
-                $this->view->contentTypeData = $contentTypePaginator;
+                $this->view->racingSeriesData = $racingSeriesPaginator;
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -104,24 +104,24 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
     public function addAction()
     {
         $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить тип контента'));
+        $this->view->pageTitle($this->view->translate('Добавить гоночнyю серию'));
 
         // form
-        $contentTypeAddForm = new Peshkov_Form_ContentType_Add();
-        $this->view->contentTypeAddForm = $contentTypeAddForm;
+        $racingSeriesAddForm = new Peshkov_Form_RacingSeries_Add();
+        $this->view->racingSeriesAddForm = $racingSeriesAddForm;
 
         // test for valid input
         // if valid, populate model
         // assign default values for some fields
         // save to database
         if ($this->getRequest()->isPost()) {
-            if ($contentTypeAddForm->isValid($this->getRequest()->getPost())) {
+            if ($racingSeriesAddForm->isValid($this->getRequest()->getPost())) {
 
                 $date = date('Y-m-d H:i:s');
 
-                $item = new Default_Model_ContentType();
+                $item = new Default_Model_RacingSeries();
 
-                $item->fromArray($contentTypeAddForm->getValues());
+                $item->fromArray($racingSeriesAddForm->getValues());
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
@@ -129,8 +129,8 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                 $this->redirect(
                     $this->view->url(
-                        array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-                            'contentTypeID' => $item->ID), 'adminContentTypeID'
+                        array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                            'racingSeriesID' => $item->ID), 'adminRacingSeriesID'
                     )
                 );
 
@@ -147,14 +147,14 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
     public function editAction()
     {
         $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать тип контента'));
+        $this->view->pageTitle($this->view->translate('Редактировать гоночную серию'));
 
         // set filters and validators for GET input
         $filters = array(
-            'contentTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+            'racingSeriesID' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
         $validators = array(
-            'contentTypeID' => array('NotEmpty', 'Int')
+            'racingSeriesID' => array('NotEmpty', 'Int')
         );
         $requestData = new Zend_Filter_Input($filters, $validators);
         $requestData->setData($this->getRequest()->getParams());
@@ -164,14 +164,14 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
 
-            $contentTypeEditForm = new Peshkov_Form_ContentType_Edit();
-            $this->view->contentTypeEditForm = $contentTypeEditForm;
+            $racingSeriesEditForm = new Peshkov_Form_RacingSeries_Edit();
+            $this->view->racingSeriesEditForm = $racingSeriesEditForm;
 
             if ($this->getRequest()->isPost()) {
-                if ($contentTypeEditForm->isValid($this->getRequest()->getPost())) {
-                    $formData = $contentTypeEditForm->getValues();
+                if ($racingSeriesEditForm->isValid($this->getRequest()->getPost())) {
+                    $formData = $racingSeriesEditForm->getValues();
 
-                    $item = Doctrine_Core::getTable('Default_Model_ContentType')->find($requestData->contentTypeID);
+                    $item = Doctrine_Core::getTable('Default_Model_RacingSeries')->find($requestData->racingSeriesID);
 
                     // set edit date
                     $formData['DateEdit'] = date('Y-m-d H:i:s');
@@ -181,12 +181,12 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
 
-                    $adminContentTypeIDUrl = $this->view->url(
-                        array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $requestData->contentTypeID),
-                        'adminContentTypeID'
+                    $adminRacingSeriesIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id', 'racingSeriesID' => $requestData->racingSeriesID),
+                        'adminRacingSeriesID'
                     );
 
-                    $this->redirect($adminContentTypeIDUrl);
+                    $this->redirect($adminRacingSeriesIDUrl);
                 } else {
                     $this->messages->addError(
                         $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -197,24 +197,24 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
                 // retrieve requested record
                 // pre-populate form
                 $query = Doctrine_Query::create()
-                    ->from('Default_Model_ContentType ct')
-                    ->where('ct.ID = ?', $requestData->contentTypeID);
+                    ->from('Default_Model_RacingSeries rs')
+                    ->where('rs.ID = ?', $requestData->racingSeriesID);
 
                 $result = $query->fetchArray();
 
                 if (count($result) == 1) {
-                    $this->view->contentTypeData = $result[0];
-                    $this->view->contentTypeEditForm->populate($result[0]);
+                    $this->view->racingSeriesData = $result[0];
+                    $this->view->racingSeriesEditForm->populate($result[0]);
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+                    $this->messages->addError($this->view->translate('Запрашиваемая гоночная серия не найдена!'));
 
                     $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+                    $this->view->headTitle($this->view->translate('Гоночная серия не найдена!'));
 
                     $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Тип контента не найден!'));
+                    $this->view->pageTitle($this->view->translate('Гоночная серия не найдена!'));
                 }
             }
 
@@ -227,14 +227,14 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить тип контента'));
+        $this->view->pageTitle($this->view->translate('Удалить гоночную серию'));
 
         // set filters and validators for GET input
         $filters = array(
-            'contentTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+            'racingSeriesID' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
         $validators = array(
-            'contentTypeID' => array('NotEmpty', 'Int')
+            'racingSeriesID' => array('NotEmpty', 'Int')
         );
         $requestData = new Zend_Filter_Input($filters, $validators);
         $requestData->setData($this->getRequest()->getParams());
@@ -244,29 +244,29 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Default_Model_ContentType ct')
-                ->where('ct.ID = ?', $requestData->contentTypeID);
+                ->from('Default_Model_RacingSeries rs')
+                ->where('rs.ID = ?', $requestData->racingSeriesID);
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                // Create content-type delete form
-                $contentTypeDeleteForm = new Peshkov_Form_ContentType_Delete();
+                // Create racing-series delete form
+                $racingSeriesDeleteForm = new Peshkov_Form_RacingSeries_Delete();
 
-                $this->view->contentTypeData = $result[0];
-                $this->view->contentTypeDeleteForm = $contentTypeDeleteForm;
+                $this->view->racingSeriesData = $result[0];
+                $this->view->racingSeriesDeleteForm = $racingSeriesDeleteForm;
 
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить тип контента')
+                    $this->view->translate('Вы действительно хотите удалить гоночную серию')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
                 if ($this->getRequest()->isPost()) {
-                    if ($contentTypeDeleteForm->isValid($this->getRequest()->getPost())) {
+                    if ($racingSeriesDeleteForm->isValid($this->getRequest()->getPost())) {
                         $query = Doctrine_Query::create()
-                            ->delete('Default_Model_ContentType ct')
-                            ->whereIn('ct.ID', $requestData->contentTypeID);
+                            ->delete('Default_Model_RacingSeries rs')
+                            ->whereIn('rs.ID', $requestData->racingSeriesID);
 
                         $result = $query->execute();
 
@@ -274,16 +274,16 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Тип контента <strong>" . $this->view->contentTypeData['Name'] . "</strong> успешно удален."
+                            $this->view->translate("Гоночная серия <strong>" . $this->view->racingSeriesData['Name'] . "</strong> успешно удалена."
                             )
                         );
 
-                        $adminContentTypeAllUrl = $this->view->url(
-                            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1),
-                            'adminContentTypeAll'
+                        $adminRacingSeriesAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'all', 'page' => 1),
+                            'adminRacingSeriesAll'
                         );
 
-                        $this->redirect($adminContentTypeAllUrl);
+                        $this->redirect($adminRacingSeriesAllUrl);
                     } else {
                         $this->messages->addError(
                             $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -294,13 +294,13 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемый тип контента не найден!'));
+                $this->messages->addError($this->view->translate('Запрашиваемая гоночная серия не найдена!'));
 
                 $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Тип контента не найден!'));
+                $this->view->headTitle($this->view->translate('Гоночная серия не найдена!'));
 
                 $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Тип контента не найден!'));
+                $this->view->pageTitle($this->view->translate('Гоночная серия не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

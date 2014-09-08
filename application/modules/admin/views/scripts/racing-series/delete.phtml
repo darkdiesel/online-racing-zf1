@@ -1,10 +1,9 @@
-<?php if ($this->contentTypeData) : ?>
+<?php if ($this->racingSeriesData) { ?>
+    <div class="m-b-10">
+        <?php echo $this->racingSeriesDeleteForm; ?>
+        <hr/>
+    </div>
     <div class="block block-default block-ui-bordered">
-        <?php
-        echo $this->BlockConfigMenu($this->translate("Тип контента"))->contentTypeMenu(
-            $this->escape($this->contentTypeData['ID'])
-        );
-        ?>
         <div>
             <table class="table table-striped table-bordered m-b-0">
                 <tbody>
@@ -13,7 +12,7 @@
                         <span><?php echo $this->translate('Название'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->escape($this->contentTypeData['Name']); ?></span>
+                        <span><?php echo $this->escape($this->racingSeriesData['Name']); ?></span>
                     </td>
                 </tr>
                 <tr>
@@ -21,7 +20,7 @@
                         <span><?php echo $this->translate('Описание'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->RenderContentTypeText($this->contentTypeData['Description'], 'full_html'); ?></span>
+                        <span><?php echo $this->RenderContentTypeText($this->racingSeriesData['Description'], 'full_html'); ?></span>
                     </td>
                 </tr>
                 </tbody>
@@ -31,20 +30,20 @@
             <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?php echo $this->translate('Тип контента'); ?>
+                <?php echo $this->translate('Гоночная серия'); ?>
             </div>
             <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
-                <?php echo $this->escape($this->contentTypeData['DateCreate']); ?>
+                <?php echo $this->escape($this->racingSeriesData['DateCreate']); ?>
             </div>
-            <?php if ($this->escape($this->contentTypeData['DateCreate']) != $this->escape($this->contentTypeData['DateEdit'])) : ?>
+            <?php if ($this->escape($this->racingSeriesData['DateCreate']) != $this->escape($this->racingSeriesData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
                      data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
-                    <?php echo $this->escape($this->contentTypeData['DateEdit']); ?>
+                    <?php echo $this->escape($this->racingSeriesData['DateEdit']); ?>
                 </div>
             <?php endif; ?>
         </div>
     </div>
-<?php endif; ?>
+<?php } ?>

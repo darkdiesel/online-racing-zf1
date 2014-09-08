@@ -89,12 +89,12 @@ class Admin_PostTypeController extends App_Controller_LoaderController
             $postTypePaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
             $postTypePaginator->setPageRange("5");
 
-            $this->view->postTypeData = $postTypePaginator;
-
             if ($postTypePaginator->count() == 0) {
+                $this->view->postTypeData = false;
                 $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $this->view->postTypeData = $postTypePaginator;
             }
-
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
         }
@@ -274,7 +274,7 @@ class Admin_PostTypeController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Тип статьи <strong>" . $this->view->postTypeData['Name'] ."</strong> успешно удален."
+                            $this->view->translate("Тип статьи <strong>" . $this->view->postTypeData['Name'] . "</strong> успешно удален."
                             )
                         );
 

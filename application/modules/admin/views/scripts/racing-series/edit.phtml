@@ -1,0 +1,11 @@
+<?php $this->CKEditor()->init(); ?>
+<?php $this->CKFinder()->init(); ?>
+
+<?php echo $this->racingSeriesEditForm; ?>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            <?php echo $this->CKEditor()->SetupFullHtmlEditor('Description'); ?>
+            <?php echo $this->CKFinder()->setupCKEditor('Description'); ?>
+        });
+    </script>

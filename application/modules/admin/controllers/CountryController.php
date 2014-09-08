@@ -88,12 +88,12 @@ class Admin_CountryController extends App_Controller_LoaderController
             $countryPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
             $countryPaginator->setPageRange("5");
 
-            $this->view->countryData = $countryPaginator;
-
             if ($countryPaginator->count() == 0) {
+                $this->view->countryData = false;
                 $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $this->view->countryData = $countryPaginator;
             }
-
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
         }

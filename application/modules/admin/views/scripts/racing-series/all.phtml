@@ -2,17 +2,17 @@
     <div class="col-md-12 col-lg-12">
         <div class="clearfix m-b-10">
             <?php
-            $adminPostTypeAddUrl = $this->url(
-                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default'
+            $adminRacingSeriesAddUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'add'), 'default'
             );
             ?>
-            <a href="<?php echo $adminPostTypeAddUrl; ?>" class="btn btn-success pull-right ">
-                <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить тип статьи'); ?>
+            <a href="<?php echo $adminRacingSeriesAddUrl; ?>" class="btn btn-success pull-right ">
+                <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить гоночную серию'); ?>
             </a>
         </div>
     </div>
 </div>
-<?php if ($this->postTypeData) { ?>
+<?php if ($this->racingSeriesData) { ?>
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="panel panel-primary">
@@ -23,57 +23,57 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th class="content-type-id">
+                            <th class="racing-series-id">
                                 <span>ID</span>
                             </th>
-                            <th class="content-type-name">
+                            <th class="racing-series-name">
                                 <span><?php echo $this->translate('Название'); ?></span>
                             </th>
-                            <th class="content-type-description">
+                            <th class="racing-series-description">
                                 <span><?php echo $this->translate('Описание'); ?></span>
                             </th>
-                            <th class="content-type-action">
+                            <th class="racing-series-action">
                                 <span><?php echo $this->translate('Действие'); ?></span>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->postTypeData as $postType): ?>
+                        <?php foreach ($this->racingSeriesData as $contentType): ?>
                             <?php
-                            $adminPostTypeIdUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-                                    'postTypeID' => $this->escape($postType['ID'])), 'adminPostTypeID'
+                            $adminRacingSeriesIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                                    'racingSeriesID' => $this->escape($contentType['ID'])), 'adminRacingSeriesID'
                             );
-                            $adminPostTypeEditUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'edit',
-                                    'postTypeID' => $this->escape($postType['ID'])), 'adminPostTypeAction'
+                            $adminRacingSeriesEditUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'edit',
+                                    'racingSeriesID' => $this->escape($contentType['ID'])), 'adminRacingSeriesAction'
                             );
-                            $adminPostTypeDeleteUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'delete',
-                                    'postTypeID' => $this->escape($postType['ID'])), 'adminPostTypeAction'
+                            $adminRacingSeriesDeleteUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'delete',
+                                    'racingSeriesID' => $this->escape($contentType['ID'])), 'adminRacingSeriesAction'
                             );
                             ?>
                             <tr>
-                                <td class="content-type-id">
+                                <td class="racing-series-id">
 										<span>
-                                            <a href="<?php echo $adminPostTypeIdUrl; ?>">
-                                                <?php echo $this->escape($postType['ID']) ?>
+                                            <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
+                                                <?php echo $this->escape($contentType['ID']) ?>
                                             </a>
                                         </span>
                                 </td>
-                                <td class="content-type-name">
+                                <td class="racing-series-name">
 										<span>
-                                            <a href="<?php echo $adminPostTypeIdUrl; ?>">
-                                                <?php echo $this->escape($postType['Name']) ?>
+                                            <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
+                                                <?php echo $this->escape($contentType['Name']) ?>
                                             </a>
                                         </span>
                                 </td>
-                                <td class="content-type-description">
+                                <td class="racing-series-description">
                                     <span>
-                                        <?php echo $this->RenderContentTypeText($postType['Description'], 'full_html'); ?>
+                                        <?php echo $this->renderContentTypeText($contentType['Description'], 'full_html'); ?>
                                     </span>
                                 </td>
-                                <td class="content-type-action">
+                                <td class="racing-series-action">
 										<span>
 											<div class="pull-right action-buttons">
                                                 <div class="btn-group pull-right">
@@ -83,21 +83,21 @@
                                                     </button>
                                                     <ul class="dropdown-menu slidedown">
                                                         <li>
-                                                            <a href="<?php echo $adminPostTypeIdUrl ?>">
+                                                            <a href="<?php echo $adminRacingSeriesIdUrl ?>">
                                                                 <i class="fa fa-eye"></i> <?php echo $this->translate(
                                                                     'Просмотреть'
                                                                 ); ?>
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="<?php echo $adminPostTypeEditUrl ?>">
+                                                            <a href="<?php echo $adminRacingSeriesEditUrl ?>">
                                                                 <i class="fa fa-pencil"></i> <?php echo $this->translate(
                                                                     'Редактировать'
                                                                 ); ?>
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="<?php echo $adminPostTypeDeleteUrl ?>">
+                                                            <a href="<?php echo $adminRacingSeriesDeleteUrl ?>">
                                                                 <i class="fa fa-trash-o"></i> <?php echo $this->translate(
                                                                     'Удалить'
                                                                 ); ?>
@@ -116,7 +116,7 @@
                 <div class="panel-footer">
                     <div class="pull-right">
                         <?php echo $this->paginationControl(
-                            $this->postTypeData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                            $this->racingSeriesData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>
                     <div class="clearfix"></div>
