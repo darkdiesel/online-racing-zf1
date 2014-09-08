@@ -467,28 +467,30 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //TEAM CONTROLLER ROUTERS
         $router->addRoute(
-            'team_id', new Zend_Controller_Router_Route_Regex('admin/team/(\d+)\.html', array(
-                'module' => 'admin',
-                'controller' => 'team',
-                'action' => 'id',
-                1 => 0), array(
-                'team_id' => 1,
-            ), "admin/team/%d.html"
-        ));
+            'adminTeamID',
+            new Zend_Controller_Router_Route_Regex('admin/team/(\d+)\.html',
+                array(
+                    'module' => 'admin',
+                    'controller' => 'team',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'teamID' => 1,
+                ), "admin/team/%d.html"
+            ));
 
         $router->addRoute(
-            'team_action', new Zend_Controller_Router_Route_Regex('admin/team/(\d+)/(\w*)\.html', array(
+            'adminTeamAction', new Zend_Controller_Router_Route_Regex('admin/team/(\d+)/(\w*)\.html', array(
                 'module' => 'admin',
                 'controller' => 'team',
                 'action' => 'id',
                 1 => 0), array(
-                'team_id' => 1,
+                'teamID' => 1,
                 'action' => 2,
             ), "admin/team/%d/%s.html"
         ));
 
         $router->addRoute(
-            'team_all', new Zend_Controller_Router_Route_Regex('admin/team/all/page/(\d+)\.html', array(
+            'adminTeamAll', new Zend_Controller_Router_Route_Regex('admin/team/all/page/(\d+)\.html', array(
                 'module' => 'admin',
                 'controller' => 'team',
                 'action' => 'all',

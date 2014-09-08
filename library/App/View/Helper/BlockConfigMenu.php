@@ -190,6 +190,21 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
+    public function teamMenu($teamID)
+    {
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'edit')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'team', 'action' => 'edit', 'teamID' => $teamID), 'adminTeamAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'delete')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'team', 'action' => 'delete', 'teamID' => $teamID), 'adminTeamAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+        }
+
+        return $this;
+    }
+
     private function buildMenu()
     {
         $this->_menuHtml = '<div class = "pull-right action-buttons block-config-menu">';

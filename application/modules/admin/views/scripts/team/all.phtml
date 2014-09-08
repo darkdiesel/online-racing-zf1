@@ -1,69 +1,141 @@
 <div class="row">
-	<div class="col-md-12 col-lg-12">
-		<div class="clearfix m-b-10">
-			<?php
-			$team_id_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true);
-			?>
-			<a href="<?php echo $team_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?></a>
-		</div>
-	</div>
+    <div class="col-md-12 col-lg-12">
+        <div class="clearfix m-b-10">
+            <?php
+            $adminTeamAddUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default'
+            );
+            ?>
+            <a href="<?php echo $adminTeamAddUrl; ?>" class="btn btn-success pull-right ">
+                <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?>
+            </a>
+        </div>
+    </div>
 </div>
-<?php if ($this->paginator) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-list"></i>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped custab">
-						<thead>
-							<tr>
-								<th class="team_id"><span>ID</span></th>
-								<th class="team_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="team_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
-								<th class="team_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($this->paginator as $team): ?>
-								<?php
-								$team_id_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $this->escape($team->id)), 'team_id', true);
-								$team_edit_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'edit', 'team_id' => $this->escape($team->id)), 'team_action', true);
-								$team_delete_url = $this->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'delete', 'team_id' => $this->escape($team->id)), 'team_action', true);
-								?>
-								<tr>
-									<td class="team_id"><span><a href="<?php echo $team_id_url; ?>"><?php echo $this->escape($team['id']) ?></a></span></td>
-									<td class="team_name"><span><a href="<?php echo $team_id_url ?>"><?php echo $this->escape($team['name']) ?></a></span></td>
-									<td class="team_descr"><span><?php echo $this->truncate($this->escape($team['description']))->toLength(200); ?></span></td>
-									<td class="team_action">
+<?php if ($this->teamData) { ?>
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-list"></i>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="team-id">
+                                <span>ID</span>
+                            </th>
+                            <th class="team-name">
+                                <span><?php echo $this->translate('Название'); ?></span>
+                            </th>
+                            <th class="team-racing-series">
+                                <span><?php echo $this->translate('Гоночная серия'); ?></span>
+                            </th>
+                            <th class="team-description">
+                                <span><?php echo $this->translate('Описание'); ?></span>
+                            </th>
+                            <th class="team-action">
+                                <span><?php echo $this->translate('Действие'); ?></span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($this->teamData as $team): ?>
+                            <?php
+                            $adminTeamIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
+                                    'teamID' => $this->escape($team['ID'])), 'adminTeamID'
+                            );
+                            $adminTeamEditUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'team', 'action' => 'edit',
+                                    'teamID' => $this->escape($team['ID'])), 'adminTeamAction'
+                            );
+                            $adminTeamDeleteUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'team', 'action' => 'delete',
+                                    'teamID' => $this->escape($team['ID'])), 'adminTeamAction'
+                            );
+                            $adminRacingSeriesIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                                    'racingSeriesID' => $this->escape($team['RacingSeries']['ID'])), 'adminRacingSeriesID'
+                            );
+                            ?>
+                            <tr>
+                                <td class="team-id">
+										<span>
+                                            <a href="<?php echo $adminTeamIdUrl; ?>">
+                                                <?php echo $this->escape($team['ID']) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="team-name">
+										<span>
+                                            <a href="<?php echo $adminTeamIdUrl; ?>">
+                                                <?php echo $this->escape($team['Name']) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="team-racing-series">
+										<span>
+                                            <a href="<?php echo $adminTeamIdUrl; ?>">
+                                                <?php echo $this->escape($team['RacingSeries']['Name']) ?>
+                                            </a>
+                                        </span>
+                                </td>
+                                <td class="team-description">
+                                    <span>
+                                        <?php echo $this->renderContentTypeText($team['Description'], 'full_html'); ?>
+                                    </span>
+                                </td>
+                                <td class="team-action">
 										<span>
 											<div class="pull-right action-buttons">
-												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
-													</button>
-													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $team_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $team_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $team_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
-													</ul>
-												</div>
-											</div>
+                                                <div class="btn-group pull-right">
+                                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                                            data-toggle="dropdown">
+                                                        <span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu slidedown">
+                                                        <li>
+                                                            <a href="<?php echo $adminTeamIdUrl ?>">
+                                                                <i class="fa fa-eye"></i> <?php echo $this->translate(
+                                                                    'Просмотреть'
+                                                                ); ?>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?php echo $adminTeamEditUrl ?>">
+                                                                <i class="fa fa-pencil"></i> <?php echo $this->translate(
+                                                                    'Редактировать'
+                                                                ); ?>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="<?php echo $adminTeamDeleteUrl ?>">
+                                                                <i class="fa fa-trash-o"></i> <?php echo $this->translate(
+                                                                    'Удалить'
+                                                                ); ?>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
 										</span>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-					<div class="pull-right">
-						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="pull-right">
+                        <?php echo $this->paginationControl(
+                            $this->teamData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php } ?>

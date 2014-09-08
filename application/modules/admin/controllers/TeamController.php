@@ -1,183 +1,314 @@
 <?php
 
-class Admin_TeamController extends App_Controller_LoaderController {
+class Admin_TeamController extends App_Controller_LoaderController
+{
 
-	public function init() {
-		parent::init();
-		$this->view->headTitle($this->view->translate('Команда'));
-	}
+    public function init()
+    {
+        parent::init();
+        $this->view->headTitle($this->view->translate('Команда'));
 
-	// action for view article type
-	public function idAction() {
-		$request = $this->getRequest();
-		$team_id = (int) $request->getParam('team_id');
+        // set doctype for correctly displaying forms
+        $this->view->doctype('XHTML1_STRICT');
+    }
 
-		$team_data = $this->db->get('team')->getItem($team_id);
+    // action for view team
+    public function idAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'teamID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'teamID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-		$team = new Application_Model_DbTable_Team();
-		$team_data = $team->fetchRow(array('id = ?' => $team_id));
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Team t')
+                ->leftJoin('t.RacingSeries rs')
+                ->where('t.ID = ?', $requestData->teamID);
+            $result = $query->fetchArray();
 
-		if (count($team_data) != 0) {
-			$this->view->team = $team_data;
-			$this->view->headTitle($team_data->name);
-			$this->view->pageTitle($team_data->name);
-			return;
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не найдена!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Команда не найдена!')}");
-		}
-	}
+            if (count($result) == 1) {
+                $this->view->teamData = $result[0];
 
-	// action for view all article types
-	public function allAction() {
-		$this->view->headTitle($this->view->translate('Все'));
-		$this->view->pageTitle($this->view->translate('Команды'));
+                $this->view->headTitle($result[0]['Name']);
+                $this->view->pageTitle(
+                    $this->view->translate('Команда') . ' :: ' . $result[0]['Name']
+                );
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-		// pager settings
-		$pager_args = array(
-			"page_count_items" => 10,
-			"page_range" => 5,
-			"page" => $this->getRequest()->getParam('page')
-		);
+                $this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
 
-		$paginator = $this->db->get("team")->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Команда не найдена!'));
 
-		if (count($paginator)) {
-			$this->view->paginator = $paginator;
-		} else {
-			$this->messages->addInfo("{$this->view->translate('Запрашиваемые команды на сайте не найдены!')}");
-		}
-	}
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Команда не найдена!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-	// action for add new team
-	public function addAction() {
-		$this->view->headTitle($this->view->translate('Добавить'));
-		$this->view->pageTitle($this->view->translate('Добавить команду'));
+    // action for view all teams
+    public function allAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-		$request = $this->getRequest();
-		// form
-		$form = new Application_Form_Team_Add();
-		$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default', true));
-		
-		$team_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'team_all', true);
-		$form->cancel->setAttrib('onClick', "location.href='{$team_all_url}'");
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $this->view->headTitle($this->view->translate('Все'));
+            $this->view->pageTitle($this->view->translate('Команды'));
 
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($request->getPost())) {
-				$date = date('Y-m-d H:i:s');
-				$new_team_data = array(
-					'name' => $form->getValue('name'),
-					'description' => $form->getValue('description'),
-					'date_create' => $date,
-					'date_edit' => $date,
-				);
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Team t')
+                ->leftJoin('t.RacingSeries rs')
+                ->orderBy('t.ID ASC');
 
-				$new_team = $this->db->get('team')->createRow($new_team_data);
-				$new_team->save();
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-				$team_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id','team_id' => $new_team->id), 'team_id', true);
-				$this->redirect($team_id_url);
-			} else {
-				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-			}
-		}
+            $teamPaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $teamPaginator->setItemCountPerPage("10");
+            $teamPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $teamPaginator->setPageRange("5");
 
-		$this->view->form = $form;
-	}
+            if ($teamPaginator->count() == 0) {
+                $this->view->teamData = false;
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $this->view->teamData = $teamPaginator;
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-	// action for edit article type
-	public function editAction() {
-		$request = $this->getRequest();
-		$team_id = (int) $request->getParam('team_id');
+    // action for add new racing series
+    public function addAction()
+    {
+        $this->view->headTitle($this->view->translate('Добавить'));
+        $this->view->pageTitle($this->view->translate('Добавить команду'));
 
-		$team_data = $this->db->get('team')->getItem($team_id);
+        // form
+        $teamAddForm = new Peshkov_Form_Team_Add();
+        $this->view->teamAddForm = $teamAddForm;
 
-		if ($team_data) {
-			// form
-			$form = new Application_Form_Team_Edit();
-			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'edit', 'team_id' => $team_id), 'team_action', true));
-			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $team_id), 'team_id', true)}\"");
+        // test for valid input
+        // if valid, populate model
+        // assign default values for some fields
+        // save to database
+        if ($this->getRequest()->isPost()) {
+            if ($teamAddForm->isValid($this->getRequest()->getPost())) {
 
-			if ($this->getRequest()->isPost()) {
-				if ($form->isValid($request->getPost())) {
-					$new_team_data = array(
-						'name' => $form->getValue('name'),
-						'description' => $form->getValue('description'),
-						'date_edit' => date('Y-m-d H:i:s')
-					);
+                $date = date('Y-m-d H:i:s');
 
-					$team_where = $this->db->get('team')->getAdapter()->quoteInto('id = ?', $team_id);
-					$this->db->get('team')->update($new_team_data, $team_where);
+                $item = new Default_Model_Team();
 
-					$this->redirect($this->view->url(
-									array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
-								'team_id' => $team_id), 'team_id', true
-					));
-				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-				}
-			}
-			// Set Page Title and Heade Title
-			$this->view->headTitle($team_data->name);
-			$this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$team_data->name}");
+                $item->fromArray($teamAddForm->getValues());
+                $item->DateCreate = $date;
+                $item->DateEdit = $date;
 
-			// Fill form fields
-			$form->name->setvalue($team_data->name);
-			$form->description->setvalue($team_data->description);
+                $item->save();
 
-			$this->view->form = $form;
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не найдена!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Команда не найдена!')}");
-		}
-	}
+                $this->redirect(
+                    $this->view->url(
+                        array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
+                            'teamID' => $item->ID), 'adminTeamID'
+                    )
+                );
 
-	// action for delete team
-	public function deleteAction() {
-		$this->view->headTitle($this->view->translate('Удалить'));
-		$this->view->pageTitle($this->view->translate('Удалить команду'));
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
+            } else {
+                $this->messages->addError(
+                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                );
+            }
+        }
+    }
 
-		$request = $this->getRequest();
-		$team_id = (int) $request->getParam('team_id');
+    // action for edit article type
+    // action for edit racing series
+    public function editAction()
+    {
+        $this->view->headTitle($this->view->translate('Редактировать'));
+        $this->view->pageTitle($this->view->translate('Редактировать команду'));
 
-		$team_data = $this->db->get('team')->getItem($team_id);
+        // set filters and validators for GET input
+        $filters = array(
+            'teamID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'teamID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-		if ($team_data) {
-			$this->view->headTitle($team_data->name);
-			
-			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить команду')} <strong>\"{$team_data->name}\"</strong> ?");
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
 
-			$team_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'delete', 'team_id' => $team_id), 'team_action', true);
-			$team_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'id', 'team_id' => $team_id), 'team_id', true);
+            $teamEditForm = new Peshkov_Form_Team_Edit();
+            $this->view->teamEditForm = $teamEditForm;
 
-			$form = new Application_Form_Team_Delete();
-			$form->setAction($team_delete_url);
-			$form->cancel->setAttrib('onClick', "location.href='{$team_id_url}'");
+            if ($this->getRequest()->isPost()) {
+                if ($teamEditForm->isValid($this->getRequest()->getPost())) {
+                    $formData = $teamEditForm->getValues();
 
-			if ($this->getRequest()->isPost()) {
-				if ($form->isValid($request->getPost())) {
-					$team_where = $this->db->get('team')->getAdapter()->quoteInto('id = ?', $team_id);
-					$this->db->get('team')->delete($team_where);
+                    $item = Doctrine_Core::getTable('Default_Model_Team')->find($requestData->teamID);
 
-					$this->messages->clearMessages();
-					$this->messages->addSuccess("{$this->view->translate("Команда <strong>\"{$team_data->name} \"</strong> успешно удалена")}");
+                    // set edit date
+                    $formData['DateEdit'] = date('Y-m-d H:i:s');
 
-					$team_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all', 'page' => 1), 'team_all', true);
-					$this->redirect($team_all_url);
-				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-				}
-			}
+                    $item->fromArray($formData);
+                    $item->save();
 
-			$this->view->form = $form;
-			$this->view->team = $team_data;
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Команда не найдена!')}");
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
-		}
-	}
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
+
+                    $adminTeamIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id', 'teamID' => $requestData->teamID),
+                        'adminTeamID'
+                    );
+
+                    $this->redirect($adminTeamIDUrl);
+                } else {
+                    $this->messages->addError(
+                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    );
+                }
+            } else {
+                // if GET request
+                // retrieve requested record
+                // pre-populate form
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_Team t')
+                    ->where('t.ID = ?', $requestData->teamID);
+
+                $result = $query->fetchArray();
+
+                if (count($result) == 1) {
+                    $this->view->teamData = $result[0];
+                    $this->view->teamEditForm->populate($result[0]);
+                } else {
+//                    throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                    $this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
+
+                    $this->view->headTitle($this->view->translate('Ошибка!'));
+                    $this->view->headTitle($this->view->translate('Команда не найдена!'));
+
+                    $this->view->pageTitle($this->view->translate('Ошибка!'));
+                    $this->view->pageTitle($this->view->translate('Команда не найдена!'));
+                }
+            }
+
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
+
+    // action for delete team
+    public function deleteAction()
+    {
+        $this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->pageTitle($this->view->translate('Удалить команду'));
+
+        // set filters and validators for GET input
+        $filters = array(
+            'teamID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'teamID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
+
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Team t')
+                ->leftJoin('t.RacingSeries rs')
+                ->where('t.ID = ?', $requestData->teamID);
+            $result = $query->fetchArray();
+
+            if (count($result) == 1) {
+                // Create racing-series delete form
+                $teamDeleteForm = new Peshkov_Form_Team_Delete();
+
+                $this->view->teamData = $result[0];
+                $this->view->teamDeleteForm = $teamDeleteForm;
+
+                $this->view->headTitle($result[0]['Name']);
+
+                $this->messages->addWarning(
+                    $this->view->translate('Вы действительно хотите удалить команду')
+                    . " <strong>" . $result[0]['Name'] . "</strong>?"
+                );
+
+                if ($this->getRequest()->isPost()) {
+                    if ($teamDeleteForm->isValid($this->getRequest()->getPost())) {
+                        $query = Doctrine_Query::create()
+                            ->delete('Default_Model_Team rs')
+                            ->whereIn('rs.ID', $requestData->teamID);
+
+                        $result = $query->execute();
+
+                        //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
+
+                        $this->messages->clearMessages();
+                        $this->messages->addSuccess(
+                            $this->view->translate("Команда <strong>" . $this->view->teamData['Name'] . "</strong> успешно удалена."
+                            )
+                        );
+
+                        $adminTeamAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'all', 'page' => 1),
+                            'adminTeamAll'
+                        );
+
+                        $this->redirect($adminTeamAllUrl);
+                    } else {
+                        $this->messages->addError(
+                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        );
+                    }
+                }
+
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                $this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
+
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Команда не найдена!'));
+
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Команда не найдена!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
 }

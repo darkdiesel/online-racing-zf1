@@ -12,7 +12,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
         $this->view->doctype('XHTML1_STRICT');
     }
 
-    // action for view content type
+    // action for view racing series
     public function idAction()
     {
         // set filters and validators for GET input
@@ -57,7 +57,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
         }
     }
 
-    // action for view all content types
+    // action for view all racing series
     public function allAction()
     {
         // set filters and validators for GET input
@@ -100,7 +100,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
         }
     }
 
-    // action for add new content type
+    // action for add new racing series
     public function addAction()
     {
         $this->view->headTitle($this->view->translate('Добавить'));
@@ -143,7 +143,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
         }
     }
 
-    // action for edit content type
+    // action for edit racing series
     public function editAction()
     {
         $this->view->headTitle($this->view->translate('Редактировать'));
@@ -223,7 +223,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
         }
     }
 
-    // action for delete content type
+    // action for delete racing series
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));

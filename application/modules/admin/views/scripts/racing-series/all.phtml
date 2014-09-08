@@ -38,39 +38,39 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->racingSeriesData as $contentType): ?>
+                        <?php foreach ($this->racingSeriesData as $racingSeries): ?>
                             <?php
                             $adminRacingSeriesIdUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
-                                    'racingSeriesID' => $this->escape($contentType['ID'])), 'adminRacingSeriesID'
+                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesID'
                             );
                             $adminRacingSeriesEditUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'edit',
-                                    'racingSeriesID' => $this->escape($contentType['ID'])), 'adminRacingSeriesAction'
+                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesAction'
                             );
                             $adminRacingSeriesDeleteUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'delete',
-                                    'racingSeriesID' => $this->escape($contentType['ID'])), 'adminRacingSeriesAction'
+                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesAction'
                             );
                             ?>
                             <tr>
                                 <td class="racing-series-id">
 										<span>
                                             <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
-                                                <?php echo $this->escape($contentType['ID']) ?>
+                                                <?php echo $this->escape($racingSeries['ID']) ?>
                                             </a>
                                         </span>
                                 </td>
                                 <td class="racing-series-name">
 										<span>
                                             <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
-                                                <?php echo $this->escape($contentType['Name']) ?>
+                                                <?php echo $this->escape($racingSeries['Name']) ?>
                                             </a>
                                         </span>
                                 </td>
                                 <td class="racing-series-description">
                                     <span>
-                                        <?php echo $this->renderContentTypeText($contentType['Description'], 'full_html'); ?>
+                                        <?php echo $this->renderContentTypeText($racingSeries['Description'], 'full_html'); ?>
                                     </span>
                                 </td>
                                 <td class="racing-series-action">
