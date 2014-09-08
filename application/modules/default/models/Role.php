@@ -10,7 +10,7 @@
  * @author     ##NAME## <##EMAIL##>
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Default_Model_Role extends Default_Model_BaseRole
+class Default_Model_Role extends Default_Model_Base_Role
 {
 
 }
