@@ -7,13 +7,23 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
     private $_emptyMenu;
     private $_menuLinks;
     private $_menuHeader;
+    private $_blockMenu;
 
-    public function BlockConfigMenu($menuHeader)
+    private $_view_icon;
+    private $_edit_icon;
+    private $_delete_icon;
+
+    public function BlockConfigMenu($menuHeader, $blockMenu = true)
     {
         $this->_menuLinks = array();
         $this->_emptyMenu = "";
         $this->_menuHtml = "";
         $this->_menuHeader = $menuHeader;
+        $this->_blockMenu = $blockMenu;
+
+        $this->_view_icon = '<i class="fa fa-eye"></i> ';
+        $this->_edit_icon = '<i class="fa fa-pencil"></i> ';
+        $this->_delete_icon = '<i class="fa fa-trash-o"></i> ';
 
         return $this;
     }
@@ -130,76 +140,112 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function countryMenu($countryID)
+    public function countryMenu($countryID, $addIDurl = false)
     {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'country', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'country', 'action' => 'id', 'countryID' => $countryID), 'adminCountryID', true);
+                array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
+            }
+        }
+
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'country', 'edit')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'country', 'action' => 'edit', 'countryID' => $countryID), 'adminCountryAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'country', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'country', 'action' => 'delete', 'countryID' => $countryID), 'adminCountryAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
         }
 
         return $this;
     }
 
-    public function contentTypeMenu($contentTypeID)
+    public function contentTypeMenu($contentTypeID, $addIDurl = false)
     {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'content-type', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'content-type', 'action' => 'id', 'contentTypeID' => $contentTypeID), 'adminContentTypeID', true);
+                array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
+            }
+        }
+
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'content-type', 'edit')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'content-type', 'action' => 'edit', 'contentTypeID' => $contentTypeID), 'adminContentTypeAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'content-type', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'content-type', 'action' => 'delete', 'contentTypeID' => $contentTypeID), 'adminContentTypeAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
         }
 
         return $this;
     }
 
-    public function postTypeMenu($postTypeID)
+    public function postTypeMenu($postTypeID, $addIDurl = false)
     {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $postTypeID), 'adminPostTypeID', true);
+                array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
+            }
+        }
+
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'edit')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'edit', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'delete', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
         }
 
         return $this;
     }
 
-    public function racingSeriesMenu($racingSeriesID)
+    public function racingSeriesMenu($racingSeriesID, $addIDurl = false)
     {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'racing-series', 'action' => 'id', 'racingSeriesID' => $racingSeriesID), 'adminRacingSeriesID', true);
+                array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
+            }
+        }
+
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'edit')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'racing-series', 'action' => 'edit', 'racingSeriesID' => $racingSeriesID), 'adminRacingSeriesAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'racing-series', 'action' => 'delete', 'racingSeriesID' => $racingSeriesID), 'adminRacingSeriesAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
         }
 
         return $this;
     }
 
-    public function teamMenu($teamID)
+    public function teamMenu($teamID, $addIDurl = false)
     {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'team', 'action' => 'id', 'teamID' => $teamID), 'adminTeamID', true);
+                array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
+
+            }
+        }
+
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'edit')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'team', 'action' => 'edit', 'teamID' => $teamID), 'adminTeamAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Редактировать') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'delete')) {
             $url = $this->view->url(array('module' => 'default', 'controller' => 'team', 'action' => 'delete', 'teamID' => $teamID), 'adminTeamAction', true);
-            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->view->translate('Удалить') . '</a>');
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
         }
 
         return $this;
@@ -207,7 +253,12 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
 
     private function buildMenu()
     {
-        $this->_menuHtml = '<div class = "pull-right action-buttons block-config-menu">';
+        if ($this->_blockMenu) {
+            $this->_menuHtml = '<div class = "pull-right action-buttons block-config-menu">';
+        } else {
+            $this->_menuHtml = '<div class = "pull-right action-buttons">';
+        }
+
         $this->_menuHtml .= '<div class = "btn-group pull-right">';
         $this->_menuHtml .= '<button type = "button" class = "btn btn-default btn-xs dropdown-toggle block-config-btn" data-toggle = "dropdown">';
         $this->_menuHtml .= '<span class = "fa fa-cog fa-lg" style = "margin-right: 0px;"></span>';

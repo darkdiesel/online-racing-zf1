@@ -1,20 +1,23 @@
-<div class="row">
-    <div class="col-md-12 col-lg-12">
-        <div class="clearfix m-b-10">
-            <?php
-            $adminRacingSeriesAddUrl = $this->url(
-                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'add'), 'default'
-            );
-            ?>
-            <a href="<?php echo $adminRacingSeriesAddUrl; ?>" class="btn btn-success pull-right ">
-                <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить гоночную серию'); ?>
-            </a>
+<?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'add')) : ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="clearfix m-b-10">
+                <?php
+                $adminRacingSeriesAddUrl = $this->url(
+                    array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'add'), 'default'
+                );
+                ?>
+                <a href="<?php echo $adminRacingSeriesAddUrl; ?>" class="btn btn-success pull-right ">
+                    <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить гоночную серию'); ?>
+                </a>
+            </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
+
 <?php if ($this->racingSeriesData) { ?>
     <div class="row">
-        <div class="col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <i class="fa fa-list"></i>
@@ -39,19 +42,14 @@
                         </thead>
                         <tbody>
                         <?php foreach ($this->racingSeriesData as $racingSeries): ?>
-                            <?php
-                            $adminRacingSeriesIdUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
-                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesID'
-                            );
-                            $adminRacingSeriesEditUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'edit',
-                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesAction'
-                            );
-                            $adminRacingSeriesDeleteUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'delete',
-                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesAction'
-                            );
+                            <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+                                $adminRacingSeriesIdUrl = $this->url(
+                                    array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                                        'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesID'
+                                );
+                            } else {
+                                $adminRacingSeriesIdUrl = '#';
+                            }
                             ?>
                             <tr>
                                 <td class="racing-series-id">
@@ -75,37 +73,11 @@
                                 </td>
                                 <td class="racing-series-action">
 										<span>
-											<div class="pull-right action-buttons">
-                                                <div class="btn-group pull-right">
-                                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle"
-                                                            data-toggle="dropdown">
-                                                        <span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu slidedown">
-                                                        <li>
-                                                            <a href="<?php echo $adminRacingSeriesIdUrl ?>">
-                                                                <i class="fa fa-eye"></i> <?php echo $this->translate(
-                                                                    'Просмотреть'
-                                                                ); ?>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="<?php echo $adminRacingSeriesEditUrl ?>">
-                                                                <i class="fa fa-pencil"></i> <?php echo $this->translate(
-                                                                    'Редактировать'
-                                                                ); ?>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="<?php echo $adminRacingSeriesDeleteUrl ?>">
-                                                                <i class="fa fa-trash-o"></i> <?php echo $this->translate(
-                                                                    'Удалить'
-                                                                ); ?>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+											<?php
+                                            echo $this->BlockConfigMenu($this->translate("Гоночная серия"), false)->racingSeriesMenu(
+                                                $this->escape($racingSeries['ID']), true
+                                            );
+                                            ?>
 										</span>
                                 </td>
                             </tr>

@@ -1,20 +1,23 @@
-<div class="row">
-    <div class="col-md-12 col-lg-12">
-        <div class="clearfix m-b-10">
-            <?php
-            $adminTeamAddUrl = $this->url(
-                array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default'
-            );
-            ?>
-            <a href="<?php echo $adminTeamAddUrl; ?>" class="btn btn-success pull-right ">
-                <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?>
-            </a>
+<?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'add')) : ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="clearfix m-b-10">
+                <?php
+                $adminTeamAddUrl = $this->url(
+                    array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default'
+                );
+                ?>
+                <a href="<?php echo $adminTeamAddUrl; ?>" class="btn btn-success pull-right ">
+                    <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить команду'); ?>
+                </a>
+            </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
+
 <?php if ($this->teamData) { ?>
     <div class="row">
-        <div class="col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <i class="fa fa-list"></i>
@@ -42,23 +45,24 @@
                         </thead>
                         <tbody>
                         <?php foreach ($this->teamData as $team): ?>
-                            <?php
-                            $adminTeamIdUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
-                                    'teamID' => $this->escape($team['ID'])), 'adminTeamID'
-                            );
-                            $adminTeamEditUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'team', 'action' => 'edit',
-                                    'teamID' => $this->escape($team['ID'])), 'adminTeamAction'
-                            );
-                            $adminTeamDeleteUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'team', 'action' => 'delete',
-                                    'teamID' => $this->escape($team['ID'])), 'adminTeamAction'
-                            );
-                            $adminRacingSeriesIdUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
-                                    'racingSeriesID' => $this->escape($team['RacingSeries']['ID'])), 'adminRacingSeriesID'
-                            );
+                            <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'id')) {
+                                $adminTeamIdUrl = $this->url(
+                                    array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
+                                        'teamID' => $this->escape($team['ID'])), 'adminTeamID'
+                                );
+                            } else {
+                                $adminTeamIdUrl = '#';
+                            }
+                            ?>
+
+                            <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+                                $adminRacingSeriesIdUrl = $this->url(
+                                    array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                                        'racingSeriesID' => $this->escape($team['RacingSeries']['ID'])), 'adminRacingSeriesID'
+                                );
+                            } else {
+                                $adminRacingSeriesIdUrl = '#';
+                            }
                             ?>
                             <tr>
                                 <td class="team-id">
@@ -89,37 +93,11 @@
                                 </td>
                                 <td class="team-action">
 										<span>
-											<div class="pull-right action-buttons">
-                                                <div class="btn-group pull-right">
-                                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle"
-                                                            data-toggle="dropdown">
-                                                        <span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu slidedown">
-                                                        <li>
-                                                            <a href="<?php echo $adminTeamIdUrl ?>">
-                                                                <i class="fa fa-eye"></i> <?php echo $this->translate(
-                                                                    'Просмотреть'
-                                                                ); ?>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="<?php echo $adminTeamEditUrl ?>">
-                                                                <i class="fa fa-pencil"></i> <?php echo $this->translate(
-                                                                    'Редактировать'
-                                                                ); ?>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="<?php echo $adminTeamDeleteUrl ?>">
-                                                                <i class="fa fa-trash-o"></i> <?php echo $this->translate(
-                                                                    'Удалить'
-                                                                ); ?>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+											<?php
+                                            echo $this->BlockConfigMenu($this->translate("Команда"), false)->teamMenu(
+                                                $this->escape($team['ID']), true
+                                            );
+                                            ?>
 										</span>
                                 </td>
                             </tr>
