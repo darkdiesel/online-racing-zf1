@@ -116,14 +116,17 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
         //LEAGUE CONTROLLER ROUTERS
         $router->addRoute(
             'defaultLeagueID',
-            new Zend_Controller_Router_Route_Regex('league/(\d+)\.html',
+            new Zend_Controller_Router_Route_Regex('league/(\d+)/page/(\d+)\.html',
                 array(
                     'module' => 'default',
                     'controller' => 'league',
                     'action' => 'id',
-                    1 => 0), array(
+                    1            => 0,
+                    2            => 1,
+                ), array(
                     'leagueID' => 1,
-                ), "league/%d.html"
+                    'page'      => 2,
+                ), "league/%d/page/%d.html"
             ));
 
         $router->addRoute(
@@ -136,22 +139,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                 'page' => 1,
             ), "league/all/page/%s.html"
         ));
-
-
-        $router->addRoute(
-            'defaultLeagueIdAll', new Zend_Controller_Router_Route_Regex('league/(\d+)/page/(\d+)\.html',
-                array(
-                     'module'     => 'default',
-                     'controller' => 'league',
-                     'action'     => 'id',
-                     1            => 0,
-                     2            => 1,
-                ), array(
-                        'leagueID' => 1,
-                        'page'      => 2,
-                   ), "league/%d/page/%d.html"
-            )
-        );
 
         //CHAMPIONSHIP CONTROLLER ROUTERS
         $router->addRoute(
@@ -381,9 +368,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'module'     => 'default',
                         'controller' => 'league',
                         'action'     => 'id',
-                        'route'      => 'defaultLeagueIdAll',
+                        'route'      => 'defaultLeagueID',
                         'params'     => array(
-                            'league_id' => '1'
+                            'leagueID' => '1'
                         )
                     ),
                     array(
@@ -392,9 +379,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'module'     => 'default',
                         'controller' => 'league',
                         'action'     => 'id',
-                        'route'      => 'defaultLeagueIdAll',
+                        'route'      => 'defaultLeagueID',
                         'params'     => array(
-                            'league_id' => '2'
+                            'leagueID' => '2'
                         )
                     ),
                     array(
@@ -403,9 +390,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'module'     => 'default',
                         'controller' => 'league',
                         'action'     => 'id',
-                        'route'      => 'defaultLeagueIdAll',
+                        'route'      => 'defaultLeagueID',
                         'params'     => array(
-                            'league_id' => '3'
+                            'leagueID' => '3'
                         )
                     ),
                     array(

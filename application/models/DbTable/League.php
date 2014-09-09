@@ -30,7 +30,7 @@ class Application_Model_DbTable_League extends Zend_Db_Table_Abstract {
 
 		$select = $model->select()
 				->from($this->_name, 'name')
-				->columns(array('id', 'name'))
+				->columns(array('ID', 'Name'))
 				->order('name ' . $order);
 
 		$leagues = $model->fetchAll($select);

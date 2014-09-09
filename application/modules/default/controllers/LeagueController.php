@@ -1,67 +1,119 @@
 <?php
 
-class LeagueController extends App_Controller_LoaderController {
+class LeagueController extends App_Controller_LoaderController
+{
 
-	public function init() {
-		parent::init();
-		$this->view->headTitle($this->view->translate('Лига'));
-	}
+    public function init()
+    {
+        parent::init();
+        $this->view->headTitle($this->view->translate('Лига'));
+    }
 
-	public function idAction() {
-		$request = $this->getRequest();
-		$league_id = (int) $request->getParam('league_id');
+    // action for view racing series
+    public function idAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'leagueID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'leagueID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-		$league_data = $this->db->get('league')->getItem($league_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_League l')
+                ->leftJoin('l.User u')
+                ->where('l.ID = ?', $requestData->leagueID);
+            $result = $query->fetchArray();
 
-		if ($league_data) {
-			$this->view->league_data = $league_data;
-			$this->view->headTitle($league_data->name);
-			$this->view->pageTitle($league_data->name);
+            if (count($result) == 1) {
+                $this->view->leagueData = $result[0];
 
-			$championship = new Application_Model_DbTable_Championship();
+                $this->view->headTitle($result[0]['Name']);
+                $this->view->pageTitle(
+                    $this->view->translate('Лига ') . ' :: ' . $result[0]['Name']
+                );
 
-			$page_count_items = 5;
-			$page_range = 5;
-			$items_order = 'DESC';
-			$page = $request->getParam('page');
+                //add breadscrumb
+                $this->view->breadcrumb()->LeagueAll('1')->league($requestData->leagueID, $result[0]['Name'], $requestData->page);
 
-			//add breadscrumb
-			$this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, $page);
+                $championship = new Application_Model_DbTable_Championship();
 
-			$championships_data = $championship->getChampionshipsPagerByLeague($page_count_items, $page, $page_range, $items_order, $league_id);
+                $page_count_items = 5;
+                $page_range = 5;
+                $items_order = 'DESC';
+                $championships_data = $championship->getChampionshipsPagerByLeague($page_count_items, $requestData->page, $page_range, $items_order, $requestData->leagueID);
 
-			if ($championships_data) {
-				$this->view->championships_data = $championships_data;
-			} else {
-				$this->messages->addInfo($this->view->translate('В лиге не найдено чемпионатов!'));
-			}
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая лига на сайте не найдена!'));
+                if ($championships_data) {
+                    $this->view->championships_data = $championships_data;
+                } else {
+                    $this->messages->addInfo($this->view->translate('В лиге не найдено чемпионатов!'));
+                }
 
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Запрашиваемая лига на сайте не найдена!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
-		}
-	}
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-	public function allAction() {
-		$this->view->headTitle($this->view->translate('Лиги Портала'));
-		$this->view->pageTitle($this->view->translate('Лиги Портала'));
+                $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
 
-		// pager settings
-		$pager_args = array(
-			"page_count_items" => 10,
-			"page_range" => 5,
-			"page" => $this->getRequest()->getParam('page')
-		);
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Лига не найдена!'));
 
-		$league_data = $this->db->get('league')->getAll(FALSE, "all", "ASC", TRUE, $pager_args);
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Лига не найдена!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-		if (count($league_data)) {
-			$this->view->league_data = $league_data;
-		} else {
-			$this->messages->addInfo($this->view->translate('Запрашиваемые лиги на сайте не найдены!'));
-		}
-	}
+    // action for view all racing series
+    public function allAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
+
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $this->view->headTitle($this->view->translate('Все'));
+            $this->view->pageTitle($this->view->translate('Лиги'));
+
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_League l')
+                ->leftJoin('l.User u')
+                ->orderBy('l.ID ASC');
+
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
+
+            $leaguePaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $leaguePaginator->setItemCountPerPage("10");
+            $leaguePaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $leaguePaginator->setPageRange("5");
+
+            if ($leaguePaginator->count() == 0) {
+                $this->view->leagueData = false;
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $this->view->leagueData = $leaguePaginator;
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
 }

@@ -13,7 +13,7 @@
                     array('module'          => 'default',
                           'controller' => 'race',
                           'action' => 'id',
-                          'league_id'       => $this->league_data->id,
+                          'league_id'       => $this->leagueData['ID'],
                           'championship_id' => $this->championship_data->id,
                           'race_id' => $race->id),
                     'defaultChampionshipRaceId', true
@@ -22,7 +22,7 @@
                 <div class="block block-default block-ui-bordered block-ui-shadow m-b-15">
                     <?php
                     echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu(
-                        $this->escape($this->league_data->id),
+                        $this->escape($this->leagueData['ID']),
                         $this->escape($this->championship_data->id),
                         $this->escape($race->id),
                         $this->escape($race->track_id)

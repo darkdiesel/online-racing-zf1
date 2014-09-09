@@ -8,7 +8,7 @@
 		<div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
 			<div class="team-item block">
 				<?php
-				echo $this->BlockConfigMenu($this->translate("Команда"))->championshipTeamMenu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id);
+				echo $this->BlockConfigMenu($this->translate("Команда"))->championshipTeamMenu($this->escape($this->leagueData['ID']), $this->team_data->championship_id, $this->team_data->team_id);
 				?>
 				<div class="block-item-content">
 					<div>
@@ -45,7 +45,7 @@
 						}
 						?>
 						<?php
-						echo $this->BlockConfigMenu($this->translate("Гонщик"))->championshipTeamDriverMenu($this->escape($this->league_data->id), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
+						echo $this->BlockConfigMenu($this->translate("Гонщик"))->championshipTeamDriverMenu($this->escape($this->leagueData['ID']), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
 						?>
 						<div class="block-body">
 							<div class="media">

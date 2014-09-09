@@ -46,12 +46,12 @@
                         <tbody>
                         <?php foreach ($this->leagueData as $league): ?>
                             <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
-                                $adminLeagueIdUrl = $this->url(
-                                    array('module' => 'admin', 'controller' => 'league', 'action' => 'id',
+                                $defaultLeagueIdUrl = $this->url(
+                                    array('module' => 'default', 'controller' => 'league', 'action' => 'id',
                                         'leagueID' => $this->escape($league['ID'])), 'defaultLeagueID'
                                 );
                             } else {
-                                $adminLeagueIdUrl = '#';
+                                $defaultLeagueIdUrl = '#';
                             }
                             ?>
 
@@ -67,14 +67,14 @@
                             <tr>
                                 <td class="league-id">
                                     <span>
-                                        <a href="<?php echo $adminLeagueIdUrl; ?>">
+                                        <a href="<?php echo $defaultLeagueIdUrl; ?>">
                                             <?php echo $this->escape($league['ID']) ?>
                                         </a>
                                     </span>
                                 </td>
                                 <td class="league-name">
                                     <span>
-                                        <a href="<?php echo $adminLeagueIdUrl; ?>">
+                                        <a href="<?php echo $defaultLeagueIdUrl; ?>">
                                             <?php echo $this->escape($league['Name']) ?>
                                         </a>
                                     </span>

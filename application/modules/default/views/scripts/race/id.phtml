@@ -9,7 +9,7 @@
             <div class="panel block block-default">
                 <?php
                 echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu(
-                    $this->escape($this->league_data->id),
+                    $this->escape($this->leagueData['ID']),
                     $this->escape($this->championship_data->id),
                     $this->escape($this->race_data->id),
                     $this->escape($this->race_data->track_id)

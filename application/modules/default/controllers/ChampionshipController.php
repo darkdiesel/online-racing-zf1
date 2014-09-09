@@ -14,13 +14,19 @@ class ChampionshipController extends App_Controller_LoaderController
         $league_id = (int)$request->getParam('league_id');
         $championship_id = (int)$request->getParam('championship_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->league_data = $league_data;
+        if ($leagueData) {
+            $this->view->leagueData = $leagueData;
 
             $this->view->headTitle($this->view->translate('Лига'));
-            $this->view->headTitle($league_data->name);
+            $this->view->headTitle($leagueData['Name']);
 
             $championship = new Application_Model_DbTable_Championship();
             $championship_data = $championship->getChampionshipData($league_id, $championship_id);
@@ -33,7 +39,7 @@ class ChampionshipController extends App_Controller_LoaderController
                 $this->view->pageTitle($championship_data->name);
 
                 // Set breadcrumbs for this page
-                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
+                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $leagueData['Name'], '1')
                     ->championship($league_id, $championship_id, $championship_data->name);
             } else {
                 $this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
@@ -66,12 +72,18 @@ class ChampionshipController extends App_Controller_LoaderController
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+        if ($leagueData) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$leagueData['Name']}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
-            $this->view->league_data = $league_data;
+            $this->view->leagueData = $leagueData;
 
             $championship_data = $this->db->get('championship')->getItem($championship_id);
 
@@ -83,7 +95,7 @@ class ChampionshipController extends App_Controller_LoaderController
                 $championship_team = new Application_Model_DbTable_ChampionshipTeam();
                 $championship_team_data = $championship_team->getTeamData($championship_id, $team_id);
                 if ($championship_team_data) {
-                    $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
+                    $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $leagueData['Name'], '1')
                         ->championship($league_id, $championship_id, $championship_data->name, '1')
                         ->drivers($league_id, $championship_id)
                         ->championship_team($league_id, $championship_id, $team_id, $championship_team_data->name);
@@ -144,12 +156,18 @@ class ChampionshipController extends App_Controller_LoaderController
         $league_id = (int)$request->getParam('league_id');
         $championship_id = $request->getParam('championship_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+        if ($leagueData) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$leagueData['Name']}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
-            $this->view->league_data = $league_data;
+            $this->view->leagueData = $leagueData;
 
             $championship = new Application_Model_DbTable_Championship();
             $championship_data = $championship->getChampionshipData($league_id, $championship_id);
@@ -282,13 +300,19 @@ class ChampionshipController extends App_Controller_LoaderController
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->league_data = $league_data;
+        if ($leagueData) {
+            $this->view->leagueData = $leagueData;
             //Set titles for html head title
             $this->view->headTitle($this->view->translate('Лига'));
-            $this->view->headTitle($league_data->name);
+            $this->view->headTitle($leagueData['Name']);
 
             $championship = new Application_Model_DbTable_Championship();
             $championship_data = $championship->getChampionshipData($league_id, $championship_id);
@@ -495,13 +519,19 @@ class ChampionshipController extends App_Controller_LoaderController
         $league_id = (int)$request->getParam('league_id');
         $championship_id = $request->getParam('championship_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+        if ($leagueData) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$leagueData['Name']}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
 
-            $this->view->league_data = $league_data;
+            $this->view->leagueData = $leagueData;
 
             $championship_data = $this->db->get('championship')->getItem($championship_id);
 
@@ -509,7 +539,7 @@ class ChampionshipController extends App_Controller_LoaderController
                 $this->view->championship_data = $championship_data;
 
                 // Set breadcrumbs for this page
-                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
+                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $leagueData['Name'], '1')
                     ->championship($league_id, $championship_id, $championship_data->name, '1')
                     ->drivers($league_id, $championship_id);
 
@@ -570,13 +600,19 @@ class ChampionshipController extends App_Controller_LoaderController
         $championship_id = $request->getParam('championship_id');
         $team_id = $request->getParam('team_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+        if ($leagueData) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$leagueData['Name']}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
 
-            $this->view->league_data = $league_data;
+            $this->view->leagueData = $leagueData;
 
             $championship_data = $this->db->get('championship')->getItem($championship_id);
 
@@ -735,13 +771,19 @@ class ChampionshipController extends App_Controller_LoaderController
         $team_id = $request->getParam('team_id');
         $user_id = $request->getParam('user_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+        if ($leagueData) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$leagueData['Name']}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
 
-            $this->view->league_data = $league_data;
+            $this->view->leagueData = $leagueData;
 
             $championship = new Application_Model_DbTable_Championship();
             $championship_data = $championship->getChampionshipData($league_id, $championship_id);
@@ -887,12 +929,18 @@ class ChampionshipController extends App_Controller_LoaderController
         $team_id = $request->getParam('team_id');
         $user_id = $request->getParam('user_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->headTitle("{$this->view->translate('Лига')} :: {$league_data->name}");
+        if ($leagueData) {
+            $this->view->headTitle("{$this->view->translate('Лига')} :: {$leagueData['Name']}");
             $this->view->headTitle($this->view->translate('Чемпионат'));
-            $this->view->league_data = $league_data;
+            $this->view->leagueData = $leagueData;
 
             $championship = new Application_Model_DbTable_Championship();
             $championship_data = $championship->getChampionshipData($league_id, $championship_id);
@@ -1100,13 +1148,19 @@ class ChampionshipController extends App_Controller_LoaderController
         $league_id = (int)$request->getParam('league_id');
         $championship_id = (int)$request->getParam('championship_id');
 
-        $league_data = $this->db->get('league')->getItem($league_id);
+        // Gel Leagues
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_League l')
+            ->leftJoin('l.User u')
+            ->where('l.ID = ?', $league_id);
+        $result = $query->fetchArray();
+        $leagueData = $result[0];
 
-        if ($league_data) {
-            $this->view->league_data = $league_data;
+        if ($leagueData) {
+            $this->view->leagueData = $leagueData;
 
             $this->view->headTitle($this->view->translate('Лига'));
-            $this->view->headTitle($league_data->name);
+            $this->view->headTitle($leagueData['Name']);
 
             $championship_data = $this->db->get('championship')->getItem($championship_id);
 
@@ -1118,7 +1172,7 @@ class ChampionshipController extends App_Controller_LoaderController
                 $this->view->pageTitle($championship_data->name);
 
                 //Set breadcrumbs for this page
-                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $league_data->name, '1')
+                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $leagueData['Name'], '1')
                     ->championship($league_id, $championship_id, $championship_data->name, '1')
                     ->calendar($league_id, $championship_id);
 

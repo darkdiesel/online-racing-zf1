@@ -179,22 +179,22 @@
         </div>
         <div class="block-body">
             <ul class="media-list">
-                <?php foreach ($this->league_data as $league): ?>
-                    <?php $league_url = $this->url(
+                <?php foreach ($this->leagueData as $league): ?>
+                    <?php $defaultLeagueIDAllURL = $this->url(
                         array('module' => 'default', 'controller' => 'league', 'action' => 'id',
-                            'league_id' => $this->escape($league->id)), 'defaultLeagueIdAll', true
+                            'leagueID' => $this->escape($league['ID'])), 'defaultLeagueID', true
                     ); ?>
                     <li class="media">
-                        <a class="pull-left" href="<?php echo $league_url; ?>">
+                        <a class="pull-left" href="<?php echo $defaultLeagueIDAllURL; ?>">
                             <img class="media-object img-thumbnail img-responsive img-size-100"
-                                 src="<?php echo $league->url_logo; ?>" alt="<?php echo $league->name; ?>">
+                                 src="<?php echo $league['UrlImageLogo']; ?>" alt="<?php echo $league['Name']; ?>">
                         </a>
 
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a href="<?php echo $league_url; ?>"><?php echo $league->name; ?></a>
+                                <a href="<?php echo $defaultLeagueIDAllURL; ?>"><?php echo $league['Name']; ?></a>
                             </h4>
-                            <?php echo $league->description; ?>
+                            <?php echo $league['Description']; ?>
                         </div>
                     </li>
                 <?php endforeach; ?>

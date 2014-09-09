@@ -301,7 +301,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'title' => $league_name,
                 'uri'   => $this->view->url(
                     array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id,
-                          'page'   => $page), 'defaultLeagueIdAll', true
+                          'page'   => $page), 'defaultLeagueID', true
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',
