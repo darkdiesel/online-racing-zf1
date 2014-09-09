@@ -228,22 +228,12 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //LEAGUE CONTROLLER ROUTERS
         $router->addRoute(
-            'adminLeagueId', new Zend_Controller_Router_Route_Regex('admin/league/(\d+)\.html', array(
-                'module' => 'admin',
-                'controller' => 'league',
-                'action' => 'id',
-                1 => 0), array(
-                'league_id' => 1,
-            ), "admin/league/%d.html"
-        ));
-
-        $router->addRoute(
             'adminLeagueAction', new Zend_Controller_Router_Route_Regex('admin/league/(\d+)/(\w*)\.html', array(
                 'module' => 'admin',
                 'controller' => 'league',
                 'action' => 'id',
                 1 => 0), array(
-                'league_id' => 1,
+                'leagueID' => 1,
                 'action' => 2,
             ), "admin/league/%d/%s.html"
         ));

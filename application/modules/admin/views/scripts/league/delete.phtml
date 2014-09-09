@@ -1,1 +1,69 @@
-<?php echo $this->form; ?>
+<?php if ($this->leagueData) { ?>
+    <div class="m-b-10">
+        <?php echo $this->leagueDeleteForm; ?>
+        <hr/>
+    </div>
+    <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+        $defaultUserIdUrl = $this->url(
+            array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                'user_id' => $this->escape($this->leagueData['User']['id'])), 'defaultUserId'
+        );
+    } else {
+        $defaultUserIdUrl = '#';
+    }
+    ?>
+    <div class="block block-default block-ui-bordered">
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->leagueData['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Администратор'); ?></span>
+                    </td>
+                    <td>
+                    <span>
+                        <a target="_blank"
+                           href="<?php echo $defaultUserIdUrl; ?>"><?php echo $this->escape($this->leagueData['User']['login']); ?></a>
+                    </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->RenderContentTypeText($this->leagueData['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Лига'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->leagueData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->leagueData['DateCreate']) != $this->escape($this->leagueData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->leagueData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php } ?>

@@ -66,25 +66,25 @@
                             ?>
                             <tr>
                                 <td class="team-id">
-										<span>
-                                            <a href="<?php echo $adminTeamIdUrl; ?>">
-                                                <?php echo $this->escape($team['ID']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminTeamIdUrl; ?>">
+                                            <?php echo $this->escape($team['ID']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="team-name">
-										<span>
-                                            <a href="<?php echo $adminTeamIdUrl; ?>">
-                                                <?php echo $this->escape($team['Name']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminTeamIdUrl; ?>">
+                                            <?php echo $this->escape($team['Name']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="team-racing-series">
-										<span>
-                                            <a href="<?php echo $adminTeamIdUrl; ?>">
-                                                <?php echo $this->escape($team['RacingSeries']['Name']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminTeamIdUrl; ?>">
+                                            <?php echo $this->escape($team['RacingSeries']['Name']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="team-description">
                                     <span>
@@ -92,13 +92,13 @@
                                     </span>
                                 </td>
                                 <td class="team-action">
-										<span>
-											<?php
-                                            echo $this->BlockConfigMenu($this->translate("Команда"), false)->teamMenu(
-                                                $this->escape($team['ID']), true
-                                            );
-                                            ?>
-										</span>
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Команда"), false)->teamMenu(
+                                            $this->escape($team['ID']), true
+                                        );
+                                        ?>
+                                    </span>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

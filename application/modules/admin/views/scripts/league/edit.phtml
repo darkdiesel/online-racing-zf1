@@ -1,1 +1,11 @@
-<?php echo $this->form; ?>
+<?php $this->CKEditor()->init(); ?>
+<?php $this->CKFinder()->init(); ?>
+
+<?php echo $this->leagueEditForm; ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        <?php echo $this->CKEditor()->SetupFullHtmlEditor('Description'); ?>
+        <?php echo $this->CKFinder()->setupCKEditor('Description'); ?>
+    });
+</script>

@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_Team_Add extends Zend_Form
+class Peshkov_Form_League_Add extends Zend_Form
 {
 
     protected function translate($str)
@@ -15,13 +15,13 @@ class Peshkov_Form_Team_Add extends Zend_Form
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'team-add'
+                'id' => 'league-add'
             )
         )
-            ->setName('teamAdd')
+            ->setName('leagueAdd')
             ->setAction(
                 $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default'
+                    array('module' => 'admin', 'controller' => 'league', 'action' => 'add'), 'default'
                 )
             )
             ->setMethod('post')
@@ -34,9 +34,40 @@ class Peshkov_Form_Team_Add extends Zend_Form
             ->setRequired(true)
             ->addValidator('NotEmpty')
             ->addValidator('stringLength', false, array(1, 255, 'UTF-8'))
+            ->addValidator(
+                'Db_NoRecordExists', false,
+                array(
+                    'table' => 'league',
+                    'field' => 'Name',
+                )
+            )
+            //->addValidator(new App_Validate_NoDbRecordExists('country', 'NativeName'))
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+
+        $users = new Zend_Form_Element_Select('UserID');
+        $users->setLabel($this->translate('Администратор лиги'))
+            ->setOptions(array('class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Администратор лиги'))
+            ->setRequired(true)
+            ->addFilter('HtmlEntities')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+        foreach ($this->getUsers() as $user) {
+            $users->addMultiOption($user['id'], $user['surname'] . ' ' . $user['name'] . ' (' . $user['login'] . ')');
+        };
+
+        $urlImageLogo = new Zend_Form_Element_File('UrlImageLogo');
+        $urlImageLogo->setLabel($this->translate('Логотип лиги'))
+            ->setAttrib('class', 'form-control')
+            ->setRequired(true)
+            ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/leagues/')
+            ->addValidator('Size', false, 512000) // 500 kb
+            ->addValidator('Extension', false, 'jpg,png,gif')
+            //->addValidator('IsImage')
+            ->addValidator('Count', false, 1)
+            ->setDecorators($this->getView()->getDecorator()->fileDecorators());
 
         $description = new Zend_Form_Element_Textarea('Description');
         $description->setLabel($this->translate('Описание'))
@@ -46,18 +77,6 @@ class Peshkov_Form_Team_Add extends Zend_Form
             ->addValidator('stringLength', false, array(0, 500, 'UTF-8'))
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-
-        $racingSeries = new Zend_Form_Element_Select('RacingSeriesID');
-        $racingSeries->setLabel($this->translate('Гоночная серия'))
-            ->setOptions(array('class' => 'form-control'))
-            ->setAttrib('placeholder', $this->translate('Гоночная серия'))
-            ->setRequired(true)
-            ->addFilter('HtmlEntities')
-            ->addFilter('StringTrim')
-            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-        foreach ($this->getRaceSeries() as $rs) {
-            $racingSeries->addMultiOption($rs['ID'], $rs['Name']);
-        };
 
         $submit = new Zend_Form_Element_Submit('Submit');
         $submit->setLabel($this->translate('Добавить'))
@@ -71,19 +90,20 @@ class Peshkov_Form_Team_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminTeamAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'adminTeamAll'
+        $adminLeagueAllUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'league', 'action' => 'all'), 'adminLeagueAll'
         );
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminTeamAllUrl}'")
+            ->setAttrib('onClick', "location.href='{$adminLeagueAllUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($name)
-            ->addElement($racingSeries)
+            ->addElement($users)
+            ->addElement($urlImageLogo)
             ->addElement($description);
 
         $this->addElement($submit)
@@ -93,14 +113,15 @@ class Peshkov_Form_Team_Add extends Zend_Form
         $this->addDisplayGroup(
             array(
                 $this->getElement('Name'),
-                $this->getElement('RacingSeriesID'),
+                $this->getElement('UserID'),
+                $this->getElement('UrlImageLogo'),
                 $this->getElement('Description')
-            ), 'TeamInfo'
+            ), 'LeagueInfo'
         );
 
-        $this->getDisplayGroup('TeamInfo')
+        $this->getDisplayGroup('LeagueInfo')
             ->setOrder(10)
-            ->setLegend('Информация о гоночной серии')
+            ->setLegend('Информация о лиге')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(
@@ -116,9 +137,15 @@ class Peshkov_Form_Team_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
     }
 
-    public function getRaceSeries(){
+    public function getUsers(){
         $query = Doctrine_Query::create()
-            ->from('Default_Model_RacingSeries rs');
+            ->from('Default_Model_User u')
+            ->leftJoin('u.UserRole ur')
+            ->leftJoin('ur.Role r')
+            ->where('r.name = ?', 'admin')
+            ->orWhere('r.name = ?', 'super_admin')
+            ->orWhere('r.name = ?', 'master')
+            ->orderBy('u.surname ASC');
         return $query->fetchArray();
     }
 

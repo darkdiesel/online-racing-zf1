@@ -18,7 +18,7 @@ class Peshkov_Form_RacingSeries_Add extends Zend_Form
                 'id' => 'racing-series-add'
             )
         )
-            ->setName('contentTypeAdd')
+            ->setName('racingSeriesAdd')
             ->setAction(
                 $this->getView()->url(
                     array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'add'), 'default'
@@ -37,7 +37,7 @@ class Peshkov_Form_RacingSeries_Add extends Zend_Form
             ->addValidator(
                 'Db_NoRecordExists', false,
                 array(
-                    'table' => 'content_type',
+                    'table' => 'racing_series',
                     'field' => 'Name',
                 )
             )

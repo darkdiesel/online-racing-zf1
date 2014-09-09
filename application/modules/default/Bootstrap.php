@@ -113,31 +113,30 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             )
         );
 
-        //league controller routers
+        //LEAGUE CONTROLLER ROUTERS
         $router->addRoute(
-            'defaultLeagueAction', new Zend_Controller_Router_Route_Regex('league/(\d+)/(\w*)\.html',
+            'defaultLeagueID',
+            new Zend_Controller_Router_Route_Regex('league/(\d+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'league',
-                ), array(
-                        'league_id' => 1,
-                        'action'    => 2,
-                   ), "league/%d/%s.html"
-            )
-        );
+                    'module' => 'default',
+                    'controller' => 'league',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'leagueID' => 1,
+                ), "league/%d.html"
+            ));
 
         $router->addRoute(
-            'defaultLeagueActionAddChamp',
-            new Zend_Controller_Router_Route_Regex('league/(\d+)/championship-add\.html',
-                array(
-                     'module'     => 'default',
-                     'controller' => 'championship',
-                     'action'     => 'add',
-                ), array(
-                        'league_id' => 1,
-                   ), "league/%d/championship-add.html"
-            )
-        );
+            'defaultLeagueAll', new Zend_Controller_Router_Route_Regex('league/all/page/(\d+)\.html', array(
+                'module' => 'default',
+                'controller' => 'league',
+                'action' => 'all',
+                1 => 1
+            ), array(
+                'page' => 1,
+            ), "league/all/page/%s.html"
+        ));
+
 
         $router->addRoute(
             'defaultLeagueIdAll', new Zend_Controller_Router_Route_Regex('league/(\d+)/page/(\d+)\.html',
@@ -148,22 +147,9 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                      1            => 0,
                      2            => 1,
                 ), array(
-                        'league_id' => 1,
+                        'leagueID' => 1,
                         'page'      => 2,
                    ), "league/%d/page/%d.html"
-            )
-        );
-
-        $router->addRoute(
-            'defaultLeagueAll', new Zend_Controller_Router_Route_Regex('league/all/page/(\d+)\.html',
-                array(
-                     'module'     => 'default',
-                     'controller' => 'league',
-                     'action'     => 'all',
-                     1            => 1
-                ), array(
-                        'page' => 1,
-                   ), "league/all/page/%s.html"
             )
         );
 

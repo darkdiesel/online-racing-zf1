@@ -23,8 +23,6 @@ class Peshkov_Form_Team_Edit extends Peshkov_Form_Team_Add
             ->setName('teamEdit')
             ->setAction($adminTeamEditUrl);
 
-        $this->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('teamID'));
-
         $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminTeamIDUrl}'");
 
         $this->getElement('Submit')->setLabel('Сохранить');

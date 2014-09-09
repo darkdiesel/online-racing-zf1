@@ -1,68 +1,119 @@
-<?php if ($this->league_data) { ?>
-		<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$league_id_url = $this->url(array('module' => 'admin', 'controller' => 'league', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $league_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить лигу'); ?></a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-list"></i>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped custab">
-						<thead>
-							<tr>
-								<th class="league_id"><span>ID</span></th>
-								<th class="league_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="league_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($this->league_data as $league): ?>
-								<?php
-								$league_id_url = $this->url(array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $this->escape($league->id)), 'defaultLeagueIdAll', true);
-								$league_edit_url = $this->url(array('module' => 'admin', 'controller' => 'league', 'action' => 'edit', 'league_id' => $this->escape($league->id)), 'adminLeagueAction', true);
-								$league_delete_url = $this->url(array('module' => 'admin', 'controller' => 'league', 'action' => 'delete', 'league_id' => $this->escape($league->id)), 'adminLeagueAction', true);
-								
-								?>
-								<tr>
-									<td class="league_id"><span><a href="<?php echo $league_id_url; ?>" target="_blank"><?php echo $this->escape($league->id) ?></a></span></td>
-									<td class="league_name"><span><a href="<?php echo $league_id_url; ?>" target="_blank"><?php echo $this->escape($league->name) ?></a></span></td>
-									<td class="league_action">
-										<span>
-											<div class="pull-right action-buttons">
-												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg"></span>
-													</button>
-													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $league_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $league_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $league_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
-													</ul>
-												</div>
-											</div>
-										</span>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-					<div class="pull-right">
-						<?php echo $this->paginationControl($this->league_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+<?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'league', 'add')) : ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="clearfix m-b-10">
+                <?php
+                $adminLeagueAddUrl = $this->url(
+                    array('module' => 'admin', 'controller' => 'league', 'action' => 'add'), 'default'
+                );
+                ?>
+                <a href="<?php echo $adminLeagueAddUrl; ?>" class="btn btn-success pull-right ">
+                    <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить лигу'); ?>
+                </a>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->leagueData) { ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-list"></i>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="league-id">
+                                <span>ID</span>
+                            </th>
+                            <th class="league-name">
+                                <span><?php echo $this->translate('Название'); ?></span>
+                            </th>
+                            <th class="league-admin">
+                                <span><?php echo $this->translate('Администратор'); ?></span>
+                            </th>
+                            <th class="league-description">
+                                <span><?php echo $this->translate('Описание'); ?></span>
+                            </th>
+                            <th class="league-action">
+                                <span><?php echo $this->translate('Действие'); ?></span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($this->leagueData as $league): ?>
+                            <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
+                                $adminLeagueIdUrl = $this->url(
+                                    array('module' => 'admin', 'controller' => 'league', 'action' => 'id',
+                                        'leagueID' => $this->escape($league['ID'])), 'defaultLeagueID'
+                                );
+                            } else {
+                                $adminLeagueIdUrl = '#';
+                            }
+                            ?>
+
+                            <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+                                $defaultUserIdUrl = $this->url(
+                                    array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                                        'user_id' => $this->escape($league['User']['id'])), 'defaultUserId'
+                                );
+                            } else {
+                                $defaultUserIdUrl = '#';
+                            }
+                            ?>
+                            <tr>
+                                <td class="league-id">
+                                    <span>
+                                        <a href="<?php echo $adminLeagueIdUrl; ?>">
+                                            <?php echo $this->escape($league['ID']) ?>
+                                        </a>
+                                    </span>
+                                </td>
+                                <td class="league-name">
+                                    <span>
+                                        <a href="<?php echo $adminLeagueIdUrl; ?>">
+                                            <?php echo $this->escape($league['Name']) ?>
+                                        </a>
+                                    </span>
+                                </td>
+                                <td class="league-admin">
+                                    <span>
+                                        <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
+                                            <?php echo $this->escape($league['User']['login']) ?>
+                                        </a>
+                                    </span>
+                                </td>
+                                <td class="league-description">
+                                    <span>
+                                        <?php echo $this->renderContentTypeText($league['Description'], 'full_html'); ?>
+                                    </span>
+                                </td>
+                                <td class="league-action">
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Лига"), false)->leagueMenu(
+                                            $this->escape($league['ID']), true
+                                        );
+                                        ?>
+                                    </span>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="pull-right">
+                        <?php echo $this->paginationControl(
+                            $this->leagueData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php } ?>

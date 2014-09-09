@@ -54,18 +54,18 @@
                             ?>
                             <tr>
                                 <td class="content-type-id">
-										<span>
-                                            <a href="<?php echo $adminContentTypeIdUrl; ?>">
-                                                <?php echo $this->escape($contentType['ID']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminContentTypeIdUrl; ?>">
+                                            <?php echo $this->escape($contentType['ID']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="content-type-name">
-										<span>
-                                            <a href="<?php echo $adminContentTypeIdUrl; ?>">
-                                                <?php echo $this->escape($contentType['Name']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminContentTypeIdUrl; ?>">
+                                            <?php echo $this->escape($contentType['Name']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="content-type-description">
                                     <span>
@@ -73,13 +73,13 @@
                                     </span>
                                 </td>
                                 <td class="content-type-action">
-										<span>
-											<?php
-                                            echo $this->BlockConfigMenu($this->translate("Тип контента"), false)->contentTypeMenu(
-                                                $this->escape($contentType['ID']), true
-                                            );
-                                            ?>
-										</span>
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Тип контента"), false)->contentTypeMenu(
+                                            $this->escape($contentType['ID']), true
+                                        );
+                                        ?>
+                                    </span>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

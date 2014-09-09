@@ -44,6 +44,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property Doctrine_Collection $League
  * @property Doctrine_Collection $Post
  * @property Doctrine_Collection $UserChat
+ * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -348,13 +349,17 @@ abstract class Default_Model_Base_User extends Doctrine_Record
 
         $this->hasMany('Default_Model_League as League', array(
              'local' => 'id',
-             'foreign' => 'user_id'));
+             'foreign' => 'UserID'));
 
         $this->hasMany('Default_Model_Post as Post', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
         $this->hasMany('Default_Model_UserChat as UserChat', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasMany('Default_Model_UserRole as UserRole', array(
              'local' => 'id',
              'foreign' => 'user_id'));
     }

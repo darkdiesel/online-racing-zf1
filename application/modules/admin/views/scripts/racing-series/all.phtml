@@ -53,18 +53,18 @@
                             ?>
                             <tr>
                                 <td class="racing-series-id">
-										<span>
-                                            <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
-                                                <?php echo $this->escape($racingSeries['ID']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
+                                            <?php echo $this->escape($racingSeries['ID']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="racing-series-name">
-										<span>
-                                            <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
-                                                <?php echo $this->escape($racingSeries['Name']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
+                                            <?php echo $this->escape($racingSeries['Name']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="racing-series-description">
                                     <span>
@@ -72,13 +72,13 @@
                                     </span>
                                 </td>
                                 <td class="racing-series-action">
-										<span>
-											<?php
-                                            echo $this->BlockConfigMenu($this->translate("Гоночная серия"), false)->racingSeriesMenu(
-                                                $this->escape($racingSeries['ID']), true
-                                            );
-                                            ?>
-										</span>
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Гоночная серия"), false)->racingSeriesMenu(
+                                            $this->escape($racingSeries['ID']), true
+                                        );
+                                        ?>
+                                    </span>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

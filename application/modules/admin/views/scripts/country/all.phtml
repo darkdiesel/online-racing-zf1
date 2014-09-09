@@ -63,32 +63,32 @@
                             ?>
                             <tr>
                                 <td class="country-id">
-										<span>
-                                            <a href="<?php echo $adminCountryIdUrl; ?>">
-                                                <?php echo $this->escape($country['ID']); ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminCountryIdUrl; ?>">
+                                            <?php echo $this->escape($country['ID']); ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="country-native-name">
-										<span>
-                                            <a href="<?php echo $adminCountryIdUrl; ?>">
-                                                <?php echo $this->escape($country['NativeName']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminCountryIdUrl; ?>">
+                                            <?php echo $this->escape($country['NativeName']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="country-english-name">
-										<span>
-                                            <a href="<?php echo $adminCountryIdUrl; ?>">
-                                                <?php echo $this->escape($country['EnglishName']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminCountryIdUrl; ?>">
+                                            <?php echo $this->escape($country['EnglishName']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="country-abreviation">
-										<span>
-                                            <a href="<?php echo $adminCountryIdUrl ?>">
-                                                <?php echo $this->escape($country['Abbreviation']) ?>
-                                            </a>
-                                        </span>
+                                    <span>
+                                        <a href="<?php echo $adminCountryIdUrl ?>">
+                                            <?php echo $this->escape($country['Abbreviation']) ?>
+                                        </a>
+                                    </span>
                                 </td>
                                 <td class="country-round-image">
                                     <span>
@@ -101,13 +101,13 @@
                                     </span>
                                 </td>
                                 <td class="country-action">
-										<span>
-											<?php
-                                            echo $this->BlockConfigMenu($this->translate("Страна"), false)->countryMenu(
-                                                $this->escape($country['ID']), true
-                                            );
-                                            ?>
-										</span>
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Страна"), false)->countryMenu(
+                                            $this->escape($country['ID']), true
+                                        );
+                                        ?>
+                                    </span>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
