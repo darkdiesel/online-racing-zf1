@@ -1,0 +1,22 @@
+#page-wrapper{}
+#page{}
+
+#content-wrapper{}
+#content{}
+
+.page{}
+.page-content{}
+
+/* Background styles */
+#background-wrapper{background:#fff;}
+
+.sidebar{
+	background-color: #F5F5F5;
+    border-right: 1px solid #EEEEEE;
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: relative;
+    top: 0;
+    z-index:0;
+}
