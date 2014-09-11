@@ -27,6 +27,9 @@
     background-repeat: repeat-x;
 }
 
+.panel-footer .pagination{
+    margin: 0;
+}
 /* Buttons */
 
 .btn-inverse {
@@ -415,4 +418,9 @@ hr.message-inner-separator {
 
 .navbar-footer-content {
     padding: 15px 15px 15px 15px;
+}
+
+/* Forms */
+input[type="file"] {
+    height: auto;
 }

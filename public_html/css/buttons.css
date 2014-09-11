@@ -1,0 +1,17 @@
+.btn-badge{
+    display: block;
+    position: relative;
+    padding: 10px 20px;
+}
+.btn-badge span.text{
+    display: block;
+    font-weight: 600;
+    padding-top: 4px;
+}
+.btn-badge .triangle-button {
+    border-top-right-radius: 3px;
+    pointer-events: none; }
+/* line 134, /home/andrei/core-admin-release/core-admin/source/stylesheets/action_nav.scss */
+.btn-badge .triangle-button i {
+    right: 4px;
+    top: 3px; }
