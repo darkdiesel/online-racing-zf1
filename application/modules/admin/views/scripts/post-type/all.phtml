@@ -1,79 +1,71 @@
-<?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'add')) : ?>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="clearfix m-b-10">
-                <?php
-                $adminPostTypeAddUrl = $this->url(
-                    array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default'
-                );
-                ?>
-                <a href="<?php echo $adminPostTypeAddUrl; ?>" class="btn btn-success pull-right ">
-                    <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить тип статьи'); ?>
-                </a>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="fa fa-list"></i>
+                <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'add')) : ?>
+                    <?php
+                    $adminPostTypeAddUrl = $this->url(
+                        array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default'
+                    );
+                    ?>
+                    <a href="<?php echo $adminPostTypeAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить тип статьи'); ?>
+                    </a>
+                <?php endif; ?>
             </div>
-        </div>
-    </div>
-<?php endif; ?>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th class="content-type-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="content-type-name">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </th>
+                    <th class="content-type-description">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </th>
+                    <th class="content-type-action">
+                        <span><?php echo $this->translate('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->postTypeData) : ?>
+                    <?php foreach ($this->postTypeData as $postType): ?>
+                        <?php
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'id')) {
+                            $adminPostTypeIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
+                                    'postTypeID' => $this->escape($postType['ID'])), 'adminPostTypeID'
+                            );
+                        } else {
+                            $adminPostTypeIdUrl = '#';
+                        }
 
-<?php if ($this->postTypeData) { ?>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <i class="fa fa-list"></i>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped">
-                        <thead>
+                        ?>
                         <tr>
-                            <th class="content-type-id">
-                                <span>ID</span>
-                            </th>
-                            <th class="content-type-name">
-                                <span><?php echo $this->translate('Название'); ?></span>
-                            </th>
-                            <th class="content-type-description">
-                                <span><?php echo $this->translate('Описание'); ?></span>
-                            </th>
-                            <th class="content-type-action">
-                                <span><?php echo $this->translate('Действие'); ?></span>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($this->postTypeData as $postType): ?>
-                            <?php
-                            if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'id')) {
-                                $adminPostTypeIdUrl = $this->url(
-                                    array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-                                        'postTypeID' => $this->escape($postType['ID'])), 'adminPostTypeID'
-                                );
-                            } else {
-                                $adminPostTypeIdUrl = '#';
-                            }
-
-                            ?>
-                            <tr>
-                                <td class="content-type-id">
+                            <td class="content-type-id">
                                     <span>
                                         <a href="<?php echo $adminPostTypeIdUrl; ?>">
                                             <?php echo $this->escape($postType['ID']) ?>
                                         </a>
                                     </span>
-                                </td>
-                                <td class="content-type-name">
+                            </td>
+                            <td class="content-type-name">
                                     <span>
                                         <a href="<?php echo $adminPostTypeIdUrl; ?>">
                                             <?php echo $this->escape($postType['Name']) ?>
                                         </a>
                                     </span>
-                                </td>
-                                <td class="content-type-description">
+                            </td>
+                            <td class="content-type-description">
                                     <span>
                                         <?php echo $this->RenderContentTypeText($postType['Description'], 'full_html'); ?>
                                     </span>
-                                </td>
-                                <td class="content-type-action">
+                            </td>
+                            <td class="content-type-action">
                                     <span>
                                         <?php
                                         echo $this->BlockConfigMenu($this->translate("Тип статьи"), false)->postTypeMenu(
@@ -81,21 +73,21 @@
                                         );
                                         ?>
                                     </span>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="panel-footer">
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix">
+                <?php if ($this->postTypeData) : ?>
                     <div class="pull-right">
                         <?php echo $this->paginationControl(
                             $this->postTypeData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
-<?php } ?>
+</div>

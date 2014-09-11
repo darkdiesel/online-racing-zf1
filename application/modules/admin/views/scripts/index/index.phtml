@@ -1,136 +1,94 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="block">
-            <div class="block-body">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <?php echo $this->translate('Быстрый доступ к функциям сайта'); ?>
+            </div>
+            <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <i class="fa fa-archive"></i> <?php echo $this->translate('Контент сайта'); ?>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <?php
-                                // section links
-                                $admin_post_add_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'post', 'action' => 'add'),
-                                    'default', true
-                                );
-                                ?>
-                                <span class="btn-ds m-all-5">
-                                    <a class="btn btn-lg btn-primary" href="<?php echo $admin_post_add_url; ?>">
-                                        <i class="fa fa-plus fa-3x pull-left"></i>
-                                        <span>
-                                            <?php echo $this->translate('Добавить контент'); ?><br />
-                                            <small><?php echo $this->translate('Создание нового контента'); ?></small>
-                                        </span>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <?php
+                        $adminPostAddUrl = $this->url(
+                            array('module' => 'admin', 'controller' => 'post', 'action' => 'add'),
+                            'default', true
+                        );
+                        ?>
+                        <a class="btn btn-badge btn-default m-all-5" href="<?php echo $adminPostAddUrl; ?>">
+                            <i class="fa fa-file-o fa-2x"></i>
+                    <span class="text">
+                        <?php echo $this->translate('Добавить контент'); ?>
+                    </span>
+                            <span class="triangle-button green"><i class="fa fa-plus"></i></span>
+                        </a>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <i class="fa fa-users"></i> <?php echo $this->translate('Пользователи'); ?>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <?php
-                                // section links
-                                $admin_user_all_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1),
-                                    'adminUserAll', true
-                                );
-                                ?>
-                                <span class="btn-ds m-all-5">
-                                    <a class="btn btn-lg btn-primary" href=<?php echo $admin_user_all_url; ?>">
-                                        <i class=" fa fa-user fa-3x pull-left"></i>
-                                        <span>
-                                            <?php echo $this->translate('Пользователи'); ?><br />
-                                            <small><?php echo $this->translate('Управление пользователями'); ?></small>
-                                        </span>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <?php
+                        $adminChampionshipAddUrl = $this->url(
+                            array('module' => 'admin', 'controller' => 'track', 'action' => 'add'),
+                            'default', true
+                        );
+                        ?>
+                        <a class="btn btn-badge btn-default m-all-5" href="<?php echo $adminChampionshipAddUrl; ?>">
+                            <i class="fa fa-trophy fa-2x"></i>
+                    <span class="text">
+                        <?php echo $this->translate('Добавить чемпионат'); ?>
+                    </span>
+                            <span class="triangle-button green"><i class="fa fa-plus"></i></span>
+                        </a>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <i class="fa fa-exclamation-circle"></i>
-                                    <?php echo $this->translate('Безопасность'); ?>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <?php
-                                //section links
-                                $admin_resources_all_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'),
-                                    'adminResourceAll', true
-                                );
-                                $admin_privilege_all_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'prvilege', 'action' => 'all'),
-                                    'adminPrivilegeAll', true
-                                );
-                                $admin_resource_access_all_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'resource-access', 'action' => 'all'),
-                                    'adminResourceAccessAll', true
-                                );
-                                $admin_role_all_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'role', 'action' => 'all'),
-                                    'adminRoleAll', true
-                                );
-                                ?>
-                                <span class="btn-ds m-all-5">
-                                    <a class="btn btn-success btn-lg" href="<?php echo $admin_resources_all_url; ?>">
-                                        <i class="fa fa-sitemap fa-3x pull-left"></i>
-                                        <span>
-                                            <?php echo $this->translate('Ресурсы'); ?><br />
-                                            <small><?php echo $this->translate('Управление ресурсами'); ?></small>
-                                        </span>
-                                    </a>
-                                </span>
-                                <span class="btn-ds m-all-5">
-                                    <a class="btn btn-success btn-lg" href="<?php echo $admin_privilege_all_url; ?>">
-                                        <i class="fa fa-tasks fa-3x pull-left"></i>
-                                        <span>
-                                            <?php echo $this->translate('Привилегии ресурсов'); ?><br />
-                                            <small><?php echo $this->translate(''); ?></small>
-                                        </span>
-                                    </a>
-                                </span>
-                                <span class="btn-ds m-all-5">
-                                    <a class="btn btn-danger btn-lg" href="<?php echo $admin_resource_access_all_url; ?>">
-                                        <i class="fa fa-ban fa-3x pull-left"></i>
-                                        <span>
-                                            <?php echo $this->translate('Доступ к ресурсам'); ?><br />
-                                            <small><?php echo $this->translate(
-                                                    'Настройка прав пользователей'
-                                                ); ?></small>
-                                        </span>
-                                    </a>
-                                </span>
-                                <span class="btn-ds m-all-5">
-                                    <a class="btn btn-danger btn-lg" href="<?php echo $admin_role_all_url; ?>">
-                                        <i class="fa fa-users fa-3x pull-left"></i>
-                                        <span>
-                                            <?php echo $this->translate('Роли пользователей'); ?><br />
-                                            <small><?php echo $this->translate('Управление ролями'); ?></small>
-                                        </span>
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <?php
+                        $adminTrackAddUrl = $this->url(
+                            array('module' => 'admin', 'controller' => 'track', 'action' => 'add'),
+                            'default', true
+                        );
+                        ?>
+                        <a class="btn btn-badge btn-default m-all-5" href="<?php echo $adminTrackAddUrl; ?>">
+                            <i class="fa fa-flag-checkered fa-2x"></i>
+                    <span class="text">
+                        <?php echo $this->translate('Добавить трассу'); ?>
+                    </span>
+                            <span class="triangle-button green"><i class="fa fa-plus"></i></span>
+                        </a>
                     </div>
                 </div>
-                <a href="<?php echo $this->baseUrl(); ?>" class="btn btn-inverse btn-lg btn-block" role="button">
-                    <i class="fa fa-globe"></i> <?php echo $this->translate('Перейти на сайт'); ?>
-                </a>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <?php
+                        $adminUserAllUrl = $this->url(
+                            array('module' => 'admin', 'controller' => 'user', 'action' => 'all', 'page' => 1),
+                            'adminUserAll', true
+                        );
+                        ?>
+                        <a class="btn btn-badge btn-default m-all-5" href="<?php echo $adminUserAllUrl; ?>">
+                            <i class="fa fa-user fa-2x"></i>
+                    <span class="text">
+                        <?php echo $this->translate('Пользователи'); ?>
+                    </span>
+                            <span class="triangle-button orange"><i class="fa fa-eye"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                        <?php
+                        $adminResourcesAllUrl = $this->url(
+                            array('module' => 'admin', 'controller' => 'resource', 'action' => 'all'),
+                            'adminResourceAll', true
+                        );
+                        ?>
+                        <a class="btn btn-badge btn-default m-all-5" href="<?php echo $adminResourcesAllUrl; ?>">
+                            <i class="fa fa-sitemap fa-2x"></i>
+                    <span class="text">
+                        <?php echo $this->translate('Ресурсы сайта'); ?>
+                    </span>
+                            <span class="triangle-button red"><i class="fa fa-exclamation-circle"></i></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
+
 </div>
