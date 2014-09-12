@@ -1,0 +1,12 @@
+.clock-digital {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.clock-digital li {
+    display: inline;
+    color: #6b787f;
+    font-size: 23px;
+    font-weight: bold;
+}
+

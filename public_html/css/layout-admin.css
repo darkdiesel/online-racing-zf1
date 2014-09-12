@@ -283,11 +283,16 @@ body {
     font-size: 14px;
     margin: 0;
     color: #888;
+    padding: 0;
 }
 
 #main-content-top .page-header > * {
     vertical-align: middle;
     text-shadow: 0 1px #fff;
+}
+
+#main-content-top .page-header h3{
+    margin-top: 10px;
 }
 
 /* Navbar-Inverce */
