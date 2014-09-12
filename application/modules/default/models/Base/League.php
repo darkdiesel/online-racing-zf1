@@ -97,7 +97,7 @@ abstract class Default_Model_Base_League extends Doctrine_Record
              'foreign' => 'id'));
 
         $this->hasMany('Default_Model_Championship as Championship', array(
-             'local' => 'id',
+             'local' => 'ID',
              'foreign' => 'league_id'));
     }
 }

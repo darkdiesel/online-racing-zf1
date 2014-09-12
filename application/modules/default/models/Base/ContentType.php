@@ -73,6 +73,6 @@ abstract class Default_Model_Base_ContentType extends Doctrine_Record
         parent::setUp();
         $this->hasMany('Default_Model_Post as Post', array(
              'local' => 'ID',
-             'foreign' => 'content_type_id'));
+             'foreign' => 'ContentTypeID'));
     }
 }

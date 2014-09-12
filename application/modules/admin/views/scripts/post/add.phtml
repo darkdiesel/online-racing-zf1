@@ -1,57 +1,47 @@
 <?php $this->CKEditor()->init(); ?>
 <?php $this->CKFinder()->init(); ?>
-<?php echo $this->form; ?>
+<?php echo $this->postAddForm; ?>
 <script type="text/javascript">
     $(document).ready(function () {
-        <?php echo $this->CKEditor()->setupBBCodeEditor('preview'); ?>
+        <?php echo $this->CKEditor()->setupBBCodeEditor('Preview'); ?>
 
-        content_type = $("#content_type").find(':selected').text();
-        switch (content_type) {
-            case 'bbcode':
-                bbcode();
-                break;
-            case 'text':
-                text();
-                break;
-            case 'full html':
-                full_html();
-                break;
-            default:
-                text();
-                break;
-        }
+        selectCKEditor();
 
         function bbcode() {
-            var ck_editor_finder = CKEDITOR.instances['text'];
+            var ck_editor_finder = CKEDITOR.instances['Text'];
             if (ck_editor_finder) {
                 ck_editor_finder.destroy();
             }
             <?php
-                echo $this->CKEditor()->setupBBCodeEditor('text');
-                echo $this->CKFinder()->setupCKEditor('text');
+                echo $this->CKEditor()->setupBBCodeEditor('Text');
+                echo $this->CKFinder()->setupCKEditor('Text');
             ?>
         }
 
         function full_html() {
-            var ck_editor_finder = CKEDITOR.instances['text'];
+            var ck_editor_finder = CKEDITOR.instances['Text'];
             if (ck_editor_finder) {
                 ck_editor_finder.destroy();
             }
             <?php
-                echo $this->CKEditor()->SetupFullHtmlEditor('text');
-                echo $this->CKFinder()->setupCKEditor('text');
+                echo $this->CKEditor()->SetupFullHtmlEditor('Text');
+                echo $this->CKFinder()->setupCKEditor('Text');
             ?>
         }
 
         function text() {
-            var ck_editor_finder = CKEDITOR.instances['text'];
+            var ck_editor_finder = CKEDITOR.instances['Text'];
             if (ck_editor_finder) {
                 ck_editor_finder.destroy();
             }
         }
 
-        $(".page_content").on('change', "#content_type", function () {
-            content_type = $(this).find(':selected').text();
+        $("#ContentTypeID").on('change', function () {
+            selectCKEditor();
+        });
+
+        function selectCKEditor(){
+            var content_type = $("#ContentTypeID").find(':selected').text();
             switch (content_type) {
                 case 'bbcode':
                     bbcode();
@@ -66,6 +56,6 @@
                     text();
                     break;
             }
-        });
+        }
     });
 </script>

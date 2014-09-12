@@ -353,7 +353,7 @@ abstract class Default_Model_Base_User extends Doctrine_Record
 
         $this->hasMany('Default_Model_Post as Post', array(
              'local' => 'id',
-             'foreign' => 'user_id'));
+             'foreign' => 'UserID'));
 
         $this->hasMany('Default_Model_UserChat as UserChat', array(
              'local' => 'id',

@@ -195,22 +195,12 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //POST CONTROLLER ROUTERS
         $router->addRoute(
-            'adminPostId', new Zend_Controller_Router_Route_Regex('admin/post/(\d+)\.html', array(
-                'module' => 'admin',
-                'controller' => 'post',
-                'action' => 'id',
-                1 => 0), array(
-                'post_id' => 1,
-            ), "admin/post/%d.html"
-        ));
-
-        $router->addRoute(
             'adminPostAction', new Zend_Controller_Router_Route_Regex('admin/post/(\d+)/(\w*)\.html', array(
                 'module' => 'admin',
                 'controller' => 'post',
                 'action' => 'id',
                 1 => 0), array(
-                'post_id' => 1,
+                'postID' => 1,
                 'action' => 2,
             ), "admin/post/%d/%s.html"
         ));

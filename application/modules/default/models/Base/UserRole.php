@@ -10,8 +10,8 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_UserRole', 'defaul
  * @property integer $ID
  * @property integer $user_id
  * @property integer $role_id
- * @property Default_Model_Role $Role
  * @property Default_Model_User $User
+ * @property Default_Model_Role $Role
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -54,12 +54,12 @@ abstract class Default_Model_Base_UserRole extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_Role as Role', array(
-             'local' => 'role_id',
-             'foreign' => 'id'));
-
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'user_id',
+             'foreign' => 'id'));
+
+        $this->hasOne('Default_Model_Role as Role', array(
+             'local' => 'role_id',
              'foreign' => 'id'));
     }
 }

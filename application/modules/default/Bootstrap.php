@@ -60,43 +60,38 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //POST CONTROLLER ROUTERS
         $router->addRoute(
-            'defaultPostId', new Zend_Controller_Router_Route_Regex('post/(\d+)\.html',
+            'defaultPostID',
+            new Zend_Controller_Router_Route_Regex('post/(\d+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'post',
-                     'action'     => 'id',
-                     1            => 0
-                ), array(
-                        'post_id' => 1,
-                   ), "post/%d.html"
-            )
-        );
+                    'module' => 'default',
+                    'controller' => 'post',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'postID' => 1,
+                ), "post/%d.html"
+            ));
 
         $router->addRoute(
-            'defaultPostAction', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html',
-                array(
-                     'module'     => 'default',
-                     'controller' => 'post',
-                     1            => 0
-                ), array(
-                        'post_id' => 1,
-                        'action'  => 2,
-                   ), "post/%d/%s.html"
-            )
-        );
+            'defaultPostAction', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
+                'module' => 'default',
+                'controller' => 'post',
+                'action' => 'id',
+                1 => 0), array(
+                'postID' => 1,
+                'action' => 2,
+            ), "post/%d/%s.html"
+        ));
 
         $router->addRoute(
-            'defaultPostAll', new Zend_Controller_Router_Route_Regex('post/all/page/(\d+)\.html',
-                array(
-                     'module'     => 'default',
-                     'controller' => 'post',
-                     'action'     => 'all',
-                     1            => 1
-                ), array(
-                        'page' => 1,
-                   ), "post/all/page/%s.html"
-            )
-        );
+            'defaultPostAll', new Zend_Controller_Router_Route_Regex('post/all/page/(\d+)\.html', array(
+                'module' => 'default',
+                'controller' => 'post',
+                'action' => 'all',
+                1 => 1
+            ), array(
+                'page' => 1,
+            ), "post/all/page/%s.html"
+        ));
 
         $router->addRoute(
             'defaultPostAllByType', new Zend_Controller_Router_Route_Regex('post/by-type/(\d+)/page/(\d+)\.html',
@@ -107,7 +102,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                      1            => 0,
                      2            => 1,
                 ), array(
-                        'post_type_id' => 1,
+                        'postTypeID' => 1,
                         'page'         => 2,
                    ), "post/by-type/%d/page/%d.html"
             )

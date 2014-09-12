@@ -86,7 +86,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                     if ($leagueAddForm->UrlImageLogo->receive()) {
                         $file = $leagueAddForm->UrlImageLogo->getFileInfo();
                         $ext = pathinfo($file['UrlImageLogo']['name'], PATHINFO_EXTENSION);
-                        $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
+                        $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
                         => $file['UrlImageLogo']['destination'] . '/'

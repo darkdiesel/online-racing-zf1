@@ -157,7 +157,7 @@ abstract class Default_Model_Base_Championship extends Doctrine_Record
         parent::setUp();
         $this->hasOne('Default_Model_League as League', array(
              'local' => 'league_id',
-             'foreign' => 'id'));
+             'foreign' => 'ID'));
 
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'user_id',

@@ -1,81 +1,135 @@
-<?php if ($this->post_data) { ?>
-		<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$post_id_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $post_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить контент'); ?></a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-list"></i>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped custab">
-						<thead>
-							<tr>
-								<th class="post_id"><span>ID</span></th>
-								<th class="post_publish"><span><?php echo $this->translate('Опубликован'); ?></span></th>
-								<th class="post_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="post_post_type"><span><?php echo $this->translate('Тип Поста'); ?></span></th>
-								<th class="post_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($this->post_data as $post): ?>
-								<?php
-								$post_id_url = $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $this->escape($post->id)), 'defaultPostId', true);
-								$post_edit_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'post_id' => $this->escape($post->id)), 'adminPostAction', true);
-								$post_delete_url = $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'delete', 'post_id' => $this->escape($post->id)), 'adminPostAction', true);
-								
-								$post_type_id_url = $this->url(array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $this->escape($post->post_type_id)), 'adminPostTypeID', true);
-								?>
-								<tr>
-									<td class="post_id"><span><a href="<?php echo $post_id_url; ?>" target="_blank"><?php echo $this->escape($post->id) ?></a></span></td>
-									<td class="post_publish">
-										<span>
-											<?php if ($this->escape($post->publish)) { ?>
-												<span class='label label-success'><i class="fa fa-check fa-lg"></i></i></span>
-											<?php } else { ?>
-												<span class='label label-danger'><i class="fa fa-times fa-lg"></i></span>
-											<?php } ?>
-										</span>
-									</td>
-									<td class="post_name"><span><a href="<?php echo $post_id_url; ?>" target="_blank"><?php echo $this->escape($post->name) ?></a></span></td>
-									<td class="post_post_type"><span><a href="<?php echo $post_type_id_url; ?>" target="_blank"><?php echo $this->escape($post->post_type_name); ?></a></span></td>
-									<td class="post_action">
-										<span>
-											<div class="pull-right action-buttons">
-												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg"></span>
-													</button>
-													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $post_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $post_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $post_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
-													</ul>
-												</div>
-											</div>
-										</span>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-					<div class="pull-right">
-						<?php echo $this->paginationControl($this->post_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php } ?>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="fa fa-list"></i>
+                <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post', 'add')) : ?>
+                    <?php
+                    $adminPostAddUrl = $this->url(
+                        array('module' => 'admin', 'controller' => 'post', 'action' => 'add'), 'default'
+                    );
+                    ?>
+                    <a href="<?php echo $adminPostAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить контент'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th class="post-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="post-publish">
+                        <span><?php echo $this->translate('Опубликована'); ?></span>
+                    </th>
+                    <th class="post-name">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </th>
+                    <th class="post-post-type">
+                        <span><?php echo $this->translate('Тип Поста'); ?></span>
+                    </th>
+                    <th class="user-series">
+                        <span><?php echo $this->translate('Автор'); ?></span>
+                    </th>
+                    <th class="post-action">
+                        <span><?php echo $this->translate('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->postData) : ?>
+                    <?php foreach ($this->postData as $post): ?>
+                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
+                            $adminPostIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'post', 'action' => 'id',
+                                    'postID' => $this->escape($post['ID'])), 'adminPostID'
+                            );
+                        } else {
+                            $adminPostIdUrl = '#';
+                        }
+                        ?>
+
+                        <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+                            $defaultUserIdUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                                    'user_id' => $this->escape($post['User']['id'])), 'defaultUserId'
+                            );
+                        } else {
+                            $defaultUserIdUrl = '#';
+                        }
+                        ?>
+                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'id')) {
+                            $adminPostTypeIdUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'post-type', 'action' => 'id',
+                                    'postTypeID' => $this->escape($post['PostType']['ID'])), 'adminPostTypeID'
+                            );
+                        } else {
+                            $adminPostTypeIdUrl = '#';
+                        }
+                        ?>
+                        <tr>
+                            <td class="post-id">
+                                    <span>
+                                        <a href="<?php echo $adminPostIdUrl; ?>">
+                                            <?php echo $this->escape($post['ID']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="post-publish text-center">
+                                    <span>
+                                        <?php if ($this->escape($post['Publish'])) { ?>
+                                            <span class='label label-success'><i class="fa fa-check fa-lg"></i></i></span>
+                                        <?php } else { ?>
+                                            <span class='label label-danger'><i
+                                                    class="fa fa-times fa-lg"></i></span>
+                                        <?php } ?>
+                                    </span>
+                            </td>
+                            <td class="post-name">
+                                    <span>
+                                        <a href="<?php echo $adminPostIdUrl; ?>">
+                                            <?php echo $this->escape($post['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="post-post-type">
+                                    <span>
+                                        <a target="blank" href="<?php echo $adminPostTypeIdUrl; ?>">
+                                            <?php echo $this->escape($post['PostType']['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="user-series">
+                                    <span>
+                                        <a target="blank" href="<?php echo $defaultUserIdUrl; ?>">
+                                            <?php echo $this->escape($post['User']['login']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="post-action">
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Пост"), false)->postMenu(
+                                            $this->escape($post['ID']), true
+                                        );
+                                        ?>
+                                    </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix">
+                <?php if ($this->postData) : ?>
+                    <div class="pull-right">
+                        <?php echo $this->paginationControl(
+                            $this->postData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>
