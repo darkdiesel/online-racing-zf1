@@ -122,8 +122,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'label' => $post_title,
                 'title' => $post_title,
                 'uri'   => $this->view->url(
-                    array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id),
-                    'defaultPostId', true
+                    array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $post_id),
+                    'defaultPostID', true
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',

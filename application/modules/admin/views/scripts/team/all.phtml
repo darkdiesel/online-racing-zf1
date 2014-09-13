@@ -3,7 +3,9 @@
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <i class="fa fa-list"></i>
-                <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'add')) : ?>
+                <?php
+                // check access and generate link for admin/team/add
+                if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'add')) : ?>
                     <?php
                     $adminTeamAddUrl = $this->url(
                         array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default'
@@ -37,7 +39,9 @@
                 <tbody>
                 <?php if ($this->teamData) : ?>
                     <?php foreach ($this->teamData as $team): ?>
-                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'id')) {
+                        <?php
+                        // check access and generate link for admin/team/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'team', 'id')) {
                             $adminTeamIdUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'team', 'action' => 'id',
                                     'teamID' => $this->escape($team['ID'])), 'adminTeamID'
@@ -46,8 +50,9 @@
                             $adminTeamIdUrl = '#';
                         }
                         ?>
-
-                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+                        <?php
+                        // check access and generate link for admin/racing-series/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
                             $adminRacingSeriesIdUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
                                     'racingSeriesID' => $this->escape($team['RacingSeries']['ID'])), 'adminRacingSeriesID'

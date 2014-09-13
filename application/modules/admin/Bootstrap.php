@@ -274,37 +274,37 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //POST TYPE CONTROLLER ROUTERS
         $router->addRoute(
-            'adminPostTypeID',
-            new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)\.html',
+            'adminPostCategoryID',
+            new Zend_Controller_Router_Route_Regex('admin/post-category/(\d+)\.html',
                 array(
                     'module' => 'admin',
-                    'controller' => 'post-type',
+                    'controller' => 'post-category',
                     'action' => 'id',
                     1 => 0), array(
-                    'postTypeID' => 1,
-                ), "admin/post-type/%d.html"
+                    'postCategoryID' => 1,
+                ), "admin/post-category/%d.html"
             ));
 
         $router->addRoute(
-            'adminPostTypeAction', new Zend_Controller_Router_Route_Regex('admin/post-type/(\d+)/(\w*)\.html', array(
+            'adminPostCategoryAction', new Zend_Controller_Router_Route_Regex('admin/post-category/(\d+)/(\w*)\.html', array(
                 'module' => 'admin',
-                'controller' => 'post-type',
+                'controller' => 'post-category',
                 'action' => 'id',
                 1 => 0), array(
-                'postTypeID' => 1,
+                'postCategoryID' => 1,
                 'action' => 2,
-            ), "admin/post-type/%d/%s.html"
+            ), "admin/post-category/%d/%s.html"
         ));
 
         $router->addRoute(
-            'adminPostTypeAll', new Zend_Controller_Router_Route_Regex('admin/post-type/all/page/(\d+)\.html', array(
+            'adminPostCategoryAll', new Zend_Controller_Router_Route_Regex('admin/post-category/all/page/(\d+)\.html', array(
                 'module' => 'admin',
-                'controller' => 'post-type',
+                'controller' => 'post-category',
                 'action' => 'all',
                 1 => 1
             ), array(
                 'page' => 1,
-            ), "admin/post-type/all/page/%s.html"
+            ), "admin/post-category/all/page/%s.html"
         ));
 
         //CONTENT TYPE CONTROLLER ROUTERS

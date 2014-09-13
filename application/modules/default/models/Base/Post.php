@@ -9,7 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Post', 'default');
  * 
  * @property integer $ID
  * @property integer $UserID
- * @property integer $PostTypeID
+ * @property integer $PostCategoryID
  * @property integer $ContentTypeID
  * @property string $Name
  * @property string $Preview
@@ -21,9 +21,9 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Post', 'default');
  * @property integer $Publish
  * @property integer $PublishToSlider
  * @property string $LastIP
- * @property Default_Model_User $User
- * @property Default_Model_PostType $PostType
  * @property Default_Model_ContentType $ContentType
+ * @property Default_Model_User $User
+ * @property Default_Model_PostCategory $PostCategory
  * @property Doctrine_Collection $Championship
  * @property Doctrine_Collection $Championship_4
  * 
@@ -54,7 +54,7 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('PostTypeID', 'integer', 4, array(
+        $this->hasColumn('PostCategoryID', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
@@ -164,24 +164,24 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'UserID',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_PostType as PostType', array(
-             'local' => 'PostTypeID',
-             'foreign' => 'ID'));
-
         $this->hasOne('Default_Model_ContentType as ContentType', array(
              'local' => 'ContentTypeID',
              'foreign' => 'ID'));
 
+        $this->hasOne('Default_Model_User as User', array(
+             'local' => 'UserID',
+             'foreign' => 'id'));
+
+        $this->hasOne('Default_Model_PostCategory as PostCategory', array(
+             'local' => 'PostCategoryID',
+             'foreign' => 'ID'));
+
         $this->hasMany('Default_Model_Championship as Championship', array(
-             'local' => 'id',
-             'foreign' => 'rule_id'));
+             'local' => 'ID',
+             'foreign' => 'game_id'));
 
         $this->hasMany('Default_Model_Championship as Championship_4', array(
-             'local' => 'id',
-             'foreign' => 'game_id'));
+             'local' => 'ID',
+             'foreign' => 'rule_id'));
     }
 }

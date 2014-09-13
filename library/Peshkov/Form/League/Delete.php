@@ -14,8 +14,8 @@ class Peshkov_Form_League_Delete extends Zend_Form
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $adminLeagueIDUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'league', 'action' => 'id', 'leagueID' => $request->getParam('leagueID')),
+        $defaultLeagueIDUrl = $this->getView()->url(
+            array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'leagueID' => $request->getParam('leagueID')),
             'defaultLeagueID'
         );
 
@@ -43,7 +43,7 @@ class Peshkov_Form_League_Delete extends Zend_Form
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminLeagueIDUrl}'")
+            ->setAttrib('onClick', "location.href='{$defaultLeagueIDUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

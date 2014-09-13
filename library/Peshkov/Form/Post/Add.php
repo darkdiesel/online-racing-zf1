@@ -38,7 +38,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
-        $urlImageLogo = new Zend_Form_Element_Text('Name');
+        $urlImageLogo = new Zend_Form_Element_Text('ImageUrl');
         $urlImageLogo->setLabel($this->translate('Картинка поста'))
             ->setOptions(array('maxLength' => 255, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Вставьте ссылку на картинку сюда'))
@@ -48,6 +48,8 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
+
+        //TODO: Uncoment this code for allow upload to server post image
 //        $urlImageLogo = new Zend_Form_Element_File('ImageUrl');
 //        $urlImageLogo->setLabel($this->translate('Картинка поста'))
 //            ->setAttrib('class', 'form-control')
@@ -59,20 +61,20 @@ class Peshkov_Form_Post_Add extends Zend_Form
 //            ->addValidator('Count', false, 1)
 //            ->setDecorators($this->getView()->getDecorator()->fileDecorators());
 
-        $postTypes = new Zend_Form_Element_Select('PostTypeID');
-        $postTypes->setLabel($this->translate('Типы постов'))
+        $postCategorys = new Zend_Form_Element_Select('PostCategoryID');
+        $postCategorys->setLabel($this->translate('Категория поста'))
             ->setOptions(array('class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Типы постов'))
             ->setRequired(true)
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-        foreach ($this->getPostTypes() as $postType) {
-            $postTypes->addMultiOption($postType['ID'], $postType['Name']);
+        foreach ($this->getPostCategorys() as $postCategory) {
+            $postCategorys->addMultiOption($postCategory['ID'], $postCategory['Name']);
         };
 
         $contentTypes = new Zend_Form_Element_Select('ContentTypeID');
-        $contentTypes->setLabel($this->translate('Типы контента'))
+        $contentTypes->setLabel($this->translate('Тип контента'))
             ->setOptions(array('class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Типы контента'))
             ->setRequired(true)
@@ -96,9 +98,9 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
         $text = new Zend_Form_Element_Textarea('Text');
-        $text->setLabel($this->translate('Текс'))
+        $text->setLabel($this->translate('Текст'))
             ->setOptions(array('class' => 'form-control'))
-            ->setAttrib('placeholder', $this->translate('Текс'))
+            ->setAttrib('placeholder', $this->translate('Текст'))
             ->setRequired(true)
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
@@ -116,7 +118,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             );
 
         $publishToSlider = new Zend_Form_Element_Checkbox('PublishToSlider');
-        $publishToSlider->setLabel($this->translate('Опубликовать в слайдер ? (Не работает)'))
+        $publishToSlider->setLabel($this->translate('Опубликовать в слайдер? (Не работает)'))
             ->setValue(0)
             ->setDecorators(
                 array(
@@ -155,7 +157,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->addElement($preview)
             ->addElement($text);
 
-        $this->addElement($postTypes)
+        $this->addElement($postCategorys)
             ->addElement($contentTypes);
 
         $this->addElement($publish)
@@ -167,7 +169,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                $this->getElement('PostTypeID'),
+                $this->getElement('PostCategoryID'),
                 $this->getElement('ContentTypeID'),
             ), 'PostSettings'
         );
@@ -216,10 +218,10 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
     }
 
-    private function getPostTypes()
+    private function getPostCategorys()
     {
         $query = Doctrine_Query::create()
-            ->from('Default_Model_PostType pt')
+            ->from('Default_Model_PostCategory pt')
             ->orderBy('pt.ID ASC');
 
         return $query->fetchArray();

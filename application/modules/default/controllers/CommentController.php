@@ -39,8 +39,8 @@ class CommentController extends App_Controller_LoaderController
                 $new_comment = $this->db->get('comment')->createRow($new_comment_data);
                 $new_comment->save();
 
-                $post_id_url = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $comment_add_form->getValue('post_id')), 'defaultPostId', true);
-                $this->redirect($post_id_url);
+                $defaultPostIDUrl = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $comment_add_form->getValue('post_id')), 'defaultPostID', true);
+                $this->redirect($defaultPostIDUrl);
             }
         }
 

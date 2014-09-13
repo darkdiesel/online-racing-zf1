@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_PostType_Add extends Zend_Form {
+class Application_Form_PostCategory_Add extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_PostType_Add extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/post-type/add');
-        $this->setName('postTypeAdd');
+        $this->setAction('/post-category/add');
+        $this->setName('postCategoryAdd');
         $this->setAttrib('class', 'white_box white_box_size_m');
 
         $this->addElement('text', 'name', array(

@@ -102,7 +102,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                      1            => 0,
                      2            => 1,
                 ), array(
-                        'postTypeID' => 1,
+                        'postCategoryID' => 1,
                         'page'         => 2,
                    ), "post/by-type/%d/page/%d.html"
             )
@@ -432,7 +432,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                         'action'     => 'by-type',
                         'route'      => 'defaultPostAllByType',
                         'params'     => array(
-                            'post_type_id' => '3'
+                            'postCategoryID' => '3'
                         )
                     ),
 //                    array(

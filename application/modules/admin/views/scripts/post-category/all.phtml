@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="fa fa-list"></i>
+                <?php
+                // check access and generate link for admin/post-category/add
+                if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'add')) : ?>
+                    <?php
+                    $adminPostCategoryAddUrl = $this->url(
+                        array('module' => 'admin', 'controller' => 'post-category', 'action' => 'add'), 'default'
+                    );
+                    ?>
+                    <a href="<?php echo $adminPostCategoryAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить категорию поста'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th class="post-category-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="post-category-name">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </th>
+                    <th class="post-category-description">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </th>
+                    <th class="post-category-action">
+                        <span><?php echo $this->translate('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->postCategoryData) : ?>
+                    <?php foreach ($this->postCategoryData as $postCategory): ?>
+                        <?php
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'id')) {
+                            $adminPostCategoryIDUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'post-category', 'action' => 'id',
+                                    'postCategoryID' => $this->escape($postCategory['ID'])), 'adminPostCategoryID'
+                            );
+                        } else {
+                            $adminPostCategoryIDUrl = '#';
+                        }
+
+                        ?>
+                        <tr>
+                            <td class="post-category-id">
+                                    <span>
+                                        <a href="<?php echo $adminPostCategoryIDUrl; ?>">
+                                            <?php echo $this->escape($postCategory['ID']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="post-category-name">
+                                    <span>
+                                        <a href="<?php echo $adminPostCategoryIDUrl; ?>">
+                                            <?php echo $this->escape($postCategory['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="post-category-description">
+                                    <span>
+                                        <?php echo $this->RenderContentTypeText($postCategory['Description'], 'full_html'); ?>
+                                    </span>
+                            </td>
+                            <td class="post-category-action">
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Категория поста"), false)->postCategoryMenu(
+                                            $this->escape($postCategory['ID']), true
+                                        );
+                                        ?>
+                                    </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix">
+                <?php if ($this->postCategoryData) : ?>
+                    <div class="pull-right">
+                        <?php echo $this->paginationControl(
+                            $this->postCategoryData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

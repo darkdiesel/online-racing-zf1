@@ -159,7 +159,7 @@ class Application_Model_DbTable_Post extends Zend_Db_Table_Abstract {
 	public function getPublishPostTitlesByTypeName($post_type_name, $order) {
 		$model = new self;
 
-		$post_type = new Application_Model_DbTable_PostType();
+		$post_type = new Application_Model_DbTable_PostCategory();
 		$post_type_data = $post_type->getItem(array('Name' => $post_type_name));
 
 		if (count($post_type_data) > 0) {

@@ -1,12 +1,13 @@
 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-    <div id="main-content">
-        <div class="row">
-                <div id="main-content-top" class="clearfix">
-                    <div class="page-header pull-left">
-                        <h3><?php echo $this->pageTitle() ?></h3>
+    <div id="main-content" >
+            <div class="row">
+                    <div id="main-content-top" class="clearfix">
+                        <div class="page-header pull-left">
+                            <h3><?php echo $this->pageTitle() ?></h3>
+                        </div>
                     </div>
-                </div>
-        </div>
-        <?php echo $this->layout()->content ?>
+            </div>
+            <?php echo $this->showMessages(); ?>
+            <?php echo $this->layout()->content ?>
     </div>
 </div>

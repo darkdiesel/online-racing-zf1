@@ -9,7 +9,7 @@ class LeagueController extends App_Controller_LoaderController
         $this->view->headTitle($this->view->translate('Лига'));
     }
 
-    // action for view racing series
+    // action for view league
     public function idAction()
     {
         // set filters and validators for GET input
@@ -43,6 +43,7 @@ class LeagueController extends App_Controller_LoaderController
                 //add breadscrumb
                 $this->view->breadcrumb()->LeagueAll('1')->league($requestData->leagueID, $result[0]['Name'], $requestData->page);
 
+                // TODO: update championship model to doctrine
                 $championship = new Application_Model_DbTable_Championship();
 
                 $page_count_items = 5;
@@ -72,7 +73,7 @@ class LeagueController extends App_Controller_LoaderController
         }
     }
 
-    // action for view all racing series
+    // action for view all league
     public function allAction()
     {
         // set filters and validators for GET input

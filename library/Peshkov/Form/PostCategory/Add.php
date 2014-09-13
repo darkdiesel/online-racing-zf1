@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_PostType_Add extends Zend_Form
+class Peshkov_Form_PostCategory_Add extends Zend_Form
 {
 
     protected function translate($str)
@@ -15,13 +15,13 @@ class Peshkov_Form_PostType_Add extends Zend_Form
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'post-type-add'
+                'id' => 'post-category-add'
             )
         )
-            ->setName('postTypeAdd')
+            ->setName('postCategoryAdd')
             ->setAction(
                 $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'post-type', 'action' => 'add'), 'default'
+                    array('module' => 'admin', 'controller' => 'post-category', 'action' => 'add'), 'default'
                 )
             )
             ->setMethod('post')
@@ -66,13 +66,13 @@ class Peshkov_Form_PostType_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminPostTypeAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'), 'adminPostTypeAll'
+        $adminPostCategoryAllUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'post-category', 'action' => 'all'), 'adminPostCategoryAll'
         );
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminPostTypeAllUrl}'")
+            ->setAttrib('onClick', "location.href='{$adminPostCategoryAllUrl}'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
@@ -88,12 +88,12 @@ class Peshkov_Form_PostType_Add extends Zend_Form
             array(
                 $this->getElement('Name'),
                 $this->getElement('Description')
-            ), 'PostTypeInfo'
+            ), 'PostCategoryInfo'
         );
 
-        $this->getDisplayGroup('PostTypeInfo')
+        $this->getDisplayGroup('PostCategoryInfo')
             ->setOrder(10)
-            ->setLegend('Информация о типе статьи')
+            ->setLegend('Информация о категории поста')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(

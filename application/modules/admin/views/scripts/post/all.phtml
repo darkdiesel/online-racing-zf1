@@ -26,11 +26,11 @@
                     <th class="post-name">
                         <span><?php echo $this->translate('Название'); ?></span>
                     </th>
-                    <th class="post-post-type">
-                        <span><?php echo $this->translate('Тип Поста'); ?></span>
-                    </th>
-                    <th class="user-series">
+                    <th class="post-user">
                         <span><?php echo $this->translate('Автор'); ?></span>
+                    </th>
+                    <th class="post-post-category">
+                        <span><?php echo $this->translate('Тип Поста'); ?></span>
                     </th>
                     <th class="post-action">
                         <span><?php echo $this->translate('Действие'); ?></span>
@@ -40,17 +40,22 @@
                 <tbody>
                 <?php if ($this->postData) : ?>
                     <?php foreach ($this->postData as $post): ?>
-                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
-                            $adminPostIdUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'post', 'action' => 'id',
-                                    'postID' => $this->escape($post['ID'])), 'adminPostID'
+
+                        <?php
+                        // check access and generate link for default/post/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
+                            $defaultPostIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                                    'postID' => $this->escape($post['ID'])), 'defaultPostID'
                             );
                         } else {
-                            $adminPostIdUrl = '#';
+                            $defaultPostIDUrl = '#';
                         }
                         ?>
 
-                        <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+                        <?php
+                        // check access and generate link for default/user/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
                             $defaultUserIdUrl = $this->url(
                                 array('module' => 'default', 'controller' => 'user', 'action' => 'id',
                                     'user_id' => $this->escape($post['User']['id'])), 'defaultUserId'
@@ -59,19 +64,22 @@
                             $defaultUserIdUrl = '#';
                         }
                         ?>
-                        <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'id')) {
-                            $adminPostTypeIdUrl = $this->url(
-                                array('module' => 'default', 'controller' => 'post-type', 'action' => 'id',
-                                    'postTypeID' => $this->escape($post['PostType']['ID'])), 'adminPostTypeID'
+
+                        <?php
+                        // check access and generate link for admin/post-category/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'id')) {
+                            $adminPostCategoryIdUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'post-category', 'action' => 'id',
+                                    'postCategoryID' => $this->escape($post['PostCategory']['ID'])), 'adminPostCategoryID'
                             );
                         } else {
-                            $adminPostTypeIdUrl = '#';
+                            $adminPostCategoryIdUrl = '#';
                         }
                         ?>
                         <tr>
                             <td class="post-id">
                                     <span>
-                                        <a href="<?php echo $adminPostIdUrl; ?>">
+                                        <a href="<?php echo $defaultPostIDUrl; ?>">
                                             <?php echo $this->escape($post['ID']) ?>
                                         </a>
                                     </span>
@@ -79,7 +87,8 @@
                             <td class="post-publish text-center">
                                     <span>
                                         <?php if ($this->escape($post['Publish'])) { ?>
-                                            <span class='label label-success'><i class="fa fa-check fa-lg"></i></i></span>
+                                            <span class='label label-success'><i
+                                                    class="fa fa-check fa-lg"></i></i></span>
                                         <?php } else { ?>
                                             <span class='label label-danger'><i
                                                     class="fa fa-times fa-lg"></i></span>
@@ -88,22 +97,22 @@
                             </td>
                             <td class="post-name">
                                     <span>
-                                        <a href="<?php echo $adminPostIdUrl; ?>">
+                                        <a href="<?php echo $defaultPostIDUrl; ?>">
                                             <?php echo $this->escape($post['Name']) ?>
                                         </a>
                                     </span>
                             </td>
-                            <td class="post-post-type">
-                                    <span>
-                                        <a target="blank" href="<?php echo $adminPostTypeIdUrl; ?>">
-                                            <?php echo $this->escape($post['PostType']['Name']) ?>
-                                        </a>
-                                    </span>
-                            </td>
-                            <td class="user-series">
+                            <td class="post-user">
                                     <span>
                                         <a target="blank" href="<?php echo $defaultUserIdUrl; ?>">
                                             <?php echo $this->escape($post['User']['login']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="post-post-category">
+                                    <span>
+                                        <a target="blank" href="<?php echo $adminPostCategoryIdUrl; ?>">
+                                            <?php echo $this->escape($post['PostCategory']['Name']) ?>
                                         </a>
                                     </span>
                             </td>

@@ -38,7 +38,7 @@ class Application_Form_Post_Edit extends Zend_Form {
 
 		// artcile type
 		$this->addElement('select', 'post_type', array(
-			'label' => $this->translate('Тип поста'),
+			'label' => $this->translate('Категория поста'),
 			//'multiOptions' => array(1 => '1',2 => '2', 3=>'3'),
 			'required' => true,
 			'class' => 'form-control',

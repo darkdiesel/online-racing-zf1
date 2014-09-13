@@ -169,7 +169,7 @@ class Application_Form_Race_Edit extends Zend_Form {
 		$this->addElement('button', 'cancel', array(
 			'ignore' => true,
 			'class' => 'btn btn-default',
-			'onClick' => "location.href='/post-type/all'",
+			'onClick' => "location.href='/post-category/all'",
 			'label' => $this->translate('Отмена'),
 			'decorators' => array(
 				'ViewHelper', 'HtmlTag',

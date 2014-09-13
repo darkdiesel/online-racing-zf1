@@ -66,14 +66,14 @@
         </li>
         <li>
             <?php
-            $adminPostTypeAllUrl = $this->url(
-                array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all'),
-                'adminPostTypeAll', true
+            $adminPostCategoryAllUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'post-category', 'action' => 'all'),
+                'adminPostCategoryAll', true
             )
             ?>
-            <a href="<?php echo $adminPostTypeAllUrl; ?>">
+            <a href="<?php echo $adminPostCategoryAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Типы постов'); ?>
+                <?php echo $this->translate('Категории постов'); ?>
             </a>
         </li>
     </ul>

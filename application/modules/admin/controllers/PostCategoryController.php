@@ -1,12 +1,12 @@
 <?php
 
-class Admin_PostTypeController extends App_Controller_LoaderController
+class Admin_PostCategoryController extends App_Controller_LoaderController
 {
 
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Тип статьи'));
+        $this->view->headTitle($this->view->translate('Категория поста'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -17,10 +17,10 @@ class Admin_PostTypeController extends App_Controller_LoaderController
     {
         // set filters and validators for GET input
         $filters = array(
-            'postTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+            'postCategoryID' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
         $validators = array(
-            'postTypeID' => array('NotEmpty', 'Int')
+            'postCategoryID' => array('NotEmpty', 'Int')
         );
         $requestData = new Zend_Filter_Input($filters, $validators);
         $requestData->setData($this->getRequest()->getParams());
@@ -30,27 +30,27 @@ class Admin_PostTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Default_Model_PostType pt')
-                ->where('pt.ID = ?', $requestData->postTypeID);
+                ->from('Default_Model_PostCategory pc')
+                ->where('pc.ID = ?', $requestData->postCategoryID);
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                $this->view->postTypeData = $result[0];
+                $this->view->postCategoryData = $result[0];
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Тип статьи') . ' :: ' . $result[0]['Name']
+                    $this->view->translate('Категория поста') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
+                $this->messages->addError($this->view->translate('Запрашиваемая категория поста не найдена!'));
 
                 $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+                $this->view->headTitle($this->view->translate('Категория поста не найдена!'));
 
                 $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Тип статьи не найден!'));
+                $this->view->pageTitle($this->view->translate('Категория поста не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -75,25 +75,25 @@ class Admin_PostTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Типы статей'));
+            $this->view->pageTitle($this->view->translate('Категории постов'));
 
             $query = Doctrine_Query::create()
-                ->from('Default_Model_PostType pt')
-                ->orderBy('pt.ID ASC');
+                ->from('Default_Model_PostCategory pc')
+                ->orderBy('pc.ID ASC');
 
             $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-            $postTypePaginator = new Zend_Paginator($adapter);
+            $postCategoryPaginator = new Zend_Paginator($adapter);
             // pager settings
-            $postTypePaginator->setItemCountPerPage("10");
-            $postTypePaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
-            $postTypePaginator->setPageRange("5");
+            $postCategoryPaginator->setItemCountPerPage("10");
+            $postCategoryPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $postCategoryPaginator->setPageRange("5");
 
-            if ($postTypePaginator->count() == 0) {
-                $this->view->postTypeData = false;
+            if ($postCategoryPaginator->count() == 0) {
+                $this->view->postCategoryData = false;
                 $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
             } else {
-                $this->view->postTypeData = $postTypePaginator;
+                $this->view->postCategoryData = $postCategoryPaginator;
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -104,24 +104,24 @@ class Admin_PostTypeController extends App_Controller_LoaderController
     public function addAction()
     {
         $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить тип статьи'));
+        $this->view->pageTitle($this->view->translate('Добавить категорию поста'));
 
         // form
-        $postTypeAddForm = new Peshkov_Form_PostType_Add();
-        $this->view->postTypeAddForm = $postTypeAddForm;
+        $postCategoryAddForm = new Peshkov_Form_PostCategory_Add();
+        $this->view->postCategoryAddForm = $postCategoryAddForm;
 
         // test for valid input
         // if valid, populate model
         // assign default values for some fields
         // save to database
         if ($this->getRequest()->isPost()) {
-            if ($postTypeAddForm->isValid($this->getRequest()->getPost())) {
+            if ($postCategoryAddForm->isValid($this->getRequest()->getPost())) {
 
                 $date = date('Y-m-d H:i:s');
 
-                $item = new Default_Model_PostType();
+                $item = new Default_Model_PostCategory();
 
-                $item->fromArray($postTypeAddForm->getValues());
+                $item->fromArray($postCategoryAddForm->getValues());
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
@@ -129,8 +129,8 @@ class Admin_PostTypeController extends App_Controller_LoaderController
 
                 $this->redirect(
                     $this->view->url(
-                        array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id',
-                            'postTypeID' => $item->ID), 'adminPostTypeID'
+                        array('module' => 'admin', 'controller' => 'post-category', 'action' => 'id',
+                            'postCategoryID' => $item->ID), 'adminPostCategoryID'
                     )
                 );
 
@@ -147,14 +147,14 @@ class Admin_PostTypeController extends App_Controller_LoaderController
     public function editAction()
     {
         $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать тип статьи'));
+        $this->view->pageTitle($this->view->translate('Редактировать категорию поста'));
 
         // set filters and validators for GET input
         $filters = array(
-            'postTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+            'postCategoryID' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
         $validators = array(
-            'postTypeID' => array('NotEmpty', 'Int')
+            'postCategoryID' => array('NotEmpty', 'Int')
         );
         $requestData = new Zend_Filter_Input($filters, $validators);
         $requestData->setData($this->getRequest()->getParams());
@@ -164,14 +164,14 @@ class Admin_PostTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
 
-            $postTypeEditForm = new Peshkov_Form_PostType_Edit();
-            $this->view->postTypeEditForm = $postTypeEditForm;
+            $postCategoryEditForm = new Peshkov_Form_PostCategory_Edit();
+            $this->view->postCategoryEditForm = $postCategoryEditForm;
 
             if ($this->getRequest()->isPost()) {
-                if ($postTypeEditForm->isValid($this->getRequest()->getPost())) {
-                    $formData = $postTypeEditForm->getValues();
+                if ($postCategoryEditForm->isValid($this->getRequest()->getPost())) {
+                    $formData = $postCategoryEditForm->getValues();
 
-                    $item = Doctrine_Core::getTable('Default_Model_PostType')->find($requestData->postTypeID);
+                    $item = Doctrine_Core::getTable('Default_Model_PostCategory')->find($requestData->postCategoryID);
 
                     // set edit date
                     $formData['DateEdit'] = date('Y-m-d H:i:s');
@@ -181,12 +181,12 @@ class Admin_PostTypeController extends App_Controller_LoaderController
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
 
-                    $adminPostTypeIDUrl = $this->view->url(
-                        array('module' => 'admin', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $requestData->postTypeID),
-                        'adminPostTypeID'
+                    $adminPostCategoryIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'post-category', 'action' => 'id', 'postCategoryID' => $requestData->postCategoryID),
+                        'adminPostCategoryID'
                     );
 
-                    $this->redirect($adminPostTypeIDUrl);
+                    $this->redirect($adminPostCategoryIDUrl);
                 } else {
                     $this->messages->addError(
                         $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -197,24 +197,24 @@ class Admin_PostTypeController extends App_Controller_LoaderController
                 // retrieve requested record
                 // pre-populate form
                 $query = Doctrine_Query::create()
-                    ->from('Default_Model_PostType pt')
-                    ->where('pt.ID = ?', $requestData->postTypeID);
+                    ->from('Default_Model_PostCategory pc')
+                    ->where('pc.ID = ?', $requestData->postCategoryID);
 
                 $result = $query->fetchArray();
 
                 if (count($result) == 1) {
-                    $this->view->postTypeData = $result[0];
-                    $this->view->postTypeEditForm->populate($result[0]);
+                    $this->view->postCategoryData = $result[0];
+                    $this->view->postCategoryEditForm->populate($result[0]);
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
+                    $this->messages->addError($this->view->translate('Запрашиваемая категория поста не найдена!'));
 
                     $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+                    $this->view->headTitle($this->view->translate('Категория поста не найдена!'));
 
                     $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Тип статьи не найден!'));
+                    $this->view->pageTitle($this->view->translate('Категория поста не найдена!'));
                 }
             }
 
@@ -227,14 +227,14 @@ class Admin_PostTypeController extends App_Controller_LoaderController
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить тип статьи'));
+        $this->view->pageTitle($this->view->translate('Удалить категорию поста'));
 
         // set filters and validators for GET input
         $filters = array(
-            'postTypeID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+            'postCategoryID' => array('HtmlEntities', 'StripTags', 'StringTrim')
         );
         $validators = array(
-            'postTypeID' => array('NotEmpty', 'Int')
+            'postCategoryID' => array('NotEmpty', 'Int')
         );
         $requestData = new Zend_Filter_Input($filters, $validators);
         $requestData->setData($this->getRequest()->getParams());
@@ -244,29 +244,29 @@ class Admin_PostTypeController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Default_Model_PostType pt')
-                ->where('pt.ID = ?', $requestData->postTypeID);
+                ->from('Default_Model_PostCategory pc')
+                ->where('pc.ID = ?', $requestData->postCategoryID);
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                // Create content-type delete form
-                $postTypeDeleteForm = new Peshkov_Form_PostType_Delete();
+                // Create post-category delete form
+                $postCategoryDeleteForm = new Peshkov_Form_PostCategory_Delete();
 
-                $this->view->postTypeData = $result[0];
-                $this->view->postTypeDeleteForm = $postTypeDeleteForm;
+                $this->view->postCategoryData = $result[0];
+                $this->view->postCategoryDeleteForm = $postCategoryDeleteForm;
 
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить тип статьи')
+                    $this->view->translate('Вы действительно хотите удалить категорию поста')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
                 if ($this->getRequest()->isPost()) {
-                    if ($postTypeDeleteForm->isValid($this->getRequest()->getPost())) {
+                    if ($postCategoryDeleteForm->isValid($this->getRequest()->getPost())) {
                         $query = Doctrine_Query::create()
-                            ->delete('Default_Model_PostType pt')
-                            ->whereIn('pt.ID', $requestData->postTypeID);
+                            ->delete('Default_Model_PostCategory pc')
+                            ->whereIn('pc.ID', $requestData->postCategoryID);
 
                         $result = $query->execute();
 
@@ -274,16 +274,16 @@ class Admin_PostTypeController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Тип статьи <strong>" . $this->view->postTypeData['Name'] . "</strong> успешно удален."
+                            $this->view->translate("Категория контента <strong>" . $this->view->postCategoryData['Name'] . "</strong> успешно удален."
                             )
                         );
 
-                        $adminPostTypeAllUrl = $this->view->url(
-                            array('module' => 'admin', 'controller' => 'post-type', 'action' => 'all', 'page' => 1),
-                            'adminPostTypeAll'
+                        $adminPostCategoryAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'post-category', 'action' => 'all', 'page' => 1),
+                            'adminPostCategoryAll'
                         );
 
-                        $this->redirect($adminPostTypeAllUrl);
+                        $this->redirect($adminPostCategoryAllUrl);
                     } else {
                         $this->messages->addError(
                             $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
@@ -294,13 +294,13 @@ class Admin_PostTypeController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемый тип статьи не найден!'));
+                $this->messages->addError($this->view->translate('Запрашиваемая категория поста не найдена!'));
 
                 $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Тип статьи не найден!'));
+                $this->view->headTitle($this->view->translate('Категория поста не найдена!'));
 
                 $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Тип статьи не найден!'));
+                $this->view->pageTitle($this->view->translate('Категория поста не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

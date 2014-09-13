@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="block-body">
-            <?php if (count($this->post_data) > 0) { ?>
+            <?php if (count($this->postData) > 0) { ?>
                 <?php
                 $filter = new Zend_Filter();
                 $filter->addFilter(new Zend_Filter_StripTags())
@@ -18,50 +18,59 @@
                 //create comment db model
                 $comment_db = new Application_Model_DbTable_Comment();
                 ?>
-                <?php foreach ($this->post_data as $post) : ?>
+                <?php foreach ($this->postData as $post) : ?>
                     <?php
-                    $default_post_id_url = $this->url(
-                        array('module' => 'default', 'controller' => 'post', 'action' => 'id',
-                            'post_id' => $this->escape($post->id)), 'defaultPostId', true
-                    );
+                    // check access and generate link for default/post/id
+                    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
+                        $defaultPostIDUrl = $this->url(
+                            array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                                'postID' => $this->escape($post['ID'])), 'defaultPostID'
+                        );
+                    } else {
+                        $defaultPostIDUrl = '#';
+                    }
 
+                    ?>
+
+                    <?php
                     /*
                      * TODO: Add method for comment model for countiong comments
+                     * TODO: Update comment model to doctrine1
                      */
-                    $comment_idencity_args = array('post_id' => $post->id);
-                    $post_comment_data = $comment_db->getAll($comment_idencity_args);
-                    if ($post_comment_data) {
-                        $comments_count = count($post_comment_data);
+                    $comment_idencity_args = array('post_id' => $post['ID']);
+                    $postCommentData = $comment_db->getAll($comment_idencity_args);
+                    if ($postCommentData) {
+                        $commentsCount = count($postCommentData);
                     } else {
-                        $comments_count = 0;
+                        $commentsCount = 0;
                     }
                     ?>
                     <div class="block block-default block-ui-bordered m-b-5">
                         <?php
                         echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
-                            $this->escape($post->id)
+                            $this->escape($post['ID'])
                         );
                         ?>
                         <div class="block-body clearfix">
-                            <?php if ($post->image) : ?>
-                                <a class="pull-left m-r-10" href="<?php echo $default_post_id_url; ?>">
+                            <?php if ($post['ImageUrl']) : ?>
+                                <a class="pull-left m-r-10" href="<?php echo $defaultPostIDUrl; ?>">
                                     <div class="img-wrapper-100-100">
                                         <img class="media-object img-thumbnail img-responsive img-size-100"
-                                             src="<?php echo $post->image; ?>" alt="<?php echo $post->name; ?>"/>
+                                             src="<?php echo $post['ImageUrl']; ?>" alt="<?php echo $post['Name']; ?>"/>
                                     </div>
                                 </a>
                             <?php endif; ?>
                             <h4 class="block-title m-b-10">
-                                <a href="<?php echo $default_post_id_url; ?>">
-                                    <?php echo $this->truncate($this->escape($post->name))->toLength(100); ?>
+                                <a href="<?php echo $defaultPostIDUrl; ?>">
+                                    <?php echo $this->truncate($this->escape($post['Name']))->toLength(100); ?>
                                 </a>
                             </h4>
                             <?php
-                            if ($post->preview != '') {
-                                echo $this->escape($post->preview);
+                            if ($post['Preview'] != '') {
+                                echo $this->escape($post['Preview']);
                             } else {
                                 echo $bbcode->render(
-                                    (string)($this->truncate($this->escape($post->text))->toLength(250))
+                                    (string)($this->truncate($this->escape($post['Text']))->toLength(250))
                                 );
                             }
                             ?>
@@ -70,16 +79,16 @@
                             <div class="pull-left m-r-15 tooltip-field"
                                  data-title="<?php echo $this->translate('Просмотров'); ?>" data-placement="bottom">
                                 <i class="fa fa-eye fa-lg"></i>
-                                <?php echo $this->escape($post->views); ?>
+                                <?php echo $this->escape($post['Views']); ?>
                             </div>
                             <div class="pull-left m-r-15 tooltip-field"
                                  data-title="<?php echo $this->translate('Комментарии'); ?>" data-placement="bottom">
                                 <i class="fa fa-comments-o fa-lg"></i>
-                                <?php echo $comments_count; ?>
+                                <?php echo $commentsCount; ?>
                             </div>
                             <div class="pull-right tooltip-field"
                                  data-title="<?php echo $this->translate('Читать дальше'); ?>" data-placement="bottom">
-                                <a href="<?php echo $default_post_id_url ?>"
+                                <a href="<?php echo $defaultPostIDUrl ?>"
                                    class="block-content-button-more">
                                     <i class="fa fa-hand-o-right fa-lg"></i>
                                 </a>

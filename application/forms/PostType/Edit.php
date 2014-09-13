@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_PostType_Edit extends Zend_Form {
+class Application_Form_PostCategory_Edit extends Zend_Form {
 
     protected function translate($str) {
         $translate = new Zend_View_Helper_Translate();
@@ -10,8 +10,8 @@ class Application_Form_PostType_Edit extends Zend_Form {
 
     public function init() {
         $this->setMethod('post');
-        $this->setAction('/post-type/edit');
-        $this->setName('postTypeEdit');
+        $this->setAction('/post-category/edit');
+        $this->setName('postCategoryEdit');
         $this->setAttrib('class', 'white_box white_box_size_m');
 
         $this->addElement('text', 'name', array(
@@ -69,7 +69,7 @@ class Application_Form_PostType_Edit extends Zend_Form {
         $this->addElement('button', 'cancel', array(
             'ignore' => true,
             'class' => 'btn btn-default',
-            'onClick' => "location.href='/post-type/all'",
+            'onClick' => "location.href='/post-category/all'",
             'label' => $this->translate('Отмена'),
             'decorators' => array(
                 'ViewHelper', 'HtmlTag',

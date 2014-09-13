@@ -1,39 +1,115 @@
-<?php if ($this->post) { ?>
-    <?php echo $this->form; ?>
-    <div class="post_item block-item">
-        <div class="block-item-content">
-	    <?php if ($this->post['image'] != '') { ?>
-		<div class="center-block">
-		    <div class="img-thumbnail text-center post_id_logo_wrapper_690 img-wrapper-690 overflow-hide">
-			<img class="post_id_logo img-size-690 img-responsive" src="<?php echo $this->escape($this->post['image']); ?>">
-		    </div>
-		</div>
-	    <?php } ?>
-    	<div class="block-content-text">
-		<?php
-		echo $this->RenderContentTypeText($this->post['text'], $this->post['content_type_name']);
-		?>
-    	</div>
-    	<div class="post_info block-item-info-bottom">
-    	    <div class="content_category block-item-info-bottom-item">
-    		<span class="text-bold font-color-black"><?php echo $this->translate('Категория контента') ?>: </span><?php echo $this->escape($this->post['post_type_name']); ?>
-    	    </div>
-    	    <div class="post_author block-item-info-bottom-item">
-    		<span class="text-bold font-color-black"><?php echo $this->translate('Автор') ?>: </span>
-    		<a href="<?php echo $this->url(array('module' => 'default','controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($this->post->user_id)), 'defaultUserId', true) ?>" target="_blank"><?php echo $this->escape($this->post->user_login); ?></a>
-    	    </div>
-    	    <div class="post_views block-item-info-bottom-item">
-    		<span class="text-bold font-color-black"><?php echo $this->translate('Просмотров') ?>: </span><?php echo $this->escape($this->post['views']); ?>
-    	    </div>
-    	    <div class="post_date_create block-item-info-bottom-item">
-    		<span class="text-bold font-color-black"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->post['date_create']); ?>
-    	    </div>
-		<?php if ($this->escape($this->post['date_create']) != $this->escape($this->post['date_edit'])) { ?>
-		    <div class="post_date_edit block-item-info-bottom-item">
-			<span class="text-bold font-color-black"><?php echo $this->translate('Редактировалось') ?>: </span><?php echo $this->escape($this->post['date_edit']); ?>
-		    </div>
-		<?php } ?>
-    	</div>
+<?php if ($this->postData) { ?>
+    <div class="m-b-10">
+        <?php echo $this->postDeleteForm; ?>
+        <hr/>
+    </div>
+    <?php
+    // check access and generate link for user
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+        $defaultUserIdUrl = $this->url(
+            array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                'user_id' => $this->escape($this->postData['User']['id'])), 'defaultUserId'
+        );
+    } else {
+        $defaultUserIdUrl = '#';
+    }
+    ?>
+
+    <?php
+    // check access and generate link for post-category
+    if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'id')) {
+        $adminPostCategoryIdUrl = $this->url(
+            array('module' => 'default', 'controller' => 'post-category', 'action' => 'id',
+                'postCategoryID' => $this->escape($this->postData['PostCategory']['ID'])), 'adminPostCategoryID'
+        );
+    } else {
+        $adminPostCategoryIdUrl = '#';
+    }
+    ?>
+    <div class="block block-default block-ui-bordered">
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->postData['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Опубликована'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <?php if ($this->escape($this->postData['Publish'])) { ?>
+                                <span class='label label-success'><i
+                                        class="fa fa-check fa-lg"></i></i></span>
+                            <?php } else { ?>
+                                <span class='label label-danger'><i
+                                        class="fa fa-times fa-lg"></i></span>
+                            <?php } ?>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Картинка поста'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <img
+                                src="<?php echo $this->baseUrl($this->escape($this->postData['ImageUrl'])); ?>">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Автор'); ?></span>
+                    </td>
+                    <td>
+                    <span>
+                        <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
+                            <?php echo $this->escape($this->postData['User']['login']); ?>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Тип Поста'); ?></span>
+                    </td>
+                    <td>
+                    <span>
+                        <a target="blank" href="<?php echo $adminPostCategoryIdUrl; ?>">
+                            <?php echo $this->escape($this->postData['PostCategory']['Name']) ?>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Пост'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->postData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->postData['DateCreate']) != $this->escape($this->postData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->postData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 <?php } ?>

@@ -34,8 +34,8 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
     {
         if ($addIDurl) {
             if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
-                $link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $postID), 'defaultPostID', true);
-                array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+                $link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $postID), 'defaultPostAction', true);
+                array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_view_icon  . $this->view->translate('Просмотр') . '</a>');
             }
         }
 
@@ -200,22 +200,22 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function postTypeMenu($postTypeID, $addIDurl = false)
+    public function postCategoryMenu($postCategoryID, $addIDurl = false)
     {
         if ($addIDurl) {
-            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'id')) {
-                $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'id', 'postTypeID' => $postTypeID), 'adminPostTypeID', true);
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'post-category', 'action' => 'id', 'postCategoryID' => $postCategoryID), 'adminPostCategoryID', true);
                 array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
             }
         }
 
-        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'edit')) {
-            $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'edit', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'edit')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'post-category', 'action' => 'edit', 'postCategoryID' => $postCategoryID), 'adminPostCategoryAction', true);
             array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
         }
 
-        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-type', 'delete')) {
-            $url = $this->view->url(array('module' => 'default', 'controller' => 'post-type', 'action' => 'delete', 'postTypeID' => $postTypeID), 'adminPostTypeAction', true);
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'delete')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'post-category', 'action' => 'delete', 'postCategoryID' => $postCategoryID), 'adminPostCategoryAction', true);
             array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
         }
 

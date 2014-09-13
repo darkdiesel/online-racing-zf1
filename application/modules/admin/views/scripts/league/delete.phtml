@@ -3,7 +3,9 @@
         <?php echo $this->leagueDeleteForm; ?>
         <hr/>
     </div>
-    <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+    <?php
+    // check access and generate link for default/user/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
         $defaultUserIdUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
                 'user_id' => $this->escape($this->leagueData['User']['id'])), 'defaultUserId'
@@ -26,12 +28,24 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
+                        <span><?php echo $this->translate('Логотип лиги'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <img class="image-responsive"
+                                src="<?php echo $this->baseUrl($this->escape($this->leagueData['UrlImageLogo'])); ?>">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
                         <span><?php echo $this->translate('Администратор'); ?></span>
                     </td>
                     <td>
                     <span>
-                        <a target="_blank"
-                           href="<?php echo $defaultUserIdUrl; ?>"><?php echo $this->escape($this->leagueData['User']['login']); ?></a>
+                        <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
+                            <?php echo $this->escape($this->leagueData['User']['login']); ?>
+                        </a>
                     </span>
                     </td>
                 </tr>

@@ -57,7 +57,7 @@ class App_Controller_Action_Helper_DB extends Zend_Controller_Action_Helper_Abst
 				$this->db[$db_name] = new Application_Model_DbTable_Post();
 				break;
 			case "post_type":
-				$this->db[$db_name] = new Application_Model_DbTable_PostType();
+				$this->db[$db_name] = new Application_Model_DbTable_PostCategory();
 				break;
             case "comment":
 				$this->db[$db_name] = new Application_Model_DbTable_Comment();

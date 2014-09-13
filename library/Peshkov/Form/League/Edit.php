@@ -10,7 +10,7 @@ class Peshkov_Form_League_Edit extends Peshkov_Form_League_Add
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
         $adminLeagueIDUrl = $this->getView()->url(
-            array('default' => 'admin', 'controller' => 'league', 'action' => 'id', 'leagueID' => $request->getParam('leagueID')),
+            array('default' => 'default', 'controller' => 'league', 'action' => 'id', 'leagueID' => $request->getParam('leagueID')),
             'defaultLeagueID'
         );
 

@@ -22,10 +22,18 @@ class IndexController extends App_Controller_LoaderController
         $this->view->rss_index = $index;
         $this->view->rss_element = $element;
 
-        // get last publish posts
-        $post = new Application_Model_DbTable_Post();
-        $post_data = $post->getLastPublishPost(10, 'DESC');
-        $this->view->post_data = $post_data;
+        // Get Last Publish Posts
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_Post p')
+            ->leftJoin('p.User u')
+            ->leftJoin('p.ContentType ct')
+            ->leftJoin('p.PostCategory pt')
+            ->where('p.Publish = ?', 1)
+            ->limit(10)
+            ->orderBy('p.ID DESC');
+        $result = $query->fetchArray();
+
+        $this->view->postData = $result;
 
         // Gel Leagues
         $query = Doctrine_Query::create()

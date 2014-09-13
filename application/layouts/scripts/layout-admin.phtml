@@ -50,7 +50,7 @@ $this->minifyHeadLink()->appendStylesheet('/css/buttons.css');
 
     <?php echo $this->jQuery(); ?>
 </head>
-<body>
+<body id="<?php echo $this->module . '-' . $this->controller . '-' . $this->action; ?>">
 <div id="page-wrapper">
     <div id="page">
         <div class="container-fluid">

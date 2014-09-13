@@ -777,8 +777,8 @@ Default_Model_Post:
       local: content_type_id
       foreign: id
       type: one
-    PostType:
-      class: Default_Model_PostType
+    PostCategory:
+      class: Default_Model_PostCategory
       local: post_type_id
       foreign: id
       type: one
@@ -792,7 +792,7 @@ Default_Model_Post:
       local: id
       foreign: game_id
       type: many
-Default_Model_PostType:
+Default_Model_PostCategory:
   connection: default
   tableName: post_type
   columns:

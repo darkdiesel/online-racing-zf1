@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_DbTable_PostType extends Zend_Db_Table_Abstract {
+class Application_Model_DbTable_PostCategory extends Zend_Db_Table_Abstract {
 
 	protected $_name = 'post_type';
 	protected $_primary = 'ID';

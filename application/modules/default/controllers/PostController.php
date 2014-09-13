@@ -1,167 +1,177 @@
 <?php
 
-class PostController extends App_Controller_LoaderController {
+class PostController extends App_Controller_LoaderController
+{
 
-	public function init() {
-		parent::init();
-		$this->view->headTitle($this->view->translate('Контент'));
-	}
+    public function init()
+    {
+        parent::init();
+        $this->view->headTitle($this->view->translate('Контент'));
+    }
 
-	// action for view post
-	public function idAction() {
-		$request = $this->getRequest();
-		$post_id = (int) $request->getParam('post_id');
+    // action for view post
+    public function idAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'postID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'postID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        //get post
-		$post_data = $this->db->get('post')->getItem($post_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Post p')
+                ->leftJoin('p.User u')
+                ->leftJoin('p.ContentType ct')
+                ->leftJoin('p.PostCategory pt')
+                ->where('p.ID = ?', $requestData->postID)
+                ->andWhere('p.Publish = ?', 1);
+            $result = $query->fetchArray();
 
-		if ($post_data) {
-			//Set breadcrumb for this page
-			$this->view->breadcrumb()->PostAll('1')->Post($post_id, $post_data->name);
+            if (count($result) == 1) {
+                $this->view->postData = $result[0];
 
-			// Set head and page titles
-			$this->view->headTitle($post_data->name);
-			$this->view->pageTitle($post_data->name);
+                $this->view->headTitle($result[0]['Name']);
+                $this->view->pageTitle($result[0]['Name']);
 
-            //get posts comment
-            $comment_idencity_args = array('post_id' => $post_id);
-            $post_comment_data = $this->db->get('comment')->getAll($comment_idencity_args);
+                //get posts comment
+                //TODO: Update comment model to Doctrine1
+                $comment_idencity_args = array('post_id' => $result[0]['ID']);
+                $postCommentData = $this->db->get('comment')->getAll($comment_idencity_args);
 
-            //create and setup comment_add form
-            $comment_add_form = new Application_Form_Comment_Add();
-            $comment_add_form->setAction($this->view->url(array('controller' => 'comment', 'action' => 'add'), 'default', true));
+                //create and setup comment_add form
+                $commentAddForm = new Application_Form_Comment_Add();
+                $commentAddForm->setAction($this->view->url(array('controller' => 'comment', 'action' => 'add'), 'default', true));
 
-            $comment_add_form->post_id->setvalue($post_id);
+                $commentAddForm->post_id->setvalue($result[0]['ID']);
 
-            $this->view->post_data = $post_data;
-            $this->view->post_comment_data = $post_comment_data;
-            $this->view->comment_add_form = $comment_add_form;
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не найден!'));
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Контент не существует!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
-		}
-	}
+                $this->view->postCommentData = $postCommentData;
+                $this->view->commentAddForm = $commentAddForm;
 
-	// action for view all posts
-	public function allAction() {
-		$this->view->headTitle($this->view->translate('Контент сайта'));
-		$this->view->pageTitle($this->view->translate('Контент сайта'));
+                //add breadscrumb
+                $this->view->breadcrumb()->PostAll('1')->Post($result[0]['ID'], $result[0]['Name']);
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-		// pager settings
-		$page_count_items = 10;
-		$page_range = 10;
-		$items_order = 'DESC';
-		$page = $this->getRequest()->getParam('page');
+                $this->messages->addError($this->view->translate('Запрашиваемый пост не найден!'));
 
-		$this->view->breadcrumb()->PostAll($page);
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Пост не найден!'));
 
-		$post = new Application_Model_DbTable_Post();
-		$paginator = $post->getPublishedPostsPager($page_count_items, $page, $page_range, $items_order);
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Пост не найден!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-		if (count($paginator)) {
-			$this->view->paginator = $paginator;
-		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемый контент на сайте не найден!'));
-		}
-	}
+    // action for view all posts
+    public function allAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-	// action for delete post
-	public function deleteAction() {
-		$this->view->headTitle($this->view->translate('Удалить'));
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $this->view->headTitle($this->view->translate('Все'));
+            $this->view->pageTitle($this->view->translate('Контент'));
 
-		$request = $this->getRequest();
-		$post_id = (int) $request->getParam('post_id');
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Post p')
+                ->leftJoin('p.User u')
+                ->leftJoin('p.ContentType ct')
+                ->leftJoin('p.PostCategory pt')
+                ->where('p.Publish = ?', 1)
+                ->orderBy('p.ID DESC');
 
-		$post = new Application_Model_DbTable_Post();
-		$post_data = $post->getPostData($post_id);
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-		if ($post_data) {
-			//page title
-			$this->view->headTitle($post_data->title);
-			$this->view->pageTitle("{$this->view->translate('Удалить контент')} :: {$post_data->title}");
+            $postPaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $postPaginator->setItemCountPerPage("10");
+            $postPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $postPaginator->setPageRange("5");
 
-			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить контент')} <strong>\"{$post_data->title}\"</strong> ?");
+            if ($postPaginator->count() == 0) {
+                $this->view->postData = false;
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $this->view->postData = $postPaginator;
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-			//create delete form
-			$form = new Application_Form_Post_Delete();
-			$form->setAction($this->view->url(array('module' => 'default','controller' => 'post', 'action' => 'delete', 'post_id' => $post_id), 'defaultPostAction', true));
-			$form->cancel->setAttrib('onClick', "location.href=\"{$this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'post_id' => $post_id), 'defaultPostId', true)}\"");
+    // action for view all posts
+    public function byTypeAction()
+    {
+        // set render file as for all action
+        $this->_helper->viewRenderer->setRender('all');
 
-			if ($this->getRequest()->isPost()) {
-				if ($form->isValid($request->getPost())) {
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim'),
+            'postCategoryID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int'),
+            'postCategoryID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-					$post_where = $post->getAdapter()->quoteInto('id = ?', $post_id);
-					$post->delete($post_where);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Post p')
+                ->leftJoin('p.User u')
+                ->leftJoin('p.ContentType ct')
+                ->leftJoin('p.PostCategory pt')
+                ->where('pt.ID = ?', $requestData->postCategoryID)
+                ->andWhere('p.Publish = ?', 1)
+                ->orderBy('p.ID DESC');
 
-					$post_type = new Application_Model_DbTable_PostType();
-					$post_type->getName($post_data->post_type_id);
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-					switch ($post_type->name) {
-						case 'game':
-							$game = new Application_Model_DbTable_Game();
-							$game_where = $game->getAdapter()->quoteInto('id = ?', $post_id);
-							$game->delete($game_where);
-							break;
-						case 'news':
-							break;
-						default :
-							break;
-					}
+            $postPaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $postPaginator->setItemCountPerPage("10");
+            $postPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $postPaginator->setPageRange("5");
 
-					$this->view->showMessages()->clearMessages();
-					$this->messages->addSuccess("{$this->view->translate("Статья <strong>\"{$post_data->title}\"</strong> успешно удалена")}");
+            if ($postPaginator->count() == 0) {
+                $this->view->postData = false;
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $item = $postPaginator->getItem(0);
+                $this->view->headTitle($this->view->translate('Категория') . ' :: ' . $item['PostCategory']['Name']);
+                $this->view->pageTitle($this->view->translate('Категория') . ' :: ' . $item['PostCategory']['Name']);
 
-					$this->redirect($this->view->url(array('controller' => 'post', 'action' => 'all', 'page' => 1), 'defaultPostAll', true));
-				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-				}
-			}
-
-			$this->view->post = $post_data;
-			$this->view->form = $form;
-		} else {
-			$this->messages->addError("{$this->view->translate('Зарпашиваемый контент не найден!')}");
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Контент не существует!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Контент не существует!')}");
-		}
-	}
-
-	public function byTypeAction() {
-		$this->_helper->viewRenderer->setRender('all');
-
-		$request = $this->getRequest();
-		$post_type_id = (int) $request->getParam('post_type_id');
-
-		$post_type_data = $this->db->get('post_type')->getItem($post_type_id);
-
-		if ($post_type_data) {
-			$this->view->headTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->Name}");
-			$this->view->pageTitle("{$this->view->translate('Категория контента')} :: {$post_type_data->Name}");
-
-			// setup pager settings
-			$page_count_items = 10;
-			$page_range = 5;
-			$items_order = 'DESC';
-			$page = $this->getRequest()->getParam('page');
-
-			$post = new Application_Model_DbTable_Post();
-			$paginator = $post->getAllPostsPagerByType($page_count_items, $page, $page_range, $post_type_id, $items_order);
-
-			if (count($paginator)) {
-				$this->view->paginator = $paginator;
-			} else {
-				$this->messages->addError("{$this->view->translate('Запрашиваемый контент на сайте не найден!')}");
-			}
-
-			$this->view->post_type_name = $post_type_data;
-		} else {
-			$this->messages->addError("{$this->view->translate('Зарпашиваемый тип контента не существует!')}");
-
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Тип контента не существует!')}");
-		}
-	}
+                $this->view->postData = $postPaginator;
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
 }

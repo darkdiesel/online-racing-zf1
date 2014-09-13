@@ -4,10 +4,15 @@
         echo $this->BlockConfigMenu($this->translate("Команда"))->teamMenu(
             $this->escape($this->teamData['ID'])
         );
-        $adminRacingSeriesIdUrl = $this->url(
-            array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
-                'racingSeriesID' => $this->escape($this->teamData['RacingSeries']['ID'])), 'adminRacingSeriesID'
-        );
+        // check access and generate link for admin/racing-series/id
+        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+            $adminRacingSeriesIdUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                    'racingSeriesID' => $this->escape($team['RacingSeries']['ID'])), 'adminRacingSeriesID'
+            );
+        } else {
+            $adminRacingSeriesIdUrl = '#';
+        }
         ?>
         <div>
             <table class="table table-striped table-bordered m-b-0">

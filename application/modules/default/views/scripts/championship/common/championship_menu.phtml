@@ -1,13 +1,13 @@
 <?php
 $default_game_id_url = $this->url(
     array('module'  => 'default', 'controller' => 'post', 'action' => 'id',
-          'post_id' => $this->escape($this->championship_data->game_id)),
-    'defaultPostId', true
+          'postID' => $this->escape($this->championship_data->game_id)),
+    'defaultPostID', true
 );
 $default_rule_id_url = $this->url(
     array('module'  => 'default', 'controller' => 'post', 'action' => 'id',
-          'post_id' => $this->escape($this->championship_data->rule_id)),
-    'defaultPostId', true
+          'postID' => $this->escape($this->championship_data->rule_id)),
+    'defaultPostID', true
 );
 $default_championship_drivers_url = $this->url(
     array('module'          => 'default', 'controller' => 'championship', 'action' => 'drivers',

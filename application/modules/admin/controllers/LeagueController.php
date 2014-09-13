@@ -81,7 +81,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
-                //receive and rename image_round file
+                //receive and rename image logo file
                 if ($leagueAddForm->getValue('UrlImageLogo')) {
                     if ($leagueAddForm->UrlImageLogo->receive()) {
                         $file = $leagueAddForm->UrlImageLogo->getFileInfo();
@@ -251,7 +251,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                // Create racing-series delete form
+                // Create league delete form
                 $leagueDeleteForm = new Peshkov_Form_League_Delete();
 
                 $this->view->leagueData = $result[0];
@@ -285,7 +285,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                         );
 
                         $adminLeagueAllUrl = $this->view->url(
-                            array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'all', 'page' => 1),
+                            array('module' => 'admin', 'controller' => 'league', 'action' => 'all', 'page' => 1),
                             'adminLeagueAll'
                         );
 

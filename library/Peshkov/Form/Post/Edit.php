@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_League_Edit extends Peshkov_Form_League_Add
+class Peshkov_Form_Post_Edit extends Peshkov_Form_Post_Add
 {
     public function init()
     {
@@ -9,25 +9,24 @@ class Peshkov_Form_League_Edit extends Peshkov_Form_League_Add
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $adminLeagueIDUrl = $this->getView()->url(
-            array('default' => 'admin', 'controller' => 'league', 'action' => 'id', 'leagueID' => $request->getParam('leagueID')),
-            'defaultLeagueID'
+        $defaultPostIDUrl = $this->getView()->url(
+            array('default' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $request->getParam('postID')),
+            'defaultPostID'
         );
 
-        $adminLeagueEditUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'league', 'action' => 'edit', 'leagueID' => $request->getParam('leagueID')),
-            'adminLeagueAction'
+        $adminPostEditUrl = $this->getView()->url(
+            array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'postID' => $request->getParam('postID')),
+            'adminPostAction'
         );
 
-        $this->setAttrib('id', 'league-edit')
-            ->setName('leagueEdit')
-            ->setAction($adminLeagueEditUrl);
+        $this->setAttrib('id', 'post-edit')
+            ->setName('postEdit')
+            ->setAction($adminPostEditUrl);
 
-        $this->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('leagueID'));
+           //TODO: Uncoment this code for allow upload to server post image
+//        $this->getElement('UrlImageLogo')->setRequired(false);
 
-        $this->getElement('UrlImageLogo')->setRequired(false);
-
-        $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminLeagueIDUrl}'");
+        $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$defaultPostIDUrl}'");
 
         $this->getElement('Submit')->setLabel('Сохранить');
     }
