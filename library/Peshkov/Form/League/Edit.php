@@ -25,7 +25,7 @@ class Peshkov_Form_League_Edit extends Peshkov_Form_League_Add
 
         $this->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('leagueID'));
 
-        $this->getElement('UrlImageLogo')->setRequired(false);
+        $this->getElement('ImageLogoUrl')->setRequired(false);
 
         $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminLeagueIDUrl}'");
 

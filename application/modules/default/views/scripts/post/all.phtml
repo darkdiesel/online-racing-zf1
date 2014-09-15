@@ -26,13 +26,12 @@
                     <?php
                     // check access and generate link for default/user/id
                     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-                        // TODO: Update user model to Doctrine1
-                        $defaultUserIdUrl = $this->url(
+                        $defaultUserIDUrl = $this->url(
                             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                                'user_id' => $this->escape($post['User']['id'])), 'defaultUserId'
+                                'userID' => $this->escape($post['User']['ID'])), 'defaultUserID'
                         );
                     } else {
-                        $defaultUserIdUrl = '#';
+                        $defaultUserIDUrl = '#';
                     }
                     ?>
 
@@ -92,9 +91,9 @@
                                 <?php echo $commentsСount; ?>
                             </div>
                             <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор');?>" data-placement="bottom">
-                                <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>" >
+                                <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>" >
                                     <i class="fa fa-user fa-lg"></i>
-                                    <?php echo $this->escape($post['User']['login']); ?>
+                                    <?php echo $this->escape($post['User']['Login']); ?>
                                 </a>
                             </div>
                             <div class="pull-right tooltip-field" data-title="<?php echo $this->translate('Читать дальше');?>" data-placement="bottom">

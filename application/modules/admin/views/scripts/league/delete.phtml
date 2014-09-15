@@ -6,12 +6,12 @@
     <?php
     // check access and generate link for default/user/id
     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-        $defaultUserIdUrl = $this->url(
+        $defaultUserIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                'user_id' => $this->escape($this->leagueData['User']['id'])), 'defaultUserId'
+                'userID' => $this->escape($this->leagueData['User']['ID'])), 'defaultUserID'
         );
     } else {
-        $defaultUserIdUrl = '#';
+        $defaultUserIDUrl = '#';
     }
     ?>
     <div class="block block-default block-ui-bordered">
@@ -33,7 +33,7 @@
                     <td>
                         <span>
                             <img class="image-responsive"
-                                src="<?php echo $this->baseUrl($this->escape($this->leagueData['UrlImageLogo'])); ?>">
+                                src="<?php echo $this->baseUrl($this->escape($this->leagueData['ImageLogoUrl'])); ?>">
                         </span>
                     </td>
                 </tr>
@@ -43,8 +43,8 @@
                     </td>
                     <td>
                     <span>
-                        <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
-                            <?php echo $this->escape($this->leagueData['User']['login']); ?>
+                        <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
+                            <?php echo $this->escape($this->leagueData['User']['Login']); ?>
                         </a>
                     </span>
                     </td>

@@ -2,10 +2,9 @@
     <?php
     // check access and generate link for default/user/id
     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-        // TODO: Update user model to Doctrine1
         $defaultUserIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                'user_id' => $this->escape($this->postData['User']['id'])), 'defaultUserId'
+                'userID' => $this->escape($this->postData['User']['ID'])), 'defaultUserID'
         );
     } else {
         $defaultUserIDUrl = '#';
@@ -42,7 +41,7 @@
                          data-placement="bottom">
                         <a href="<?php echo $defaultUserIDUrl; ?>" target="_blank">
                             <i class="fa fa-user fa-lg"></i>
-                            <?php echo $this->escape($this->postData['User']['login']); ?>
+                            <?php echo $this->escape($this->postData['User']['Login']); ?>
                         </a>
                     </div>
                 </div>
@@ -181,7 +180,7 @@
                                     // TODO: Update user model to Doctrine1
                                     $defaultUserIDUrl = $this->url(
                                         array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                                            'user_id' => $this->escape($comment['User']['id'])), 'defaultUserId'
+                                            'userID' => $this->escape($comment['UserID'])), 'defaultUserID'
                                     );
                                 } else {
                                     $defaultUserIDUrl = '#';
@@ -190,10 +189,15 @@
 
                                 <?php
                                 //TODO: Update user model to Doctrine1
-                                $user_db = new Application_Model_DbTable_User();
-                                $user_data = $user_db->getItem($comment['UserID']);
+                                $query = Doctrine_Query::create()
+                                    ->from('Default_Model_User u')
+                                    ->leftJoin('u.UserRole ur')
+                                    ->leftJoin('ur.Role r')
+                                    ->where('u.ID = ?', $comment['UserID']);
 
-                                if ($this->getUserStatus($user_data->date_last_activity) == 'online') {
+                                $userResult = $query->fetchArray();
+
+                                if ($this->getUserStatus($userResult[0]['DateLastActivity']) == USER_STATUS_ONLINE) {
                                     $user_status_class = 'user-online';
                                 } else {
                                     $user_status_class = 'user-offline';

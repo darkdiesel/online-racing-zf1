@@ -6,12 +6,12 @@
     <?php
     // check access and generate link for user
     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-        $defaultUserIdUrl = $this->url(
+        $defaultUserIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                'user_id' => $this->escape($this->postData['User']['id'])), 'defaultUserId'
+                'userID' => $this->escape($this->postData['User']['ID'])), 'defaultUserID'
         );
     } else {
-        $defaultUserIdUrl = '#';
+        $defaultUserIDUrl = '#';
     }
     ?>
 
@@ -71,8 +71,8 @@
                     </td>
                     <td>
                     <span>
-                        <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
-                            <?php echo $this->escape($this->postData['User']['login']); ?>
+                        <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
+                            <?php echo $this->escape($this->postData['User']['Login']); ?>
                         </a>
                     </span>
                     </td>

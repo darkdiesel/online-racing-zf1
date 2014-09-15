@@ -56,7 +56,7 @@ class Peshkov_Form_Comment_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
         $postID->setValue($request->getParam('postID'));
 
-        $csrfToken = new Zend_Form_Element_Hash('default_comment_add_csrf_token');
+        $csrfToken = new Zend_Form_Element_Hash('defaultCommentAddCsrfToken');
         $csrfToken->setSalt('asdfasdfasd')
             ->setDecorators(
                 array(

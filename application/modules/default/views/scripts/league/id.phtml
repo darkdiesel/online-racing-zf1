@@ -1,12 +1,12 @@
 <?php if ($this->leagueData) : ?>
 
     <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-        $defaultUserIdUrl = $this->url(
+        $defaultUserIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                'user_id' => $this->escape($this->leagueData['User']['id'])), 'defaultUserId'
+                'userID' => $this->escape($this->leagueData['User']['ID'])), 'defaultUserID'
         );
     } else {
-        $defaultUserIdUrl = '#';
+        $defaultUserIDUrl = '#';
     }
     ?>
 
@@ -37,8 +37,8 @@
                                     </td>
                                     <td>
                                         <span>
-                                            <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
-                                                <?php echo $this->escape($this->leagueData['User']['login']); ?>
+                                            <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
+                                                <?php echo $this->escape($this->leagueData['User']['Login']); ?>
                                             </a>
                                         </span>
                                     </td>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="text-center">
-                        <?php if ($this->escape($this->leagueData['UrlImageLogo'])) { ?>
+                        <?php if ($this->escape($this->leagueData['ImageLogoUrl'])) { ?>
                             <div class="m-b-15 center-block text-center">
                                 <a href="#" data-toggle="modal"
                                    data-target=".league-<?php print $this->leagueData['ID']; ?>"
@@ -66,7 +66,7 @@
                                    class="">
                                     <img class="img-thumbnail img-responsive"
                                          src="<?php echo $this->escape(
-                                             $this->leagueData['UrlImageLogo']
+                                             $this->leagueData['ImageLogoUrl']
                                          ); ?>"/>
                                 </a>
                                 <?php echo $this->modal(
@@ -74,7 +74,7 @@
                                         'title'   => $this->leagueData['Name'],
                                         'class'   => 'league-' . $this->leagueData['ID'],
                                         'content' =>
-                                            '<img src="' . $this->escape($this->leagueData['UrlImageLogo'])
+                                            '<img src="' . $this->escape($this->leagueData['ImageLogoUrl'])
                                             . '" class="img-responsive img-rounded center-block" alt="">'
                                     )
                                 ); ?>
@@ -167,7 +167,7 @@
                                     <span class="text-bold font-color-black"><i
                                             class="fa fa-user font-color-gray"></i> <?php echo $this->translate('Администратор') ?>
                                         : </span>
-                                    <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'defaultUserId', true); ?>"
+                                    <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($championship['user_id'])), 'defaultUserID', true); ?>"
                                        target="_blank"><?php echo $this->escape($championship['user_login']); ?></a>
                                 </div>
                             </small>

@@ -27,8 +27,8 @@ class Peshkov_Form_Country_Edit extends Peshkov_Form_Country_Add
         $this->getElement('EnglishName')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('countryID'));
         $this->getElement('Abbreviation')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('countryID'));
 
-        $this->getElement('UrlImageRound')->setRequired(false);
-        $this->getElement('UrlImageGlossyWave')->setRequired(false);
+        $this->getElement('ImageRoundUrl')->setRequired(false);
+        $this->getElement('ImageGlossyWaveUrl')->setRequired(false);
 
         $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminCountryIDUrl}'");
 

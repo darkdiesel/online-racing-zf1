@@ -1,8 +1,19 @@
 <?php
 
+// User status constants
+const USER_STATUS_ONLINE = "ONLINE";
+const USER_STATUS_OFFLINE = "OFFLINE";
+
+const USER_STATUS_NOT_FOUND = 'NOT_FOUND';
+const USER_STATUS_NOT_ACTIVATED = 'NOT_ACTIVATED';
+const USER_STATUS_ENABLE = 'ENABLE';
+const USER_STATUS_BLOCKED = 'BLOCKED';
+
+// Period for that user is online
+const USER_ONLINE_PERIOD = 420;
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-
     public function _initConfig()
     {
         $config_options = array('allowModifications' => true);
@@ -12,7 +23,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $this->getEnvironment(),
             $config_options);
 
-        if (isset($_SERVER['HTTP_HOST'])){
+        if (isset($_SERVER['HTTP_HOST'])) {
             $config->domain = $_SERVER['HTTP_HOST'];
         }
 
@@ -228,9 +239,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $translate = new Zend_Translate(
             array(
-                 'adapter' => 'gettext',
-                 'content' => APPLICATION_PATH . '/languages/' . $lang . '.mo',
-                 'locale'  => $locale
+                'adapter' => 'gettext',
+                'content' => APPLICATION_PATH . '/languages/' . $lang . '.mo',
+                'locale' => $locale
             )
         );
 
@@ -256,9 +267,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         //$manager->getCache('up')->setLifetime($time);
         $cache = Zend_Cache::factory(
             'Core', 'File', array(
-                                 'lifetime' => 3600 * 24, //cache is cleaned once a day
-                                 'automatic_serialization' => true
-                            ), array('cache_dir' => APPLICATION_PATH . '/../cache/')
+                'lifetime' => 3600 * 24, //cache is cleaned once a day
+                'automatic_serialization' => true
+            ), array('cache_dir' => APPLICATION_PATH . '/../cache/')
         );
         Zend_Db_Table_Abstract::setDefaultMetadataCache(
             $cache

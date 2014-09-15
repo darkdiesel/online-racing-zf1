@@ -19,15 +19,15 @@
 			<div class="block-item-content">
 				<div class="article_title">
 					<span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
-					<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserId', true) ?>" target="_blank">
+					<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
 						<?php echo $this->escape($driver->user_name) ?>
 						<?php echo $this->escape($driver->user_surname) ?>
 						(<?php echo $driver->country_abbreviation ?>)
-						<img class="user_flag_x" src="<?php echo $driver->country_UrlImageGlossyWave ?>" title="<?php echo $driver->country_NativeName ?> (<?php echo $driver->country_EnglishName ?>)">
+						<img class="user_flag_x" src="<?php echo $driver->country_ImageGlossyWaveUrl ?>" title="<?php echo $driver->country_NativeName ?> (<?php echo $driver->country_EnglishName ?>)">
 					</a>
 				</div>
 				<div class="user_image pull-left">
-					<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserId', true) ?>" target="_blank">
+					<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
 						<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
 					</a>
 				</div>

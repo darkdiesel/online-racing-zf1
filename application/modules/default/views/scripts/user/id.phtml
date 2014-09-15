@@ -1,32 +1,23 @@
-<?php if ($this->user_data) { ?>
-
+<?php if ($this->userData) { ?>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <?php
-            $date1 = new Zend_Date();
-            $date2 = new Zend_Date($this->user_data->date_last_activity);
-
-            if (($date1->toValue() - $date2->toValue()) <= 420) {
-                ?>
+            <?php if ($this->getUser()->getUserStatus($this->userData['DateLastActivity']) == USER_STATUS_ONLINE) { ?>
+                <?php $userStatusClass = 'user-online'; ?>
                 <div class="alert alert-success">
                     <strong><?php echo $this->translate("В паддоке") ?></strong>
                 </div>
             <?php } else { ?>
+                <?php $userStatusClass = 'user-offline'; ?>
                 <div class="alert alert-warning">
                     <strong><?php echo $this->translate("Вне паддока") ?></strong>
                 </div>
             <?php } ?>
+
         </div>
     </div>
+<?php } ?>
 
-    <?php
-    if ($this->getUserStatus($this->user_data->date_last_activity) == 'online') {
-        $user_status_class = 'user-online';
-    } else {
-        $user_status_class = 'user-offline';
-    }
-    ?>
-
+<?php if ($this->userData) { ?>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="block block-default m-b-15">
@@ -34,43 +25,43 @@
                     <div class="m-b-15">
                         <div class="user-cover">
                             <img
-                                src="<?php echo $this->baseUrl('/data-content/img/user-cover/user-cover-2.png');?>"
+                                src="<?php echo $this->baseUrl('/data-content/img/user-cover/user-cover-2.png'); ?>"
                                 alt="" class="img-responsive"/>
                         </div>
-                        <div
-                            class="img-wrapper-120-120 overflow-hide img-circle user-avatar pic <?php echo $user_status_class; ?>">
-                            <a href="#" data-toggle="modal" data-target=".user-<?php echo $this->user_data->id; ?>"
-                               title="<?php echo $this->escape($this->user_data->id); ?>">
-                            <?php echo $this->getUserAvatar($this->user_data->id, $this->user_data->avatar_type, 'img-responsive img-size-120', 120); ?>
+                        <div class="img-wrapper-120-120 overflow-hide img-circle user-avatar pic <?php echo $userStatusClass; ?>">
+                            <a href="#" data-toggle="modal" data-target=".user-<?php echo $this->userData['ID']; ?>"
+                               title="<?php echo $this->escape($this->userData['ID']); ?>">
+                                <?php echo $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-120', 120); ?>
                             </a>
                             <?php echo $this->modal(array(
-                                'title' => $this->user_data->login,
-                                'class' => 'user-'.$this->user_data->id,
-                                'content' => $this->getUserAvatar($this->user_data->id, $this->user_data->avatar_type, 'img-responsive img-size-640 center-block', 640)
+                                'title' => $this->userData['Login'],
+                                'class' => 'user-' . $this->userData['ID'],
+                                'content' => $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-640 center-block', 640)
                             )); ?>
                         </div>
                         <div class="user-name">
                             <span class="tooltip-field pull-left m-t-5" data-placement="bottom"
-                                  data-title="<?php echo $this->escape($this->user_data->country_EnglishName); ?>">
+                                  data-title="<?php echo $this->escape($this->userData['Country']['EnglishName']); ?>">
                                 <div class="img-wrapper-50-50">
                                     <img class="img-size-50-50 img-responsive" src="<?php echo $this->baseUrl(
-                                        $this->escape($this->user_data->country_UrlImageGlossyWave)
-                                    ); ?>" alt="<?php echo $this->escape($this->user_data->country_EnglishName); ?>">
+                                        $this->escape($this->userData['Country']['ImageGlossyWaveUrl'])
+                                    ); ?>"
+                                         alt="<?php echo $this->escape($this->userData['Country']['EnglishName']); ?>">
                                 </div>
                             </span>
-                            <?php if (!empty($this->user_data->name) && !empty($this->user_data->surname)) { ?>
-                                <small><?php echo $this->user_data->surname, ' ', $this->user_data->name ?></small>
+                            <?php if (!empty($this->userData['Name']) && !empty($this->userData['Surname'])) { ?>
+                                <small><?php echo $this->userData['Surname'], ' ', $this->userData['Name'] ?></small>
                             <?php } else { ?>
                                 <small>
                                     <БЕЗ ИМЕНИ>
                                 </small>
                             <?php } ?>
-                            <span class="text-muted small"><small><?php echo $this->user_data->login;?></small></span>
+                            <span class="text-muted small"><small><?php echo $this->userData['Login']; ?></small></span>
                         </div>
-                        <a href="#" class="btn btn-xs btn-primary pull-right change-user-cover-btn"
-                           style="margin:10px;">
+                        <a href="#" class="btn btn-xs btn-primary pull-right change-user-cover-btn" style="margin:10px;">
                             <i class="fa fa-pencil-square"></i> <?php echo $this->translate('Изменить обложку'); ?>
                         </a>
+
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -78,206 +69,252 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="block block-default">
-                <div class="block-body">
-                    <ul class="nav nav-tabs" id="myTab">
-                        <li class="active">
-                            <a href="#info" data-toggle="tab"><i
-                                    class="fa fa-info-circle"></i> <?php echo $this->translate('Информация'); ?>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#site-statistic" data-toggle="tab"><i
-                                    class="fa fa-bar-chart-o"></i> <?php echo $this->translate('Статистика сайта'); ?>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#user-contacts" data-toggle="tab">
-                                <i class="fa fa-keyboard-o"></i> <?php echo $this->translate('Контакты'); ?>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#user-social" data-toggle="tab">
-                                <i class="fa fa-users"></i> <?php echo $this->translate('Социальные сети'); ?>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="info">
-                            <div class="well">
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Имя') ?>:</td>
-                                            <td>
-                                                <div class="break_word_wrap"><?php echo $this->user_data->name ?></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Фамилия') ?>:</td>
-                                            <td>
-                                                <div class="break_word_wrap">
-                                                    <?php echo $this->user_data->surname ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Дата рождения') ?>:</td>
-                                            <td>
-                                                <div class="break_word_wrap">
-                                                    <?php echo date_format(date_create($this->user_data->birthday), 'd.m.Y') ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Страна') ?>:</td>
-                                            <td>
-                                                <div class="break_word_wrap">
-                                                    <?php echo $this->user_data->country_NativeName . " ({$this->user_data->country_EnglishName})" ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Город') ?>:</td>
-                                            <td>
-                                                <div class="break_word_wrap"><?php echo $this->user_data->city ?></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Последний визит') ?>:
-                                            </td>
-                                            <td>
-                                                <div class="break_word_wrap">
-                                                    <?php echo date_format(date_create($this->user_data->date_last_activity), 'H:i d.m.Y') ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="block block-default">
+    <div class="block-body">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+            <a href="#info" data-toggle="tab"><i
+                    class="fa fa-info-circle"></i> <?php echo $this->translate('Информация'); ?>
+            </a>
+        </li>
+        <li>
+            <a href="#site-statistic" data-toggle="tab"><i
+                    class="fa fa-bar-chart-o"></i> <?php echo $this->translate('Статистика сайта'); ?>
+            </a>
+        </li>
+        <li>
+            <a href="#user-contacts" data-toggle="tab">
+                <i class="fa fa-keyboard-o"></i> <?php echo $this->translate('Контакты'); ?>
+            </a>
+        </li>
+        <li>
+            <a href="#user-social" data-toggle="tab">
+                <i class="fa fa-users"></i> <?php echo $this->translate('Социальные сети'); ?>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="info">
+            <div class="well">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Имя') ?>:
+                            </td>
+                            <td>
+                                <div class="break_word_wrap">
+                                    <?php echo $this->userData['Name'] ?>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="site-statistic">
-                            <div class="well">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Номер пользователя') ?>
-                                                :
-                                            </td>
-                                            <td><?php echo $this->user_data->id ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Времени на сайте') ?>:
-                                            </td>
-                                            <td>
-                                                <?php
-                                                $d = new DateTime();
-                                                echo $d->diff(new DateTime($this->user_data->date_create))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
-                                                ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold"><?php echo $this->translate('Дней на сайте') ?>:</td>
-                                            <td>
-                                                <?php
-                                                echo date_diff(new DateTime(), new DateTime($this->user_data->date_create))->days;
-                                                ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <?php echo $this->translate('Дата регистрации') ?>:
-                                            </td>
-                                            <td><?php echo date_format(date_create($this->user_data->date_create), 'H:i d.m.Y') ?></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Фамилия') ?>:
+                            </td>
+                            <td>
+                                <div class="break_word_wrap">
+                                    <?php echo $this->userData['Surname'] ?>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="user-contacts">
-                            <div class="well">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/skype-20.png'); ?>" />
-                                                <?php echo $this->translate('Skype'), ':'; ?>
-                                            </td>
-                                            <td><?php echo $this->user_data->skype ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/icq-20.png'); ?>" />
-                                                <?php echo $this->translate('ICQ'), ':'; ?>
-                                            </td>
-                                            <td><?php echo $this->user_data->icq ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/googletalk-20.png'); ?>" />
-                                                <?php echo $this->translate('Google Talk'), ':'; ?>
-                                            </td>
-                                            <td><?php echo $this->user_data->gtalk ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/www-20.png'); ?>" />
-                                                <?php echo $this->translate('WWW'), ':'; ?>
-                                            </td>
-                                            <td><?php echo $this->user_data->www ?></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Дата рождения') ?>:
+                            </td>
+                            <td>
+                                <div class="break_word_wrap">
+                                    <?php echo date_format(date_create($this->userData['DateBirthday']), 'd.m.Y') ?>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="user-social">
-                            <div class="well">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/vk-20.png'); ?>" />
-                                                <?php echo $this->translate('Вконтакте'), ':'; ?>
-                                            </td>
-                                            <td><?php echo 'none' ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/facebook-20.png'); ?>" />
-                                                <?php echo $this->translate('Facebook'), ':'; ?>
-                                            </td>
-                                            <td><?php echo 'none' ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/twitter-20.png'); ?>" />
-                                                <?php echo $this->translate('Twitter'), ':'; ?>
-                                            </td>
-                                            <td><?php echo 'none' ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <img src="<?php echo $this->baseUrl('data-content/ui/icons/googleplus-20.png'); ?>" />
-                                                <?php echo $this->translate('Google+'), ':'; ?>
-                                            </td>
-                                            <td><?php echo 'none' ?></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Страна') ?>:
+                            </td>
+                            <td>
+                                <div class="break_word_wrap">
+                                    <?php echo $this->userData['Country']['EnglishName'] . " ({$this->userData['Country']['NativeName']})" ?>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Город') ?>:
+                            </td>
+                            <td>
+                                <div class="break_word_wrap">
+                                    <?php echo $this->userData['City'] ?>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Последний визит') ?>:
+                            </td>
+                            <td>
+                                <div class="break_word_wrap">
+                                    <?php echo date_format(date_create($this->userData['DateLastActivity']), 'H:i d.m.Y') ?>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+        <div class="tab-pane" id="site-statistic">
+            <div class="well">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Номер пользователя') ?>:
+                            </td>
+                            <td>
+                                <?php echo $this->userData['ID'] ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Времени на сайте') ?>:
+                            </td>
+                            <td>
+                                <?php
+                                $d = new DateTime();
+                                echo $d->diff(new DateTime($this->userData['DateCreate']))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Дней на сайте') ?>:
+                            </td>
+                            <td>
+                                <?php
+                                echo date_diff(new DateTime(), new DateTime($this->userData['DateCreate']))->days;
+                                ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <?php echo $this->translate('Дата регистрации') ?>:
+                            </td>
+                            <td>
+                                <?php echo date_format(date_create($this->userData['DateCreate']), 'H:i d.m.Y') ?>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="user-contacts">
+            <div class="well">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/skype-20.png'); ?>"/>
+                                <?php echo $this->translate('Skype'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo $this->userData['Skype'] ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/icq-20.png'); ?>"/>
+                                <?php echo $this->translate('ICQ'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo $this->userData['Icq'] ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/googletalk-20.png'); ?>"/>
+                                <?php echo $this->translate('Google Talk'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo $this->userData['GoogleTalk'] ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/www-20.png'); ?>"/>
+                                <?php echo $this->translate('Веб-Сайт'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo $this->userData['WebSite'] ?>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="user-social">
+            <div class="well">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/vk-20.png'); ?>"/>
+                                <?php echo $this->translate('Вконтакте'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo 'none' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/facebook-20.png'); ?>"/>
+                                <?php echo $this->translate('Facebook'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo 'none' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/twitter-20.png'); ?>"/>
+                                <?php echo $this->translate('Twitter'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo 'none' ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-bold">
+                                <img
+                                    src="<?php echo $this->baseUrl('data-content/ui/icons/googleplus-20.png'); ?>"/>
+                                <?php echo $this->translate('Google+'), ':'; ?>
+                            </td>
+                            <td>
+                                <?php echo 'none' ?>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 <?php } ?>

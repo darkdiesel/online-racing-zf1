@@ -16,9 +16,9 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Comment', 'default
  * @property timestamp $DateEdit
  * @property integer $Status
  * @property integer $ParentCommentID
+ * @property Default_Model_Post $Post
  * @property Doctrine_Collection $Comment
  * @property Default_Model_User $User
- * @property Default_Model_Post $Post
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -112,16 +112,16 @@ abstract class Default_Model_Base_Comment extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Default_Model_Post as Post', array(
+             'local' => 'PostID',
+             'foreign' => 'ID'));
+
         $this->hasMany('Default_Model_Comment as Comment', array(
              'local' => 'ID',
              'foreign' => 'ParentCommentID'));
 
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_Post as Post', array(
-             'local' => 'PostID',
              'foreign' => 'ID'));
     }
 }

@@ -21,7 +21,7 @@ class App_Plugin_Module_Default extends Zend_Controller_Plugin_Abstract
         $layout = $this->_bootstrap->getResource('layout');
         $view = $layout->getView();
 
-        $view->display_header_login_form = TRUE;
+        $view->displayHeaderAuthoSignInForm = TRUE;
 
         // Change layout
         Zend_Layout::getMvcInstance()->setLayout('default');

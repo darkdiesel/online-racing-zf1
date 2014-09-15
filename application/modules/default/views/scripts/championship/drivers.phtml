@@ -75,7 +75,7 @@
                                         ?>
                                         <div class="team-driver-item block">
                                             <?php
-                                            $driver_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserId', true);
+                                            $driver_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true);
                                             echo $this->BlockConfigMenu($this->translate("Гонщик"))->championshipTeamDriverMenu($this->escape($this->leagueData['ID']), $team->championship_id, $team->team_id, $driver->user_id);
                                             ?>
                                             <div class="block-body media well">
@@ -104,7 +104,7 @@
                                                     </h4>
                                                     <hr style="margin:8px auto">
                                                     <span class="label"><img class="img-size-32 team_driver_flag"
-                                                                             src="<?php echo $driver->country_UrlImageRound ?>"
+                                                                             src="<?php echo $driver->country_ImageRoundUrl ?>"
                                                                              title="<?php echo $driver->country_NativeName ?> (<?php echo $driver->country_EnglishName ?>)"></span>
                                                     <span
                                                         class="label label-default"><?php echo $this->translate('Номер') . ': ' . $driver->driver_number; ?></span>

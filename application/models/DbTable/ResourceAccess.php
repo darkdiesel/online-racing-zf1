@@ -61,7 +61,7 @@ class Application_Model_DbTable_ResourceAccess extends Zend_Db_Table_Abstract {
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->where($idencity_data)
-				->joinLeft(array('rl' => 'role'), $this->db_href . '.role_id = rl.id', array('role_name' => 'rl.name'))
+				->joinLeft(array('rl' => 'role'), $this->db_href . '.RoleID = rl.ID', array('role_name' => 'rl.Name'))
 				->joinLeft(array('rsrc' => 'resource'), $this->db_href . '.resource_id = rsrc.id', array('resource_name' => 'rsrc.name'))
 				->joinLeft(array('prvlg' => 'privilege'), $this->db_href . '.privilege_id = prvlg.id', array('privilege_name' => 'prvlg.name'));
 

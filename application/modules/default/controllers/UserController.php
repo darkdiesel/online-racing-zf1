@@ -1,498 +1,557 @@
 <?php
 
-class UserController extends App_Controller_LoaderController {
+class UserController extends App_Controller_LoaderController
+{
 
-	public function init() {
-		parent::init();
-		$this->view->headTitle($this->view->translate('Гонщик'));
-	}
+    public function init()
+    {
+        parent::init();
+        $this->view->headTitle($this->view->translate('Гонщик'));
+    }
 
-	public function idAction() {
-		$request = $this->getRequest();
-		$user_id = $request->getParam('user_id');
+    // action for view league
+    public function idAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'userID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'userID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-		$user = new Application_Model_DbTable_User();
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_User u')
+                ->leftJoin('u.UserRole ur')
+                ->leftJoin('ur.Role r')
+                ->leftJoin('u.Country c')
+                ->where('u.Status = ?', 1)
+                ->where('u.ID = ?', $requestData->userID);
+            $result = $query->fetchArray();
 
-		$user_data = $user->getUserData($user_id);
+            if (count($result) == 1) {
+                $this->view->userData = $result[0];
 
-		if ($user_data) {
-			$this->view->user_data = $user_data;
-			$this->view->breadcrumb()->UserAll('1')->User($user_id, $user_data->login);
+                $this->view->headTitle($result[0]['Name']);
+                $this->view->pageTitle($result[0]['Name']);
 
-			$this->view->headTitle($user_data->login);
-			$this->view->pageTitle($user_data->login);
-		} else {
-			$this->messages->addError("{$this->view->translate("Пользователь не существует!")}");
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Пользователь не существует!')}");
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
-		}
-	}
+                // BreadsCrumbs
+                $this->view->breadcrumb()->UserAll('1')->User($result[0]['ID'], $result[0]['Login']);
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-	public function activateAction() {
-		if (Zend_Auth::getInstance()->hasIdentity()) {
-			$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
-		}
+                $this->messages->addError($this->view->translate('Запрашиваемый профиль не найден!'));
 
-        // set layout without sidebar
-        $this->_helper->layout->setLayout('layout-default-no-sidebar');
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Профиль не найден!'));
 
-		// page title
-		$this->view->headTitle($this->view->translate('Активация пользователя'));
-		$this->view->pageTitle($this->view->translate('Активация пользователя'));
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Профиль не найден!'));
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-		$this->messages->addInfo($this->view->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.'));
-		$this->messages->addInfo($this->view->translate('<strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.'));
+    // action for view all users
+    public function allAction()
+    {
+        // set filters and validators for GET input
+        $filters = array(
+            'page' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'page' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-		$request = $this->getRequest();
-		$form = new Application_Form_User_Activate();
-		$form->setAction(
-				$this->view->url(
-						array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default', true
-				)
-		);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $this->view->headTitle($this->view->translate('Все'));
+            $this->view->pageTitle($this->view->translate('Гонщики'));
 
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($request->getPost())) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_User u')
+                ->leftJoin('u.UserRole ur')
+                ->leftJoin('ur.Role r')
+                ->leftJoin('u.Country c')
+                ->where('u.Status = ?', 1)
+                ->orderBy('u.DateLastActivity DESC');
 
-				$user = new Application_Model_DbTable_User();
-				$user_data = array(
-					'email' => $form->email->getValue(),
-					'password' => sha1($form->password->getValue()),
-					'code_activate' => $form->code_activate->getValue(),
-				);
+            $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-				$result = $user->activateUser($user_data['email'], $user_data['password'], $user_data['code_activate']);
+            $userPaginator = new Zend_Paginator($adapter);
+            // pager settings
+            $userPaginator->setItemCountPerPage("12");
+            $userPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+            $userPaginator->setPageRange("5");
 
-				switch ($result) {
-					case 'done':
-						// load e-mail script (template) for user
-						$html = new Zend_View();
-						$html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-						// e-mail template values for user
-						$html->assign('login', $user_data['email']);
-						$html->assign('content', 'Ваш профиль активирован. Приятного время провождения на нашем портале. Да прибудет с вами скорость! ©');
-						// e-mail for user
-						$mail = new Zend_Mail('UTF-8');
-						$bodyText = $html->render('activation_template.phtml');
-						$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-						$mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
-						$mail->addTo($user_data['email'], $user_data['email']);
-						$mail->setBodyHtml($bodyText);
-						$mail->send();
+            if ($userPaginator->count() == 0) {
+                $this->view->userData = false;
+                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+            } else {
+                $this->view->userData = $userPaginator;
+            }
+        } else {
+            throw new Zend_Controller_Action_Exception('Invalid input');
+        }
+    }
 
-						// load e-mail script (template) for admin
-						$html = new Zend_View();
-						$html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-						// e-mail template values for admin
-						$html->assign('login', "Администратор Online-racing.net");
-						$html->assign('content', 'На сайте активирован новый пользователь.<br/>' .
-								'Данные пользователя:<br/><br/>' .
-								'E-mail: <strong>' . $user_data['email'] . '</strong><br/>');
-						// e-mail for admin
-						$mail = new Zend_Mail('UTF-8');
-						$bodyText = $html->render('master_user_activate_template.phtml');
-						$mail->addTo('igor.peshkov@gmail.com', 'Igor Peshkov');
-						$mail->setSubject('Online-Racing.net - На сайте активирован пользователь.');
-						$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-						$mail->setBodyHtml($bodyText);
-						$mail->send();
-
-						$bootstrap = $this->getInvokeArg('bootstrap');
-						$auth = Zend_Auth::getInstance();
-						$adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
-						$authAdapter = new Zend_Auth_Adapter_DbTable(
-								$adapter, 'user', 'email', 'password'
-						);
-
-						$authAdapter->setIdentity($user_data['email']);
-						$authAdapter->setCredential($user_data['password']);
-						$result = $auth->authenticate($authAdapter);
-
-						$storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-						$storage = $auth->getStorage();
-						$storage->write($storage_data);
-
-						$this->messages->clearMessages();
-						$this->messages->addSuccess($this->view->translate('Ваш профиль активирован. Добро пожаловать в команду портала Online-Racing.Net. Желаем отличного настроение и высоких результатов.'));
-						$this->messages->addSuccess($this->view->translate('Да прибудет с вами скорость. ©'));
-
-						$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
-
-						break;
-					case 'error':
-						$this->messages->addError($this->view->translate('Введены неверные данные активации!'));
-
-						break;
-					case 'activate':
-						$url_login = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true);
-						$this->messages->addError($this->view->translate('Пользователь уже активирован!') . ' <strong><a class="btn btn-default" href="' . $url_login . '">'
-								. $this->view->translate('Авторизоваться?') . '</a></strong>');
-						break;
-					case 'notFound':
-						$this->messages->addError($this->view->translate('Пользователь на сайте не найден!'));
-						break;
-				}
-			} else {
-				$this->messages->addError($this->view->translate('Исправте ошибки для корректной активации профиля!'));
-			}
-		}
-
-		$this->view->form = $form;
-	}
-
-	public function restorePassAction() {
-		if (Zend_Auth::getInstance()->hasIdentity()) {
-			$this->_helper->redirector('index', 'index');
-		}
+    public function activateAction()
+    {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+        }
 
         // set layout without sidebar
         $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
-		$this->view->headTitle($this->view->translate('Восстановление пароля'));
-		$this->view->pageTitle($this->view->translate('Восстановление пароля'));
+        // page title
+        $this->view->headTitle($this->view->translate('Активация пользователя'));
+        $this->view->pageTitle($this->view->translate('Активация пользователя'));
 
-		$this->messages->addInfo($this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.'));
+        $this->messages->addInfo($this->view->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.'));
+        $this->messages->addInfo($this->view->translate('<strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.'));
 
-		$request = $this->getRequest();
-		$form = new Application_Form_User_RestorePass();
-		$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true));
+        $request = $this->getRequest();
+        $form = new Application_Form_User_Activate();
+        $form->setAction(
+            $this->view->url(
+                array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default', true
+            )
+        );
 
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($request->getPost())) {
-				Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
-				$user_code_restore_pass = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
 
-				$user = new Application_Model_DbTable_User();
-				$user->setRestorePassCode($form->getValue('email'), $user_code_restore_pass);
+                $user = new Application_Model_DbTable_User();
+                $user_data = array(
+                    'email' => $form->email->getValue(),
+                    'password' => sha1($form->password->getValue()),
+                    'code_activate' => $form->code_activate->getValue(),
+                );
 
-				// load e-mail script (template) for user
-				$html = new Zend_View();
-				$html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-				// e-mail template values for user
-				$restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true);
-				$html->assign('login', $form->getValue('email'));
-				$html->assign('content', 'Уважаемый пользователь, вы или кто-то другой запросили код для создания нового пароля.<br/>' .
-						'На <a href="' . $restore_url . '">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
-						'E-mail: <strong>' . $form->getValue('email') . '</strong><br/>' .
-						'Код восстановления: <strong>' . $user_code_restore_pass . '</strong><br/>' .
-						'Если вы не запрашивали новый пароль, то просто проигнорируйте данное сообщение.');
-				// e-mail for user
-				$mail = new Zend_Mail('UTF-8');
-				$bodyText = $html->render('restore_passwd_template.phtml');
-				$mail->addTo($form->getValue('email'), $form->getValue('email'));
-				$mail->setSubject('Online-Racing.net - Код для восстановления пароля.');
-				$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-				$mail->setBodyHtml($bodyText);
-				$mail->send();
+                $result = $user->activateUser($user_data['email'], $user_data['password'], $user_data['code_activate']);
 
-				//clear all messages on the page
-				$this->messages->clearMessages();
+                switch ($result) {
+                    case 'done':
+                        // load e-mail script (template) for user
+                        $html = new Zend_View();
+                        $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+                        // e-mail template values for user
+                        $html->assign('login', $user_data['email']);
+                        $html->assign('content', 'Ваш профиль активирован. Приятного время провождения на нашем портале. Да прибудет с вами скорость! ©');
+                        // e-mail for user
+                        $mail = new Zend_Mail('UTF-8');
+                        $bodyText = $html->render('activation_template.phtml');
+                        $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                        $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
+                        $mail->addTo($user_data['email'], $user_data['email']);
+                        $mail->setBodyHtml($bodyText);
+                        $mail->send();
 
-				$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
-			} else {
-				$this->messages->addError($this->view->translate('Исправте следующие ошибки для восстановления пароля!'));
-			}
-		}
+                        // load e-mail script (template) for admin
+                        $html = new Zend_View();
+                        $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+                        // e-mail template values for admin
+                        $html->assign('login', "Администратор Online-racing.net");
+                        $html->assign('content', 'На сайте активирован новый пользователь.<br/>' .
+                            'Данные пользователя:<br/><br/>' .
+                            'E-mail: <strong>' . $user_data['email'] . '</strong><br/>');
+                        // e-mail for admin
+                        $mail = new Zend_Mail('UTF-8');
+                        $bodyText = $html->render('master_user_activate_template.phtml');
+                        $mail->addTo('igor.peshkov@gmail.com', 'Igor Peshkov');
+                        $mail->setSubject('Online-Racing.net - На сайте активирован пользователь.');
+                        $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                        $mail->setBodyHtml($bodyText);
+                        $mail->send();
 
-		$this->view->form = $form;
-	}
+                        $bootstrap = $this->getInvokeArg('bootstrap');
+                        $auth = Zend_Auth::getInstance();
+                        $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
+                        $authAdapter = new Zend_Auth_Adapter_DbTable(
+                            $adapter, 'user', 'email', 'password'
+                        );
 
-	public function setRestorePassAction() {
-		if (Zend_Auth::getInstance()->hasIdentity()) {
-			$this->_helper->redirector('index', 'index');
-		}
+                        $authAdapter->setIdentity($user_data['email']);
+                        $authAdapter->setCredential($user_data['password']);
+                        $result = $auth->authenticate($authAdapter);
+
+                        $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
+                        $storage = $auth->getStorage();
+                        $storage->write($storage_data);
+
+                        $this->messages->clearMessages();
+                        $this->messages->addSuccess($this->view->translate('Ваш профиль активирован. Добро пожаловать в команду портала Online-Racing.Net. Желаем отличного настроение и высоких результатов.'));
+                        $this->messages->addSuccess($this->view->translate('Да прибудет с вами скорость. ©'));
+
+                        $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+
+                        break;
+                    case 'error':
+                        $this->messages->addError($this->view->translate('Введены неверные данные активации!'));
+
+                        break;
+                    case 'activate':
+                        $url_login = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true);
+                        $this->messages->addError($this->view->translate('Пользователь уже активирован!') . ' <strong><a class="btn btn-default" href="' . $url_login . '">'
+                            . $this->view->translate('Авторизоваться?') . '</a></strong>');
+                        break;
+                    case 'notFound':
+                        $this->messages->addError($this->view->translate('Пользователь на сайте не найден!'));
+                        break;
+                }
+            } else {
+                $this->messages->addError($this->view->translate('Исправте ошибки для корректной активации профиля!'));
+            }
+        }
+
+        $this->view->form = $form;
+    }
+
+    public function restorePassAction()
+    {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_helper->redirector('index', 'index');
+        }
 
         // set layout without sidebar
         $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
-		$this->view->headTitle($this->view->translate('Создание нового пароля'));
-		$this->view->pageTitle($this->view->translate('Создание нового пароля'));
+        $this->view->headTitle($this->view->translate('Восстановление пароля'));
+        $this->view->pageTitle($this->view->translate('Восстановление пароля'));
 
-		$this->messages->addInfo($this->view->translate('Введите данные, полученные на ваш регистрационный e-mail в форму ниже для создания нового пароля.'));
-		$this->messages->addInfo($this->view->translate('Если вы не получали писем - проверьте папку спам на его наличия в ней и <strong>обозначте его как <u>"не смам"</u></strong>.'));
+        $this->messages->addInfo($this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.'));
 
-		$request = $this->getRequest();
-		$form = new Application_Form_User_SetRestorePass();
-		$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
+        $request = $this->getRequest();
+        $form = new Application_Form_User_RestorePass();
+        $form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true));
 
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($request->getPost())) {
-				$user = new Application_Model_DbTable_User();
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
+                $user_code_restore_pass = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
 
-				$user_data = array(
-					'email' => $form->getValue('email'),
-					'code_restore' => $form->getValue('code_restore'),
-					'password' => sha1($form->getValue('password')),
-				);
+                $user = new Application_Model_DbTable_User();
+                $user->setRestorePassCode($form->getValue('email'), $user_code_restore_pass);
 
-				$result = $user->restoreNewPasswd($user_data['email'], $user_data['code_restore'], $user_data['password']);
+                // load e-mail script (template) for user
+                $html = new Zend_View();
+                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+                // e-mail template values for user
+                $restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true);
+                $html->assign('login', $form->getValue('email'));
+                $html->assign('content', 'Уважаемый пользователь, вы или кто-то другой запросили код для создания нового пароля.<br/>' .
+                    'На <a href="' . $restore_url . '">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
+                    'E-mail: <strong>' . $form->getValue('email') . '</strong><br/>' .
+                    'Код восстановления: <strong>' . $user_code_restore_pass . '</strong><br/>' .
+                    'Если вы не запрашивали новый пароль, то просто проигнорируйте данное сообщение.');
+                // e-mail for user
+                $mail = new Zend_Mail('UTF-8');
+                $bodyText = $html->render('restore_passwd_template.phtml');
+                $mail->addTo($form->getValue('email'), $form->getValue('email'));
+                $mail->setSubject('Online-Racing.net - Код для восстановления пароля.');
+                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                $mail->setBodyHtml($bodyText);
+                $mail->send();
 
-				if ($result) {
-					// load e-mail script (template) for user
-					$html = new Zend_View();
-					$html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-					// e-mail template values for user
-					$html->assign('login', $user_data['email']);
-					$html->assign('content', 'Ваш пароль изменен. Приятного время на нашем портале. <br/> Да прибудем с Вами скорость! ©');
-					// e-mail for user
-					$mail = new Zend_Mail('UTF-8');
-					$bodyText = $html->render('set_restore_pass_template.phtml');
-					$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-					$mail->setSubject('Online-Racing.net - Ваш пароль изменен.');
-					$mail->addTo($user_data['email'], $user_data['email']);
-					$mail->setBodyHtml($bodyText);
-					$mail->send();
+                //clear all messages on the page
+                $this->messages->clearMessages();
 
-					$bootstrap = $this->getInvokeArg('bootstrap');
-					$auth = Zend_Auth::getInstance();
-					$adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
-					$authAdapter = new Zend_Auth_Adapter_DbTable(
-							$adapter, 'user', 'email', 'password'
-					);
+                $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
+            } else {
+                $this->messages->addError($this->view->translate('Исправте следующие ошибки для восстановления пароля!'));
+            }
+        }
 
-					$authAdapter->setIdentity($user_data['email']);
-					$authAdapter->setCredential($user_data['password']);
-					$result = $auth->authenticate($authAdapter);
+        $this->view->form = $form;
+    }
 
-					$storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-					$storage = $auth->getStorage();
-					$storage->write($storage_data);
+    public function setRestorePassAction()
+    {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->_helper->redirector('index', 'index');
+        }
 
-					//clear all messages on the page
-					$this->messages->clearMessages();
+        // set layout without sidebar
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
-					$this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
-				} else {
-					$this->messages->addError($this->view->translate('Введены неверные данные для создания нового пароля!'));
-					$this->messages->addError('<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true) . '">' . $this->view->translate('Выслать данные еще раз?') . '</a></strong>');
-				}
-			} else {
-				$this->messages->addError($this->view->translate('Исправте следующие ошибки для создания пароля!'));
-			}
-		}
+        $this->view->headTitle($this->view->translate('Создание нового пароля'));
+        $this->view->pageTitle($this->view->translate('Создание нового пароля'));
 
-		$this->view->form = $form;
-	}
+        $this->messages->addInfo($this->view->translate('Введите данные, полученные на ваш регистрационный e-mail в форму ниже для создания нового пароля.'));
+        $this->messages->addInfo($this->view->translate('Если вы не получали писем - проверьте папку спам на его наличия в ней и <strong>обозначте его как <u>"не смам"</u></strong>.'));
 
-	public function editAction() {
-		// page title
-		$this->view->headTitle($this->view->translate('Редактирование профиля'));
-		$this->view->pageTitle($this->view->translate('Редактирование профиля'));
+        $request = $this->getRequest();
+        $form = new Application_Form_User_SetRestorePass();
+        $form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
 
-		$this->messages->addInfo($this->view->translate('Введите новые данные и нажмите "Сохранить".'));
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $user = new Application_Model_DbTable_User();
 
-		$request = $this->getRequest();
+                $user_data = array(
+                    'email' => $form->getValue('email'),
+                    'code_restore' => $form->getValue('code_restore'),
+                    'password' => sha1($form->getValue('password')),
+                );
 
-		$user = new Application_Model_DbTable_User();
+                $result = $user->restoreNewPasswd($user_data['email'], $user_data['code_restore'], $user_data['password']);
 
-		$form = new Application_Form_User_Edit();
-		$form->isValid($request->getPost());
-		$form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true));
+                if ($result) {
+                    // load e-mail script (template) for user
+                    $html = new Zend_View();
+                    $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+                    // e-mail template values for user
+                    $html->assign('login', $user_data['email']);
+                    $html->assign('content', 'Ваш пароль изменен. Приятного время на нашем портале. <br/> Да прибудем с Вами скорость! ©');
+                    // e-mail for user
+                    $mail = new Zend_Mail('UTF-8');
+                    $bodyText = $html->render('set_restore_pass_template.phtml');
+                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                    $mail->setSubject('Online-Racing.net - Ваш пароль изменен.');
+                    $mail->addTo($user_data['email'], $user_data['email']);
+                    $mail->setBodyHtml($bodyText);
+                    $mail->send();
 
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValidPartial($request->getPost())) {
-				$user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage()->read()->id);
-				$date = date('Y-m-d H:i:s');
-				switch ($request->getParam('tab_name')) {
-					case 'avatar':
-						if ($form->getValue('avatar_load')) {
-							if ($form->avatar_load->receive()) {
-								$file = $form->avatar_load->getFileInfo();
-								$ext = pathinfo($file['avatar_load']['name'], PATHINFO_EXTENSION);
-								$newName = Date('Y-m-d_H-i-s') . strtolower('_avatar' . '.' . $ext);
+                    $bootstrap = $this->getInvokeArg('bootstrap');
+                    $auth = Zend_Auth::getInstance();
+                    $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
+                    $authAdapter = new Zend_Auth_Adapter_DbTable(
+                        $adapter, 'user', 'email', 'password'
+                    );
 
-								$filterRename = new Zend_Filter_File_Rename(array('target'
-									=> $file['avatar_load']['destination'] . '/' . $newName, 'overwrite' => true));
+                    $authAdapter->setIdentity($user_data['email']);
+                    $authAdapter->setCredential($user_data['password']);
+                    $result = $auth->authenticate($authAdapter);
 
-								$filterRename->filter($file['avatar_load']['destination'] . '/' . $file['avatar_load']['name']);
+                    $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
+                    $storage = $auth->getStorage();
+                    $storage->write($storage_data);
 
-								$user_data = array(
-									'avatar_load' => '/data-content/data-uploads/user/avatar_upload/' . $newName,
-								);
+                    //clear all messages on the page
+                    $this->messages->clearMessages();
 
-								$user_avatar_file = $user->getUserAvatarLoad(Zend_Auth::getInstance()->getStorage()->read()->id);
-								if ($user_avatar_file) {
-									unlink(APPLICATION_PATH . '/../public_html' . $user_avatar_file);
-								}
-							}
-						}
+                    $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+                } else {
+                    $this->messages->addError($this->view->translate('Введены неверные данные для создания нового пароля!'));
+                    $this->messages->addError('<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true) . '">' . $this->view->translate('Выслать данные еще раз?') . '</a></strong>');
+                }
+            } else {
+                $this->messages->addError($this->view->translate('Исправте следующие ошибки для создания пароля!'));
+            }
+        }
 
-						$user_data['avatar_type'] = $form->getValue('avatar_type');
-						$user_data['avatar_link'] = $form->getValue('avatar_link');
-						$user_data['avatar_gravatar_email'] = $form->getValue('avatar_gravatar_email');
-						$user_data['date_edit'] = $date;
+        $this->view->form = $form;
+    }
 
-						$user->update($user_data, $user_where);
-						break;
-					case 'personal_Inf':
-						$user_data = array(
-							'name' => $form->getValue('name'),
-							'surname' => $form->getValue('surname'),
-							'birthday' => $form->getValue('birthday'),
-							'country_id' => $form->getValue('country'),
-							'city' => $form->getValue('city'),
-							//'flag' => $form->getValue('flag'),
-							'date_edit' => $date,
-						);
+    public function editAction()
+    {
+        // page title
+        $this->view->headTitle($this->view->translate('Редактирование профиля'));
+        $this->view->pageTitle($this->view->translate('Редактирование профиля'));
 
-						$user->update($user_data, $user_where);
-						break;
-					case 'contacts_Inf':
-						$user_data = array(
-							'skype' => $form->getValue('skype'),
-							'icq' => $form->getValue('icq'),
-							'gtalk' => $form->getValue('gtalk'),
-							'www' => $form->getValue('www'),
-							'date_edit' => $date,
-						);
+        $this->messages->addInfo($this->view->translate('Введите новые данные и нажмите "Сохранить".'));
 
-						$user->update($user_data, $user_where);
-						break;
-					case 'additional_Inf':
-						$user_data = array(
-							'about' => $form->getValue('about'),
-							'date_edit' => $date,
-						);
+        $request = $this->getRequest();
 
-						$user->update($user_data, $user_where);
-						break;
-					default:
-						$this->messages->addWarning($this->view->translate('Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.'));
-						break;
-				}
-			} else {
-				$this->messages->addWarning($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-			}
-		}
+        $user = new Application_Model_DbTable_User();
 
-		$user_data = $user->fetchRow(array('id = ?' => Zend_Auth::getInstance()->getStorage()->read()->id));
+        $form = new Application_Form_User_Edit();
+        $form->isValid($request->getPost());
+        $form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true));
 
-		if (count($user_data) != 0) {
-			$form->name->setValue($user_data->name);
-			$form->surname->setValue($user_data->surname);
-			$form->birthday->setValue($user_data->birthday);
-			$form->city->setValue($user_data->city);
-			$form->avatar_type->setValue($user_data->avatar_type);
-			$form->avatar_link->setValue($user_data->avatar_link);
-			$form->avatar_gravatar_email->setValue($user_data->avatar_gravatar_email);
-			$form->skype->setValue($user_data->skype);
-			$form->icq->setValue($user_data->icq);
-			$form->gtalk->setValue($user_data->gtalk);
-			$form->www->setValue($user_data->www);
-			$form->about->setValue($user_data->about);
-			$this->view->user_id = $user_data->id;
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValidPartial($request->getPost())) {
+                $user_where = $user->getAdapter()->quoteInto('id = ?', Zend_Auth::getInstance()->getStorage()->read()->id);
+                $date = date('Y-m-d H:i:s');
+                switch ($request->getParam('tab_name')) {
+                    case 'avatar':
+                        if ($form->getValue('avatar_load')) {
+                            if ($form->avatar_load->receive()) {
+                                $file = $form->avatar_load->getFileInfo();
+                                $ext = pathinfo($file['avatar_load']['name'], PATHINFO_EXTENSION);
+                                $newName = Date('Y-m-d_H-i-s') . strtolower('_avatar' . '.' . $ext);
 
-			$countries = $this->db->get('country')->getAll(FALSE, array('id', 'NativeName', 'EnglishName'));
+                                $filterRename = new Zend_Filter_File_Rename(array('target'
+                                => $file['avatar_load']['destination'] . '/' . $newName, 'overwrite' => true));
 
-			foreach ($countries as $country):
-				$form->country->addMultiOption($country->id, $country->NativeName . " ({$country->EnglishName})");
-			endforeach;
+                                $filterRename->filter($file['avatar_load']['destination'] . '/' . $file['avatar_load']['name']);
 
-			$form->country->setValue($user_data->country_id);
-		} else {
-			$this->messages->addWarning($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-		}
+                                $user_data = array(
+                                    'avatar_load' => '/data-content/data-uploads/user/avatar_upload/' . $newName,
+                                );
 
-		$this->view->form = $form;
-	}
+                                $user_avatar_file = $user->getUserAvatarLoad(Zend_Auth::getInstance()->getStorage()->read()->id);
+                                if ($user_avatar_file) {
+                                    unlink(APPLICATION_PATH . '/../public_html' . $user_avatar_file);
+                                }
+                            }
+                        }
 
-	public function allAction() {
-		$this->view->headTitle($this->view->translate('Все'));
-		$this->view->pageTitle($this->view->translate('Гонщики'));
-		
-		// pager settings
-		$pager_args = array(
-			"page_count_items" => 12,
-			"page_range" => 5,
-			"page" => $this->getRequest()->getParam('page')
-		);
-		
-		$this->view->breadcrumb()->UserAll($this->getRequest()->getParam('page'));
-		
-		$user_data = $this->db->get('user')->getAll(array(
-			'enable' => array('value' => '1'),
-			'code_activate' => array('value' => '', 'condition' => 'AND')), 'all', array('date_last_activity' => 'DESC'), TRUE, $pager_args);
-		
-		if (count($user_data)) {
-			$this->view->user_data = $user_data;
-		} else {
-			$this->messages->addInfo($this->view->translate('Гонщики на сайте не найдены!'));
-		}
-	}
+                        $user_data['avatar_type'] = $form->getValue('avatar_type');
+                        $user_data['avatar_link'] = $form->getValue('avatar_link');
+                        $user_data['avatar_gravatar_email'] = $form->getValue('avatar_gravatar_email');
+                        $user_data['date_edit'] = $date;
 
-	public function messageAction() {
-		// page title
-		$this->view->headTitle($this->view->translate('Сообщения'));
-		$this->view->pageTitle($this->view->translate('Сообщения'));
+                        $user->update($user_data, $user_where);
+                        break;
+                    case 'personal_Inf':
+                        $user_data = array(
+                            'name' => $form->getValue('name'),
+                            'surname' => $form->getValue('surname'),
+                            'birthday' => $form->getValue('birthday'),
+                            'country_id' => $form->getValue('country'),
+                            'city' => $form->getValue('city'),
+                            //'flag' => $form->getValue('flag'),
+                            'date_edit' => $date,
+                        );
 
-		$this->messages->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
-	}
+                        $user->update($user_data, $user_where);
+                        break;
+                    case 'contacts_Inf':
+                        $user_data = array(
+                            'skype' => $form->getValue('skype'),
+                            'icq' => $form->getValue('icq'),
+                            'gtalk' => $form->getValue('gtalk'),
+                            'www' => $form->getValue('www'),
+                            'date_edit' => $date,
+                        );
 
-	public function settingsAction() {
-		// page title
-		$this->view->headTitle($this->view->translate('Настройки профиля'));
-		$this->view->pageTitle($this->view->translate('Настройки профиля'));
+                        $user->update($user_data, $user_where);
+                        break;
+                    case 'additional_Inf':
+                        $user_data = array(
+                            'about' => $form->getValue('about'),
+                            'date_edit' => $date,
+                        );
 
-		$this->messages->addInfo($this->view->translate('Измините настройки и нажмите "Сохранить".'));
+                        $user->update($user_data, $user_where);
+                        break;
+                    default:
+                        $this->messages->addWarning($this->view->translate('Приносим Вам наши извинения, но сахранение этих данных пока не работает. Пожалуйста, зайдите через некоторое время.'));
+                        break;
+                }
+            } else {
+                $this->messages->addWarning($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+            }
+        }
 
-		$request = $this->getRequest();
+        $user_data = $user->fetchRow(array('id = ?' => Zend_Auth::getInstance()->getStorage()->read()->id));
 
-		$form = new Application_Form_User_Settings();
-		$form->setAction(
-				$this->view->url(
-						array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true
-				)
-		);
+        if (count($user_data) != 0) {
+            $form->name->setValue($user_data->name);
+            $form->surname->setValue($user_data->surname);
+            $form->birthday->setValue($user_data->birthday);
+            $form->city->setValue($user_data->city);
+            $form->avatar_type->setValue($user_data->avatar_type);
+            $form->avatar_link->setValue($user_data->avatar_link);
+            $form->avatar_gravatar_email->setValue($user_data->avatar_gravatar_email);
+            $form->skype->setValue($user_data->skype);
+            $form->icq->setValue($user_data->icq);
+            $form->gtalk->setValue($user_data->gtalk);
+            $form->www->setValue($user_data->www);
+            $form->about->setValue($user_data->about);
+            $this->view->user_id = $user_data->id;
 
-		$user = new Application_Model_DbTable_User();
+            $countries = $this->db->get('country')->getAll(FALSE, array('id', 'NativeName', 'EnglishName'));
 
-		if ($this->getRequest()->isPost()) {
-			if ($form->isValid($request->getPost())) {
-				switch ($request->getParam('tab_name')) {
-					case 'lang_settings ':
-						$this->messages->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
-						break;
-					case 'change_password':
-						if ($form->getValue('newpassword') == $form->getValue('confirmnewpassword') && ($form->getValue('newpassword') != '')) {
-							$user_data = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage()->read()->id, $form->getValue('oldpassword'), $form->getValue('newpassword'));
+            foreach ($countries as $country):
+                $form->country->addMultiOption($country->id, $country->NativeName . " ({$country->EnglishName})");
+            endforeach;
 
-							if (!$user_data) {
-								$this->messages->addError($this->view->translate("Старый пароль введен не верно! Повторите ввод."));
-							} else {
-								$this->messages->addSuccess($this->view->translate("Пароль успешно изменен."));
+            $form->country->setValue($user_data->country_id);
+        } else {
+            $this->messages->addWarning($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+        }
 
-								$user_data = $user->getUserData(Zend_Auth::getInstance()->getStorage()->read()->id);
+        $this->view->form = $form;
+    }
 
-								// load e-mail script (template) for user
-								$html = new Zend_View();
-								$html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-								// e-mail template values for user
-								$html->assign('login', $user_data['login']);
-								$html->assign('password', $form->getValue('newpassword'));
-								$html->assign('user_id', Zend_Auth::getInstance()->getStorage()->read()->id);
-								// e-mail for user
-								$mail = new Zend_Mail('UTF-8');
-								$bodyText = $html->render('new_user_password_template.phtml');
-								$mail->addTo($user_data['email'], $user_data['email']);
-								$mail->setSubject('Online-Racing.net - Пароль учетной записи был изминен.');
-								$mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-								$mail->setBodyHtml($bodyText);
-								$mail->send();
-							}
-						} else {
-							$this->messages->addError($this->view->translate("Поля нового пароля должны содержать одинаковые значения и не должны быть пустыми!"));
-						}
-						break;
-					default :
+    public function messageAction()
+    {
+        $this->view->headTitle($this->view->translate('Сообщения'));
+        $this->view->pageTitle($this->view->translate('Сообщения'));
 
-						break;
-				}
-			} else {
-				$this->view->errMessage .= "Исправте следующие ошибки для смены настроек!" . '<br />';
-			}
-		}
+        $this->messages->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
+    }
 
-		$this->view->form = $form;
-	}
+    public function settingsAction()
+    {
+        // page title
+        $this->view->headTitle($this->view->translate('Настройки профиля'));
+        $this->view->pageTitle($this->view->translate('Настройки профиля'));
+
+        $this->messages->addInfo($this->view->translate('Измините настройки и нажмите "Сохранить".'));
+
+        $request = $this->getRequest();
+
+        $form = new Application_Form_User_Settings();
+        $form->setAction(
+            $this->view->url(
+                array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true
+            )
+        );
+
+        $user = new Application_Model_DbTable_User();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                switch ($request->getParam('tab_name')) {
+                    case 'lang_settings ':
+                        $this->messages->addInfo($this->view->translate('Приносим свои извинения. Функционал данной страницы находится в разработке!'));
+                        break;
+                    case 'change_password':
+                        if ($form->getValue('newpassword') == $form->getValue('confirmnewpassword') && ($form->getValue('newpassword') != '')) {
+                            $user_data = $user->setNewUserPassword(Zend_Auth::getInstance()->getStorage()->read()->id, $form->getValue('oldpassword'), $form->getValue('newpassword'));
+
+                            if (!$user_data) {
+                                $this->messages->addError($this->view->translate("Старый пароль введен не верно! Повторите ввод."));
+                            } else {
+                                $this->messages->addSuccess($this->view->translate("Пароль успешно изменен."));
+
+                                $user_data = $user->getUserData(Zend_Auth::getInstance()->getStorage()->read()->id);
+
+                                // load e-mail script (template) for user
+                                $html = new Zend_View();
+                                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+                                // e-mail template values for user
+                                $html->assign('login', $user_data['login']);
+                                $html->assign('password', $form->getValue('newpassword'));
+                                $html->assign('user_id', Zend_Auth::getInstance()->getStorage()->read()->id);
+                                // e-mail for user
+                                $mail = new Zend_Mail('UTF-8');
+                                $bodyText = $html->render('new_user_password_template.phtml');
+                                $mail->addTo($user_data['email'], $user_data['email']);
+                                $mail->setSubject('Online-Racing.net - Пароль учетной записи был изминен.');
+                                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+                                $mail->setBodyHtml($bodyText);
+                                $mail->send();
+                            }
+                        } else {
+                            $this->messages->addError($this->view->translate("Поля нового пароля должны содержать одинаковые значения и не должны быть пустыми!"));
+                        }
+                        break;
+                    default :
+
+                        break;
+                }
+            } else {
+                $this->view->errMessage .= "Исправте следующие ошибки для смены настроек!" . '<br />';
+            }
+        }
+
+        $this->view->form = $form;
+    }
 
 }

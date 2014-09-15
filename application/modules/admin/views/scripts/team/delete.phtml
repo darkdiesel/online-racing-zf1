@@ -8,7 +8,7 @@
     if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
         $adminRacingSeriesIdUrl = $this->url(
             array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
-                'racingSeriesID' => $this->escape($team['RacingSeries']['ID'])), 'adminRacingSeriesID'
+                'racingSeriesID' => $this->escape($this->teamData['RacingSeries']['ID'])), 'adminRacingSeriesID'
         );
     } else {
         $adminRacingSeriesIdUrl = '#';

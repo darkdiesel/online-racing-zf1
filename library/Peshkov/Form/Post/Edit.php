@@ -24,7 +24,7 @@ class Peshkov_Form_Post_Edit extends Peshkov_Form_Post_Add
             ->setAction($adminPostEditUrl);
 
            //TODO: Uncoment this code for allow upload to server post image
-//        $this->getElement('UrlImageLogo')->setRequired(false);
+//        $this->getElement('ImageLogoUrl')->setRequired(false);
 
         $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$defaultPostIDUrl}'");
 

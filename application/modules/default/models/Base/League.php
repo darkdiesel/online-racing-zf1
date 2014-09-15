@@ -9,7 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_League', 'default'
  * 
  * @property integer $ID
  * @property string $Name
- * @property string $UrlImageLogo
+ * @property string $ImageLogoUrl
  * @property string $Description
  * @property integer $UserID
  * @property timestamp $DateCreate
@@ -43,7 +43,7 @@ abstract class Default_Model_Base_League extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('UrlImageLogo', 'string', 255, array(
+        $this->hasColumn('ImageLogoUrl', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
@@ -93,6 +93,6 @@ abstract class Default_Model_Base_League extends Doctrine_Record
         parent::setUp();
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
-             'foreign' => 'id'));
+             'foreign' => 'ID'));
     }
 }

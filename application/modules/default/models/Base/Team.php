@@ -13,6 +13,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Team', 'default');
  * @property integer $RacingSeriesID
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
+ * @property Default_Model_RacingSeries $RacingSeries
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -80,6 +81,8 @@ abstract class Default_Model_Base_Team extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        
+        $this->hasOne('Default_Model_RacingSeries as RacingSeries', array(
+             'local' => 'RacingSeriesID',
+             'foreign' => 'ID'));
     }
 }

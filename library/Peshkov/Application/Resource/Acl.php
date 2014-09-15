@@ -10,16 +10,16 @@ class Acl extends Zend_Acl
 
     public function __construct()
     {
-//        // Init roles array from DB
-//        $this->getRolesArray();
-//        $this->initRoles();
+        // Init roles array from DB
+        $this->getRolesArray();
+        $this->initRoles();
+
+        $this->getResourcesArray();
+        $this->initResources();
+
+        $this->deny();
 //
-//        $this->getResourcesArray();
-//        $this->initResources();
-//
-//        $this->deny();
-////
-//        $this->initAccess();
+        $this->initAccess();
     }
 
     protected function getRolesArray()

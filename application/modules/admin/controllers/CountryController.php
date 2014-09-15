@@ -124,40 +124,40 @@ class Admin_CountryController extends App_Controller_LoaderController
                 $item->DateEdit = $date;
 
                 //receive and rename image_round file
-                if ($countryAddForm->getValue('UrlImageRound')) {
-                    if ($countryAddForm->UrlImageRound->receive()) {
-                        $file = $countryAddForm->UrlImageRound->getFileInfo();
-                        $ext = pathinfo($file['UrlImageRound']['name'], PATHINFO_EXTENSION);
+                if ($countryAddForm->getValue('ImageRoundUrl')) {
+                    if ($countryAddForm->ImageRoundUrl->receive()) {
+                        $file = $countryAddForm->ImageRoundUrl->getFileInfo();
+                        $ext = pathinfo($file['ImageRoundUrl']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['UrlImageRound']['destination'] . '/'
+                        => $file['ImageRoundUrl']['destination'] . '/'
                             . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
-                            $file['UrlImageRound']['destination'] . '/' . $file['UrlImageRound']['name']
+                            $file['ImageRoundUrl']['destination'] . '/' . $file['ImageRoundUrl']['name']
                         );
 
-                        $item->UrlImageRound = '/data-content/data-uploads/flags/' . $newName;
+                        $item->ImageRoundUrl = '/data-content/data-uploads/flags/' . $newName;
                     }
                 }
 
                 //receive and rename image_glossy_wave file
-                if ($countryAddForm->getValue('UrlImageGlossyWave')) {
-                    if ($countryAddForm->UrlImageGlossyWave->receive()) {
-                        $file = $countryAddForm->UrlImageGlossyWave->getFileInfo();
-                        $ext = pathinfo($file['UrlImageGlossyWave']['name'], PATHINFO_EXTENSION);
+                if ($countryAddForm->getValue('ImageGlossyWaveUrl')) {
+                    if ($countryAddForm->ImageGlossyWaveUrl->receive()) {
+                        $file = $countryAddForm->ImageGlossyWaveUrl->getFileInfo();
+                        $ext = pathinfo($file['ImageGlossyWaveUrl']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['UrlImageGlossyWave']['destination']
+                        => $file['ImageGlossyWaveUrl']['destination']
                             . '/' . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
-                            $file['UrlImageGlossyWave']['destination'] . '/' . $file['UrlImageGlossyWave']['name']
+                            $file['ImageGlossyWaveUrl']['destination'] . '/' . $file['ImageGlossyWaveUrl']['name']
                         );
 
-                        $item->UrlImageGlossyWave = '/data-content/data-uploads/flags/' . $newName;
+                        $item->ImageGlossyWaveUrl = '/data-content/data-uploads/flags/' . $newName;
                     }
                 }
 
@@ -210,53 +210,53 @@ class Admin_CountryController extends App_Controller_LoaderController
                     $item = Doctrine_Core::getTable('Default_Model_Country')->find($requestData->countryID);
 
                     //receive and rename image_round file
-                    if ($formData['UrlImageRound']) {
-                        if ($countryEditForm->UrlImageRound->receive()) {
-                            $file = $countryEditForm->UrlImageRound->getFileInfo();
-                            $ext = pathinfo($file['UrlImageRound']['name'], PATHINFO_EXTENSION);
+                    if ($formData['ImageRoundUrl']) {
+                        if ($countryEditForm->ImageRoundUrl->receive()) {
+                            $file = $countryEditForm->ImageRoundUrl->getFileInfo();
+                            $ext = pathinfo($file['ImageRoundUrl']['name'], PATHINFO_EXTENSION);
                             $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
 
                             $filterRename = new Zend_Filter_File_Rename(array('target'
-                            => $file['UrlImageRound']['destination'] . '/'
+                            => $file['ImageRoundUrl']['destination'] . '/'
                                 . $newName, 'overwrite' => true));
 
                             $filterRename->filter(
-                                $file['UrlImageRound']['destination'] . '/' . $file['UrlImageRound']['name']
+                                $file['ImageRoundUrl']['destination'] . '/' . $file['ImageRoundUrl']['name']
                             );
 
-                            $formData['UrlImageRound'] = '/data-content/data-uploads/flags/' . $newName;
+                            $formData['ImageRoundUrl'] = '/data-content/data-uploads/flags/' . $newName;
 
-                            if ($formData['UrlImageRound'] != $item['UrlImageRound']) {
-                                unlink(APPLICATION_PATH . '/../public_html' . $item['UrlImageRound']);
+                            if ($formData['ImageRoundUrl'] != $item['ImageRoundUrl']) {
+                                unlink(APPLICATION_PATH . '/../public_html' . $item['ImageRoundUrl']);
                             }
                         }
                     } else {
-                        unset($formData['UrlImageRound']);
+                        unset($formData['ImageRoundUrl']);
                     }
 
                     //receive and rename image_glossy_wave file
-                    if ($formData['UrlImageGlossyWave']) {
-                        if ($countryEditForm->UrlImageGlossyWave->receive()) {
-                            $file = $countryEditForm->UrlImageGlossyWave->getFileInfo();
-                            $ext = pathinfo($file['UrlImageGlossyWave']['name'], PATHINFO_EXTENSION);
+                    if ($formData['ImageGlossyWaveUrl']) {
+                        if ($countryEditForm->ImageGlossyWaveUrl->receive()) {
+                            $file = $countryEditForm->ImageGlossyWaveUrl->getFileInfo();
+                            $ext = pathinfo($file['ImageGlossyWaveUrl']['name'], PATHINFO_EXTENSION);
                             $newName = Date('Y-m-d_H-i-s') . strtolower('_image_glossy_wave' . '.' . $ext);
 
                             $filterRename = new Zend_Filter_File_Rename(array('target'
-                            => $file['UrlImageGlossyWave']['destination']
+                            => $file['ImageGlossyWaveUrl']['destination']
                                 . '/' . $newName, 'overwrite' => true));
 
                             $filterRename->filter(
-                                $file['UrlImageGlossyWave']['destination'] . '/' . $file['UrlImageGlossyWave']['name']
+                                $file['ImageGlossyWaveUrl']['destination'] . '/' . $file['ImageGlossyWaveUrl']['name']
                             );
 
-                            $formData['UrlImageGlossyWave'] = '/data-content/data-uploads/flags/' . $newName;
+                            $formData['ImageGlossyWaveUrl'] = '/data-content/data-uploads/flags/' . $newName;
 
-                            if ($formData['UrlImageGlossyWave'] != $item['UrlImageGlossyWave']) {
-                                unlink(APPLICATION_PATH . '/../public_html' . $item['UrlImageGlossyWave']);
+                            if ($formData['ImageGlossyWaveUrl'] != $item['ImageGlossyWaveUrl']) {
+                                unlink(APPLICATION_PATH . '/../public_html' . $item['ImageGlossyWaveUrl']);
                             }
                         }
                     } else {
-                        unset($formData['UrlImageGlossyWave']);
+                        unset($formData['ImageGlossyWaveUrl']);
                     }
 
                     // set edit date
@@ -356,8 +356,8 @@ class Admin_CountryController extends App_Controller_LoaderController
                         $result = $query->execute();
 
                         // remove country images
-                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageRound']);
-                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['UrlImageGlossyWave']);
+                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['ImageRoundUrl']);
+                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->countryData['ImageGlossyWaveUrl']);
 
                         //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
 

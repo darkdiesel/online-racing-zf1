@@ -55,7 +55,7 @@
                         if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
                             $defaultUserIDUrl = $this->url(
                                 array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                                    'user_id' => $this->escape($league['User']['id'])), 'defaultUserId'
+                                    'userID' => $this->escape($league['User']['ID'])), 'defaultUserID'
                             );
                         } else {
                             $defaultUserIDUrl = '#';
@@ -79,7 +79,7 @@
                             <td class="league-admin">
                                     <span>
                                         <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                            <?php echo $this->escape($league['User']['login']) ?>
+                                            <?php echo $this->escape($league['User']['Login']) ?>
                                         </a>
                                     </span>
                             </td>

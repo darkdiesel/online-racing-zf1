@@ -13,11 +13,11 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->from(array('u' => $this->_name), 'u.id')
 				->where('u.id = ? and u.enable = 1', $id)
 				->join(array('c' => 'country'), 'u.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+					'country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
-				->columns(array('login', 'email', 'name', 'surname', 'avatar_type', 'birthday', 'city', 'date_last_activity', 'date_create', 'skype',
-			'icq', 'gtalk', 'www',));
+				->columns(array('Login', 'Email', 'Name', 'Surname', 'AvatarType', 'DateBirthday', 'City', 'DateLastActivity', 'DateCreate', 'Skype',
+			'Icq', 'Gtalk', 'WebSite',));
 
 		$user = $model->fetchRow($select);
 
@@ -63,10 +63,10 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 		$model = new self;
 
 		$user_data = array(
-			'date_last_activity' => date('Y-m-d H:i:s')
+			'DateLastActivity' => date('Y-m-d H:i:s')
 		);
 
-		$user_where = $model->getAdapter()->quoteInto('id = ?', $user_id);
+		$user_where = $model->getAdapter()->quoteInto('ID = ?', $user_id);
 		$model->update($user_data, $user_where);
 	}
 
@@ -74,10 +74,10 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 		$model = new self;
 
 		$user_data = array(
-			'last_login_ip' => $ip
+			'LastUserLoginIP' => $ip
 		);
 
-		$user_where = $model->getAdapter()->quoteInto('id = ?', $user_id);
+		$user_where = $model->getAdapter()->quoteInto('ID = ?', $user_id);
 		$model->update($user_data, $user_where);
 	}
 
@@ -85,32 +85,32 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 		$model = new self;
 
 		$select = $model->select()
-				->from('user', 'id')
-				->where('email = ?', $email)
-				->where('password = ?', $password)
-				->columns(array('code_activate'));
+				->from('User', 'ID')
+				->where('Email = ?', $email)
+				->where('Password = ?', $password)
+				->columns(array('ActivationCode'));
 
 		$user = $model->fetchRow($select);
 
 		if (count($user) != 0) {
-			if ($user->code_activate == $code_activate) {
+			if ($user->ActivationCode == $code_activate) {
 				$user_data = array(
-					'code_activate' => ''
+					'ActivationCode' => ''
 				);
 
 				$user_where = $model->getAdapter()->quoteInto('id = ?', $user->id);
 				$model->update($user_data, $user_where);
 
 				$role_db = new Application_Model_DbTable_Role();
-				$role_data = $role_db->getItem(array("name" => array("value" => "user")), array("id", "name"));
+				$role_data = $role_db->getItem(array("Name" => array("value" => "user")), array("ID", "Name"));
 				$user_role_db = new Application_Model_DbTable_UserRole();
 
 				$new_user_role_data = array(
-					'user_id' => $user->id,
-					'role_id' => $role_data->id,
+					'UserID' => $user->ID,
+					'RoleID' => $role_data->id,
 				);
 
-				$user_where = $user_role_db->getAdapter()->quoteInto('user_id = ?', $user->id);
+				$user_where = $user_role_db->getAdapter()->quoteInto('UserID = ?', $user->ID);
 				$updated = $user_role_db->update($new_user_role_data, $user_where);
 
 				if (!$updated) {
@@ -388,7 +388,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->join(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
+					'country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->joinLeft(array('ur' => 'user_role'), $this->db_href . '.id = ur.user_id', array('user_role_id' => 'ur.role_id'))
@@ -467,8 +467,8 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
 				->join(array('c' => 'country'), $this->db_href . '.country_id = c.id', array('country_abbreviation' => 'c.abbreviation',
-					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
-					'country_UrlImageRound' => 'c.UrlImageRound',
+					'country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
+					'country_ImageRoundUrl' => 'c.ImageRoundUrl',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->joinLeft(array('ur' => 'user_role'), $this->db_href . '.id = ur.user_id', array('user_role_id' => 'ur.role_id'))

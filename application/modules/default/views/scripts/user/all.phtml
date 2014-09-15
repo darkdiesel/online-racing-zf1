@@ -1,41 +1,57 @@
-<?php if ($this->user_data): ?>
-	<div class="row">
-		<?php
-		
-		foreach ($this->user_data as $user):
-			$user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user->id), 'defaultUserId', true);
-			
-			if ($this->getUserStatus($user->date_last_activity) == 'online'){
-				$user_status_class = 'user-online';
-			} else {
-				$user_status_class = 'user-offline';
-			}
-			
-			?>
-			<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-				<div class="block block-default center-block block-ui-shadow block-user m-b-10">
-					<div class="block-body">
-						<div class="img-wrapper-150-150 overflow-hide img-circle center-block user-avatar <?php echo $user_status_class; ?>">
-							<a href="<?php echo $user_id_url; ?>"><?php echo $this->getUserAvatar($user->id, $user->avatar_type, 'media-object img-responsive img-size-150', 150); ?></a>
-						</div>
-						<div class="user-flag"><img class="img-size-64" src="<?php echo $user->country_UrlImageGlossyWave; ?>" title="<?php echo $user->country_EnglishName . ' (' . $user->country_NativeName . ')'; ?>"></div>
-						<div class="user-login text-center"><a href="<?php echo $user_id_url; ?>"><?php echo $user->login; ?></a></div>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-			</div>
-			<?php
-		endforeach;
-		?>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
-			<div class="block-item m-t-15">
-				<div class="pull-right">
-					<?php echo $this->paginationControl($this->user_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
+<?php if ($this->userData): ?>
+    <div class="row">
+        <?php foreach ($this->userData as $user): ?>
+            <?php
+            // check access and generate link for default/user/id
+            if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+                $defaultUserIDUrl = $this->url(
+                    array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                        'userID' => $this->escape($user['ID'])), 'defaultUserID'
+                );
+            } else {
+                $defaultUserIDUrl = '#';
+            }
+            ?>
+
+            <?php if ($this->getUser()->getUserStatus($user['DateLastActivity']) == USER_STATUS_ONLINE) {
+                $userStatusClass = 'user-online';
+            } else {
+                $userStatusClass = 'user-offline';
+            }
+            ?>
+
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="block block-default center-block block-ui-shadow block-user m-b-10">
+                    <div class="block-body">
+                        <div class="img-wrapper-150-150 overflow-hide img-circle center-block user-avatar <?php echo $userStatusClass; ?>">
+                            <a href="<?php echo $defaultUserIDUrl; ?>">
+                                <?php echo $this->getUser()->getUserAvatar($user['ID'], $user['AvatarType'], 'media-object img-responsive img-size-150', 150); ?>
+                            </a>
+                        </div>
+                        <div class="user-flag">
+                            <img class="img-size-64" src="<?php echo $user['Country']['ImageGlossyWaveUrl']; ?>" title="<?php echo $user['Country']['EnglishName'] . ' (' . $user['Country']['NativeName'] . ')'; ?>">
+                        </div>
+                        <div class="user-login text-center">
+                            <a href="<?php echo $defaultUserIDUrl; ?>">
+                                <?php echo $user['Login']; ?>
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        <?php
+        endforeach;
+        ?>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
+            <div class="block-item m-t-15">
+                <div class="pull-right">
+                    <?php echo $this->paginationControl($this->userData, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
 <?php endif; ?>

@@ -93,13 +93,13 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //ROLE CONTROLLER ROUTERS
         $router->addRoute(
-            'adminRoleId', new Zend_Controller_Router_Route_Regex('admin/role/(\d+)\.html', array(
+            'adminRoleID', new Zend_Controller_Router_Route_Regex('admin/role/(\d+)\.html', array(
                     'module' => 'admin',
                     'controller' => 'role',
                     'action' => 'id',
                     1 => 0
                 ), array(
-                    'role_id' => 1,
+                    'RoleID' => 1,
                 ), "admin/role/%d.html"
             )
         );
@@ -110,7 +110,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
                     'controller' => 'role',
                     1 => 0
                 ), array(
-                    'role_id' => 1,
+                    'roleID' => 1,
                     'action' => 2,
                 ), "admin/role/%d/%s.html"
             )

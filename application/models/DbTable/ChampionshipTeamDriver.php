@@ -59,8 +59,8 @@ class Application_Model_DbTable_ChampionshipTeamDriver extends Zend_Db_Table_Abs
 					'user_avatar_type' => 'u.avatar_type',
 					'user_country_id' => 'u.country_id'))
 				->join(array('c' => 'country'), 'u.country_id = c.id', array(
-					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
-					'country_UrlImageRound' => 'c.UrlImageRound',
+					'country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
+					'country_ImageRoundUrl' => 'c.ImageRoundUrl',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->columns('CTD.driver_number')
@@ -93,8 +93,8 @@ class Application_Model_DbTable_ChampionshipTeamDriver extends Zend_Db_Table_Abs
 					'user_country_id' => 'u.country_id'))
 				->join(array('c' => 'country'), 'u.country_id = c.id', array(
 					'country_abbreviation' => 'c.abbreviation',
-					'country_UrlImageGlossyWave' => 'c.UrlImageGlossyWave',
-					'country_UrlImageRound' => 'c.UrlImageRound',
+					'country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
+					'country_ImageRoundUrl' => 'c.ImageRoundUrl',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
 				->columns('CTD.driver_number')

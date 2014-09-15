@@ -20,10 +20,10 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Post', 'default');
  * @property integer $Views
  * @property integer $Publish
  * @property integer $PublishToSlider
- * @property string $LastIP
+ * @property string $LastUserIP
+ * @property Default_Model_PostCategory $PostCategory
  * @property Default_Model_ContentType $ContentType
  * @property Default_Model_User $User
- * @property Default_Model_PostCategory $PostCategory
  * @property Doctrine_Collection $Comment
  * 
  * @package    ##PACKAGE##
@@ -149,7 +149,7 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('LastIP', 'string', 50, array(
+        $this->hasColumn('LastUserIP', 'string', 50, array(
              'type' => 'string',
              'length' => 50,
              'fixed' => false,
@@ -163,16 +163,16 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Default_Model_PostCategory as PostCategory', array(
+             'local' => 'PostCategoryID',
+             'foreign' => 'ID'));
+
         $this->hasOne('Default_Model_ContentType as ContentType', array(
              'local' => 'ContentTypeID',
              'foreign' => 'ID'));
 
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_PostCategory as PostCategory', array(
-             'local' => 'PostCategoryID',
              'foreign' => 'ID'));
 
         $this->hasMany('Default_Model_Comment as Comment', array(

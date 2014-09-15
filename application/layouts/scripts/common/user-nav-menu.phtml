@@ -1,122 +1,133 @@
 <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
-    <?php $storage_data = Zend_Auth::getInstance()->getStorage()->read(); ?>
+    <?php
+        $storageData = Zend_Auth::getInstance()->getStorage()->read();
+    ?>
     <?php
     $default_auth_logout_url = $this->url(
         array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true
     );
-    $default_user_id_url = $this->url(
-        array('module'  => 'default', 'controller' => 'user', 'action' => 'id',
-              'user_id' => $storage_data->id), 'defaultUserId', true
+    $defaultUserIDUrl = $this->url(
+        array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+            'userID' => $storageData->id), 'defaultUserID', true
     );
-    $default_user_edit_url = $this->url(
+    $defaultUserEditUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true
     );
-    $default_user_settings_url = $this->url(
+    $defaultUserSettingUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'settings'), 'default', true
     );
-    $default_user_mssages_url = $this->url(
+    $defaultUserMessageUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'message'), 'default', true
     );
-    $admin_url = $this->url(
+    $adminIndexUrl = $this->url(
         array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true
     );
 
-    $user_db = new Application_Model_DbTable_User();
-    $user_data = $user_db->getItem(Zend_Auth::getInstance()->getStorage()->read()->id);
-    ?>
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-user"></span>
-                <?php echo $this->translate('Профиль'); ?>
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    <div class="navbar-content">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="img-wrapper-100 thumbnail m-b-0">
-                                    <?php echo $this->getUserAvatar(
-                                        $user_data->id, $user_data->avatar_type,
-                                        'img-responsive img-size-100', 100
-                                    ); ?>
+    $query = Doctrine_Query::create()
+        ->from('Default_Model_User u')
+        ->leftJoin('u.UserRole ur')
+        ->leftJoin('ur.Role r')
+        ->where('u.ID = ?', $storageData->id);
+
+    $userResult = $query->fetchArray();
+
+    if (count($userResult) == 1) {
+        ?>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <?php echo $this->translate('Профиль'); ?>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="navbar-content">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="img-wrapper-100 thumbnail m-b-0">
+                                        <?php echo $this->getUser()->getUserAvatar(
+                                            $userResult[0]['ID'], $userResult[0]['AvatarType'],
+                                            'img-responsive img-size-100', 100
+                                        ); ?>
+                                    </div>
+                                    <p class="text-center small">
+                                        <a href="<?php echo $defaultUserEditUrl, '#tabs-2' ?>">
+                                            <?php echo $this->translate('Изменить аватар'); ?>
+                                        </a>
+                                    </p>
                                 </div>
-                                <p class="text-center small">
-                                    <a href="<?php echo $default_user_edit_url, '#tabs-2' ?>">
-                                        <?php echo $this->translate('Изменить аватар'); ?>
-                                    </a>
-                                </p>
+                                <div class="col-md-7">
+                                    <span>
+                                        <?php if (!empty($userResult[0]['Name']) && !empty($userResult[0]['Surname'])) : ?>
+                                            <strong>
+                                                <?php echo $userResult[0]['Surname'] . ' ' . $userResult[0]['Name']; ?>
+                                            </strong>
+                                        <?php else: ?>
+                                            <div>
+                                                <a href="<?php echo $defaultUserEditUrl ?>">
+                                                    <span class="label label-danger">
+                                                        >> <?php echo $this->translate('Добавить имя'); ?> <<
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        <?php endif; ?>
+                                    </span>
+
+                                    <p class="text-muted small">
+                                        <?php echo $userResult[0]['Login'] ?>
+                                        <a href="<?php echo $defaultUserEditUrl ?>">
+                                            <i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?>
+                                        </a>
+                                    </p>
+
+                                    <div class="divider"></div>
+
+                                    <div>
+                                        <a href="<?php echo $defaultUserIDUrl; ?>"
+                                           class="btn btn-primary btn-sm active m-b-5">
+                                            <i class="fa fa-briefcase"></i> <?php echo $this->translate('Профиль'); ?>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="<?php echo $defaultUserMessageUrl; ?>"
+                                           class="btn btn-default btn-sm m-b-5">
+                                            <i class="fa fa-envelope"></i> <?php echo $this->translate('Сообщения'); ?>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-7">
-                                <span>
-                                    <?php
-                                    if (!empty($user_data->name)
-                                        && !empty($user_data->surname)
-                                    ) {
-                                        ?>
-                                        <strong>
-                                            <?php echo $user_data->surname . ' ' . $user_data->name; ?>
-                                        </strong>
-                                    <?php } else { ?>
-                                        <div>
-                                            <a href="<?php echo $default_user_edit_url ?>">
-                                                <span class="label label-danger">
-                                                    >> <?php echo $this->translate('Добавить имя'); ?> <<
-                                                </span>
+                            <div class="navbar-footer">
+                                <div class="navbar-footer-content">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="<?php echo $defaultUserSettingUrl ?>"
+                                               class="btn btn-default btn-sm">
+                                                <i class="fa fa-cog"></i> <?php echo $this->translate(
+                                                    'Настройки'
+                                                ) ?>
                                             </a>
                                         </div>
-                                    <?php } ?>
-                                </span>
-
-                                <p class="text-muted small">
-                                    <?php echo Zend_Auth::getInstance()->getStorage()->read()->login; ?>
-                                    <a href="<?php echo $default_user_edit_url ?>">
-                                        <i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?>
-                                    </a>
-                                </p>
-
-                                <div class="divider"></div>
-
-                                <div>
-                                    <a href="<?php echo $default_user_id_url; ?>"
-                                       class="btn btn-primary btn-sm active m-b-5">
-                                        <i class="fa fa-briefcase"></i> <?php echo $this->translate('Профиль'); ?>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="<?php echo $default_user_mssages_url; ?>"
-                                       class="btn btn-default btn-sm m-b-5">
-                                        <i class="fa fa-envelope"></i> <?php echo $this->translate('Сообщения'); ?>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="navbar-footer">
-                            <div class="navbar-footer-content">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a href="<?php echo $default_user_settings_url ?>"
-                                           class="btn btn-default btn-sm">
-                                            <i class="fa fa-cog"></i> <?php echo $this->translate(
-                                                'Настройки'
-                                            ) ?>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="<?php echo $default_auth_logout_url; ?>"
-                                           class="btn btn-default btn-sm pull-right">
-                                            <i class="fa fa-power-off"></i> <?php echo $this->translate('Выход'); ?>
-                                        </a>
+                                        <div class="col-md-6">
+                                            <a href="<?php echo $default_auth_logout_url; ?>"
+                                               class="btn btn-default btn-sm pull-right">
+                                                <i class="fa fa-power-off"></i> <?php echo $this->translate('Выход'); ?>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-        </li>
-    </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    <?php } else { ?>
+        <?php
+        $this->messages->addError($this->view->translate('Запрашиваемый пользователь не найден!'));
+        ?>
+    <?php } ?>
+
 <?php } else { ?>
     <?php
     $default_reg_user_url = $this->url(
@@ -127,7 +138,7 @@
         <a class="btn btn-info navbar-btn" href="<?php echo $default_reg_user_url; ?>">
             <?php echo $this->translate('Регистрация'); ?>
         </a>
-        <?php if (isset($this->display_header_login_form) && ($this->display_header_login_form)) : ?>
+        <?php if (isset($this->displayHeaderAuthoSignInForm) && ($this->displayHeaderAuthoSignInForm)) : ?>
             <button data-toggle="modal" href="#loginModalForm" type="button" class="btn btn-primary navbar-btn">
                 <?php echo $this->translate('Войти') ?>
             </button>

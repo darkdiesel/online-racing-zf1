@@ -87,7 +87,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addFilter('StringToUpper')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
-        $urlImageRound = new Zend_Form_Element_File('UrlImageRound');
+        $urlImageRound = new Zend_Form_Element_File('ImageRoundUrl');
         $urlImageRound->setLabel($this->translate('Круговая картинка флага (32х24)'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
@@ -98,7 +98,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->addValidator('Count', false, 1)
             ->setDecorators($this->getView()->getDecorator()->fileDecorators());
 
-        $urlImageGlossyWave = new Zend_Form_Element_File('UrlImageGlossyWave');
+        $urlImageGlossyWave = new Zend_Form_Element_File('ImageGlossyWaveUrl');
         $urlImageGlossyWave->setLabel($this->translate('Волнистая картинка флага (64х48)'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
@@ -157,8 +157,8 @@ class Peshkov_Form_Country_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                $this->getElement('UrlImageRound'),
-                $this->getElement('UrlImageGlossyWave')
+                $this->getElement('ImageRoundUrl'),
+                $this->getElement('ImageGlossyWaveUrl')
             ), 'CountryImg'
         );
 

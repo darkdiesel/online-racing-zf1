@@ -5,7 +5,7 @@
         if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
             $defaultUserIDUrl = $this->url(
                 array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                    'user_id' => $this->escape($league['User']['id'])), 'defaultUserId'
+                    'userID' => $this->escape($league['User']['ID'])), 'defaultUserID'
             );
         } else {
             $defaultUserIDUrl = '#';
@@ -32,10 +32,10 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <div class="text-center">
-                            <?php if ($this->escape($league['UrlImageLogo'])) { ?>
+                            <?php if ($this->escape($league['ImageLogoUrl'])) { ?>
                                 <div class="m-b-15 center-block text-center">
                                     <a href="<?php echo $defaultLeagueIDUrl; ?>">
-                                        <img class="img-thumbnail img-responsive" src="<?php echo $this->escape($league['UrlImageLogo']); ?>"/>
+                                        <img class="img-thumbnail img-responsive" src="<?php echo $this->escape($league['ImageLogoUrl']); ?>"/>
                                     </a>
                                 </div>
                             <?php } ?>
@@ -65,7 +65,7 @@
                                         <td>
                                         <span>
                                             <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                                <?php echo $this->escape($league['User']['login']); ?>
+                                                <?php echo $this->escape($league['User']['Login']); ?>
                                             </a>
                                         </span>
                                         </td>

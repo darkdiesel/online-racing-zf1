@@ -20,14 +20,14 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
         $router = $frontController->getRouter();
 
         $router->addRoute(
-            'defaultUserId', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html',
+            'defaultUserID', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html',
                 array(
                      'module'     => 'default',
                      'controller' => 'user',
                      'action'     => 'id',
                      1            => 0
                 ), array(
-                        'user_id' => 1,
+                        'userID' => 1,
                    ), 'user/%d.html'
             )
         );
@@ -39,7 +39,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                      'controller' => 'user',
                      1            => 0
                 ), array(
-                        'user_id' => 1,
+                        'userID' => 1,
                         'action'  => 2,
                    ), 'user/%d/%s.html'
             )

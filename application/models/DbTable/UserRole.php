@@ -60,7 +60,7 @@ class Application_Model_DbTable_UserRole extends Zend_Db_Table_Abstract {
 		$select = $model->select()
 				->setIntegrityCheck(false)
 				->from(array($this->db_href => $this->_name))
-				->join(array('r' => 'role'), $this->db_href . '.role_id = r.id', array('role_name' => 'r.name'))
+				->join(array('r' => 'role'), $this->db_href . '.RoleID = r.ID', array('role_name' => 'r.Name'))
 				->where($idencity_data);
 
 		if ($fields) {

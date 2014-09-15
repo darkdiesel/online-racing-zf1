@@ -55,10 +55,10 @@ class Peshkov_Form_League_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
         foreach ($this->getUsers() as $user) {
-            $users->addMultiOption($user['id'], $user['surname'] . ' ' . $user['name'] . ' (' . $user['login'] . ')');
+            $users->addMultiOption($user['ID'], $user['Surname'] . ' ' . $user['Name'] . ' (' . $user['Login'] . ')');
         };
 
-        $urlImageLogo = new Zend_Form_Element_File('UrlImageLogo');
+        $urlImageLogo = new Zend_Form_Element_File('ImageLogoUrl');
         $urlImageLogo->setLabel($this->translate('Логотип лиги'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
@@ -114,7 +114,7 @@ class Peshkov_Form_League_Add extends Zend_Form
             array(
                 $this->getElement('Name'),
                 $this->getElement('UserID'),
-                $this->getElement('UrlImageLogo'),
+                $this->getElement('ImageLogoUrl'),
                 $this->getElement('Description')
             ), 'LeagueInfo'
         );
