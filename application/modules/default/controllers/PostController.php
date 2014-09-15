@@ -41,18 +41,17 @@ class PostController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle($result[0]['Name']);
 
-                //get posts comment
-                //TODO: Update comment model to Doctrine1
-                $comment_idencity_args = array('post_id' => $result[0]['ID']);
-                $postCommentData = $this->db->get('comment')->getAll($comment_idencity_args);
+                // Get post comments
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_Comment c')
+                    ->leftJoin('c.User u')
+                    ->where('c.PostID = ?', $requestData->postID);
+                $commentResult = $query->fetchArray();
 
-                //create and setup comment_add form
-                $commentAddForm = new Application_Form_Comment_Add();
-                $commentAddForm->setAction($this->view->url(array('controller' => 'comment', 'action' => 'add'), 'default', true));
+                $this->view->postCommentData = $commentResult;
 
-                $commentAddForm->post_id->setvalue($result[0]['ID']);
-
-                $this->view->postCommentData = $postCommentData;
+                // Add CommentAdd Form
+                $commentAddForm = new Peshkov_Form_Comment_Add();
                 $this->view->commentAddForm = $commentAddForm;
 
                 //add breadscrumb

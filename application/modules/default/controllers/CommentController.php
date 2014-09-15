@@ -9,42 +9,50 @@ class CommentController extends App_Controller_LoaderController
         $this->view->headTitle($this->view->translate('Комментарий'));
     }
 
-    public function addAction(){
-        $request = $this->getRequest();
-
-        // Set head and page titles
+    // action for add new post type
+    public function addAction()
+    {
         $this->view->headTitle($this->view->translate('Добавить'));
         $this->view->pageTitle($this->view->translate('Добавить комментарий'));
 
-        //create comment_add form
-        $comment_add_form = new Application_Form_Comment_Add();
-        $comment_add_form->setAction($this->view->url(array('controller' => 'comment', 'action' => 'add'), 'default', true));
+        // form
+        $commentAddForm = new Peshkov_Form_Comment_Add();
+        $this->view->commentAddForm = $commentAddForm;
 
+        // test for valid input
+        // if valid, populate model
+        // assign default values for some fields
+        // save to database
         if ($this->getRequest()->isPost()) {
-            if ($comment_add_form->isValid($request->getPost())) {
-                // create current date
+            if ($commentAddForm->isValid($this->getRequest()->getPost())) {
+
                 $date = date('Y-m-d H:i:s');
 
-                //create array with new comment data
-                $new_comment_data = array(
-                    'user_id' => Zend_Auth::getInstance()->getStorage()->read()->id,
-                    'post_id' => $comment_add_form->getValue('post_id'),
-                    'title' => $comment_add_form->getValue('title'),
-                    'content' => $comment_add_form->getValue('content'),
-                    'date_create' => $date,
-                    'date_edit' => $date,
-                    'status' => 1,
+                $item = new Default_Model_Comment() ;
+
+                $item->fromArray($commentAddForm->getValues());
+                $item->UserID = Zend_Auth::getInstance()->getStorage()->read()->id;
+                $item->DateCreate = $date;
+                $item->DateEdit = $date;
+
+                $item->save();
+
+                $defaultPostIDUrl = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $commentAddForm->getValue('PostID')), 'defaultPostID', true);
+                $this->redirect($defaultPostIDUrl);
+
+                $this->redirect(
+                    $this->view->url(
+                        array('module' => 'admin', 'controller' => 'post-category', 'action' => 'id',
+                            'postCategoryID' => $item->ID), 'adminPostCategoryID'
+                    )
                 );
 
-                $new_comment = $this->db->get('comment')->createRow($new_comment_data);
-                $new_comment->save();
-
-                $defaultPostIDUrl = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $comment_add_form->getValue('post_id')), 'defaultPostID', true);
-                $this->redirect($defaultPostIDUrl);
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
+            } else {
+                $this->messages->addError(
+                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                );
             }
         }
-
-        $this->view->comment_add_form = $comment_add_form;
     }
-
 }

@@ -15,7 +15,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_League', 'default'
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
  * @property Default_Model_User $User
- * @property Doctrine_Collection $Championship
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -62,9 +61,9 @@ abstract class Default_Model_Base_League extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('UserID', 'integer', 4, array(
+        $this->hasColumn('UserID', 'integer', 8, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => 8,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
@@ -95,9 +94,5 @@ abstract class Default_Model_Base_League extends Doctrine_Record
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
              'foreign' => 'id'));
-
-        $this->hasMany('Default_Model_Championship as Championship', array(
-             'local' => 'ID',
-             'foreign' => 'league_id'));
     }
 }

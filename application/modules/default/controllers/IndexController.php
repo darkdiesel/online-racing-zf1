@@ -40,15 +40,16 @@ class IndexController extends App_Controller_LoaderController
             ->from('Default_Model_League l')
             ->leftJoin('l.User u')
             ->orderBy('l.ID ASC');
-        $result = $query->fetchArray();
+        $leagueResult = $query->fetchArray();
 
-        $this->view->leagueData = $result;
+        $this->view->leagueData = $leagueResult;
 
         // Get Next Races
         $date = new Zend_Date();
         $date_start = $date->toString('yyyy-MM-dd HH:mm:ss');
         $date_end = $date->add(7, Zend_Date::DAY)->toString('yyyy-MM-dd HH:mm:ss');
 
+        // TODO: Update championship model to Doctrine1
         $this->view->race_data = $this->db->get('championship_race')->getAll(
             array(
                 'race_date' => array(

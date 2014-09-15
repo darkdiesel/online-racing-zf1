@@ -38,13 +38,9 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property timestamp $date_create
  * @property timestamp $date_edit
  * @property string $about
- * @property Default_Model_Country $Country
- * @property Doctrine_Collection $Championship
- * @property Doctrine_Collection $ChampionshipTeamDriver
+ * @property Doctrine_Collection $Comment
  * @property Doctrine_Collection $League
  * @property Doctrine_Collection $Post
- * @property Doctrine_Collection $UserChat
- * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -56,9 +52,9 @@ abstract class Default_Model_Base_User extends Doctrine_Record
     public function setTableDefinition()
     {
         $this->setTableName('user');
-        $this->hasColumn('id', 'integer', 4, array(
+        $this->hasColumn('id', 'integer', 8, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => 8,
              'fixed' => false,
              'unsigned' => false,
              'primary' => true,
@@ -335,17 +331,9 @@ abstract class Default_Model_Base_User extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_Country as Country', array(
-             'local' => 'country_id',
-             'foreign' => 'ID'));
-
-        $this->hasMany('Default_Model_Championship as Championship', array(
+        $this->hasMany('Default_Model_Comment as Comment', array(
              'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('Default_Model_ChampionshipTeamDriver as ChampionshipTeamDriver', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
+             'foreign' => 'UserID'));
 
         $this->hasMany('Default_Model_League as League', array(
              'local' => 'id',
@@ -354,13 +342,5 @@ abstract class Default_Model_Base_User extends Doctrine_Record
         $this->hasMany('Default_Model_Post as Post', array(
              'local' => 'id',
              'foreign' => 'UserID'));
-
-        $this->hasMany('Default_Model_UserChat as UserChat', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('Default_Model_UserRole as UserRole', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
     }
 }

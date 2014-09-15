@@ -15,7 +15,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Country', 'default
  * @property string $UrlImageGlossyWave
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
- * @property Doctrine_Collection $User
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -101,8 +100,6 @@ abstract class Default_Model_Base_Country extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Default_Model_User as User', array(
-             'local' => 'ID',
-             'foreign' => 'country_id'));
+        
     }
 }

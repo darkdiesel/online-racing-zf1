@@ -12,7 +12,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_UserChat', 'defaul
  * @property string $message
  * @property timestamp $date_create
  * @property timestamp $date_edit
- * @property Default_Model_User $User
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -71,8 +70,6 @@ abstract class Default_Model_Base_UserChat extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'user_id',
-             'foreign' => 'id'));
+        
     }
 }

@@ -1,21 +1,25 @@
 <?php if ($this->leagueData) : ?>
     <?php foreach ($this->leagueData as $league): ?>
-        <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-            $defaultUserIdUrl = $this->url(
+        <?php
+        // check access and generate link for default/user/id
+        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+            $defaultUserIDUrl = $this->url(
                 array('module' => 'default', 'controller' => 'user', 'action' => 'id',
                     'user_id' => $this->escape($league['User']['id'])), 'defaultUserId'
             );
         } else {
-            $defaultUserIdUrl = '#';
+            $defaultUserIDUrl = '#';
         }
         ?>
-        <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
-            $defaultLeagueIdUrl = $this->url(
+        <?php
+        // check access and generate link for default/league/id
+        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
+            $defaultLeagueIDUrl = $this->url(
                 array('module' => 'default', 'controller' => 'league', 'action' => 'id',
                     'leagueID' => $this->escape($league['ID'])), 'defaultLeagueID'
             );
         } else {
-            $defaultLeagueIdUrl = '#';
+            $defaultLeagueIDUrl = '#';
         }
         ?>
         <div class="block block-default block-ui-bordered m-b-10">
@@ -30,7 +34,7 @@
                         <div class="text-center">
                             <?php if ($this->escape($league['UrlImageLogo'])) { ?>
                                 <div class="m-b-15 center-block text-center">
-                                    <a href="<?php echo $defaultLeagueIdUrl; ?>">
+                                    <a href="<?php echo $defaultLeagueIDUrl; ?>">
                                         <img class="img-thumbnail img-responsive" src="<?php echo $this->escape($league['UrlImageLogo']); ?>"/>
                                     </a>
                                 </div>
@@ -48,7 +52,7 @@
                                         </td>
                                         <td>
                                             <span>
-                                                <a href="<?php echo $defaultLeagueIdUrl; ?>">
+                                                <a href="<?php echo $defaultLeagueIDUrl; ?>">
                                                     <?php echo $this->escape($league['Name']); ?>
                                                 </a>
                                             </span>
@@ -60,7 +64,7 @@
                                         </td>
                                         <td>
                                         <span>
-                                            <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
+                                            <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
                                                 <?php echo $this->escape($league['User']['login']); ?>
                                             </a>
                                         </span>

@@ -13,9 +13,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Team', 'default');
  * @property integer $RacingSeriesID
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
- * @property Default_Model_RacingSeries $RacingSeries
- * @property Doctrine_Collection $ChampionshipTeam
- * @property Doctrine_Collection $ChampionshipTeamDriver
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -83,16 +80,6 @@ abstract class Default_Model_Base_Team extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_RacingSeries as RacingSeries', array(
-             'local' => 'RacingSeriesID',
-             'foreign' => 'ID'));
-
-        $this->hasMany('Default_Model_ChampionshipTeam as ChampionshipTeam', array(
-             'local' => 'ID',
-             'foreign' => 'team_id'));
-
-        $this->hasMany('Default_Model_ChampionshipTeamDriver as ChampionshipTeamDriver', array(
-             'local' => 'ID',
-             'foreign' => 'team_id'));
+        
     }
 }

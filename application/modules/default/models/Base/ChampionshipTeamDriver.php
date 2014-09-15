@@ -14,9 +14,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_ChampionshipTeamDr
  * @property integer $driver_number
  * @property timestamp $date_create
  * @property timestamp $date_edit
- * @property Default_Model_Championship $Championship
- * @property Default_Model_Team $Team
- * @property Default_Model_User $User
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -94,16 +91,6 @@ abstract class Default_Model_Base_ChampionshipTeamDriver extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_Championship as Championship', array(
-             'local' => 'championship_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_Team as Team', array(
-             'local' => 'team_id',
-             'foreign' => 'ID'));
-
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'user_id',
-             'foreign' => 'id'));
+        
     }
 }

@@ -20,13 +20,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Championship', 'de
  * @property string $description
  * @property timestamp $date_create
  * @property timestamp $date_edit
- * @property Default_Model_Post $Post
- * @property Default_Model_User $User
- * @property Default_Model_League $League
- * @property Default_Model_Post $Post_4
- * @property Doctrine_Collection $ChampionshipRace
- * @property Doctrine_Collection $ChampionshipTeam
- * @property Doctrine_Collection $ChampionshipTeamDriver
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -155,32 +148,6 @@ abstract class Default_Model_Base_Championship extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_Post as Post', array(
-             'local' => 'game_id',
-             'foreign' => 'ID'));
-
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'user_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_League as League', array(
-             'local' => 'league_id',
-             'foreign' => 'ID'));
-
-        $this->hasOne('Default_Model_Post as Post_4', array(
-             'local' => 'rule_id',
-             'foreign' => 'ID'));
-
-        $this->hasMany('Default_Model_ChampionshipRace as ChampionshipRace', array(
-             'local' => 'id',
-             'foreign' => 'championship_id'));
-
-        $this->hasMany('Default_Model_ChampionshipTeam as ChampionshipTeam', array(
-             'local' => 'id',
-             'foreign' => 'championship_id'));
-
-        $this->hasMany('Default_Model_ChampionshipTeamDriver as ChampionshipTeamDriver', array(
-             'local' => 'id',
-             'foreign' => 'championship_id'));
+        
     }
 }

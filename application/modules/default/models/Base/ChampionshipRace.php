@@ -17,8 +17,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_ChampionshipRace',
  * @property string $description
  * @property timestamp $date_create
  * @property timestamp $date_edit
- * @property Default_Model_Track $Track
- * @property Default_Model_Championship $Championship
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -120,12 +118,6 @@ abstract class Default_Model_Base_ChampionshipRace extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_Track as Track', array(
-             'local' => 'track_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_Championship as Championship', array(
-             'local' => 'championship_id',
-             'foreign' => 'id'));
+        
     }
 }

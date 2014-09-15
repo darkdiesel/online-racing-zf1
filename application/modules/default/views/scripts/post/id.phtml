@@ -3,12 +3,12 @@
     // check access and generate link for default/user/id
     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
         // TODO: Update user model to Doctrine1
-        $defaultUserIdUrl = $this->url(
+        $defaultUserIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
                 'user_id' => $this->escape($this->postData['User']['id'])), 'defaultUserId'
         );
     } else {
-        $defaultUserIdUrl = '#';
+        $defaultUserIDUrl = '#';
     }
     ?>
 
@@ -19,7 +19,7 @@
         $commentsCount = 0;
     }
     ?>
-    <div class="row m-t-10">
+    <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="block block-default">
                 <?php
@@ -40,7 +40,7 @@
                     </div>
                     <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор'); ?>"
                          data-placement="bottom">
-                        <a href="<?php echo $defaultUserIdUrl; ?>" target="_blank">
+                        <a href="<?php echo $defaultUserIDUrl; ?>" target="_blank">
                             <i class="fa fa-user fa-lg"></i>
                             <?php echo $this->escape($this->postData['User']['login']); ?>
                         </a>
@@ -157,37 +157,41 @@
             </div>
         </div>
     </div>
-
-    <?php
-    //TODO:Update comment model to Doctrine1
-    ?>
     <!-- comments -->
     <?php
     $commentAddAccess = $this->checkUserAccess(
         'default' . Acl::RESOURCE_SEPARATOR . 'comment', 'add'
     );
     ?>
-
-    <!-- post comments list -->
-    <div class="row m-t-10">
+    <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="block block-default block-ui-bordered comment-block">
-                <div class="block-header">
-                    <div class="block-title text-uppercase text-bold">
-                        <?php echo $this->translate('Комментарии'); ?>
-                    </div>
-                </div>
                 <div class="block-body">
+                    <h3 class="page-header">
+                        <i class="fa fa-comments-o fa-lg"></i>
+                        <?php echo $this->translate('Комментарии'); ?> ( <?php echo count($this->postCommentData); ?> )
+                    </h3>
+
                     <div class="comments" id="post-comments">
                         <?php if ($this->postCommentData) { ?>
                             <?php foreach ($this->postCommentData as $comment): ?>
                                 <?php
-                                $defaultUserIdUrl = $this->url(
-                                    array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                                        'user_id' => $this->escape($comment->user_id)), 'defaultUserId', true
-                                );
+                                // check access and generate link for default/user/id
+                                if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+                                    // TODO: Update user model to Doctrine1
+                                    $defaultUserIDUrl = $this->url(
+                                        array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                                            'user_id' => $this->escape($comment['User']['id'])), 'defaultUserId'
+                                    );
+                                } else {
+                                    $defaultUserIDUrl = '#';
+                                }
+                                ?>
+
+                                <?php
+                                //TODO: Update user model to Doctrine1
                                 $user_db = new Application_Model_DbTable_User();
-                                $user_data = $user_db->getItem($comment->user_id);
+                                $user_data = $user_db->getItem($comment['UserID']);
 
                                 if ($this->getUserStatus($user_data->date_last_activity) == 'online') {
                                     $user_status_class = 'user-online';
@@ -196,7 +200,7 @@
                                 }
                                 ?>
 
-                                <div class="message-item" id="m7">
+                                <div class="message-item" id="m<?php echo $comment['ID'] ?>">
                                     <div class="message-inner">
                                         <div class="message-head clearfix">
                                             <div class="avatar pull-left">
@@ -205,7 +209,7 @@
                                                         class="img-wrapper-40-40 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $user_status_class; ?>"
                                                         data-title="<?php echo $user_data->login; ?>"
                                                         data-placement="bottom">
-                                                        <a href="<?php echo $defaultUserIdUrl; ?>" target="_blank">
+                                                        <a href="<?php echo $defaultUserIDUrl; ?>" target="_blank">
                                                             <?php echo $this->getUserAvatar(
                                                                 $user_data->id, $user_data->avatar_type,
                                                                 'media-object img-responsive img-size-40', 40
@@ -215,26 +219,26 @@
                                                 </div>
                                             </div>
                                             <div class="user-detail">
-                                                <?php if ($comment->title) { ?>
+                                                <?php if ($comment['Name']) { ?>
                                                     <h5 class="text-bold handle">
-                                                        <?php echo $comment->title; ?>
+                                                        <?php echo $comment['Name']; ?>
                                                     </h5>
                                                 <?php } ?>
                                                 <div class="post-meta">
-                                                    <div class="asker-meta">
+                                                    <div class="user-meta">
                                                         <span class="qa-message-what"></span>
-                                                        <span class="qa-message-when">
-                                                            <span class="qa-message-when-data">
-                                                                <?php echo $comment->date_create; ?>
-                                                            </span>
-                                                        </span>
                                                         <span class="qa-message-who">
                                                             <span class="qa-message-who-pad"> </span>
                                                             <span class="qa-message-who-data">
-                                                                <a href="<?php echo $defaultUserIdUrl; ?>"
-                                                                   target="_blank">
+                                                                <a target="_blank"
+                                                                   href="<?php echo $defaultUserIDUrl; ?>">
                                                                     <?php echo $user_data->login; ?>
-                                                                </a>
+                                                                </a>,
+                                                            </span>
+                                                        </span>
+                                                        <span class="qa-message-when">
+                                                            <span class="qa-message-when-data">
+                                                                <time><?php echo $comment['DateCreate']; ?></time>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -242,7 +246,7 @@
                                             </div>
                                         </div>
                                         <div class="qa-message-content">
-                                            <?php echo $comment->content; ?>
+                                            <?php echo $comment['Text']; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -253,35 +257,22 @@
                             </div>
                         <?php } ?>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ./ post comments list -->
 
-    <!-- post comment form -->
-    <div class="row m-t-10">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="block block-default block-ui-bordered">
-                <div class="block-header">
-                    <div class="block-title text-uppercase text-bold">
-                        <?php echo $this->translate('Добавить комментарий'); ?>
-                    </div>
-                </div>
-                <div class="block-body">
-                    <?php if ($commentAddAccess) { ?>
-                        <?php echo $this->commentAddForm; ?>
-                    <?php } else { ?>
-                        <div class="alert alert-warning">
+                    <?php if ($commentAddAccess) : ?>
+                        <hr />
+                        <div id="comment-form-wrapper">
+                            <?php echo $this->commentAddForm; ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="alert alert-info">
                             <?php echo $this->translate(
-                                'Добавлять комментарии могут только зарегестированные пользователи!'
+                                'Чтобы добавить комментарий, авторизуйтесь на сайте.'
                             ); ?>
                         </div>
-                    <?php } ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ./ post comment form -->
     <!-- ./ comments -->
 <?php } ?>

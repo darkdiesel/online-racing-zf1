@@ -42,43 +42,43 @@
                         <?php
                         // check access and generate link for default/league/id
                         if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
-                            $defaultLeagueIdUrl = $this->url(
+                            $defaultLeagueIDUrl = $this->url(
                                 array('module' => 'default', 'controller' => 'league', 'action' => 'id',
                                     'leagueID' => $this->escape($league['ID'])), 'defaultLeagueID'
                             );
                         } else {
-                            $defaultLeagueIdUrl = '#';
+                            $defaultLeagueIDUrl = '#';
                         }
                         ?>
                         <?php
                         // check access and generate link for default/user/id
                         if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-                            $defaultUserIdUrl = $this->url(
+                            $defaultUserIDUrl = $this->url(
                                 array('module' => 'default', 'controller' => 'user', 'action' => 'id',
                                     'user_id' => $this->escape($league['User']['id'])), 'defaultUserId'
                             );
                         } else {
-                            $defaultUserIdUrl = '#';
+                            $defaultUserIDUrl = '#';
                         }
                         ?>
                         <tr>
                             <td class="league-id">
                                     <span>
-                                        <a href="<?php echo $defaultLeagueIdUrl; ?>">
+                                        <a href="<?php echo $defaultLeagueIDUrl; ?>">
                                             <?php echo $this->escape($league['ID']) ?>
                                         </a>
                                     </span>
                             </td>
                             <td class="league-name">
                                     <span>
-                                        <a href="<?php echo $defaultLeagueIdUrl; ?>">
+                                        <a href="<?php echo $defaultLeagueIDUrl; ?>">
                                             <?php echo $this->escape($league['Name']) ?>
                                         </a>
                                     </span>
                             </td>
                             <td class="league-admin">
                                     <span>
-                                        <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>">
+                                        <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
                                             <?php echo $this->escape($league['User']['login']) ?>
                                         </a>
                                     </span>

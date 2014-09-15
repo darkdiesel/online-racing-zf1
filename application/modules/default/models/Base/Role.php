@@ -13,7 +13,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Role', 'default');
  * @property string $description
  * @property timestamp $date_create
  * @property timestamp $date_edit
- * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -81,8 +80,6 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('Default_Model_UserRole as UserRole', array(
-             'local' => 'id',
-             'foreign' => 'role_id'));
+        
     }
 }

@@ -4,9 +4,6 @@
             <div class="block block-timeline">
                 <?php
                 $block_class = 'block-timeline-inverted';
-
-                //create comment db model
-                $comment_db = new Application_Model_DbTable_Comment();
                 ?>
                 <?php foreach ($this->postData as $post): ?>
                     <?php
@@ -40,18 +37,15 @@
                     ?>
 
                     <?php
-                    /*
-                     * TODO: Add method for comment model for counting comments
-                     * TODO: Update comment model to Doctrine1
-                     */
-                    $comment_idencity_args = array('post_id' => $post['ID']);
-                    $post_comment_data = $comment_db->getAll($comment_idencity_args);
-                    if ($post_comment_data){
-                        $comments_count = count($post_comment_data);
-                    } else {
-                        $comments_count = 0;
-                    }
+                    //TODO: Add method for comment model for counting comments
 
+                    $query = Doctrine_Query::create()
+                        ->from('Default_Model_Comment c')
+                        ->leftJoin('c.User u')
+                        ->where('c.PostID = ?', $post['ID']);
+                    $commentResult = $query->fetchArray();
+
+                    $commentsСount = count($commentResult);
                     ?>
                 <div class="block-timeline-item <?php echo  $block_class; ?>">
                     <div class="block-timeline-badge primary">
@@ -95,7 +89,7 @@
                             </div>
                             <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Комментарии');?>" data-placement="bottom">
                                 <i class="fa fa-comments-o fa-lg"></i>
-                                <?php echo $comments_count; ?>
+                                <?php echo $commentsСount; ?>
                             </div>
                             <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор');?>" data-placement="bottom">
                                 <a target="_blank" href="<?php echo $defaultUserIdUrl; ?>" >

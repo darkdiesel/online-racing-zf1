@@ -15,8 +15,6 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_ChampionshipTeam',
  * @property integer $team_number
  * @property timestamp $date_create
  * @property timestamp $date_edit
- * @property Default_Model_Championship $Championship
- * @property Default_Model_Team $Team
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -103,12 +101,6 @@ abstract class Default_Model_Base_ChampionshipTeam extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('Default_Model_Championship as Championship', array(
-             'local' => 'championship_id',
-             'foreign' => 'id'));
-
-        $this->hasOne('Default_Model_Team as Team', array(
-             'local' => 'team_id',
-             'foreign' => 'ID'));
+        
     }
 }

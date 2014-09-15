@@ -24,8 +24,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Post', 'default');
  * @property Default_Model_ContentType $ContentType
  * @property Default_Model_User $User
  * @property Default_Model_PostCategory $PostCategory
- * @property Doctrine_Collection $Championship
- * @property Doctrine_Collection $Championship_4
+ * @property Doctrine_Collection $Comment
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -37,17 +36,17 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
     public function setTableDefinition()
     {
         $this->setTableName('post');
-        $this->hasColumn('ID', 'integer', 4, array(
+        $this->hasColumn('ID', 'integer', 8, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => 8,
              'fixed' => false,
              'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
-        $this->hasColumn('UserID', 'integer', 4, array(
+        $this->hasColumn('UserID', 'integer', 8, array(
              'type' => 'integer',
-             'length' => 4,
+             'length' => 8,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
@@ -176,12 +175,8 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
              'local' => 'PostCategoryID',
              'foreign' => 'ID'));
 
-        $this->hasMany('Default_Model_Championship as Championship', array(
+        $this->hasMany('Default_Model_Comment as Comment', array(
              'local' => 'ID',
-             'foreign' => 'game_id'));
-
-        $this->hasMany('Default_Model_Championship as Championship_4', array(
-             'local' => 'ID',
-             'foreign' => 'rule_id'));
+             'foreign' => 'PostID'));
     }
 }

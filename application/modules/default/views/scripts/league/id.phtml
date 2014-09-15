@@ -143,7 +143,7 @@
                                 <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'drivers', 'league_id' => $this->leagueData['ID'], 'championship_id' => $this->escape($championship['id'])), 'defaultChampionshipAction', true); ?>"
                                    class="btn btn-sm btn-info"
                                    title="<?php echo $this->translate('Командный зачет') ?>"><?php echo $this->translate('Гонщики') ?></a>
-                                <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $this->escape($championship->rule_id)), '$defaultPostIDUrl', true); ?>"
+                                <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $this->escape($championship->rule_id)), 'defaultPostID', true); ?>"
                                    target="_blank" class="btn btn-sm btn-danger post_more"
                                    title="<?php echo $this->translate('Регламент чемпионата') ?>"><?php echo $this->translate('Регламент') ?></a>
                                 <a href="<?php echo $championshipIdAllUrl; ?>" class="btn btn-sm btn-primary post_more"
