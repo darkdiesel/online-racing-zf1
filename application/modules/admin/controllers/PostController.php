@@ -77,12 +77,12 @@ class Admin_PostController extends App_Controller_LoaderController
 
                 $date = date('Y-m-d H:i:s');
 
-                $item = new Default_Model_Post();
+                $newPost = new Default_Model_Post();
 
-                $item->fromArray($postAddForm->getValues());
-                $item->UserID = Zend_Auth::getInstance()->getStorage()->read()->id;
-                $item->DateCreate = $date;
-                $item->DateEdit = $date;
+                $newPost->fromArray($postAddForm->getValues());
+                $newPost->UserID = Zend_Auth::getInstance()->getStorage()->read()->id;
+                $newPost->DateCreate = $date;
+                $newPost->DateEdit = $date;
 
                 //receive and rename post image file
                 //TODO: Uncoment this code for allow upload to server post image
@@ -100,16 +100,16 @@ class Admin_PostController extends App_Controller_LoaderController
 //                            $file['']['destination'] . '/' . $file['']['name']
 //                        );
 //
-//                        $item-> = '/data-content/data-uploads/posts/' . $newName;
+//                        $newPost-> = '/data-content/data-uploads/posts/' . $newName;
 //                    }
 //                }
 
-                $item->save();
+                $newPost->save();
 
                 $this->redirect(
                     $this->view->url(
                         array('module' => 'default', 'controller' => 'post', 'action' => 'id',
-                            'postID' => $item->ID), 'defaultPostID'
+                            'postID' => $newPost->ID), 'defaultPostID'
                     )
                 );
 

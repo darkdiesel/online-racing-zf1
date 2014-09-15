@@ -33,13 +33,31 @@ class PostController extends App_Controller_LoaderController
                 ->leftJoin('p.PostCategory pt')
                 ->where('p.ID = ?', $requestData->postID)
                 ->andWhere('p.Publish = ?', 1);
-            $result = $query->fetchArray();
+            $postResult = $query->fetchArray();
 
-            if (count($result) == 1) {
-                $this->view->postData = $result[0];
+            if (count($postResult) == 1) {
 
-                $this->view->headTitle($result[0]['Name']);
-                $this->view->pageTitle($result[0]['Name']);
+                // Update post views counting
+                // TODO: Add coocie for counting views for this post
+                if ($postResult[0]['LastUserIP'] != $_SERVER['REMOTE_ADDR']) {
+
+                    $updatedPost = Doctrine_Core::getTable('Default_Model_Post')->find($requestData->postID);
+
+                    $postResult[0]['Views'] = ++$postResult[0]['Views'];
+
+                    $newPostData =array(
+                        'Views' => $postResult[0]['Views'],
+                        'LastUserIP' => $_SERVER['REMOTE_ADDR']
+                    );
+
+                    $updatedPost->fromArray($newPostData);
+                    $updatedPost->save();
+                }
+
+                $this->view->postData = $postResult[0];
+
+                $this->view->headTitle($postResult[0]['Name']);
+                $this->view->pageTitle($postResult[0]['Name']);
 
                 // Get post comments
                 $query = Doctrine_Query::create()
@@ -55,7 +73,7 @@ class PostController extends App_Controller_LoaderController
                 $this->view->commentAddForm = $commentAddForm;
 
                 //add breadscrumb
-                $this->view->breadcrumb()->PostAll('1')->Post($result[0]['ID'], $result[0]['Name']);
+                $this->view->breadcrumb()->PostAll('1')->Post($postResult[0]['ID'], $postResult[0]['Name']);
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
