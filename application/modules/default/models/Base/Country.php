@@ -27,9 +27,9 @@ abstract class Default_Model_Base_Country extends Doctrine_Record
     public function setTableDefinition()
     {
         $this->setTableName('country');
-        $this->hasColumn('ID', 'integer', 8, array(
+        $this->hasColumn('ID', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 8,
+             'length' => 4,
              'fixed' => false,
              'unsigned' => false,
              'primary' => true,

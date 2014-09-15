@@ -100,14 +100,19 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
                     array('HtmlTag', array('class' => ''))));
 
         $submit = new Zend_Form_Element_Submit('Submit');
-        $submit->setLabel($this->translate('Добавить'))
+        $submit->setLabel($this->translate('Войти'))
             ->setAttrib('class', 'btn btn-primary')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $reset = new Zend_Form_Element_Reset('Reset');
-        $reset->setLabel($this->translate('Сбросить'))
-            ->setAttrib('class', 'btn btn-default')
+        $defaultUserRestorePasswordUrl = $this->getView()->url(
+            array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default'
+        );
+
+        $forgetPassword = new Zend_Form_Element_Button('ForgetPassword');
+        $forgetPassword->setLabel($this->translate('Забыли пароль?'))
+            ->setAttrib('onClick', "location.href='{$defaultUserRestorePasswordUrl}'")
+            ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
@@ -118,13 +123,12 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
         $this->addElement($csrfToken);
 
         $this->addElement($submit)
-            ->addElement($reset);
+            ->addElement($forgetPassword);
 
         $this->addDisplayGroup(
             array(
                 $this->getElement('Submit'),
-                $this->getElement('Reset'),
-                $this->getElement('Cancel'),
+                $this->getElement('ForgetPassword'),
             ), 'FormActions'
         );
 

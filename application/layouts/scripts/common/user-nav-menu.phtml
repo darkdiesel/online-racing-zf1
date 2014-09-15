@@ -3,12 +3,12 @@
         $storageData = Zend_Auth::getInstance()->getStorage()->read();
     ?>
     <?php
-    $default_auth_logout_url = $this->url(
-        array('module' => 'default', 'controller' => 'auth', 'action' => 'logout'), 'default', true
+    $defaultAuthSignOutUrl = $this->url(
+        array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-out'), 'default', true
     );
     $defaultUserIDUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-            'userID' => $storageData->id), 'defaultUserID', true
+            'userID' => $storageData->ID), 'defaultUserID', true
     );
     $defaultUserEditUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true
@@ -27,7 +27,7 @@
         ->from('Default_Model_User u')
         ->leftJoin('u.UserRole ur')
         ->leftJoin('ur.Role r')
-        ->where('u.ID = ?', $storageData->id);
+        ->where('u.ID = ?', $storageData->ID);
 
     $userResult = $query->fetchArray();
 
@@ -109,7 +109,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="<?php echo $default_auth_logout_url; ?>"
+                                            <a href="<?php echo $defaultAuthSignOutUrl; ?>"
                                                class="btn btn-default btn-sm pull-right">
                                                 <i class="fa fa-power-off"></i> <?php echo $this->translate('Выход'); ?>
                                             </a>

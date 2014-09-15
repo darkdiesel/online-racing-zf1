@@ -9,8 +9,8 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Role', 'default');
  * 
  * @property integer $ID
  * @property string $Name
- * @property integer $ParentRoleID
  * @property string $Description
+ * @property integer $ParentRoleID
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
  * @property Doctrine_Collection $UserRole
@@ -42,15 +42,6 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('ParentRoleID', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
         $this->hasColumn('Description', 'string', 500, array(
              'type' => 'string',
              'length' => 500,
@@ -58,6 +49,15 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
              'unsigned' => false,
              'primary' => false,
              'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('ParentRoleID', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('DateCreate', 'timestamp', null, array(
@@ -82,7 +82,7 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
     {
         parent::setUp();
         $this->hasMany('Default_Model_UserRole as UserRole', array(
-             'local' => 'id',
+             'local' => 'ID',
              'foreign' => 'RoleID'));
     }
 }

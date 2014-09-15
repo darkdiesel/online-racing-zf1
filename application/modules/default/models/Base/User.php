@@ -10,18 +10,15 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property integer $ID
  * @property string $Login
  * @property string $Password
- * @property timestamp $DateLastActivity
- * @property string $LastUserLoginIP
- * @property string $ActivationCode
- * @property string $RestorePassCode
- * @property integer $Status
  * @property string $Email
  * @property string $Name
  * @property string $Surname
- * @property integer $CountryID
- * @property string $Language
- * @property string $City
+ * @property string $Description
  * @property date $DateBirthday
+ * @property integer $CountryID
+ * @property string $City
+ * @property string $Language
+ * @property integer $Status
  * @property integer $AvatarType
  * @property string $AvatarImageUrl
  * @property string $AvatarGravatarEmail
@@ -32,10 +29,13 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property string $Vkontakte
  * @property string $Facebook
  * @property string $Twitter
+ * @property string $ActivationCode
+ * @property string $RestorePassCode
  * @property string $GooglePlus
+ * @property string $LastUserLoginIP
+ * @property timestamp $DateLastActivity
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
- * @property string $Description
  * @property Default_Model_Country $Country
  * @property Doctrine_Collection $Comment
  * @property Doctrine_Collection $League
@@ -78,50 +78,6 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('DateLastActivity', 'timestamp', null, array(
-             'type' => 'timestamp',
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('LastUserLoginIP', 'string', 255, array(
-             'type' => 'string',
-             'length' => 255,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('ActivationCode', 'string', 15, array(
-             'type' => 'string',
-             'length' => 15,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('RestorePassCode', 'string', 15, array(
-             'type' => 'string',
-             'length' => 15,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('Status', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => true,
-             'autoincrement' => false,
-             ));
         $this->hasColumn('Email', 'string', 100, array(
              'type' => 'string',
              'length' => 100,
@@ -131,27 +87,53 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('Name', 'string', 250, array(
+        $this->hasColumn('Name', 'string', 255, array(
              'type' => 'string',
-             'length' => 250,
+             'length' => 255,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('Surname', 'string', 250, array(
+        $this->hasColumn('Surname', 'string', 255, array(
              'type' => 'string',
-             'length' => 250,
+             'length' => 255,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('CountryID', 'integer', 8, array(
+        $this->hasColumn('Description', 'string', 500, array(
+             'type' => 'string',
+             'length' => 500,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('DateBirthday', 'date', null, array(
+             'type' => 'date',
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('CountryID', 'integer', 4, array(
              'type' => 'integer',
-             'length' => 8,
+             'length' => 4,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('City', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
@@ -167,21 +149,13 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('City', 'string', 100, array(
-             'type' => 'string',
-             'length' => 100,
+        $this->hasColumn('Status', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('DateBirthday', 'date', null, array(
-             'type' => 'date',
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('AvatarType', 'integer', 4, array(
@@ -274,9 +248,44 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
+        $this->hasColumn('ActivationCode', 'string', 15, array(
+             'type' => 'string',
+             'length' => 15,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('RestorePassCode', 'string', 15, array(
+             'type' => 'string',
+             'length' => 15,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
         $this->hasColumn('GooglePlus', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('LastUserLoginIP', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('DateLastActivity', 'timestamp', null, array(
+             'type' => 'timestamp',
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
@@ -297,15 +306,6 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'unsigned' => false,
              'primary' => false,
              'notnull' => true,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('Description', 'string', 500, array(
-             'type' => 'string',
-             'length' => 500,
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => false,
              'autoincrement' => false,
              ));
     }

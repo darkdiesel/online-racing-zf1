@@ -10,34 +10,52 @@ class Acl extends Zend_Acl
 
     public function __construct()
     {
-//        // Init roles array from DB
-//        $this->getRolesArray();
-//        $this->initRoles();
-//
-//        $this->getResourcesArray();
-//        $this->initResources();
-//
-//        $this->deny();
-////
-//        $this->initAccess();
+        // Init roles array from DB
+        $this->getRolesArray();
+        $this->initRoles();
+
+
+        $this->getResourcesArray();
+        $this->initResources();
+
+        $this->deny();
+
+        $this->initAccess();
     }
 
     protected function getRolesArray()
     {
-        $query = Doctrine_Query::create()
-            ->from('Default_Model_Role r')
-            ->orderBy('r.ID DESC');
 
-        $roleResult = $query->fetchArray();
+        //TODO: Uncomment this after fix loading doctrine before acl
+//        $query = Doctrine_Query::create()
+//            ->from('Default_Model_Role r')
+//            ->orderBy('r.ID DESC');
+//
+//        $roleResult = $query->fetchArray();
+//
+//        if ($roleResult) {
+//            $this->roles = array();
+//            foreach ($roleResult as $role) {
+//                $this->roles[$role['ID']] = array(
+//                    'ID' => $role['ID'],
+//                    'Name' => $role['Name'],
+//                    'ParentRoleID' => $role['ParentRoleID'],
+//                    'Added' => 0,
+//                );
+//            }
+//        }
 
-        if ($roleResult) {
+        $role_db = new Application_Model_DbTable_Role();
+        $role_all = $role_db->getAll(FALSE, array("ID", "Name", "ParentRoleID"), array('ParentRoleID' => 'ASC'));
+
+        if ($role_all) {
             $this->roles = array();
-            foreach ($roleResult as $role) {
+            foreach ($role_all as $role) {
                 $this->roles[$role->ID] = array(
-                    'id' => $role->ID,
-                    'name' => $role->Name,
-                    'parent_role_id' => $role->ParentRoleID,
-                    'added' => 0,
+                    'ID' => $role->ID,
+                    'Name' => $role->Name,
+                    'ParentRoleID' => $role->ParentRoleID,
+                    'Added' => 0,
                 );
             }
         }
@@ -65,28 +83,28 @@ class Acl extends Zend_Acl
     {
         if ($this->roles) {
             foreach ($this->roles as $role) {
-                if (!$this->roles[$role['id']]['added']) {
-                    $this->addRecursiveRole($role['id']);
+                if (!$this->roles[$role['ID']]['Added']) {
+                    $this->addRecursiveRole($role['ID']);
                 }
             }
         }
     }
 
-    protected function addRecursiveRole($role_id)
+    protected function addRecursiveRole($roleID)
     {
-        $parent_role_id = $this->roles[$role_id]['parent_role_id'];
+        $parentRoleID = $this->roles[$roleID]['ParentRoleID'];
 
-        if ($parent_role_id) {
-            if ($this->roles[$parent_role_id]['added']) {
-                $this->addRole(new Zend_Acl_Role($this->roles[$role_id]['name']), $this->roles[$parent_role_id]['name']);
-                $this->roles[$role_id]['added'] = 1;
+        if ($parentRoleID) {
+            if ($this->roles[$parentRoleID]['Added']) {
+                $this->addRole(new Zend_Acl_Role($this->roles[$roleID]['Name']), $this->roles[$parentRoleID]['Name']);
+                $this->roles[$roleID]['Added'] = 1;
             } else {
-                $this->addRecursiveRole($parent_role_id);
-                $this->addRecursiveRole($role_id);
+                $this->addRecursiveRole($parentRoleID);
+                $this->addRecursiveRole($roleID);
             }
         } else {
-            $this->addRole(new Zend_Acl_Role($this->roles[$role_id]['name']));
-            $this->roles[$role_id]['added'] = 1;
+            $this->addRole(new Zend_Acl_Role($this->roles[$roleID]['Name']));
+            $this->roles[$roleID]['Added'] = 1;
         }
     }
 
@@ -141,7 +159,7 @@ class Acl extends Zend_Acl
             $storageData = Zend_Auth::getInstance()->getStorage()->read();
 
             $user_role_db = new Application_Model_DbTable_UserRole();
-            $role = $user_role_db->getItem(array('UserID' => $storageData->id))->role_name;
+            $role = $user_role_db->getItem(array('UserID' => $storageData->ID))->role_name;
         } else {
             $role = 'guest';
         }
@@ -158,7 +176,7 @@ class Acl extends Zend_Acl
             $storageData = Zend_Auth::getInstance()->getStorage()->read();
 
             $user_role_db = new Application_Model_DbTable_UserRole();
-            $role = $user_role_db->getItem(array('UserID' => $storageData->id))->role_name;
+            $role = $user_role_db->getItem(array('UserID' => $storageData->ID))->role_name;
         } else {
             $role = 'guest';
         }

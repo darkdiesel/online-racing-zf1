@@ -177,7 +177,7 @@ class AuthController extends App_Controller_LoaderController
 
     /**
      * function logoutAction
-     * @todo Переделать перенаправление на предыдущую страницу после того как пользователь вылогинился
+     * TODO: Redirect to previous page after sign out.
      */
     public function signOutAction()
     {
@@ -197,8 +197,10 @@ class AuthController extends App_Controller_LoaderController
         /** Disable CKFinder * */
         $ckFinderSession->allowed = false;
 
+        $defaultIndexUrl = $this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default');
+
         // Redirect to main page
-        $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+        $this->redirect($defaultIndexUrl);
     }
 
 }

@@ -33,14 +33,13 @@
                             <!-- /User Navigation menu  -->
                             <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'index', 'index')) : ?>
                                 <?php
-                                $admin_index_url = $this->url(
-                                    array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default',
-                                    true
+                                $adminIndexUrl = $this->url(
+                                    array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default'
                                 );
                                 ?>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>
-                                        <a href="<?php echo $admin_index_url; ?>">
+                                        <a href="<?php echo $adminIndexUrl; ?>">
                                             <i class="fa fa-bolt"></i> <?php echo $this->translate('Админ. Панель'); ?>
                                         </a>
                                     </li>
@@ -101,15 +100,22 @@
                     </div>
                     <div class="modal-body">
                         <?php
-                        $form = new Application_Form_Auth_Login();
-                        $form->setAction(
-                            "{$this->url(
-                                array('module' => 'default', 'controller' => 'auth', 'action' => 'login'),
-                                'default',
-                                true
-                            )}?redirectTo={$this->url()}"
-                        );
-                        echo $form;
+                        // check access and generate link for default/auth/sign-in
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'auth', 'sign-in')) {
+                            $defaultAuthSignInUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'),
+                                'default'
+                            );
+                        } else {
+                            $defaultAuthSignInUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        $authSignInForm = new Peshkov_Form_Auth_SignIn();
+                        $authSignInForm->setAction($defaultAuthSignInUrl . '?redirectTo=' . $this->url());
+
+                        echo $authSignInForm;
                         ?>
                         <br/>
                     </div>
