@@ -159,7 +159,7 @@ class Acl extends Zend_Acl
             $storageData = Zend_Auth::getInstance()->getStorage()->read();
 
             $user_role_db = new Application_Model_DbTable_UserRole();
-            $role = $user_role_db->getItem(array('UserID' => $storageData->ID))->role_name;
+            $role = $user_role_db->getItem(array('UserID' => $storageData['UserID']))->role_name;
         } else {
             $role = 'guest';
         }
@@ -176,7 +176,7 @@ class Acl extends Zend_Acl
             $storageData = Zend_Auth::getInstance()->getStorage()->read();
 
             $user_role_db = new Application_Model_DbTable_UserRole();
-            $role = $user_role_db->getItem(array('UserID' => $storageData->ID))->role_name;
+            $role = $user_role_db->getItem(array('UserID' => $storageData['UserID']))->role_name;
         } else {
             $role = 'guest';
         }
@@ -194,7 +194,7 @@ class Acl extends Zend_Acl
                 ->from('Default_Model_User u')
                 ->leftJoin('u.UserRole ur')
                 ->leftJoin('ur.Role r')
-                ->where('u.ID = ?', $storageData['id']);
+                ->where('u.ID = ?', $storageData['UserID']);
 
             $userResult = $query->fetchArray();
 

@@ -52,27 +52,33 @@ class AuthController extends App_Controller_LoaderController
                         $auth = Zend_Auth::getInstance();
 
                         //create auth adapter
-                        $authAdapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter());
+                        $authAdapter = new Peshkov_Auth_Adapter_Doctrine('Default_Model_User');
 
-                        //set user credential for authentication
-                        $authAdapter->setTableName('user')
-                            ->setIdentityColumn('Email')
+                        $authAdapter->setIdentityColumn('Email')
                             ->setCredentialColumn('Password');
 
-                        $authAdapter->setIdentity($authSignInForm->getValue('Email'));
-                        $authAdapter->setCredential(sha1($authSignInForm->getValue('Password')));
+                        $authAdapter->setIdentity($authSignInForm->getValue('Email'))
+                            ->setCredential(sha1($authSignInForm->getValue('Password')));
 
                         //get result from authntication
                         $result = $auth->authenticate($authAdapter);
 
+//                        switch ($result->getCode()) {
+//                            case Zend_Auth_Result::SUCCESS:
+//                        }
+
                         if ($result->isValid()) {
+
                             $storageData = $authAdapter->getResultRowObject(array('ID'), null);
-                            $auth->getStorage()->write($storageData);
+
+                            $auth->getStorage()->write(array(
+                                'UserID' => $storageData->ID
+                            ));
 
                             // Receive Zend_Session_Namespace object
                             //require_once('Zend/Session/Namespace.php');
                             // Set the time of user logged in
-                            if ($authSignInForm->RememberMe->getValue() == 1) {
+                            if ($authSignInForm->getValue('RememberMe') == 1) {
                                 $session = new Zend_Session_Namespace('Zend_Auth');
                                 $session->setExpirationSeconds(60 * 60 * 120);
 
@@ -86,7 +92,7 @@ class AuthController extends App_Controller_LoaderController
                                 Zend_Session::forgetMe();
                             }
 
-                            $userID = Zend_Auth::getInstance()->getStorage()->read()->ID;
+                            $userID = $storageData->ID;
                             $userIP = $this->view->getUser()->getUserIP();
 
                             // Update Last User Login IP
@@ -102,11 +108,13 @@ class AuthController extends App_Controller_LoaderController
                             $this->view->showMessages()->clearMessages();
                             $this->messages->addSuccess($this->view->translate('Вы успешно авторизовались на сайте.'));
 
+
+                            // Check access for CKEditor
                             $ckfinder = $this->view->checkUserAccess('ckfinder');
 
                             if ($ckfinder) {
                                 $ckFinderSession = new Zend_Session_Namespace('CKFinder');
-                                /** Disable CKFinder * */
+                                /** Enable CKFinder * */
                                 $ckFinderSession->allowed = true;
                             } else {
                                 $ckFinderSession = new Zend_Session_Namespace('CKFinder');
@@ -124,32 +132,6 @@ class AuthController extends App_Controller_LoaderController
                                 . ' <a class="btn btn-danger btn-sm" href="' . $defaultAuthSignUpUrl . '">' . $this->view->translate('Зарегистрироваться?') . '</a>');
                         }
 
-                        /* switch ($result->getCode()) {
-                          case Zend_Auth_Result::SUCCESS:
-                          $storageData = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                          $storage = $auth->getStorage();
-                          $storage->write($storageData);
-
-                          if ($authSignInForm->remember->getValue() == 1) {
-                          // Получить объект Zend_Session_Namespace
-                          //require_once('Zend/Session/Namespace.php');
-                          //$session = new Zend_Session_Namespace('online-racing');
-                          // set
-                          //$session->setExpirationSeconds(60 * 60 * 24 * 5);
-
-                          Zend_Session::rememberMe(60 * 60 * 24 * 5);
-                          } else {
-                          Zend_Session::forgetMe();
-                          }
-                          $this->_helper->redirector('index', 'index');
-                          break;
-                          default:
-                          $authSignInForm->populate($request->getPost());
-                          $this->view->errMessage .= $this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.') . '<br />';
-                          $this->view->errMessage .= '<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true) . '">' . $this->view->translate('Забыли пароль?') . '</a></strong><br/>'
-                          . '<strong><a href="' . $this->view->baseUrl('user/register') . '">' . $this->view->translate('Зарегистрироваться?') . '</a></strong>';
-                          break;
-                          } */
                         break;
                     case USER_STATUS_BLOCKED:
                         $this->messages->addError($this->view->translate('Пользователь заблокирован! Обротитесь к администрации сайта для справки.'));

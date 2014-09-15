@@ -8,7 +8,7 @@
     );
     $defaultUserIDUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-            'userID' => $storageData->ID), 'defaultUserID', true
+            'userID' => $storageData['UserID']), 'defaultUserID', true
     );
     $defaultUserEditUrl = $this->url(
         array('module' => 'default', 'controller' => 'user', 'action' => 'edit'), 'default', true
@@ -27,7 +27,7 @@
         ->from('Default_Model_User u')
         ->leftJoin('u.UserRole ur')
         ->leftJoin('ur.Role r')
-        ->where('u.ID = ?', $storageData->ID);
+        ->where('u.ID = ?', $storageData['UserID']);
 
     $userResult = $query->fetchArray();
 

@@ -33,7 +33,7 @@ class App_Controller_LoaderController extends Zend_Controller_Action
 
             //save last activity time
             $storageData = Zend_Auth::getInstance()->getStorage()->read();
-            $user->setLastActivity($storageData->ID);
+            $user->setLastActivity($storageData['UserID']);
 
             //checked role
             /* $user_role = $user->getUserStatus($storageData->id);
