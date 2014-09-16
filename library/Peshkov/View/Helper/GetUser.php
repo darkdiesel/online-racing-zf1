@@ -21,6 +21,7 @@ class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
         }
     }
 
+    // TODO: Update method
     function getUserAvatar($userID, $avatarType, $img_class = '', $img_size = 200)
     {
         switch ($avatarType) {
@@ -33,11 +34,13 @@ class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
                 return $avatar;
                 break;
             case '1':
-                $user = new Application_Model_DbTable_User();
-                $avatar = $user->getUserAvatarLoad($userID);
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_User u')
+                    ->where('u.ID = ?', $userID);
+                $userResult = $query->fetchArray();
 
-                if ($avatar) {
-                    return "<img class=\"{$img_class}\" src=\"{$avatar}\">";
+                if ($userResult) {
+                    return '<img class="' . $img_class . '" src="' . $userResult[0]['AvatarImageUrl'] . '">';
                 } else {
                     $avatar = $this->view->gravatar()
                         ->setImgSize(200)
@@ -49,32 +52,17 @@ class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
                 }
 
                 break;
-            case '2':
-                /* Avatar link */
-                $user = new Application_Model_DbTable_User();
-                $avatar = $user->getUserAvatarLink($userID);
 
-                if ($avatar) {
-                    return "<img class=\"{$img_class}\" src=\"{$avatar}\">";
-                } else {
-                    $avatar = $this->view->gravatar()
-                        ->setImgSize($img_size)
-                        ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
-                        ->setSecure(true)
-                        ->setAttribs(array('class' => $img_class));
-
-                    return $avatar;
-                }
-
-                break;
             case '3':
                 /* Avatar gravatar email */
-                $user = new Application_Model_DbTable_User();
-                $avatar = $user->getUserAvatarGravatarEmail($userID);
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_User u')
+                    ->where('u.ID = ?', $userID);
+                $userResult = $query->fetchArray();
 
-                if ($avatar) {
+                if ($userResult) {
                     $avatar = $this->view->gravatar()
-                        ->setEmail($avatar)
+                        ->setEmail($userResult[0]['AvatarGravatarEmail'])
                         ->setImgSize($img_size)
                         ->setDefaultImg(Zend_View_Helper_Gravatar::DEFAULT_MM)
                         ->setSecure(true)
