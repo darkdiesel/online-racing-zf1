@@ -34,7 +34,7 @@
                                 <?php echo $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-120', 120); ?>
                             </a>
                             <?php echo $this->modal(array(
-                                'title' => $this->userData['Login'],
+                                'title' => $this->userData['NickName'],
                                 'class' => 'user-' . $this->userData['ID'],
                                 'content' => $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-640 center-block', 640)
                             )); ?>
@@ -56,7 +56,7 @@
                                     <БЕЗ ИМЕНИ>
                                 </small>
                             <?php } ?>
-                            <span class="text-muted small"><small><?php echo $this->userData['Login']; ?></small></span>
+                            <span class="text-muted small"><small><?php echo $this->userData['NickName']; ?></small></span>
                         </div>
                         <a href="#" class="btn btn-xs btn-primary pull-right change-user-cover-btn" style="margin:10px;">
                             <i class="fa fa-pencil-square"></i> <?php echo $this->translate('Изменить обложку'); ?>

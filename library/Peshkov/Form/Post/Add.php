@@ -108,26 +108,12 @@ class Peshkov_Form_Post_Add extends Zend_Form
         $publish = new Zend_Form_Element_Checkbox('Publish');
         $publish->setLabel($this->translate('Опубликовать?'))
             ->setValue(1)
-            ->setDecorators(
-                array(
-                    'ViewHelper', 'HtmlTag', 'Errors',
-                    array('label', array('class' => 'control-label', 'placement' => 'APPEND')),
-                    array('HtmlTag', array('tag' => 'span')),
-                    array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-                )
-            );
+            ->setDecorators($this->getView()->getDecorator()->checkboxDecorators());
 
         $publishToSlider = new Zend_Form_Element_Checkbox('PublishToSlider');
         $publishToSlider->setLabel($this->translate('Опубликовать в слайдер? (Не работает)'))
             ->setValue(0)
-            ->setDecorators(
-                array(
-                    'ViewHelper', 'HtmlTag', 'Errors',
-                    array('label', array('class' => 'control-label', 'placement' => 'APPEND')),
-                    array('HtmlTag', array('tag' => 'span')),
-                    array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-                )
-            );
+            ->setDecorators($this->getView()->getDecorator()->checkboxDecorators());
 
         $submit = new Zend_Form_Element_Submit('Submit');
         $submit->setLabel($this->translate('Добавить'))

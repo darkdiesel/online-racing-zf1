@@ -42,7 +42,7 @@ class UserController extends App_Controller_LoaderController
                 $this->view->pageTitle($result[0]['Name']);
 
                 // BreadsCrumbs
-                $this->view->breadcrumb()->UserAll('1')->User($result[0]['ID'], $result[0]['Login']);
+                $this->view->breadcrumb()->UserAll('1')->User($result[0]['ID'], $result[0]['NickName']);
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
@@ -119,104 +119,111 @@ class UserController extends App_Controller_LoaderController
         $this->view->headTitle($this->view->translate('Активация пользователя'));
         $this->view->pageTitle($this->view->translate('Активация пользователя'));
 
-        $this->messages->addInfo($this->view->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.'));
-        $this->messages->addInfo($this->view->translate('<strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.'));
-
-        $request = $this->getRequest();
-        $form = new Application_Form_User_Activate();
-        $form->setAction(
-            $this->view->url(
-                array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default', true
-            )
+        $this->messages->addInfo(
+            $this->view->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.')
+        );
+        $this->messages->addInfo(
+            $this->view->translate('<strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.')
         );
 
+        $userActivateForm = new Peshkov_Form_User_Activate();
+        $this->view->userActivateForm = $userActivateForm;
+
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
+            if ($userActivateForm->isValid($this->getRequest()->getPost())) {
 
-                $user = new Application_Model_DbTable_User();
-                $user_data = array(
-                    'email' => $form->email->getValue(),
-                    'password' => sha1($form->password->getValue()),
-                    'code_activate' => $form->code_activate->getValue(),
-                );
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_User u')
+                    ->where('u.Status = ?', 1)
+                    ->where('u.Email = ?', $userActivateForm->getValue('Email'))
+                    ->andWhere('u.ActivationCode = ?', $userActivateForm->getValue('ActivationCode'));
+                $userResult = $query->fetchArray();
 
-                $result = $user->activateUser($user_data['email'], $user_data['password'], $user_data['code_activate']);
+                if (count($userResult) == 1) {
+                    if ($userResult[0]['Password'] == sha1($userActivateForm->getValue('Password'))) {
+                        if ($userResult[0]['ActivationCode'] == $userActivateForm->getValue('ActivationCode')) {
 
-                switch ($result) {
-                    case 'done':
-                        // load e-mail script (template) for user
-                        $html = new Zend_View();
-                        $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-                        // e-mail template values for user
-                        $html->assign('login', $user_data['email']);
-                        $html->assign('content', 'Ваш профиль активирован. Приятного время провождения на нашем портале. Да прибудет с вами скорость! ©');
-                        // e-mail for user
-                        $mail = new Zend_Mail('UTF-8');
-                        $bodyText = $html->render('activation_template.phtml');
-                        $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-                        $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
-                        $mail->addTo($user_data['email'], $user_data['email']);
-                        $mail->setBodyHtml($bodyText);
-                        $mail->send();
+                            $updatedUser = Doctrine_Core::getTable('Default_Model_User')->find($userResult[0]['ID']);
+                            $updatedUser->fromArray($userResult[0]);
 
-                        // load e-mail script (template) for admin
-                        $html = new Zend_View();
-                        $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-                        // e-mail template values for admin
-                        $html->assign('login', "Администратор Online-racing.net");
-                        $html->assign('content', 'На сайте активирован новый пользователь.<br/>' .
-                            'Данные пользователя:<br/><br/>' .
-                            'E-mail: <strong>' . $user_data['email'] . '</strong><br/>');
-                        // e-mail for admin
-                        $mail = new Zend_Mail('UTF-8');
-                        $bodyText = $html->render('master_user_activate_template.phtml');
-                        $mail->addTo('igor.peshkov@gmail.com', 'Igor Peshkov');
-                        $mail->setSubject('Online-Racing.net - На сайте активирован пользователь.');
-                        $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-                        $mail->setBodyHtml($bodyText);
-                        $mail->send();
+                            $updatedUser->ActivationCode = null;
 
-                        $bootstrap = $this->getInvokeArg('bootstrap');
-                        $auth = Zend_Auth::getInstance();
-                        $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
-                        $authAdapter = new Zend_Auth_Adapter_DbTable(
-                            $adapter, 'user', 'email', 'password'
-                        );
+                            $updatedUser->save();
 
-                        $authAdapter->setIdentity($user_data['email']);
-                        $authAdapter->setCredential($user_data['password']);
-                        $result = $auth->authenticate($authAdapter);
+                            $this->messages->clearMessages();
+                            $this->messages->addSuccess($this->view->translate('Ваш профиль активирован. '
+                                . 'Добро пожаловать в команду Online-Racing.Net. '
+                                . 'Желаем отличного настроение и высоких результатов.'));
+                            $this->messages->addSuccess($this->view->translate('Да пребудет с вами скорость. ©'));
+                            $this->messages->addSuccess($this->view->translate('Для авторизации пользуйтесь формой ниже.'));
 
-                        $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                        $storage = $auth->getStorage();
-                        $storage->write($storage_data);
+                            $defaultAuthSignInUrl = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'), 'default');
+                            $defaultUserIDUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'userID' => $updatedUser->ID), 'defaultUserID');
 
-                        $this->messages->clearMessages();
-                        $this->messages->addSuccess($this->view->translate('Ваш профиль активирован. Добро пожаловать в команду портала Online-Racing.Net. Желаем отличного настроение и высоких результатов.'));
-                        $this->messages->addSuccess($this->view->translate('Да прибудет с вами скорость. ©'));
+                            // load e-mail script (template) for user
+                            $html = new Zend_View();
+                            $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
 
-                        $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+                            // Assign e-mail template variables
+                            $html->assign('Name', $updatedUser->Name);
+                            $html->assign('Surname', $updatedUser->Surname);
+                            $html->assign('NickName', $updatedUser->NickName);
+                            $html->assign('SignInUrl', $defaultAuthSignInUrl);
 
-                        break;
-                    case 'error':
-                        $this->messages->addError($this->view->translate('Введены неверные данные активации!'));
+                            // New Mail for registered user
+                            $mail = new Zend_Mail('UTF-8');
 
-                        break;
-                    case 'activate':
-                        $url_login = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true);
-                        $this->messages->addError($this->view->translate('Пользователь уже активирован!') . ' <strong><a class="btn btn-default" href="' . $url_login . '">'
-                            . $this->view->translate('Авторизоваться?') . '</a></strong>');
-                        break;
-                    case 'notFound':
-                        $this->messages->addError($this->view->translate('Пользователь на сайте не найден!'));
-                        break;
+                            $mail->addTo($updatedUser->Email, $updatedUser->NickName);
+                            $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
+                            //TODO: Get back-email from site setting.
+                            $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                            $bodyText = $html->render('user-complete-activation.phtml');
+                            $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
+                            $mail->send();
+
+                            // load e-mail script (template) for admin
+                            $html = new Zend_View();
+                            $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+
+                            // Assign e-mail template variables
+                            //TODO: Get admin nick from admin from site setting.
+                            $html->assign('NickName', "Администратор Online-Racing.Net");
+                            $html->assign('Name', $updatedUser->Name);
+                            $html->assign('Surname', $updatedUser->Surname);
+                            $html->assign('NickName', $updatedUser->NickName);
+                            $html->assign('Email', $updatedUser->Email);
+                            $html->assign('NewUserUrl', $defaultUserIDUrl);
+
+                            // New Mail for site administrator
+                            $mail = new Zend_Mail('UTF-8');
+
+                            //TODO: Get admin email from site setting.
+                            $mail->addTo('igor.peshkov@gmail.com', 'Igor Peshkov');
+                            $mail->setSubject('Online-Racing.net - Активирован новый пользователь.');
+                            //TODO: Get back-email from site setting.
+                            $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                            $bodyText = $html->render('administrator-user-activation.phtml');
+                            $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
+                            $mail->send();
+
+                            $this->redirect($defaultAuthSignInUrl);
+                        } else {
+                            $this->messages->addError($this->view->translate('Неверный код активации!'));
+                        }
+                    } else {
+                        $this->messages->addError($this->view->translate('Неверные данные авторизации!'));
+                    }
+                } else {
+                    $this->messages->addError($this->view->translate('Пользователь с такими данными не найден!'));
                 }
             } else {
                 $this->messages->addError($this->view->translate('Исправте ошибки для корректной активации профиля!'));
             }
         }
-
-        $this->view->form = $form;
     }
 
     public function restorePassAction()
@@ -234,32 +241,32 @@ class UserController extends App_Controller_LoaderController
         $this->messages->addInfo($this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.'));
 
         $request = $this->getRequest();
-        $form = new Application_Form_User_RestorePass();
-        $form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true));
+        $userActivateForm = new Application_Form_User_RestorePass();
+        $userActivateForm->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true));
 
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
+            if ($userActivateForm->isValid($request->getPost())) {
                 Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
                 $user_code_restore_pass = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
 
                 $user = new Application_Model_DbTable_User();
-                $user->setRestorePassCode($form->getValue('email'), $user_code_restore_pass);
+                $user->setRestorePassCode($userActivateForm->getValue('email'), $user_code_restore_pass);
 
                 // load e-mail script (template) for user
                 $html = new Zend_View();
                 $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
                 // e-mail template values for user
                 $restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true);
-                $html->assign('login', $form->getValue('email'));
+                $html->assign('login', $userActivateForm->getValue('email'));
                 $html->assign('content', 'Уважаемый пользователь, вы или кто-то другой запросили код для создания нового пароля.<br/>' .
                     'На <a href="' . $restore_url . '">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
-                    'E-mail: <strong>' . $form->getValue('email') . '</strong><br/>' .
+                    'E-mail: <strong>' . $userActivateForm->getValue('email') . '</strong><br/>' .
                     'Код восстановления: <strong>' . $user_code_restore_pass . '</strong><br/>' .
                     'Если вы не запрашивали новый пароль, то просто проигнорируйте данное сообщение.');
                 // e-mail for user
                 $mail = new Zend_Mail('UTF-8');
                 $bodyText = $html->render('restore_passwd_template.phtml');
-                $mail->addTo($form->getValue('email'), $form->getValue('email'));
+                $mail->addTo($userActivateForm->getValue('email'), $userActivateForm->getValue('email'));
                 $mail->setSubject('Online-Racing.net - Код для восстановления пароля.');
                 $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
                 $mail->setBodyHtml($bodyText);
@@ -273,8 +280,6 @@ class UserController extends App_Controller_LoaderController
                 $this->messages->addError($this->view->translate('Исправте следующие ошибки для восстановления пароля!'));
             }
         }
-
-        $this->view->form = $form;
     }
 
     public function setRestorePassAction()

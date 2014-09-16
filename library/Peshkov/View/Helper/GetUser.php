@@ -109,4 +109,8 @@ class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
         return $ip;
     }
 
+    public function activate($user){
+        // TODO: add helper for activation
+    }
+
 }

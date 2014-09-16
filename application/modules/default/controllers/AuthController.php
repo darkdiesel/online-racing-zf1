@@ -6,6 +6,9 @@ class AuthController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
+
+        // set doctype for correctly displaying forms
+        $this->view->doctype('XHTML1_STRICT');
     }
 
     public function signInAction()
@@ -183,6 +186,110 @@ class AuthController extends App_Controller_LoaderController
 
         // Redirect to main page
         $this->redirect($defaultIndexUrl);
+    }
+
+    public function signUpAction()
+    {
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+        }
+
+        // set layout without sidebar
+        $this->_helper->layout->setLayout('layout-default-no-sidebar');
+
+        $this->view->headTitle($this->view->translate('Регистрация'));
+        $this->view->pageTitle($this->view->translate('Регистрация'));
+
+        $this->messages->addInfo($this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.'));
+
+        // jQuery validate script
+        $this->view->MinifyHeadScript()->appendFile("/library/jquery.validate/jquery.validate.min.js");
+
+        $authSignUpForm = new Peshkov_Form_Auth_SignUp();
+        $this->view->authSignUpForm = $authSignUpForm;
+
+        if ($this->getRequest()->isPost()) {
+            if ($authSignUpForm->isValid($this->getRequest()->getPost())) {
+                $date = date('Y-m-d H:i:s');
+
+                $newUser = new Default_Model_User();
+                $newUser->fromArray($authSignUpForm->getValues());
+
+                $newUser->Password = sha1($newUser->Password);
+                $newUser->Status = 1;
+                $newUser->AvatarType = USER_AVATAR_TYPE_NONE;
+                $newUser->DateCreate = $date;
+
+                $newUser->ActivationCode = $this->view->GenerateCode(8);
+
+                $newUser->save();
+
+                $defaultUserActivateUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default');
+                $defaultUserIDUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'userID' => $newUser->getIncremented()), 'defaultUserID');
+
+                // load e-mail script (template) for user
+                $html = new Zend_View();
+                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+
+                // Assign e-mail template variables
+                $html->assign('Name', $newUser->Name);
+                $html->assign('Surname', $newUser->Surname);
+                $html->assign('NickName', $newUser->NickName);
+                $html->assign('Email', $newUser->Email);
+                $html->assign('Password', $authSignUpForm->getValue('Password'));
+                $html->assign('ActivationCode', $newUser->ActivationCode);
+                $html->assign('ActivateUrl', $defaultUserActivateUrl);
+
+                // New Mail for registered user
+                $mail = new Zend_Mail('UTF-8');
+
+                $mail->addTo($newUser->Email, $newUser->NickName);
+                $mail->setSubject('Online-Racing.net - Код подверждения регистрации.');
+                //TODO: Get back-email from site setting.
+                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                $bodyText = $html->render('user-complete-registration.phtml');
+                $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
+                $mail->send();
+
+                // load e-mail script (template) for admin
+                $html = new Zend_View();
+                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+
+                // Assign e-mail template variables
+                //TODO: Get admin nick from admin from site setting.
+                $html->assign('NickName', "Администратор Online-Racing.Net");
+                $html->assign('Name', $newUser->Name);
+                $html->assign('Surname', $newUser->Surname);
+                $html->assign('NickName', $newUser->NickName);
+                $html->assign('Email', $newUser->Email);
+                $html->assign('ActivationCode', $newUser->ActivationCode);
+                $html->assign('NewUserUrl', $defaultUserIDUrl);
+
+                // New Mail for site administrator
+                $mail = new Zend_Mail('UTF-8');
+
+                //TODO: Get admin email from site setting.
+                $mail->addTo('igor.peshkov@gmail.com', 'Igor Peshkov');
+                $mail->setSubject('Online-Racing.net - Зарегестрировался новый пользователь.');
+                //TODO: Get back-email from site setting.
+                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                $bodyText = $html->render('administrator-user-registration.phtml');
+                $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
+                $mail->send();
+
+                $this->redirect($defaultUserActivateUrl);
+            } else {
+                $this->messages->addError(
+                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                );
+            }
+        }
+
+
     }
 
 }

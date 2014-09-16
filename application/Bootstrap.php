@@ -9,6 +9,11 @@ const USER_STATUS_NOT_ACTIVATED = 'NOT_ACTIVATED';
 const USER_STATUS_ENABLE = 'ENABLE';
 const USER_STATUS_BLOCKED = 'BLOCKED';
 
+// User Avatar Type
+const USER_AVATAR_TYPE_NONE = '0';
+const USER_AVATAR_TYPE_LOADED = '1';
+const USER_AVATAR_TYPE_GRAVATAR = '2';
+
 // Period for that user is online
 const USER_ONLINE_PERIOD = 420;
 

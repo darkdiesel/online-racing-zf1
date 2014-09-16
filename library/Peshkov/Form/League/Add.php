@@ -55,7 +55,7 @@ class Peshkov_Form_League_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
         foreach ($this->getUsers() as $user) {
-            $users->addMultiOption($user['ID'], $user['Surname'] . ' ' . $user['Name'] . ' (' . $user['Login'] . ')');
+            $users->addMultiOption($user['ID'], $user['Surname'] . ' ' . $user['Name'] . ' (' . $user['NickName'] . ')');
         };
 
         $urlImageLogo = new Zend_Form_Element_File('ImageLogoUrl');

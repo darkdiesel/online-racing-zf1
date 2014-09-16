@@ -14,7 +14,7 @@ class Application_Model_DbTable_UserChat extends Zend_Db_Table_Abstract {
                 ->from(array('uc' => 'user_chat'), 'uc.id')
                 ->columns(array('uc.id', 'uc.user_id', 'uc.message', 'uc.date_create'))
                 ->where('uc.id > ?', $last_id)
-                ->join(array('u' => 'user'), 'uc.user_id = u.id', array('user_login' => 'login'))
+                ->join(array('u' => 'user'), 'uc.user_id = u.ID', array('user_login' => 'NickName'))
                 ->order('date_create DESC');
 
         $user_chat_messages = $model->fetchAll($select);
@@ -34,7 +34,7 @@ class Application_Model_DbTable_UserChat extends Zend_Db_Table_Abstract {
                 ->setIntegrityCheck(false)
                 ->from(array('uc' => 'user_chat'), 'id')
                 ->columns('*')
-                ->join(array('u' => 'user'), 'uc.user_id = u.id', array('user_login' => 'login'))
+                ->join(array('u' => 'user'), 'uc.user_id = u.ID', array('user_login' => 'NickName'))
                 ->order('date_create DESC')
                 ->limit(50, 0);
 

@@ -1,6 +1,6 @@
 <?php if (Zend_Auth::getInstance()->hasIdentity()) { ?>
     <?php
-        $storageData = Zend_Auth::getInstance()->getStorage()->read();
+    $storageData = Zend_Auth::getInstance()->getStorage()->read();
     ?>
     <?php
     $defaultAuthSignOutUrl = $this->url(
@@ -75,7 +75,7 @@
                                     </span>
 
                                     <p class="text-muted small">
-                                        <?php echo $userResult[0]['Login'] ?>
+                                        <?php echo $userResult[0]['NickName'] ?>
                                         <a href="<?php echo $defaultUserEditUrl ?>">
                                             <i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?>
                                         </a>
@@ -129,13 +129,19 @@
     <?php } ?>
 
 <?php } else { ?>
+
     <?php
-    $default_reg_user_url = $this->url(
-        array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true
-    );
+    // check access and generate link for default/auth/sign-up
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'auth', 'sign-in')) {
+        $defaultAuthSignUpUrl = $this->url(
+            array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-up'), 'default'
+        );
+    } else {
+        $defaultAuthSignUpUrl = '#';
+    }
     ?>
     <ul class="nav navbar-nav navbar-collapse navbar-right">
-        <a class="btn btn-info navbar-btn" href="<?php echo $default_reg_user_url; ?>">
+        <a class="btn btn-info navbar-btn" href="<?php echo $defaultAuthSignUpUrl; ?>">
             <?php echo $this->translate('Регистрация'); ?>
         </a>
         <?php if (isset($this->displayHeaderAuthoSignInForm) && ($this->displayHeaderAuthoSignInForm)) : ?>

@@ -49,9 +49,9 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
                 'data-title' => $this->translate('Введите свой электронный почтовый ящик. Пример: example@mail.com.'),
                 'data-placement' => 'bottom'))
             ->setRequired(true)
-            ->addValidator('NotEmpty')
+            ->addValidator('NotEmpty', true)
             ->addValidator('EmailAddress')
-            ->addValidator('stringLength', false, array(5, 255, 'UTF-8'))
+            ->addValidator('stringLength', true, array(5, 255, 'UTF-8'))
             ->addValidator(
                 'Db_RecordExists', false,
                 array(
@@ -72,7 +72,7 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
                 'data-title' => $this->translate('Введите пароль от своей учетной записи.'),
                 'data-placement' => 'bottom'))
             ->setRequired(true)
-            ->addValidator('stringLength', false, array(6, 40, 'UTF-8'))
+            ->addValidator('stringLength', true, array(6, 40, 'UTF-8'))
             ->addFilter('StringTrim')
             ->addFilter('StripTags')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
@@ -80,30 +80,12 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
         $rememberMe = new Zend_Form_Element_Checkbox('RememberMe');
         $rememberMe->setLabel($this->translate('Запомнить меня?'))
             ->setValue(1)
-            ->setDecorators(
-                array(
-                    'ViewHelper', 'HtmlTag', 'Errors',
-                    array('label', array('class' => 'control-label', 'placement' => 'APPEND')),
-                    array('HtmlTag', array('tag' => 'span')),
-                    array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
-                )
-            );
-
-        $csrfToken = new Zend_Form_Element_Hash('defaultAuthSignInCsrfToken');
-        $csrfToken->setSalt(md5(microtime() . uniqid()))
-            ->setDecorators(
-                array(
-                    'ViewHelper', 'HtmlTag', 'label', 'Errors',
-                    array('Label', array('class' => 'control-label')),
-                    array(array('elementDiv' => 'HtmlTag'),
-                        array('tag' => 'div', 'class' => 'form-group')),
-                    array('HtmlTag', array('class' => ''))));
-
-        $submit = new Zend_Form_Element_Submit('Submit');
-        $submit->setLabel($this->translate('Войти'))
-            ->setAttrib('class', 'btn btn-primary')
-            ->setIgnore(true)
-            ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
+            ->setDecorators(array(
+                'ViewHelper', 'HtmlTag', 'Errors',
+                array('label', array('class' => 'control-label', 'placement' => 'APPEND')),
+                array('HtmlTag', array('tag' => 'span')),
+                array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group col-xs-6 col-sm-6 col-md-6 col-lg-6')),
+            ));
 
         $defaultUserRestorePasswordUrl = $this->getView()->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default'
@@ -112,29 +94,60 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
         $forgetPassword = new Zend_Form_Element_Button('ForgetPassword');
         $forgetPassword->setLabel($this->translate('Забыли пароль?'))
             ->setAttrib('onClick', "location.href='{$defaultUserRestorePasswordUrl}'")
-            ->setAttrib('class', 'btn btn-danger')
+            ->setAttrib('class', 'btn btn-warning btn-sm')
+            ->setIgnore(true)
+            ->setDecorators(array(
+                array('ViewHelper'),
+                array('HtmlTag', array('tag' => 'div', 'class' => 'form-group col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right')),
+            ));
+
+        $csrfToken = new Zend_Form_Element_Hash('defaultAuthSignInCsrfToken');
+        $csrfToken->setSalt(md5(microtime() . uniqid()))
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+
+        $submit = new Zend_Form_Element_Submit('Submit');
+        $submit->setLabel($this->translate('Войти'))
+            ->setAttrib('class', 'btn btn-primary btn-block btn-lg')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($email)
             ->addElement($password)
-            ->addElement($rememberMe);
+            ->addElement($rememberMe)
+            ->addElement($forgetPassword);
 
         $this->addElement($csrfToken);
 
-        $this->addElement($submit)
-            ->addElement($forgetPassword);
+        $this->addElement($submit);
+
+        $this->addDisplayGroup(
+            array(
+                $this->getElement('RememberMe'),
+                $this->getElement('ForgetPassword'),
+            ), 'SignInRow'
+        );
+
+        $this->getDisplayGroup('SignInRow')
+            ->setOrder(10)
+            ->setDecorators(
+                array(
+                    array('FormElements'),
+                    array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'row')),
+                )
+            );
 
         $this->addDisplayGroup(
             array(
                 $this->getElement('Submit'),
-                $this->getElement('ForgetPassword'),
             ), 'FormActions'
         );
 
         $this->getDisplayGroup('FormActions')
             ->setOrder(100)
-            ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
+            ->setDecorators(array(
+                array('FormElements'),
+                array(array('outerHtmlTag' => 'HtmlTag'), array('tag' => 'div')),
+            ));
     }
 
 }

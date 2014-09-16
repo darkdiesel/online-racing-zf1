@@ -7,6 +7,9 @@ class CommentController extends App_Controller_LoaderController
     {
         parent::init();
         $this->view->headTitle($this->view->translate('Комментарий'));
+
+        // set doctype for correctly displaying forms
+        $this->view->doctype('XHTML1_STRICT');
     }
 
     // action for add new post type

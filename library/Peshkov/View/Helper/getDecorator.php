@@ -81,6 +81,22 @@ class Peshkov_View_Helper_GetDecorator extends Zend_View_Helper_Abstract
         return $this->_decorator;
     }
 
+    public function checkboxDecorators()
+    {
+        switch ($this->_decoratorName) {
+            case 'TwitterBootstrap3':
+                $this->_decorator = array(
+                    'ViewHelper', 'HtmlTag', 'Errors',
+                    array('label', array('class' => 'control-label', 'placement' => 'APPEND')),
+                    array('HtmlTag', array('tag' => 'span')),
+                    array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
+                );
+                break;
+        }
+
+        return $this->_decorator;
+    }
+
     public function displayGroupDecorators()
     {
 

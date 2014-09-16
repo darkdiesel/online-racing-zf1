@@ -16,7 +16,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract {
 					'country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
 					'country_NativeName' => 'c.NativeName',
 					'country_EnglishName' => 'c.EnglishName',))
-				->columns(array('Login', 'Email', 'Name', 'Surname', 'AvatarType', 'DateBirthday', 'City', 'DateLastActivity', 'DateCreate', 'Skype',
+				->columns(array('NickName', 'Email', 'Name', 'Surname', 'AvatarType', 'DateBirthday', 'City', 'DateLastActivity', 'DateCreate', 'Skype',
 			'Icq', 'Gtalk', 'WebSite',));
 
 		$user = $model->fetchRow($select);
