@@ -32,6 +32,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property string $ActivationCode
  * @property string $RestorePassCode
  * @property string $GooglePlus
+ * @property integer $Authorized
  * @property string $LastUserLoginIP
  * @property timestamp $DateLastActivity
  * @property timestamp $DateCreate
@@ -269,6 +270,15 @@ abstract class Default_Model_Base_User extends Doctrine_Record
         $this->hasColumn('GooglePlus', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('Authorized', 'integer', 4, array(
+             'type' => 'integer',
+             'length' => 4,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
