@@ -188,7 +188,6 @@
                                 ?>
 
                                 <?php
-                                //TODO: Update user model to Doctrine1
                                 $query = Doctrine_Query::create()
                                     ->from('Default_Model_User u')
                                     ->leftJoin('u.UserRole ur')
@@ -197,10 +196,10 @@
 
                                 $userResult = $query->fetchArray();
 
-                                if ($this->getUserStatus($userResult[0]['DateLastActivity']) == USER_STATUS_ONLINE) {
-                                    $user_status_class = 'user-online';
+                                if ($this->getuser()->getUserStatus($userResult[0]['DateLastActivity']) == USER_STATUS_ONLINE) {
+                                    $userStatusClass = 'user-online';
                                 } else {
-                                    $user_status_class = 'user-offline';
+                                    $userStatusClass = 'user-offline';
                                 }
                                 ?>
 
@@ -210,12 +209,12 @@
                                             <div class="avatar pull-left">
                                                 <div class="block-user">
                                                     <div
-                                                        class="img-wrapper-40-40 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $user_status_class; ?>"
-                                                        data-title="<?php echo $user_data->login; ?>"
+                                                        class="img-wrapper-40-40 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $userStatusClass; ?>"
+                                                        data-title="<?php echo $userResult[0]['NickName']; ?>"
                                                         data-placement="bottom">
                                                         <a href="<?php echo $defaultUserIDUrl; ?>" target="_blank">
-                                                            <?php echo $this->getUserAvatar(
-                                                                $user_data->id, $user_data->avatar_type,
+                                                            <?php echo $this->getUser()->getUserAvatar(
+                                                                $userResult[0]['ID'], $userResult[0]['AvatarType'],
                                                                 'media-object img-responsive img-size-40', 40
                                                             ); ?>
                                                         </a>
@@ -236,7 +235,7 @@
                                                             <span class="qa-message-who-data">
                                                                 <a target="_blank"
                                                                    href="<?php echo $defaultUserIDUrl; ?>">
-                                                                    <?php echo $user_data->login; ?>
+                                                                    <?php echo $userResult[0]['NickName']; ?>
                                                                 </a>,
                                                             </span>
                                                         </span>
@@ -263,7 +262,7 @@
                     </div>
 
                     <?php if ($commentAddAccess) : ?>
-                        <hr />
+                        <hr/>
                         <div id="comment-form-wrapper">
                             <?php echo $this->commentAddForm; ?>
                         </div>

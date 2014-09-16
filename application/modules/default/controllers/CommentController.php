@@ -33,8 +33,10 @@ class CommentController extends App_Controller_LoaderController
 
                 $item = new Default_Model_Comment() ;
 
+                $storageData = Zend_Auth::getInstance()->getStorage()->read();
+
                 $item->fromArray($commentAddForm->getValues());
-                $item->UserID = Zend_Auth::getInstance()->getStorage()->read()->id;
+                $item->UserID = $storageData['UserID'];
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 

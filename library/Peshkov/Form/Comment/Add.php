@@ -44,7 +44,8 @@ class Peshkov_Form_Comment_Add extends Zend_Form
         $text->setLabel($this->translate('Текст комментария'))
             ->setOptions(array('maxLength' => 5000, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Текст комментария'))
-            ->setRequired(false)
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
             ->addValidator('stringLength', false, array(0, 5000, 'UTF-8'))
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
