@@ -65,19 +65,6 @@ class Peshkov_Form_User_Activate extends Zend_Form
             ->addFilter('StripTags')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
-        $repeatPassword = new Zend_Form_Element_Password('RepeatPassword');
-        $repeatPassword->setLabel($this->translate('Повторите пароль'))
-            ->setOptions(array('maxLength' => 40, 'class' => 'form-control'))
-            ->setAttrib('placeholder', $this->translate('Повторите пароль'))
-            ->setAttribs(array(
-                'data-title' => $this->translate('Повторите введенный выше пароль.'),
-                'data-placement' => 'bottom'))
-            ->setRequired(true)
-            ->addValidator('identical', true, array('token' => 'Password'))
-            ->addFilter('StringTrim')
-            ->addFilter('StripTags')
-            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-
         $activationCode = new Zend_Form_Element_Text('ActivationCode');
         $activationCode->setLabel($this->translate('Код активации'))
             ->setOptions(array('maxLength' => 255, 'class' => 'form-control'))
@@ -131,7 +118,6 @@ class Peshkov_Form_User_Activate extends Zend_Form
 
         $this->addElement($email)
             ->addElement($password)
-            ->addElement($repeatPassword)
             ->addElement($activationCode);
 
 //        $this->addElement($captcha);
