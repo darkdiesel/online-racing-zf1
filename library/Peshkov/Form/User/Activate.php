@@ -12,7 +12,7 @@ class Peshkov_Form_User_Activate extends Zend_Form
 
     public function init()
     {
-        $request = Zend_Controller_Front::getInstance()->getRequest();
+        $defaultUserActivateUrl = $this->getView()->url(array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default');
 
         $this->setAttribs(
             array(
@@ -21,11 +21,7 @@ class Peshkov_Form_User_Activate extends Zend_Form
             )
         )
             ->setName('userActivate')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default'
-                )
-            )
+            ->setAction($defaultUserActivateUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -120,7 +116,7 @@ class Peshkov_Form_User_Activate extends Zend_Form
             ->addElement($password)
             ->addElement($activationCode);
 
-//        $this->addElement($captcha);
+        $this->addElement($captcha);
 
         $this->addElement($csrfToken);
 

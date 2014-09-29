@@ -9,6 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Role', 'default');
  * 
  * @property integer $ID
  * @property string $Name
+ * @property string $SystemName
  * @property string $Description
  * @property integer $ParentRoleID
  * @property timestamp $DateCreate
@@ -34,6 +35,15 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
              'autoincrement' => true,
              ));
         $this->hasColumn('Name', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('SystemName', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,

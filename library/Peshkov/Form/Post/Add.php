@@ -12,6 +12,9 @@ class Peshkov_Form_Post_Add extends Zend_Form
 
     public function init()
     {
+        $adminPostAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'add'), 'default');
+        $adminPostAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'all'), 'adminPostAll');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +22,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             )
         )
             ->setName('postAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'post', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($adminPostAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -69,7 +68,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-        foreach ($this->getPostCategorys() as $postCategory) {
+        foreach ($this->getPostCategories() as $postCategory) {
             $postCategorys->addMultiOption($postCategory['ID'], $postCategory['Name']);
         };
 
@@ -127,13 +126,9 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminPostAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'post', 'action' => 'all'), 'adminPostAll'
-        );
-
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminPostAllUrl}'")
+            ->setAttrib('onClick', "location.href='" . $adminPostAllUrl . "'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
@@ -204,7 +199,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
     }
 
-    private function getPostCategorys()
+    private function getPostCategories()
     {
         $query = Doctrine_Query::create()
             ->from('Default_Model_PostCategory pt')

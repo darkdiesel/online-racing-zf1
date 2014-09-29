@@ -12,6 +12,9 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
 
     public function init()
     {
+        $adminContentTypeAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default');
+        $adminContentTypeAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'adminContentTypeAll');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +22,7 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
             )
         )
             ->setName('contentTypeAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($adminContentTypeAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -67,13 +66,9 @@ class Peshkov_Form_ContentType_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminContentTypeAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all'), 'adminContentTypeAll'
-        );
-
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminContentTypeAllUrl}'")
+            ->setAttrib('onClick', "location.href='".$adminContentTypeAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

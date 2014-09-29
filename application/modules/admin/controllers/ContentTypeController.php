@@ -127,12 +127,9 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                 $item->save();
 
-                $this->redirect(
-                    $this->view->url(
-                        array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
-                            'contentTypeID' => $item->ID), 'adminContentTypeID'
-                    )
-                );
+                $adminContentTypeIDUrl = $this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id','contentTypeID' => $item->ID), 'adminContentTypeID');
+
+                $this->redirect($adminContentTypeIDUrl);
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {

@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_RacingSeries_Add extends Zend_Form
+class Peshkov_Form_Role_Add extends Zend_Form
 {
 
     protected function translate($str)
@@ -12,17 +12,17 @@ class Peshkov_Form_RacingSeries_Add extends Zend_Form
 
     public function init()
     {
-        $adminRacingSeriesAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'add'), 'default');
-        $adminRacingSeriesAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'all'), 'adminRacingSeriesAll');
+        $adminRoleAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default');
+        $adminRoleAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all'), 'adminRoleAll');
 
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'racing-series-add'
+                'id' => 'role-add'
             )
         )
-            ->setName('racingSeriesAdd')
-            ->setAction($adminRacingSeriesAddUrl)
+            ->setName('roleAdd')
+            ->setAction($adminRoleAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -36,8 +36,27 @@ class Peshkov_Form_RacingSeries_Add extends Zend_Form
             ->addValidator(
                 'Db_NoRecordExists', false,
                 array(
-                    'table' => 'racing_series',
+                    'table' => 'role',
                     'field' => 'Name',
+                )
+            )
+            //->addValidator(new App_Validate_NoDbRecordExists('country', 'NativeName'))
+            ->addFilter('StripTags')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+
+        $systemName = new Zend_Form_Element_Text('SystemName');
+        $systemName->setLabel($this->translate('Системное название'))
+            ->setOptions(array('maxLength' => 255, 'class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Системное название'))
+            ->setRequired(true)
+            ->addValidator('NotEmpty')
+            ->addValidator('stringLength', false, array(1, 255, 'UTF-8'))
+            ->addValidator(
+                'Db_NoRecordExists', false,
+                array(
+                    'table' => 'role',
+                    'field' => 'SystemName',
                 )
             )
             //->addValidator(new App_Validate_NoDbRecordExists('country', 'NativeName'))
@@ -68,12 +87,13 @@ class Peshkov_Form_RacingSeries_Add extends Zend_Form
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='".$adminRacingSeriesAllUrl."'")
+            ->setAttrib('onClick', "location.href='".$adminRoleAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($name)
+            ->addElement($systemName)
             ->addElement($description);
 
         $this->addElement($submit)
@@ -83,13 +103,14 @@ class Peshkov_Form_RacingSeries_Add extends Zend_Form
         $this->addDisplayGroup(
             array(
                 $this->getElement('Name'),
+                $this->getElement('SystemName'),
                 $this->getElement('Description')
-            ), 'RacingSeriesInfo'
+            ), 'RoleInfo'
         );
 
-        $this->getDisplayGroup('RacingSeriesInfo')
+        $this->getDisplayGroup('RoleInfo')
             ->setOrder(10)
-            ->setLegend('Информация о гоночной серии')
+            ->setLegend('Информация о роли')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(

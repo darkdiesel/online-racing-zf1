@@ -12,6 +12,9 @@ class Peshkov_Form_League_Add extends Zend_Form
 
     public function init()
     {
+        $adminLeagueAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'league', 'action' => 'add'), 'default');
+        $adminLeagueAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'league', 'action' => 'all'), 'adminLeagueAll');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +22,7 @@ class Peshkov_Form_League_Add extends Zend_Form
             )
         )
             ->setName('leagueAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'league', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($adminLeagueAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -90,13 +89,9 @@ class Peshkov_Form_League_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminLeagueAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'league', 'action' => 'all'), 'adminLeagueAll'
-        );
-
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminLeagueAllUrl}'")
+            ->setAttrib('onClick', "location.href='".$adminLeagueAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

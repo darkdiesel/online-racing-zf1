@@ -12,6 +12,9 @@ class Peshkov_Form_Country_Add extends Zend_Form
 
     public function init()
     {
+        $adminCountyAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default');
+        $adminCountyAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'adminCountryAll');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +22,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             )
         )
             ->setName('countryAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($adminCountyAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -121,13 +120,9 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminCountyAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'country', 'action' => 'all'), 'adminCountryAll'
-        );
-
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminCountyAllUrl}'")
+            ->setAttrib('onClick', "location.href='".$adminCountyAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

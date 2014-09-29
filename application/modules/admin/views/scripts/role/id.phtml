@@ -1,9 +1,50 @@
-<?php if ($this->role) { ?>
-    <div class="block-item">
-	<?php
-	foreach ($this->role as $role_field):
-	    echo $role_field . "<br/>";
-	endforeach;
-	?>
+<?php if ($this->roleData) : ?>
+    <div class="block block-default block-ui-bordered">
+        <?php
+        echo $this->BlockConfigMenu($this->translate("Роль пользователя"))->roleMenu(
+            $this->escape($this->roleData['ID'])
+        );
+        ?>
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->roleData['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->RenderContentTypeText($this->roleData['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Роль пользователя'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->roleData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->roleData['DateCreate']) != $this->escape($this->roleData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->roleData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
     </div>
-<?php } ?>
+<?php endif; ?>

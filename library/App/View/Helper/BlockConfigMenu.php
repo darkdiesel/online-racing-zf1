@@ -267,6 +267,29 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
+    public function roleMenu($roleID, $addIDurl = false)
+    {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'role', 'action' => 'id', 'roleID' => $roleID), 'adminRoleID', true);
+                array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>');
+
+            }
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'edit')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'role', 'action' => 'edit', 'roleID' => $roleID), 'adminRoleAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>');
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'delete')) {
+            $url = $this->view->url(array('module' => 'default', 'controller' => 'role', 'action' => 'delete', 'roleID' => $roleID), 'adminRoleAction', true);
+            array_push($this->_menuLinks, '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>');
+        }
+
+        return $this;
+    }
+
     private function buildMenu()
     {
         if ($this->_blockMenu) {

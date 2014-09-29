@@ -14,6 +14,8 @@ class Peshkov_Form_Comment_Add extends Zend_Form
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
+        $defaultCommentAddUrl = $this->getView()->url(array('module' => 'default', 'controller' => 'comment', 'action' => 'add'), 'default');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -21,11 +23,7 @@ class Peshkov_Form_Comment_Add extends Zend_Form
             )
         )
             ->setName('commentAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'default', 'controller' => 'comment', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($defaultCommentAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 

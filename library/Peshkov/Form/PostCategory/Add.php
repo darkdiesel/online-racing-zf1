@@ -12,6 +12,9 @@ class Peshkov_Form_PostCategory_Add extends Zend_Form
 
     public function init()
     {
+        $adminPostCategoryAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'post-category', 'action' => 'add'), 'default');
+        $adminPostCategoryAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'post-category', 'action' => 'all'), 'adminPostCategoryAll');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +22,7 @@ class Peshkov_Form_PostCategory_Add extends Zend_Form
             )
         )
             ->setName('postCategoryAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'post-category', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($adminPostCategoryAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -66,13 +65,9 @@ class Peshkov_Form_PostCategory_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminPostCategoryAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'post-category', 'action' => 'all'), 'adminPostCategoryAll'
-        );
-
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminPostCategoryAllUrl}'")
+            ->setAttrib('onClick', "location.href='".$adminPostCategoryAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

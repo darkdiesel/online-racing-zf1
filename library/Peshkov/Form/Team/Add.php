@@ -12,6 +12,9 @@ class Peshkov_Form_Team_Add extends Zend_Form
 
     public function init()
     {
+        $adminTeamAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default');
+        $adminTeamAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'adminTeamAll');
+
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
@@ -19,11 +22,7 @@ class Peshkov_Form_Team_Add extends Zend_Form
             )
         )
             ->setName('teamAdd')
-            ->setAction(
-                $this->getView()->url(
-                    array('module' => 'admin', 'controller' => 'team', 'action' => 'add'), 'default'
-                )
-            )
+            ->setAction($adminTeamAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -71,13 +70,9 @@ class Peshkov_Form_Team_Add extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $adminTeamAllUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'team', 'action' => 'all'), 'adminTeamAll'
-        );
-
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='{$adminTeamAllUrl}'")
+            ->setAttrib('onClick', "location.href='".$adminTeamAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());

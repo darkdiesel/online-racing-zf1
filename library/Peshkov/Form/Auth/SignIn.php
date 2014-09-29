@@ -14,6 +14,9 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
+        $defaultAuthSignInUrl = $this->getView()->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'), 'default');
+        $defaultUserRestorePassUrl = $this->getView()->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default');
+
         // Set  redirect url if user authorizing successful.
         $redirectToUrl = $request->getParam('redirectTo');
 
@@ -23,12 +26,12 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
             $config = Zend_Registry::get('config');
 
             if (parse_url($redirectToUrl, PHP_URL_HOST) == parse_url($config->resources->frontController->baseUrl, PHP_URL_HOST)) {
-                $this->setAction($this->getView()->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'), 'default', true) . "?redirectTo=" . $redirectToUrl);
+                $this->setAction( $defaultAuthSignInUrl . "?redirectTo=" . $redirectToUrl);
             } else {
-                $this->setAction($this->getView()->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'), 'default', true));
+                $this->setAction($defaultAuthSignInUrl);
             }
         } else {
-            $this->setAction($this->getView()->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'), 'default', true) . "?redirectTo=" . $redirectToUrl);
+            $this->setAction($defaultAuthSignInUrl . "?redirectTo=" . $redirectToUrl);
         }
 
         $this->setAttribs(
@@ -87,13 +90,9 @@ class Peshkov_Form_Auth_SignIn extends Zend_Form
                 array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group col-xs-6 col-sm-6 col-md-6 col-lg-6')),
             ));
 
-        $defaultUserRestorePasswordUrl = $this->getView()->url(
-            array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default'
-        );
-
         $forgetPassword = new Zend_Form_Element_Button('ForgetPassword');
         $forgetPassword->setLabel($this->translate('Забыли пароль?'))
-            ->setAttrib('onClick', "location.href='{$defaultUserRestorePasswordUrl}'")
+            ->setAttrib('onClick', "location.href='".$defaultUserRestorePassUrl."'")
             ->setAttrib('class', 'btn btn-warning btn-sm')
             ->setIgnore(true)
             ->setDecorators(array(

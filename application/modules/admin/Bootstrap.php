@@ -99,7 +99,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
                     'action' => 'id',
                     1 => 0
                 ), array(
-                    'RoleID' => 1,
+                    'roleID' => 1,
                 ), "admin/role/%d.html"
             )
         );
