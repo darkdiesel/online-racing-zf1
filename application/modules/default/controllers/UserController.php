@@ -106,6 +106,7 @@ class UserController extends App_Controller_LoaderController
         }
     }
 
+    // action for activate new user
     public function activateAction()
     {
         if (Zend_Auth::getInstance()->hasIdentity()) {
@@ -226,6 +227,7 @@ class UserController extends App_Controller_LoaderController
         }
     }
 
+    // action for activate operation for resseting password
     public function restorePassAction()
     {
         if (Zend_Auth::getInstance()->hasIdentity()) {
@@ -238,51 +240,73 @@ class UserController extends App_Controller_LoaderController
         $this->view->headTitle($this->view->translate('Восстановление пароля'));
         $this->view->pageTitle($this->view->translate('Восстановление пароля'));
 
-        $this->messages->addInfo($this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.'));
+        $this->messages->addInfo(
+            $this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.')
+        );
 
-        $request = $this->getRequest();
-        $userActivateForm = new Application_Form_User_RestorePass();
-        $userActivateForm->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true));
+        $userRestorePassForm = new Peshkov_Form_User_RestorePass();
+        $this->view->userRestorePassForm = $userRestorePassForm;
 
         if ($this->getRequest()->isPost()) {
-            if ($userActivateForm->isValid($request->getPost())) {
-                Zend_Controller_Action_HelperBroker::addPrefix('App_Action_Helpers');
-                $user_code_restore_pass = $this->_helper->getHelper('GenerateCode')->GenerateCodeString(8);
+            if ($userRestorePassForm->isValid($this->getRequest()->getPost())) {
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_User u')
+                    ->where('u.Status = ?', 1)
+                    ->where('u.Email = ?', $userRestorePassForm->getValue('Email'));
+                $userResult = $query->fetchArray();
 
-                $user = new Application_Model_DbTable_User();
-                $user->setRestorePassCode($userActivateForm->getValue('email'), $user_code_restore_pass);
+                if (count($userResult) == 1) {
+                    $date = date('Y-m-d H:i:s');
 
-                // load e-mail script (template) for user
-                $html = new Zend_View();
-                $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-                // e-mail template values for user
-                $restore_url = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true);
-                $html->assign('login', $userActivateForm->getValue('email'));
-                $html->assign('content', 'Уважаемый пользователь, вы или кто-то другой запросили код для создания нового пароля.<br/>' .
-                    'На <a href="' . $restore_url . '">странице</a> для создания нового пароля введите следующие данные:<br/><br/>' .
-                    'E-mail: <strong>' . $userActivateForm->getValue('email') . '</strong><br/>' .
-                    'Код восстановления: <strong>' . $user_code_restore_pass . '</strong><br/>' .
-                    'Если вы не запрашивали новый пароль, то просто проигнорируйте данное сообщение.');
-                // e-mail for user
-                $mail = new Zend_Mail('UTF-8');
-                $bodyText = $html->render('restore_passwd_template.phtml');
-                $mail->addTo($userActivateForm->getValue('email'), $userActivateForm->getValue('email'));
-                $mail->setSubject('Online-Racing.net - Код для восстановления пароля.');
-                $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
-                $mail->setBodyHtml($bodyText);
-                $mail->send();
+                    $updatedUser = Doctrine_Core::getTable('Default_Model_User')->find($userResult[0]['ID']);
 
-                //clear all messages on the page
-                $this->messages->clearMessages();
+                    $updatedUser->fromArray($userResult[0]);
 
-                $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
+                    $updatedUser->RestorePassCode = $this->view->GenerateCode(8);
+                    $updatedUser->DateExperateRestorePassCode = date("Y-m-d H:i:s", strtotime($date . "+15 minutes"));
+
+                    $updatedUser->save();
+
+
+                    $defaultUserNewPassUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'new-pass'), 'default');
+
+                    // load e-mail script (template) for user
+                    $html = new Zend_View();
+                    $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
+
+                    // Assign e-mail template variables
+                    $html->assign('Name', $updatedUser->Name);
+                    $html->assign('Surname', $updatedUser->Surname);
+                    $html->assign('NickName', $updatedUser->NickName);
+                    $html->assign('Email', $updatedUser->Email);
+                    $html->assign('RestorePassCode', $updatedUser->RestorePassCode);
+                    $html->assign('NewPassUrl', $defaultUserNewPassUrl);
+
+                    // New Mail for registered user
+                    $mail = new Zend_Mail('UTF-8');
+
+                    $mail->addTo($updatedUser->Email, $updatedUser->NickName);
+                    $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
+                    //TODO: Get back-email from site setting.
+                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                    $bodyText = $html->render('user-restore-pass-template.phtml');
+                    $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
+                    $mail->send();
+
+                    $this->redirect($defaultUserNewPassUrl);
+                } else {
+                    $this->messages->addError($this->view->translate('Пользователь с такими данными не найден!'));
+                }
+
             } else {
                 $this->messages->addError($this->view->translate('Исправте следующие ошибки для восстановления пароля!'));
             }
         }
     }
 
-    public function setRestorePassAction()
+    public function newPassAction()
     {
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $this->_helper->redirector('index', 'index');

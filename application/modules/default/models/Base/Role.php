@@ -14,6 +14,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Role', 'default');
  * @property integer $ParentRoleID
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
+ * @property Doctrine_Collection $Role
  * @property Doctrine_Collection $UserRole
  * 
  * @package    ##PACKAGE##
@@ -58,7 +59,7 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('ParentRoleID', 'integer', 4, array(
@@ -91,6 +92,10 @@ abstract class Default_Model_Base_Role extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('Default_Model_Role as Role', array(
+             'local' => 'ParentRoleID',
+             'foreign' => 'ID'));
+
         $this->hasMany('Default_Model_UserRole as UserRole', array(
              'local' => 'ID',
              'foreign' => 'RoleID'));

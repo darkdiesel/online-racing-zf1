@@ -15,19 +15,19 @@ class Peshkov_Form_Role_Delete extends Zend_Form
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
         $adminRoleIDUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id', 'RoleID' => $request->getParam('RoleID')),
+            array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'RoleID' => $request->getParam('RoleID')),
             'adminRoleID'
         );
 
         $adminRoleDeleteUrl = $this->getView()->url(
-            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'RoleID' => $request->getParam('RoleID')),
+            array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'RoleID' => $request->getParam('RoleID')),
             'adminRoleAction'
         );
 
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'content-type-delete'
+                'id' => 'role-delete'
             )
         )
             ->setName('RoleDelete')

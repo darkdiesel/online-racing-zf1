@@ -121,7 +121,13 @@ class Admin_ContentTypeController extends App_Controller_LoaderController
 
                 $item = new Default_Model_ContentType();
 
-                $item->fromArray($contentTypeAddForm->getValues());
+                $formData = $contentTypeAddForm->getValues();
+
+                if (!$formData['Description']){
+                    unset($formData['Description']);
+                }
+
+                $item->fromArray($formData);
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 

@@ -196,7 +196,7 @@
 
                                 $userResult = $query->fetchArray();
 
-                                if ($this->getuser()->getUserStatus($userResult[0]['DateLastActivity']) == USER_STATUS_ONLINE) {
+                                if ($this->getUser()->getUserStatus($userResult[0]['DateLastActivity']) == USER_STATUS_ONLINE) {
                                     $userStatusClass = 'user-online';
                                 } else {
                                     $userStatusClass = 'user-offline';

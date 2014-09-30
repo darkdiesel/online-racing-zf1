@@ -18,6 +18,37 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
+                        <span><?php echo $this->translate('Системное Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->roleData['SystemName']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Родительская роль'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <?php if ($this->escape($this->roleData['ParentRoleID'])) { ?>
+                                <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'id')) { ?>
+                                    <?php
+                                    $adminRoleIDUrl = $this->url(
+                                        array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'roleID' => $this->escape($this->roleData['ParentRoleID'])), 'adminRoleID'
+                                    );
+                                    ?>
+                                <?php } else { ?>
+                                    <?php $adminRoleIDUrl = '#'; ?>
+                                <?php } ?>
+                                <a href="<?php echo $adminRoleIDUrl; ?>">
+                                    <?php echo $this->escape($this->roleData['Role'][0]['Name']) ?>
+                                </a>
+                            <?php } ?>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
                         <span><?php echo $this->translate('Описание'); ?></span>
                     </td>
                     <td>

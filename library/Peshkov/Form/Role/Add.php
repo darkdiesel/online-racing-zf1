@@ -64,6 +64,19 @@ class Peshkov_Form_Role_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
+        $parentRole = new Zend_Form_Element_Select('ParentRoleID');
+        $parentRole->setLabel($this->translate('Родительская роль'))
+            ->setOptions(array('class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Родительская роль'))
+            ->setRequired(false)
+            ->addFilter('HtmlEntities')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+        $parentRole->addMultiOption('','');
+        foreach ($this->getRoles() as $role) {
+            $parentRole->addMultiOption($role['ID'], $role['Name'] . ' (' . $role['SystemName'] . ')');
+        };
+
         $description = new Zend_Form_Element_Textarea('Description');
         $description->setLabel($this->translate('Описание'))
             ->setOptions(array('maxLength' => 500, 'class' => 'form-control'))
@@ -87,13 +100,14 @@ class Peshkov_Form_Role_Add extends Zend_Form
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='".$adminRoleAllUrl."'")
+            ->setAttrib('onClick', "location.href='" . $adminRoleAllUrl . "'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($name)
             ->addElement($systemName)
+            ->addElement($parentRole)
             ->addElement($description);
 
         $this->addElement($submit)
@@ -104,6 +118,7 @@ class Peshkov_Form_Role_Add extends Zend_Form
             array(
                 $this->getElement('Name'),
                 $this->getElement('SystemName'),
+                $this->getElement('ParentRoleID'),
                 $this->getElement('Description')
             ), 'RoleInfo'
         );
@@ -124,6 +139,14 @@ class Peshkov_Form_Role_Add extends Zend_Form
         $this->getDisplayGroup('FormActions')
             ->setOrder(100)
             ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
+    }
+
+    public function getRoles()
+    {
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_Role r')
+            ->orderBy('r.Name ASC');
+        return $query->fetchArray();
     }
 
 }

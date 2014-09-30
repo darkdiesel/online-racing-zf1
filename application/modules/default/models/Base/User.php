@@ -31,6 +31,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property string $Twitter
  * @property string $ActivationCode
  * @property string $RestorePassCode
+ * @property timestamp $DateExperateRestorePassCode
  * @property string $GooglePlus
  * @property integer $Authorized
  * @property string $LastUserLoginIP
@@ -261,6 +262,14 @@ abstract class Default_Model_Base_User extends Doctrine_Record
         $this->hasColumn('RestorePassCode', 'string', 15, array(
              'type' => 'string',
              'length' => 15,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('DateExperateRestorePassCode', 'timestamp', null, array(
+             'type' => 'timestamp',
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,

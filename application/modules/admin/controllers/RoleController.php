@@ -31,6 +31,7 @@ class Admin_RoleController extends App_Controller_LoaderController
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
                 ->from('Default_Model_role r')
+                ->leftJoin('r.Role pr')
                 ->where('r.ID = ?', $requestData->roleID);
             $result = $query->fetchArray();
 
@@ -79,6 +80,7 @@ class Admin_RoleController extends App_Controller_LoaderController
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Role r')
+                ->leftJoin('r.Role pr')
                 ->orderBy('r.ID ASC');
 
             $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
@@ -93,7 +95,7 @@ class Admin_RoleController extends App_Controller_LoaderController
                 $this->view->roleData = false;
                 $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
             } else {
-                $this->view->RoleData = $rolePaginator;
+                $this->view->roleData = $rolePaginator;
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -121,7 +123,18 @@ class Admin_RoleController extends App_Controller_LoaderController
 
                 $item = new Default_Model_Role();
 
-                $item->fromArray($roleAddForm->getValues());
+                $formData = $roleAddForm->getValues();
+
+                if (!$formData['ParentRoleID']){
+                    unset($formData['ParentRoleID']);
+                }
+
+                if (!$formData['Description']){
+                    unset($formData['Description']);
+                }
+
+                $item->fromArray($formData);
+
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
@@ -140,56 +153,91 @@ class Admin_RoleController extends App_Controller_LoaderController
         }
     }
 
-    // action for editing role
+    // action for edit role
     public function editAction()
     {
-        $request = $this->getRequest();
-        $role_id = (int)$request->getParam('role_id');
-
         $this->view->headTitle($this->view->translate('Редактировать'));
+        $this->view->pageTitle($this->view->translate('Редактировать роль'));
 
-        $role_data = $this->db->get('role')->getItem($role_id);
+        // set filters and validators for GET input
+        $filters = array(
+            'roleID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'roleID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        if ($role_data) {
-            // form
-            $form = new Application_Form_Role_Edit();
-            $form->setAction($this->view->url(
-                array('module' => 'admin', 'controller' => 'role', 'action' => 'edit',
-                    'role_id' => $role_id), 'adminRoleAction', true
-            ));
-            $admin_role_id = $this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role_id), 'adminRoleId', true);
-            $form->cancel->setAttrib('onClick', "location.href=\"{$admin_role_id}\"");
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+
+            $roleEditForm = new Peshkov_Form_Role_Edit();
+            $this->view->roleEditForm = $roleEditForm;
 
             if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-                    $new_role_data = array(
-                        'name' => strtolower($form->getValue('name')),
-                        'parent_role_id' => strtolower($form->getValue('parent_role')),
-                        'description' => $form->getValue('description'),
-                        'date_edit' => date('Y-m-d H:i:s')
+                if ($roleEditForm->isValid($this->getRequest()->getPost())) {
+                    $formData = $roleEditForm->getValues();
+
+                    $item = Doctrine_Core::getTable('Default_Model_Role')->find($requestData->roleID);
+
+                    // set edit date
+                    $formData['DateEdit'] = date('Y-m-d H:i:s');
+
+                    if (!$formData['ParentRoleID']){
+                        unset($formData['ParentRoleID']);
+                    }
+
+                    if (!$formData['Description']){
+                        unset($formData['Description']);
+                    }
+
+                    $item->fromArray($formData);
+                    $item->save();
+
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
+
+                    $adminRoleIDUrl = $this->view->url(
+                        array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'roleID' => $requestData->roleID),
+                        'adminRoleID'
                     );
 
-                    $role_where = $this->db->get('role')->getAdapter()->quoteInto('id = ?', $role_id);
-                    $this->db->get('role')->update($new_role_data, $role_where);
-
-                    $this->redirect($admin_role_id);
+                    $this->redirect($adminRoleIDUrl);
                 } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError(
+                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    );
+                }
+            } else {
+                // if GET request
+                // retrieve requested record
+                // pre-populate form
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_Role r')
+                    ->where('r.ID = ?', $requestData->roleID);
+
+                $result = $query->fetchArray();
+
+                if (count($result) == 1) {
+                    $this->view->roleData = $result[0];
+                    $this->view->roleEditForm->populate($result[0]);
+                } else {
+//                    throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                    $this->messages->addError($this->view->translate('Запрашиваемая роль не найдена!'));
+
+                    $this->view->headTitle($this->view->translate('Ошибка!'));
+                    $this->view->headTitle($this->view->translate('Роль не найдена!'));
+
+                    $this->view->pageTitle($this->view->translate('Ошибка!'));
+                    $this->view->pageTitle($this->view->translate('Роль не найдена!'));
                 }
             }
-            $this->view->headTitle($role_data->name);
-            $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$role_data->name}");
 
-            $form->name->setvalue($role_data->name);
-            $form->parent_role->setvalue($role_data->parent_role_id);
-            $form->description->setvalue($role_data->description);
-
-            $this->view->form = $form;
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Роль пользователя не найдена!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
     }
 
@@ -197,43 +245,83 @@ class Admin_RoleController extends App_Controller_LoaderController
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->pageTitle($this->view->translate('Удалить роль'));
 
-        $request = $this->getRequest();
-        $role_id = (int)$request->getParam('role_id');
+        // set filters and validators for GET input
+        $filters = array(
+            'roleID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'roleID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        $role_data = $this->db->get('role')->getItem($role_id);
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Role r')
+                ->where('r.ID = ?', $requestData->roleID);
+            $result = $query->fetchArray();
 
-        if ($role_data) {
-            $this->view->headTitle($role_data->name);
-            $this->view->pageTitle("{$this->view->translate('Удалить ресурс')} :: {$role_data->name}");
+            if (count($result) == 1) {
+                // Create role delete form
+                $roleDeleteForm = new Peshkov_Form_Role_Delete();
 
-            $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить ресурс')} <strong>\"{$role_data->name}\"</strong> ?");
+                $this->view->roleData = $result[0];
+                $this->view->roleDeleteForm = $roleDeleteForm;
 
-            $form = new Application_Form_Role_Delete();
-            $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'delete', 'role_id' => $role_id), 'role_action', true));
-            $form->cancel->setAttrib('onClick', 'location.href="' . $this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $role_id), 'role_id', true) . '"');
+                $this->view->headTitle($result[0]['Name']);
 
-            if ($this->getRequest()->isPost()) {
-                if ($form->isValid($request->getPost())) {
-                    $role_where = $this->db->get('role')->getAdapter()->quoteInto('id = ?', $role_id);
-                    $this->db->get('role')->delete($role_where);
+                $this->messages->addWarning(
+                    $this->view->translate('Вы действительно хотите удалить рольы')
+                    . " <strong>" . $result[0]['Name'] . "</strong>?"
+                );
 
-                    $this->messages->clearMessages();
-                    $this->messages->addSuccess("{$this->view->translate("Роль пользователя <strong>\"{$role_data->name}\"</strong> успешно удалена")}");
+                if ($this->getRequest()->isPost()) {
+                    if ($roleDeleteForm->isValid($this->getRequest()->getPost())) {
+                        $query = Doctrine_Query::create()
+                            ->delete('Default_Model_Role r')
+                            ->whereIn('r.ID', $requestData->roleID);
 
-                    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'all', 'page' => 1), 'adminRoleAll', true));
-                } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                        $result = $query->execute();
+
+                        //$this->_helper->getHelper('FlashMessenger')->addMessage('The records were successfully deleted.');
+
+                        $this->messages->clearMessages();
+                        $this->messages->addSuccess(
+                            $this->view->translate("Роль <strong>" . $this->view->roleData['Name'] . "</strong> успешно удалена."
+                            )
+                        );
+
+                        $adminRoleAllUrl = $this->view->url(
+                            array('module' => 'admin', 'controller' => 'role', 'action' => 'all', 'page' => 1),
+                            'adminRoleAll'
+                        );
+
+                        $this->redirect($adminRoleAllUrl);
+                    } else {
+                        $this->messages->addError(
+                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        );
+                    }
                 }
-            }
 
-            $this->view->form = $form;
-            $this->view->role = $role_data;
+            } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
+                $this->messages->addError($this->view->translate('Запрашиваемая роль не найдена!'));
+
+                $this->view->headTitle($this->view->translate('Ошибка!'));
+                $this->view->headTitle($this->view->translate('Роль не найдена!'));
+
+                $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Роль не найдена!'));
+            }
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Роль пользователя не найдена!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
     }
 

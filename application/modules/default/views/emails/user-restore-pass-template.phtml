@@ -31,14 +31,13 @@
                                                     Здравствуйте, <?php echo $this->Name; ?> <?php echo $this->Surname; ?>
                                                     (<?php echo $this->NickName; ?>).
                                                 </p>
-
                                                 <p>
-                                                    Спасибо, за регистрацию на нашем портале <a
-                                                        href="http://online-racing.net">Online-Racing.Net</a>.
+                                                    Вы или кто-то другой запросили смену пароля для вашего аккаунта <?php echo $this->Email; ?> на портале
+                                                    <a href="http://online-racing.net">Online-Racing.Net</a>.
                                                 </p>
                                                 <br/>
                                                 <p>
-                                                <h2>Данные зарегестрированного аккаунта:</h2>
+                                                <h2>Данные вашего аккаунта для смены пароля:</h2>
                                                 <table border="1" style="font-size:14px;">
                                                     <tbody>
                                                     <tr>
@@ -58,27 +57,24 @@
                                                         <td><?php echo $this->Email; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><strong>Пароль</strong></td>
-                                                        <td><?php echo $this->Password; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Код активации</strong></td>
-                                                        <td style="color:red"><?php echo $this->ActivationCode; ?></td>
+                                                        <td><strong>Код для смены пароля</strong></td>
+                                                        <td style="color:red"><?php echo $this->RestorePassCode; ?></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                                 </p>
                                                 <br/>
                                                 <p>
-                                                    Для подверждения регистрации перейдите на страницу
-                                                    <a href="<?php echo $this->ActivateUrl; ?>"><?php echo $this->ActivateUrl; ?></a>
-                                                    и введите перечисленные выше данные.
+                                                    Для смены пароля перейдите на страницу
+                                                    <a href="<?php echo $this->NewPassUrl; ?>">
+                                                        <?php echo $this->NewPassUrl; ?>
+                                                    </a>
+                                                    и введите перечисленные выше данные.<br/>
+                                                    <strong style="color:red">Код для смены пароля будет доступен в течении 15 минут, после чего придется повторить операцию для получения нового кода.</strong>
                                                 </p>
-
                                                 <p>
                                                     Если это были не вы, проигнорируйте это письмо.
                                                 </p>
-
                                                 <p>
                                                     <span style="color:gray;">_______________</span><br/>
                                                     С уважением, администрация сайта <a href="http://online-racing.net">Online-Racing.Net</a>.

@@ -28,6 +28,9 @@
                     <th class="role-system-name">
                         <span><?php echo $this->translate('Системное имя'); ?></span>
                     </th>
+                    <th class="role-parent-role">
+                        <span><?php echo $this->translate('Родительская роль'); ?></span>
+                    </th>
                     <th class="role-description">
                         <span><?php echo $this->translate('Описание'); ?></span>
                     </th>
@@ -70,6 +73,24 @@
                                         <a href="<?php echo $adminRoleIdUrl; ?>">
                                             <?php echo $this->escape($role['SystemName']) ?>
                                         </a>
+                                    </span>
+                            </td>
+                            <td class="role-parent-role">
+                                    <span>
+                                        <?php if ($this->escape($role['ParentRoleID'])) { ?>
+                                            <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'id')) { ?>
+                                                <?php
+                                                $adminRoleIDUrl = $this->url(
+                                                    array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'roleID' => $this->escape($role['ParentRoleID'])), 'adminRoleID'
+                                                );
+                                                ?>
+                                            <?php } else { ?>
+                                                <?php $adminRoleIDUrl = '#'; ?>
+                                            <?php } ?>
+                                            <a href="<?php echo $adminRoleIDUrl; ?>">
+                                                <?php echo $this->escape($role['Role'][0]['Name']) ?>
+                                            </a>
+                                        <?php } ?>
                                     </span>
                             </td>
                             <td class="role-description">
