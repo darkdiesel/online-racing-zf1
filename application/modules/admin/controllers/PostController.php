@@ -290,8 +290,7 @@ class Admin_PostController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Пост <strong>" . $this->view->postData['Name'] . "</strong> успешно удалена."
-                            )
+                            $this->view->translate('Пост <strong>' . $this->view->postData['Name'] . '</strong> успешно удален.')
                         );
 
                         $adminPostAllUrl = $this->view->url(

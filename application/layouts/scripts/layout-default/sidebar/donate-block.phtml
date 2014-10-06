@@ -3,7 +3,7 @@
     <div id="calendar" class="block block-sidebar block-ui-bordered  m-b-10">
         <div class="block-header">
             <div class="block-title">
-                <i class="fa fa-money"></i>
+                <i class="fa fa-cc-visa fa-lg"></i>
                 <?php echo $this->translate("Помощь проекту") ?>
             </div>
         </div>
@@ -12,7 +12,7 @@
                 $default_donate_url = $this->url(array('module' => 'default', 'controller' => 'donate', 'action' => 'index'), 'default', true);
             ?>
             <a  class="btn btn-gold btn-lg btn-block" href="<?php echo $default_donate_url; ?>">
-                <i class="fa fa-money"></i>
+                <i class="fa fa-dollar"></i>
                 <?php echo $this->translate('Помочь!'); ?>
             </a>
         </div>

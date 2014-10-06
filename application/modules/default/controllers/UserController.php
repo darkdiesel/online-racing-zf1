@@ -120,13 +120,6 @@ class UserController extends App_Controller_LoaderController
         $this->view->headTitle($this->view->translate('Активация пользователя'));
         $this->view->pageTitle($this->view->translate('Активация пользователя'));
 
-        $this->messages->addInfo(
-            $this->view->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.')
-        );
-        $this->messages->addInfo(
-            $this->view->translate('<strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.')
-        );
-
         $userActivateForm = new Peshkov_Form_User_Activate();
         $this->view->userActivateForm = $userActivateForm;
 
@@ -211,6 +204,10 @@ class UserController extends App_Controller_LoaderController
 
                             $mail->send();
 
+                            $this->messages->addSuccess(
+                                $this->view->translate('Ваш профиль успешно активирован, теперь вы можете авторизоваться на сайте.')
+                            );
+
                             $this->redirect($defaultAuthSignInUrl);
                         } else {
                             $this->messages->addError($this->view->translate('Неверный код активации!'));
@@ -222,9 +219,16 @@ class UserController extends App_Controller_LoaderController
                     $this->messages->addError($this->view->translate('Пользователь с такими данными не найден!'));
                 }
             } else {
-                $this->messages->addError($this->view->translate('Исправте ошибки для корректной активации профиля!'));
+                $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!');
             }
         }
+
+        $this->messages->addInfo(
+            $this->view->translate('Вам на почту высланы данные для подверждения регистрации. Введите их в форму ниже, чтобы активировать свой аккаунт.')
+        );
+        $this->messages->addInfo(
+            $this->view->translate('<strong>P.S.</strong> Если вы не нашли письмо, <strong>проверьте папку спам</strong> и пометьте, что письмо не является спамом.')
+        );
     }
 
     // action for activate operation for resseting password
@@ -239,10 +243,6 @@ class UserController extends App_Controller_LoaderController
 
         $this->view->headTitle($this->view->translate('Восстановление пароля'));
         $this->view->pageTitle($this->view->translate('Восстановление пароля'));
-
-        $this->messages->addInfo(
-            $this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.')
-        );
 
         $userRestorePassForm = new Peshkov_Form_User_RestorePass();
         $this->view->userRestorePassForm = $userRestorePassForm;
@@ -286,12 +286,16 @@ class UserController extends App_Controller_LoaderController
                     $mail = new Zend_Mail('UTF-8');
 
                     $mail->addTo($updatedUser->Email, $updatedUser->NickName);
-                    $mail->setSubject('Online-Racing.net - Ваш профиль активирован.');
+                    $mail->setSubject('Online-Racing.net - Запрос на востановление пароля.');
                     //TODO: Get back-email from site setting.
                     $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
 
                     $bodyText = $html->render('user-restore-pass-template.phtml');
                     $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
+                    $this->messages->addSuccess(
+                        $this->view->translate('Данные для востановления пароля отправлены вам на почту. Теперь вы можете задать новый пароль.')
+                    );
 
                     $mail->send();
 
@@ -301,9 +305,13 @@ class UserController extends App_Controller_LoaderController
                 }
 
             } else {
-                $this->messages->addError($this->view->translate('Исправте следующие ошибки для восстановления пароля!'));
+                $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!');
             }
         }
+
+        $this->messages->addInfo(
+            $this->view->translate('Для восстановления своего пароля введите e-mail адрес, указаный при регистрации, на который вам будут высланы данные для восстановления пароля.')
+        );
     }
 
     public function newPassAction()
@@ -315,73 +323,83 @@ class UserController extends App_Controller_LoaderController
         // set layout without sidebar
         $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
-        $this->view->headTitle($this->view->translate('Создание нового пароля'));
-        $this->view->pageTitle($this->view->translate('Создание нового пароля'));
+        $this->view->headTitle($this->view->translate('Новый пароль'));
+        $this->view->pageTitle($this->view->translate('Новый пароль'));
 
-        $this->messages->addInfo($this->view->translate('Введите данные, полученные на ваш регистрационный e-mail в форму ниже для создания нового пароля.'));
-        $this->messages->addInfo($this->view->translate('Если вы не получали писем - проверьте папку спам на его наличия в ней и <strong>обозначте его как <u>"не смам"</u></strong>.'));
-
-        $request = $this->getRequest();
-        $form = new Application_Form_User_SetRestorePass();
-        $form->setAction($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'set-restore-pass'), 'default', true));
+        $userNewPassForm = new Peshkov_Form_User_NewPass();
+        $this->view->userNewPassForm = $userNewPassForm;
 
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
-                $user = new Application_Model_DbTable_User();
+            if ($userNewPassForm->isValid($this->getRequest()->getPost())) {
 
-                $user_data = array(
-                    'email' => $form->getValue('email'),
-                    'code_restore' => $form->getValue('code_restore'),
-                    'password' => sha1($form->getValue('password')),
-                );
+                $date = date('Y-m-d H:i:s');
 
-                $result = $user->restoreNewPasswd($user_data['email'], $user_data['code_restore'], $user_data['password']);
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_User u')
+                    ->where('u.Status = ?', 1)
+                    ->where('u.Email = ?', $userNewPassForm->getValue('Email'))
+                    ->andWhere('u.RestorePassCode = ?', $userNewPassForm->getValue('RestorePassCode'))
+                    ->andWhere('u.DateExperateRestorePassCode >= ?', $date);
+                $userResult = $query->fetchArray();
 
-                if ($result) {
+                if (count($userResult) == 1) {
+                    $defaultAuthSignInUrl = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-in'), 'default');
+
+                    $updatedUser = Doctrine_Core::getTable('Default_Model_User')->find($userResult[0]['ID']);
+
+                    $updatedUser->fromArray($userNewPassForm->getValues());
+
+                    $updatedUser->Password = sha1($updatedUser->Password);
+                    $updatedUser->RestorePassCode = null;
+                    $updatedUser->DateExperateRestorePassCode = null;
+
+                    $updatedUser->save();
+
                     // load e-mail script (template) for user
                     $html = new Zend_View();
                     $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
-                    // e-mail template values for user
-                    $html->assign('login', $user_data['email']);
-                    $html->assign('content', 'Ваш пароль изменен. Приятного время на нашем портале. <br/> Да прибудем с Вами скорость! ©');
-                    // e-mail for user
+
+                    // Assign e-mail template variables
+                    $html->assign('Name', $updatedUser->Name);
+                    $html->assign('Surname', $updatedUser->Surname);
+                    $html->assign('NickName', $updatedUser->NickName);
+                    $html->assign('Email', $updatedUser->Email);
+                    $html->assign('Password', $userNewPassForm->getValue('Password'));
+                    $html->assign('SignInUrl', $defaultAuthSignInUrl);
+
+                    // New Mail for registered user
                     $mail = new Zend_Mail('UTF-8');
-                    $bodyText = $html->render('set_restore_pass_template.phtml');
-                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                    $mail->addTo($updatedUser->Email, $updatedUser->NickName);
                     $mail->setSubject('Online-Racing.net - Ваш пароль изменен.');
-                    $mail->addTo($user_data['email'], $user_data['email']);
-                    $mail->setBodyHtml($bodyText);
+                    //TODO: Get back-email from site setting.
+                    $mail->setFrom('onlinera@online-racing.net', 'Online-Racing.net');
+
+                    $bodyText = $html->render('user-new-pass-template.phtml');
+                    $mail->setBodyHtml(mb_convert_encoding($bodyText, 'UTF-8', 'UTF-8'));
+
                     $mail->send();
 
-                    $bootstrap = $this->getInvokeArg('bootstrap');
-                    $auth = Zend_Auth::getInstance();
-                    $adapter = $bootstrap->getPluginResource('db')->getDbAdapter();
-                    $authAdapter = new Zend_Auth_Adapter_DbTable(
-                        $adapter, 'user', 'email', 'password'
+                    $this->messages->addSuccess(
+                        $this->view->translate('Новый пароль успешно сохранен. Данные о новом пароле отправлены вам на почту. Теперь вы можете авторизоваться используя новый пароль.')
                     );
 
-                    $authAdapter->setIdentity($user_data['email']);
-                    $authAdapter->setCredential($user_data['password']);
-                    $result = $auth->authenticate($authAdapter);
-
-                    $storage_data = $authAdapter->getResultRowObject(array('login', 'id'), null);
-                    $storage = $auth->getStorage();
-                    $storage->write($storage_data);
-
-                    //clear all messages on the page
-                    $this->messages->clearMessages();
-
-                    $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'index', 'action' => 'index'), 'default', true));
+                    $this->redirect($defaultAuthSignInUrl);
                 } else {
-                    $this->messages->addError($this->view->translate('Введены неверные данные для создания нового пароля!'));
-                    $this->messages->addError('<strong><a href="' . $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default', true) . '">' . $this->view->translate('Выслать данные еще раз?') . '</a></strong>');
+                    $this->messages->addError($this->view->translate('Пользователь с такими данными не найден либо введен неверный код востановления пароля!'));
+                    $this->messages->addError($this->view->translate('Повторите попытку или запросите новый код для смены пароля!'));
                 }
             } else {
-                $this->messages->addError($this->view->translate('Исправте следующие ошибки для создания пароля!'));
+                $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!');
             }
         }
 
-        $this->view->form = $form;
+        $this->messages->addInfo(
+            $this->view->translate('Введите данные, которые вы получили на регистрационный e-mail в форму ниже для создания нового пароля.')
+        );
+        $this->messages->addInfo(
+            $this->view->translate('Если вы не нашли письмо, то проверьте папку спам, возможно оно случайно попало туда. <strong>Обозначте его как <u>"не смам"</u></strong>.')
+        );
     }
 
     public function editAction()

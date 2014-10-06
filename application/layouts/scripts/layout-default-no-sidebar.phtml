@@ -13,7 +13,6 @@ $this->MinifyHeadScript()->appendFile(
 $this->MinifyHeadScript()->appendFile(
     "/library/jquery.page-scroller/jquery.page-scroller.js"
 ); // page-scroller block js
-$this->MinifyHeadScript()->appendFile("/library/jquery.slide-out-tabs/jquery.slide-out-tabs.js"); // slide out tabs
 
 // js app files
 $this->MinifyHeadScript()->appendFile("/js/app.js");
@@ -109,7 +108,6 @@ $this->headLink()->appendStylesheet("/css/ie7.css", 'screen', 'IE 7');
 <!-- ./ #page-wrapper -->
 
 <?php echo $this->render("common/page-scroller-block.phtml"); ?>
-<?php echo $this->render("layout-default/blocks/slide-out-tabs-block.phtml"); ?>
 
 <div id="background-wrapper" class="background-wrapper"></div>
 
