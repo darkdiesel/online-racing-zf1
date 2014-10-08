@@ -9,6 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_ContentType', 'def
  * 
  * @property integer $ID
  * @property string $Name
+ * @property string $SystemName
  * @property string $Description
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
@@ -41,13 +42,22 @@ abstract class Default_Model_Base_ContentType extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
+        $this->hasColumn('SystemName', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
         $this->hasColumn('Description', 'string', 500, array(
              'type' => 'string',
              'length' => 500,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('DateCreate', 'timestamp', null, array(

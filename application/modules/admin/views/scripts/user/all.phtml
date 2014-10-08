@@ -34,7 +34,7 @@
 								$user_id_url = $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $this->escape($user->id)), 'user_id', true);
 								$user_edit_url = $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'edit', 'user_id' => $this->escape($user->id)), 'user_action', true);
 								$user_delete_url = $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'delete', 'user_id' => $this->escape($user->id)), 'user_action', true);
-								$user_role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $user['user_role_id']), 'adminRoleId', true);
+								$user_role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $user['user_role_id']), 'adminRoleID', true);
 								?>
 								<tr>
 									<td class="user_id"><span><a href="<?php echo $user_id_url ?>"><?php echo $this->escape($user['id']) ?></a></span></td>

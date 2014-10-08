@@ -24,6 +24,8 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Post', 'default');
  * @property Default_Model_PostCategory $PostCategory
  * @property Default_Model_ContentType $ContentType
  * @property Default_Model_User $User
+ * @property Doctrine_Collection $ChampionshipRule
+ * @property Doctrine_Collection $ChampionshipGame
  * @property Doctrine_Collection $Comment
  * 
  * @package    ##PACKAGE##
@@ -174,6 +176,14 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
              'foreign' => 'ID'));
+
+        $this->hasMany('Default_Model_Championship as ChampionshipRule', array(
+             'local' => 'ID',
+             'foreign' => 'PostRuleID'));
+
+        $this->hasMany('Default_Model_Championship as ChampionshipGame', array(
+             'local' => 'ID',
+             'foreign' => 'PostGameID'));
 
         $this->hasMany('Default_Model_Comment as Comment', array(
              'local' => 'ID',

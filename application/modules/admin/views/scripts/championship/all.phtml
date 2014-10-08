@@ -1,67 +1,193 @@
-<?php if ($this->championship_data) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="clearfix m-b-10">
-				<?php
-				$championship_id_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'add'), 'default', true);
-				?>
-				<a href="<?php echo $championship_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить чемпионат'); ?></a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-list"></i>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped custab">
-						<thead>
-							<tr>
-								<th class="championship_id"><span>ID</span></th>
-								<th class="championship_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="championship_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($this->championship_data as $championship): ?>
-								<?php
-								$championship_id_url = $this->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'league_id' =>  $this->escape($championship->league_id),'championship_id' => $this->escape($championship->id)), 'defaultChampionshipId', true);
-								$championship_edit_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'championship_id' => $this->escape($championship->id)), 'adminChampionshipAction', true);
-								$championship_delete_url = $this->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'delete', 'championship_id' => $this->escape($championship->id)), 'adminChampionshipAction', true);
-								?>
-								<tr>
-									<td class="championship_id"><span><a href="<?php echo $championship_id_url; ?>" target="_blank"><?php echo $this->escape($championship->id) ?></a></span></td>
-									<td class="championship_name"><span><a href="<?php echo $championship_id_url; ?>" target="_blank"><?php echo $this->escape($championship->name) ?></a></span></td>
-									<td class="championship_action">
-										<span>
-											<div class="pull-right action-buttons">
-												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg"></span>
-													</button>
-													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $championship_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $championship_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $championship_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
-													</ul>
-												</div>
-											</div>
-										</span>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-					<div class="pull-right">
-						<?php echo $this->paginationControl($this->championship_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php } ?>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="fa fa-list fa-2x"></i>
+                <?php
+                // check access and generate link for admin/championship/add
+                if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'championship', 'add')) : ?>
+                    <?php
+                    $adminChampionshipAddUrl = $this->url(
+                        array('module' => 'admin', 'controller' => 'championship', 'action' => 'add'), 'default'
+                    );
+                    ?>
+                    <a href="<?php echo $adminChampionshipAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить чемпионат'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="championship-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="championship-name">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </th>
+                    <th class="championship-administrator">
+                        <span><?php echo $this->translate('Администратор'); ?></span>
+                    </th>
+                    <th class="championship-league">
+                        <span><?php echo $this->translate('Лига'); ?></span>
+                    </th>
+                    <th class="championship-racing-serie">
+                        <span><?php echo $this->translate('Гоночная серия'); ?></span>
+                    </th>
+                    <th class="championship-rule">
+                        <span><?php echo $this->translate('Регламент'); ?></span>
+                    </th>
+                    <th class="championship-game">
+                        <span><?php echo $this->translate('Игра'); ?></span>
+                    </th>
+                    <th class="championship-action">
+                        <span><?php echo $this->translate('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->championshipData) : ?>
+                    <?php foreach ($this->championshipData as $championship): ?>
+
+                        <?php
+                        // check access and generate link for default/championship/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
+                            $defaultChampionshipIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                                    'championshipID' => $this->escape($championship['ID'])), 'defaultChampionshipID'
+                            );
+                        } else {
+                            $defaultChampionshipIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/user/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+                            $defaultUserIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                                    'userID' => $this->escape($championship['User']['ID'])), 'defaultUserID'
+                            );
+                        } else {
+                            $defaultUserIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/league/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
+                            $defaultLeagueIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'league', 'action' => 'id',
+                                    'leagueID' => $this->escape($championship['League']['ID'])), 'defaultLeagueID'
+                            );
+                        } else {
+                            $defaultLeagueIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/post/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
+                            $defaultPostRuleIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                                    'postID' => $this->escape($championship['PostRule']['ID'])), 'defaultPostID'
+                            );
+                            $defaultPostGameIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                                    'postID' => $this->escape($championship['PostGame']['ID'])), 'defaultPostID'
+                            );
+                        } else {
+                            $defaultPostRuleIDUrl = '#';
+                            $defaultPostGameIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/league/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+                            $defaultRacingSeriesIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'racing-series', 'action' => 'id',
+                                    'racingSeriesID' => $this->escape($championship['RacingSeries']['ID'])), 'adminRacingSeriesID'
+                            );
+                        } else {
+                            $defaultRacingSeriesIDUrl = '#';
+                        }
+                        ?>
+                        <tr>
+                            <td class="championship-id">
+                                    <span>
+                                        <a href="<?php echo $defaultChampionshipIDUrl; ?>">
+                                            <?php echo $this->escape($championship['ID']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-name">
+                                    <span>
+                                        <a href="<?php echo $defaultChampionshipIDUrl; ?>">
+                                            <?php echo $this->escape($championship['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-administrator">
+                                    <span>
+                                        <a class="tooltip-field"
+                                           title="<?= $this->escape($championship['User']['NickName']) ?>"
+                                           target="blank" href="<?php echo $defaultUserIDUrl; ?>">
+                                            <?= $this->escape($championship['User']['LastName']) . ' ' . $this->escape($championship['User']['FirstName']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-league">
+                                    <span>
+                                        <a target="blank" href="<?php echo $defaultLeagueIDUrl; ?>">
+                                            <?php echo $this->escape($championship['League']['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-racing-serie">
+                                    <span>
+                                        <a target="blank" href="<?php echo $defaultRacingSeriesIDUrl; ?>">
+                                            <?php echo $this->escape($championship['RacingSeries']['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-rule">
+                                    <span>
+                                        <a target="blank" href="<?php echo $defaultPostRuleIDUrl; ?>">
+                                            <?php echo $this->escape($championship['PostRule']['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-game">
+                                    <span>
+                                        <a target="blank" href="<?php echo $defaultPostGameIDUrl; ?>">
+                                            <?php echo $this->escape($championship['PostGame']['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-action">
+                                    <span>
+                                        <?php
+                                        echo $this->BlockConfigMenu($this->translate("Чемпионат"), false)->championshipMenu(
+                                            $this->escape($championship['ID']), true
+                                        );
+                                        ?>
+                                    </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix">
+                <?php if ($this->championshipData) : ?>
+                    <div class="pull-right">
+                        <?php echo $this->paginationControl(
+                            $this->championshipData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

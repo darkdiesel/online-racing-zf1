@@ -9,6 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_PostCategory', 'de
  * 
  * @property integer $ID
  * @property string $Name
+ * @property string $SystemName
  * @property string $Description
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
@@ -35,6 +36,15 @@ abstract class Default_Model_Base_PostCategory extends Doctrine_Record
         $this->hasColumn('Name', 'string', 100, array(
              'type' => 'string',
              'length' => 100,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('SystemName', 'string', 255, array(
+             'type' => 'string',
+             'length' => 255,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,

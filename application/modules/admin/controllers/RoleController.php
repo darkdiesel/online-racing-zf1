@@ -183,9 +183,6 @@ class Admin_RoleController extends App_Controller_LoaderController
 
                     $item = Doctrine_Core::getTable('Default_Model_Role')->find($requestData->roleID);
 
-                    // set edit date
-                    $formData['DateEdit'] = date('Y-m-d H:i:s');
-
                     if (!$formData['ParentRoleID']){
                         unset($formData['ParentRoleID']);
                     }
@@ -195,6 +192,9 @@ class Admin_RoleController extends App_Controller_LoaderController
                     }
 
                     $item->fromArray($formData);
+
+                    $item->DateEdit = date('Y-m-d H:i:s');
+
                     $item->save();
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');

@@ -36,9 +36,9 @@
 								$resource_access_edit_url = $this->url(array('module' => 'admin', 'controller' => 'resource_access', 'action' => 'edit', 'resource_access_id' => $this->escape($resource_access->id)), 'adminResourceAccessAction', true);
 								$resource_access_delete_url = $this->url(array('module' => 'admin', 'controller' => 'resource_access', 'action' => 'delete', 'resource_access_id' => $this->escape($resource_access->id)), 'adminResourceAccessAction', true);
 
-								$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $this->escape($resource_access->resource_id)), 'adminRoleId', true);
-								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($resource_access->resource_id)), 'adminResourceId', true);
-								$privilege_id_url = $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $this->escape($resource_access->privilege_id)), 'adminPrivilegeId', true);
+								$role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $this->escape($resource_access->resource_id)), 'adminRoleID');
+								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($resource_access->resource_id)), 'adminResourceId');
+								$privilege_id_url = $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $this->escape($resource_access->privilege_id)), 'adminPrivilegeId');
 								?>
 								<tr>
 									<td class="resource_access_id"><span><a href="<?php echo $resource_access_id_url; ?>"><?php echo $this->escape($resource_access->id) ?></a></span></td>

@@ -2,7 +2,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <i class="fa fa-list"></i>
+                <i class="fa fa-list fa-2x"></i>
                 <?php
                 // check access and generate link for admin/role/add
                 if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'add')) : ?>
@@ -16,7 +16,7 @@
                     </a>
                 <?php endif; ?>
             </div>
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                     <th class="role-id">
@@ -45,32 +45,32 @@
                         <?php
                         // check access and generate link for admin/role/id
                         if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'id')) {
-                            $adminRoleIdUrl = $this->url(
+                            $adminRoleIDUrl = $this->url(
                                 array('module' => 'admin', 'controller' => 'role', 'action' => 'id',
                                     'roleID' => $this->escape($role['ID'])), 'adminRoleID'
                             );
                         } else {
-                            $adminRoleIdUrl = '#';
+                            $adminRoleIDUrl = '#';
                         }
                         ?>
                         <tr>
                             <td class="role-id">
                                     <span>
-                                        <a href="<?php echo $adminRoleIdUrl; ?>">
+                                        <a href="<?php echo $adminRoleIDUrl; ?>">
                                             <?php echo $this->escape($role['ID']) ?>
                                         </a>
                                     </span>
                             </td>
                             <td class="role-name">
                                     <span>
-                                        <a href="<?php echo $adminRoleIdUrl; ?>">
+                                        <a href="<?php echo $adminRoleIDUrl; ?>">
                                             <?php echo $this->escape($role['Name']) ?>
                                         </a>
                                     </span>
                             </td>
                             <td class="role-system-name">
                                     <span>
-                                        <a href="<?php echo $adminRoleIdUrl; ?>">
+                                        <a href="<?php echo $adminRoleIDUrl; ?>">
                                             <?php echo $this->escape($role['SystemName']) ?>
                                         </a>
                                     </span>

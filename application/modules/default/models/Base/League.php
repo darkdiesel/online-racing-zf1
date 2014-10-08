@@ -15,6 +15,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_League', 'default'
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
  * @property Default_Model_User $User
+ * @property Doctrine_Collection $Championship
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -94,5 +95,9 @@ abstract class Default_Model_Base_League extends Doctrine_Record
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
              'foreign' => 'ID'));
+
+        $this->hasMany('Default_Model_Championship as Championship', array(
+             'local' => 'ID',
+             'foreign' => 'LeagueID'));
     }
 }

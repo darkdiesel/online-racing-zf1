@@ -262,7 +262,7 @@ class ChampionshipController extends App_Controller_LoaderController
                             $this->view->url(
                                 array('module'          => 'default', 'controller' => 'championship', 'action' => 'id',
                                       'league_id'       => $league_id,
-                                      'championship_id' => $championship_id), 'defaultChampionshipId', true
+                                      'championship_id' => $championship_id), 'defaultChampionshipID', true
                             )
                         );
                     } else {

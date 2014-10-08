@@ -153,7 +153,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                         if ($leagueEditForm->ImageLogoUrl->receive()) {
                             $file = $leagueEditForm->ImageLogoUrl->getFileInfo();
                             $ext = pathinfo($file['ImageLogoUrl']['name'], PATHINFO_EXTENSION);
-                            $newName = Date('Y-m-d_H-i-s') . strtolower('_image_round' . '.' . $ext);
+                            $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
 
                             $filterRename = new Zend_Filter_File_Rename(array('target'
                             => $file['ImageLogoUrl']['destination'] . '/'
@@ -173,10 +173,10 @@ class Admin_LeagueController extends App_Controller_LoaderController
                         unset($formData['ImageLogoUrl']);
                     }
 
-                    // set edit date
-                    $formData['DateEdit'] = date('Y-m-d H:i:s');
-
                     $item->fromArray($formData);
+
+                    $item->DateEdit = date('Y-m-d H:i:s');
+
                     $item->save();
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
@@ -224,7 +224,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
         }
     }
 
-// action for delete racing series
+    // action for delete league
     public function deleteAction()
     {
         $this->view->headTitle($this->view->translate('Удалить'));

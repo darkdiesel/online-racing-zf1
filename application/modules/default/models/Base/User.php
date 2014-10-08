@@ -11,8 +11,8 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property string $NickName
  * @property string $Password
  * @property string $Email
- * @property string $Name
- * @property string $Surname
+ * @property string $FirstName
+ * @property string $LastName
  * @property string $Description
  * @property date $DateBirthday
  * @property integer $CountryID
@@ -39,6 +39,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
  * @property Default_Model_Country $Country
+ * @property Doctrine_Collection $Championship
  * @property Doctrine_Collection $Comment
  * @property Doctrine_Collection $League
  * @property Doctrine_Collection $Post
@@ -89,7 +90,7 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('Name', 'string', 255, array(
+        $this->hasColumn('FirstName', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
@@ -98,7 +99,7 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('Surname', 'string', 255, array(
+        $this->hasColumn('LastName', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
@@ -335,6 +336,10 @@ abstract class Default_Model_Base_User extends Doctrine_Record
         $this->hasOne('Default_Model_Country as Country', array(
              'local' => 'CountryID',
              'foreign' => 'ID'));
+
+        $this->hasMany('Default_Model_Championship as Championship', array(
+             'local' => 'ID',
+             'foreign' => 'UserID'));
 
         $this->hasMany('Default_Model_Comment as Comment', array(
              'local' => 'ID',

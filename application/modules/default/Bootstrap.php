@@ -22,39 +22,39 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
         $router->addRoute(
             'defaultUserID', new Zend_Controller_Router_Route_Regex('user/(\d+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'user',
-                     'action'     => 'id',
-                     1            => 0
+                    'module' => 'default',
+                    'controller' => 'user',
+                    'action' => 'id',
+                    1 => 0
                 ), array(
-                        'userID' => 1,
-                   ), 'user/%d.html'
+                    'userID' => 1,
+                ), 'user/%d.html'
             )
         );
 
         $router->addRoute(
             'defaultUserAction', new Zend_Controller_Router_Route_Regex('user/(\d+)/(\w*)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'user',
-                     1            => 0
+                    'module' => 'default',
+                    'controller' => 'user',
+                    1 => 0
                 ), array(
-                        'userID' => 1,
-                        'action'  => 2,
-                   ), 'user/%d/%s.html'
+                    'userID' => 1,
+                    'action' => 2,
+                ), 'user/%d/%s.html'
             )
         );
 
         $router->addRoute(
             'defaultUserAll', new Zend_Controller_Router_Route_Regex('user/all/page/(\d+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'user',
-                     'action'     => 'all',
-                     1            => 1
+                    'module' => 'default',
+                    'controller' => 'user',
+                    'action' => 'all',
+                    1 => 1
                 ), array(
-                        'page' => 1,
-                   ), "user/all/page/%s.html"
+                    'page' => 1,
+                ), "user/all/page/%s.html"
             )
         );
 
@@ -73,38 +73,38 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
 
         $router->addRoute(
             'defaultPostAction', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
-                'module' => 'default',
-                'controller' => 'post',
-                'action' => 'id',
-                1 => 0), array(
-                'postID' => 1,
-                'action' => 2,
-            ), "post/%d/%s.html"
-        ));
+                    'module' => 'default',
+                    'controller' => 'post',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'postID' => 1,
+                    'action' => 2,
+                ), "post/%d/%s.html"
+            ));
 
         $router->addRoute(
             'defaultPostAll', new Zend_Controller_Router_Route_Regex('post/all/page/(\d+)\.html', array(
-                'module' => 'default',
-                'controller' => 'post',
-                'action' => 'all',
-                1 => 1
-            ), array(
-                'page' => 1,
-            ), "post/all/page/%s.html"
-        ));
+                    'module' => 'default',
+                    'controller' => 'post',
+                    'action' => 'all',
+                    1 => 1
+                ), array(
+                    'page' => 1,
+                ), "post/all/page/%s.html"
+            ));
 
         $router->addRoute(
             'defaultPostAllByType', new Zend_Controller_Router_Route_Regex('post/by-type/(\d+)/page/(\d+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'post',
-                     'action'     => 'by-type',
-                     1            => 0,
-                     2            => 1,
+                    'module' => 'default',
+                    'controller' => 'post',
+                    'action' => 'by-type',
+                    1 => 0,
+                    2 => 1,
                 ), array(
-                        'postCategoryID' => 1,
-                        'page'         => 2,
-                   ), "post/by-type/%d/page/%d.html"
+                    'postCategoryID' => 1,
+                    'page' => 2,
+                ), "post/by-type/%d/page/%d.html"
             )
         );
 
@@ -116,55 +116,49 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                     'module' => 'default',
                     'controller' => 'league',
                     'action' => 'id',
-                    1            => 0,
-                    2            => 1,
+                    1 => 0,
+                    2 => 1,
                 ), array(
                     'leagueID' => 1,
-                    'page'      => 2,
+                    'page' => 2,
                 ), "league/%d/page/%d.html"
             ));
 
         $router->addRoute(
             'defaultLeagueAll', new Zend_Controller_Router_Route_Regex('league/all/page/(\d+)\.html', array(
-                'module' => 'default',
-                'controller' => 'league',
-                'action' => 'all',
-                1 => 1
-            ), array(
-                'page' => 1,
-            ), "league/all/page/%s.html"
-        ));
+                    'module' => 'default',
+                    'controller' => 'league',
+                    'action' => 'all',
+                    1 => 1
+                ), array(
+                    'page' => 1,
+                ), "league/all/page/%s.html"
+            ));
 
         //CHAMPIONSHIP CONTROLLER ROUTERS
         $router->addRoute(
-            'defaultChampionshipId',
-            new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)\.html',
-                array(
-                     'module'     => 'default',
-                     'controller' => 'championship',
-                     'action'     => 'id',
-                     1            => 0,
-                     2            => 0,
-                ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                   ), "league/%d/championship/%d.html"
-            )
-        );
+            'defaultChampionshipID', new Zend_Controller_Router_Route_Regex('championship/(\d+)\.html', array(
+                    'module' => 'default',
+                    'controller' => 'championship',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'championshipID' => 1,
+                ), "championship/%d.html"
+            ));
 
         $router->addRoute(
             'defaultChampionshipAction',
             new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/([^\/]+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'championship',
-                     1            => 0,
-                     2            => 0,
+                    'module' => 'default',
+                    'controller' => 'championship',
+                    1 => 0,
+                    2 => 0,
                 ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                        'action'          => 3,
-                   ), "league/%d/championship/%d/%s.html"
+                    'league_id' => 1,
+                    'championship_id' => 2,
+                    'action' => 3,
+                ), "league/%d/championship/%d/%s.html"
             )
         );
 
@@ -172,17 +166,17 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             'defaultChampionshipTeam',
             new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/team/(\d+)/([^\/]+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'championship',
-                     1            => 0,
-                     2            => 0,
-                     3            => 0
+                    'module' => 'default',
+                    'controller' => 'championship',
+                    1 => 0,
+                    2 => 0,
+                    3 => 0
                 ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                        'team_id'         => 3,
-                        'action'          => 4,
-                   ), "league/%d/championship/%d/team/%d/%s.html"
+                    'league_id' => 1,
+                    'championship_id' => 2,
+                    'team_id' => 3,
+                    'action' => 4,
+                ), "league/%d/championship/%d/team/%d/%s.html"
             )
         );
 
@@ -190,18 +184,18 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             'defaultChampionshipTeamDriver',
             new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/team/(\d+)/driver/(\d+)/?([^\/]+)?\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'championship',
-                     1            => 0,
-                     2            => 0,
-                     3            => 0,
+                    'module' => 'default',
+                    'controller' => 'championship',
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
                 ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                        'team_id'         => 3,
-                        'user_id'         => 4,
-                        'action'          => 5,
-                   ), "league/%d/championship/%d/team/%d/driver/%d/%s.html"
+                    'league_id' => 1,
+                    'championship_id' => 2,
+                    'team_id' => 3,
+                    'user_id' => 4,
+                    'action' => 5,
+                ), "league/%d/championship/%d/team/%d/driver/%d/%s.html"
             )
         );
 
@@ -210,16 +204,16 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             'defaultChampionshipRaceAction',
             new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\w*)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'race',
-                     'action'     => 'add',
-                     1            => 0,
-                     2            => 0,
+                    'module' => 'default',
+                    'controller' => 'race',
+                    'action' => 'add',
+                    1 => 0,
+                    2 => 0,
                 ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                        'action'          => 3,
-                   ), "league/%d/championship/%d/race/%s.html"
+                    'league_id' => 1,
+                    'championship_id' => 2,
+                    'action' => 3,
+                ), "league/%d/championship/%d/race/%s.html"
             )
         );
 
@@ -227,17 +221,17 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             'defaultChampionshipRaceId',
             new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'race',
-                     'action'     => 'id',
-                     1            => 0,
-                     2            => 0,
-                     3            => 0,
+                    'module' => 'default',
+                    'controller' => 'race',
+                    'action' => 'id',
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
                 ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                        'race_id'         => 3,
-                   ), "league/%d/championship/%d/race/%d.html"
+                    'league_id' => 1,
+                    'championship_id' => 2,
+                    'race_id' => 3,
+                ), "league/%d/championship/%d/race/%d.html"
             )
         );
 
@@ -245,17 +239,17 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             'defaultChampionshipRaceIdAction',
             new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/race/(\d+)/(\w*)\.html',
                 array(
-                     'module'     => 'default',
-                     'controller' => 'race',
-                     1            => 0,
-                     2            => 0,
-                     3            => 0,
+                    'module' => 'default',
+                    'controller' => 'race',
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
                 ), array(
-                        'league_id'       => 1,
-                        'championship_id' => 2,
-                        'race_id'         => 3,
-                        'action'          => 4,
-                   ), "league/%d/championship/%d/race/%d/%s.html"
+                    'league_id' => 1,
+                    'championship_id' => 2,
+                    'race_id' => 3,
+                    'action' => 4,
+                ), "league/%d/championship/%d/race/%d/%s.html"
             )
         );
 
@@ -340,98 +334,98 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
         $pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
-                'label'      => _('Главная'),
-                'module'     => 'default',
+                'label' => _('Главная'),
+                'module' => 'default',
                 'controller' => 'index',
-                'action'     => 'index',
-                'route'      => 'default',
+                'action' => 'index',
+                'route' => 'default',
             ),
             array(
-                'label'      => _('Лиги'),
-                'title'      => _('Лиги'),
-                'module'     => 'default',
+                'label' => _('Лиги'),
+                'title' => _('Лиги'),
+                'module' => 'default',
                 'controller' => 'league',
-                'action'     => 'all',
-                'route'      => 'defaultLeagueAll',
-                'params'     => array(
+                'action' => 'all',
+                'route' => 'defaultLeagueAll',
+                'params' => array(
                     'page' => '1'
                 ),
-                'pages'      => array(
+                'pages' => array(
                     array(
-                        'label'      => _('F1 ORL'),
-                        'title'      => _('F1 ORL'),
-                        'module'     => 'default',
+                        'label' => _('F1 ORL'),
+                        'title' => _('F1 ORL'),
+                        'module' => 'default',
                         'controller' => 'league',
-                        'action'     => 'id',
-                        'route'      => 'defaultLeagueID',
-                        'params'     => array(
+                        'action' => 'id',
+                        'route' => 'defaultLeagueID',
+                        'params' => array(
                             'leagueID' => '1'
                         )
                     ),
                     array(
-                        'label'      => _('F1 ORS League'),
-                        'title'      => _('F1 ORS League'),
-                        'module'     => 'default',
+                        'label' => _('F1 ORS League'),
+                        'title' => _('F1 ORS League'),
+                        'module' => 'default',
                         'controller' => 'league',
-                        'action'     => 'id',
-                        'route'      => 'defaultLeagueID',
-                        'params'     => array(
+                        'action' => 'id',
+                        'route' => 'defaultLeagueID',
+                        'params' => array(
                             'leagueID' => '2'
                         )
                     ),
                     array(
-                        'label'      => _('ORT League'),
-                        'title'      => _('ORT League'),
-                        'module'     => 'default',
+                        'label' => _('ORT League'),
+                        'title' => _('ORT League'),
+                        'module' => 'default',
                         'controller' => 'league',
-                        'action'     => 'id',
-                        'route'      => 'defaultLeagueID',
-                        'params'     => array(
+                        'action' => 'id',
+                        'route' => 'defaultLeagueID',
+                        'params' => array(
                             'leagueID' => '3'
                         )
                     ),
                     array(
-                        'label'      => _('Все лиги'),
-                        'title'      => _('Все лиги портала'),
-                        'module'     => 'default',
+                        'label' => _('Все лиги'),
+                        'title' => _('Все лиги портала'),
+                        'module' => 'default',
                         'controller' => 'league',
-                        'action'     => 'all',
-                        'route'      => 'defaultLeagueAll'
+                        'action' => 'all',
+                        'route' => 'defaultLeagueAll'
                     )
                 )
             ),
             array(
-                'label'      => _('Гонщики'),
-                'title'      => _('Все гонщики портала'),
-                'module'     => 'default',
+                'label' => _('Гонщики'),
+                'title' => _('Все гонщики портала'),
+                'module' => 'default',
                 'controller' => 'user',
-                'action'     => 'all',
-                'route'      => 'defaultUserAll',
-                'params'     => array(
+                'action' => 'all',
+                'route' => 'defaultUserAll',
+                'params' => array(
                     'page' => '1'
                 ),
             ),
             array(
-                'label'      => _('Новости'),
-                'title'      => _('Весь контент портала'),
-                'module'     => 'default',
+                'label' => _('Новости'),
+                'title' => _('Весь контент портала'),
+                'module' => 'default',
                 'controller' => 'post',
-                'action'     => 'all',
-                'route'      => 'defaultPostAll'
+                'action' => 'all',
+                'route' => 'defaultPostAll'
             ),
             array(
                 'label' => _('Файлы'),
                 'title' => _('Файлы'),
-                'uri'   => '#',
+                'uri' => '#',
                 'pages' => array(
                     array(
-                        'label'      => _('Игры и Моды'),
-                        'title'      => _('Игры и Моды'),
-                        'module'     => 'default',
+                        'label' => _('Игры и Моды'),
+                        'title' => _('Игры и Моды'),
+                        'module' => 'default',
                         'controller' => 'post',
-                        'action'     => 'by-type',
-                        'route'      => 'defaultPostAllByType',
-                        'params'     => array(
+                        'action' => 'by-type',
+                        'route' => 'defaultPostAllByType',
+                        'params' => array(
                             'postCategoryID' => '3'
                         )
                     ),
@@ -445,7 +439,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             array(
                 'label' => _('Блог'),
                 'title' => _('Блог'),
-                'uri'   => 'http://onlineracingnet.blogspot.com/'
+                'uri' => 'http://onlineracingnet.blogspot.com/'
             ),
 //            array(
 //                'label'      => _('Rush TV'),
@@ -458,7 +452,7 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             array(
                 'label' => _('Форум'),
                 'title' => _('Форум'),
-                'uri'   => 'http://f1orl.forum2x2.ru/'
+                'uri' => 'http://f1orl.forum2x2.ru/'
             )
         );
 

@@ -34,47 +34,52 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
     {
         if ($addIDurl) {
             if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
-                $link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $postID), 'defaultPostAction', true);
+                $link = $this->view->url(array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $postID), 'defaultPostID');
                 array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_view_icon  . $this->view->translate('Просмотр') . '</a>');
             }
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post', 'edit')) {
-            $link = $this->view->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'postID' => $postID), 'adminPostAction', true);
+            $link = $this->view->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'edit', 'postID' => $postID), 'adminPostAction');
             array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_edit_icon  . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post', 'delete')) {
-            $link = $this->view->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'delete', 'postID' => $postID), 'adminPostAction', true);
+            $link = $this->view->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'delete', 'postID' => $postID), 'adminPostAction');
             array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_delete_icon  . $this->view->translate('Удалить') . '</a>');
         }
 
         return $this;
     }
 
-    public function championshipMenu($league_id, $championship_id)
+    public function championshipMenu($championshipID, $addIDurl = false)
     {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
+                $link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'id', 'championshipID' => $championshipID), 'defaultChampionshipID');
+                array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_view_icon  . $this->view->translate('Просмотр') . '</a>');
+            }
+        }
 
-
-        if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'edit')) {
-            $link = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'league_id' => $league_id, 'championship_id' => $championship_id), 'adminChampionshipAction', true);
-            array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Редактировать')}</a>");
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'championship', 'edit')) {
+            $link = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'edit', 'championshipID' => $championshipID), 'adminChampionshipAction');
+            array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_edit_icon  . $this->view->translate('Редактировать') . '</a>');
         }
 
         if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'delete')) {
-            $link = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'delete', 'league_id' => $league_id, 'championship_id' => $championship_id), 'adminChampionshipAction', true);
-            array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Удалить')}</a>");
+            $link = $this->view->url(array('module' => 'admin', 'controller' => 'championship', 'action' => 'delete', 'championshipID' => $championshipID), 'adminChampionshipAction', true);
+            array_push($this->_menuLinks, '<a href="' . $link . '">' . $this->_delete_icon  . $this->view->translate('Удалить') . '</a>');
         }
 
-        if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'team-add')) {
-            $link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'team-add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipId', true);
-            array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Добавить команду')}</a>");
-        }
-
-        if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race', 'add')) {
-            $link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'add', 'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipRaceAction', true);
-            array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Добавить гонку')}</a>");
-        }
+//        if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'team-add')) {
+//            $link = $this->view->url(array('module' => 'default', 'controller' => 'championship', 'action' => 'team-add', 'championshipID' => $championshipID), 'adminChampionshipAction', true);
+//            array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Добавить команду')}</a>");
+//        }
+//
+//        if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race', 'add')) {
+//            $link = $this->view->url(array('module' => 'default', 'controller' => 'race', 'action' => 'add', 'championshipID' => $championshipID), 'adminChampionshipAction', true);
+//            array_push($this->_menuLinks, "<a href=\"$link\">{$this->view->translate('Добавить гонку')}</a>");
+//        }
 
         return $this;
     }

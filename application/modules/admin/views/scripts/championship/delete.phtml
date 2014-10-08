@@ -1,1 +1,83 @@
-<?php echo $this->form; ?>
+<?php if ($this->championshipData) { ?>
+    <div class="m-b-10">
+        <?php echo $this->championshipDeleteForm; ?>
+        <hr/>
+    </div>
+    <?php
+    // check access and generate link for default/user/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+        $defaultUserIDUrl = $this->url(
+            array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                'userID' => $this->escape($this->championshipData['User']['ID'])), 'defaultUserID'
+        );
+    } else {
+        $defaultUserIDUrl = '#';
+    }
+    ?>
+    <div class="block block-default block-ui-bordered">
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->escape($this->championshipData['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Логотип лиги'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <img class="image-responsive"
+                                 src="<?php echo $this->baseUrl($this->escape($this->championshipData['ImageLogoUrl'])); ?>">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Администратор'); ?></span>
+                    </td>
+                    <td>
+                    <span>
+                        <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
+                            <?php echo $this->escape($this->championshipData['User']['NickName']); ?>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-bold">
+                        <span><?php echo $this->translate('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?php echo $this->RenderContentTypeText($this->championshipData['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?php echo $this->translate('Лига'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?php echo $this->escape($this->championshipData['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($this->championshipData['DateCreate']) != $this->escape($this->championshipData['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?php echo $this->escape($this->championshipData['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php } ?>

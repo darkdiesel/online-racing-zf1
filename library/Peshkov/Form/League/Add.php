@@ -54,7 +54,19 @@ class Peshkov_Form_League_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
         foreach ($this->getUsers() as $user) {
-            $users->addMultiOption($user['ID'], $user['Surname'] . ' ' . $user['Name'] . ' (' . $user['NickName'] . ')');
+            $users->addMultiOption($user['ID'], $user['LastName'] . ' ' . $user['FirstName'] . ' (' . $user['NickName'] . ')');
+        };
+
+        $rules = new Zend_Form_Element_Select('UserID');
+        $users->setLabel($this->translate('Администратор лиги'))
+            ->setOptions(array('class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Администратор лиги'))
+            ->setRequired(true)
+            ->addFilter('HtmlEntities')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+        foreach ($this->getUsers() as $user) {
+            $users->addMultiOption($user['ID'], $user['LastName'] . ' ' . $user['FirstName'] . ' (' . $user['NickName'] . ')');
         };
 
         $urlImageLogo = new Zend_Form_Element_File('ImageLogoUrl');
@@ -137,10 +149,10 @@ class Peshkov_Form_League_Add extends Zend_Form
             ->from('Default_Model_User u')
             ->leftJoin('u.UserRole ur')
             ->leftJoin('ur.Role r')
-            ->where('r.name = ?', 'admin')
-            ->orWhere('r.name = ?', 'super_admin')
-            ->orWhere('r.name = ?', 'master')
-            ->orderBy('u.surname ASC');
+            ->where('r.SystemName = ?', 'admin')
+            ->orWhere('r.SystemName = ?', 'super_admin')
+            ->orWhere('r.SystemName = ?', 'master')
+            ->orderBy('u.LastName ASC');
         return $query->fetchArray();
     }
 
