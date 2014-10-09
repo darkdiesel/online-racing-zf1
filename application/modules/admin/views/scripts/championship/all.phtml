@@ -25,14 +25,14 @@
                     <th class="championship-name">
                         <span><?php echo $this->translate('Название'); ?></span>
                     </th>
-                    <th class="championship-administrator">
-                        <span><?php echo $this->translate('Администратор'); ?></span>
-                    </th>
                     <th class="championship-league">
                         <span><?php echo $this->translate('Лига'); ?></span>
                     </th>
                     <th class="championship-racing-serie">
                         <span><?php echo $this->translate('Гоночная серия'); ?></span>
+                    </th>
+                    <th class="championship-administrator">
+                        <span><?php echo $this->translate('Администратор'); ?></span>
                     </th>
                     <th class="championship-rule">
                         <span><?php echo $this->translate('Регламент'); ?></span>
@@ -128,15 +128,6 @@
                                         </a>
                                     </span>
                             </td>
-                            <td class="championship-administrator">
-                                    <span>
-                                        <a class="tooltip-field"
-                                           title="<?= $this->escape($championship['User']['NickName']) ?>"
-                                           target="blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                            <?= $this->escape($championship['User']['LastName']) . ' ' . $this->escape($championship['User']['FirstName']) ?>
-                                        </a>
-                                    </span>
-                            </td>
                             <td class="championship-league">
                                     <span>
                                         <a target="blank" href="<?php echo $defaultLeagueIDUrl; ?>">
@@ -148,6 +139,15 @@
                                     <span>
                                         <a target="blank" href="<?php echo $defaultRacingSeriesIDUrl; ?>">
                                             <?php echo $this->escape($championship['RacingSeries']['Name']) ?>
+                                        </a>
+                                    </span>
+                            </td>
+                            <td class="championship-administrator">
+                                    <span>
+                                        <a class="tooltip-field"
+                                           title="<?= $this->escape($championship['User']['NickName']) ?>"
+                                           target="blank" href="<?php echo $defaultUserIDUrl; ?>">
+                                            <?= $this->escape($championship['User']['LastName']) . ' ' . $this->escape($championship['User']['FirstName']) ?>
                                         </a>
                                     </span>
                             </td>

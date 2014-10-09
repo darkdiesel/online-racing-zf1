@@ -43,20 +43,30 @@ class LeagueController extends App_Controller_LoaderController
                 //add breadscrumb
                 $this->view->breadcrumb()->LeagueAll('1')->league($requestData->leagueID, $result[0]['Name'], $requestData->page);
 
-                // TODO: update championship model to doctrine
-                $championship = new Application_Model_DbTable_Championship();
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_Championship champ')
+                    ->leftJoin('champ.User u')
+                    ->leftJoin('champ.League l')
+                    ->leftJoin('champ.PostRule pr')
+                    ->leftJoin('champ.PostGame pg')
+                    ->leftJoin('champ.RacingSeries rc')
+                    ->where('l.ID = ?', $requestData->leagueID)
+                    ->orderBy('champ.ID DESC');
 
-                $page_count_items = 5;
-                $page_range = 5;
-                $items_order = 'DESC';
-                $championships_data = $championship->getChampionshipsPagerByLeague($page_count_items, $requestData->page, $page_range, $items_order, $requestData->leagueID);
+                $adapter = new ZFDoctrine_Paginator_Adapter_DoctrineQuery($query);
 
-                if ($championships_data) {
-                    $this->view->championships_data = $championships_data;
+                $championshipPaginator = new Zend_Paginator($adapter);
+                // pager settings
+                $championshipPaginator->setItemCountPerPage("10");
+                $championshipPaginator->setCurrentPageNumber($this->getRequest()->getParam('page'));
+                $championshipPaginator->setPageRange("5");
+
+                if ($championshipPaginator->count() == 0) {
+                    $this->view->championshipData = false;
+                    $this->messages->addInfo($this->view->translate('В лиге нет чемпионатов!'));
                 } else {
-                    $this->messages->addInfo($this->view->translate('В лиге не найдено чемпионатов!'));
+                    $this->view->championshipData = $championshipPaginator;
                 }
-
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 

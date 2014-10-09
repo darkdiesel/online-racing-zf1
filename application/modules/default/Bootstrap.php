@@ -75,7 +75,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             'defaultPostAction', new Zend_Controller_Router_Route_Regex('post/(\d+)/(\w*)\.html', array(
                     'module' => 'default',
                     'controller' => 'post',
-                    'action' => 'id',
                     1 => 0), array(
                     'postID' => 1,
                     'action' => 2,
@@ -147,20 +146,14 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
             ));
 
         $router->addRoute(
-            'defaultChampionshipAction',
-            new Zend_Controller_Router_Route_Regex('league/(\d+)/championship/(\d+)/([^\/]+)\.html',
-                array(
+            'defaultChampionshipAction', new Zend_Controller_Router_Route_Regex('championship/(\d+)/(\w*)\.html', array(
                     'module' => 'default',
                     'controller' => 'championship',
-                    1 => 0,
-                    2 => 0,
-                ), array(
-                    'league_id' => 1,
-                    'championship_id' => 2,
-                    'action' => 3,
-                ), "league/%d/championship/%d/%s.html"
-            )
-        );
+                    1 => 0), array(
+                    'championshipID' => 1,
+                    'action' => 2,
+                ), "admin/championship/%d/%s.html"
+            ));
 
         $router->addRoute(
             'defaultChampionshipTeam',
@@ -429,11 +422,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                             'postCategoryID' => '3'
                         )
                     ),
-//                    array(
-//                        'label' => _('FTP'),
-//                        'title' => _('FTP'),
-//                        'uri'   => 'http://85.112.55.36:8080/http/',
-//                    )
                 )
             ),
             array(
@@ -441,14 +429,6 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                 'title' => _('Блог'),
                 'uri' => 'http://onlineracingnet.blogspot.com/'
             ),
-//            array(
-//                'label'      => _('Rush TV'),
-//                'title'      => _('Rush TV'),
-//                'module'     => 'default',
-//                'controller' => 'rush-tv',
-//                'action'     => 'index',
-//                'route'      => 'default',
-//            ),
             array(
                 'label' => _('Форум'),
                 'title' => _('Форум'),

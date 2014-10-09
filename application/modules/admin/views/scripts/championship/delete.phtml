@@ -14,42 +14,134 @@
         $defaultUserIDUrl = '#';
     }
     ?>
+
+    <?php
+    // check access and generate link for default/league/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'league', 'id')) {
+        $defaultLeagueIDUrl = $this->url(
+            array('module' => 'default', 'controller' => 'league', 'action' => 'id',
+                'leagueID' => $this->escape($this->championshipData['League']['ID'])), 'defaultLeagueID'
+        );
+    } else {
+        $defaultLeagueIDUrl = '#';
+    }
+    ?>
+
+    <?php
+    // check access and generate link for default/racing-series/id
+    if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+        $defaultRacingSeriesIDUrl = $this->url(
+            array('module' => 'default', 'controller' => 'racing-series', 'action' => 'id',
+                'racingSeriesID' => $this->escape($this->championshipData['RacingSeries']['ID'])), 'adminRacingSeriesID'
+        );
+    } else {
+        $defaultRacingSeriesIDUrl = '#';
+    }
+    ?>
+
+    <?php
+    // check access and generate link for default/post/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'post', 'id')) {
+        $defaultPostRuleIDUrl = $this->url(
+            array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                'postID' => $this->escape($this->championshipData['PostRule']['ID'])), 'defaultPostID'
+        );
+        $defaultPostGameIDUrl = $this->url(
+            array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+                'postID' => $this->escape($this->championshipData['PostGame']['ID'])), 'defaultPostID'
+        );
+    } else {
+        $defaultPostRuleIDUrl = '#';
+        $defaultPostGameIDUrl = '#';
+    }
+    ?>
+
     <div class="block block-default block-ui-bordered">
         <div>
             <table class="table table-striped table-bordered m-b-0">
                 <tbody>
-                <tr>
+                <tr class="championship-name">
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->escape($this->championshipData['Name']); ?></span>
+                        <span><?= $this->escape($this->championshipData['Name']); ?></span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="championship-img-logo">
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Логотип лиги'); ?></span>
+                        <span><?= $this->translate('Логотип чемпионата'); ?></span>
                     </td>
                     <td>
                         <span>
                             <img class="image-responsive"
-                                 src="<?php echo $this->baseUrl($this->escape($this->championshipData['ImageLogoUrl'])); ?>">
+                                 src="<?= $this->baseUrl($this->escape($this->championshipData['ImageLogoUrl'])); ?>">
                         </span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="championship-league">
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Администратор'); ?></span>
+                        <span><?= $this->translate('Лига'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="blank" href="<?= $defaultLeagueIDUrl; ?>">
+                                <?= $this->escape($this->championshipData['League']['Name']) ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="championship-racing-series">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Гоночная серия'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="blank" href="<?= $defaultRacingSeriesIDUrl; ?>">
+                                <?= $this->escape($this->championshipData['RacingSeries']['Name']) ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="championship-administrator">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Администратор'); ?></span>
                     </td>
                     <td>
                     <span>
-                        <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
-                            <?php echo $this->escape($this->championshipData['User']['NickName']); ?>
+                        <a class="tooltip-field"
+                           title="<?= $this->escape($this->championshipData['User']['NickName']) ?>"
+                           target="blank" href="<?= $defaultUserIDUrl; ?>">
+                            <?= $this->escape($this->championshipData['User']['LastName']) . ' ' . $this->escape($this->championshipData    ['User']['FirstName']) ?>
                         </a>
                     </span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="championship-rule">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Регламент'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="blank" href="<?= $defaultPostRuleIDUrl; ?>">
+                                <?= $this->escape($this->championshipData['PostRule']['Name']) ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="championship-game">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Игра'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="blank" href="<?= $defaultPostGameIDUrl; ?>">
+                                <?= $this->escape($this->championshipData['PostGame']['Name']) ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="championship-description">
                     <td class="text-bold">
                         <span><?php echo $this->translate('Описание'); ?></span>
                     </td>
@@ -64,7 +156,7 @@
             <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?php echo $this->translate('Лига'); ?>
+                <?php echo $this->translate('Чемпионат'); ?>
             </div>
             <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
                  data-placement="bottom">

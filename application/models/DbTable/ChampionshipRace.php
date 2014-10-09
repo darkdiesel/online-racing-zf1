@@ -145,12 +145,12 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
             ->join(
                 array('champ' => 'championship'), $this->db_href . '.championship_id = champ.id',
                 array(
-                     'league_id'         => 'champ.league_id',
-                     'championship_name' => 'champ.name'
+                     'league_id'         => 'champ.LeagueID',
+                     'championship_name' => 'champ.Name'
                 )
             )
             ->joinLeft(
-                array('c' => 'country'), 't.country_id = c.id',
+                array('c' => 'country'), 't.country_id = c.ID',
                 array('country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
                       'country_ImageRoundUrl'       => 'c.ImageRoundUrl',
                       'country_NativeName'           => 'c.NativeName',

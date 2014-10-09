@@ -142,7 +142,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminResourceAccessAction', new Zend_Controller_Router_Route_Regex('admin/resource-access/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'resource-access',
-                    'action' => 'id',
                     1 => 0), array(
                     'resource_access_id' => 1,
                     'action' => 2,
@@ -175,7 +174,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminPrivilegeAction', new Zend_Controller_Router_Route_Regex('admin/privilege/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'privilege',
-                    'action' => 'id',
                     1 => 0), array(
                     'privilege_id' => 1,
                     'action' => 2,
@@ -198,7 +196,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminPostAction', new Zend_Controller_Router_Route_Regex('admin/post/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'post',
-                    'action' => 'id',
                     1 => 0), array(
                     'postID' => 1,
                     'action' => 2,
@@ -221,7 +218,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminLeagueAction', new Zend_Controller_Router_Route_Regex('admin/league/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'league',
-                    'action' => 'id',
                     1 => 0), array(
                     'leagueID' => 1,
                     'action' => 2,
@@ -244,7 +240,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminChampionshipAction', new Zend_Controller_Router_Route_Regex('admin/championship/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'championship',
-                    'action' => 'id',
                     1 => 0), array(
                     'championshipID' => 1,
                     'action' => 2,
@@ -279,7 +274,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminPostCategoryAction', new Zend_Controller_Router_Route_Regex('admin/post-category/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'post-category',
-                    'action' => 'id',
                     1 => 0), array(
                     'postCategoryID' => 1,
                     'action' => 2,
@@ -314,7 +308,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminContentTypeAction', new Zend_Controller_Router_Route_Regex('admin/content-type/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'content-type',
-                    'action' => 'id',
                     1 => 0), array(
                     'contentTypeID' => 1,
                     'action' => 2,
@@ -349,7 +342,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminRacingSeriesAction', new Zend_Controller_Router_Route_Regex('admin/racing-series/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'racing-series',
-                    'action' => 'id',
                     1 => 0), array(
                     'racingSeriesID' => 1,
                     'action' => 2,
@@ -382,7 +374,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'event_action', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'event',
-                    'action' => 'id',
                     1 => 0), array(
                     'event_id' => 1,
                     'action' => 2,
@@ -402,8 +393,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //COUNTRY CONTROLLER ROUTERS
         $router->addRoute(
-            'adminCountryID',
-            new Zend_Controller_Router_Route_Regex('admin/country/(\d+)\.html',
+            'adminCountryID', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)\.html',
                 array(
                     'module' => 'admin',
                     'controller' => 'country',
@@ -417,7 +407,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminCountryAction', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'country',
-                    'action' => 'id',
                     1 => 0), array(
                     'countryID' => 1,
                     'action' => 2,
@@ -452,7 +441,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminTeamAction', new Zend_Controller_Router_Route_Regex('admin/team/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'team',
-                    'action' => 'id',
                     1 => 0), array(
                     'teamID' => 1,
                     'action' => 2,
@@ -485,7 +473,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
             'adminTrackAction', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)/(\w*)\.html', array(
                     'module' => 'admin',
                     'controller' => 'track',
-                    'action' => 'id',
                     1 => 0), array(
                     'track_id' => 1,
                     'action' => 2,

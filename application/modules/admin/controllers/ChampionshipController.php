@@ -32,6 +32,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Championship champ')
                 ->leftJoin('champ.User u')
+                ->leftJoin('champ.League l')
                 ->leftJoin('champ.PostRule pr')
                 ->leftJoin('champ.PostGame pg')
                 ->leftJoin('champ.RacingSeries rc')
@@ -80,15 +81,15 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                 $formData = $championshipAddForm->getValues();
 
                 if (!$formData['DateStart']) {
-                    unset($formData['DateStart']);
+                    $formData['DateStart'] = null;
                 }
 
                 if (!$formData['DateEnd']) {
-                    unset($formData['DateEnd']);
+                    $formData['DateEnd'] = null;
                 }
 
                 if (!$formData['HotLapsIP']) {
-                    unset($formData['HotLapsIP']);
+                    $formData['HotLapsIP'] = null;
                 }
 
                 $item->fromArray($formData);
@@ -193,15 +194,15 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                     }
 
                     if (!$formData['DateStart']) {
-                        unset($formData['DateStart']);
+                        $formData['DateStart'] = null;
                     }
 
                     if (!$formData['DateEnd']) {
-                        unset($formData['DateEnd']);
+                        $formData['DateEnd'] = null;
                     }
 
                     if (!$formData['HotLapsIP']) {
-                        unset($formData['HotLapsIP']);
+                        $formData['HotLapsIP'] = null;
                     }
 
                     $item->fromArray($formData);
@@ -234,6 +235,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                 $query = Doctrine_Query::create()
                     ->from('Default_Model_Championship champ')
                     ->leftJoin('champ.User u')
+                    ->leftJoin('champ.League l')
                     ->leftJoin('champ.PostRule pr')
                     ->leftJoin('champ.PostGame pg')
                     ->leftJoin('champ.RacingSeries rc')
@@ -283,8 +285,9 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $query = Doctrine_Query::create()
-                ->from('Default_Model_Сhampionship champ')
+                ->from('Default_Model_Championship champ')
                 ->leftJoin('champ.User u')
+                ->leftJoin('champ.League l')
                 ->leftJoin('champ.PostRule pr')
                 ->leftJoin('champ.PostGame pg')
                 ->leftJoin('champ.RacingSeries rc')
@@ -293,7 +296,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
 
             if (count($result) == 1) {
                 // Create championship delete form
-                $championshipDeleteForm = new Peshkov_Form_Сhampionship_Delete();
+                $championshipDeleteForm = new Peshkov_Form_Championship_Delete();
 
                 $this->view->championshipData = $result[0];
                 $this->view->championshipDeleteForm = $championshipDeleteForm;
@@ -308,7 +311,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                 if ($this->getRequest()->isPost()) {
                     if ($championshipDeleteForm->isValid($this->getRequest()->getPost())) {
                         $query = Doctrine_Query::create()
-                            ->delete('Default_Model_Сhampionship champ')
+                            ->delete('Default_Model_Championship champ')
                             ->whereIn('champ.ID', $requestData->championshipID);
 
                         $result = $query->execute();
@@ -326,7 +329,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
 
                         $adminСhampionshipAllUrl = $this->view->url(
                             array('module' => 'admin', 'controller' => 'championship', 'action' => 'all', 'page' => 1),
-                            'adminСhampionshipAll'
+                            'adminChampionshipAll'
                         );
 
                         $this->redirect($adminСhampionshipAllUrl);

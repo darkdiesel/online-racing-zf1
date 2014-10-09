@@ -8,56 +8,110 @@ class ChampionshipController extends App_Controller_LoaderController
         parent::init();
     }
 
+    // action for view championship
     public function idAction()
     {
-        $request = $this->getRequest();
-        $league_id = (int)$request->getParam('league_id');
-        $championship_id = (int)$request->getParam('championship_id');
+        // set filters and validators for GET input
+        $filters = array(
+            'championshipID' => array('HtmlEntities', 'StripTags', 'StringTrim')
+        );
+        $validators = array(
+            'championshipID' => array('NotEmpty', 'Int')
+        );
+        $requestData = new Zend_Filter_Input($filters, $validators);
+        $requestData->setData($this->getRequest()->getParams());
 
-        // Gel Leagues
-        $query = Doctrine_Query::create()
-            ->from('Default_Model_League l')
-            ->leftJoin('l.User u')
-            ->where('l.ID = ?', $league_id);
-        $result = $query->fetchArray();
-        $leagueData = $result[0];
+        // test if input is valid
+        // retrieve requested record
+        // attach to view
+        if ($requestData->isValid()) {
+            $query = Doctrine_Query::create()
+                ->from('Default_Model_Championship champ')
+                ->leftJoin('champ.User u')
+                ->leftJoin('champ.League l')
+                ->leftJoin('champ.PostRule pr')
+                ->leftJoin('champ.PostGame pg')
+                ->leftJoin('champ.RacingSeries rc')
+                ->where('champ.ID = ?', $requestData->championshipID);
+            $result = $query->fetchArray();
 
-        if ($leagueData) {
-            $this->view->leagueData = $leagueData;
+            if (count($result) == 1) {
+                $this->view->championshipData = $result[0];
 
-            $this->view->headTitle($this->view->translate('Лига'));
-            $this->view->headTitle($leagueData['Name']);
+                $this->view->headTitle($result[0]['Name']);
+                $this->view->pageTitle(
+                    $this->view->translate('Чемпионат ') . ' :: ' . $result[0]['Name']
+                );
 
-            $championship = new Application_Model_DbTable_Championship();
-            $championship_data = $championship->getChampionshipData($league_id, $championship_id);
-
-            if ($championship_data) {
-                $this->view->championship_data = $championship_data;
-                $this->view->headTitle($this->view->translate('Чемпионат'));
-                $this->view->headTitle($championship_data->name);
-
-                $this->view->pageTitle($championship_data->name);
-
-                // Set breadcrumbs for this page
-                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $leagueData['Name'], '1')
-                    ->championship($league_id, $championship_id, $championship_data->name);
+                //add breadscrumb
+                //TODO: Make breadcrumbs
+                //$this->view->breadcrumb()->LeagueAll('1')->championship($requestData->championshipID, $result[0]['Name'], $requestData->page);
             } else {
+//                throw new Zend_Controller_Action_Exception('Page not found', 404);
+
                 $this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
 
                 $this->view->headTitle($this->view->translate('Ошибка!'));
                 $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
 
                 $this->view->pageTitle($this->view->translate('Ошибка!'));
+                $this->view->pageTitle($this->view->translate('Чемпионат не найден!'));
             }
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
-
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Лига не найдена!'));
-
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            throw new Zend_Controller_Action_Exception('Invalid input');
         }
     }
+
+//    public function idAction()
+//    {
+//        $request = $this->getRequest();
+//        $league_id = (int)$request->getParam('league_id');
+//        $championship_id = (int)$request->getParam('championship_id');
+//
+//        // Gel Leagues
+//        $query = Doctrine_Query::create()
+//            ->from('Default_Model_League l')
+//            ->leftJoin('l.User u')
+//            ->where('l.ID = ?', $league_id);
+//        $result = $query->fetchArray();
+//        $leagueData = $result[0];
+//
+//        if ($leagueData) {
+//            $this->view->leagueData = $leagueData;
+//
+//            $this->view->headTitle($this->view->translate('Лига'));
+//            $this->view->headTitle($leagueData['Name']);
+//
+//            $championship = new Application_Model_DbTable_Championship();
+//            $championship_data = $championship->getChampionshipData($league_id, $championship_id);
+//
+//            if ($championship_data) {
+//                $this->view->championship_data = $championship_data;
+//                $this->view->headTitle($this->view->translate('Чемпионат'));
+//                $this->view->headTitle($championship_data->name);
+//
+//                $this->view->pageTitle($championship_data->name);
+//
+//                // Set breadcrumbs for this page
+//                $this->view->breadcrumb()->LeagueAll('1')->league($league_id, $leagueData['Name'], '1')
+//                    ->championship($league_id, $championship_id, $championship_data->name);
+//            } else {
+//                $this->messages->addError($this->view->translate('Запрашиваемый чемпионат не найден!'));
+//
+//                $this->view->headTitle($this->view->translate('Ошибка!'));
+//                $this->view->headTitle($this->view->translate('Чемпионат не найден!'));
+//
+//                $this->view->pageTitle($this->view->translate('Ошибка!'));
+//            }
+//        } else {
+//            $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
+//
+//            $this->view->headTitle($this->view->translate('Ошибка!'));
+//            $this->view->headTitle($this->view->translate('Лига не найдена!'));
+//
+//            $this->view->pageTitle($this->view->translate('Ошибка!'));
+//        }
+//    }
 
 
     public function allAction()

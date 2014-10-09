@@ -1,0 +1,102 @@
+<?php
+$defaultPostGameIDUrl = $this->url(
+    array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+        'postID' => $this->escape($this->championshipData['PostGame']['ID'])),
+    'defaultPostID'
+);
+$defaultPostRuleIDUrl = $this->url(
+    array('module' => 'default', 'controller' => 'post', 'action' => 'id',
+        'postID' => $this->escape($this->championshipData['PostRule']['ID'])),
+    'defaultPostID'
+);
+$defaultChampionshipDriversUrl = $this->url(
+    array('module' => 'default', 'controller' => 'championship', 'action' => 'drivers',
+        'championshipID' => $this->escape($this->championshipData['ID'])), 'defaultChampionshipAction'
+);
+$defaultChampionshipCalendarUrl = $this->url(
+    array('module' => 'default', 'controller' => 'championship', 'action' => 'calendar',
+        'championshipID' => $this->escape($this->championshipData['ID'])), 'defaultChampionshipAction'
+);
+
+$defaultChampionshipDriverStandingsUrl = $this->url(
+    array('module' => 'default', 'controller' => 'championship', 'action' => 'ds',
+        'championshipID' => $this->escape($this->championshipData['ID'])), 'defaultChampionshipAction'
+);
+$defaultChampionshipTeamStandingsUrl = $this->url(
+    array('module' => 'default', 'controller' => 'championship', 'action' => 'ts',
+        'championshipID' => $this->escape($this->championshipData['ID'])), 'defaultChampionshipAction'
+);
+?>
+<!-- start championship menu block -->
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
+        <div class="block block-default m-b-15">
+            <div class="block-body">
+                <nav class="navbar navbar-default m-b-0" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#championship-navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="navbar-brand tooltip-field" data-placement="bottom"
+                                  data-title="<?= $this->championshipData['Name']; ?>">
+                                <i class="fa fa-trophy fa-lg"></i>
+                            </span>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="championship-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="<?= $defaultChampionshipDriversUrl ?>"
+                                       title="<?= $this->translate('Гонщики'); ?>">
+                                        <?= $this->translate('Гонщики'); ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="<?= $defaultChampionshipCalendarUrl ?>"
+                                       title="<?= $this->translate('Календарь'); ?>">
+                                        <?= $this->translate('Календарь'); ?>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <?= $this->translate('Зачеты'); ?> <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="<?= $defaultChampionshipDriverStandingsUrl; ?>"
+                                               title="<?= $this->translate('Личный зачет'); ?>">
+                                                <?= $this->translate('ЛЗ'); ?>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?= $defaultChampionshipTeamStandingsUrl; ?>"
+                                               title="<?= $this->translate('Командный зачет'); ?>">
+                                                <?= $this->translate('КЗ'); ?>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <a class="btn btn-success navbar-btn m-l-10" href="<?= $defaultPostGameIDUrl ?>"
+                               title="<?= $this->translate('Игра для проведения') ?>" target="_blank">
+                                <?= $this->translate('Игра') ?>
+                            </a>
+                            <a class="btn btn-danger navbar-btn m-l-10" href="<?= $defaultPostRuleIDUrl ?>"
+                               title="<?= $this->translate('Регламент чемпионата') ?>" target="_blank">
+                                <?= $this->translate('Регламент') ?>
+                            </a>
+                        </div>
+                        <!-- /.navbar-collapse -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</div><!-- end championship menu block -->

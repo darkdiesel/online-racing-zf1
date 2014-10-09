@@ -35,7 +35,8 @@
                             <?php if ($this->escape($league['ImageLogoUrl'])) { ?>
                                 <div class="m-b-15 center-block text-center">
                                     <a href="<?php echo $defaultLeagueIDUrl; ?>">
-                                        <img class="img-thumbnail img-responsive" src="<?php echo $this->escape($league['ImageLogoUrl']); ?>"/>
+                                        <img class="img-thumbnail img-responsive"
+                                             src="<?php echo $this->escape($league['ImageLogoUrl']); ?>"/>
                                     </a>
                                 </div>
                             <?php } ?>
@@ -44,42 +45,25 @@
                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                         <div class="block block-default">
                             <div>
-                                <table class="table table-striped table-bordered m-b-0">
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-bold">
-                                            <span><?php echo $this->translate('Название'); ?></span>
-                                        </td>
-                                        <td>
-                                            <span>
-                                                <a href="<?php echo $defaultLeagueIDUrl; ?>">
-                                                    <?php echo $this->escape($league['Name']); ?>
-                                                </a>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">
-                                            <span><?php echo $this->translate('Администратор'); ?></span>
-                                        </td>
-                                        <td>
-                                        <span>
-                                            <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                                <?php echo $this->escape($league['User']['NickName']); ?>
-                                            </a>
-                                        </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold">
-                                            <span><?php echo $this->translate('Описание'); ?></span>
-                                        </td>
-                                        <td>
-                                            <span><?php echo $this->RenderContentTypeText($league['Description'], 'full_html'); ?></span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <h4 class="league-name">
+                                    <a href="<?php echo $defaultLeagueIDUrl; ?>">
+                                        <?php echo $this->escape($league['Name']); ?>
+                                    </a>
+                                </h4>
+                                <div class="league-administrator">
+                                    <?php echo $this->translate('Администратор'); ?>:
+                                    <i class="fa fa-user fa-1x"></i>
+                                    <a class="tooltip-field"
+                                       title="<?= $this->escape($league['User']['NickName']) ?>"
+                                       target="blank" href="<?= $defaultUserIDUrl; ?>">
+                                        <?= $this->escape($league['User']['LastName']) . ' ' . $this->escape($league['User']['FirstName']) ?>
+                                    </a>
+
+                                </div>
+                                <hr />
+                                <p class="league-description">
+                                    <?php echo $this->RenderContentTypeText($league['Description'], 'full_html'); ?>
+                                </p>
                             </div>
                         </div>
                     </div>
