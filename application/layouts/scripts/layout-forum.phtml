@@ -10,7 +10,7 @@ $this->MinifyHeadScript()->appendFile("/library/jquery.page-scroller/jquery.page
 // js app files
 $this->MinifyHeadScript()->appendFile("/js/app.js");
 $this->MinifyHeadScript()->appendFile("/js/common.js");
-$this->MinifyHeadScript()->appendFile("/js/layout-forum.js");
+$this->MinifyHeadScript()->appendFile("/js/script.js");
 
 // IE js files
 $this->headScript()->appendFile(
@@ -26,8 +26,8 @@ $this->minifyHeadLink()->appendStylesheet(
 ); // page-scroller block styles
 
 // css app files
-$this->minifyHeadLink()->appendStylesheet('/css/layout-common.css');
-$this->minifyHeadLink()->appendStylesheet('/css/layout-forum.css');
+$this->minifyHeadLink()->appendStylesheet('/css/style.css');
+$this->minifyHeadLink()->appendStylesheet('/css/style.css');
 
 // IE css files
 $this->headLink()->appendStylesheet("/css/ie9.css", 'screen', 'IE 9');

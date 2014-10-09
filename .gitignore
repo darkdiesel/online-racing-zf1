@@ -29,6 +29,10 @@ public_html/data-content/data-uploads/track/logos/*
 public_html/data-content/data-uploads/leagues/*
 !/public_html/data-content/data-uploads/leagues/index.php
 
+!/public_html/data-content/data-uploads/championships/
+public_html/data-content/data-uploads/championships/*
+!/public_html/data-content/data-uploads/championships/index.php
+
 !/public_html/data-content/data-uploads/flags/
 /public_html/data-content/data-uploads/flags/*
 

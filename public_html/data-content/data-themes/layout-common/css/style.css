@@ -626,7 +626,7 @@
 }
 
 .block-media-list .media-list .media {
-    background: url("../data-content/ui/border-pattern.gif") repeat-x left top;
+    background: url("../img/border-pattern.gif") repeat-x left top;
     padding: 20px 0 10px;
     margin-top: 5px;
 }

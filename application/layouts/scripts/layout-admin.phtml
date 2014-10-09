@@ -1,14 +1,16 @@
 <?php
 
-// js library files
+// Modernizr
 $this->headScript()->prependFile("/library/modernizr/modernizr.min.js"); // modernizr
-
-//$this->MinifyHeadScript()->appendFile("/library/jquery.page-scroller/jquery.page-scroller.js"); // page-scroller block js
 
 // Twitter Bootstrap 3
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
 $this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css");
+
+// Additional Twitter Bootstrap 3
+$this->minifyHeadLink()->appendStylesheet("/data-content/data-themes/layout-common/css/bootstrap-3-additional.css");
+$this->minifyHeadLink()->appendStylesheet("/data-content/data-themes/layout-common/css/bootstrap-3-additional-theme.css");
 
 // Font-AweSome
 $this->minifyHeadLink()->appendStylesheet("/library/font-awesome/css/font-awesome.min.css");
@@ -18,20 +20,16 @@ $this->MinifyHeadScript()->appendFile("/library/jquery.clock/js/jquery.clock.js"
 $this->minifyHeadLink()->appendStylesheet("/library/jquery.clock/css/digital.css");
 
 // js app files
-//$this->MinifyHeadScript()->appendFile("/js/app.js");
-$this->MinifyHeadScript()->appendFile("/js/common.js");
-$this->MinifyHeadScript()->appendFile("/js/layout-admin.js");
+//$this->MinifyHeadScript()->appendFile("/data-content/data-themes/layout-common/js/app.js");
+$this->MinifyHeadScript()->appendFile("/data-content/data-themes/layout-common/js/common.js");
+$this->MinifyHeadScript()->appendFile("/data-content/data-themes/layout-admin/js/script.js");
 
 // css app files
 //$this->minifyHeadLink()->appendStylesheet('/css/style.css');
-//$this->minifyHeadLink()->appendStylesheet('/css/items.css');
+//$this->minifyHeadLink()->appendStylesheet('/data-content/data-themes/layout-common/css/items.css');
 //$this->minifyHeadLink()->appendStylesheet('/css/forms.css');
-$this->minifyHeadLink()->appendStylesheet('/css/layout-common.css');
-$this->minifyHeadLink()->appendStylesheet('/css/layout-admin.css');
-
-
-$this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional.css"); // twitter bootstrap additional css
-$this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional-theme.css"); // twitter bootstrap additional theme css
+$this->minifyHeadLink()->appendStylesheet('/data-content/data-themes/layout-common/css/style.css');
+$this->minifyHeadLink()->appendStylesheet('/data-content/data-themes/layout-admin/css/style.css');
 
 $this->minifyHeadLink()->appendStylesheet('/css/action-nav.css');
 $this->minifyHeadLink()->appendStylesheet('/css/triangle-button.css');

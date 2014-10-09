@@ -11,7 +11,7 @@ $this->MinifyHeadScript()->appendFile("/library/jquery.page-scroller/jquery.page
 // js app files
 $this->MinifyHeadScript()->appendFile("/js/app.js");
 $this->MinifyHeadScript()->appendFile("/js/common.js");
-$this->MinifyHeadScript()->appendFile("/js/layout-admin.js");
+$this->MinifyHeadScript()->appendFile("/js/script.js");
 
 // IE js files
 $this->headScript()->appendFile("https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", 'text/javascript', array('conditional' => 'lt IE 9'));
@@ -30,8 +30,8 @@ $this->minifyHeadLink()->appendStylesheet("/css/bootstrap-3-additional-theme.css
 $this->minifyHeadLink()->appendStylesheet('/css/style.css');
 $this->minifyHeadLink()->appendStylesheet('/css/items.css');
 $this->minifyHeadLink()->appendStylesheet('/css/forms.css');
-$this->minifyHeadLink()->appendStylesheet('/css/layout-common.css');
-$this->minifyHeadLink()->appendStylesheet('/css/layout-admin.css');
+$this->minifyHeadLink()->appendStylesheet('/css/style.css');
+$this->minifyHeadLink()->appendStylesheet('/css/style.css');
 
 // IE css files
 $this->headLink()->appendStylesheet("/css/ie9.css",'screen', 'IE 9');

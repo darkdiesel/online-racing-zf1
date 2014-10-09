@@ -1,7 +1,7 @@
 /* Base styles */
 body {
     font: normal 12px 'Open Sans', HelveticaNeue, Helvetica, Arial;
-    background: url("../data-themes/layout-admin/img/bg.png");
+    background: url("../img/bg.png");
     min-height: 100%;
     color: #707070;
     overflow-x: hidden;
