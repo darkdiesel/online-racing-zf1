@@ -20,7 +20,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_User', 'default');
  * @property string $Language
  * @property integer $Status
  * @property integer $AvatarType
- * @property string $AvatarImageUrl
+ * @property string $AvatarUrl
  * @property string $AvatarGravatarEmail
  * @property string $Skype
  * @property string $Icq
@@ -170,7 +170,7 @@ abstract class Default_Model_Base_User extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('AvatarImageUrl', 'string', 255, array(
+        $this->hasColumn('AvatarUrl', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,

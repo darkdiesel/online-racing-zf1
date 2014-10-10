@@ -11,8 +11,8 @@
                         array('module' => 'admin', 'controller' => 'content-type', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminContentTypeAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить тип контента'); ?>
+                    <a href="<?= $adminContentTypeAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить тип контента'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,13 +23,13 @@
                         <span>ID</span>
                     </th>
                     <th class="content-type-name">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </th>
                     <th class="content-type-description">
-                        <span><?php echo $this->translate('Описание'); ?></span>
+                        <span><?= $this->translate('Описание'); ?></span>
                     </th>
                     <th class="content-type-action">
-                        <span><?php echo $this->translate('Действие'); ?></span>
+                        <span><?= $this->translate('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -49,32 +49,30 @@
                         ?>
                         <tr>
                             <td class="content-type-id">
-                                    <span>
-                                        <a href="<?php echo $adminContentTypeIdUrl; ?>">
-                                            <?php echo $this->escape($contentType['ID']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminContentTypeIdUrl; ?>">
+                                        <?= $this->escape($contentType['ID']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="content-type-name">
-                                    <span>
-                                        <a href="<?php echo $adminContentTypeIdUrl; ?>">
-                                            <?php echo $this->escape($contentType['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminContentTypeIdUrl; ?>">
+                                        <?= $this->escape($contentType['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="content-type-description">
-                                    <span>
-                                        <?php echo $this->RenderContentTypeText($contentType['Description'], 'full_html'); ?>
-                                    </span>
+                                <span>
+                                    <?= $this->RenderContentTypeText($contentType['Description'], 'full_html'); ?>
+                                </span>
                             </td>
                             <td class="content-type-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Тип контента"), false)->contentTypeMenu(
-                                            $this->escape($contentType['ID']), true
-                                        );
-                                        ?>
-                                    </span>
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Тип контента"), false)
+                                        ->contentTypeMenu($this->escape($contentType['ID']), true);
+                                    ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -84,7 +82,7 @@
             <div class="panel-footer clearfix">
                 <?php if ($this->contentTypeData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->contentTypeData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>

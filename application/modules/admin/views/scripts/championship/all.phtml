@@ -11,8 +11,8 @@
                         array('module' => 'admin', 'controller' => 'championship', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminChampionshipAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить чемпионат'); ?>
+                    <a href="<?= $adminChampionshipAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить чемпионат'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,25 +23,25 @@
                         <span>ID</span>
                     </th>
                     <th class="championship-name">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </th>
                     <th class="championship-league">
-                        <span><?php echo $this->translate('Лига'); ?></span>
+                        <span><?= $this->translate('Лига'); ?></span>
                     </th>
                     <th class="championship-racing-serie">
-                        <span><?php echo $this->translate('Гоночная серия'); ?></span>
+                        <span><?= $this->translate('Гоночная серия'); ?></span>
                     </th>
                     <th class="championship-administrator">
-                        <span><?php echo $this->translate('Администратор'); ?></span>
+                        <span><?= $this->translate('Администратор'); ?></span>
                     </th>
                     <th class="championship-rule">
-                        <span><?php echo $this->translate('Регламент'); ?></span>
+                        <span><?= $this->translate('Регламент'); ?></span>
                     </th>
                     <th class="championship-game">
-                        <span><?php echo $this->translate('Игра'); ?></span>
+                        <span><?= $this->translate('Игра'); ?></span>
                     </th>
                     <th class="championship-action">
-                        <span><?php echo $this->translate('Действие'); ?></span>
+                        <span><?= $this->translate('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -115,64 +115,62 @@
                         ?>
                         <tr>
                             <td class="championship-id">
-                                    <span>
-                                        <a href="<?php echo $defaultChampionshipIDUrl; ?>">
-                                            <?php echo $this->escape($championship['ID']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $defaultChampionshipIDUrl; ?>">
+                                        <?= $this->escape($championship['ID']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-name">
-                                    <span>
-                                        <a href="<?php echo $defaultChampionshipIDUrl; ?>">
-                                            <?php echo $this->escape($championship['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $defaultChampionshipIDUrl; ?>">
+                                        <?= $this->escape($championship['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-league">
-                                    <span>
-                                        <a target="blank" href="<?php echo $defaultLeagueIDUrl; ?>">
-                                            <?php echo $this->escape($championship['League']['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a target="blank" href="<?= $defaultLeagueIDUrl; ?>">
+                                        <?= $this->escape($championship['League']['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-racing-serie">
-                                    <span>
-                                        <a target="blank" href="<?php echo $defaultRacingSeriesIDUrl; ?>">
-                                            <?php echo $this->escape($championship['RacingSeries']['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a target="blank" href="<?= $defaultRacingSeriesIDUrl; ?>">
+                                        <?= $this->escape($championship['RacingSeries']['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-administrator">
-                                    <span>
-                                        <a class="tooltip-field"
-                                           title="<?= $this->escape($championship['User']['NickName']) ?>"
-                                           target="blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                            <?= $this->escape($championship['User']['LastName']) . ' ' . $this->escape($championship['User']['FirstName']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a class="tooltip-field"
+                                       title="<?= $this->escape($championship['User']['NickName']) ?>"
+                                       target="blank" href="<?= $defaultUserIDUrl; ?>">
+                                        <?= $this->escape($championship['User']['LastName']) . ' ' . $this->escape($championship['User']['FirstName']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-rule">
-                                    <span>
-                                        <a target="blank" href="<?php echo $defaultPostRuleIDUrl; ?>">
-                                            <?php echo $this->escape($championship['PostRule']['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a target="blank" href="<?= $defaultPostRuleIDUrl; ?>">
+                                        <?= $this->escape($championship['PostRule']['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-game">
-                                    <span>
-                                        <a target="blank" href="<?php echo $defaultPostGameIDUrl; ?>">
-                                            <?php echo $this->escape($championship['PostGame']['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a target="blank" href="<?= $defaultPostGameIDUrl; ?>">
+                                        <?= $this->escape($championship['PostGame']['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="championship-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Чемпионат"), false)->championshipMenu(
-                                            $this->escape($championship['ID']), true
-                                        );
-                                        ?>
-                                    </span>
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Чемпионат"), false)
+                                        ->championshipMenu($this->escape($championship['ID']), true);
+                                    ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -182,7 +180,7 @@
             <div class="panel-footer clearfix">
                 <?php if ($this->championshipData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->championshipData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>

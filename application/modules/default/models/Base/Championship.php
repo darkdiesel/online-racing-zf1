@@ -9,7 +9,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Championship', 'de
  * 
  * @property integer $ID
  * @property string $Name
- * @property string $ImageLogoUrl
+ * @property string $LogoUrl
  * @property integer $LeagueID
  * @property integer $RacingSeriesID
  * @property integer $PostRuleID
@@ -22,10 +22,10 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Championship', 'de
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
  * @property Default_Model_League $League
+ * @property Default_Model_RacingSeries $RacingSeries
  * @property Default_Model_Post $PostRule
  * @property Default_Model_Post $PostGame
  * @property Default_Model_User $User
- * @property Default_Model_RacingSeries $RacingSeries
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -54,7 +54,7 @@ abstract class Default_Model_Base_Championship extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('ImageLogoUrl', 'string', 255, array(
+        $this->hasColumn('LogoUrl', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,
@@ -167,8 +167,8 @@ abstract class Default_Model_Base_Championship extends Doctrine_Record
              'local' => 'LeagueID',
              'foreign' => 'ID'));
 
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'UserID',
+        $this->hasOne('Default_Model_RacingSeries as RacingSeries', array(
+             'local' => 'RacingSeriesID',
              'foreign' => 'ID'));
 
         $this->hasOne('Default_Model_Post as PostRule', array(
@@ -179,8 +179,8 @@ abstract class Default_Model_Base_Championship extends Doctrine_Record
              'local' => 'PostGameID',
              'foreign' => 'ID'));
 
-        $this->hasOne('Default_Model_RacingSeries as RacingSeries', array(
-             'local' => 'RacingSeriesID',
+        $this->hasOne('Default_Model_User as User', array(
+             'local' => 'UserID',
              'foreign' => 'ID'));
     }
 }

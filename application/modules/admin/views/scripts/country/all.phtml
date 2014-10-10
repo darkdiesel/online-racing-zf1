@@ -11,8 +11,8 @@
                         array('module' => 'admin', 'controller' => 'country', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminCountryAddUrl; ?>" class="btn btn-xs btn-primary pull-right">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить страну'); ?>
+                    <a href="<?= $adminCountryAddUrl; ?>" class="btn btn-xs btn-primary pull-right">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить страну'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,22 +23,22 @@
                         <span>ID</span>
                     </th>
                     <th class="country-native-name">
-                        <span><?php echo $this->translate('Родное название'); ?></span>
+                        <span><?= $this->translate('Родное название'); ?></span>
                     </th>
                     <th class="country-english-name">
-                        <span><?php echo $this->translate('Английское название'); ?></span>
+                        <span><?= $this->translate('Английское название'); ?></span>
                     </th>
                     <th class="country-abreviation">
-                        <span><?php echo $this->translate('Аббревиатура'); ?></span>
+                        <span><?= $this->translate('Аббревиатура'); ?></span>
                     </th>
                     <th class="country-round-image">
-                        <span><?php echo $this->translate('Круговая картинка'); ?></span>
+                        <span><?= $this->translate('Круговая картинка'); ?></span>
                     </th>
                     <th class="country-glowssy-wave-image">
-                        <span><?php echo $this->translate('Волнистая картинка'); ?></span>
+                        <span><?= $this->translate('Волнистая картинка'); ?></span>
                     </th>
                     <th class="country-action">
-                        <span><?php echo $this->translate('Действие'); ?></span>
+                        <span><?= $this->translate('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -58,53 +58,49 @@
                         ?>
                         <tr>
                             <td class="country-id">
-                                    <span>
-                                        <a href="<?php echo $adminCountryIdUrl; ?>">
-                                            <?php echo $this->escape($country['ID']); ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminCountryIdUrl; ?>">
+                                        <?= $this->escape($country['ID']); ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="country-native-name">
-                                    <span>
-                                        <a href="<?php echo $adminCountryIdUrl; ?>">
-                                            <?php echo $this->escape($country['NativeName']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminCountryIdUrl; ?>">
+                                        <?= $this->escape($country['NativeName']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="country-english-name">
-                                    <span>
-                                        <a href="<?php echo $adminCountryIdUrl; ?>">
-                                            <?php echo $this->escape($country['EnglishName']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminCountryIdUrl; ?>">
+                                        <?= $this->escape($country['EnglishName']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="country-abreviation">
-                                    <span>
-                                        <a href="<?php echo $adminCountryIdUrl ?>">
-                                            <?php echo $this->escape($country['Abbreviation']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminCountryIdUrl ?>">
+                                        <?= $this->escape($country['Abbreviation']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="country-round-image">
-                                    <span>
-                                        <img
-                                            src="<?php echo $this->baseUrl($this->escape($country['ImageRoundUrl'])) ?>">
-                                    </span>
+                                <span>
+                                    <img src="<?= $this->baseUrl($this->escape($country['ImageRoundUrl'])) ?>"/>
+                                </span>
                             </td>
                             <td class="country-wave-image">
-                                    <span>
-                                        <img
-                                            src="<?php echo $this->baseUrl($this->escape($country['ImageGlossyWaveUrl'])) ?>">
-                                    </span>
+                                <span>
+                                    <imgsrc="<?= $this->baseUrl($this->escape($country['ImageGlossyWaveUrl'])) ?>" />
+                                </span>
                             </td>
                             <td class="country-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Страна"), false)->countryMenu(
-                                            $this->escape($country['ID']), true
-                                        );
-                                        ?>
-                                    </span>
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Страна"), false)
+                                        ->countryMenu($this->escape($country['ID']), true);
+                                    ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -114,7 +110,7 @@
             <div class="panel-footer clearfix">
                 <?php if ($this->countryData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->countryData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         );
                         ?>

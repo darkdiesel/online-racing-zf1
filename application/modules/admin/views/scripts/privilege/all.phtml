@@ -4,7 +4,7 @@
 			<?php
 			$privilege_id_url = $this->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'add'), 'default', true);
 			?>
-			<a href="<?php echo $privilege_id_url ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить привилегию ресурса'); ?></a>
+			<a href="<?= $privilege_id_url ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?= $this->translate('Добавить привилегию ресурса'); ?></a>
 		</div>
 	</div>
 </div>
@@ -20,12 +20,12 @@
 						<thead>
 							<tr>
 								<th class="privilege_id"><span>ID</span></th>
-								<th class="privilege_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="privilege_resource"><span><?php echo $this->translate('Ресурс'); ?></span></th>
-								<th class="privilege_descr"><span><?php echo $this->translate('Описание'); ?></span></th>
-								<th class="privilege_date_create"><span><?php echo $this->translate('Дата создания'); ?></span></th>
-								<th class="privilege_date_edit"><span><?php echo $this->translate('Дата редактирования'); ?></span></th>
-								<th class="privilege_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+								<th class="privilege_name"><span><?= $this->translate('Название'); ?></span></th>
+								<th class="privilege_resource"><span><?= $this->translate('Ресурс'); ?></span></th>
+								<th class="privilege_descr"><span><?= $this->translate('Описание'); ?></span></th>
+								<th class="privilege_date_create"><span><?= $this->translate('Дата создания'); ?></span></th>
+								<th class="privilege_date_edit"><span><?= $this->translate('Дата редактирования'); ?></span></th>
+								<th class="privilege_action"><span><?= $this->translate('Действие'); ?></span></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,12 +38,12 @@
 								$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $this->escape($privilege->resource_id)), 'adminResourceId', true);
 								?>
 								<tr>
-									<td class="privilege_id"><span><a href="<?php echo $privilege_id_url; ?>"><?php echo $this->escape($privilege->id) ?></a></span></td>
-									<td class="privilege_name"><span><a href="<?php echo $privilege_id_url ?>"><?php echo $this->escape($privilege->name) ?></a></span></td>
-									<td class="privilege_resource"><span><a href="<?php echo $resource_id_url ?>"><?php echo $this->escape($privilege->resource_id) ?></a></span></td>
-									<td class="privilege_descr"><span><?php echo $this->truncate($this->escape($privilege->description))->toLength(100); ?></span></td>
-									<td class="privilege_date_create"><span><?php echo $this->escape($privilege->date_create); ?></span></td>
-									<td class="privilege_dae_edit"><span><?php echo $this->escape($privilege->date_edit); ?></span></td>
+									<td class="privilege_id"><span><a href="<?= $privilege_id_url; ?>"><?= $this->escape($privilege->id) ?></a></span></td>
+									<td class="privilege_name"><span><a href="<?= $privilege_id_url ?>"><?= $this->escape($privilege->name) ?></a></span></td>
+									<td class="privilege_resource"><span><a href="<?= $resource_id_url ?>"><?= $this->escape($privilege->resource_id) ?></a></span></td>
+									<td class="privilege_descr"><span><?= $this->truncate($this->escape($privilege->description))->toLength(100); ?></span></td>
+									<td class="privilege_date_create"><span><?= $this->escape($privilege->date_create); ?></span></td>
+									<td class="privilege_dae_edit"><span><?= $this->escape($privilege->date_edit); ?></span></td>
 									<td class="privilege_action">
 										<span>
 											<div class="pull-right action-buttons">
@@ -52,9 +52,9 @@
 														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
 													</button>
 													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $privilege_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $privilege_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $privilege_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+														<li><a href="<?= $privilege_id_url ?>"><i class="fa fa-eye"></i> <?= $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?= $privilege_edit_url ?>"><i class="fa fa-pencil"></i> <?= $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?= $privilege_delete_url ?>"><i class="fa fa-trash-o"></i> <?= $this->translate('Удалить'); ?></a></li>
 													</ul>
 												</div>
 											</div>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="panel-footer">
 					<div class="pull-right">
-						<?php echo $this->paginationControl($this->privileges_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+						<?= $this->paginationControl($this->privileges_data, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
 					</div>
 					<div class="clearfix"></div>
 				</div>

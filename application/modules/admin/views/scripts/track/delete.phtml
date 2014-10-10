@@ -1,27 +1,27 @@
 <?php if ($this->track) { ?>
-	<?php echo $this->form; ?>
+	<?= $this->form; ?>
 	<div class="track_item">
 		<table class="table table-striped table-bordered article_table">
 			<tbody>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->name); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Название'); ?></span></td>
+					<td><span><?= $this->escape($this->track->name); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Год трассы'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->track_year); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Год трассы'); ?></span></td>
+					<td><span><?= $this->escape($this->track->track_year); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Город'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->city_id); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Город'); ?></span></td>
+					<td><span><?= $this->escape($this->track->city_id); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->description); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Описание'); ?></span></td>
+					<td><span><?= $this->escape($this->track->description); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Схема'); ?></span></td>
-					<td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->url_track_scheme)); ?>"></span></td>
+					<td class="header_column"><span><?= $this->translate('Схема'); ?></span></td>
+					<td><span><img src="<?= $this->baseUrl($this->escape($this->track->url_track_scheme)); ?>"></span></td>
 				</tr>
 			</tbody>
 		</table>

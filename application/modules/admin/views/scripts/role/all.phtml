@@ -11,8 +11,8 @@
                         array('module' => 'admin', 'controller' => 'role', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminRoleAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить роль'); ?>
+                    <a href="<?= $adminRoleAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить роль'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,19 +23,19 @@
                         <span>ID</span>
                     </th>
                     <th class="role-name">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </th>
                     <th class="role-system-name">
-                        <span><?php echo $this->translate('Системное имя'); ?></span>
+                        <span><?= $this->translate('Системное имя'); ?></span>
                     </th>
                     <th class="role-parent-role">
-                        <span><?php echo $this->translate('Родительская роль'); ?></span>
+                        <span><?= $this->translate('Родительская роль'); ?></span>
                     </th>
                     <th class="role-description">
-                        <span><?php echo $this->translate('Описание'); ?></span>
+                        <span><?= $this->translate('Описание'); ?></span>
                     </th>
                     <th class="role-action">
-                        <span><?php echo $this->translate('Действие'); ?></span>
+                        <span><?= $this->translate('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -49,63 +49,57 @@
                                 array('module' => 'admin', 'controller' => 'role', 'action' => 'id',
                                     'roleID' => $this->escape($role['ID'])), 'adminRoleID'
                             );
+                            $adminParentRoleIDUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'role', 'action' => 'id',
+                                    'roleID' => $this->escape($role['ParentRoleID'])), 'adminRoleID'
+                            );
                         } else {
                             $adminRoleIDUrl = '#';
+                            $adminParentRoleIDUrl = '#';
                         }
                         ?>
                         <tr>
                             <td class="role-id">
-                                    <span>
-                                        <a href="<?php echo $adminRoleIDUrl; ?>">
-                                            <?php echo $this->escape($role['ID']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminRoleIDUrl; ?>">
+                                        <?= $this->escape($role['ID']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="role-name">
-                                    <span>
-                                        <a href="<?php echo $adminRoleIDUrl; ?>">
-                                            <?php echo $this->escape($role['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminRoleIDUrl; ?>">
+                                        <?= $this->escape($role['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="role-system-name">
-                                    <span>
-                                        <a href="<?php echo $adminRoleIDUrl; ?>">
-                                            <?php echo $this->escape($role['SystemName']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $adminRoleIDUrl; ?>">
+                                        <?= $this->escape($role['SystemName']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="role-parent-role">
-                                    <span>
-                                        <?php if ($this->escape($role['ParentRoleID'])) { ?>
-                                            <?php if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'role', 'id')) { ?>
-                                                <?php
-                                                $adminRoleIDUrl = $this->url(
-                                                    array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'roleID' => $this->escape($role['ParentRoleID'])), 'adminRoleID'
-                                                );
-                                                ?>
-                                            <?php } else { ?>
-                                                <?php $adminRoleIDUrl = '#'; ?>
-                                            <?php } ?>
-                                            <a href="<?php echo $adminRoleIDUrl; ?>">
-                                                <?php echo $this->escape($role['Role'][0]['Name']) ?>
-                                            </a>
-                                        <?php } ?>
-                                    </span>
+                                <span>
+                                    <?php if ($this->escape($role['ParentRoleID'])) { ?>
+                                        <a href="<?= $adminParentRoleIDUrl; ?>">
+                                            <?= $this->escape($role['Role'][0]['Name']) ?>
+                                        </a>
+                                    <?php } ?>
+                                </span>
                             </td>
                             <td class="role-description">
-                                    <span>
-                                        <?php echo $this->RenderContentTypeText($role['Description'], 'full_html'); ?>
-                                    </span>
+                                <span>
+                                    <?= $this->RenderContentTypeText($role['Description'], 'full_html'); ?>
+                                </span>
                             </td>
                             <td class="role-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Роль пользователя"), false)->roleMenu(
-                                            $this->escape($role['ID']), true
-                                        );
-                                        ?>
-                                    </span>
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Роль пользователя"), false)
+                                        ->roleMenu($this->escape($role['ID']), true);
+                                    ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -115,7 +109,7 @@
             <div class="panel-footer clearfix">
                 <?php if ($this->roleData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->roleData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>

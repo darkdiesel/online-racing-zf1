@@ -11,8 +11,8 @@
                         array('module' => 'admin', 'controller' => 'league', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminLeagueAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить лигу'); ?>
+                    <a href="<?= $adminLeagueAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить лигу'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,16 +23,16 @@
                         <span>ID</span>
                     </th>
                     <th class="league-name">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </th>
-                    <th class="league-admin">
-                        <span><?php echo $this->translate('Администратор'); ?></span>
+                    <th class="league-administrator">
+                        <span><?= $this->translate('Администратор'); ?></span>
                     </th>
                     <th class="league-description">
-                        <span><?php echo $this->translate('Описание'); ?></span>
+                        <span><?= $this->translate('Описание'); ?></span>
                     </th>
                     <th class="league-action">
-                        <span><?php echo $this->translate('Действие'); ?></span>
+                        <span><?= $this->translate('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -63,41 +63,39 @@
                         ?>
                         <tr>
                             <td class="league-id">
-                                    <span>
-                                        <a href="<?php echo $defaultLeagueIDUrl; ?>">
-                                            <?php echo $this->escape($league['ID']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $defaultLeagueIDUrl; ?>">
+                                        <?= $this->escape($league['ID']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="league-name">
-                                    <span>
-                                        <a href="<?php echo $defaultLeagueIDUrl; ?>">
-                                            <?php echo $this->escape($league['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $defaultLeagueIDUrl; ?>">
+                                        <?= $this->escape($league['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
-                            <td class="league-admin">
-                                    <span>
-                                        <a class="tooltip-field"
-                                           title="<?= $this->escape($league['User']['NickName']) ?>"
-                                           target="blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                            <?= $this->escape($league['User']['LastName']) . ' ' . $this->escape($league['User']['FirstName']) ?>
-                                        </a>
-                                    </span>
+                            <td class="league-administrator">
+                                <span>
+                                    <a class="tooltip-field"
+                                       title="<?= $this->escape($league['User']['NickName']) ?>"
+                                       target="blank" href="<?= $defaultUserIDUrl; ?>">
+                                        <?= $this->escape($this->getUser($league['User'])->getFullName()); ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="league-description">
-                                    <span>
-                                        <?php echo $this->renderContentTypeText($league['Description'], 'full_html'); ?>
-                                    </span>
+                                <span>
+                                    <?= $this->renderContentTypeText($league['Description'], 'full_html'); ?>
+                                </span>
                             </td>
                             <td class="league-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Лига"), false)->leagueMenu(
-                                            $this->escape($league['ID']), true
-                                        );
-                                        ?>
-                                    </span>
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Лига"), false)
+                                        ->leagueMenu($this->escape($league['ID']), true);
+                                    ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -107,7 +105,7 @@
             <div class="panel-footer clearfix">
                 <?php if ($this->leagueData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->leagueData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>

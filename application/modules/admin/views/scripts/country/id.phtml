@@ -10,47 +10,47 @@
                 <tbody>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Родное название'); ?></span>
+                        <span><?= $this->translate('Родное название'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->escape($this->countryData['NativeName']); ?></span>
+                        <span><?= $this->escape($this->countryData['NativeName']); ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Английское название'); ?></span>
+                        <span><?= $this->translate('Английское название'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->escape($this->countryData['EnglishName']); ?></span>
+                        <span><?= $this->escape($this->countryData['EnglishName']); ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Аббревиатура'); ?></span>
+                        <span><?= $this->translate('Аббревиатура'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->escape($this->countryData['Abbreviation']); ?></span>
+                        <span><?= $this->escape($this->countryData['Abbreviation']); ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Круговая картинка'); ?></span>
+                        <span><?= $this->translate('Круговая картинка'); ?></span>
                     </td>
                     <td>
                         <span>
                             <img
-                                src="<?php echo $this->baseUrl($this->escape($this->countryData['ImageRoundUrl'])); ?>">
+                                src="<?= $this->baseUrl($this->escape($this->countryData['ImageRoundUrl'])); ?>">
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Волнистая картинка'); ?></span>
+                        <span><?= $this->translate('Волнистая картинка'); ?></span>
                     </td>
                     <td>
                         <span>
                             <img
-                                src="<?php echo $this->baseUrl($this->escape($this->countryData['ImageGlossyWaveUrl'])); ?>">
+                                src="<?= $this->baseUrl($this->escape($this->countryData['ImageGlossyWaveUrl'])); ?>">
                         </span>
                     </td>
                 </tr>
@@ -58,21 +58,21 @@
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?php echo $this->translate('Страна'); ?>
+                <?= $this->translate('Страна'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
-                <?php echo $this->escape($this->countryData['DateCreate']); ?>
+                <?= $this->escape($this->countryData['DateCreate']); ?>
             </div>
             <?php if ($this->escape($this->countryData['DateCreate']) != $this->escape($this->countryData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
-                    <?php echo $this->escape($this->countryData['DateEdit']); ?>
+                    <?= $this->escape($this->countryData['DateEdit']); ?>
                 </div>
             <?php endif; ?>
         </div>

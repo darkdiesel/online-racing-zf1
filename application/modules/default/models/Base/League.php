@@ -10,7 +10,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_League', 'default'
  * @property integer $ID
  * @property string $Name
  * @property string $Description
- * @property string $ImageLogoUrl
+ * @property string $LogoUrl
  * @property integer $UserID
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
@@ -53,7 +53,7 @@ abstract class Default_Model_Base_League extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('ImageLogoUrl', 'string', 255, array(
+        $this->hasColumn('LogoUrl', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
              'fixed' => false,

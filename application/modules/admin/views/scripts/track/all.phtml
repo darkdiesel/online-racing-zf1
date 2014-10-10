@@ -1,75 +1,115 @@
 <div class="row">
-	<div class="col-md-12 col-lg-12">
-		<div class="clearfix m-b-10">
-			<?php
-			$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true);
-			?>
-			<a href="<?php echo $track_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?php echo $this->translate('Добавить трассу'); ?></a>
-		</div>
-	</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="fa fa-list fa-2x"></i>
+                <?php
+                // check access and generate link for admin/track/add
+                if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'add')) : ?>
+                    <?php
+                    $adminTrackAddUrl = $this->url(
+                        array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default'
+                    );
+                    ?>
+                    <a href="<?= $adminTrackAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить лигу'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="track-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="track-name">
+                        <span><?= $this->translate('Название'); ?></span>
+                    </th>
+                    <th class="track-year">
+                        <span><?= $this->translate('Год'); ?></span>
+                    </th>
+                    <th class="track-country">
+                        <span><?= $this->translate('Страна'); ?></span>
+                    </th>
+                    <th class="track-action">
+                        <span><?= $this->translate('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->trackData) : ?>
+                    <?php foreach ($this->trackData as $track): ?>
+                        <?php
+                        // check access and generate link for admin/track/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'track', 'id')) {
+                            $adminTrackIDUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'track', 'action' => 'id',
+                                    'trackID' => $this->escape($track['ID'])), 'adminTrackID'
+                            );
+                        } else {
+                            $adminTrackIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for admin/country/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'country', 'id')) {
+                            $adminCountryIDUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'country', 'action' => 'id',
+                                    'countryID' => $this->escape($track['Country']['ID'])), 'adminCountryID'
+                            );
+                        } else {
+                            $adminCountryIDUrl = '#';
+                        }
+                        ?>
+                        <tr>
+                            <td class="track-id">
+                                <span>
+                                    <a href="<?= $adminTrackIDUrl; ?>">
+                                        <?= $this->escape($track['ID']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="track-name">
+                                <span>
+                                    <a href="<?= $adminTrackIDUrl; ?>">
+                                        <?= $this->escape($track['Name']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="track-year">
+                                <span>
+                                    <?= $this->escape($track['Year']) ?>
+                                </span>
+                            </td>
+                            <td class="track-country">
+                                <span>
+                                    <a href="<?= $adminCountryIDUrl; ?>">
+                                        <img src="<?= $this->escape($track['Country']['ImageRoundUrl']); ?>" />
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="track-action">
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Трасса"), false)
+                                        ->trackMenu($this->escape($track['ID']), true);
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix">
+                <?php if ($this->trackData) : ?>
+                    <div class="pull-right">
+                        <?= $this->paginationControl(
+                            $this->trackData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 </div>
-<?php if ($this->paginator) { ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-list"></i>
-				</div>
-				<div class="panel-body">
-					<table class="table table-striped custab">
-						<thead>
-							<tr>
-								<th class="track_id"><span>ID</span></th>
-								<th class="track_country"><span><?php echo $this->translate('Страна'); ?></span></th>
-								<th class="track_name"><span><?php echo $this->translate('Название'); ?></span></th>
-								<th class="track_length"><span><?php echo $this->translate('Длина круга (км)'); ?></span></th>
-								<th class="track_year"><span><?php echo $this->translate('Год'); ?></span></th>
-								<th class="track_action"><span><?php echo $this->translate('Действие'); ?></span></th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach ($this->paginator as $track): ?>
-								<?php
-								$track_id_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $this->escape($track->id)), 'adminTrackId', true);
-								$track_edit_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($track->id)), 'adminTrackAction', true);
-								$track_delete_url = $this->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($track->id)), 'adminTrackAction', true);
-								
-								$country_id_url = $this->url(array('module' => 'admin', 'controller' => 'country', 'action' => 'id', 'country_id' => $this->escape($track->country_id)), 'adminCountryID', true);
-								?>
-								<tr>
-									<td class="track_id"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->id) ?></a></span></td>
-									<td class="track_country"><span><a href="<?php echo $country_id_url; ?>"><img src="<?php echo $this->escape($track->country_ImageGlossyWaveUrl) ?>" class="img-responsive"/></a></span></td>
-									<td class="track_name"><span><a href="<?php echo $track_id_url; ?>"><?php echo $this->escape($track->name) ?></a></span></td>
-									<td class="track_year"><span><?php echo $this->escape($track->track_length) ?></span></td>
-									<td class="track_year"><span><?php echo $this->escape($track->track_year) ?></span></td>
-									<td class="track_action">
-										<span>
-											<div class="pull-right action-buttons">
-												<div class="btn-group pull-right">
-													<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
-													</button>
-													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $track_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $track_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $track_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
-													</ul>
-												</div>
-											</div>
-										</span>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer">
-					<div class="pull-right">
-						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php } ?>

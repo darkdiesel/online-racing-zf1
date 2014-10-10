@@ -1,9 +1,9 @@
 <?php if ($this->privilege) { ?>
-	<?php echo $this->form; ?>
+	<?= $this->form; ?>
 	<?php if ($this->privilege) : ?>
 		<div class="block">
 			<?php foreach ($this->privilege as $privilege_field): ?>
-				<?php echo $privilege_field . '<br/>'; ?>
+				<?= $privilege_field . '<br/>'; ?>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>

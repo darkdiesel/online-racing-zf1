@@ -1,6 +1,6 @@
 <?php if ($this->championshipData) { ?>
     <div class="m-b-10">
-        <?php echo $this->championshipDeleteForm; ?>
+        <?= $this->championshipDeleteForm; ?>
         <hr/>
     </div>
     <?php
@@ -75,7 +75,7 @@
                     <td>
                         <span>
                             <img class="image-responsive"
-                                 src="<?= $this->baseUrl($this->escape($this->championshipData['ImageLogoUrl'])); ?>">
+                                 src="<?= $this->baseUrl($this->escape($this->championshipData['LogoUrl'])); ?>">
                         </span>
                     </td>
                 </tr>
@@ -143,31 +143,31 @@
                 </tr>
                 <tr class="championship-description">
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Описание'); ?></span>
+                        <span><?= $this->translate('Описание'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->RenderContentTypeText($this->championshipData['Description'], 'full_html'); ?></span>
+                        <span><?= $this->RenderContentTypeText($this->championshipData['Description'], 'full_html'); ?></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?php echo $this->translate('Чемпионат'); ?>
+                <?= $this->translate('Чемпионат'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
-                <?php echo $this->escape($this->championshipData['DateCreate']); ?>
+                <?= $this->escape($this->championshipData['DateCreate']); ?>
             </div>
             <?php if ($this->escape($this->championshipData['DateCreate']) != $this->escape($this->championshipData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
-                    <?php echo $this->escape($this->championshipData['DateEdit']); ?>
+                    <?= $this->escape($this->championshipData['DateEdit']); ?>
                 </div>
             <?php endif; ?>
         </div>

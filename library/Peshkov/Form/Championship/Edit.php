@@ -25,7 +25,7 @@ class Peshkov_Form_Championship_Edit extends Peshkov_Form_Championship_Add
 
         $this->getElement('Name')->getValidator('Db_NoRecordExists')->setExclude('ID != ' . $request->getParam('championshipID'));
 
-        $this->getElement('ImageLogoUrl')->setRequired(false);
+        $this->getElement('LogoUrl')->setRequired(false);
 
         $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminChampionshipIDUrl}'");
 

@@ -21,9 +21,9 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Post', 'default');
  * @property string $LastUserIP
  * @property timestamp $DateCreate
  * @property timestamp $DateEdit
+ * @property Default_Model_User $User
  * @property Default_Model_PostCategory $PostCategory
  * @property Default_Model_ContentType $ContentType
- * @property Default_Model_User $User
  * @property Doctrine_Collection $ChampionshipRule
  * @property Doctrine_Collection $ChampionshipGame
  * @property Doctrine_Collection $Comment
@@ -61,7 +61,7 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('Text', 'string', null, array(
@@ -105,7 +105,7 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('UserID', 'integer', 8, array(
@@ -165,16 +165,16 @@ abstract class Default_Model_Base_Post extends Doctrine_Record
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Default_Model_User as User', array(
+             'local' => 'UserID',
+             'foreign' => 'ID'));
+
         $this->hasOne('Default_Model_PostCategory as PostCategory', array(
              'local' => 'PostCategoryID',
              'foreign' => 'ID'));
 
         $this->hasOne('Default_Model_ContentType as ContentType', array(
              'local' => 'ContentTypeID',
-             'foreign' => 'ID'));
-
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'UserID',
              'foreign' => 'ID'));
 
         $this->hasMany('Default_Model_Championship as ChampionshipRule', array(

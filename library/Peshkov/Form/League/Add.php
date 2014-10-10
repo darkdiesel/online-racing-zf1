@@ -69,7 +69,7 @@ class Peshkov_Form_League_Add extends Zend_Form
             $users->addMultiOption($user['ID'], $user['LastName'] . ' ' . $user['FirstName'] . ' (' . $user['NickName'] . ')');
         };
 
-        $urlImageLogo = new Zend_Form_Element_File('ImageLogoUrl');
+        $urlImageLogo = new Zend_Form_Element_File('LogoUrl');
         $urlImageLogo->setLabel($this->translate('Логотип лиги'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
@@ -121,7 +121,7 @@ class Peshkov_Form_League_Add extends Zend_Form
             array(
                 $this->getElement('Name'),
                 $this->getElement('UserID'),
-                $this->getElement('ImageLogoUrl'),
+                $this->getElement('LogoUrl'),
                 $this->getElement('Description')
             ), 'LeagueInfo'
         );

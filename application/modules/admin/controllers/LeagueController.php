@@ -82,21 +82,21 @@ class Admin_LeagueController extends App_Controller_LoaderController
                 $item->DateEdit = $date;
 
                 //receive and rename image logo file
-                if ($leagueAddForm->getValue('ImageLogoUrl')) {
-                    if ($leagueAddForm->ImageLogoUrl->receive()) {
-                        $file = $leagueAddForm->ImageLogoUrl->getFileInfo();
-                        $ext = pathinfo($file['ImageLogoUrl']['name'], PATHINFO_EXTENSION);
+                if ($leagueAddForm->getValue('LogoUrl')) {
+                    if ($leagueAddForm->LogoUrl->receive()) {
+                        $file = $leagueAddForm->LogoUrl->getFileInfo();
+                        $ext = pathinfo($file['LogoUrl']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['ImageLogoUrl']['destination'] . '/'
+                        => $file['LogoUrl']['destination'] . '/'
                             . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
-                            $file['ImageLogoUrl']['destination'] . '/' . $file['ImageLogoUrl']['name']
+                            $file['LogoUrl']['destination'] . '/' . $file['LogoUrl']['name']
                         );
 
-                        $item->ImageLogoUrl = '/data-content/data-uploads/leagues/' . $newName;
+                        $item->LogoUrl = '/data-content/data-uploads/leagues/' . $newName;
                     }
                 }
 
@@ -149,28 +149,28 @@ class Admin_LeagueController extends App_Controller_LoaderController
                     $item = Doctrine_Core::getTable('Default_Model_League')->find($requestData->leagueID);
 
                     //receive and rename image logo file
-                    if ($formData['ImageLogoUrl']) {
-                        if ($leagueEditForm->ImageLogoUrl->receive()) {
-                            $file = $leagueEditForm->ImageLogoUrl->getFileInfo();
-                            $ext = pathinfo($file['ImageLogoUrl']['name'], PATHINFO_EXTENSION);
+                    if ($formData['LogoUrl']) {
+                        if ($leagueEditForm->LogoUrl->receive()) {
+                            $file = $leagueEditForm->LogoUrl->getFileInfo();
+                            $ext = pathinfo($file['LogoUrl']['name'], PATHINFO_EXTENSION);
                             $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
 
                             $filterRename = new Zend_Filter_File_Rename(array('target'
-                            => $file['ImageLogoUrl']['destination'] . '/'
+                            => $file['LogoUrl']['destination'] . '/'
                                 . $newName, 'overwrite' => true));
 
                             $filterRename->filter(
-                                $file['ImageLogoUrl']['destination'] . '/' . $file['ImageLogoUrl']['name']
+                                $file['LogoUrl']['destination'] . '/' . $file['LogoUrl']['name']
                             );
 
-                            $formData['ImageLogoUrl'] = '/data-content/data-uploads/leagues/' . $newName;
+                            $formData['LogoUrl'] = '/data-content/data-uploads/leagues/' . $newName;
 
-                            if ($formData['ImageLogoUrl'] != $item['ImageLogoUrl']) {
-                                unlink(APPLICATION_PATH . '/../public_html' . $item['ImageLogoUrl']);
+                            if ($formData['LogoUrl'] != $item['LogoUrl']) {
+                                unlink(APPLICATION_PATH . '/../public_html' . $item['LogoUrl']);
                             }
                         }
                     } else {
-                        unset($formData['ImageLogoUrl']);
+                        unset($formData['LogoUrl']);
                     }
 
                     $item->fromArray($formData);
@@ -272,7 +272,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
 
                         $result = $query->execute();
 
-                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->leagueData['ImageLogoUrl']);
+                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->leagueData['LogoUrl']);
 
                         //TODO: Delete all championships, teams, and races after delleting league
 

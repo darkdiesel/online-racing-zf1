@@ -1,12 +1,12 @@
 <?php $this->CKEditor()->init(); ?>
 <?php $this->CKFinder()->init(); ?>
 
-<?php echo $this->championshipAddForm; ?>
+<?= $this->championshipAddForm; ?>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        <?php echo $this->CKEditor()->SetupFullHtmlEditor('Description'); ?>
-        <?php echo $this->CKFinder()->setupCKEditor('Description'); ?>
+        <?= $this->CKEditor()->SetupFullHtmlEditor('Description'); ?>
+        <?= $this->CKFinder()->setupCKEditor('Description'); ?>
 
         $("#DateStart").datepicker({
             showButtonPanel: true,

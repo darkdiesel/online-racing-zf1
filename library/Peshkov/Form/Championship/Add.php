@@ -105,7 +105,7 @@ class Peshkov_Form_Championship_Add extends Zend_Form
             $postGameID->addMultiOption($post['ID'], $post['Name']);
         };
 
-        $urlImageLogo = new Zend_Form_Element_File('ImageLogoUrl');
+        $urlImageLogo = new Zend_Form_Element_File('LogoUrl');
         $urlImageLogo->setLabel($this->translate('Логотип чемпионата'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
@@ -197,7 +197,7 @@ class Peshkov_Form_Championship_Add extends Zend_Form
         $this->addDisplayGroup(
             array(
                 $this->getElement('Name'),
-                $this->getElement('ImageLogoUrl'),
+                $this->getElement('LogoUrl'),
                 $this->getElement('Description'),
             ), 'ChampionshipInfo'
         );

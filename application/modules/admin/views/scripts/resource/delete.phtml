@@ -1,23 +1,23 @@
 <?php if ($this->resource) { ?>
-    <?php echo $this->form; ?>
+    <?= $this->form; ?>
     <div class="resource_item">
         <table class="table table-striped table-bordered article_table">
     	<tbody>
     	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->resource->name); ?></span></td>
+    		<td class="header_column"><span><?= $this->translate('Название'); ?></span></td>
+    		<td><span><?= $this->escape($this->resource->name); ?></span></td>
     	    </tr>
     	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->resource->description); ?></span></td>
+    		<td class="header_column"><span><?= $this->translate('Описание'); ?></span></td>
+    		<td><span><?= $this->escape($this->resource->description); ?></span></td>
     	    </tr>
     	</tbody>
         </table>
         <div class="article_info">
-    	<div class="resource_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Ресурс'); ?></div>
-    	<div class="resource_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->resource->date_create); ?></div>
+    	<div class="resource_name article_info_item"><span class="bold_text"><?= $this->translate('Вид контента') ?>: </span><?= $this->translate('Ресурс'); ?></div>
+    	<div class="resource_date_create article_info_item"><span class="bold_text"><?= $this->translate('Опубликовано') ?>: </span><?= $this->escape($this->resource->date_create); ?></div>
 	    <?php if ($this->escape($this->resource->date_create) != $this->escape($this->resource->date_edit)) { ?>
-		<div class="resource_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->resource->date_edit); ?></div>
+		<div class="resource_date_edit article_info_item"><span class="bold_text"><?= $this->translate('Последнее редактирование') ?>: </span><?= $this->escape($this->resource->date_edit); ?></div>
 	    <?php } ?>
         </div>
     </div>

@@ -11,80 +11,78 @@
                         array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminRacingSeriesAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить гоночную серию'); ?>
+                    <a href="<?= $adminRacingSeriesAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить гоночную серию'); ?>
                     </a>
                 <?php endif; ?>
             </div>
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th class="racing-series-id">
-                            <span>ID</span>
-                        </th>
-                        <th class="racing-series-name">
-                            <span><?php echo $this->translate('Название'); ?></span>
-                        </th>
-                        <th class="racing-series-description">
-                            <span><?php echo $this->translate('Описание'); ?></span>
-                        </th>
-                        <th class="racing-series-action">
-                            <span><?php echo $this->translate('Действие'); ?></span>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php if ($this->racingSeriesData) : ?>
-                        <?php foreach ($this->racingSeriesData as $racingSeries): ?>
-                            <?php
-                            // check access and generate link for admin/racing-series/id
-                            if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
-                                $adminRacingSeriesIdUrl = $this->url(
-                                    array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
-                                        'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesID'
-                                );
-                            } else {
-                                $adminRacingSeriesIdUrl = '#';
-                            }
-                            ?>
-                            <tr>
-                                <td class="racing-series-id">
-                                    <span>
-                                        <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
-                                            <?php echo $this->escape($racingSeries['ID']) ?>
-                                        </a>
-                                    </span>
-                                </td>
-                                <td class="racing-series-name">
-                                    <span>
-                                        <a href="<?php echo $adminRacingSeriesIdUrl; ?>">
-                                            <?php echo $this->escape($racingSeries['Name']) ?>
-                                        </a>
-                                    </span>
-                                </td>
-                                <td class="racing-series-description">
-                                    <span>
-                                        <?php echo $this->renderContentTypeText($racingSeries['Description'], 'full_html'); ?>
-                                    </span>
-                                </td>
-                                <td class="racing-series-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Гоночная серия"), false)->racingSeriesMenu(
-                                            $this->escape($racingSeries['ID']), true
-                                        );
-                                        ?>
-                                    </span>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                    </tbody>
-                </table>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="racing-series-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="racing-series-name">
+                        <span><?= $this->translate('Название'); ?></span>
+                    </th>
+                    <th class="racing-series-description">
+                        <span><?= $this->translate('Описание'); ?></span>
+                    </th>
+                    <th class="racing-series-action">
+                        <span><?= $this->translate('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($this->racingSeriesData) : ?>
+                    <?php foreach ($this->racingSeriesData as $racingSeries): ?>
+                        <?php
+                        // check access and generate link for admin/racing-series/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 'id')) {
+                            $adminRacingSeriesIdUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'racing-series', 'action' => 'id',
+                                    'racingSeriesID' => $this->escape($racingSeries['ID'])), 'adminRacingSeriesID'
+                            );
+                        } else {
+                            $adminRacingSeriesIdUrl = '#';
+                        }
+                        ?>
+                        <tr>
+                            <td class="racing-series-id">
+                                <span>
+                                    <a href="<?= $adminRacingSeriesIdUrl; ?>">
+                                        <?= $this->escape($racingSeries['ID']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="racing-series-name">
+                                <span>
+                                    <a href="<?= $adminRacingSeriesIdUrl; ?>">
+                                        <?= $this->escape($racingSeries['Name']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="racing-series-description">
+                                <span>
+                                    <?= $this->renderContentTypeText($racingSeries['Description'], 'full_html'); ?>
+                                </span>
+                            </td>
+                            <td class="racing-series-action">
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Гоночная серия"), false)
+                                        ->racingSeriesMenu($this->escape($racingSeries['ID']), true);
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                </tbody>
+            </table>
             <div class="panel-footer clearfix">
                 <?php if ($this->racingSeriesData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->racingSeriesData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>

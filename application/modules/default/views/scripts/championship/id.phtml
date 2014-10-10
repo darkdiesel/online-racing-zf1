@@ -93,7 +93,7 @@
                                             <a class="tooltip-field"
                                                title="<?= $this->escape($this->championshipData['User']['NickName']) ?>"
                                                target="blank" href="<?= $defaultUserIDUrl; ?>">
-                                                <?= $this->escape($this->championshipData['User']['LastName']) . ' ' . $this->escape($this->championshipData['User']['FirstName']) ?>
+                                                <?= $this->escape($this->getUser($this->championshipData['User'])->getFullName()); ?>
                                             </a>
                                         </span>
                                     </td>
@@ -113,21 +113,21 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="text-center">
-                        <?php if ($this->escape($this->championshipData['ImageLogoUrl'])) { ?>
+                        <?php if ($this->escape($this->championshipData['LogoUrl'])) { ?>
                             <div class="m-b-15 center-block text-center">
                                 <a href="#" data-toggle="modal"
                                    data-target=".championship-<?php print $this->championshipData['ID']; ?>"
                                    title="<?= $this->escape($this->championshipData['Name']); ?>"
                                    class="">
                                     <img class="img-thumbnail img-responsive"
-                                         src="<?= $this->escape($this->championshipData['ImageLogoUrl']); ?>"/>
+                                         src="<?= $this->escape($this->championshipData['LogoUrl']); ?>"/>
                                 </a>
                                 <?= $this->modal(
                                     array(
                                         'title' => $this->championshipData['Name'],
                                         'class' => 'championship-' . $this->championshipData['ID'],
                                         'content' =>
-                                            '<img src="' . $this->escape($this->championshipData['ImageLogoUrl'])
+                                            '<img src="' . $this->escape($this->championshipData['LogoUrl'])
                                             . '" class="img-responsive img-rounded center-block" alt="">'
                                     )
                                 ); ?>

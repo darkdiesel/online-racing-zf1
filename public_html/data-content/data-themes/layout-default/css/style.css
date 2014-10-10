@@ -258,14 +258,22 @@ body {
 
 }
 
+#default-league-all .block-league{
+
+}
+
+#default-league-all .block-league hr{
+    margin: 7px 0;
+}
+
 #default-league-all .league-name{
     text-transform: uppercase;
     font-weight: bold;
-    margin-top: 0;
+    margin: 0 0 4px;
 }
 
 #default-league-all .league-name, #default-league-all .league-name a{
-    color:#777;
+    color:#c41d1d;
 }
 
 #default-league-all .league-administrator, #default-league-all .league-administrator a{

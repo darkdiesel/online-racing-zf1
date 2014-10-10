@@ -9,11 +9,11 @@
 <?php } ?>
 
 <?php if ($this->privileges_data) : ?>
-	<h3><?php echo $this->translate('Привилегии ресурсов'); ?></h3>
+	<h3><?= $this->translate('Привилегии ресурсов'); ?></h3>
 	<?php foreach ($this->privileges_data as $privilege): ?>
 		<div class="block">
 			<?php foreach ($privilege as $field): ?>
-				<?php echo $field . "<br/>"; ?>
+				<?= $field . "<br/>"; ?>
 			<?php endforeach; ?>
 		</div>
 	<?php endforeach; ?>

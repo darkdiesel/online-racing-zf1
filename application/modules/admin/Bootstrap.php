@@ -460,12 +460,14 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
 
         //TRACK CONTROLLER ROUTERS
         $router->addRoute(
-            'adminTrackId', new Zend_Controller_Router_Route_Regex('admin/track/(\d+)\.html', array(
+            'adminTrackID',
+            new Zend_Controller_Router_Route_Regex('admin/track/(\d+)\.html',
+                array(
                     'module' => 'admin',
                     'controller' => 'track',
                     'action' => 'id',
                     1 => 0), array(
-                    'track_id' => 1,
+                    'trackID' => 1,
                 ), "admin/track/%d.html"
             ));
 
@@ -474,7 +476,7 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
                     'module' => 'admin',
                     'controller' => 'track',
                     1 => 0), array(
-                    'track_id' => 1,
+                    'trackID' => 1,
                     'action' => 2,
                 ), "admin/track/%d/%s.html"
             ));

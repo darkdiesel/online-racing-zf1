@@ -1,6 +1,6 @@
 <?php if ($this->leagueData) { ?>
     <div class="m-b-10">
-        <?php echo $this->leagueDeleteForm; ?>
+        <?= $this->leagueDeleteForm; ?>
         <hr/>
     </div>
     <?php
@@ -20,62 +20,64 @@
                 <tbody>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->escape($this->leagueData['Name']); ?></span>
+                        <span><?= $this->escape($this->leagueData['Name']); ?></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Логотип лиги'); ?></span>
+                        <span><?= $this->translate('Логотип лиги'); ?></span>
                     </td>
                     <td>
                         <span>
                             <img class="image-responsive"
-                                src="<?php echo $this->baseUrl($this->escape($this->leagueData['ImageLogoUrl'])); ?>">
+                                src="<?= $this->baseUrl($this->escape($this->leagueData['LogoUrl'])); ?>">
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Администратор'); ?></span>
+                        <span><?= $this->translate('Администратор'); ?></span>
                     </td>
                     <td>
                     <span>
-                        <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
-                            <?php echo $this->escape($this->leagueData['User']['NickName']); ?>
+                        <a class="tooltip-field"
+                           title="<?= $this->escape($this->leagueData['User']['NickName']) ?>"
+                           target="blank" href="<?= $defaultUserIDUrl; ?>">
+                            <?= $this->escape($this->getUser($this->leagueData['User'])->getFullName()); ?>
                         </a>
                     </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?php echo $this->translate('Описание'); ?></span>
+                        <span><?= $this->translate('Описание'); ?></span>
                     </td>
                     <td>
-                        <span><?php echo $this->RenderContentTypeText($this->leagueData['Description'], 'full_html'); ?></span>
+                        <span><?= $this->RenderContentTypeText($this->leagueData['Description'], 'full_html'); ?></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?php echo $this->translate('Лига'); ?>
+                <?= $this->translate('Лига'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?php echo $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
-                <?php echo $this->escape($this->leagueData['DateCreate']); ?>
+                <?= $this->escape($this->leagueData['DateCreate']); ?>
             </div>
             <?php if ($this->escape($this->leagueData['DateCreate']) != $this->escape($this->leagueData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?php echo $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
-                    <?php echo $this->escape($this->leagueData['DateEdit']); ?>
+                    <?= $this->escape($this->leagueData['DateEdit']); ?>
                 </div>
             <?php endif; ?>
         </div>

@@ -38,8 +38,8 @@ class UserController extends App_Controller_LoaderController
             if (count($result) == 1) {
                 $this->view->userData = $result[0];
 
-                $this->view->headTitle($result[0]['Name']);
-                $this->view->pageTitle($result[0]['Name']);
+                $this->view->headTitle($this->view->getUser($result[0])->getFullName());
+                $this->view->pageTitle($this->view->getUser($result[0])->getFullName());
 
                 // BreadsCrumbs
                 $this->view->breadcrumb()->UserAll('1')->User($result[0]['ID'], $result[0]['NickName']);

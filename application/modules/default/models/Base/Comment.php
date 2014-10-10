@@ -12,13 +12,13 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Comment', 'default
  * @property integer $PostID
  * @property string $Name
  * @property string $Text
- * @property timestamp $DateCreate
- * @property timestamp $DateEdit
  * @property integer $Status
  * @property integer $ParentCommentID
+ * @property timestamp $DateCreate
+ * @property timestamp $DateEdit
+ * @property Default_Model_User $User
  * @property Default_Model_Post $Post
  * @property Doctrine_Collection $Comment
- * @property Default_Model_User $User
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -73,22 +73,6 @@ abstract class Default_Model_Base_Comment extends Doctrine_Record
              'notnull' => true,
              'autoincrement' => false,
              ));
-        $this->hasColumn('DateCreate', 'timestamp', null, array(
-             'type' => 'timestamp',
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => true,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('DateEdit', 'timestamp', null, array(
-             'type' => 'timestamp',
-             'fixed' => false,
-             'unsigned' => false,
-             'primary' => false,
-             'notnull' => true,
-             'autoincrement' => false,
-             ));
         $this->hasColumn('Status', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
@@ -107,11 +91,31 @@ abstract class Default_Model_Base_Comment extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
+        $this->hasColumn('DateCreate', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('DateEdit', 'timestamp', null, array(
+             'type' => 'timestamp',
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => true,
+             'autoincrement' => false,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
+        $this->hasOne('Default_Model_User as User', array(
+             'local' => 'UserID',
+             'foreign' => 'ID'));
+
         $this->hasOne('Default_Model_Post as Post', array(
              'local' => 'PostID',
              'foreign' => 'ID'));
@@ -119,9 +123,5 @@ abstract class Default_Model_Base_Comment extends Doctrine_Record
         $this->hasMany('Default_Model_Comment as Comment', array(
              'local' => 'ID',
              'foreign' => 'ParentCommentID'));
-
-        $this->hasOne('Default_Model_User as User', array(
-             'local' => 'UserID',
-             'foreign' => 'ID'));
     }
 }

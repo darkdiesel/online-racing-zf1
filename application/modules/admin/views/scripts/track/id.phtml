@@ -3,42 +3,42 @@
 		<table class="table table-striped table-bordered article_table">
 			<tbody>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->name); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Название'); ?></span></td>
+					<td><span><?= $this->escape($this->track->name); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Год конфигурации трассы'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->track_year); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Год конфигурации трассы'); ?></span></td>
+					<td><span><?= $this->escape($this->track->track_year); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Город'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->city_id); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Город'); ?></span></td>
+					<td><span><?= $this->escape($this->track->city_id); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Страна'); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Страна'); ?></span></td>
 					<td>
-						<span><?php echo $this->escape($this->track->country_id); ?></span>
-						<span><?php echo $this->escape($this->track->country_NativeName); ?></span>
-						<span>(<?php echo $this->escape($this->track->country_EnglishName); ?>)</span>
-						<span><img src="<?php echo $this->baseUrl($this->escape($this->track->country_ImageGlossyWaveUrl)); ?>" ></span>
-						<span><img src="<?php echo $this->baseUrl($this->escape($this->track->country_ImageRoundUrl)); ?>" ></span>
+						<span><?= $this->escape($this->track->country_id); ?></span>
+						<span><?= $this->escape($this->track->country_NativeName); ?></span>
+						<span>(<?= $this->escape($this->track->country_EnglishName); ?>)</span>
+						<span><img src="<?= $this->baseUrl($this->escape($this->track->country_ImageGlossyWaveUrl)); ?>" ></span>
+						<span><img src="<?= $this->baseUrl($this->escape($this->track->country_ImageRoundUrl)); ?>" ></span>
 					</td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Длина'); ?></span></td>
-					<td><span><?php echo $this->escape($this->track->track_length); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Длина'); ?></span></td>
+					<td><span><?= $this->escape($this->track->track_length); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-					<td><span><?php echo $this->RenderContentTypeText($this->track->description, 'full_html'); ?></span></td>
+					<td class="header_column"><span><?= $this->translate('Описание'); ?></span></td>
+					<td><span><?= $this->RenderContentTypeText($this->track->description, 'full_html'); ?></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Логотип'); ?></span></td>
-					<td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->url_track_logo)); ?>"></span></td>
+					<td class="header_column"><span><?= $this->translate('Логотип'); ?></span></td>
+					<td><span><img src="<?= $this->baseUrl($this->escape($this->track->url_track_logo)); ?>"></span></td>
 				</tr>
 				<tr>
-					<td class="header_column"><span><?php echo $this->translate('Схема'); ?></span></td>
-					<td><span><img src="<?php echo $this->baseUrl($this->escape($this->track->url_track_scheme)); ?>"></span></td>
+					<td class="header_column"><span><?= $this->translate('Схема'); ?></span></td>
+					<td><span><img src="<?= $this->baseUrl($this->escape($this->track->url_track_scheme)); ?>"></span></td>
 				</tr>
 			</tbody>
 		</table>
@@ -53,30 +53,30 @@
 					<?php
 					$track_edit_url = $this->url(array('controller' => 'track', 'action' => 'edit', 'track_id' => $this->escape($this->track->id)), 'adminTrackAction', true);
 					?>
-					<a href = "<?php echo $track_edit_url; ?>" class = "btn btn-sm btn-primary content_edit">
-						<?php echo $this->translate('Редактировать') ?>
+					<a href = "<?= $track_edit_url; ?>" class = "btn btn-sm btn-primary content_edit">
+						<?= $this->translate('Редактировать') ?>
 					</a>
 				<?php } ?>
 				<?php if ($delete_access) { ?>
 					<?php
 					$track_delete_url = $this->url(array('controller' => 'track', 'action' => 'delete', 'track_id' => $this->escape($this->track->id)), 'adminTrackAction', true);
 					?>
-					<a href = "<?php echo $track_delete_url; ?>" class = "btn btn-sm btn-primary content_delete">
-						<?php echo $this->translate('Удалить') ?>
+					<a href = "<?= $track_delete_url; ?>" class = "btn btn-sm btn-primary content_delete">
+						<?= $this->translate('Удалить') ?>
 					</a>
 				<?php } ?>
 			</div>
 		<?php } ?>
 		<div class="article_info">
 			<div class="track_name article_info_item">
-				<span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Трасса'); ?>
+				<span class="bold_text"><?= $this->translate('Вид контента') ?>: </span><?= $this->translate('Трасса'); ?>
 			</div>
 			<div class="track_date_create article_info_item">
-				<span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->track->date_create); ?>
+				<span class="bold_text"><?= $this->translate('Опубликовано') ?>: </span><?= $this->escape($this->track->date_create); ?>
 			</div>
 			<?php if ($this->escape($this->track->date_create) != $this->escape($this->track->date_edit)) { ?>
 				<div class="track_date_edit article_info_item">
-					<span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->track->date_edit); ?>
+					<span class="bold_text"><?= $this->translate('Последнее редактирование') ?>: </span><?= $this->escape($this->track->date_edit); ?>
 				</div>
 			<?php } ?>
 		</div>

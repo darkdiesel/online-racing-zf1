@@ -19,13 +19,13 @@
 						<thead>
 							<tr>
 								<th class="resource_id"><span>ID</span></th>
-								<th class="user_login"><span><?php echo $this->translate('Логин'); ?></span></th>
-								<th class="user_name"><span><?php echo $this->translate('Имя'); ?></span></th>
-								<th class="user_surname"><span><?php echo $this->translate('Фамилия'); ?></span></th>
-								<th class="user_last_login_ip"><span><?php echo $this->translate('Последний IP'); ?></span></th>
-								<th class="user_role"><span><?php echo $this->translate('Роль'); ?></span></th>
-								<th class="user_about"><span><?php echo $this->translate('О себе'); ?></span></th>
-								<th class="user_action"><span><?php echo $this->translate('Действие'); ?></span></th>
+								<th class="user_login"><span><?= $this->translate('Логин'); ?></span></th>
+								<th class="user_name"><span><?= $this->translate('Имя'); ?></span></th>
+								<th class="user_surname"><span><?= $this->translate('Фамилия'); ?></span></th>
+								<th class="user_last_login_ip"><span><?= $this->translate('Последний IP'); ?></span></th>
+								<th class="user_role"><span><?= $this->translate('Роль'); ?></span></th>
+								<th class="user_about"><span><?= $this->translate('О себе'); ?></span></th>
+								<th class="user_action"><span><?= $this->translate('Действие'); ?></span></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -37,13 +37,13 @@
 								$user_role_id_url = $this->url(array('module' => 'admin', 'controller' => 'role', 'action' => 'id', 'role_id' => $user['user_role_id']), 'adminRoleID', true);
 								?>
 								<tr>
-									<td class="user_id"><span><a href="<?php echo $user_id_url ?>"><?php echo $this->escape($user['id']) ?></a></span></td>
-									<td class="user_login"><span><a href="<?php echo $user_id_url ?>"><?php echo $this->escape($user['login']) ?></a></span></td>
-									<td class="user_name"><span><?php echo $this->escape($user['name']) ?></span></td>
-									<td class="user_surname"><span><?php echo $this->escape($user['surname']) ?></span></td>
-									<td class="user_last_login_ip"><span><?php echo $this->escape($user['last_login_ip']) ?></span></td>
-									<td class="user_role"><span><a href="<?php echo $user_role_id_url; ?>"><?php echo $this->escape($user['user_role_name']) ?></a></span></td>
-									<td class="user_about"><span><?php echo $this->truncate($this->escape($user['about']))->toLength(200); ?></span></td>
+									<td class="user_id"><span><a href="<?= $user_id_url ?>"><?= $this->escape($user['id']) ?></a></span></td>
+									<td class="user_login"><span><a href="<?= $user_id_url ?>"><?= $this->escape($user['login']) ?></a></span></td>
+									<td class="user_name"><span><?= $this->escape($user['name']) ?></span></td>
+									<td class="user_surname"><span><?= $this->escape($user['surname']) ?></span></td>
+									<td class="user_last_login_ip"><span><?= $this->escape($user['last_login_ip']) ?></span></td>
+									<td class="user_role"><span><a href="<?= $user_role_id_url; ?>"><?= $this->escape($user['user_role_name']) ?></a></span></td>
+									<td class="user_about"><span><?= $this->truncate($this->escape($user['about']))->toLength(200); ?></span></td>
 									<td class="user_action">
 										<span>
 											<div class="pull-right action-buttons">
@@ -52,9 +52,9 @@
 														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
 													</button>
 													<ul class="dropdown-menu slidedown">
-														<li><a href="<?php echo $user_id_url ?>"><i class="fa fa-eye"></i> <?php echo $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?php echo $user_edit_url ?>"><i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?php echo $user_delete_url ?>"><i class="fa fa-trash-o"></i> <?php echo $this->translate('Удалить'); ?></a></li>
+														<li><a href="<?= $user_id_url ?>"><i class="fa fa-eye"></i> <?= $this->translate('Просмотреть'); ?></a></li>
+														<li><a href="<?= $user_edit_url ?>"><i class="fa fa-pencil"></i> <?= $this->translate('Редактировать'); ?></a></li>
+														<li><a href="<?= $user_delete_url ?>"><i class="fa fa-trash-o"></i> <?= $this->translate('Удалить'); ?></a></li>
 													</ul>
 												</div>
 											</div>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="panel-footer">
 					<div class="pull-right">
-						<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+						<?= $this->paginationControl($this->paginator, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
 					</div>
 					<div class="clearfix"></div>
 				</div>

@@ -1,23 +1,23 @@
 <?php if ($this->event) { ?>
-    <?php echo $this->form; ?>
+    <?= $this->form; ?>
     <div class="event_item block-item">
         <table class="table table-striped table-bordered article_table">
     	<tbody>
     	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Название'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->event['name']); ?></span></td>
+    		<td class="header_column"><span><?= $this->translate('Название'); ?></span></td>
+    		<td><span><?= $this->escape($this->event['name']); ?></span></td>
     	    </tr>
     	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Описание'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->event['description']); ?></span></td>
+    		<td class="header_column"><span><?= $this->translate('Описание'); ?></span></td>
+    		<td><span><?= $this->escape($this->event['description']); ?></span></td>
     	    </tr>
     	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Дата события'); ?></span></td>
-    		<td><span><?php echo $this->escape($this->event['date_event']); ?></span></td>
+    		<td class="header_column"><span><?= $this->translate('Дата события'); ?></span></td>
+    		<td><span><?= $this->escape($this->event['date_event']); ?></span></td>
     	    </tr>
     	    <tr>
-    		<td class="header_column"><span><?php echo $this->translate('Ссылка на событие'); ?></span></td>
-    		<td><span><a href="<?php echo $this->escape($this->event['url_event']); ?>"><?php echo $this->translate('Ссылка'); ?></a></span></td>
+    		<td class="header_column"><span><?= $this->translate('Ссылка на событие'); ?></span></td>
+    		<td><span><a href="<?= $this->escape($this->event['url_event']); ?>"><?= $this->translate('Ссылка'); ?></a></span></td>
     	    </tr>
     	</tbody>
         </table>
@@ -31,18 +31,18 @@
 	    ?>
 	    <div class = "article_controls" >
 		<?php if ($edit_access) { ?>
-	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $this->event['id']), 'event_action', true) ?>" class = "btn btn-sm btn-primary content_edit"><?php echo $this->translate('Редактировать') ?></a>
+	    	<a href = "<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $this->event['id']), 'event_action', true) ?>" class = "btn btn-sm btn-primary content_edit"><?= $this->translate('Редактировать') ?></a>
 		<?php } ?>
 		<?php if ($delete_access) { ?>
-	    	<a href = "<?php echo $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $this->event['id']), 'event_action', true) ?>" class = "btn btn-sm btn-primary content_delete"><?php echo $this->translate('Удалить') ?></a>
+	    	<a href = "<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $this->event['id']), 'event_action', true) ?>" class = "btn btn-sm btn-primary content_delete"><?= $this->translate('Удалить') ?></a>
 		<?php } ?>
 	    </div>
 	<?php } ?>
         <div class="article_info">
-    	<div class="event_name article_info_item"><span class="bold_text"><?php echo $this->translate('Вид контента') ?>: </span><?php echo $this->translate('Событие'); ?></div>
-    	<div class="event_date_create article_info_item"><span class="bold_text"><?php echo $this->translate('Опубликовано') ?>: </span><?php echo $this->escape($this->event['date_create']); ?></div>
+    	<div class="event_name article_info_item"><span class="bold_text"><?= $this->translate('Вид контента') ?>: </span><?= $this->translate('Событие'); ?></div>
+    	<div class="event_date_create article_info_item"><span class="bold_text"><?= $this->translate('Опубликовано') ?>: </span><?= $this->escape($this->event['date_create']); ?></div>
 	    <?php if ($this->escape($this->event['date_create']) != $this->escape($this->event['date_edit'])) { ?>
-		<div class="event_date_edit article_info_item"><span class="bold_text"><?php echo $this->translate('Последнее редактирование') ?>: </span><?php echo $this->escape($this->event['date_edit']); ?></div>
+		<div class="event_date_edit article_info_item"><span class="bold_text"><?= $this->translate('Последнее редактирование') ?>: </span><?= $this->escape($this->event['date_edit']); ?></div>
 	    <?php } ?>
         </div>
     </div>

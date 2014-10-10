@@ -2,9 +2,14 @@
 
 class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
 {
+    private $_user;
 
-    public function getUser()
+    public function getUser($user = null)
     {
+
+        if ($user) {
+            $this->_user = $user;
+        }
 
         return $this;
     }
@@ -40,7 +45,7 @@ class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
                 $userResult = $query->fetchArray();
 
                 if ($userResult) {
-                    return '<img class="' . $img_class . '" src="' . $userResult[0]['AvatarImageUrl'] . '">';
+                    return '<img class="' . $img_class . '" src="' . $userResult[0]['AvatarUrl'] . '">';
                 } else {
                     $avatar = $this->view->gravatar()
                         ->setImgSize(200)
@@ -109,8 +114,22 @@ class Peshkov_View_Helper_GetUser extends Zend_View_Helper_Abstract
         return $ip;
     }
 
-    public function activate($user){
+    public function activate($user)
+    {
         // TODO: add helper for activation
+    }
+
+    public function getFullName()
+    {
+        if ($this->_user) {
+            if ($this->_user['LastName'] && $this->_user['FirstName']) {
+                return $this->_user['LastName'] . ' ' . $this->_user['FirstName'];
+            } else {
+                return $this->_user['NickName'];
+            }
+        } else {
+            return false;
+        }
     }
 
 }

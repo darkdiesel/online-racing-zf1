@@ -98,21 +98,21 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                 $item->DateEdit = $date;
 
                 //receive and rename image logo file
-                if ($championshipAddForm->getValue('ImageLogoUrl')) {
-                    if ($championshipAddForm->ImageLogoUrl->receive()) {
-                        $file = $championshipAddForm->ImageLogoUrl->getFileInfo();
-                        $ext = pathinfo($file['ImageLogoUrl']['name'], PATHINFO_EXTENSION);
+                if ($championshipAddForm->getValue('LogoUrl')) {
+                    if ($championshipAddForm->LogoUrl->receive()) {
+                        $file = $championshipAddForm->LogoUrl->getFileInfo();
+                        $ext = pathinfo($file['LogoUrl']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_championship_logo' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['ImageLogoUrl']['destination'] . '/'
+                        => $file['LogoUrl']['destination'] . '/'
                             . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
-                            $file['ImageLogoUrl']['destination'] . '/' . $file['ImageLogoUrl']['name']
+                            $file['LogoUrl']['destination'] . '/' . $file['LogoUrl']['name']
                         );
 
-                        $item->ImageLogoUrl = '/data-content/data-uploads/championships/' . $newName;
+                        $item->LogoUrl = '/data-content/data-uploads/championships/' . $newName;
                     }
                 }
 
@@ -169,28 +169,28 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                     $item = Doctrine_Core::getTable('Default_Model_Championship')->find($requestData->championshipID);
 
                     //receive and rename image logo file
-                    if ($formData['ImageLogoUrl']) {
-                        if ($championshipEditForm->ImageLogoUrl->receive()) {
-                            $file = $championshipEditForm->ImageLogoUrl->getFileInfo();
-                            $ext = pathinfo($file['ImageLogoUrl']['name'], PATHINFO_EXTENSION);
+                    if ($formData['LogoUrl']) {
+                        if ($championshipEditForm->LogoUrl->receive()) {
+                            $file = $championshipEditForm->LogoUrl->getFileInfo();
+                            $ext = pathinfo($file['LogoUrl']['name'], PATHINFO_EXTENSION);
                             $newName = Date('Y-m-d_H-i-s') . strtolower('_championship_logo' . '.' . $ext);
 
                             $filterRename = new Zend_Filter_File_Rename(array('target'
-                            => $file['ImageLogoUrl']['destination'] . '/'
+                            => $file['LogoUrl']['destination'] . '/'
                                 . $newName, 'overwrite' => true));
 
                             $filterRename->filter(
-                                $file['ImageLogoUrl']['destination'] . '/' . $file['ImageLogoUrl']['name']
+                                $file['LogoUrl']['destination'] . '/' . $file['LogoUrl']['name']
                             );
 
-                            $formData['ImageLogoUrl'] = '/data-content/data-uploads/championships/' . $newName;
+                            $formData['LogoUrl'] = '/data-content/data-uploads/championships/' . $newName;
 
-                            if ($formData['ImageLogoUrl'] != $item['ImageLogoUrl']) {
-                                unlink(APPLICATION_PATH . '/../public_html' . $item['ImageLogoUrl']);
+                            if ($formData['LogoUrl'] != $item['LogoUrl']) {
+                                unlink(APPLICATION_PATH . '/../public_html' . $item['LogoUrl']);
                             }
                         }
                     } else {
-                        unset($formData['ImageLogoUrl']);
+                        unset($formData['LogoUrl']);
                     }
 
                     if (!$formData['DateStart']) {
@@ -316,7 +316,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
 
                         $result = $query->execute();
 
-                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->championshipData['ImageLogoUrl']);
+                        unlink(APPLICATION_PATH . '/../public_html' . $this->view->championshipData['LogoUrl']);
 
                         //TODO: Delete all teams, teams, and races after delleting championship
 

@@ -39,7 +39,7 @@
                                             <a class="tooltip-field"
                                                title="<?= $this->escape($this->leagueData['User']['NickName']) ?>"
                                                target="blank" href="<?= $defaultUserIDUrl; ?>">
-                                                <?= $this->escape($this->leagueData['User']['LastName']) . ' ' . $this->escape($this->leagueData['User']['FirstName']) ?>
+                                                <?= $this->escape($this->getUser($this->leagueData['User'])->getFullName()); ?>
                                             </a>
                                         </span>
                                     </td>
@@ -59,21 +59,21 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <div class="text-center">
-                        <?php if ($this->escape($this->leagueData['ImageLogoUrl'])) { ?>
+                        <?php if ($this->escape($this->leagueData['LogoUrl'])) { ?>
                             <div class="m-b-15 center-block text-center">
                                 <a href="#" data-toggle="modal"
                                    data-target=".league-<?php print $this->leagueData['ID']; ?>"
                                    title="<?= $this->escape($this->leagueData['Name']); ?>"
                                    class="">
                                     <img class="img-thumbnail img-responsive"
-                                         src="<?= $this->escape($this->leagueData['ImageLogoUrl']); ?>"/>
+                                         src="<?= $this->escape($this->leagueData['LogoUrl']); ?>"/>
                                 </a>
                                 <?= $this->modal(
                                     array(
                                         'title' => $this->leagueData['Name'],
                                         'class' => 'league-' . $this->leagueData['ID'],
                                         'content' =>
-                                            '<img src="' . $this->escape($this->leagueData['ImageLogoUrl'])
+                                            '<img src="' . $this->escape($this->leagueData['LogoUrl'])
                                             . '" class="img-responsive img-rounded center-block" alt="">'
                                     )
                                 ); ?>
@@ -133,11 +133,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                             <div class="text-center">
-                                <?php if ($this->escape($championship['ImageLogoUrl'])) { ?>
+                                <?php if ($this->escape($championship['LogoUrl'])) { ?>
                                     <div class="m-b-15 center-block text-center">
                                         <a href="<?= $defaultChampionshipIDUrl; ?>">
                                             <img class="img-thumbnail img-responsive"
-                                                 src="<?= $this->escape($championship['ImageLogoUrl']); ?>"/>
+                                                 src="<?= $this->escape($championship['LogoUrl']); ?>"/>
                                         </a>
                                     </div>
                                 <?php } ?>
@@ -169,7 +169,7 @@
                                             <a class="tooltip-field"
                                                title="<?= $this->escape($championship['User']['NickName']) ?>"
                                                target="blank" href="<?= $defaultUserIDUrl; ?>">
-                                                <?= $this->escape($championship['User']['LastName']) . ' ' . $this->escape($championship['User']['FirstName']) ?>
+                                                <?= $this->escape($this->getUser($championship['User'])->getFullName()); ?>
                                             </a>
                                         </span>
                                             </td>

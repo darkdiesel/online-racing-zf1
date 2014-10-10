@@ -11,8 +11,8 @@
                         array('module' => 'admin', 'controller' => 'post', 'action' => 'add'), 'default'
                     );
                     ?>
-                    <a href="<?php echo $adminPostAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?php echo $this->translate('Добавить контент'); ?>
+                    <a href="<?= $adminPostAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить контент'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,19 +23,19 @@
                         <span>ID</span>
                     </th>
                     <th class="post-publish">
-                        <span><?php echo $this->translate('Опубликована'); ?></span>
+                        <span><?= $this->translate('Опубликована'); ?></span>
                     </th>
                     <th class="post-name">
-                        <span><?php echo $this->translate('Название'); ?></span>
+                        <span><?= $this->translate('Название'); ?></span>
                     </th>
                     <th class="post-user">
-                        <span><?php echo $this->translate('Автор'); ?></span>
+                        <span><?= $this->translate('Автор'); ?></span>
                     </th>
                     <th class="post-post-category">
-                        <span><?php echo $this->translate('Категория поста'); ?></span>
+                        <span><?= $this->translate('Категория поста'); ?></span>
                     </th>
                     <th class="post-action">
-                        <span><?php echo $this->translate('Действие'); ?></span>
+                        <span><?= $this->translate('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -80,54 +80,52 @@
                         ?>
                         <tr>
                             <td class="post-id">
-                                    <span>
-                                        <a href="<?php echo $defaultPostIDUrl; ?>">
-                                            <?php echo $this->escape($post['ID']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $defaultPostIDUrl; ?>">
+                                        <?= $this->escape($post['ID']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="post-publish text-center">
-                                    <span>
-                                        <?php if ($this->escape($post['Publish'])) { ?>
-                                            <span class='label label-success'><i
-                                                    class="fa fa-check fa-lg"></i></i></span>
-                                        <?php } else { ?>
-                                            <span class='label label-danger'><i
-                                                    class="fa fa-times fa-lg"></i></span>
-                                        <?php } ?>
-                                    </span>
+                                <span>
+                                    <?php if ($this->escape($post['Publish'])) { ?>
+                                        <span class='label label-success'><i
+                                                class="fa fa-check fa-lg"></i></i></span>
+                                    <?php } else { ?>
+                                        <span class='label label-danger'><i
+                                                class="fa fa-times fa-lg"></i></span>
+                                    <?php } ?>
+                                </span>
                             </td>
                             <td class="post-name">
-                                    <span>
-                                        <a href="<?php echo $defaultPostIDUrl; ?>">
-                                            <?php echo $this->escape($post['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a href="<?= $defaultPostIDUrl; ?>">
+                                        <?= $this->escape($post['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="post-user">
-                                    <span>
-                                        <a class="tooltip-field"
-                                           title="<?= $this->escape($post['User']['NickName']) ?>"
-                                           target="blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                            <?= $this->escape($post['User']['LastName']) . ' ' . $this->escape($post['User']['FirstName']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a class="tooltip-field"
+                                       title="<?= $this->escape($post['User']['NickName']) ?>"
+                                       target="blank" href="<?= $defaultUserIDUrl; ?>">
+                                        <?= $this->escape($post['User']['LastName']) . ' ' . $this->escape($post['User']['FirstName']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="post-post-category">
-                                    <span>
-                                        <a target="blank" href="<?php echo $adminPostCategoryIdUrl; ?>">
-                                            <?php echo $this->escape($post['PostCategory']['Name']) ?>
-                                        </a>
-                                    </span>
+                                <span>
+                                    <a target="blank" href="<?= $adminPostCategoryIdUrl; ?>">
+                                        <?= $this->escape($post['PostCategory']['Name']) ?>
+                                    </a>
+                                </span>
                             </td>
                             <td class="post-action">
-                                    <span>
-                                        <?php
-                                        echo $this->BlockConfigMenu($this->translate("Пост"), false)->postMenu(
-                                            $this->escape($post['ID']), true
-                                        );
-                                        ?>
-                                    </span>
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->translate("Пост"), false)
+                                        ->postMenu($this->$post($country['ID']), true);
+                                    ?>
+                                </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -137,7 +135,7 @@
             <div class="panel-footer clearfix">
                 <?php if ($this->postData) : ?>
                     <div class="pull-right">
-                        <?php echo $this->paginationControl(
+                        <?= $this->paginationControl(
                             $this->postData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                         ); ?>
                     </div>

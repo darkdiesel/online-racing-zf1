@@ -41,17 +41,17 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
             ->setIntegrityCheck(false)
             ->from(array($this->db_href => $this->_name))
             ->join(
-                array('t' => 'track'), $this->db_href . '.track_id = t.id',
-                array('track_name'        => 't.name',
-                      'track_year'        => 't.track_year',
-                      'track_length'      => 't.track_length',
-                      'track_country_id'  => 't.country_id',
-                      'track_url_logo'    => 't.url_track_logo',
-                      'track_url_scheme'  => 't.url_track_scheme',
-                      'track_description' => 't.description')
+                array('t' => 'track'), $this->db_href . '.track_id = t.ID',
+                array('track_name'        => 't.Name',
+                      'track_year'        => 't.Year',
+                      'track_length'      => 't.Length',
+                      'track_country_id'  => 't.CountryID',
+                      'track_url_logo'    => 't.LogoUrl',
+                      'track_url_scheme'  => 't.SchemeUrl',
+                      'track_description' => 't.Description')
             )
             ->joinLeft(
-                array('c' => 'country'), 'c.ID = t.country_id',
+                array('c' => 'country'), 'c.ID = t.CountryID',
                 array('country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
                       'country_ImageRoundUrl'       => 'c.ImageRoundUrl',
                       'country_NativeName'           => 'c.NativeName',
@@ -133,24 +133,22 @@ class Application_Model_DbTable_ChampionshipRace extends Zend_Db_Table_Abstract
             ->setIntegrityCheck(false)
             ->from(array($this->db_href => $this->_name))
             ->join(
-                array('t' => 'track'), $this->db_href . '.track_id = t.id',
-                array(
-                     'track_name'       => 't.name',
-                     'track_country_id' => 't.country_id',
-                     'track_url_scheme' => 't.url_track_scheme',
-                     'track_year' => 't.track_year',
-                     'track_length' => 't.track_length'
+                array('t' => 'track'), $this->db_href . '.track_id = t.ID',
+                array('track_name'        => 't.Name',
+                    'track_year'        => 't.Year',
+                    'track_length'      => 't.Length',
+                    'track_country_id'  => 't.CountryID',
                 )
             )
             ->join(
-                array('champ' => 'championship'), $this->db_href . '.championship_id = champ.id',
+                array('champ' => 'championship'), $this->db_href . '.championship_id = champ.ID',
                 array(
                      'league_id'         => 'champ.LeagueID',
                      'championship_name' => 'champ.Name'
                 )
             )
             ->joinLeft(
-                array('c' => 'country'), 't.country_id = c.ID',
+                array('c' => 'country'), 't.CountryID = c.ID',
                 array('country_ImageGlossyWaveUrl' => 'c.ImageGlossyWaveUrl',
                       'country_ImageRoundUrl'       => 'c.ImageRoundUrl',
                       'country_NativeName'           => 'c.NativeName',
