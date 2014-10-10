@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminTrackAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить лигу'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить трассу'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -79,13 +79,14 @@
                             </td>
                             <td class="track-year">
                                 <span>
-                                    <?= $this->escape($track['Year']) ?>
+                                    <?= $this->escape($track['Year']); ?>
                                 </span>
                             </td>
                             <td class="track-country">
                                 <span>
-                                    <a href="<?= $adminCountryIDUrl; ?>">
-                                        <img src="<?= $this->escape($track['Country']['ImageRoundUrl']); ?>" />
+                                    <a href="<?= $adminCountryIDUrl; ?>" class="tooltip-field"
+                                       title="<?= $this->escape($track['Country']['EnglishName']); ?>">
+                                        <img src="<?= $this->escape($track['Country']['ImageRoundUrl']); ?>"/>
                                     </a>
                                 </span>
                             </td>

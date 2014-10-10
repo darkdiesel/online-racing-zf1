@@ -74,7 +74,7 @@ class Admin_TrackController extends App_Controller_LoaderController
         // attach to view
         if ($requestData->isValid()) {
             $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Лиги'));
+            $this->view->pageTitle($this->view->translate('Трассы'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Track t')
@@ -100,82 +100,162 @@ class Admin_TrackController extends App_Controller_LoaderController
         }
     }
 
+    // action for add new track
     public function addAction()
     {
         $this->view->headTitle($this->view->translate('Добавить'));
         $this->view->pageTitle($this->view->translate('Добавить трассу'));
 
-        $request = $this->getRequest();
         // form
-        $form = new Application_Form_Track_Add();
-        $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true));
+        $trackAddForm = new Peshkov_Form_Track_Add();
+        $this->view->trackAddForm = $trackAddForm;
 
+        // test for valid input
+        // if valid, populate model
+        // assign default values for some fields
+        // save to database
         if ($this->getRequest()->isPost()) {
-            if ($form->isValid($request->getPost())) {
+            if ($trackAddForm->isValid($this->getRequest()->getPost())) {
 
-                $new_track_data = array();
+                $date = date('Y-m-d H:i:s');
 
-                //receive and rename track_logo file
-                if ($form->getValue('track_logo')) {
-                    if ($form->track_scheme->receive()) {
-                        $file = $form->track_logo->getFileInfo();
-                        $ext = pathinfo($file['track_logo']['name'], PATHINFO_EXTENSION);
+                $item = new Default_Model_Track();
+
+                $item->fromArray($trackAddForm->getValues());
+                $item->DateCreate = $date;
+                $item->DateEdit = $date;
+
+                //receive and rename track logo file
+                if ($trackAddForm->getValue('LogoUrl')) {
+                    if ($trackAddForm->LogoUrl->receive()) {
+                        $file = $trackAddForm->LogoUrl->getFileInfo();
+                        $ext = pathinfo($file['LogoUrl']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_track_logo' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['track_logo']['destination'] . '/' . $newName, 'overwrite' => true));
+                        => $file['LogoUrl']['destination'] . '/' . $newName, 'overwrite' => true));
 
-                        $filterRename->filter($file['track_logo']['destination'] . '/' . $file['track_logo']['name']);
+                        $filterRename->filter(
+                            $file['LogoUrl']['destination'] . '/' . $file['LogoUrl']['name']
+                        );
 
-                        $new_track_data['url_track_logo'] = '/data-content/data-uploads/track/logos/' . $newName;
+                        $item->LogoUrl = '/data-content/data-uploads/tracks/' . $newName;
                     }
                 }
 
-                //receive and rename track_scheme file
-                if ($form->getValue('track_scheme')) {
-                    if ($form->track_scheme->receive()) {
-                        $file = $form->track_scheme->getFileInfo();
-                        $ext = pathinfo($file['track_scheme']['name'], PATHINFO_EXTENSION);
+                //receive and rename track scheme file
+                if ($trackAddForm->getValue('SchemeUrl')) {
+                    if ($trackAddForm->SchemeUrl->receive()) {
+                        $file = $trackAddForm->SchemeUrl->getFileInfo();
+                        $ext = pathinfo($file['SchemeUrl']['name'], PATHINFO_EXTENSION);
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_track_scheme' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['track_scheme']['destination'] . '/' . $newName, 'overwrite' => true));
+                        => $file['SchemeUrl']['destination']
+                            . '/' . $newName, 'overwrite' => true));
 
-                        $filterRename->filter($file['track_scheme']['destination'] . '/' . $file['track_scheme']['name']);
+                        $filterRename->filter(
+                            $file['SchemeUrl']['destination'] . '/' . $file['SchemeUrl']['name']
+                        );
 
-                        $new_track_data['url_track_scheme'] = '/data-content/data-uploads/track/schemes/' . $newName;
+                        $item->SchemeUrl = '/data-content/data-uploads/tracks/' . $newName;
                     }
                 }
 
-                $date = date('Y-m-d H:i:s');
-                $new_track_data['name'] = $form->getValue('name');
-                $new_track_data['track_year'] = $form->getValue('track_year');
-                $new_track_data['track_length'] = $form->getValue('track_length');
-                $new_track_data['city_id'] = $form->getValue('city');
-                $new_track_data['country_id'] = $form->getValue('country');
-                $new_track_data['description'] = $form->getValue('description');
-                $new_track_data['date_create'] = $date;
-                $new_track_data['date_edit'] = $date;
+                $item->save();
 
-                $new_track = $this->db->get('track')->createRow($new_track_data);
-                $new_track->save();
+                $this->redirect(
+                    $this->view->url(
+                        array('module' => 'admin', 'controller' => 'track', 'action' => 'id',
+                            'trackID' => $item->ID), 'adminTrackID'
+                    )
+                );
 
-                $track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $new_track->id), 'adminTrackId', true);
-                $this->redirect($track_id_url);
+//                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
-                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError(
+                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                );
             }
         }
-
-        // Fill list of countries
-        $countries = $this->db->get('country')->getAll(FALSE, array('id', 'NativeName', 'EnglishName'), array('EnglishName' => 'ASC'));
-        $form->country->addMultiOption("", "");
-        foreach ($countries as $country):
-            $form->country->addMultiOption($country->id, $country->EnglishName . " ({$country->NativeName})");
-        endforeach;
-
-        $this->view->form = $form;
     }
+
+//    public function addAction()
+//    {
+//        $this->view->headTitle($this->view->translate('Добавить'));
+//        $this->view->pageTitle($this->view->translate('Добавить трассу'));
+//
+//        $request = $this->getRequest();
+//        // form
+//        $form = new Application_Form_Track_Add();
+//        $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'add'), 'default', true));
+//
+//        if ($this->getRequest()->isPost()) {
+//            if ($form->isValid($request->getPost())) {
+//
+//                $new_track_data = array();
+//
+//                //receive and rename track_logo file
+//                if ($form->getValue('track_logo')) {
+//                    if ($form->track_scheme->receive()) {
+//                        $file = $form->track_logo->getFileInfo();
+//                        $ext = pathinfo($file['track_logo']['name'], PATHINFO_EXTENSION);
+//                        $newName = Date('Y-m-d_H-i-s') . strtolower('_track_logo' . '.' . $ext);
+//
+//                        $filterRename = new Zend_Filter_File_Rename(array('target'
+//                        => $file['track_logo']['destination'] . '/' . $newName, 'overwrite' => true));
+//
+//                        $filterRename->filter($file['track_logo']['destination'] . '/' . $file['track_logo']['name']);
+//
+//                        $new_track_data['url_track_logo'] = '/data-content/data-uploads/track/logos/' . $newName;
+//                    }
+//                }
+//
+//                //receive and rename track_scheme file
+//                if ($form->getValue('track_scheme')) {
+//                    if ($form->track_scheme->receive()) {
+//                        $file = $form->track_scheme->getFileInfo();
+//                        $ext = pathinfo($file['track_scheme']['name'], PATHINFO_EXTENSION);
+//                        $newName = Date('Y-m-d_H-i-s') . strtolower('_track_scheme' . '.' . $ext);
+//
+//                        $filterRename = new Zend_Filter_File_Rename(array('target'
+//                        => $file['track_scheme']['destination'] . '/' . $newName, 'overwrite' => true));
+//
+//                        $filterRename->filter($file['track_scheme']['destination'] . '/' . $file['track_scheme']['name']);
+//
+//                        $new_track_data['url_track_scheme'] = '/data-content/data-uploads/track/schemes/' . $newName;
+//                    }
+//                }
+//
+//                $date = date('Y-m-d H:i:s');
+//                $new_track_data['name'] = $form->getValue('name');
+//                $new_track_data['track_year'] = $form->getValue('track_year');
+//                $new_track_data['track_length'] = $form->getValue('track_length');
+//                $new_track_data['city_id'] = $form->getValue('city');
+//                $new_track_data['country_id'] = $form->getValue('country');
+//                $new_track_data['description'] = $form->getValue('description');
+//                $new_track_data['date_create'] = $date;
+//                $new_track_data['date_edit'] = $date;
+//
+//                $new_track = $this->db->get('track')->createRow($new_track_data);
+//                $new_track->save();
+//
+//                $track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $new_track->id), 'adminTrackId', true);
+//                $this->redirect($track_id_url);
+//            } else {
+//                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+//            }
+//        }
+//
+//        // Fill list of countries
+//        $countries = $this->db->get('country')->getAll(FALSE, array('id', 'NativeName', 'EnglishName'), array('EnglishName' => 'ASC'));
+//        $form->country->addMultiOption("", "");
+//        foreach ($countries as $country):
+//            $form->country->addMultiOption($country->id, $country->EnglishName . " ({$country->NativeName})");
+//        endforeach;
+//
+//        $this->view->form = $form;
+//    }
 
     public function editAction()
     {

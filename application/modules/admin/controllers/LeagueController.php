@@ -81,7 +81,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
-                //receive and rename image logo file
+                //receive and rename league logo file
                 if ($leagueAddForm->getValue('LogoUrl')) {
                     if ($leagueAddForm->LogoUrl->receive()) {
                         $file = $leagueAddForm->LogoUrl->getFileInfo();
@@ -89,8 +89,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                         $newName = Date('Y-m-d_H-i-s') . strtolower('_league_logo' . '.' . $ext);
 
                         $filterRename = new Zend_Filter_File_Rename(array('target'
-                        => $file['LogoUrl']['destination'] . '/'
-                            . $newName, 'overwrite' => true));
+                        => $file['LogoUrl']['destination'] . '/' . $newName, 'overwrite' => true));
 
                         $filterRename->filter(
                             $file['LogoUrl']['destination'] . '/' . $file['LogoUrl']['name']

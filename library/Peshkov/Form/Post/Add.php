@@ -37,8 +37,8 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
-        $urlImageLogo = new Zend_Form_Element_Text('ImageUrl');
-        $urlImageLogo->setLabel($this->translate('Картинка поста'))
+        $logoUrl = new Zend_Form_Element_Text('ImageUrl');
+        $logoUrl->setLabel($this->translate('Картинка поста'))
             ->setOptions(array('maxLength' => 255, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Вставьте ссылку на картинку сюда'))
             ->setRequired(false)
@@ -49,13 +49,13 @@ class Peshkov_Form_Post_Add extends Zend_Form
 
 
         //TODO: Uncoment this code for allow upload to server post image
-//        $urlImageLogo = new Zend_Form_Element_File('ImageUrl');
-//        $urlImageLogo->setLabel($this->translate('Картинка поста'))
+//        $logoUrl = new Zend_Form_Element_File('ImageUrl');
+//        $logoUrl->setLabel($this->translate('Картинка поста'))
 //            ->setAttrib('class', 'form-control')
 //            ->setRequired(true)
 //            ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/posts/')
 //            ->addValidator('Size', false, 512000) // 500 kb
-//            ->addValidator('Extension', false, 'jpg,png,gif')
+//            ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
 //            //->addValidator('IsImage')
 //            ->addValidator('Count', false, 1)
 //            ->setDecorators($this->getView()->getDecorator()->fileDecorators());
@@ -134,7 +134,7 @@ class Peshkov_Form_Post_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($name)
-            ->addElement($urlImageLogo)
+            ->addElement($logoUrl)
             ->addElement($preview)
             ->addElement($text);
 

@@ -105,13 +105,13 @@ class Peshkov_Form_Championship_Add extends Zend_Form
             $postGameID->addMultiOption($post['ID'], $post['Name']);
         };
 
-        $urlImageLogo = new Zend_Form_Element_File('LogoUrl');
-        $urlImageLogo->setLabel($this->translate('Логотип чемпионата'))
+        $logoUrl = new Zend_Form_Element_File('LogoUrl');
+        $logoUrl->setLabel($this->translate('Логотип чемпионата'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
             ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/championships/')
             ->addValidator('Size', false, 512000) // 500 kb
-            ->addValidator('Extension', false, 'jpg,png,gif')
+            ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
             //->addValidator('IsImage')
             ->addValidator('Count', false, 1)
             ->setDecorators($this->getView()->getDecorator()->fileDecorators());
@@ -181,7 +181,7 @@ class Peshkov_Form_Championship_Add extends Zend_Form
             ->addElement($leagues)
             ->addElement($racingSeries)
             ->addElement($users)
-            ->addElement($urlImageLogo)
+            ->addElement($logoUrl)
             ->addElement($postRuleID)
             ->addElement($postGameID)
             ->addElement($description);

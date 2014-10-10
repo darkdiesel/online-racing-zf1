@@ -92,7 +92,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->setRequired(true)
             ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/flags/')
             ->addValidator('Size', false, 102400) // 100 kb
-            ->addValidator('Extension', false, 'jpg,png,gif')
+            ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
             //->addValidator('IsImage')
             ->addValidator('Count', false, 1)
             ->setDecorators($this->getView()->getDecorator()->fileDecorators());
@@ -103,7 +103,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
             ->setRequired(true)
             ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/flags/')
             ->addValidator('Size', false, 102400) // 100 kb
-            ->addValidator('Extension', false, 'jpg,png,gif')
+            ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
             //->addValidator('IsImage')
             ->addValidator('Count', false, 1)
             ->setDecorators($this->getView()->getDecorator()->fileDecorators());

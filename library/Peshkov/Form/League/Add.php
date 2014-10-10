@@ -57,25 +57,13 @@ class Peshkov_Form_League_Add extends Zend_Form
             $users->addMultiOption($user['ID'], $user['LastName'] . ' ' . $user['FirstName'] . ' (' . $user['NickName'] . ')');
         };
 
-        $rules = new Zend_Form_Element_Select('UserID');
-        $users->setLabel($this->translate('Администратор лиги'))
-            ->setOptions(array('class' => 'form-control'))
-            ->setAttrib('placeholder', $this->translate('Администратор лиги'))
-            ->setRequired(true)
-            ->addFilter('HtmlEntities')
-            ->addFilter('StringTrim')
-            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-        foreach ($this->getUsers() as $user) {
-            $users->addMultiOption($user['ID'], $user['LastName'] . ' ' . $user['FirstName'] . ' (' . $user['NickName'] . ')');
-        };
-
-        $urlImageLogo = new Zend_Form_Element_File('LogoUrl');
-        $urlImageLogo->setLabel($this->translate('Логотип лиги'))
+        $logoUrl = new Zend_Form_Element_File('LogoUrl');
+        $logoUrl->setLabel($this->translate('Логотип лиги'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
             ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/leagues/')
             ->addValidator('Size', false, 512000) // 500 kb
-            ->addValidator('Extension', false, 'jpg,png,gif')
+            ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
             //->addValidator('IsImage')
             ->addValidator('Count', false, 1)
             ->setDecorators($this->getView()->getDecorator()->fileDecorators());
@@ -110,7 +98,7 @@ class Peshkov_Form_League_Add extends Zend_Form
 
         $this->addElement($name)
             ->addElement($users)
-            ->addElement($urlImageLogo)
+            ->addElement($logoUrl)
             ->addElement($description);
 
         $this->addElement($submit)
