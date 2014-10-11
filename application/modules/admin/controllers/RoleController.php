@@ -126,11 +126,11 @@ class Admin_RoleController extends App_Controller_LoaderController
                 $formData = $roleAddForm->getValues();
 
                 if (!$formData['ParentRoleID']){
-                    unset($formData['ParentRoleID']);
+                    $formData['ParentRoleID'] = null;
                 }
 
                 if (!$formData['Description']){
-                    unset($formData['Description']);
+                    $formData['Description'] = null;
                 }
 
                 $item->fromArray($formData);
@@ -184,11 +184,11 @@ class Admin_RoleController extends App_Controller_LoaderController
                     $item = Doctrine_Core::getTable('Default_Model_Role')->find($requestData->roleID);
 
                     if (!$formData['ParentRoleID']){
-                        unset($formData['ParentRoleID']);
+                        $formData['ParentRoleID'] = null;
                     }
 
                     if (!$formData['Description']){
-                        unset($formData['Description']);
+                        $formData['Description'] = null;
                     }
 
                     $item->fromArray($formData);

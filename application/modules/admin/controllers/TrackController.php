@@ -121,7 +121,21 @@ class Admin_TrackController extends App_Controller_LoaderController
 
                 $item = new Default_Model_Track();
 
-                $item->fromArray($trackAddForm->getValues());
+                $formData = $trackAddForm->getValues();
+
+                if (!$formData['Length']) {
+                    $formData['Length'] = null;
+                }
+
+                if (!$formData['CityID']) {
+                    $formData['CityID'] = null;
+                }
+
+                if (!$formData['Description']) {
+                    $formData['Description'] = null;
+                }
+
+                $item->fromArray($formData);
                 $item->DateCreate = $date;
                 $item->DateEdit = $date;
 
@@ -261,6 +275,18 @@ class Admin_TrackController extends App_Controller_LoaderController
                         }
                     } else {
                         unset($formData['SchemeUrl']);
+                    }
+
+                    if (!$formData['Length']) {
+                        $formData['Length'] = null;
+                    }
+
+                    if (!$formData['CityID']) {
+                        $formData['CityID'] = null;
+                    }
+
+                    if (!$formData['Description']) {
+                        $formData['Description'] = null;
                     }
 
                     $item->fromArray($formData);

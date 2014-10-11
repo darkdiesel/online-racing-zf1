@@ -90,7 +90,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
         $urlImageRound->setLabel($this->translate('Круговая картинка флага (32х24)'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
-            ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/flags/')
+            ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/countries/')
             ->addValidator('Size', false, 102400) // 100 kb
             ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
             //->addValidator('IsImage')
@@ -101,7 +101,7 @@ class Peshkov_Form_Country_Add extends Zend_Form
         $urlImageGlossyWave->setLabel($this->translate('Волнистая картинка флага (64х48)'))
             ->setAttrib('class', 'form-control')
             ->setRequired(true)
-            ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/flags/')
+            ->setDestination(APPLICATION_PATH . '/../public_html/data-content/data-uploads/countries/')
             ->addValidator('Size', false, 102400) // 100 kb
             ->addValidator('Extension', false, 'jpg,jpeg,png,gif')
             //->addValidator('IsImage')

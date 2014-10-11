@@ -138,7 +138,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                             $file['ImageRoundUrl']['destination'] . '/' . $file['ImageRoundUrl']['name']
                         );
 
-                        $item->ImageRoundUrl = '/data-content/data-uploads/flags/' . $newName;
+                        $item->ImageRoundUrl = '/data-content/data-uploads/countries/' . $newName;
                     }
                 }
 
@@ -157,7 +157,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                             $file['ImageGlossyWaveUrl']['destination'] . '/' . $file['ImageGlossyWaveUrl']['name']
                         );
 
-                        $item->ImageGlossyWaveUrl = '/data-content/data-uploads/flags/' . $newName;
+                        $item->ImageGlossyWaveUrl = '/data-content/data-uploads/countries/' . $newName;
                     }
                 }
 

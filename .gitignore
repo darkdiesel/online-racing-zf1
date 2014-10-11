@@ -6,16 +6,12 @@
 
 /data/logs/application.log
 /data/logs/errors.log
-!/public_html/img/data/flags/
-/public_html/img/data/flags/*
 !/public_html/img/data/logos/championships/
 /public_html/img/data/logos/championships/*
 !/public_html/img/data/logos/leagues/
 /public_html/img/data/logos/leagues/*
 !/public_html/img/data/logos/teams/
 /public_html/img/data/logos/teams/
-!/public_html/img/data/users/avatars/
-/public_html/img/data/users/avatars/*
 !/public_html/img/data/track_schemes/
 /public_html/img/data/track_schemes/*
 
@@ -33,8 +29,9 @@ public_html/data-content/data-uploads/leagues/*
 public_html/data-content/data-uploads/championships/*
 !/public_html/data-content/data-uploads/championships/index.php
 
-!/public_html/data-content/data-uploads/flags/
-/public_html/data-content/data-uploads/flags/*
-!/public_html/data-content/data-uploads/championships/index.php
+!/public_html/data-content/data-uploads/countries/
+/public_html/data-content/data-uploads/countries/*
+!/public_html/data-content/data-uploads/countries/index.php
 
 !.gitfolder
+public_html/data-content/data-uploads/user/*
