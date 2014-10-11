@@ -9,7 +9,7 @@ class Peshkov_Form_League_Edit extends Peshkov_Form_League_Add
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
 
-        $adminLeagueIDUrl = $this->getView()->url(
+        $defaultLeagueIDUrl = $this->getView()->url(
             array('default' => 'default', 'controller' => 'league', 'action' => 'id', 'leagueID' => $request->getParam('leagueID')),
             'defaultLeagueID'
         );
@@ -27,7 +27,7 @@ class Peshkov_Form_League_Edit extends Peshkov_Form_League_Add
 
         $this->getElement('LogoUrl')->setRequired(false);
 
-        $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$adminLeagueIDUrl}'");
+        $this->getElement('Cancel')->setAttrib('onClick', "location.href='{$defaultLeagueIDUrl}'");
 
         $this->getElement('Submit')->setLabel('Сохранить');
     }

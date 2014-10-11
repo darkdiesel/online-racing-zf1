@@ -1,29 +1,129 @@
-<?php if ($this->track) { ?>
-	<?= $this->form; ?>
-	<div class="track_item">
-		<table class="table table-striped table-bordered article_table">
-			<tbody>
-				<tr>
-					<td class="header_column"><span><?= $this->translate('Название'); ?></span></td>
-					<td><span><?= $this->escape($this->track->name); ?></span></td>
-				</tr>
-				<tr>
-					<td class="header_column"><span><?= $this->translate('Год трассы'); ?></span></td>
-					<td><span><?= $this->escape($this->track->track_year); ?></span></td>
-				</tr>
-				<tr>
-					<td class="header_column"><span><?= $this->translate('Город'); ?></span></td>
-					<td><span><?= $this->escape($this->track->city_id); ?></span></td>
-				</tr>
-				<tr>
-					<td class="header_column"><span><?= $this->translate('Описание'); ?></span></td>
-					<td><span><?= $this->escape($this->track->description); ?></span></td>
-				</tr>
-				<tr>
-					<td class="header_column"><span><?= $this->translate('Схема'); ?></span></td>
-					<td><span><img src="<?= $this->baseUrl($this->escape($this->track->url_track_scheme)); ?>"></span></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<?php
+    $track = $this->trackData;
+?>
+
+<?php if ($track) { ?>
+    <div class="m-b-10">
+        <?= $this->trackDeleteForm; ?>
+        <hr/>
+    </div>
+    <?php
+    // check access and generate link for admin/country/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'country', 'id')) {
+        $adminCountryIDUrl = $this->url(
+            array('module' => 'admin', 'controller' => 'country', 'action' => 'id',
+                'countryID' => $this->escape($track['Country']['ID'])), 'adminCountryID'
+        );
+    } else {
+        $adminCountryIDUrl = '#';
+    }
+    ?>
+    <div class="block block-default block-ui-bordered">
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr class="track-name">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->escape($track['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr class="track-city">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Город (не реализовано)'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->escape($track['CityID']); ?></span>
+                    </td>
+                </tr>
+                <tr class="track-country">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Страна'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a href="<?= $adminCountryIDUrl; ?>" class="tooltip-field"
+                               title="<?= $this->escape($track['Country']['EnglishName']); ?>">
+                                <img src="<?= $this->escape($track['Country']['ImageRoundUrl']); ?>"/>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="track-year">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Год конфигурации трассы'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <?= $this->escape($track['Year']); ?>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="track-length">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Длинна (Км)'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <?= $this->escape($track['Length']); ?>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="track-logo">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Логотип'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <?php if ($track['LogoUrl']) : ?>
+                                <img class="img-responsive"
+                                     src="<?= $this->baseUrl($this->escape($track['LogoUrl'])); ?>"/>
+                            <?php endif; ?>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="track-scheme">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Схема'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <img class="img-responsive"
+                                 src="<?= $this->baseUrl($this->escape($track['SchemeUrl'])); ?>"/>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="track-description">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->RenderContentTypeText($track['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?= $this->translate('Трасса'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?= $this->escape($track['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($track['DateCreate']) != $this->escape($track['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?= $this->escape($track['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
 <?php } ?>

@@ -101,12 +101,16 @@ class Admin_LeagueController extends App_Controller_LoaderController
 
                 $item->save();
 
-                $this->redirect(
-                    $this->view->url(
-                        array('module' => 'default', 'controller' => 'league', 'action' => 'id',
-                            'leagueID' => $item->ID), 'defaultLeagueID'
-                    )
+                $this->messages->addSuccess(
+                    $this->view->translate("Лига <strong>" . $item->Name . "</strong> успешно создана.")
                 );
+
+                $defaultLeagueIDUrl = $this->view->url(
+                    array('module' => 'default', 'controller' => 'league', 'action' => 'id',
+                        'leagueID' => $item->ID), 'defaultLeagueID'
+                );
+
+                $this->redirect($defaultLeagueIDUrl);
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
@@ -178,14 +182,18 @@ class Admin_LeagueController extends App_Controller_LoaderController
 
                     $item->save();
 
+                    $this->messages->addSuccess(
+                        $this->view->translate("Лига <strong>" . $item->Name . "</strong> успешно отредактирована.")
+                    );
+
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
 
-                    $adminLeagueIDUrl = $this->view->url(
+                    $defaultLeagueIDUrl = $this->view->url(
                         array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'leagueID' => $requestData->leagueID),
                         'defaultLeagueID'
                     );
 
-                    $this->redirect($adminLeagueIDUrl);
+                    $this->redirect($defaultLeagueIDUrl);
                 } else {
                     $this->messages->addError(
                         $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')

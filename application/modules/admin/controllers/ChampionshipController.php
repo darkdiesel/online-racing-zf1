@@ -212,7 +212,7 @@ class Admin_ChampionshipController extends App_Controller_LoaderController
                     $item->save();
 
                     $this->messages->addSuccess(
-                        $this->view->translate("Чемпионат <strong>" . $item->Name . "</strong> успешно изменен.")
+                        $this->view->translate("Чемпионат <strong>" . $item->Name . "</strong> успешно отредактирован.")
                     );
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');

@@ -59,6 +59,7 @@ class Peshkov_Form_Track_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
+        //TODO: Add function and load cities for country or ajax query after selecting country
 //        foreach ($this->getCountries() as $country) {
 //            $countries->addMultiOption($country['ID'], $country['NativeName'] . ' (' . $country['EnglishName'] . ')');
 //        };
@@ -109,10 +110,10 @@ class Peshkov_Form_Track_Add extends Zend_Form
 
         $description = new Zend_Form_Element_Textarea('Description');
         $description->setLabel($this->translate('Описание'))
-            ->setOptions(array('maxLength' => 500, 'class' => 'form-control'))
+            ->setOptions(array('maxLength' => 5000, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Описание'))
             ->setRequired(false)
-            ->addValidator('stringLength', false, array(0, 500, 'UTF-8'))
+            ->addValidator('stringLength', false, array(0, 5000, 'UTF-8'))
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
