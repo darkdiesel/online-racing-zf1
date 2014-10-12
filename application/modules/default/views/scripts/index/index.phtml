@@ -123,9 +123,9 @@
                     <?php foreach ($raceEvents as $raceEvent): ?>
                         <?php
                         // check access and generate link for admin/race-event/id
-                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
                             $defaultRaceEventIDUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'race-event', 'action' => 'id',
+                                array('module' => 'default', 'controller' => 'race-event', 'action' => 'id',
                                     'raceEventID' => $this->escape($raceEvent['ID'])), 'defaultRaceEventID'
                             );
                         } else {
@@ -138,7 +138,7 @@
                         if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
                             $adminChampionshipIDUrl = $this->url(
                                 array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
-                                    'championshipID' => $this->escape($raceEvent['ID'])), 'defaultChampionshipID'
+                                    'championshipID' => $this->escape($raceEvent['Championship']['ID'])), 'defaultChampionshipID'
                             );
                         } else {
                             $adminChampionshipIDUrl = '#';
