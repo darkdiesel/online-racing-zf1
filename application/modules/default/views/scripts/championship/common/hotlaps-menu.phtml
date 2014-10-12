@@ -17,39 +17,39 @@
                         <div id="hotlap-navbar-collapse" class="collapse navbar-collapse">
                             <p class="navbar-text hotlap-marquee">
                                 <iframe
-                                    src="http://<?php echo $this->championshipData['HotLapsIP']; ?>/rFactorHotlaps/Marquee.htm"
+                                    src="http://<?= $this->championshipData['HotLapsIP']; ?>/rFactorHotlaps/Marquee.htm"
                                     name="standings" width="625" height="25" scrolling="no" id="standings"
                                     frameborder="0" style="background:none;"></iframe>
                             </p>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <?php echo $this->translate("Ссылки"); ?> <b class="caret"></b>
+                                        <?= $this->t("Ссылки"); ?> <b class="caret"></b>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="http://<?php echo $this->championshipData['HotLapsIP']; ?>/rFactorLive"
+                                            <a href="http://<?= $this->championshipData['HotLapsIP']; ?>/rFactorLive"
                                                target="_blank">
-                                                <?php echo $this->translate('Прямой эфир') ?>
+                                                <?= $this->t('Прямой эфир') ?>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="http://<?php echo $this->championshipData['HotLapsIP']; ?>/rFactorHotlaps?max=25"
+                                            <a href="http://<?= $this->championshipData['HotLapsIP']; ?>/rFactorHotlaps?max=25"
                                                target="_blank">
-                                                <?php echo $this->translate('Рекорды') ?>
+                                                <?= $this->t('Рекорды') ?>
                                             </a>
                                         </li>
                                         <li class="divider"></li>
                                         <li>
-                                            <a href="http://<?php echo $this->championshipData['HotLapsIP']; ?>/rFactorLeagues"
+                                            <a href="http://<?= $this->championshipData['HotLapsIP']; ?>/rFactorLeagues"
                                                target="_blank">
-                                                <?php echo $this->translate('Лиги') ?>
+                                                <?= $this->t('Лиги') ?>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="http://<?php echo $this->championshipData['HotLapsIP']; ?>/rFactorResults"
+                                            <a href="http://<?= $this->championshipData['HotLapsIP']; ?>/rFactorResults"
                                                target="_blank">
-                                                <?php echo $this->translate('Результаты') ?>
+                                                <?= $this->t('Результаты') ?>
                                             </a>
                                         </li>
                                     </ul>

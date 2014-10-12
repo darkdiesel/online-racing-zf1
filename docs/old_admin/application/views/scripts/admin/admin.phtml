@@ -1,5 +1,5 @@
 <div id="articles_page" class="page">
-    <div class="page_title"><?php echo $this->translate('Панель управления сайтом'); ?></div>
+    <div class="page_title"><?= $this->translate('Панель управления сайтом'); ?></div>
     <div class="div_hr"></div>
     <div class="page_content">
         <div>
@@ -7,8 +7,8 @@
             
             <strong>Действия:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('admin/users')?>">Просмотреть в админке</a></li>
-                <li><a href="<?php echo $this->baseUrl('user/all')?>">Просмотреть на сайте</a></li>
+                <li><a href="<?= $this->baseUrl('admin/users')?>">Просмотреть в админке</a></li>
+                <li><a href="<?= $this->baseUrl('user/all')?>">Просмотреть на сайте</a></li>
             </ul>
         </div>
         <div>
@@ -16,27 +16,27 @@
             
             <strong>Действия:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('admin/articles')?>">Просмотреть в админке</a></li>
-                <li><a href="<?php echo $this->baseUrl('article/all')?>">Просмотреть на сайте</a></li>
-                <li><a href="<?php echo $this->baseUrl('article/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('admin/articles')?>">Просмотреть в админке</a></li>
+                <li><a href="<?= $this->baseUrl('article/all')?>">Просмотреть на сайте</a></li>
+                <li><a href="<?= $this->baseUrl('article/add')?>">Создать</a></li>
             </ul>
             
             <strong>Типы статей:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('article-type/all')?>">Просмотреть</a></li>
-                <li><a href="<?php echo $this->baseUrl('article-type/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('article-type/all')?>">Просмотреть</a></li>
+                <li><a href="<?= $this->baseUrl('article-type/add')?>">Создать</a></li>
             </ul>
             
             <strong>Типы контента:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('content-type/all')?>">Просмотреть</a></li>
-                <li><a href="<?php echo $this->baseUrl('content-type/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('content-type/all')?>">Просмотреть</a></li>
+                <li><a href="<?= $this->baseUrl('content-type/add')?>">Создать</a></li>
             </ul>
             
             <strong>Игры и моды:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('game/all')?>">Просмотреть игры (Мод)</a></li>
-                <li><a href="<?php echo $this->baseUrl('game/add')?>">Добавить игру (Мод)</a></li>
+                <li><a href="<?= $this->baseUrl('game/all')?>">Просмотреть игры (Мод)</a></li>
+                <li><a href="<?= $this->baseUrl('game/add')?>">Добавить игру (Мод)</a></li>
             </ul>
         </div>
         <div>
@@ -44,46 +44,46 @@
             
             <strong>Лиги:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('admin/leagues')?>">Просмотреть в админке</a></li>
-                <li><a href="<?php echo $this->baseUrl('league/all')?>">Просмотреть на сайте</a></li>
-                <li><a href="<?php echo $this->baseUrl('league/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('admin/leagues')?>">Просмотреть в админке</a></li>
+                <li><a href="<?= $this->baseUrl('league/all')?>">Просмотреть на сайте</a></li>
+                <li><a href="<?= $this->baseUrl('league/add')?>">Создать</a></li>
             </ul>
             
             <strong>Соревнования:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('championship/all')?>">Просмотреть все</a></li>
-                <li><a href="<?php echo $this->baseUrl('championship/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('championship/all')?>">Просмотреть все</a></li>
+                <li><a href="<?= $this->baseUrl('championship/add')?>">Создать</a></li>
             </ul>
             
             <strong>Команды:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('team/all')?>">Просмотреть все</a></li>
-                <li><a href="<?php echo $this->baseUrl('team/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('team/all')?>">Просмотреть все</a></li>
+                <li><a href="<?= $this->baseUrl('team/add')?>">Создать</a></li>
             </ul>
             
             <strong>Страны:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('country/all')?>">Просмотреть все</a></li>
-                <li><a href="<?php echo $this->baseUrl('country/add')?>">Создать</a></li>
+                <li><a href="<?= $this->baseUrl('country/all')?>">Просмотреть все</a></li>
+                <li><a href="<?= $this->baseUrl('country/add')?>">Создать</a></li>
             </ul>
             
             <strong>Трассы:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('admin/users')?>">Просмотреть все</a></li>
-                <li><a href="<?php echo $this->baseUrl('user/all')?>">Добавить трассу</a></li>
+                <li><a href="<?= $this->baseUrl('admin/users')?>">Просмотреть все</a></li>
+                <li><a href="<?= $this->baseUrl('user/all')?>">Добавить трассу</a></li>
             </ul>
             
             <strong>Гонки и результаты:</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('admin/users')?>">Просмотреть все</a></li>
-                <li><a href="<?php echo $this->baseUrl('user/all')?>">Создать гонку</a></li>
-                <li><a href="<?php echo $this->baseUrl('user/all')?>">Добавить результат</a></li>
+                <li><a href="<?= $this->baseUrl('admin/users')?>">Просмотреть все</a></li>
+                <li><a href="<?= $this->baseUrl('user/all')?>">Создать гонку</a></li>
+                <li><a href="<?= $this->baseUrl('user/all')?>">Добавить результат</a></li>
             </ul>
             
             <strong>Событие (отображается в левом сайдбаре):</strong>
             <ul>
-                <li><a href="<?php echo $this->baseUrl('event/all')?>">Просмотреть все</a></li>
-                <li><a href="<?php echo $this->baseUrl('event/add')?>">Добавить событие</a></li>
+                <li><a href="<?= $this->baseUrl('event/all')?>">Просмотреть все</a></li>
+                <li><a href="<?= $this->baseUrl('event/add')?>">Добавить событие</a></li>
             </ul>
         </div>
     </div>

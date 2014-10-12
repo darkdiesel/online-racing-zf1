@@ -22,26 +22,26 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="block block-default">
                 <?php
-                echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
+                echo $this->BlockConfigMenu($this->t("Контент"))->postMenu(
                     $this->escape($this->postData['ID'])
                 );
                 ?>
                 <div class="block-header block-header-info clearfix">
                     <div class="pull-right m-r-15 tooltip-field"
-                         data-title="<?php echo $this->translate('Просмотров'); ?>" data-placement="bottom">
+                         data-title="<?= $this->t('Просмотров'); ?>" data-placement="bottom">
                         <i class="fa fa-eye fa-lg"></i>
-                        <?php echo $this->escape($this->postData['Views']); ?>
+                        <?= $this->escape($this->postData['Views']); ?>
                     </div>
                     <div class="pull-right m-r-15 tooltip-field"
-                         data-title="<?php echo $this->translate('Комментарии'); ?>" data-placement="bottom">
+                         data-title="<?= $this->t('Комментарии'); ?>" data-placement="bottom">
                         <i class="fa fa-comments-o fa-lg"></i>
-                        <?php echo $commentsCount; ?>
+                        <?= $commentsCount; ?>
                     </div>
-                    <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор'); ?>"
+                    <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Автор'); ?>"
                          data-placement="bottom">
-                        <a href="<?php echo $defaultUserIDUrl; ?>" target="_blank">
+                        <a href="<?= $defaultUserIDUrl; ?>" target="_blank">
                             <i class="fa fa-user fa-lg"></i>
-                            <?php echo $this->escape($this->postData['User']['NickName']); ?>
+                            <?= $this->escape($this->postData['User']['NickName']); ?>
                         </a>
                     </div>
                 </div>
@@ -49,11 +49,11 @@
                     <?php if ($this->escape($this->postData['ImageUrl'])) { ?>
                         <div class="m-b-15 center-block text-center">
                             <a href="#" data-toggle="modal" data-target=".post-<?php print $this->postData['ID']; ?>"
-                               title="<?php echo $this->escape($this->postData['Name']); ?>" class="">
+                               title="<?= $this->escape($this->postData['Name']); ?>" class="">
                                 <img class="img-thumbnail img-responsive"
-                                     src="<?php echo $this->escape($this->postData['ImageUrl']); ?>"/>
+                                     src="<?= $this->escape($this->postData['ImageUrl']); ?>"/>
                             </a>
-                            <?php echo $this->modal(array(
+                            <?= $this->modal(array(
                                 'title' => $this->postData['Name'],
                                 'class' => 'post-' . $this->postData['ID'],
                                 'content' => '<img src="' . $this->escape($this->postData['ImageUrl']) . '" class="img-responsive img-rounded center-block" alt="">'
@@ -91,7 +91,7 @@
                                     js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
                                     fjs.parentNode.insertBefore(js, fjs);
                                 }(document, 'script', 'facebook-jssdk'));</script>
-                            <div class="fb-like" data-href="<?php echo $this->url() ?>" data-width="450"
+                            <div class="fb-like" data-href="<?= $this->url() ?>" data-width="450"
                                  data-layout="button_count" data-show-faces="true" data-send="false"></div>
                             <!-- Facebook like END-->
                         </div>
@@ -135,21 +135,21 @@
                 </div>
                 <div class="block-footer clearfix">
                     <div class="pull-left m-r-15 tooltip-field"
-                         data-title="<?php echo $this->translate('Тип контента'); ?>" data-placement="bottom">
+                         data-title="<?= $this->t('Тип контента'); ?>" data-placement="bottom">
                         <i class="fa fa-filter fa-lg"></i>
-                        <?php echo $this->escape($this->postData['PostCategory']['Name']); ?>
+                        <?= $this->escape($this->postData['PostCategory']['Name']); ?>
                     </div>
                     <div class="pull-right m-r-15 tooltip-field"
-                         data-title="<?php echo $this->translate('Дата создания'); ?>" data-placement="bottom">
+                         data-title="<?= $this->t('Дата создания'); ?>" data-placement="bottom">
                         <i class="fa fa-calendar fa-lg"></i>
-                        <?php echo $this->escape($this->postData['DateCreate']); ?>
+                        <?= $this->escape($this->postData['DateCreate']); ?>
                     </div>
                     <?php if ($this->escape($this->postData['DateCreate']) != $this->escape($this->postData['DateEdit'])) : ?>
                         <div class="pull-right m-r-15 tooltip-field"
-                             data-title="<?php echo $this->translate('Дата редактирования'); ?>"
+                             data-title="<?= $this->t('Дата редактирования'); ?>"
                              data-placement="bottom">
                             <i class="fa fa-pencil fa-lg"></i>
-                            <?php echo $this->escape($this->postData['DateEdit']); ?>
+                            <?= $this->escape($this->postData['DateEdit']); ?>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -168,7 +168,7 @@
                 <div class="block-body">
                     <h4 class="page-header">
                         <i class="fa fa-comments-o fa-lg"></i>
-                        <?php echo $this->translate('Комментарии'); ?> ( <?php echo count($this->postCommentData); ?> )
+                        <?= $this->t('Комментарии'); ?> ( <?= count($this->postCommentData); ?> )
                     </h4>
 
                     <div class="comments" id="post-comments">
@@ -203,17 +203,17 @@
                                 }
                                 ?>
 
-                                <div class="message-item" id="m<?php echo $comment['ID'] ?>">
+                                <div class="message-item" id="m<?= $comment['ID'] ?>">
                                     <div class="message-inner">
                                         <div class="message-head clearfix">
                                             <div class="avatar pull-left">
                                                 <div class="block-user">
                                                     <div
-                                                        class="img-wrapper-40-40 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $userStatusClass; ?>"
-                                                        data-title="<?php echo $userResult[0]['NickName']; ?>"
+                                                        class="img-wrapper-40-40 overflow-hide img-circle center-block user-avatar tooltip-field <?= $userStatusClass; ?>"
+                                                        data-title="<?= $userResult[0]['NickName']; ?>"
                                                         data-placement="bottom">
-                                                        <a href="<?php echo $defaultUserIDUrl; ?>" target="_blank">
-                                                            <?php echo $this->getUser()->getUserAvatar(
+                                                        <a href="<?= $defaultUserIDUrl; ?>" target="_blank">
+                                                            <?= $this->getUser()->getUserAvatar(
                                                                 $userResult[0]['ID'], $userResult[0]['AvatarType'],
                                                                 'media-object img-responsive img-size-40', 40
                                                             ); ?>
@@ -224,7 +224,7 @@
                                             <div class="user-detail">
                                                 <?php if ($comment['Name']) { ?>
                                                     <h5 class="text-bold handle">
-                                                        <?php echo $comment['Name']; ?>
+                                                        <?= $comment['Name']; ?>
                                                     </h5>
                                                 <?php } ?>
                                                 <div class="post-meta">
@@ -234,14 +234,14 @@
                                                             <span class="qa-message-who-pad"> </span>
                                                             <span class="qa-message-who-data">
                                                                 <a target="_blank"
-                                                                   href="<?php echo $defaultUserIDUrl; ?>">
-                                                                    <?php echo $userResult[0]['NickName']; ?>
+                                                                   href="<?= $defaultUserIDUrl; ?>">
+                                                                    <?= $userResult[0]['NickName']; ?>
                                                                 </a>,
                                                             </span>
                                                         </span>
                                                         <span class="qa-message-when">
                                                             <span class="qa-message-when-data">
-                                                                <time><?php echo $comment['DateCreate']; ?></time>
+                                                                <time><?= $comment['DateCreate']; ?></time>
                                                             </span>
                                                         </span>
                                                     </div>
@@ -249,14 +249,14 @@
                                             </div>
                                         </div>
                                         <div class="qa-message-content">
-                                            <?php echo $comment['Text']; ?>
+                                            <?= $comment['Text']; ?>
                                         </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         <?php } else { ?>
                             <div class="alert alert-info">
-                                <?php echo $this->translate('Для данной записи нет комментариев! Добавте первым комментарий к этой записе.'); ?>
+                                <?= $this->t('Для данной записи нет комментариев! Добавте первым комментарий к этой записе.'); ?>
                             </div>
                         <?php } ?>
                     </div>
@@ -264,11 +264,11 @@
                     <?php if ($commentAddAccess) : ?>
                         <hr/>
                         <div id="comment-form-wrapper">
-                            <?php echo $this->commentAddForm; ?>
+                            <?= $this->commentAddForm; ?>
                         </div>
                     <?php else: ?>
                         <div class="alert alert-info">
-                            <?php echo $this->translate(
+                            <?= $this->t(
                                 'Чтобы добавить комментарий следует авторизоваться на сайте.'
                             ); ?>
                         </div>

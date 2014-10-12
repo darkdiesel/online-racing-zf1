@@ -100,7 +100,7 @@ class Zend_Tool_Project_Context_Zf_LayoutScriptFile extends Zend_Tool_Project_Co
     public function getContents()
     {
         $contents = <<<EOS
-<?php echo \$this->layout()->content; ?>
+<?= \$this->layout()->content; ?>
 EOS;
 
         return $contents;

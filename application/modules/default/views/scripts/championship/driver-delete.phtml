@@ -1,49 +1,49 @@
 <?php if ($this->team_data && $this->team_driver_data) { ?>
 	<?php $driver = $this->team_driver_data; ?>
-	<?php echo $this->form ?>
+	<?= $this->form ?>
 	<div class="div_hr"></div>
 	<div class="team-item block-item">
 		<div class="block-item-content">
 			<div>
 				<?php if ($this->escape($this->team_data->url_logo_car) != '') { ?>
-					<img class="img-thumbnail article_team_car_image_x" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
+					<img class="img-thumbnail article_team_car_image_x" src="<?= $this->escape($this->team_data->url_logo_car); ?>">
 				<?php } ?>
 				<?php if ($this->escape($this->team_data->url_logo) != '') { ?>
-					<img class="img-thumbnail article_team_logo_image" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
+					<img class="img-thumbnail article_team_logo_image" src="<?= $this->escape($this->team_data->url_logo); ?>">
 				<?php } ?>
 			</div>
 		</div>
-		<div class="page_title"><?php echo $this->translate('Гонщик') ?>:</div>
+		<div class="page_title"><?= $this->t('Гонщик') ?>:</div>
 		<div class="div_hr"></div>
 		<div class="user_full_item block-item">
 			<div class="block-item-content">
 				<div class="article_title">
-					<span class="badge team_driver_number"><?php echo $this->escape($driver->driver_number) ?></span>
-					<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
-						<?php echo $this->escape($driver->user_name) ?>
-						<?php echo $this->escape($driver->user_surname) ?>
-						(<?php echo $driver->country_abbreviation ?>)
-						<img class="user_flag_x" src="<?php echo $driver->country_ImageGlossyWaveUrl ?>" title="<?php echo $driver->country_NativeName ?> (<?php echo $driver->country_EnglishName ?>)">
+					<span class="badge team_driver_number"><?= $this->escape($driver->driver_number) ?></span>
+					<a href="<?= $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
+						<?= $this->escape($driver->user_name) ?>
+						<?= $this->escape($driver->user_surname) ?>
+						(<?= $driver->country_abbreviation ?>)
+						<img class="user_flag_x" src="<?= $driver->country_ImageGlossyWaveUrl ?>" title="<?= $driver->country_NativeName ?> (<?= $driver->country_EnglishName ?>)">
 					</a>
 				</div>
 				<div class="user_image pull-left">
-					<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
-						<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
+					<a href="<?= $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
+						<?= $this->getUserAvatar($driver->user_id, $driver->user_avatar_type); ?>
 					</a>
 				</div>
 				<div class="teams_driver_info no_width">
 					<table class="table table-condensed">
 						<tr>
-							<td><span class="bold_text"><?php echo $this->translate("Имя"); ?>: </span></td>
-							<td><?php echo $this->escape($driver->user_name) ?></td>
+							<td><span class="bold_text"><?= $this->t("Имя"); ?>: </span></td>
+							<td><?= $this->escape($driver->user_name) ?></td>
 						</tr>
 						<tr>
-							<td><span class="bold_text"><?php echo $this->translate("Фамилия"); ?>: </span></td>
-							<td><?php echo $this->escape($driver->user_surname) ?></td>
+							<td><span class="bold_text"><?= $this->t("Фамилия"); ?>: </span></td>
+							<td><?= $this->escape($driver->user_surname) ?></td>
 						</tr>
 						<tr>
-							<td><span class="bold_text"><?php echo $this->translate("Ник-нэйм"); ?>: </span></td>
-							<td><?php echo $this->escape($driver->user_login) ?></td>
+							<td><span class="bold_text"><?= $this->t("Ник-нэйм"); ?>: </span></td>
+							<td><?= $this->escape($driver->user_login) ?></td>
 						</tr>
 					</table>
 				</div>

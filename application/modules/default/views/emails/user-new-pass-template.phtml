@@ -28,11 +28,11 @@
                                         <tr>
                                             <td>
                                                 <p>
-                                                    Здравствуйте, <?php echo $this->Name; ?> <?php echo $this->Surname; ?>
-                                                    (<?php echo $this->NickName; ?>).
+                                                    Здравствуйте, <?= $this->Name; ?> <?= $this->Surname; ?>
+                                                    (<?= $this->NickName; ?>).
                                                 </p>
                                                 <p>
-                                                    Пароль для вашего аккаунта <?php echo $this->Email; ?> на портале
+                                                    Пароль для вашего аккаунта <?= $this->Email; ?> на портале
                                                     <a href="http://online-racing.net">Online-Racing.Net</a> был успешно изменен.
                                                 </p>
                                                 <br/>
@@ -42,23 +42,23 @@
                                                     <tbody>
                                                     <tr>
                                                         <td><strong>Имя</strong></td>
-                                                        <td><?php echo $this->Name; ?></td>
+                                                        <td><?= $this->Name; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Фамилия</strong></td>
-                                                        <td><?php echo $this->Surname; ?></td>
+                                                        <td><?= $this->Surname; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Никнейм</strong></td>
-                                                        <td><?php echo $this->NickName; ?></td>
+                                                        <td><?= $this->NickName; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>E-Mail</strong></td>
-                                                        <td><?php echo $this->Email; ?></td>
+                                                        <td><?= $this->Email; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Пароль</strong></td>
-                                                        <td style="color:red"><?php echo $this->Password; ?></td>
+                                                        <td style="color:red"><?= $this->Password; ?></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -66,8 +66,8 @@
                                                 <br/>
                                                 <p>
                                                     Для авторизации на сайте перейдите на страницу
-                                                    <a href="<?php echo $this->SignInUrl; ?>">
-                                                        <?php echo $this->SignInUrl; ?>
+                                                    <a href="<?= $this->SignInUrl; ?>">
+                                                        <?= $this->SignInUrl; ?>
                                                     </a>
                                                     и введите перечисленные выше данные.<br/>
                                                 </p>

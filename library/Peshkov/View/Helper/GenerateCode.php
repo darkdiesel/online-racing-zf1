@@ -6,7 +6,7 @@ class Peshkov_View_Helper_GenerateCode extends Zend_View_Helper_Abstract
      *  GenerateCode() Генерериет строку символов заданной длины
      *
      * @param int $length
-     * @return strin
+     * @return string
      */
     public function GenerateCode($length = 6)
     {

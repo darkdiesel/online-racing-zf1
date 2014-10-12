@@ -6,7 +6,7 @@ class LeagueController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Лига'));
+        $this->view->headTitle($this->view->t('Лига'));
     }
 
     // action for view league
@@ -37,7 +37,7 @@ class LeagueController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Лига ') . ' :: ' . $result[0]['Name']
+                    $this->view->t('Лига ') . ' :: ' . $result[0]['Name']
                 );
 
                 //add breadscrumb
@@ -63,20 +63,20 @@ class LeagueController extends App_Controller_LoaderController
 
                 if ($championshipPaginator->count() == 0) {
                     $this->view->championshipData = false;
-                    $this->messages->addInfo($this->view->translate('В лиге нет чемпионатов!'));
+                    $this->messages->addInfo($this->view->t('В лиге нет чемпионатов!'));
                 } else {
                     $this->view->championshipData = $championshipPaginator;
                 }
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая лига не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Лига не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Лига не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Лига не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Лига не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -100,8 +100,8 @@ class LeagueController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Лиги'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Лиги'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_League l')
@@ -118,7 +118,7 @@ class LeagueController extends App_Controller_LoaderController
 
             if ($leaguePaginator->count() == 0) {
                 $this->view->leagueData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->leagueData = $leaguePaginator;
             }

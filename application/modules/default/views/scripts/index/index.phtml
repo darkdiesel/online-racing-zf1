@@ -8,7 +8,7 @@
     <div class="block block-default block-ui-bordered block-list">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold">
-                <?= $this->translate('Новости портала') ?>
+                <?= $this->t('Новости портала') ?>
             </div>
         </div>
         <div class="block-body">
@@ -45,7 +45,7 @@
                     ?>
                     <div class="block block-default block-ui-bordered m-b-5">
                         <?php
-                        echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
+                        echo $this->BlockConfigMenu($this->t("Контент"))->postMenu(
                             $this->escape($post['ID'])
                         );
                         ?>
@@ -75,17 +75,17 @@
                         </div>
                         <div class="block-footer clearfix">
                             <div class="pull-left m-r-15 tooltip-field"
-                                 data-title="<?= $this->translate('Просмотров'); ?>" data-placement="bottom">
+                                 data-title="<?= $this->t('Просмотров'); ?>" data-placement="bottom">
                                 <i class="fa fa-eye fa-lg"></i>
                                 <?= $this->escape($post['Views']); ?>
                             </div>
                             <div class="pull-left m-r-15 tooltip-field"
-                                 data-title="<?= $this->translate('Комментарии'); ?>" data-placement="bottom">
+                                 data-title="<?= $this->t('Комментарии'); ?>" data-placement="bottom">
                                 <i class="fa fa-comments-o fa-lg"></i>
                                 <?= $commentsСount ?>
                             </div>
                             <div class="pull-right tooltip-field"
-                                 data-title="<?= $this->translate('Читать дальше'); ?>" data-placement="bottom">
+                                 data-title="<?= $this->t('Читать дальше'); ?>" data-placement="bottom">
                                 <a href="<?= $defaultPostIDUrl ?>"
                                    class="block-content-button-more">
                                     <i class="fa fa-arrow-right fa-lg"></i>
@@ -101,7 +101,7 @@
                  */
                 ?>
                 <div class="alert alert-error">
-                    <?= $this->translate('Ошибка!'); ?>
+                    <?= $this->t('Ошибка!'); ?>
                 </div>
             <?php } ?>
         </div>
@@ -113,7 +113,7 @@
     <div class="block block-default block-ui-bordered block-table">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold" style="border:0; padding:0;">
-                <?= $this->translate('Ближайшие события') ?>
+                <?= $this->t('Ближайшие события') ?>
             </div>
         </div>
         <div class="block-body">
@@ -170,7 +170,7 @@
                 */
                 ?>
                 <div class="alert alert-info">
-                    <?= $this->translate('В ближайшее время события отсутствуют.'); ?>
+                    <?= $this->t('В ближайшее время события отсутствуют.'); ?>
                 </div>
             <?php } ?>
         </div>
@@ -182,7 +182,7 @@
     <div class="block block-default block-ui-bordered block-media-list">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold">
-                <?= $this->translate('Лиги портала') ?>
+                <?= $this->t('Лиги портала') ?>
             </div>
         </div>
         <div class="block-body">
@@ -216,7 +216,7 @@
     <div class="block block-default block-ui-bordered block-media-list block-media-list-rss">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold">
-                <?= $this->translate('Новости из мира автоспорта') ?>
+                <?= $this->t('Новости из мира автоспорта') ?>
             </div>
         </div>
         <div class="block-body">
@@ -246,7 +246,7 @@
         <div class="block block-default block-ui-bordered">
             <div class="block-header">
                 <div class="block-title text-uppercase text-bold">
-                    <?= $this->translate('Друзья и Партнеры'); ?>
+                    <?= $this->t('Друзья и Партнеры'); ?>
                 </div>
             </div>
             <div class="block-body">
@@ -264,7 +264,7 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <a class="thumbnail" href="http://i-src.ru/" target="_blank">
                                         <img
-                                            alt="<?= $this->translate(''); ?>"
+                                            alt="<?= $this->t(''); ?>"
                                             src="/data-content/ui/icons/partners/i-src-ru-logo-250.png"
                                             class="img-responsive">
                                     </a>

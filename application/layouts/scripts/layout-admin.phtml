@@ -37,18 +37,18 @@ $this->minifyHeadLink()->appendStylesheet('/css/triangle-button.css');
 $this->minifyHeadLink()->appendStylesheet('/css/buttons.css');
 ?>
 
-<?php echo $this->doctype() ?>
+<?= $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headMeta() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    <?php echo $this->minifyHeadLink() ?>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->minifyHeadLink() ?>
 
-    <?php echo $this->jQuery(); ?>
+    <?= $this->jQuery(); ?>
 </head>
-<body id="<?php echo $this->module . '-' . $this->controller . '-' . $this->action; ?>">
+<body id="<?= $this->module . '-' . $this->controller . '-' . $this->action; ?>">
 
 <div class="preloader">
     <div class="spinner">
@@ -61,19 +61,19 @@ $this->minifyHeadLink()->appendStylesheet('/css/buttons.css');
 <div id="page-wrapper">
     <div id="page">
         <div class="container-fluid">
-            <?php echo $this->render("layout-admin/header.phtml") ?>
+            <?= $this->render("layout-admin/header.phtml") ?>
             <div class="row">
-                <?php echo $this->render("layout-admin/sidebar.phtml") ?>
-                <?php echo $this->render("layout-admin/content.phtml") ?>
+                <?= $this->render("layout-admin/sidebar.phtml") ?>
+                <?= $this->render("layout-admin/content.phtml") ?>
             </div>
         </div>
     </div>
 </div>
 <!-- scripts -->
 <?php //echo $this->headScript() ?>
-<?php echo $this->minifyHeadScript() ?>
+<?= $this->minifyHeadScript() ?>
 
 <?php //echo $this->render("common/site-heart-js.phtml") ?>
-<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+<?= $this->render("common/analytics-tracking-js-layout.phtml") ?>
 </body>
 </html>

@@ -6,7 +6,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Категория поста'));
+        $this->view->headTitle($this->view->t('Категория поста'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -39,18 +39,18 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Категория поста') . ' :: ' . $result[0]['Name']
+                    $this->view->t('Категория поста') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая категория поста не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая категория поста не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Категория поста не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Категория поста не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Категория поста не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Категория поста не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -74,8 +74,8 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Категории постов'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Категории постов'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_PostCategory pc')
@@ -91,7 +91,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
 
             if ($postCategoryPaginator->count() == 0) {
                 $this->view->postCategoryData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->postCategoryData = $postCategoryPaginator;
             }
@@ -103,8 +103,8 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
     // action for add new post type
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить категорию поста'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить категорию поста'));
 
         // form
         $postCategoryAddForm = new Peshkov_Form_PostCategory_Add();
@@ -137,7 +137,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -146,8 +146,8 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
     // action for edit post type
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать категорию поста'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать категорию поста'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -189,7 +189,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
                     $this->redirect($adminPostCategoryIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -208,13 +208,13 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая категория поста не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая категория поста не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Категория поста не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Категория поста не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Категория поста не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Категория поста не найдена!'));
                 }
             }
 
@@ -226,8 +226,8 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
     // action for delete post type
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить категорию поста'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить категорию поста'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -258,7 +258,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить категорию поста')
+                    $this->view->t('Вы действительно хотите удалить категорию поста')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -274,7 +274,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Категория контента <strong>" . $this->view->postCategoryData['Name'] . "</strong> успешно удален."
+                            $this->view->t("Категория контента <strong>" . $this->view->postCategoryData['Name'] . "</strong> успешно удален."
                             )
                         );
 
@@ -286,7 +286,7 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
                         $this->redirect($adminPostCategoryAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
@@ -294,13 +294,13 @@ class Admin_PostCategoryController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая категория поста не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая категория поста не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Категория поста не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Категория поста не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Категория поста не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Категория поста не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

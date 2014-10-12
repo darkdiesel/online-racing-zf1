@@ -11,8 +11,8 @@ class Admin_IndexController extends App_Controller_LoaderController
 
     public function indexAction()
     {
-        $this->view->headTitle($this->view->translate('Панель управления'));
-        $this->view->pageTitle($this->view->translate('Панель управления'));
+        $this->view->headTitle($this->view->t('Панель управления'));
+        $this->view->pageTitle($this->view->t('Панель управления'));
     }
 
 }

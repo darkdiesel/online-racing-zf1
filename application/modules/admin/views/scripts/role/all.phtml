@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminRoleAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить роль'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить роль'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,19 +23,19 @@
                         <span>ID</span>
                     </th>
                     <th class="role-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="role-system-name">
-                        <span><?= $this->translate('Системное имя'); ?></span>
+                        <span><?= $this->t('Системное имя'); ?></span>
                     </th>
                     <th class="role-parent-role">
-                        <span><?= $this->translate('Родительская роль'); ?></span>
+                        <span><?= $this->t('Родительская роль'); ?></span>
                     </th>
                     <th class="role-description">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </th>
                     <th class="role-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -96,7 +96,7 @@
                             </td>
                             <td class="role-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Роль пользователя"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Роль пользователя"), false)
                                         ->roleMenu($this->escape($role['ID']), true);
                                     ?>
                                 </span>

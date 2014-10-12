@@ -48,4 +48,8 @@ class App_Controller_LoaderController extends Zend_Controller_Action
         }
     }
 
+    public function _(){
+        echo '1988';
+    }
+
 }

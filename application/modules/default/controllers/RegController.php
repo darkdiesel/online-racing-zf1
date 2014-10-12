@@ -18,10 +18,10 @@ class RegController extends App_Controller_LoaderController
         $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
         // page title
-        $this->view->headTitle($this->view->translate('Регистрация пользователя'));
-        $this->view->pageTitle($this->view->translate('Регистрация пользователя'));
+        $this->view->headTitle($this->view->t('Регистрация пользователя'));
+        $this->view->pageTitle($this->view->t('Регистрация пользователя'));
 
-        $this->messages->addInfo("{$this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.')}");
+        $this->messages->addInfo("{$this->view->t('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.')}");
 
         // jQuery validate script
         $this->view->MinifyHeadScript()->appendFile("/library/jquery.validate/jquery.validate.min.js");
@@ -97,7 +97,7 @@ class RegController extends App_Controller_LoaderController
 
                 $this->redirect($this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default', true));
             } else {
-                $this->view->errMessage .= $this->view->translate('Исправте ошибки для корректной регистрации!');
+                $this->view->errMessage .= $this->view->t('Исправте ошибки для корректной регистрации!');
             }
         }
 

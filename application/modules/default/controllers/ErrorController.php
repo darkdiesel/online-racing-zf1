@@ -5,8 +5,8 @@ class ErrorController extends App_Controller_LoaderController {
 	public function init() {
 		parent::init();
 
-		$this->view->headTitle($this->view->translate('Ошибка'));
-		$this->view->pageTitle($this->view->translate('Ошибка'));
+		$this->view->headTitle($this->view->t('Ошибка'));
+		$this->view->pageTitle($this->view->t('Ошибка'));
 	}
 
 	public function errorAction() {
@@ -18,10 +18,10 @@ class ErrorController extends App_Controller_LoaderController {
 		if (!$errors || !$errors instanceof ArrayObject) {
 			switch ($errors['type']) {
 				case "access_denied":
-					$this->messages->addError($this->view->translate('Доступ запрещен!'));
+					$this->messages->addError($this->view->t('Доступ запрещен!'));
 					break;
 				default:
-					$this->messages->addError($this->view->translate('You have reached the error page!'));
+					$this->messages->addError($this->view->t('You have reached the error page!'));
 					break;
 			}
 			return;
@@ -37,14 +37,14 @@ class ErrorController extends App_Controller_LoaderController {
 				// 404 error -- controller or action not found
 				$this->getResponse()->setHttpResponseCode(404);
 				$priority = Zend_Log::NOTICE;
-				$this->messages->addError($this->view->translate('Ошибка 404. Страница не найдена'));
+				$this->messages->addError($this->view->t('Ошибка 404. Страница не найдена'));
 				$this->_helper->layout->setLayout( 'layout-error-404' );
 				break;
 			default:
 				// application error
 				$this->getResponse()->setHttpResponseCode(500);
 				$priority = Zend_Log::CRIT;
-				$this->messages->addError($this->view->translate('Ошибка 500. Ошибка приложения'));
+				$this->messages->addError($this->view->t('Ошибка 500. Ошибка приложения'));
 				break;
 		}
 

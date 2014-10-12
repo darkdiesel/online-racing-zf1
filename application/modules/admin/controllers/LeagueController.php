@@ -6,7 +6,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Лига'));
+        $this->view->headTitle($this->view->t('Лига'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -29,8 +29,8 @@ class Admin_LeagueController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Лиги'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Лиги'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_League l')
@@ -47,7 +47,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
 
             if ($leaguePaginator->count() == 0) {
                 $this->view->leagueData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->leagueData = $leaguePaginator;
             }
@@ -59,8 +59,8 @@ class Admin_LeagueController extends App_Controller_LoaderController
     // action for add new league
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить лигу'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить лигу'));
 
         // form
         $leagueAddForm = new Peshkov_Form_League_Add();
@@ -102,7 +102,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                 $item->save();
 
                 $this->messages->addSuccess(
-                    $this->view->translate("Лига <strong>" . $item->Name . "</strong> успешно создана.")
+                    $this->view->t("Лига <strong>" . $item->Name . "</strong> успешно создана.")
                 );
 
                 $defaultLeagueIDUrl = $this->view->url(
@@ -115,7 +115,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -124,8 +124,8 @@ class Admin_LeagueController extends App_Controller_LoaderController
     // action for edit league
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать лигу'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать лигу'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -183,7 +183,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                     $item->save();
 
                     $this->messages->addSuccess(
-                        $this->view->translate("Лига <strong>" . $item->Name . "</strong> успешно отредактирована.")
+                        $this->view->t("Лига <strong>" . $item->Name . "</strong> успешно отредактирована.")
                     );
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
@@ -196,7 +196,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                     $this->redirect($defaultLeagueIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -216,13 +216,13 @@ class Admin_LeagueController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая лига не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Лига не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Лига не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Лига не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Лига не найдена!'));
                 }
             }
 
@@ -234,8 +234,8 @@ class Admin_LeagueController extends App_Controller_LoaderController
     // action for delete league
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить лигу'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить лигу'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -267,7 +267,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить лигу')
+                    $this->view->t('Вы действительно хотите удалить лигу')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -287,7 +287,7 @@ class Admin_LeagueController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Лига <strong>" . $this->view->leagueData['Name'] . "</strong> успешно удалена."
+                            $this->view->t("Лига <strong>" . $this->view->leagueData['Name'] . "</strong> успешно удалена."
                             )
                         );
 
@@ -299,20 +299,20 @@ class Admin_LeagueController extends App_Controller_LoaderController
                         $this->redirect($adminLeagueAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая лига не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Лига не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Лига не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Лига не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Лига не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

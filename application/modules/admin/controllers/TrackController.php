@@ -6,7 +6,7 @@ class Admin_TrackController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Трасса'));
+        $this->view->headTitle($this->view->t('Трасса'));
     }
 
     // action for view track
@@ -37,19 +37,19 @@ class Admin_TrackController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Трасса ') . ' :: ' . $result[0]['Name']
+                    $this->view->t('Трасса ') . ' :: ' . $result[0]['Name']
                 );
 
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая трасса не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая трасса не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Трасса не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Трасса не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Трасса не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Трасса не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -73,8 +73,8 @@ class Admin_TrackController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Трассы'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Трассы'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Track t')
@@ -91,7 +91,7 @@ class Admin_TrackController extends App_Controller_LoaderController
 
             if ($trackPaginator->count() == 0) {
                 $this->view->trackData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->trackData = $trackPaginator;
             }
@@ -103,8 +103,8 @@ class Admin_TrackController extends App_Controller_LoaderController
     // action for add new track
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить трассу'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить трассу'));
 
         // form
         $trackAddForm = new Peshkov_Form_Track_Add();
@@ -179,7 +179,7 @@ class Admin_TrackController extends App_Controller_LoaderController
                 $item->save();
 
                 $this->messages->addSuccess(
-                    $this->view->translate("Трасса <strong>" . $item->Name . "</strong> успешно создана.")
+                    $this->view->t("Трасса <strong>" . $item->Name . "</strong> успешно создана.")
                 );
 
                 $adminTrackIDUrl = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id',
@@ -191,7 +191,7 @@ class Admin_TrackController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -200,8 +200,8 @@ class Admin_TrackController extends App_Controller_LoaderController
     // action for edit track
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать трассу'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать трассу'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -296,7 +296,7 @@ class Admin_TrackController extends App_Controller_LoaderController
                     $item->save();
 
                     $this->messages->addSuccess(
-                        $this->view->translate("Трасса <strong>" . $item->Name . "</strong> успешно отредактирована.")
+                        $this->view->t("Трасса <strong>" . $item->Name . "</strong> успешно отредактирована.")
                     );
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
@@ -309,7 +309,7 @@ class Admin_TrackController extends App_Controller_LoaderController
                     $this->redirect($adminTrackIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -329,13 +329,13 @@ class Admin_TrackController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая трасса не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая трасса не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Трасса не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Трасса не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Трасса не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Трасса не найдена!'));
                 }
             }
 
@@ -347,8 +347,8 @@ class Admin_TrackController extends App_Controller_LoaderController
     // action for delete track
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить лигу'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить лигу'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -380,7 +380,7 @@ class Admin_TrackController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить трассу')
+                    $this->view->t('Вы действительно хотите удалить трассу')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -399,7 +399,7 @@ class Admin_TrackController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Трасса <strong>" . $this->view->trackData['Name'] . "</strong> успешно удалена."
+                            $this->view->t("Трасса <strong>" . $this->view->trackData['Name'] . "</strong> успешно удалена."
                             )
                         );
 
@@ -411,20 +411,20 @@ class Admin_TrackController extends App_Controller_LoaderController
                         $this->redirect($adminTrackAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая трасса не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая трасса не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Трасса не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Трасса не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Трасса не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Трасса не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -434,8 +434,8 @@ class Admin_TrackController extends App_Controller_LoaderController
 //    // action for delete track
 //    public function deleteAction()
 //    {
-//        $this->view->headTitle($this->view->translate('Удалить'));
-//        $this->view->pageTitle($this->view->translate('Удалить трассу'));
+//        $this->view->headTitle($this->view->t('Удалить'));
+//        $this->view->pageTitle($this->view->t('Удалить трассу'));
 //
 //        $request = $this->getRequest();
 //        $track_id = (int)$request->getParam('track_id');
@@ -445,7 +445,7 @@ class Admin_TrackController extends App_Controller_LoaderController
 //        if ($track_data) {
 //            $this->view->headTitle($track_data->name);
 //
-//            $this->messages->addWarning($this->view->translate('Вы действительно хотите удалить трассу') . '<strong>' . $track_data->name . '</strong> ?');
+//            $this->messages->addWarning($this->view->t('Вы действительно хотите удалить трассу') . '<strong>' . $track_data->name . '</strong> ?');
 //
 //            $track_delete_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'track_id' => $track_id), 'adminTrackAction', true);
 //            $track_id_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'track_id' => $track_id), 'adminTrackId', true);
@@ -460,21 +460,21 @@ class Admin_TrackController extends App_Controller_LoaderController
 //                    $this->db->get('track')->delete($track_where);
 //
 //                    $this->messages->clearMessages();
-//                    $this->messages->addSuccess($this->view->translate('Трасса <strong>"' . $track_data->name . '"</strong> успешно удалена'));
+//                    $this->messages->addSuccess($this->view->t('Трасса <strong>"' . $track_data->name . '"</strong> успешно удалена'));
 //
 //                    $track_all_url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'all', 'page' => 1), 'adminTrackAll', true);
 //                    $this->redirect($track_all_url);
 //                } else {
-//                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+//                    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 //                }
 //            }
 //
 //            $this->view->form = $form;
 //            $this->view->track = $track_data;
 //        } else {
-//            $this->messages->addError($this->view->translate('Запрашиваемая трасса не найдена!'));
-//            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Трасса не найдена!')}");
-//            $this->view->pageTitle($this->view->translate('Ошибка!'));
+//            $this->messages->addError($this->view->t('Запрашиваемая трасса не найдена!'));
+//            $this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Трасса не найдена!')}");
+//            $this->view->pageTitle($this->view->t('Ошибка!'));
 //        }
 //    }
 

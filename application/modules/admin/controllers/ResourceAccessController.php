@@ -4,7 +4,7 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 
 	public function init() {
 		parent::init();
-		$this->view->pageTitle($this->view->translate('Доступ к ресурсам'));
+		$this->view->pageTitle($this->view->t('Доступ к ресурсам'));
 	}
 
 	// action for view content type
@@ -17,20 +17,20 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 		if ($resource_access_data) {
 			$this->view->resource_access = $resource_access_data;
 			$this->view->headTitle($resource_access_data->id);
-			$this->view->pageTitle($this->view->translate('Доступ к ресурсам') . " : " . $resource_access_data->id);
+			$this->view->pageTitle($this->view->t('Доступ к ресурсам') . " : " . $resource_access_data->id);
 			return;
 		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемый доступ к ресурсам не найден!'));
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Доступ к ресурсам не найден!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
+			$this->messages->addError($this->view->t('Запрашиваемый доступ к ресурсам не найден!'));
+			$this->view->headTitle($this->view->t('Ошибка!'));
+			$this->view->headTitle($this->view->t('Доступ к ресурсам не найден!'));
+			$this->view->pageTitle($this->view->t('Ошибка!'));
 		}
 	}
 
 	// action for view all content types
 	public function allAction() {
-		$this->view->headTitle($this->view->translate('Все'));
-		$this->view->pageTitle($this->view->translate('Доступы к ресурсам'));
+		$this->view->headTitle($this->view->t('Все'));
+		$this->view->pageTitle($this->view->t('Доступы к ресурсам'));
 
 		// pager settings
 		$pager_args = array(
@@ -44,14 +44,14 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 		if (count($paginator)) {
 			$this->view->resource_access_data = $paginator;
 		} else {
-			$this->messages->addInfo("{$this->view->translate('Запрашиваемые доступы к ресурсам на сайте не найдены!')}");
+			$this->messages->addInfo("{$this->view->t('Запрашиваемые доступы к ресурсам на сайте не найдены!')}");
 		}
 	}
 
 	// action for add new content type
 	public function addAction() {
-		$this->view->headTitle($this->view->translate('Настроить'));
-		$this->view->pageTitle($this->view->translate('Настроить доступ к ресурсу'));
+		$this->view->headTitle($this->view->t('Настроить'));
+		$this->view->pageTitle($this->view->t('Настроить доступ к ресурсу'));
 
 		$request = $this->getRequest();
 		// form
@@ -91,7 +91,7 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 
 				if ($check_resource_access_data) {
 					$this->messages->addError(
-							$this->view->translate('Доступ для выбранного ресурса, привилегии и роли уже существуют. Отредактируйте уже созданный доступ либо поменяйте параметры для добавления нового.')
+							$this->view->t('Доступ для выбранного ресурса, привилегии и роли уже существуют. Отредактируйте уже созданный доступ либо поменяйте параметры для добавления нового.')
 					);
 				} else {
 					$new_resource_access = $this->db->get('resource_access')->createRow($new_resource_access_data);
@@ -104,7 +104,7 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 					);
 				}
 			} else {
-				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+				$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 			}
 		}
 
@@ -116,7 +116,7 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$resource_access_id = (int) $request->getParam('resource_access_id');
 
-		$this->view->headTitle($this->view->translate('Редактировать'));
+		$this->view->headTitle($this->view->t('Редактировать'));
 
 		$resource_access_data = $this->db->get('resource_access')->getItem($resource_access_id);
 
@@ -160,7 +160,7 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 						if ($check_resource_access_data->id != $resource_access_data->id) {
 							$update_resource_access = FALSE;
 							$this->messages->addError(
-									$this->view->translate('Доступ для выбранного ресурса, привилегии и роли уже существуют. Отредактируйте уже созданный доступ либо поменяйте параметры для добавления нового.')
+									$this->view->t('Доступ для выбранного ресурса, привилегии и роли уже существуют. Отредактируйте уже созданный доступ либо поменяйте параметры для добавления нового.')
 							);
 						}
 					}
@@ -172,11 +172,11 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 						$this->redirect($resource_access_id_url);
 					}
 				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+					$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
 			}
 			$this->view->headTitle($resource_access_data->id);
-			$this->view->pageTitle($this->view->translate('Редактировать права доступа') . ' : ' . $resource_access_data->id);
+			$this->view->pageTitle($this->view->t('Редактировать права доступа') . ' : ' . $resource_access_data->id);
 
 			$form->role->setvalue($resource_access_data->role_id);
 			$form->resource->setvalue($resource_access_data->resource_id);
@@ -185,16 +185,16 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 
 			$this->view->form = $form;
 		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемый доступ к ресурсам не найден!'));
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Доступ к ресурсам не найден!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
+			$this->messages->addError($this->view->t('Запрашиваемый доступ к ресурсам не найден!'));
+			$this->view->headTitle($this->view->t('Ошибка!'));
+			$this->view->headTitle($this->view->t('Доступ к ресурсам не найден!'));
+			$this->view->pageTitle($this->view->t('Ошибка!'));
 		}
 	}
 
 	// action for delete content type
 	public function deleteAction() {
-		$this->view->headTitle($this->view->translate('Удалить'));
+		$this->view->headTitle($this->view->t('Удалить'));
 
 		$request = $this->getRequest();
 		$content_type_id = (int) $request->getParam('content_type_id');
@@ -204,9 +204,9 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 
 		if ($content_type_data) {
 			$this->view->headTitle($content_type_data->name);
-			$this->view->pageTitle("{$this->view->translate('Удалить Правила')} :: {$content_type_data->name}");
+			$this->view->pageTitle("{$this->view->t('Удалить Правила')} :: {$content_type_data->name}");
 
-			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить Правила')} <strong>\"{$content_type_data->name}\"</strong> ?");
+			$this->messages->addWarning("{$this->view->t('Вы действительно хотите удалить Правила')} <strong>\"{$content_type_data->name}\"</strong> ?");
 
 			$form = new Application_Form_PostCategory_Delete();
 			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'delete', 'content_type_id' => $content_type_id), 'content_type_action', true));
@@ -218,20 +218,20 @@ class Admin_ResourceAccessController extends App_Controller_LoaderController {
 					$content_type->delete($content_type_where);
 
 					$this->view->showMessages()->clearMessages();
-					$this->messages->addSuccess("{$this->view->translate("Правила <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
+					$this->messages->addSuccess("{$this->view->t("Правила <strong>\"{$content_type_data->name}\"</strong> успешно удален")}");
 
 					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'content-type', 'action' => 'all', 'page' => 1), 'adminContentTypeAll', true));
 				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+					$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
 			}
 
 			$this->view->form = $form;
 			$this->view->content_type = $content_type_data;
 		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
-			$this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Правило не найдено!')}");
-			$this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Правило не найдено!')}");
+			$this->messages->addError($this->view->t('Запрашиваемое правило не найдено!'));
+			$this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Правило не найдено!')}");
+			$this->view->pageTitle("{$this->view->t('Ошибка!')} {$this->view->t('Правило не найдено!')}");
 		}
 	}
 

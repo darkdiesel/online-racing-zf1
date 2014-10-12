@@ -6,7 +6,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Ресурс'));
+        $this->view->headTitle($this->view->t('Ресурс'));
     }
 
     public function idAction()
@@ -24,24 +24,24 @@ class Admin_ResourceController extends App_Controller_LoaderController
             if ($privileges_data) {
                 $this->view->privileges_data = $privileges_data;
             } else {
-                $this->messages->addWarning($this->view->translate('Для данного ресурса не создано привлегий!'));
+                $this->messages->addWarning($this->view->t('Для данного ресурса не создано привлегий!'));
             }
 
             $this->view->headTitle($resource_data->name);
-            $this->view->pageTitle($this->view->translate("Ресурс :: ") . $resource_data->name);
+            $this->view->pageTitle($this->view->t("Ресурс :: ") . $resource_data->name);
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Ресурс не найден!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->messages->addError($this->view->t('Запрашиваемый ресурс не найден!'));
+            $this->view->headTitle($this->view->t('Ошибка!'));
+            $this->view->headTitle($this->view->t('Ресурс не найден!'));
+            $this->view->pageTitle($this->view->t('Ошибка!'));
         }
     }
 
     // action for view all resources
     public function allAction()
     {
-        $this->view->headTitle($this->view->translate('Все'));
-        $this->view->pageTitle($this->view->translate('Ресурсы сайта'));
+        $this->view->headTitle($this->view->t('Все'));
+        $this->view->pageTitle($this->view->t('Ресурсы сайта'));
 
         // pager settings
         $pager_args = array(
@@ -55,14 +55,14 @@ class Admin_ResourceController extends App_Controller_LoaderController
         if ($paginator) {
             $this->view->paginator = $paginator;
         } else {
-            $this->messages->addInfo("{$this->view->translate('Запрашиваемые ресурсы на сайте не найдены!')}");
+            $this->messages->addInfo("{$this->view->t('Запрашиваемые ресурсы на сайте не найдены!')}");
         }
     }
 
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить ресурс'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить ресурс'));
 
         // add scripts
         $this->view->headScript()->appendFile("/js/admin/resource.js");
@@ -98,7 +98,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
                 $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'id', 'resource_id' => $new_resource->id), 'adminResourceId', true));
             } else {
-                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
 
@@ -114,7 +114,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
         // add scripts
         $this->view->headScript()->appendFile("/js/admin/resource.js");
 
-        $this->view->headTitle($this->view->translate('Редактировать'));
+        $this->view->headTitle($this->view->t('Редактировать'));
 
         $resource_data = $this->db->get('resource')->getItem($resource_id);
 
@@ -138,8 +138,8 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
                     if ($check_resource_data) {
                         if ($check_resource_data->id != $resource_id) {
-                            $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
-                            $this->messages->addError($this->view->translate('Ресурс с именем "' . strtolower($form->getValue('name')) . '" уже существует!'));
+                            $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
+                            $this->messages->addError($this->view->t('Ресурс с именем "' . strtolower($form->getValue('name')) . '" уже существует!'));
                             $update_resource = FALSE;
                         }
                     }
@@ -160,11 +160,11 @@ class Admin_ResourceController extends App_Controller_LoaderController
                         $this->redirect($resource_id_url);
                     }
                 } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
             $this->view->headTitle($resource_data->name);
-            $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$resource_data->name}");
+            $this->view->pageTitle("{$this->view->t('Редактировать')} :: {$resource_data->name}");
 
             $form->name->setvalue($resource_data->name);
             $form->module->setvalue($resource_data->module);
@@ -174,16 +174,16 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
             $this->view->form = $form;
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
-            $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Ресурс не найден!')}");
-            $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Ресурс не найден!')}");
+            $this->messages->addError($this->view->t('Запрашиваемый ресурс не найден!'));
+            $this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Ресурс не найден!')}");
+            $this->view->pageTitle("{$this->view->t('Ошибка!')} {$this->view->t('Ресурс не найден!')}");
         }
     }
 
     // action for delete resource
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
+        $this->view->headTitle($this->view->t('Удалить'));
 
         $request = $this->getRequest();
         $resource_id = (int)$request->getParam('resource_id');
@@ -192,9 +192,9 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
         if ($resource_data) {
             $this->view->headTitle($resource_data->name);
-            $this->view->pageTitle("{$this->view->translate('Удалить ресурс')} :: {$resource_data->name}");
+            $this->view->pageTitle("{$this->view->t('Удалить ресурс')} :: {$resource_data->name}");
 
-            $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить ресурс')} <strong>\"{$resource_data->name}\"</strong> ?");
+            $this->messages->addWarning("{$this->view->t('Вы действительно хотите удалить ресурс')} <strong>\"{$resource_data->name}\"</strong> ?");
 
             $form = new Application_Form_Resource_Delete();
             $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'delete', 'resource_id' => $resource_id), 'adminResourceAction', true));
@@ -206,27 +206,27 @@ class Admin_ResourceController extends App_Controller_LoaderController
                     $this->db->get('resource')->delete($resource_where);
 
                     $this->messages->clearMessages();
-                    $this->messages->addSuccess("{$this->view->translate("Ресурс <strong>\"{$resource_data->name}\"</strong> успешно удален")}");
+                    $this->messages->addSuccess("{$this->view->t("Ресурс <strong>\"{$resource_data->name}\"</strong> успешно удален")}");
 
                     $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'all', 'page' => 1), 'adminResourceAll', true));
                 } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
             $this->view->form = $form;
             $this->view->resource = $resource_data;
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Ресурс не найден!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->messages->addError($this->view->t('Запрашиваемый ресурс не найден!'));
+            $this->view->headTitle($this->view->t('Ошибка!'));
+            $this->view->headTitle($this->view->t('Ресурс не найден!'));
+            $this->view->pageTitle($this->view->t('Ошибка!'));
         }
     }
 
     public function addPrivilegeAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить привилегию ресурсу'));
+        $this->view->headTitle($this->view->t('Добавить привилегию ресурсу'));
 
         $request = $this->getRequest();
         $resource_id = (int)$request->getParam('resource_id');
@@ -235,7 +235,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
         if ($resource_data) {
             $this->view->headTitle($resource_data->name);
-            $this->view->pageTitle($this->view->translate('Добавить привилегию ресурсу') . " : " . $resource_data->name);
+            $this->view->pageTitle($this->view->t('Добавить привилегию ресурсу') . " : " . $resource_data->name);
 
             $form = new Application_Form_Resource_AddPrivilege();
             $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add-privilege', 'resource_id' => $resource_id), 'adminResourceAction', true));
@@ -254,7 +254,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
                     );
 
                     if ($check_privilege_data) {
-                        $this->messages->addError($this->view->translate('Для данного ресурса эта привиления уже присутствует в базе данных!'));
+                        $this->messages->addError($this->view->t('Для данного ресурса эта привиления уже присутствует в базе данных!'));
                         $add_privilege = FALSE;
                     } else {
                         $add_privilege = TRUE;
@@ -276,7 +276,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
                         $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $new_privilege->id), 'adminPrivilegeId', true));
                     }
                 } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
 
@@ -287,16 +287,16 @@ class Admin_ResourceController extends App_Controller_LoaderController
             $this->view->form = $form;
             $this->view->resource_data = $resource_data;
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Ресурс не найден!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->messages->addError($this->view->t('Запрашиваемый ресурс не найден!'));
+            $this->view->headTitle($this->view->t('Ошибка!'));
+            $this->view->headTitle($this->view->t('Ресурс не найден!'));
+            $this->view->pageTitle($this->view->t('Ошибка!'));
         }
     }
 
     public function addResourceAccessAction()
     {
-        $this->view->headTitle($this->view->translate('Настроить доступ к ресурсу'));
+        $this->view->headTitle($this->view->t('Настроить доступ к ресурсу'));
 
         $request = $this->getRequest();
         $resource_id = (int)$request->getParam('resource_id');
@@ -305,7 +305,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
         if ($resource_data) {
             $this->view->headTitle($resource_data->name);
-            $this->view->pageTitle($this->view->translate('Настроить доступ к ресурсу') . " : " . $resource_data->name);
+            $this->view->pageTitle($this->view->t('Настроить доступ к ресурсу') . " : " . $resource_data->name);
 
             $form = new Application_Form_Resource_AddResourceAccess();
             $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add-resource-access', 'resource_id' => $resource_id), 'adminResourceAction', true));
@@ -338,7 +338,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
 
                     if ($check_resource_access_data) {
                         $this->messages->addError(
-                            $this->view->translate('Доступ для выбранного ресурса, привилегии и роли уже существуют. Отредактируйте уже созданный доступ либо поменяйте параметры для добавления нового.')
+                            $this->view->t('Доступ для выбранного ресурса, привилегии и роли уже существуют. Отредактируйте уже созданный доступ либо поменяйте параметры для добавления нового.')
                         );
                     } else {
                         $new_resource_access = $this->db->get('resource_access')->createRow($new_resource_access_data);
@@ -351,7 +351,7 @@ class Admin_ResourceController extends App_Controller_LoaderController
                         );
                     }
                 } else {
-                    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
                 }
             }
             // add resource to form
@@ -365,16 +365,16 @@ class Admin_ResourceController extends App_Controller_LoaderController
                     $form->privilege->addMultiOptions(array($privilege->id => $privilege->name));
                 }
             } else {
-                $this->messages->addError($this->view->translate('У данного ресурса нет привилегий!'));
+                $this->messages->addError($this->view->t('У данного ресурса нет привилегий!'));
             }
 
             $this->view->form = $form;
             $this->view->resource_data = $resource_data;
         } else {
-            $this->messages->addError($this->view->translate('Запрашиваемый ресурс не найден!'));
-            $this->view->headTitle($this->view->translate('Ошибка!'));
-            $this->view->headTitle($this->view->translate('Ресурс не найден!'));
-            $this->view->pageTitle($this->view->translate('Ошибка!'));
+            $this->messages->addError($this->view->t('Запрашиваемый ресурс не найден!'));
+            $this->view->headTitle($this->view->t('Ошибка!'));
+            $this->view->headTitle($this->view->t('Ресурс не найден!'));
+            $this->view->pageTitle($this->view->t('Ошибка!'));
         }
     }
 

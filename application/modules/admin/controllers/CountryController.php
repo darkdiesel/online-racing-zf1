@@ -6,7 +6,7 @@ class Admin_CountryController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Страна'));
+        $this->view->headTitle($this->view->t('Страна'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -38,19 +38,19 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['NativeName']);
                 $this->view->pageTitle(
-                    $this->view->translate('Страна') . ' :: ' . $result[0]['EnglishName'] . ' ('
+                    $this->view->t('Страна') . ' :: ' . $result[0]['EnglishName'] . ' ('
                     . $result[0]['NativeName'] . ')'
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая страна не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Страна не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Страна не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Страна не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Страна не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -73,8 +73,8 @@ class Admin_CountryController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Cтраны'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Cтраны'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Country c')
@@ -90,7 +90,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
             if ($countryPaginator->count() == 0) {
                 $this->view->countryData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->countryData = $countryPaginator;
             }
@@ -101,8 +101,8 @@ class Admin_CountryController extends App_Controller_LoaderController
 
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить страну'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить страну'));
 
         // form
         $countryAddForm = new Peshkov_Form_Country_Add();
@@ -173,7 +173,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -182,8 +182,8 @@ class Admin_CountryController extends App_Controller_LoaderController
 
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать страну'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать страну'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -275,7 +275,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                     $this->redirect($adminCountryIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -294,13 +294,13 @@ class Admin_CountryController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая страна не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Страна не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Страна не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Страна не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Страна не найдена!'));
                 }
             }
 
@@ -311,8 +311,8 @@ class Admin_CountryController extends App_Controller_LoaderController
 
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить страну'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить страну'));
 
         // set filters and validators for POST input
         $filters = array(
@@ -343,7 +343,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['NativeName']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить страну')
+                    $this->view->t('Вы действительно хотите удалить страну')
                     . " <strong>" . $result[0]['NativeName'] . " (" . $result[0]['EnglishName'] . ")</strong>?"
                 );
 
@@ -363,7 +363,7 @@ class Admin_CountryController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Страна <strong>" . $this->view->countryData['NativeName'] . " (" . $this->view->countryData['EnglishName'] . ")</strong> успешно удалена."
+                            $this->view->t("Страна <strong>" . $this->view->countryData['NativeName'] . " (" . $this->view->countryData['EnglishName'] . ")</strong> успешно удалена."
                             )
                         );
 
@@ -375,7 +375,7 @@ class Admin_CountryController extends App_Controller_LoaderController
                         $this->redirect($adminCountryAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
@@ -383,13 +383,13 @@ class Admin_CountryController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая страна не найдена!!'));
+                $this->messages->addError($this->view->t('Запрашиваемая страна не найдена!!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Страна не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Страна не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Страна не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Страна не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

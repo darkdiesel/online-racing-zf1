@@ -1,20 +1,20 @@
 <div id="tabs">
     <ul>
-        <li><a href="#tabs-1"><?php echo $this->translate('Язык'); ?></a></li>
-        <li><a href="#tabs-2"><?php echo $this->translate('Пароль'); ?></a></li>
+        <li><a href="#tabs-1"><?= $this->t('Язык'); ?></a></li>
+        <li><a href="#tabs-2"><?= $this->t('Пароль'); ?></a></li>
     </ul>
     <div id="tabs-1">
-        <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-1" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>">
-            <?php echo $this->form->getDisplayGroup('lang_settings'); ?>
-            <?php echo $this->form->tab_name->setvalue('lang_settings'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+        <form id="<?= $this->form->getName(); ?>" action="<?= $this->form->getAction(); ?>#tabs-1" method="<?= $this->form->getMethod(); ?>" class="<?= $this->form->getAttrib('class'); ?>">
+            <?= $this->form->getDisplayGroup('lang_settings'); ?>
+            <?= $this->form->tab_name->setvalue('lang_settings'); ?>
+            <?= $this->form->getDisplayGroup('form_actions'); ?>
         </form>
     </div>
     <div id="tabs-2">
-        <form id="<?php echo $this->form->getName(); ?>" action="<?php echo $this->form->getAction(); ?>#tabs-2" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>">
-            <?php echo $this->form->getDisplayGroup('change_password'); ?>
-            <?php echo $this->form->tab_name->setvalue('change_password'); ?>
-            <?php echo $this->form->getDisplayGroup('form_actions'); ?>
+        <form id="<?= $this->form->getName(); ?>" action="<?= $this->form->getAction(); ?>#tabs-2" method="<?= $this->form->getMethod(); ?>" class="<?= $this->form->getAttrib('class'); ?>">
+            <?= $this->form->getDisplayGroup('change_password'); ?>
+            <?= $this->form->tab_name->setvalue('change_password'); ?>
+            <?= $this->form->getDisplayGroup('form_actions'); ?>
         </form>
     </div>
 </div>

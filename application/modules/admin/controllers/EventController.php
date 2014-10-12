@@ -6,7 +6,7 @@ class Admin_EventController extends App_Controller_LoaderController
     public function init()
     {
 	parent::init();
-	$this->view->headTitle($this->view->translate('Событие'));
+	$this->view->headTitle($this->view->t('Событие'));
     }
 
     // action for view content type
@@ -24,17 +24,17 @@ class Admin_EventController extends App_Controller_LoaderController
 	    $this->view->pageTitle($event_data->name);
 	    return;
 	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемое событие не найдено!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Событие не найдено!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Событие не найдено!')}");
+	    $this->messages->addError($this->view->t('Запрашиваемое событие не найдено!'));
+	    $this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Событие не найдено!')}");
+	    $this->view->pageTitle("{$this->view->t('Ошибка!')} {$this->view->t('Событие не найдено!')}");
 	}
     }
 
     // action for view all content types
     public function allAction()
     {
-	$this->view->headTitle($this->view->translate('События сайта'));
-	$this->view->pageTitle($this->view->translate('События сайта'));
+	$this->view->headTitle($this->view->t('События сайта'));
+	$this->view->pageTitle($this->view->t('События сайта'));
 
 	$event = new Application_Model_DbTable_Event();
 
@@ -50,15 +50,15 @@ class Admin_EventController extends App_Controller_LoaderController
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messages->addInfo("{$this->view->translate('События на сайте не найдены!')}");
+	    $this->messages->addInfo("{$this->view->t('События на сайте не найдены!')}");
 	}
     }
 
     // action for add new content type
     public function addAction()
     {
-	$this->view->headTitle($this->view->translate('Добавить'));
-	$this->view->pageTitle($this->view->translate('Добавить событие'));
+	$this->view->headTitle($this->view->t('Добавить'));
+	$this->view->pageTitle($this->view->t('Добавить событие'));
 
 	// css and js for date time picker script
 	$this->view->headLink()->appendStylesheet($this->view->baseUrl("/library/jquery/css/jquery-ui-timepicker-addon.min.css"));
@@ -97,7 +97,7 @@ class Admin_EventController extends App_Controller_LoaderController
 			)
 		);
 	    } else {
-		$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 	    }
 	}
 
@@ -110,7 +110,7 @@ class Admin_EventController extends App_Controller_LoaderController
 	$request = $this->getRequest();
 	$event_id = (int) $request->getParam('event_id');
 	
-	$this->view->headTitle($this->view->translate('Редактировать'));
+	$this->view->headTitle($this->view->t('Редактировать'));
 
 	// css and js for date time picker script
 	$this->view->headLink()->appendStylesheet($this->view->baseUrl("/library/jquery/css/jquery-ui-timepicker-addon.min.css"));
@@ -146,12 +146,12 @@ class Admin_EventController extends App_Controller_LoaderController
 				'event_id' => $event_id), 'event_id', true
 		    ));
 		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
 	    $this->view->headTitle($event_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$event_data->name}");
+	    $this->view->pageTitle("{$this->view->t('Редактировать')} :: {$event_data->name}");
 
 	    $form->name->setvalue($event_data->name);
 	    $form->date_event->setvalue($event_data->date_event);
@@ -160,16 +160,16 @@ class Admin_EventController extends App_Controller_LoaderController
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемое событие не найдено!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Событие не найдено!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Событие не найдено!')}");
+	    $this->messages->addError($this->view->t('Запрашиваемое событие не найдено!'));
+	    $this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Событие не найдено!')}");
+	    $this->view->pageTitle("{$this->view->t('Ошибка!')} {$this->view->t('Событие не найдено!')}");
 	}
     }
 
     // action for delete content type
     public function deleteAction()
     {
-	$this->view->headTitle($this->view->translate('Удалить'));
+	$this->view->headTitle($this->view->t('Удалить'));
 
 	$request = $this->getRequest();
 	$event_id = (int) $request->getParam('event_id');
@@ -179,9 +179,9 @@ class Admin_EventController extends App_Controller_LoaderController
 
 	if (count($event_data) != 0) {
 	    $this->view->headTitle($event_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Удалить событие')} :: {$event_data->name}");
+	    $this->view->pageTitle("{$this->view->t('Удалить событие')} :: {$event_data->name}");
 
-	    $this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить событие')} <strong>\"{$event_data->name}\"</strong> ?");
+	    $this->messages->addWarning("{$this->view->t('Вы действительно хотите удалить событие')} <strong>\"{$event_data->name}\"</strong> ?");
 
 	    $form = new Application_Form_Event_Delete();
 	    $form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event_id), 'event_action', true));
@@ -193,20 +193,20 @@ class Admin_EventController extends App_Controller_LoaderController
 		    $event->delete($event_where);
 
 		    $this->view->showMessages()->clearMessages();
-		    $this->messages->addSuccess("{$this->view->translate("Событие <strong>\"{$event_data->name}\"</strong> успешно удалено")}");
+		    $this->messages->addSuccess("{$this->view->t("Событие <strong>\"{$event_data->name}\"</strong> успешно удалено")}");
 
 		    $this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'all', 'page' => 1), 'event_all', true));
 		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 
 	    $this->view->form = $form;
 	    $this->view->event = $event_data;
 	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемое событие не найдено!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Событие не найдено!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Событие не найдено!')}");
+	    $this->messages->addError($this->view->t('Запрашиваемое событие не найдено!'));
+	    $this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Событие не найдено!')}");
+	    $this->view->pageTitle("{$this->view->t('Ошибка!')} {$this->view->t('Событие не найдено!')}");
 	}
     }
 

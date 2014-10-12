@@ -6,7 +6,7 @@ class Admin_PostController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Контент'));
+        $this->view->headTitle($this->view->t('Контент'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -29,8 +29,8 @@ class Admin_PostController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Контент'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Контент'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Post p')
@@ -49,7 +49,7 @@ class Admin_PostController extends App_Controller_LoaderController
 
             if ($postPaginator->count() == 0) {
                 $this->view->postData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->postData = $postPaginator;
             }
@@ -61,8 +61,8 @@ class Admin_PostController extends App_Controller_LoaderController
     // action for add new post
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить контент'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить контент'));
 
         // form
         $postAddForm = new Peshkov_Form_Post_Add();
@@ -116,7 +116,7 @@ class Admin_PostController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -125,8 +125,8 @@ class Admin_PostController extends App_Controller_LoaderController
     // action for edit post
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать пост'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать пост'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -194,7 +194,7 @@ class Admin_PostController extends App_Controller_LoaderController
                     $this->redirect($adminPostIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -216,13 +216,13 @@ class Admin_PostController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемый пост не найден!'));
+                    $this->messages->addError($this->view->t('Запрашиваемый пост не найден!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Пост не найден!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Пост не найден!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Пост не найден!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Пост не найден!'));
                 }
             }
 
@@ -234,8 +234,8 @@ class Admin_PostController extends App_Controller_LoaderController
     // action for delete racing series
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить пост'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить пост'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -269,7 +269,7 @@ class Admin_PostController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить пост')
+                    $this->view->t('Вы действительно хотите удалить пост')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -290,7 +290,7 @@ class Admin_PostController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate('Пост <strong>' . $this->view->postData['Name'] . '</strong> успешно удален.')
+                            $this->view->t('Пост <strong>' . $this->view->postData['Name'] . '</strong> успешно удален.')
                         );
 
                         $adminPostAllUrl = $this->view->url(
@@ -301,20 +301,20 @@ class Admin_PostController extends App_Controller_LoaderController
                         $this->redirect($adminPostAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемый пост не найден!'));
+                $this->messages->addError($this->view->t('Запрашиваемый пост не найден!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Пост не найден!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Пост не найден!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Пост не найден!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Пост не найден!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

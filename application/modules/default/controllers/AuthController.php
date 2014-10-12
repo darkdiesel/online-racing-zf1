@@ -21,11 +21,11 @@ class AuthController extends App_Controller_LoaderController
             $this->redirect($defaultIndexUrl);
         }
 
-        $this->view->headTitle($this->view->translate('Авторизация'));
-        $this->view->pageTitle($this->view->translate('Авторизация'));
+        $this->view->headTitle($this->view->t('Авторизация'));
+        $this->view->pageTitle($this->view->t('Авторизация'));
 
         // info message
-        $this->messages->addInfo($this->view->translate('Введите данные в форму ниже, чтобы авторизоваться на сайте.'));
+        $this->messages->addInfo($this->view->t('Введите данные в форму ниже, чтобы авторизоваться на сайте.'));
 
         $authSignInForm = new Peshkov_Form_Auth_SignIn();
 
@@ -109,7 +109,7 @@ class AuthController extends App_Controller_LoaderController
                             $updatedUser->save();
 
                             $this->view->showMessages()->clearMessages();
-                            $this->messages->addSuccess($this->view->translate('Вы успешно авторизовались на сайте.'));
+                            $this->messages->addSuccess($this->view->t('Вы успешно авторизовались на сайте.'));
 
 
                             // Check access for CKEditor
@@ -130,32 +130,32 @@ class AuthController extends App_Controller_LoaderController
                             $defaultAuthSignUpUrl = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-up'), 'default');
                             $defaultUserRestorePassUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default');
 
-                            $this->messages->addError($this->view->translate('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')
-                                . '<br/><a class="btn btn-danger btn-sm" href="' . $defaultUserRestorePassUrl . '">' . $this->view->translate('Забыли пароль?') . '</a>'
-                                . ' <a class="btn btn-danger btn-sm" href="' . $defaultAuthSignUpUrl . '">' . $this->view->translate('Зарегистрироваться?') . '</a>');
+                            $this->messages->addError($this->view->t('Вы ввели неверное имя пользователя или пароль. Повторите ввод.')
+                                . '<br/><a class="btn btn-danger btn-sm" href="' . $defaultUserRestorePassUrl . '">' . $this->view->t('Забыли пароль?') . '</a>'
+                                . ' <a class="btn btn-danger btn-sm" href="' . $defaultAuthSignUpUrl . '">' . $this->view->t('Зарегистрироваться?') . '</a>');
                         }
 
                         break;
                     case USER_STATUS_BLOCKED:
-                        $this->messages->addError($this->view->translate('Пользователь заблокирован! Обротитесь к администрации сайта для справки.'));
+                        $this->messages->addError($this->view->t('Пользователь заблокирован! Обротитесь к администрации сайта для справки.'));
                         break;
                     case USER_STATUS_NOT_ACTIVATED:
                         $defaultUserActivateUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'activate'), 'default');
-                        $this->messages->addError($this->view->translate('Пользователь с этими данными не активирован!')
-                            . ' <a class="btn btn-danger btn-sm" href="' . $defaultUserActivateUrl . '">' . $this->view->translate('Активировать?') . '</a>');
+                        $this->messages->addError($this->view->t('Пользователь с этими данными не активирован!')
+                            . ' <a class="btn btn-danger btn-sm" href="' . $defaultUserActivateUrl . '">' . $this->view->t('Активировать?') . '</a>');
                         break;
                     case USER_STATUS_NOT_FOUND:
 
                         $defaultUserRestorePassUrl = $this->view->url(array('module' => 'default', 'controller' => 'user', 'action' => 'restore-pass'), 'default');
                         $defaultAuthSignUpUrl = $this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'sign-up'), 'default');
 
-                        $this->messages->addError($this->view->translate('Пользователь с этими данными не найден!')
-                            . '<br/><a class="btn btn-danger btn-sm" href="' . $defaultUserRestorePassUrl . '">' . $this->view->translate('Забыли пароль?') . '</a>'
-                            . ' <a class="btn btn-danger btn-sm" href="' . $defaultAuthSignUpUrl . '">' . $this->view->translate('Зарегистрироваться?') . '</a>');
+                        $this->messages->addError($this->view->t('Пользователь с этими данными не найден!')
+                            . '<br/><a class="btn btn-danger btn-sm" href="' . $defaultUserRestorePassUrl . '">' . $this->view->t('Забыли пароль?') . '</a>'
+                            . ' <a class="btn btn-danger btn-sm" href="' . $defaultAuthSignUpUrl . '">' . $this->view->t('Зарегистрироваться?') . '</a>');
                         break;
                 }
             } else {
-                $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+                $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
             }
         }
     }
@@ -197,10 +197,10 @@ class AuthController extends App_Controller_LoaderController
         // set layout without sidebar
         $this->_helper->layout->setLayout('layout-default-no-sidebar');
 
-        $this->view->headTitle($this->view->translate('Регистрация'));
-        $this->view->pageTitle($this->view->translate('Регистрация'));
+        $this->view->headTitle($this->view->t('Регистрация'));
+        $this->view->pageTitle($this->view->t('Регистрация'));
 
-        $this->messages->addInfo($this->view->translate('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.'));
+        $this->messages->addInfo($this->view->t('Введите данные в форму ниже, чтобы зарегистрироваться на сайте.'));
 
         // jQuery validate script
         $this->view->MinifyHeadScript()->appendFile("/library/jquery.validate/jquery.validate.min.js");
@@ -284,7 +284,7 @@ class AuthController extends App_Controller_LoaderController
                 $this->redirect($defaultUserActivateUrl);
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }

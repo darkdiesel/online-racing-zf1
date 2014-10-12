@@ -4,16 +4,16 @@
         <div class="block-header">
             <div class="block-title">
                 <i class="fa fa-cc-visa fa-lg"></i>
-                <?php echo $this->translate("Помощь проекту") ?>
+                <?= $this->translate("Помощь проекту") ?>
             </div>
         </div>
         <div class="block-body text-center">
             <?php
                 $default_donate_url = $this->url(array('module' => 'default', 'controller' => 'donate', 'action' => 'index'), 'default', true);
             ?>
-            <a  class="btn btn-gold btn-lg btn-block" href="<?php echo $default_donate_url; ?>">
+            <a  class="btn btn-gold btn-lg btn-block" href="<?= $default_donate_url; ?>">
                 <i class="fa fa-dollar"></i>
-                <?php echo $this->translate('Помочь!'); ?>
+                <?= $this->translate('Помочь!'); ?>
             </a>
         </div>
     </div>

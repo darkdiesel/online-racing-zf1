@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminCountryAddUrl; ?>" class="btn btn-xs btn-primary pull-right">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить страну'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить страну'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,22 +23,22 @@
                         <span>ID</span>
                     </th>
                     <th class="country-native-name">
-                        <span><?= $this->translate('Родное название'); ?></span>
+                        <span><?= $this->t('Родное название'); ?></span>
                     </th>
                     <th class="country-english-name">
-                        <span><?= $this->translate('Английское название'); ?></span>
+                        <span><?= $this->t('Английское название'); ?></span>
                     </th>
                     <th class="country-abreviation">
-                        <span><?= $this->translate('Аббревиатура'); ?></span>
+                        <span><?= $this->t('Аббревиатура'); ?></span>
                     </th>
                     <th class="country-round-image">
-                        <span><?= $this->translate('Круговая картинка'); ?></span>
+                        <span><?= $this->t('Круговая картинка'); ?></span>
                     </th>
                     <th class="country-glowssy-wave-image">
-                        <span><?= $this->translate('Волнистая картинка'); ?></span>
+                        <span><?= $this->t('Волнистая картинка'); ?></span>
                     </th>
                     <th class="country-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -97,7 +97,7 @@
                             </td>
                             <td class="country-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Страна"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Страна"), false)
                                         ->countryMenu($this->escape($country['ID']), true);
                                     ?>
                                 </span>

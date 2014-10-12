@@ -24,7 +24,7 @@
                 <tbody>
                 <tr class="track-name">
                     <td class="text-bold">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($track['Name']); ?></span>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr class="track-city">
                     <td class="text-bold">
-                        <span><?= $this->translate('Город (не реализовано)'); ?></span>
+                        <span><?= $this->t('Город (не реализовано)'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($track['CityID']); ?></span>
@@ -40,7 +40,7 @@
                 </tr>
                 <tr class="track-country">
                     <td class="text-bold">
-                        <span><?= $this->translate('Страна'); ?></span>
+                        <span><?= $this->t('Страна'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -53,7 +53,7 @@
                 </tr>
                 <tr class="track-year">
                     <td class="text-bold">
-                        <span><?= $this->translate('Год конфигурации трассы'); ?></span>
+                        <span><?= $this->t('Год конфигурации трассы'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -63,7 +63,7 @@
                 </tr>
                 <tr class="track-length">
                     <td class="text-bold">
-                        <span><?= $this->translate('Длинна (Км)'); ?></span>
+                        <span><?= $this->t('Длинна (Км)'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -73,7 +73,7 @@
                 </tr>
                 <tr class="track-logo">
                     <td class="text-bold">
-                        <span><?= $this->translate('Логотип'); ?></span>
+                        <span><?= $this->t('Логотип'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -86,7 +86,7 @@
                 </tr>
                 <tr class="track-scheme">
                     <td class="text-bold">
-                        <span><?= $this->translate('Схема'); ?></span>
+                        <span><?= $this->t('Схема'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -97,7 +97,7 @@
                 </tr>
                 <tr class="track-description">
                     <td class="text-bold">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->RenderContentTypeText($track['Description'], 'full_html'); ?></span>
@@ -107,19 +107,19 @@
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?= $this->translate('Трасса'); ?>
+                <?= $this->t('Трасса'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
                 <?= $this->escape($track['DateCreate']); ?>
             </div>
             <?php if ($this->escape($track['DateCreate']) != $this->escape($track['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->t('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
                     <?= $this->escape($track['DateEdit']); ?>
                 </div>

@@ -4,7 +4,7 @@
 			<?php
 			$resource_id_url = $this->url(array('module' => 'admin', 'controller' => 'resource', 'action' => 'add'), 'default', true);
 			?>
-			<a href="<?= $resource_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?= $this->translate('Добавить ресурс'); ?></a>
+			<a href="<?= $resource_id_url; ?>" class="btn btn-success pull-right "><i class="fa fa-plus"></i> <?= $this->t('Добавить ресурс'); ?></a>
 		</div>
 	</div>
 </div>
@@ -20,11 +20,11 @@
 						<thead>
 							<tr>
 								<th class="resource_id"><span>ID</span></th>
-								<th class="resource_name"><span><?= $this->translate('Название'); ?></span></th>
-								<th class="resource_module"><span><?= $this->translate('Модуль'); ?></span></th>
-								<th class="resource_controller"><span><?= $this->translate('Контроллер'); ?></span></th>
-								<th class="resource_descr"><span><?= $this->translate('Описание'); ?></span></th>
-								<th class="resource_action"><span><?= $this->translate('Действие'); ?></span></th>
+								<th class="resource_name"><span><?= $this->t('Название'); ?></span></th>
+								<th class="resource_module"><span><?= $this->t('Модуль'); ?></span></th>
+								<th class="resource_controller"><span><?= $this->t('Контроллер'); ?></span></th>
+								<th class="resource_descr"><span><?= $this->t('Описание'); ?></span></th>
+								<th class="resource_action"><span><?= $this->t('Действие'); ?></span></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -50,12 +50,12 @@
 														<span class="fa fa-cog fa-lg" style="margin-right: 0px;"></span>
 													</button>
 													<ul class="dropdown-menu slidedown">
-														<li><a href="<?= $resource_id_url ?>"><i class="fa fa-eye"></i> <?= $this->translate('Просмотреть'); ?></a></li>
-														<li><a href="<?= $resource_edit_url ?>"><i class="fa fa-pencil"></i> <?= $this->translate('Редактировать'); ?></a></li>
-														<li><a href="<?= $resource_delete_url ?>"><i class="fa fa-trash-o"></i> <?= $this->translate('Удалить'); ?></a></li>
+														<li><a href="<?= $resource_id_url ?>"><i class="fa fa-eye"></i> <?= $this->t('Просмотреть'); ?></a></li>
+														<li><a href="<?= $resource_edit_url ?>"><i class="fa fa-pencil"></i> <?= $this->t('Редактировать'); ?></a></li>
+														<li><a href="<?= $resource_delete_url ?>"><i class="fa fa-trash-o"></i> <?= $this->t('Удалить'); ?></a></li>
 														<li class="divider"></li>
-														<li><a href="<?= $resource_add_resource_access_url ?>"><i class="fa fa-wrench"></i> <?= $this->translate('Настроить доступ'); ?></a></li>
-														<li><a href="<?= $resource_add_privilege_url ?>"><i class="fa fa-plus"></i> <?= $this->translate('Добавить привилегию'); ?></a></li>
+														<li><a href="<?= $resource_add_resource_access_url ?>"><i class="fa fa-wrench"></i> <?= $this->t('Настроить доступ'); ?></a></li>
+														<li><a href="<?= $resource_add_privilege_url ?>"><i class="fa fa-plus"></i> <?= $this->t('Добавить привилегию'); ?></a></li>
 													</ul>
 												</div>
 											</div>

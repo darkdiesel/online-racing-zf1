@@ -9,7 +9,7 @@
                 <tbody>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($this->roleData['Name']); ?></span>
@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Системное Название'); ?></span>
+                        <span><?= $this->t('Системное Название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($this->roleData['SystemName']); ?></span>
@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Родительская роль'); ?></span>
+                        <span><?= $this->t('Родительская роль'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -48,7 +48,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->RenderContentTypeText($this->roleData['Description'], 'full_html'); ?></span>
@@ -58,19 +58,19 @@
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?= $this->translate('Роль пользователя'); ?>
+                <?= $this->t('Роль пользователя'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
                 <?= $this->escape($this->roleData['DateCreate']); ?>
             </div>
             <?php if ($this->escape($this->roleData['DateCreate']) != $this->escape($this->roleData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->t('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
                     <?= $this->escape($this->roleData['DateEdit']); ?>
                 </div>

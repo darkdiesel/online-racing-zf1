@@ -48,7 +48,7 @@ $post = $this->postData;
                 <tbody>
                 <tr class="post-name">
                     <td class="text-bold">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($post['Name']); ?></span>
@@ -56,7 +56,7 @@ $post = $this->postData;
                 </tr>
                 <tr class="post-publish">
                     <td class="text-bold">
-                        <span><?= $this->translate('Опубликована'); ?></span>
+                        <span><?= $this->t('Опубликована'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -72,7 +72,7 @@ $post = $this->postData;
                 </tr>
                 <tr class="post-image">
                     <td class="text-bold">
-                        <span><?= $this->translate('Картинка поста'); ?></span>
+                        <span><?= $this->t('Картинка поста'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -84,7 +84,7 @@ $post = $this->postData;
                 </tr>
                 <tr class="post-user">
                     <td class="text-bold">
-                        <span><?= $this->translate('Автор'); ?></span>
+                        <span><?= $this->t('Автор'); ?></span>
                     </td>
                     <td>
                     <span>
@@ -96,7 +96,7 @@ $post = $this->postData;
                 </tr>
                 <tr class="post-category">
                     <td class="text-bold">
-                        <span><?= $this->translate('Категория поста'); ?></span>
+                        <span><?= $this->t('Категория поста'); ?></span>
                     </td>
                     <td>
                     <span>
@@ -108,7 +108,7 @@ $post = $this->postData;
                 </tr>
                 <tr class="post-content-type">
                     <td class="text-bold">
-                        <span><?= $this->translate('Тип контента'); ?></span>
+                        <span><?= $this->t('Тип контента'); ?></span>
                     </td>
                     <td>
                     <span>
@@ -122,19 +122,19 @@ $post = $this->postData;
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?= $this->translate('Пост'); ?>
+                <?= $this->t('Пост'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
                 <?= $this->escape($post['DateCreate']); ?>
             </div>
             <?php if ($this->escape($post['DateCreate']) != $this->escape($post['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->t('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
                     <?= $this->escape($post['DateEdit']); ?>
                 </div>

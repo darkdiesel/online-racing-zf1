@@ -12,9 +12,9 @@
 	    //$html[] = $this->menu()->htmlify($page) . PHP_EOL;
 
 	    if ($href = $page->getHref()) {
-		$page->getTitle() ? $title = $this->translate($page->getTitle()) : $title = "";
+		$page->getTitle() ? $title = $this->t($page->getTitle()) : $title = "";
 		$html[] = "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\" title=\"{$title}\">";
-		$html[] = $this->translate($page->getLabel());
+		$html[] = $this->t($page->getLabel());
 		$html[] = "<b class=\"caret\"></b></a>";
 	    }
 
@@ -27,7 +27,7 @@
 		}
 
 		if ($href = $subpage->getHref()) {
-		    $subpage->getTitle() ? $title = $this->translate($subpage->getTitle()) : $title = "";
+		    $subpage->getTitle() ? $title = $this->t($subpage->getTitle()) : $title = "";
 
 		    $html[] = "<a href=\"{$href}\" title=\"{$title}\">";
 		}

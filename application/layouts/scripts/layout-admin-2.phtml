@@ -39,16 +39,16 @@ $this->headLink()->appendStylesheet("/css/ie8.css",'screen', 'IE 8');
 $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
 
 ?>
-<?php echo $this->doctype() ?>
+<?= $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headMeta() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    <?php echo $this->minifyHeadLink() ?>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->minifyHeadLink() ?>
 
-    <?php echo $this->jQuery(); ?>
+    <?= $this->jQuery(); ?>
 </head>
 <body>
 <div id="page-wrapper">
@@ -56,13 +56,13 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 p-all-0">
-                    <?php echo $this->render("layout-admin/header.phtml") ?>
+                    <?= $this->render("layout-admin/header.phtml") ?>
                 </div>
             </div>
             <div class="row p-t-50">
                 <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 p-all-0">
                     <div class="sidebar sidebar-left p-all-15">
-                        <?php echo $this->render("layout-admin/left-sidebar.phtml") ?>
+                        <?= $this->render("layout-admin/left-sidebar.phtml") ?>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 p-all-0">
@@ -72,17 +72,17 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                         <div class="page-header">
-                                            <h2><?php echo $this->pageTitle() ?></h2>
+                                            <h2><?= $this->pageTitle() ?></h2>
                                         </div>
                                     </div>
                                 </div>
                             <?php endif; ?>
                         </div>
-                        <?php echo $this->showMessages(); ?>
-                        <div id="<?php echo $this->module . '-' . $this->controller . '-' . $this->action; ?>"
+                        <?= $this->showMessages(); ?>
+                        <div id="<?= $this->module . '-' . $this->controller . '-' . $this->action; ?>"
                              class="page">
                             <div class="page-content">
-                                <?php echo $this->layout()->content ?>
+                                <?= $this->layout()->content ?>
                             </div>
                         </div>
                     </div>
@@ -90,22 +90,22 @@ $this->headLink()->appendStylesheet("/css/ie7.css",'screen', 'IE 7');
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <?php echo $this->render("layout-admin/footer.phtml") ?>
+                    <?= $this->render("layout-admin/footer.phtml") ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php echo $this->render("common/page-scroller-block.phtml"); ?>
+<?= $this->render("common/page-scroller-block.phtml"); ?>
 
 <div id="background-wrapper" class="background-wrapper"></div>
 
 <!-- scripts -->
 <?php //echo $this->headScript() ?>
-<?php echo $this->minifyHeadScript() ?>
+<?= $this->minifyHeadScript() ?>
 
 <?php //echo $this->render("common/site-heart-js.phtml") ?>
-<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+<?= $this->render("common/analytics-tracking-js-layout.phtml") ?>
 <!-- ./ scripts -->
 </body>
 </html>

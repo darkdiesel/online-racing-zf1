@@ -20,6 +20,7 @@ class Peshkov_Controller_Action_Helper_LayoutLoader extends Zend_Controller_Acti
                 ->getHelper('layout')
                 ->setLayout($layoutScript);
         }
+
     }
 
 }

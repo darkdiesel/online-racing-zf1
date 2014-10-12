@@ -62,7 +62,7 @@
                 <tbody>
                 <tr class="championship-name">
                     <td class="text-bold">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($this->championshipData['Name']); ?></span>
@@ -70,7 +70,7 @@
                 </tr>
                 <tr class="championship-img-logo">
                     <td class="text-bold">
-                        <span><?= $this->translate('Логотип чемпионата'); ?></span>
+                        <span><?= $this->t('Логотип чемпионата'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -81,7 +81,7 @@
                 </tr>
                 <tr class="championship-league">
                     <td class="text-bold">
-                        <span><?= $this->translate('Лига'); ?></span>
+                        <span><?= $this->t('Лига'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -93,7 +93,7 @@
                 </tr>
                 <tr class="championship-racing-series">
                     <td class="text-bold">
-                        <span><?= $this->translate('Гоночная серия'); ?></span>
+                        <span><?= $this->t('Гоночная серия'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -105,7 +105,7 @@
                 </tr>
                 <tr class="championship-administrator">
                     <td class="text-bold">
-                        <span><?= $this->translate('Администратор'); ?></span>
+                        <span><?= $this->t('Администратор'); ?></span>
                     </td>
                     <td>
                     <span>
@@ -119,7 +119,7 @@
                 </tr>
                 <tr class="championship-rule">
                     <td class="text-bold">
-                        <span><?= $this->translate('Регламент'); ?></span>
+                        <span><?= $this->t('Регламент'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -131,7 +131,7 @@
                 </tr>
                 <tr class="championship-game">
                     <td class="text-bold">
-                        <span><?= $this->translate('Игра'); ?></span>
+                        <span><?= $this->t('Игра'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -143,7 +143,7 @@
                 </tr>
                 <tr class="championship-description">
                     <td class="text-bold">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->RenderContentTypeText($this->championshipData['Description'], 'full_html'); ?></span>
@@ -153,19 +153,19 @@
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?= $this->translate('Чемпионат'); ?>
+                <?= $this->t('Чемпионат'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
                 <?= $this->escape($this->championshipData['DateCreate']); ?>
             </div>
             <?php if ($this->escape($this->championshipData['DateCreate']) != $this->escape($this->championshipData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->t('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
                     <?= $this->escape($this->championshipData['DateEdit']); ?>
                 </div>

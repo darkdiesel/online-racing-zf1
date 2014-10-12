@@ -6,7 +6,7 @@ class RaceEventController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Гоночное событие'));
+        $this->view->headTitle($this->view->t('Гоночное событие'));
     }
 
     public function idAction()
@@ -39,13 +39,13 @@ class RaceEventController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемое гоночное событие не найдено!'));
+                $this->messages->addError($this->view->t('Запрашиваемое гоночное событие не найдено!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Гоночное событие не найдено!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Гоночное событие не найдено!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Гоночное событие не найдено!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Гоночное событие не найдено!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

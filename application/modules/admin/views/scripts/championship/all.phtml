@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminChampionshipAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить чемпионат'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить чемпионат'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,25 +23,25 @@
                         <span>ID</span>
                     </th>
                     <th class="championship-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="championship-league">
-                        <span><?= $this->translate('Лига'); ?></span>
+                        <span><?= $this->t('Лига'); ?></span>
                     </th>
                     <th class="championship-racing-serie">
-                        <span><?= $this->translate('Гоночная серия'); ?></span>
+                        <span><?= $this->t('Гоночная серия'); ?></span>
                     </th>
                     <th class="championship-administrator">
-                        <span><?= $this->translate('Администратор'); ?></span>
+                        <span><?= $this->t('Администратор'); ?></span>
                     </th>
                     <th class="championship-rule">
-                        <span><?= $this->translate('Регламент'); ?></span>
+                        <span><?= $this->t('Регламент'); ?></span>
                     </th>
                     <th class="championship-game">
-                        <span><?= $this->translate('Игра'); ?></span>
+                        <span><?= $this->t('Игра'); ?></span>
                     </th>
                     <th class="championship-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -167,7 +167,7 @@
                             </td>
                             <td class="championship-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Чемпионат"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Чемпионат"), false)
                                         ->championshipMenu($this->escape($championship['ID']), true);
                                     ?>
                                 </span>

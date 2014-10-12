@@ -1,14 +1,14 @@
 <?php if (isset($this->exception)): ?>
 	<div class="alert alert-block alert-danger">
-		<h3><?php echo $this->translate('Информация об ошибке'); ?>:</h3>
+		<h3><?= $this->t('Информация об ошибке'); ?>:</h3>
 		<dl>
-			<dd><b>Message:</b> <?php echo $this->exception->getMessage() ?></dd>
+			<dd><b>Message:</b> <?= $this->exception->getMessage() ?></dd>
 		</dl>
 		<h3>Stack trace:</h3>
-		<pre><?php echo $this->exception->getTraceAsString() ?>
+		<pre><?= $this->exception->getTraceAsString() ?>
 		</pre>
 		<h3>Request Parameters:</h3>
-		<pre><?php echo $this->escape(var_export($this->request->getParams(), true)) ?>
+		<pre><?= $this->escape(var_export($this->request->getParams(), true)) ?>
 		</pre>
 	</div>
 <?php endif; ?>

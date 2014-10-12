@@ -24,7 +24,7 @@
         ?>
         <div class="block block-default block-ui-bordered block-league m-b-10">
             <?php
-            echo $this->BlockConfigMenu($this->translate("Лига"))->leagueMenu(
+            echo $this->BlockConfigMenu($this->t("Лига"))->leagueMenu(
                 $this->escape($league['ID'])
             );
             ?>
@@ -50,7 +50,7 @@
                         </h4>
 
                         <div class="league-administrator">
-                            <?= $this->translate('Администратор'); ?>:
+                            <?= $this->t('Администратор'); ?>:
                             <i class="fa fa-user fa-1x"></i>
                             <a class="tooltip-field"
                                title="<?= $this->escape($league['User']['NickName']) ?>"

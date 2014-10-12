@@ -42,7 +42,7 @@
 
     <div class="block block-default block-ui-bordered">
         <?= $this->BlockConfigMenu(
-            $this->translate("Чемпионат"))->championshipMenu($this->escape($this->championshipData['ID'])
+            $this->t("Чемпионат"))->championshipMenu($this->escape($this->championshipData['ID'])
         );
         ?>
         <div class="block-body">
@@ -54,7 +54,7 @@
                                 <tbody>
                                 <tr class="championship-name">
                                     <td class="text-bold">
-                                        <span><?= $this->translate('Название'); ?></span>
+                                        <span><?= $this->t('Название'); ?></span>
                                     </td>
                                     <td>
                                         <span><?= $this->escape($this->championshipData['Name']); ?></span>
@@ -62,7 +62,7 @@
                                 </tr>
                                 <tr class="championship-league">
                                     <td class="text-bold">
-                                        <span><?= $this->translate('Лига'); ?></span>
+                                        <span><?= $this->t('Лига'); ?></span>
                                     </td>
                                     <td>
                                         <span>
@@ -74,7 +74,7 @@
                                 </tr>
                                 <tr class="championship-racing-series">
                                     <td class="text-bold">
-                                        <span><?= $this->translate('Гоночная серия'); ?></span>
+                                        <span><?= $this->t('Гоночная серия'); ?></span>
                                     </td>
                                     <td>
                                         <span>
@@ -86,7 +86,7 @@
                                 </tr>
                                 <tr class="championship-administrator">
                                     <td class="text-bold">
-                                        <span><?= $this->translate('Администратор'); ?></span>
+                                        <span><?= $this->t('Администратор'); ?></span>
                                     </td>
                                     <td>
                                         <span>
@@ -100,7 +100,7 @@
                                 </tr>
                                 <tr class="championship-description">
                                     <td class="text-bold">
-                                        <span><?= $this->translate('Описание'); ?></span>
+                                        <span><?= $this->t('Описание'); ?></span>
                                     </td>
                                     <td>
                                         <span><?= $this->RenderContentTypeText($this->championshipData['Description'], 'full_html'); ?></span>
@@ -138,12 +138,12 @@
             </div>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?= $this->translate('Чемпионат'); ?>
+                <?= $this->t('Чемпионат'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
                 <?= $this->escape($this->championshipData['DateCreate']); ?>

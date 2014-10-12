@@ -14,16 +14,16 @@
             // if this isn't the last page, add a link and the separator
             if ($key < count($this->pages) - 1):
                 ?>
-                <a href="<?php echo $page->getHref(); ?>" class="<?php echo $page->getClass(); ?>"
-                   title="<?php echo $title; ?>">
-                    <div><?php echo $label; ?></div>
+                <a href="<?= $page->getHref(); ?>" class="<?= $page->getClass(); ?>"
+                   title="<?= $title; ?>">
+                    <div><?= $label; ?></div>
                 </a>
             <?php // otherwise, just output the name
             else:
                 ?>
-                <span class="<?php echo $page->getClass(); ?> active"
-                      title="<?php echo $title; ?>">
-                <div><?php echo $label; ?></div>
+                <span class="<?= $page->getClass(); ?> active"
+                      title="<?= $title; ?>">
+                <div><?= $label; ?></div>
             </span>
             <?php endif; ?>
             <?php if ($key = 0): ?>

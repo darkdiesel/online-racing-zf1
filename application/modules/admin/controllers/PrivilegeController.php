@@ -4,7 +4,7 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 
 	public function init() {
 		parent::init();
-		$this->view->headTitle($this->view->translate('Привилегии ресурсов'));
+		$this->view->headTitle($this->view->t('Привилегии ресурсов'));
 	}
 
 	// action for view privilege
@@ -20,17 +20,17 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 			$this->view->pageTitle($privilege_data->name);
 			return;
 		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая привиллегия не найдена!'));
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Привилегия не найдена!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
+			$this->messages->addError($this->view->t('Запрашиваемая привиллегия не найдена!'));
+			$this->view->headTitle($this->view->t('Ошибка!'));
+			$this->view->headTitle($this->view->t('Привилегия не найдена!'));
+			$this->view->pageTitle($this->view->t('Ошибка!'));
 		}
 	}
 
 	// action for view all privilege
 	public function allAction() {
-		$this->view->headTitle($this->view->translate('Все'));
-		$this->view->pageTitle($this->view->translate('Привилегии ресурсов'));
+		$this->view->headTitle($this->view->t('Все'));
+		$this->view->pageTitle($this->view->t('Привилегии ресурсов'));
 
 		// pager settings
 		$pager_args = array(
@@ -44,14 +44,14 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 		if ($paginator) {
 			$this->view->privileges_data = $paginator;
 		} else {
-			$this->messages->addInfo("{$this->view->translate('Запрашиваемые типы контента на сайте не найдены!')}");
+			$this->messages->addInfo("{$this->view->t('Запрашиваемые типы контента на сайте не найдены!')}");
 		}
 	}
 
 	// action for add new content type
 	public function addAction() {
-		$this->view->headTitle($this->view->translate('Добавить'));
-		$this->view->pageTitle($this->view->translate('Добавить привилегию'));
+		$this->view->headTitle($this->view->t('Добавить'));
+		$this->view->pageTitle($this->view->t('Добавить привилегию'));
 
 		$request = $this->getRequest();
 		// form
@@ -77,7 +77,7 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 				);
 
 				if ($check_privilege_data) {
-					$this->messages->addError($this->view->translate('Для данного ресурса эта привиления уже присутствует в базе данных!'));
+					$this->messages->addError($this->view->t('Для данного ресурса эта привиления уже присутствует в базе данных!'));
 					$add_privilege = FALSE;
 				} else {
 					$add_privilege = TRUE;
@@ -99,7 +99,7 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'id', 'privilege_id' => $new_privilege->id), 'adminPrivilegeId', true));
 				}
 			} else {
-				$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+				$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 			}
 		}
 
@@ -111,7 +111,7 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 		$request = $this->getRequest();
 		$privilege_id = (int) $request->getParam('privilege_id');
 
-		$this->view->headTitle($this->view->translate('Редактировать привилегию'));
+		$this->view->headTitle($this->view->t('Редактировать привилегию'));
 
 		$privilege_data = $this->db->get('privilege')->getItem($privilege_id);
 
@@ -140,7 +140,7 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 					$upadate_privilege = TRUE;
 					if ($check_privilege_data) {
 						if ($check_privilege_data->id != $privilege_id) {
-							$this->messages->addError($this->view->translate('Для данного ресурса эта привиления уже присутствует в базе данных!'));
+							$this->messages->addError($this->view->t('Для данного ресурса эта привиления уже присутствует в базе данных!'));
 							$upadate_privilege = FALSE;
 						}
 					}
@@ -159,11 +159,11 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 						$this->redirect($privilege_id_url);
 					}
 				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+					$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
 			}
 			$this->view->headTitle($privilege_data->name);
-			$this->view->pageTitle($this->view->translate('Редактировать привилегию'));
+			$this->view->pageTitle($this->view->t('Редактировать привилегию'));
 
 			$form->name->setvalue($privilege_data->name);
 			$form->resource->setvalue($privilege_data->resource_id);
@@ -171,16 +171,16 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 
 			$this->view->form = $form;
 		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемое правило не найдено!'));
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Правило не найдено!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
+			$this->messages->addError($this->view->t('Запрашиваемое правило не найдено!'));
+			$this->view->headTitle($this->view->t('Ошибка!'));
+			$this->view->headTitle($this->view->t('Правило не найдено!'));
+			$this->view->pageTitle($this->view->t('Ошибка!'));
 		}
 	}
 
 	// action for delete content type
 	public function deleteAction() {
-		$this->view->headTitle($this->view->translate('Удалить привилегию'));
+		$this->view->headTitle($this->view->t('Удалить привилегию'));
 
 		$request = $this->getRequest();
 		$privilege_id = (int) $request->getParam('privilege_id');
@@ -189,9 +189,9 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 
 		if ($privilege_data) {
 			$this->view->headTitle($privilege_data->name);
-			$this->view->pageTitle($this->view->translate('Удалить привилегию'));
+			$this->view->pageTitle($this->view->t('Удалить привилегию'));
 
-			$this->messages->addWarning("{$this->view->translate('Вы действительно хотите удалить привилегию')} <strong>\"{$privilege_data->name}\"</strong> ?");
+			$this->messages->addWarning("{$this->view->t('Вы действительно хотите удалить привилегию')} <strong>\"{$privilege_data->name}\"</strong> ?");
 
 			$form = new Application_Form_Privilege_Delete();
 			$form->setAction($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'delete', 'privilege_id' => $privilege_id), 'adminPrivilegeAction', true));
@@ -203,21 +203,21 @@ class Admin_PrivilegeController extends App_Controller_LoaderController {
 					$this->db->get('privilege')->delete($privilege_where);
 
 					$this->messages->clearMessages();
-					$this->messages->addSuccess("{$this->view->translate("Привилегия <strong>\"{$privilege_data->name}\"</strong> успешно удалена")}");
+					$this->messages->addSuccess("{$this->view->t("Привилегия <strong>\"{$privilege_data->name}\"</strong> успешно удалена")}");
 
 					$this->redirect($this->view->url(array('module' => 'admin', 'controller' => 'privilege', 'action' => 'all', 'page' => 1), 'adminPrivilegeAll', true));
 				} else {
-					$this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+					$this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 				}
 			}
 
 			$this->view->form = $form;
 			$this->view->privilege = $privilege_data;
 		} else {
-			$this->messages->addError($this->view->translate('Запрашиваемая привилегия не найдена!'));
-			$this->view->headTitle($this->view->translate('Ошибка!'));
-			$this->view->headTitle($this->view->translate('Привилегия не найдена!'));
-			$this->view->pageTitle($this->view->translate('Ошибка!'));
+			$this->messages->addError($this->view->t('Запрашиваемая привилегия не найдена!'));
+			$this->view->headTitle($this->view->t('Ошибка!'));
+			$this->view->headTitle($this->view->t('Привилегия не найдена!'));
+			$this->view->pageTitle($this->view->t('Ошибка!'));
 		}
 	}
 

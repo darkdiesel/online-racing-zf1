@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminPostAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить контент'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить контент'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,19 +23,19 @@
                         <span>ID</span>
                     </th>
                     <th class="post-publish">
-                        <span><?= $this->translate('Опубликована'); ?></span>
+                        <span><?= $this->t('Опубликована'); ?></span>
                     </th>
                     <th class="post-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="post-user">
-                        <span><?= $this->translate('Автор'); ?></span>
+                        <span><?= $this->t('Автор'); ?></span>
                     </th>
                     <th class="post-post-category">
-                        <span><?= $this->translate('Категория поста'); ?></span>
+                        <span><?= $this->t('Категория поста'); ?></span>
                     </th>
                     <th class="post-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -122,7 +122,7 @@
                             </td>
                             <td class="post-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Пост"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Пост"), false)
                                         ->postMenu($this->escape($post['ID']), true);
                                     ?>
                                 </span>

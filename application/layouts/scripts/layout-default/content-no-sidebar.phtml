@@ -27,20 +27,20 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <div class="page_title">
-                                        <h4><?php echo $this->pageTitle() ?></h4>
+                                        <h4><?= $this->pageTitle() ?></h4>
                                     </div>
                                 </div>
                             </div>
                         <?php endif; ?>
                         <?php if ($breadcrumb['show']) : ?>
-                            <?php echo $breadcrumb_data; ?>
+                            <?= $breadcrumb_data; ?>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
-                <?php echo $this->showMessages(); ?>
+                <?= $this->showMessages(); ?>
                 <div class="page">
                     <div class="page_content">
-                        <?php echo $this->layout()->content ?>
+                        <?= $this->layout()->content ?>
                     </div>
                 </div>
             </div>

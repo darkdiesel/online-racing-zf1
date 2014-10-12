@@ -28,13 +28,13 @@
                                         <tr>
                                             <td>
                                                 <p>
-                                                    Здравствуйте, <?php echo $this->NickName; ?>.
+                                                    Здравствуйте, <?= $this->NickName; ?>.
                                                 </p>
 
                                                 <p>
                                                     На портале активировался новый пользователь <a
-                                                        href="<?php echo $this->NewUserUrl; ?>"><?php echo $this->Name; ?> <?php echo $this->Surname; ?>
-                                                        (<?php echo $this->NickName; ?>)</a>.
+                                                        href="<?= $this->NewUserUrl; ?>"><?= $this->Name; ?> <?= $this->Surname; ?>
+                                                        (<?= $this->NickName; ?>)</a>.
                                                 </p>
                                                 <br/>
                                                 <p>
@@ -43,19 +43,19 @@
                                                     <tbody>
                                                     <tr>
                                                         <td><strong>Имя</strong></td>
-                                                        <td><?php echo $this->Name; ?></td>
+                                                        <td><?= $this->Name; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Фамилия</strong></td>
-                                                        <td><?php echo $this->Surname; ?></td>
+                                                        <td><?= $this->Surname; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Никнейм</strong></td>
-                                                        <td><?php echo $this->NickName; ?></td>
+                                                        <td><?= $this->NickName; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>E-Mail</strong></td>
-                                                        <td><?php echo $this->Email; ?></td>
+                                                        <td><?= $this->Email; ?></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>

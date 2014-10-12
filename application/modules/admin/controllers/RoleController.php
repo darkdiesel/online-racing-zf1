@@ -6,7 +6,7 @@ class Admin_RoleController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Роли Пользователей'));
+        $this->view->headTitle($this->view->t('Роли Пользователей'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -40,18 +40,18 @@ class Admin_RoleController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Роль') . ' :: ' . $result[0]['Name']
+                    $this->view->t('Роль') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая роль не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая роль не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Роль не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Роль не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Роль не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Роль не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -75,8 +75,8 @@ class Admin_RoleController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Роли пользователей'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Роли пользователей'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Role r')
@@ -93,7 +93,7 @@ class Admin_RoleController extends App_Controller_LoaderController
 
             if ($rolePaginator->count() == 0) {
                 $this->view->roleData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->roleData = $rolePaginator;
             }
@@ -105,8 +105,8 @@ class Admin_RoleController extends App_Controller_LoaderController
     // action for add new role
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить роль'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить роль'));
 
         // form
         $roleAddForm = new Peshkov_Form_Role_Add();
@@ -147,7 +147,7 @@ class Admin_RoleController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -156,8 +156,8 @@ class Admin_RoleController extends App_Controller_LoaderController
     // action for edit role
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать роль'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать роль'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -207,7 +207,7 @@ class Admin_RoleController extends App_Controller_LoaderController
                     $this->redirect($adminRoleIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -226,13 +226,13 @@ class Admin_RoleController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая роль не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая роль не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Роль не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Роль не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Роль не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Роль не найдена!'));
                 }
             }
 
@@ -244,8 +244,8 @@ class Admin_RoleController extends App_Controller_LoaderController
     // action for delete role
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить роль'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить роль'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -276,7 +276,7 @@ class Admin_RoleController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить рольы')
+                    $this->view->t('Вы действительно хотите удалить рольы')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -292,7 +292,7 @@ class Admin_RoleController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Роль <strong>" . $this->view->roleData['Name'] . "</strong> успешно удалена."
+                            $this->view->t("Роль <strong>" . $this->view->roleData['Name'] . "</strong> успешно удалена."
                             )
                         );
 
@@ -304,7 +304,7 @@ class Admin_RoleController extends App_Controller_LoaderController
                         $this->redirect($adminRoleAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
@@ -312,13 +312,13 @@ class Admin_RoleController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая роль не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая роль не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Роль не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Роль не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Роль не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Роль не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

@@ -74,7 +74,7 @@ b {color:#c00}
     <div class=topNote><strong>Note:</strong> It looks like you're running Minify in a user
  directory. You may need the following option in /min/config.php to have URIs
  correctly rewritten in CSS output:
- <br><textarea id=symlinkOpt rows=3 cols=80 readonly><?php echo htmlspecialchars($symlinkOption); ?></textarea>
+ <br><textarea id=symlinkOpt rows=3 cols=80 readonly><?= htmlspecialchars($symlinkOption); ?></textarea>
 </div>
 <?php endif; ?>
 
@@ -86,10 +86,10 @@ b {color:#c00}
 </p>
 
 <?php if ($cachePathCode): ?>
-<p class=topNote><strong>Note:</strong> <code><?php echo
+<p class=topNote><strong>Note:</strong> <code><?=
     htmlspecialchars($detectedTmp); ?></code> was discovered as a usable temp directory.<br>To
     slightly improve performance you can hardcode this in /min/config.php:
-    <code><?php echo htmlspecialchars($cachePathCode); ?></code></p>
+    <code><?= htmlspecialchars($cachePathCode); ?></code></p>
 <?php endIf; ?>
 
 <p id=minRewriteFailed class="hide"><strong>Note:</strong> Your webserver does not seem to
@@ -168,7 +168,7 @@ by Minify. E.g. <code>@import "<span class=minRoot>/min/?</span>g=css2";</code><
 <p>Need help? Check the <a href="http://code.google.com/p/minify/w/list?can=3">wiki</a>,
  or post to the <a class=ext href="http://groups.google.com/group/minify">discussion
  list</a>.</p>
- <p><small>Powered by Minify <?php echo Minify::VERSION; ?></small></p>
+ <p><small>Powered by Minify <?= Minify::VERSION; ?></small></p>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="jquery-1.6.3.min.js"><\/script>')</script>

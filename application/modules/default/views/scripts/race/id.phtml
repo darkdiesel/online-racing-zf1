@@ -1,14 +1,14 @@
 <?php if ($this->race_data): ?>
 
-    <?php echo $this->render('championship/common/championship-menu.phtml') ?>
+    <?= $this->render('championship/common/championship-menu.phtml') ?>
 
-    <?php echo $this->render('championship/common/hotlaps-menu.phtml') ?>
+    <?= $this->render('championship/common/hotlaps-menu.phtml') ?>
 
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="panel block block-default">
                 <?php
-                echo $this->BlockConfigMenu($this->translate("Гонка"))->championshipRaceMenu(
+                echo $this->BlockConfigMenu($this->t("Гонка"))->championshipRaceMenu(
                     $this->escape($this->leagueData['ID']),
                     $this->escape($this->championship_data->id),
                     $this->escape($this->race_data->id),
@@ -19,10 +19,10 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <blockquote class="pull-right">
-                                <h3><?php echo $this->escape($this->race_data->track_name); ?></h3>
+                                <h3><?= $this->escape($this->race_data->track_name); ?></h3>
                                 <h1>
-                                    <small><?php echo $this->translate('Раунд'); ?>: <span
-                                            class="label label-info"><?php echo $this->escape($this->race_data->race_number); ?></span>
+                                    <small><?= $this->t('Раунд'); ?>: <span
+                                            class="label label-info"><?= $this->escape($this->race_data->race_number); ?></span>
                                     </small>
                                 </h1>
                             </blockquote>
@@ -33,11 +33,11 @@
                             <?php if ($this->escape($this->race_data->track_url_scheme)) : ?>
                                 <div class="m-b-15 center-block text-center">
                                     <a href="#" data-toggle="modal" data-target=".champ-race-<?php print $this->race_data->id; ?>"
-                                       title="<?php echo $this->escape($this->race_data->name); ?>" class="">
+                                       title="<?= $this->escape($this->race_data->name); ?>" class="">
                                         <img class="img-responsive img-thumbnail"
-                                             src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_scheme)); ?>" />
+                                             src="<?= $this->baseUrl($this->escape($this->race_data->track_url_scheme)); ?>" />
                                     </a>
-                                    <?php echo $this->modal(array(
+                                    <?= $this->modal(array(
                                         'title' => $this->race_data->track_name,
                                         'class' => 'champ-race-'.$this->race_data->id,
                                         'content' => '<img src="'.$this->baseUrl($this->escape($this->race_data->track_url_scheme)).'" class="img-responsive img-rounded center-block" alt="">'
@@ -49,7 +49,7 @@
                             <div class="col-lg-6">
                                 <div class="center-block text-center m-b-10">
                                     <img class="img-responsive img-thumbnail img-size-150"
-                                         src="<?php echo $this->baseUrl($this->escape($this->race_data->track_url_logo)); ?>" />
+                                         src="<?= $this->baseUrl($this->escape($this->race_data->track_url_logo)); ?>" />
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -59,17 +59,17 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#track-description"
-                                                      data-toggle="tab"><?php echo $this->translate('О трассе'); ?></a>
+                                                      data-toggle="tab"><?= $this->t('О трассе'); ?></a>
                                 </li>
                                 <li><a href="#race-description"
-                                       data-toggle="tab"><?php echo $this->translate('О гонке'); ?></a></li>
+                                       data-toggle="tab"><?= $this->t('О гонке'); ?></a></li>
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane active" id="track-description">
                                     <div class="panel">
                                         <div class="panel-body">
-                                            <span><?php echo $this->RenderContentTypeText($this->race_data->track_description, 'full_html'); ?></span>
+                                            <span><?= $this->RenderContentTypeText($this->race_data->track_description, 'full_html'); ?></span>
                                         </div>
                                         <!-- Table -->
                                         <div class="table-responsive">
@@ -77,13 +77,13 @@
                                                 <thead>
                                                 <tr>
                                                     <th>
-                                                        <span><?php echo $this->translate('Страна'); ?></span>
+                                                        <span><?= $this->t('Страна'); ?></span>
                                                     </th>
                                                     <th>
-                                                        <span><?php echo $this->translate('Год конфигурации'); ?></span>
+                                                        <span><?= $this->t('Год конфигурации'); ?></span>
                                                     </th>
                                                     <th>
-                                                        <span><?php echo $this->translate('Длина круга'); ?></span>
+                                                        <span><?= $this->t('Длина круга'); ?></span>
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -93,14 +93,14 @@
                                                         <span class="tooltip-field" data-placement="bottom"
                                                               data-title="<?php print $this->escape($this->race_data->country_EnglishName); ?>">
                                                             <img
-                                                                src="<?php echo $this->escape($this->race_data->country_ImageRoundUrl); ?>">
+                                                                src="<?= $this->escape($this->race_data->country_ImageRoundUrl); ?>">
                                                         </span>
                                                     </td>
                                                     <td class="text-vertical-m">
-                                                        <span><?php echo $this->escape($this->race_data->track_year); ?></span>
+                                                        <span><?= $this->escape($this->race_data->track_year); ?></span>
                                                     </td>
                                                     <td class="text-vertical-m">
-                                                        <span><?php echo $this->escape($this->race_data->track_length); ?></span>
+                                                        <span><?= $this->escape($this->race_data->track_length); ?></span>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -111,7 +111,7 @@
                                 <div class="tab-pane" id="race-description">
                                     <div class="panel">
                                         <div class="panel-body">
-                                            <span><?php echo $this->RenderContentTypeText($this->race_data->description, 'full_html'); ?></span>
+                                            <span><?= $this->RenderContentTypeText($this->race_data->description, 'full_html'); ?></span>
                                         </div>
                                         <!-- Table -->
                                         <div class="table-responsive">
@@ -119,26 +119,26 @@
                                                 <thead>
                                                 <tr>
                                                     <th>
-                                                        <span><?php echo $this->translate('Номер этапа'); ?></span>
+                                                        <span><?= $this->t('Номер этапа'); ?></span>
                                                     </th>
                                                     <th>
-                                                        <span><?php echo $this->translate('Дата проведения'); ?></span>
+                                                        <span><?= $this->t('Дата проведения'); ?></span>
                                                     </th>
                                                     <th>
-                                                        <span><?php echo $this->translate('Количество кругов'); ?></span>
+                                                        <span><?= $this->t('Количество кругов'); ?></span>
                                                     </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr>
                                                     <td class="text-vertical-m">
-                                                        <span><?php echo $this->escape($this->race_data->race_number); ?></span>
+                                                        <span><?= $this->escape($this->race_data->race_number); ?></span>
                                                     </td>
                                                     <td class="text-vertical-m">
-                                                        <span><?php echo $this->escape($this->race_data->race_date); ?></span>
+                                                        <span><?= $this->escape($this->race_data->race_date); ?></span>
                                                     </td>
                                                     <td class="text-vertical-m">
-                                                        <span><?php echo $this->escape($this->race_data->race_laps); ?></span>
+                                                        <span><?= $this->escape($this->race_data->race_laps); ?></span>
                                                     </td>
                                                 </tr>
                                                 </tbody>

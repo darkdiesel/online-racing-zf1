@@ -13,9 +13,9 @@
 <ul class="nav">
 <li>
     <span class="glow"></span>
-    <a href="<?php echo $this->baseUrl(); ?>">
+    <a href="<?= $this->baseUrl(); ?>">
         <i class="fa fa-globe fa-2x"></i>
-        <span><?php echo $this->translate('Перейти на сайт'); ?></span>
+        <span><?= $this->translate('Перейти на сайт'); ?></span>
     </a>
 </li>
 <li class="active">
@@ -25,9 +25,9 @@
         array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true
     )
     ?>
-    <a href="<?php echo $adminIndexUrl; ?>">
+    <a href="<?= $adminIndexUrl; ?>">
         <i class="fa fa-dashboard fa-2x"></i>
-        <span><?php echo $this->translate('Панель управления'); ?></span>
+        <span><?= $this->translate('Панель управления'); ?></span>
     </a>
 </li>
 <li class="dark-nav">
@@ -35,7 +35,7 @@
     <a class="accordion-toggle collapsed " data-toggle="collapse" href="#sidebar-site-content-links">
         <i class="fa fa-file-text fa-2x"></i>
                     <span>
-                      <?php echo $this->translate('Контент'); ?>
+                      <?= $this->translate('Контент'); ?>
                         <i class="fa fa-caret-down"></i>
                     </span>
     </a>
@@ -47,9 +47,9 @@
                 'adminPostAll', true
             )
             ?>
-            <a href="<?php echo $adminPostAllUrl; ?>">
+            <a href="<?= $adminPostAllUrl; ?>">
                 <i class="fa fa-file-o"></i>
-                <?php echo $this->translate('Контент сайта'); ?>
+                <?= $this->translate('Контент сайта'); ?>
             </a>
         </li>
         <li>
@@ -59,9 +59,9 @@
                 'adminContentTypeAll', true
             )
             ?>
-            <a href="<?php echo $adminContentTypeAllUrl; ?>">
+            <a href="<?= $adminContentTypeAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Типы контента'); ?>
+                <?= $this->translate('Типы контента'); ?>
             </a>
         </li>
         <li>
@@ -71,9 +71,9 @@
                 'adminPostCategoryAll', true
             )
             ?>
-            <a href="<?php echo $adminPostCategoryAllUrl; ?>">
+            <a href="<?= $adminPostCategoryAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Категории постов'); ?>
+                <?= $this->translate('Категории постов'); ?>
             </a>
         </li>
     </ul>
@@ -83,7 +83,7 @@
     <a class="accordion-toggle collapsed " data-toggle="collapse" href="#sidebar-site-security-links">
         <i class="fa fa-exclamation-circle fa-2x"></i>
                     <span>
-                      <?php echo $this->translate('Безопасность'); ?>
+                      <?= $this->translate('Безопасность'); ?>
                         <i class="fa fa-caret-down"></i>
                     </span>
     </a>
@@ -95,9 +95,9 @@
                 'adminResourceAll', true
             )
             ?>
-            <a href="<?php echo $adminResourceAllUrl; ?>">
+            <a href="<?= $adminResourceAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Ресурсы сайта'); ?>
+                <?= $this->translate('Ресурсы сайта'); ?>
             </a>
         </li>
 
@@ -108,9 +108,9 @@
                 'adminPrivilegeAll', true
             )
             ?>
-            <a href="<?php echo $adminPrivelegeAllUrl; ?>">
+            <a href="<?= $adminPrivelegeAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Привилегии ресурсов'); ?>
+                <?= $this->translate('Привилегии ресурсов'); ?>
             </a>
         </li>
         <li>
@@ -120,9 +120,9 @@
                     'action' => 'all'), 'adminResourceAccessAll', true
             )
             ?>
-            <a href="<?php echo $adminResourceAccessAllUrl; ?>">
+            <a href="<?= $adminResourceAccessAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Доступ к ресурсам'); ?>
+                <?= $this->translate('Доступ к ресурсам'); ?>
             </a>
         </li>
     </ul>
@@ -132,7 +132,7 @@
     <a class="accordion-toggle collapsed " data-toggle="collapse" href="#sidebar-users-links">
         <i class="fa fa-users fa-2x"></i>
                     <span>
-                      <?php echo $this->translate('Пользователи'); ?>
+                      <?= $this->translate('Пользователи'); ?>
                         <i class="fa fa-caret-down"></i>
                     </span>
     </a>
@@ -144,9 +144,9 @@
                     'page' => 1), 'adminUserAll', true
             )
             ?>
-            <a href="<?php echo $adminUserAllUrl; ?>">
+            <a href="<?= $adminUserAllUrl; ?>">
                 <i class="fa fa-users"></i>
-                <?php echo $this->translate('Пользователи'); ?>
+                <?= $this->translate('Пользователи'); ?>
             </a>
         </li>
         <li>
@@ -156,9 +156,9 @@
                 'adminRoleAll', true
             )
             ?>
-            <a href="<?php echo $adminRoleAllUrl; ?>">
+            <a href="<?= $adminRoleAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Роли пользователей'); ?>
+                <?= $this->translate('Роли пользователей'); ?>
             </a>
         </li>
     </ul>
@@ -168,7 +168,7 @@
     <a class="accordion-toggle collapsed " data-toggle="collapse" href="#sidebar-leagues-champs-links">
         <i class="fa fa-trophy fa-2x"></i>
                     <span>
-                      <?php echo $this->translate('Лиги и Чемпионаты'); ?>
+                      <?= $this->translate('Лиги и Чемпионаты'); ?>
                         <i class="fa fa-caret-down"></i>
                     </span>
     </a>
@@ -180,9 +180,9 @@
                 'adminLeagueAll', true
             )
             ?>
-            <a href="<?php echo $adminLeagueAllUrl; ?>">
+            <a href="<?= $adminLeagueAllUrl; ?>">
                 <i class="fa fa-users"></i>
-                <?php echo $this->translate('Лиги'); ?>
+                <?= $this->translate('Лиги'); ?>
             </a>
         </li>
         <li>
@@ -192,9 +192,9 @@
                 'adminChampionshipAll', true
             )
             ?>
-            <a href="<?php echo $adminChampionshipAllUrl; ?>">
+            <a href="<?= $adminChampionshipAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Чемпионаты'); ?>
+                <?= $this->translate('Чемпионаты'); ?>
             </a>
         </li>
         <li>
@@ -204,9 +204,9 @@
                 'adminRacingSeriesAll', true
             )
             ?>
-            <a href="<?php echo $adminRacingSeriesAllUrl; ?>">
+            <a href="<?= $adminRacingSeriesAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Гоночные серии'); ?>
+                <?= $this->translate('Гоночные серии'); ?>
             </a>
         </li>
         <li>
@@ -216,9 +216,9 @@
                 'adminTrackAll', true
             )
             ?>
-            <a href="<?php echo $adminTrackAllUrl; ?>">
+            <a href="<?= $adminTrackAllUrl; ?>">
                 <i class="fa fa-road"></i>
-                <?php echo $this->translate('Трассы'); ?>
+                <?= $this->translate('Трассы'); ?>
             </a>
         </li>
         <li>
@@ -228,9 +228,9 @@
                 'adminRaceEventAll', true
             )
             ?>
-            <a href="<?php echo $adminRaceEventAllUrl; ?>">
+            <a href="<?= $adminRaceEventAllUrl; ?>">
                 <i class="fa fa-road"></i>
-                <?php echo $this->translate('Гоночные события'); ?>
+                <?= $this->translate('Гоночные события'); ?>
             </a>
         </li>
         <li>
@@ -240,9 +240,9 @@
                 'adminRaceAll', true
             )
             ?>
-            <a href="<?php echo $adminRaceAllUrl; ?>">
+            <a href="<?= $adminRaceAllUrl; ?>">
                 <i class="fa fa-road"></i>
-                <?php echo $this->translate('Гонки'); ?>
+                <?= $this->translate('Гонки'); ?>
             </a>
         </li>
         <li>
@@ -252,9 +252,9 @@
                 'adminTeamAll', true
             )
             ?>
-            <a href="<?php echo $adminTeamAllUrl; ?>">
+            <a href="<?= $adminTeamAllUrl; ?>">
                 <i class="fa fa-file-text"></i>
-                <?php echo $this->translate('Команды'); ?>
+                <?= $this->translate('Команды'); ?>
             </a>
         </li>
     </ul>
@@ -265,7 +265,7 @@
         <i class="fa fa-plug fa-2x"></i>
 
                     <span>
-                      <?php echo $this->translate('Компоненты сайта'); ?>
+                      <?= $this->translate('Компоненты сайта'); ?>
                         <i class="fa fa-caret-down"></i>
                     </span>
     </a>
@@ -277,9 +277,9 @@
                 'adminCountryAll'
             )
             ?>
-            <a href="<?php echo $adminCountryAllUrl; ?>">
+            <a href="<?= $adminCountryAllUrl; ?>">
                 <i class="fa fa-flag"></i>
-                <?php echo $this->translate('Страны'); ?>
+                <?= $this->translate('Страны'); ?>
             </a>
         </li>
         <li>
@@ -289,9 +289,9 @@
                 'default', true
             )
             ?>
-            <a href="<?php echo $adminFileManagerUrl; ?>">
+            <a href="<?= $adminFileManagerUrl; ?>">
                 <i class="fa fa-users"></i>
-                <?php echo $this->translate('Файловый менеджер'); ?>
+                <?= $this->translate('Файловый менеджер'); ?>
             </a>
         </li>
     </ul>

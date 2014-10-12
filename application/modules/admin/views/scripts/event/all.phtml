@@ -7,11 +7,11 @@ if (count($this->paginator)) {
             <thead>
     	    <tr>
     		<th class="event_id"><span>#</span></th>
-    		<th class="event_name"><span><?= $this->translate('Название'); ?></span></th>
-    		<th class="event_descr"><span><?= $this->translate('Описание'); ?></span></th>
-    		<th class="event_date_event"><span><?= $this->translate('Дата события'); ?></span></th>
-    		<th class="event_url_event"><span><?= $this->translate('Ссылка события'); ?></span></th>
-    		<th class="content_type_action articles_table_action"><span><?= $this->translate('Действие'); ?></span></th>
+    		<th class="event_name"><span><?= $this->t('Название'); ?></span></th>
+    		<th class="event_descr"><span><?= $this->t('Описание'); ?></span></th>
+    		<th class="event_date_event"><span><?= $this->t('Дата события'); ?></span></th>
+    		<th class="event_url_event"><span><?= $this->t('Ссылка события'); ?></span></th>
+    		<th class="content_type_action articles_table_action"><span><?= $this->t('Действие'); ?></span></th>
     	    </tr>
             </thead>
             <tbody>
@@ -21,12 +21,12 @@ if (count($this->paginator)) {
 			<td class="event_name"><span><a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><?= $this->escape($event['name']) ?></a></span></td>
 			<td class="event_descr"><span><?= $this->truncate($this->escape($event['description']))->toLength(200); ?></span></td>
 			<td class="event_date_event"><span><?= $this->escape($event['date_event']); ?></span></td>
-			<td class="event_url_event"><span><a href="<?= $this->escape($event['url_event']); ?>"><?= $this->translate('Ссылка'); ?></a></span></td>
+			<td class="event_url_event"><span><a href="<?= $this->escape($event['url_event']); ?>"><?= $this->t('Ссылка'); ?></a></span></td>
 			<td class="content_type_action articles_table_action">
 			    <span>
-				<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><i class="fa fa-eye"></i> <?= $this->translate('Просм.'); ?></a><br/>
-				<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="fa fa-pencil"></i> <?= $this->translate('Ред.'); ?></a><br/>
-				<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="fa fa-trash-o"></i> <?= $this->translate('Удал.'); ?></a><br/>
+				<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'id', 'event_id' => $event['id']), 'event_id', true) ?>"><i class="fa fa-eye"></i> <?= $this->t('Просм.'); ?></a><br/>
+				<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'edit', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="fa fa-pencil"></i> <?= $this->t('Ред.'); ?></a><br/>
+				<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'event', 'action' => 'delete', 'event_id' => $event['id']), 'event_action', true) ?>"><i class="fa fa-trash-o"></i> <?= $this->t('Удал.'); ?></a><br/>
 			    </span>
 			</td>
 		    </tr>

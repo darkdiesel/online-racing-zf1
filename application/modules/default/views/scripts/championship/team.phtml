@@ -1,25 +1,25 @@
 <?php if ($this->team_data) { ?>
 
-    <?php echo $this->render('championship/common/championship-menu.phtml') ?>
+    <?= $this->render('championship/common/championship-menu.phtml') ?>
 
-    <?php echo $this->render('championship/common/hotlaps-menu.phtml') ?>
+    <?= $this->render('championship/common/hotlaps-menu.phtml') ?>
 
     <div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
 			<div class="team-item block">
 				<?php
-				echo $this->BlockConfigMenu($this->translate("Команда"))->championshipTeamMenu($this->escape($this->leagueData['ID']), $this->team_data->championship_id, $this->team_data->team_id);
+				echo $this->BlockConfigMenu($this->t("Команда"))->championshipTeamMenu($this->escape($this->leagueData['ID']), $this->team_data->championship_id, $this->team_data->team_id);
 				?>
 				<div class="block-item-content">
 					<div>
 						<?php if ($this->escape($this->team_data->url_logo_car)) { ?>
 							<div class=" text-center team_show_car_wrapper_700 img-wrapper-700 overflow-hide">
-								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->team_data->url_logo_car); ?>">
+								<img class="img-thumbnail img-responsive" src="<?= $this->escape($this->team_data->url_logo_car); ?>">
 							</div>
 						<?php } ?>
 						<?php if ($this->escape($this->team_data->url_logo) != '') { ?>
 							<div class="text-center team_show_logo_wrapper_210 img-wrapper-210-210 overflow-hide">
-								<img class="img-thumbnail img-responsive" src="<?php echo $this->escape($this->team_data->url_logo); ?>">
+								<img class="img-thumbnail img-responsive" src="<?= $this->escape($this->team_data->url_logo); ?>">
 							</div>
 						<?php } ?>
 					</div>
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="section-title m-t-15 m-b-15"><?php echo $this->translate('Состав команды') ?>:</div>
+	<div class="section-title m-t-15 m-b-15"><?= $this->t('Состав команды') ?>:</div>
 	<div class="row">
 		<?php
 		if ($this->team_driver_data) {
@@ -45,35 +45,35 @@
 						}
 						?>
 						<?php
-						echo $this->BlockConfigMenu($this->translate("Гонщик"))->championshipTeamDriverMenu($this->escape($this->leagueData['ID']), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
+						echo $this->BlockConfigMenu($this->t("Гонщик"))->championshipTeamDriverMenu($this->escape($this->leagueData['ID']), $this->team_data->championship_id, $this->team_data->team_id, $driver->user_id);
 						?>
 						<div class="block-body">
 							<div class="media">
 								<div class="team-driver-img img-wrapper-200-200 overflow-hide pull-left">
-									<a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
-										<?php echo $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'img-thumbnail img-rounded img-responsive', 200); ?>
+									<a href="<?= $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
+										<?= $this->getUserAvatar($driver->user_id, $driver->user_avatar_type, 'img-thumbnail img-rounded img-responsive', 200); ?>
 									</a>
 								</div>
 								<div class="media-body">
 									<h4 class="media-heading">
-										<a class="font-color-black" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
-											<?php echo $user_name; ?>
+										<a class="font-color-black" href="<?= $this->url(array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $driver->user_id), 'defaultUserID', true) ?>" target="_blank">
+											<?= $user_name; ?>
 										</a>
 									</h4>
 									<blockquote>
-										<img class="img-size-40-40 pull-left m-r-15" src="<?php echo $driver->country_ImageGlossyWaveUrl ?>" title="<?php echo $driver->country_NativeName ?> (<?php echo $driver->country_EnglishName ?>)">
-										<small> <?php echo $driver->country_NativeName . ' (' . $driver->country_EnglishName . ')'; ?> <i class="glyphicon glyphicon-map-marker"></i></small>
+										<img class="img-size-40-40 pull-left m-r-15" src="<?= $driver->country_ImageGlossyWaveUrl ?>" title="<?= $driver->country_NativeName ?> (<?= $driver->country_EnglishName ?>)">
+										<small> <?= $driver->country_NativeName . ' (' . $driver->country_EnglishName . ')'; ?> <i class="glyphicon glyphicon-map-marker"></i></small>
 									</blockquote>
 									<hr style="margin:8px auto">
-									<span class="label label-warning"><?php echo $this->translate('Номер') . ': ' . $driver->driver_number; ?></span>
-									<span class="label label-info"><i class="glyphicon glyphicon-gift"></i> <?php echo $driver->user_birthday; ?></span>
+									<span class="label label-warning"><?= $this->t('Номер') . ': ' . $driver->driver_number; ?></span>
+									<span class="label label-info"><i class="glyphicon glyphicon-gift"></i> <?= $driver->user_birthday; ?></span>
 									<div class="m-t-10">
-										<strong><?php echo $this->translate('О гонщике'); ?></strong>
+										<strong><?= $this->t('О гонщике'); ?></strong>
 										<table class="table table-condensed table-responsive table-user-information">
 											<tbody>
 												<tr>
-													<td><?php echo $this->translate("Ник-нэйм"); ?>:</td>
-													<td><?php echo $this->escape($driver->user_login) ?></td>
+													<td><?= $this->t("Ник-нэйм"); ?>:</td>
+													<td><?= $this->escape($driver->user_login) ?></td>
 												</tr>
 											</tbody>
 										</table>
@@ -89,8 +89,8 @@
 			?>
 			<div class="alert alert-info alert-block">
 				<button type="button" class="close" data-dismiss="alert">×</button>
-				<h4><?php echo $this->translate('Информация!'); ?></h4>
-				<?php echo $this->translate('В команде нет пилотов!'); ?>
+				<h4><?= $this->t('Информация!'); ?></h4>
+				<?= $this->t('В команде нет пилотов!'); ?>
 			</div>
 		<?php } ?>
 	</div>

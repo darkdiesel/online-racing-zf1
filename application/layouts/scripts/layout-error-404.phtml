@@ -69,16 +69,16 @@ $this->headLink()->appendStylesheet('/data-content/data-themes/layout-common/css
 
 ?>
 
-<?php echo $this->doctype() ?>
+<?= $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headMeta() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    <?php echo $this->minifyHeadLink() ?>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->minifyHeadLink() ?>
 
-    <?php echo $this->jQuery(); ?>
+    <?= $this->jQuery(); ?>
 </head>
 <body>
 <div id="page-wrapper">
@@ -97,18 +97,18 @@ $this->headLink()->appendStylesheet('/data-content/data-themes/layout-common/css
                     <div class="panel">
                         <div class="panel-body center-block text-center">
                             <div class="error-template text-center">
-                                <h1><?php echo $this->translate('УПС!'); ?></h1>
+                                <h1><?= $this->translate('УПС!'); ?></h1>
 
-                                <h2><?php echo $this->translate('Ошибка 404. Страница не найдена!'); ?></h2>
+                                <h2><?= $this->translate('Ошибка 404. Страница не найдена!'); ?></h2>
 
                                 <div class="error-details">
-                                    <?php echo $this->translate(
+                                    <?= $this->translate(
                                         'Приносим свои извинения. На сайте произошла ошибка, запрашиваемая страница не найдена!'
                                     ); ?>
                                 </div>
                                 <div class="error-actions m-t-15">
-                                    <a href="<?php echo $this->baseUrl(); ?>" class="btn btn-primary btn-lg">
-                                        <i class="fa fa-home"></i> <?php echo $this->translate(
+                                    <a href="<?= $this->baseUrl(); ?>" class="btn btn-primary btn-lg">
+                                        <i class="fa fa-home"></i> <?= $this->translate(
                                             'Перейти на главную страницу?'
                                         ); ?>
                                     </a>
@@ -121,7 +121,7 @@ $this->headLink()->appendStylesheet('/data-content/data-themes/layout-common/css
             </div>
             <div class="row m-t-15">
                 <div class="col-md-12">
-                    <?php echo $this->layout()->content ?>
+                    <?= $this->layout()->content ?>
                 </div>
             </div>
         </div>
@@ -132,10 +132,10 @@ $this->headLink()->appendStylesheet('/data-content/data-themes/layout-common/css
 
 <!-- scripts -->
 <?php //echo $this->headScript() ?>
-<?php echo $this->minifyHeadScript() ?>
+<?= $this->minifyHeadScript() ?>
 
-<?php echo $this->render("common/site-heart-js.phtml") ?>
-<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+<?= $this->render("common/site-heart-js.phtml") ?>
+<?= $this->render("common/analytics-tracking-js-layout.phtml") ?>
 <!-- ./ scripts -->
 </body>
 </html>

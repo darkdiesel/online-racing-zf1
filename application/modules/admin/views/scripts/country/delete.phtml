@@ -9,7 +9,7 @@
                 <tbody>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Родное название'); ?></span>
+                        <span><?= $this->t('Родное название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($this->countryData['NativeName']); ?></span>
@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Английское название'); ?></span>
+                        <span><?= $this->t('Английское название'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($this->countryData['EnglishName']); ?></span>
@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Аббревиатура'); ?></span>
+                        <span><?= $this->t('Аббревиатура'); ?></span>
                     </td>
                     <td>
                         <span><?= $this->escape($this->countryData['Abbreviation']); ?></span>
@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Круговая картинка'); ?></span>
+                        <span><?= $this->t('Круговая картинка'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td class="text-bold">
-                        <span><?= $this->translate('Волнистая картинка'); ?></span>
+                        <span><?= $this->t('Волнистая картинка'); ?></span>
                     </td>
                     <td>
                         <span>
@@ -57,19 +57,19 @@
             </table>
         </div>
         <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->translate('Тип контента'); ?>"
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-filter fa-lg"></i>
-                <?= $this->translate('Страна'); ?>
+                <?= $this->t('Страна'); ?>
             </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
                 <?= $this->escape($this->countryData['DateCreate']); ?>
             </div>
             <?php if ($this->escape($this->countryData['DateCreate']) != $this->escape($this->countryData['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
-                     data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
+                     data-title="<?= $this->t('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
                     <?= $this->escape($this->countryData['DateEdit']); ?>
                 </div>

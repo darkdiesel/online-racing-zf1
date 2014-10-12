@@ -15,7 +15,7 @@ $raceEvents = $this->raceEventData;
                     );
                     ?>
                     <a href="<?= $adminRacingEventAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить гоночное событие'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить гоночное событие'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -26,16 +26,16 @@ $raceEvents = $this->raceEventData;
                         <span>ID</span>
                     </th>
                     <th class="race-event-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="race-event-championship">
-                        <span><?= $this->translate('Чемпионат'); ?></span>
+                        <span><?= $this->t('Чемпионат'); ?></span>
                     </th>
                     <th class="race-event-date-start">
-                        <span><?= $this->translate('Дата начала'); ?></span>
+                        <span><?= $this->t('Дата начала'); ?></span>
                     </th>
                     <th class="race-event-date-end">
-                        <span><?= $this->translate('Дата окончания'); ?></span>
+                        <span><?= $this->t('Дата окончания'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -99,7 +99,7 @@ $raceEvents = $this->raceEventData;
                             </td>
                             <td class="race-event-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Гоночное событие"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Гоночное событие"), false)
                                         ->raceEventMenu($this->escape($raceEvent['ID']), true);
                                     ?>
                                 </span>
@@ -108,7 +108,7 @@ $raceEvents = $this->raceEventData;
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr class="text-center danger">
-                        <td colspan="4"><?= $this->translate('Нет гоночных событий!');?></td>
+                        <td colspan="4"><?= $this->t('Нет гоночных событий!');?></td>
                     </tr>
                 <?php endif; ?>
                 </tbody>

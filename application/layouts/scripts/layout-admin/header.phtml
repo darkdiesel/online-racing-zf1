@@ -14,14 +14,14 @@
                         <?php
                         $admin_index_url = $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'index'), 'default', true);
                         ?>
-                        <a href="<?php echo $admin_index_url; ?>" class="pull-left">
-                            <img src="<?php echo $this->baseUrl('data-content/data-themes/layout-admin/img/logo.png'); ?>"
+                        <a href="<?= $admin_index_url; ?>" class="pull-left">
+                            <img src="<?= $this->baseUrl('data-content/data-themes/layout-admin/img/logo.png'); ?>"
                                  class="img-responsive"/>
                         </a>
                     </div>
                     <div id="admin-main-menu" class="collapse navbar-collapse">
                         <!-- User Navigation menu  -->
-                        <?php echo $this->render("common/user-nav-menu.phtml") ?>
+                        <?= $this->render("common/user-nav-menu.phtml") ?>
                         <!-- /User Navigation menu  -->
                         <?php
                         $default_index_url = $this->url(
@@ -30,8 +30,8 @@
                         ?>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="<?php echo $default_index_url; ?>">
-                                    <i class="fa fa-globe"></i> <?php echo $this->translate('Сайт'); ?>
+                                <a href="<?= $default_index_url; ?>">
+                                    <i class="fa fa-globe"></i> <?= $this->translate('Сайт'); ?>
                                 </a>
                             </li>
                         </ul>

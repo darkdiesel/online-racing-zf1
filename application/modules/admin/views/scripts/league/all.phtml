@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminLeagueAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить лигу'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить лигу'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,16 +23,16 @@
                         <span>ID</span>
                     </th>
                     <th class="league-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="league-administrator">
-                        <span><?= $this->translate('Администратор'); ?></span>
+                        <span><?= $this->t('Администратор'); ?></span>
                     </th>
                     <th class="league-description">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </th>
                     <th class="league-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -92,7 +92,7 @@
                             </td>
                             <td class="league-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Лига"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Лига"), false)
                                         ->leagueMenu($this->escape($league['ID']), true);
                                     ?>
                                 </span>

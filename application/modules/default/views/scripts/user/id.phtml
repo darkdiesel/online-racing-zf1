@@ -4,12 +4,12 @@
             <?php if ($this->getUser()->getUserStatus($this->userData['DateLastActivity']) == USER_STATUS_ONLINE) { ?>
                 <?php $userStatusClass = 'user-online'; ?>
                 <div class="alert alert-success">
-                    <strong><?php echo $this->translate("В паддоке") ?></strong>
+                    <strong><?= $this->t("В паддоке") ?></strong>
                 </div>
             <?php } else { ?>
                 <?php $userStatusClass = 'user-offline'; ?>
                 <div class="alert alert-warning">
-                    <strong><?php echo $this->translate("Вне паддока") ?></strong>
+                    <strong><?= $this->t("Вне паддока") ?></strong>
                 </div>
             <?php } ?>
 
@@ -25,15 +25,15 @@
                     <div class="m-b-15">
                         <div class="user-cover">
                             <img
-                                src="<?php echo $this->baseUrl('/data-content/img/user-cover/user-cover-2.png'); ?>"
+                                src="<?= $this->baseUrl('/data-content/img/user-cover/user-cover-2.png'); ?>"
                                 alt="" class="img-responsive"/>
                         </div>
-                        <div class="img-wrapper-120-120 overflow-hide img-circle user-avatar pic <?php echo $userStatusClass; ?>">
-                            <a href="#" data-toggle="modal" data-target=".user-<?php echo $this->userData['ID']; ?>"
-                               title="<?php echo $this->escape($this->userData['ID']); ?>">
-                                <?php echo $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-120', 120); ?>
+                        <div class="img-wrapper-120-120 overflow-hide img-circle user-avatar pic <?= $userStatusClass; ?>">
+                            <a href="#" data-toggle="modal" data-target=".user-<?= $this->userData['ID']; ?>"
+                               title="<?= $this->escape($this->userData['ID']); ?>">
+                                <?= $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-120', 120); ?>
                             </a>
-                            <?php echo $this->modal(array(
+                            <?= $this->modal(array(
                                 'title' => $this->userData['NickName'],
                                 'class' => 'user-' . $this->userData['ID'],
                                 'content' => $this->getUser()->getUserAvatar($this->userData['ID'], $this->userData['AvatarType'], 'img-responsive img-size-640 center-block', 640)
@@ -41,25 +41,25 @@
                         </div>
                         <div class="user-name">
                             <span class="tooltip-field pull-left m-t-5" data-placement="bottom"
-                                  data-title="<?php echo $this->escape($this->userData['Country']['EnglishName']); ?>">
+                                  data-title="<?= $this->escape($this->userData['Country']['EnglishName']); ?>">
                                 <div class="img-wrapper-50-50">
-                                    <img class="img-size-50-50 img-responsive" src="<?php echo $this->baseUrl(
+                                    <img class="img-size-50-50 img-responsive" src="<?= $this->baseUrl(
                                         $this->escape($this->userData['Country']['ImageGlossyWaveUrl'])
                                     ); ?>"
-                                         alt="<?php echo $this->escape($this->userData['Country']['EnglishName']); ?>">
+                                         alt="<?= $this->escape($this->userData['Country']['EnglishName']); ?>">
                                 </div>
                             </span>
                             <?php if (!empty($this->userData['Name']) && !empty($this->userData['Surname'])) { ?>
-                                <small><?php echo $this->userData['Surname'], ' ', $this->userData['Name'] ?></small>
+                                <small><?= $this->userData['Surname'], ' ', $this->userData['Name'] ?></small>
                             <?php } else { ?>
                                 <small>
                                     <БЕЗ ИМЕНИ>
                                 </small>
                             <?php } ?>
-                            <span class="text-muted small"><small><?php echo $this->userData['NickName']; ?></small></span>
+                            <span class="text-muted small"><small><?= $this->userData['NickName']; ?></small></span>
                         </div>
                         <a href="#" class="btn btn-xs btn-primary pull-right change-user-cover-btn" style="margin:10px;">
-                            <i class="fa fa-pencil-square"></i> <?php echo $this->translate('Изменить обложку'); ?>
+                            <i class="fa fa-pencil-square"></i> <?= $this->t('Изменить обложку'); ?>
                         </a>
 
                         <div class="clear"></div>
@@ -75,22 +75,22 @@
     <ul class="nav nav-tabs" id="myTab">
         <li class="active">
             <a href="#info" data-toggle="tab"><i
-                    class="fa fa-info-circle"></i> <?php echo $this->translate('Информация'); ?>
+                    class="fa fa-info-circle"></i> <?= $this->t('Информация'); ?>
             </a>
         </li>
         <li>
             <a href="#site-statistic" data-toggle="tab"><i
-                    class="fa fa-bar-chart-o"></i> <?php echo $this->translate('Статистика сайта'); ?>
+                    class="fa fa-bar-chart-o"></i> <?= $this->t('Статистика сайта'); ?>
             </a>
         </li>
         <li>
             <a href="#user-contacts" data-toggle="tab">
-                <i class="fa fa-keyboard-o"></i> <?php echo $this->translate('Контакты'); ?>
+                <i class="fa fa-keyboard-o"></i> <?= $this->t('Контакты'); ?>
             </a>
         </li>
         <li>
             <a href="#user-social" data-toggle="tab">
-                <i class="fa fa-users"></i> <?php echo $this->translate('Социальные сети'); ?>
+                <i class="fa fa-users"></i> <?= $this->t('Социальные сети'); ?>
             </a>
         </li>
     </ul>
@@ -102,61 +102,61 @@
                         <tbody>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Имя') ?>:
+                                <?= $this->t('Имя') ?>:
                             </td>
                             <td>
                                 <div class="break_word_wrap">
-                                    <?php echo $this->userData['FirstName'] ?>
+                                    <?= $this->userData['FirstName'] ?>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Фамилия') ?>:
+                                <?= $this->t('Фамилия') ?>:
                             </td>
                             <td>
                                 <div class="break_word_wrap">
-                                    <?php echo $this->userData['LastName'] ?>
+                                    <?= $this->userData['LastName'] ?>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Дата рождения') ?>:
+                                <?= $this->t('Дата рождения') ?>:
                             </td>
                             <td>
                                 <div class="break_word_wrap">
-                                    <?php echo date_format(date_create($this->userData['DateBirthday']), 'd.m.Y') ?>
+                                    <?= date_format(date_create($this->userData['DateBirthday']), 'd.m.Y') ?>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Страна') ?>:
+                                <?= $this->t('Страна') ?>:
                             </td>
                             <td>
                                 <div class="break_word_wrap">
-                                    <?php echo $this->userData['Country']['EnglishName'] . " ({$this->userData['Country']['NativeName']})" ?>
+                                    <?= $this->userData['Country']['EnglishName'] . " ({$this->userData['Country']['NativeName']})" ?>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Город') ?>:
+                                <?= $this->t('Город') ?>:
                             </td>
                             <td>
                                 <div class="break_word_wrap">
-                                    <?php echo $this->userData['City'] ?>
+                                    <?= $this->userData['City'] ?>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Последний визит') ?>:
+                                <?= $this->t('Последний визит') ?>:
                             </td>
                             <td>
                                 <div class="break_word_wrap">
-                                    <?php echo date_format(date_create($this->userData['DateLastActivity']), 'H:i d.m.Y') ?>
+                                    <?= date_format(date_create($this->userData['DateLastActivity']), 'H:i d.m.Y') ?>
                                 </div>
                             </td>
                         </tr>
@@ -172,26 +172,26 @@
                         <tbody>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Номер пользователя') ?>:
+                                <?= $this->t('Номер пользователя') ?>:
                             </td>
                             <td>
-                                <?php echo $this->userData['ID'] ?>
+                                <?= $this->userData['ID'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Времени на сайте') ?>:
+                                <?= $this->t('Времени на сайте') ?>:
                             </td>
                             <td>
                                 <?php
                                 $d = new DateTime();
-                                echo $d->diff(new DateTime($this->userData['DateCreate']))->format("<strong>" . $this->translate('Лет') . ":</strong> %y <strong>" . $this->translate('Месяцев') . ":</strong> %m <strong>" . $this->translate('Дней') . ":</strong> %d");
+                                echo $d->diff(new DateTime($this->userData['DateCreate']))->format("<strong>" . $this->t('Лет') . ":</strong> %y <strong>" . $this->t('Месяцев') . ":</strong> %m <strong>" . $this->t('Дней') . ":</strong> %d");
                                 ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Дней на сайте') ?>:
+                                <?= $this->t('Дней на сайте') ?>:
                             </td>
                             <td>
                                 <?php
@@ -201,10 +201,10 @@
                         </tr>
                         <tr>
                             <td class="text-bold">
-                                <?php echo $this->translate('Дата регистрации') ?>:
+                                <?= $this->t('Дата регистрации') ?>:
                             </td>
                             <td>
-                                <?php echo date_format(date_create($this->userData['DateCreate']), 'H:i d.m.Y') ?>
+                                <?= date_format(date_create($this->userData['DateCreate']), 'H:i d.m.Y') ?>
                             </td>
                         </tr>
                         </tbody>
@@ -220,41 +220,41 @@
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/skype-20.png'); ?>"/>
-                                <?php echo $this->translate('Skype'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/skype-20.png'); ?>"/>
+                                <?= $this->t('Skype'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo $this->userData['Skype'] ?>
+                                <?= $this->userData['Skype'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/icq-20.png'); ?>"/>
-                                <?php echo $this->translate('ICQ'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/icq-20.png'); ?>"/>
+                                <?= $this->t('ICQ'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo $this->userData['Icq'] ?>
+                                <?= $this->userData['Icq'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/googletalk-20.png'); ?>"/>
-                                <?php echo $this->translate('Google Talk'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/googletalk-20.png'); ?>"/>
+                                <?= $this->t('Google Talk'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo $this->userData['GoogleTalk'] ?>
+                                <?= $this->userData['GoogleTalk'] ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/www-20.png'); ?>"/>
-                                <?php echo $this->translate('Веб-Сайт'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/www-20.png'); ?>"/>
+                                <?= $this->t('Веб-Сайт'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo $this->userData['WebSite'] ?>
+                                <?= $this->userData['WebSite'] ?>
                             </td>
                         </tr>
                         </tbody>
@@ -270,41 +270,41 @@
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/vk-20.png'); ?>"/>
-                                <?php echo $this->translate('Вконтакте'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/vk-20.png'); ?>"/>
+                                <?= $this->t('Вконтакте'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo 'none' ?>
+                                <?= 'none' ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/facebook-20.png'); ?>"/>
-                                <?php echo $this->translate('Facebook'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/facebook-20.png'); ?>"/>
+                                <?= $this->t('Facebook'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo 'none' ?>
+                                <?= 'none' ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/twitter-20.png'); ?>"/>
-                                <?php echo $this->translate('Twitter'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/twitter-20.png'); ?>"/>
+                                <?= $this->t('Twitter'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo 'none' ?>
+                                <?= 'none' ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-bold">
                                 <img
-                                    src="<?php echo $this->baseUrl('data-content/ui/icons/googleplus-20.png'); ?>"/>
-                                <?php echo $this->translate('Google+'), ':'; ?>
+                                    src="<?= $this->baseUrl('data-content/ui/icons/googleplus-20.png'); ?>"/>
+                                <?= $this->t('Google+'), ':'; ?>
                             </td>
                             <td>
-                                <?php echo 'none' ?>
+                                <?= 'none' ?>
                             </td>
                         </tr>
                         </tbody>

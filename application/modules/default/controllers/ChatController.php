@@ -3,16 +3,16 @@
 class ChatController extends App_Controller_LoaderController {
 
 	public function indexAction() {
-		$this->view->headTitle($this->view->translate('Чат'));
-		$this->view->pageTitle($this->view->translate('Чат'));
+		$this->view->headTitle($this->view->t('Чат'));
+		$this->view->pageTitle($this->view->t('Чат'));
 
 		if (Zend_Auth::getInstance()->hasIdentity()) {
-			$this->messages->addInfo("{$this->view->translate('Введите сообщение в поле ввода и нажмите "Отправить".')}");
+			$this->messages->addInfo("{$this->view->t('Введите сообщение в поле ввода и нажмите "Отправить".')}");
 		} else {
-			$this->messages->addWarning("{$this->view->translate('Сообщения в чате могут оставлять только авторизованные пользователи.')}"
-					. "<br/><a class=\"btn btn-warning\" href=\"{$this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}\">{$this->view->translate('Авторизоваться')}</a>"
-					. " {$this->view->translate('или')} "
-					. "<a class=\"btn btn-danger\" href=\"{$this->view->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true)}\">{$this->view->translate('Зарегистрироваться')}</a>"
+			$this->messages->addWarning("{$this->view->t('Сообщения в чате могут оставлять только авторизованные пользователи.')}"
+					. "<br/><a class=\"btn btn-warning\" href=\"{$this->view->url(array('module' => 'default', 'controller' => 'auth', 'action' => 'login'), 'default', true)}\">{$this->view->t('Авторизоваться')}</a>"
+					. " {$this->view->t('или')} "
+					. "<a class=\"btn btn-danger\" href=\"{$this->view->url(array('module' => 'default', 'controller' => 'reg', 'action' => 'user'), 'default', true)}\">{$this->view->t('Зарегистрироваться')}</a>"
 			);
 		}
 

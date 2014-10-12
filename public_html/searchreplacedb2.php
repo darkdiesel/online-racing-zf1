@@ -116,7 +116,7 @@ function check_table_array( $table = '' ){
  */
 function icit_srdb_submit( $text = 'Submit', $warning = '' ){
 	$warning = str_replace( "'", "\'", $warning ); ?>
-	<input type="submit" class="button" value="<?php echo htmlentities( $text, ENT_QUOTES, 'UTF-8' ); ?>" <?php echo ! empty( $warning ) ? 'onclick="if (confirm(\'' . htmlentities( $warning, ENT_QUOTES, 'UTF-8' ) . '\')){return true;}return false;"' : ''; ?>/> <?php
+	<input type="submit" class="button" value="<?= htmlentities( $text, ENT_QUOTES, 'UTF-8' ); ?>" <?= ! empty( $warning ) ? 'onclick="if (confirm(\'' . htmlentities( $warning, ENT_QUOTES, 'UTF-8' ) . '\')){return true;}return false;"' : ''; ?>/> <?php
 }
 
 
@@ -705,9 +705,9 @@ switch ( $step ) {
 
 				<p>
 					<label for="guid">
-					<input type="checkbox" name="guid" id="guid" value="1" <?php echo $guid == 1 ? 'checked="checked"' : '' ?>/> Leave GUID column unchanged? </label>
+					<input type="checkbox" name="guid" id="guid" value="1" <?= $guid == 1 ? 'checked="checked"' : '' ?>/> Leave GUID column unchanged? </label>
 					<em>If the values in the GUID column from the WordPress posts table change RSS readers and other tools will be under the impression that the posts are new and may show them in feeds again. <br />
-					All columns titled <?php echo eng_list( $exclude_cols ) ?> will be skipped if this it ticked.</em>
+					All columns titled <?= eng_list( $exclude_cols ) ?> will be skipped if this it ticked.</em>
 				</p>
 
 				<?php icit_srdb_submit( 'Continue', 'Do be sure that you have selected the correct tables - especially important on multi-sites installs.' );	?>

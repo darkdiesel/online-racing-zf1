@@ -3,11 +3,11 @@
     <div id="online-drivers" class="block block-ui-bordered block-sidebar m-b-10">
         <div class="block-header">
             <div class="block-title">
-                <i class="fa fa-user fa-lg"></i> <?php echo $this->translate("Паддок") ?>
+                <i class="fa fa-user fa-lg"></i> <?= $this->translate("Паддок") ?>
             </div>
         </div>
         <div class="block-body">
-            <i><?php echo $this->translate('Cейчас в паддоке'); ?>:</i>
+            <i><?= $this->translate('Cейчас в паддоке'); ?>:</i>
             <span>
                 <?php
 
@@ -29,7 +29,7 @@
                     $userCount = '0';
                 }
                 ?>
-                <strong><?php echo $userCount; ?></strong> <?php echo $this->translate('гонщик(-а, -ов)'); ?>
+                <strong><?= $userCount; ?></strong> <?= $this->translate('гонщик(-а, -ов)'); ?>
             </span>
 
             <div class="row m-t-10">
@@ -59,10 +59,10 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                             <div class="block block-user m-b-10">
                                 <div
-                                    class="img-wrapper-50-50 overflow-hide img-circle center-block user-avatar tooltip-field <?php echo $userStatusClass; ?>"
-                                    data-title="<?php echo $user['NickName']; ?>" data-placement="bottom">
-                                    <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>">
-                                        <?php echo $this->getUser()->getUserAvatar($user['ID'], $user['AvatarType'], 'media-object img-responsive img-size-50', 50); ?>
+                                    class="img-wrapper-50-50 overflow-hide img-circle center-block user-avatar tooltip-field <?= $userStatusClass; ?>"
+                                    data-title="<?= $user['NickName']; ?>" data-placement="bottom">
+                                    <a target="_blank" href="<?= $defaultUserIDUrl; ?>">
+                                        <?= $this->getUser()->getUserAvatar($user['ID'], $user['AvatarType'], 'media-object img-responsive img-size-50', 50); ?>
                                     </a>
                                 </div>
                             </div>

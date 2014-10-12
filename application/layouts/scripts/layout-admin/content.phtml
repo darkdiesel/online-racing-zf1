@@ -3,11 +3,11 @@
             <div class="row">
                     <div id="main-content-top" class="clearfix">
                         <div class="page-header pull-left">
-                            <h3><?php echo $this->pageTitle() ?></h3>
+                            <h3><?= $this->pageTitle() ?></h3>
                         </div>
                     </div>
             </div>
-            <?php echo $this->showMessages(); ?>
-            <?php echo $this->layout()->content ?>
+            <?= $this->showMessages(); ?>
+            <?= $this->layout()->content ?>
     </div>
 </div>

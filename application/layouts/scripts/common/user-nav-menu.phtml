@@ -37,7 +37,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-user"></span>
-                    <?php echo $this->translate('Профиль'); ?>
+                    <?= $this->translate('Профиль'); ?>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -46,14 +46,14 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="img-wrapper-100 thumbnail m-b-0">
-                                        <?php echo $this->getUser()->getUserAvatar(
+                                        <?= $this->getUser()->getUserAvatar(
                                             $userResult[0]['ID'], $userResult[0]['AvatarType'],
                                             'img-responsive img-size-100', 100
                                         ); ?>
                                     </div>
                                     <p class="text-center small">
-                                        <a href="<?php echo $defaultUserEditUrl, '#tabs-2' ?>">
-                                            <?php echo $this->translate('Изменить аватар'); ?>
+                                        <a href="<?= $defaultUserEditUrl, '#tabs-2' ?>">
+                                            <?= $this->translate('Изменить аватар'); ?>
                                         </a>
                                     </p>
                                 </div>
@@ -61,13 +61,13 @@
                                     <span>
                                         <?php if (!empty($userResult[0]['Name']) && !empty($userResult[0]['Surname'])) : ?>
                                             <strong>
-                                                <?php echo $userResult[0]['Surname'] . ' ' . $userResult[0]['Name']; ?>
+                                                <?= $userResult[0]['Surname'] . ' ' . $userResult[0]['Name']; ?>
                                             </strong>
                                         <?php else: ?>
                                             <div>
-                                                <a href="<?php echo $defaultUserEditUrl ?>">
+                                                <a href="<?= $defaultUserEditUrl ?>">
                                                     <span class="label label-danger">
-                                                        >> <?php echo $this->translate('Добавить имя'); ?> <<
+                                                        >> <?= $this->translate('Добавить имя'); ?> <<
                                                     </span>
                                                 </a>
                                             </div>
@@ -75,24 +75,24 @@
                                     </span>
 
                                     <p class="text-muted small">
-                                        <?php echo $userResult[0]['NickName'] ?>
-                                        <a href="<?php echo $defaultUserEditUrl ?>">
-                                            <i class="fa fa-pencil"></i> <?php echo $this->translate('Редактировать'); ?>
+                                        <?= $userResult[0]['NickName'] ?>
+                                        <a href="<?= $defaultUserEditUrl ?>">
+                                            <i class="fa fa-pencil"></i> <?= $this->translate('Редактировать'); ?>
                                         </a>
                                     </p>
 
                                     <div class="divider"></div>
 
                                     <div>
-                                        <a href="<?php echo $defaultUserIDUrl; ?>"
+                                        <a href="<?= $defaultUserIDUrl; ?>"
                                            class="btn btn-primary btn-sm active m-b-5">
-                                            <i class="fa fa-briefcase"></i> <?php echo $this->translate('Профиль'); ?>
+                                            <i class="fa fa-briefcase"></i> <?= $this->translate('Профиль'); ?>
                                         </a>
                                     </div>
                                     <div>
-                                        <a href="<?php echo $defaultUserMessageUrl; ?>"
+                                        <a href="<?= $defaultUserMessageUrl; ?>"
                                            class="btn btn-default btn-sm m-b-5">
-                                            <i class="fa fa-envelope"></i> <?php echo $this->translate('Сообщения'); ?>
+                                            <i class="fa fa-envelope"></i> <?= $this->translate('Сообщения'); ?>
                                         </a>
                                     </div>
                                 </div>
@@ -101,17 +101,17 @@
                                 <div class="navbar-footer-content">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <a href="<?php echo $defaultUserSettingUrl ?>"
+                                            <a href="<?= $defaultUserSettingUrl ?>"
                                                class="btn btn-default btn-sm">
-                                                <i class="fa fa-cog"></i> <?php echo $this->translate(
+                                                <i class="fa fa-cog"></i> <?= $this->translate(
                                                     'Настройки'
                                                 ) ?>
                                             </a>
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="<?php echo $defaultAuthSignOutUrl; ?>"
+                                            <a href="<?= $defaultAuthSignOutUrl; ?>"
                                                class="btn btn-default btn-sm pull-right">
-                                                <i class="fa fa-power-off"></i> <?php echo $this->translate('Выход'); ?>
+                                                <i class="fa fa-power-off"></i> <?= $this->translate('Выход'); ?>
                                             </a>
                                         </div>
                                     </div>
@@ -141,12 +141,12 @@
     }
     ?>
     <ul class="nav navbar-nav navbar-collapse navbar-right">
-        <a class="btn btn-info navbar-btn" href="<?php echo $defaultAuthSignUpUrl; ?>">
-            <?php echo $this->translate('Регистрация'); ?>
+        <a class="btn btn-info navbar-btn" href="<?= $defaultAuthSignUpUrl; ?>">
+            <?= $this->translate('Регистрация'); ?>
         </a>
         <?php if (isset($this->displayHeaderAuthoSignInForm) && ($this->displayHeaderAuthoSignInForm)) : ?>
             <button data-toggle="modal" href="#loginModalForm" type="button" class="btn btn-primary navbar-btn">
-                <?php echo $this->translate('Войти') ?>
+                <?= $this->translate('Войти') ?>
             </button>
         <?php endif; ?>
     </ul>

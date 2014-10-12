@@ -6,7 +6,7 @@ class IndexController extends App_Controller_LoaderController
     public function indexAction()
     {
         // page title
-        $this->view->headTitle($this->view->translate('SIM-Racing Портал'));
+        $this->view->headTitle($this->view->t('SIM-Racing Портал'));
 
         // get 10 rss news
         $url = 'http://www.f1news.ru/export/news.xml';

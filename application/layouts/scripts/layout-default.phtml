@@ -69,42 +69,42 @@ $this->headLink()->appendStylesheet('/data-content/data-themes/layout-common/css
 
 ?>
 
-<?php echo $this->doctype() ?>
+<?= $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headMeta() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    <?php echo $this->minifyHeadLink() ?>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->minifyHeadLink() ?>
 
-    <?php echo $this->jQuery(); ?>
+    <?= $this->jQuery(); ?>
 </head>
-<body id="<?php echo $this->module . '-' . $this->controller . '-' . $this->action; ?>">
+<body id="<?= $this->module . '-' . $this->controller . '-' . $this->action; ?>">
 <!-- head-line -->
-<?php echo $this->render("layout-default/head-line.phtml"); ?>
+<?= $this->render("layout-default/head-line.phtml"); ?>
 <!-- ./ head-line -->
 <!-- ./ #page-wrapper -->
 <div id="page-wrapper">
     <!-- #page -->
     <div id="page">
-        <?php echo $this->render("layout-default/header.phtml") ?>
-        <?php echo $this->render("layout-default/content-right-sidebar.phtml"); ?>
-        <?php echo $this->render("layout-default/footer.phtml") ?>
+        <?= $this->render("layout-default/header.phtml") ?>
+        <?= $this->render("layout-default/content-right-sidebar.phtml"); ?>
+        <?= $this->render("layout-default/footer.phtml") ?>
     </div>
     <!-- ./ #page -->
 </div>
 <!-- ./ #page-wrapper -->
-<?php echo $this->render("common/page-scroller-block.phtml"); ?>
+<?= $this->render("common/page-scroller-block.phtml"); ?>
 
 <div id="background-wrapper" class="background-wrapper"></div>
 
 <!-- scripts -->
 <?php //echo $this->headScript() ?>
-<?php echo $this->minifyHeadScript() ?>
+<?= $this->minifyHeadScript() ?>
 
-<?php echo $this->render("common/site-heart-js.phtml") ?>
-<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+<?= $this->render("common/site-heart-js.phtml") ?>
+<?= $this->render("common/analytics-tracking-js-layout.phtml") ?>
 <!-- ./ scripts -->
 </body>
 </html>

@@ -6,7 +6,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Гоночное событие'));
+        $this->view->headTitle($this->view->t('Гоночное событие'));
     }
 
     // action for view all race events
@@ -26,8 +26,8 @@ class Admin_RaceEventController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Гоночные события'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Гоночные события'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_RaceEvent re')
@@ -44,7 +44,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
 
             if ($raceEventPaginator->count() == 0) {
                 $this->view->raceEventData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->raceEventData = $raceEventPaginator;
             }
@@ -56,8 +56,8 @@ class Admin_RaceEventController extends App_Controller_LoaderController
     // action for add new race-event
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить гоночное событие'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить гоночное событие'));
 
         // form
         $raceEventAddForm = new Peshkov_Form_RaceEvent_Add();
@@ -99,7 +99,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                 $item->save();
 
                 $this->messages->addSuccess(
-                    $this->view->translate("Гоночное событие <strong>" . $item->Name . "</strong> успешно создано.")
+                    $this->view->t("Гоночное событие <strong>" . $item->Name . "</strong> успешно создано.")
                 );
 
                 $defaultRaceEventIDUrl = $this->view->url(
@@ -112,7 +112,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -121,8 +121,8 @@ class Admin_RaceEventController extends App_Controller_LoaderController
     // action for edit race-event
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать гоночное событие'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать гоночное событие'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -171,7 +171,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                     $item->save();
 
                     $this->messages->addSuccess(
-                        $this->view->translate("Гоночное событие <strong>" . $item->Name . "</strong> успешно отредактировано.")
+                        $this->view->t("Гоночное событие <strong>" . $item->Name . "</strong> успешно отредактировано.")
                     );
 
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('The record was successfully updated.');
@@ -184,7 +184,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                     $this->redirect($defaultRaceEventIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -204,13 +204,13 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемое гоночное событие не найдено!'));
+                    $this->messages->addError($this->view->t('Запрашиваемое гоночное событие не найдено!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Гоночное событие не найдено!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Гоночное событие не найдено!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Гоночное событие не найдено!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Гоночное событие не найдено!'));
                 }
             }
 
@@ -222,8 +222,8 @@ class Admin_RaceEventController extends App_Controller_LoaderController
     // action for delete race-event
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить лигу'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить лигу'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -255,7 +255,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить лигу')
+                    $this->view->t('Вы действительно хотите удалить лигу')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -273,7 +273,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Гоночное событие <strong>" . $this->view->raceEventData['Name'] . "</strong> успешно удалено."
+                            $this->view->t("Гоночное событие <strong>" . $this->view->raceEventData['Name'] . "</strong> успешно удалено."
                             )
                         );
 
@@ -285,20 +285,20 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                         $this->redirect($adminRaceEventAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая лига не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая лига не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Лига не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Лига не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Лига не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Лига не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

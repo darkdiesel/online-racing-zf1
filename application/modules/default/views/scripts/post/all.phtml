@@ -46,29 +46,29 @@
 
                     $commentsСount = count($commentResult);
                     ?>
-                <div class="block-timeline-item <?php echo  $block_class; ?>">
+                <div class="block-timeline-item <?=  $block_class; ?>">
                     <div class="block-timeline-badge primary">
-                        <a href="<?php echo $defaultPostIDUrl;?>">
-                            <i class="fa fa-dot-circle-o fa-lg"" rel="tooltip" title="<?php echo $this->translate('Добавлено').': '.$this->escape($post['DateCreate']); ?>" id=""></i>
+                        <a href="<?= $defaultPostIDUrl;?>">
+                            <i class="fa fa-dot-circle-o fa-lg"" rel="tooltip" title="<?= $this->t('Добавлено').': '.$this->escape($post['DateCreate']); ?>" id=""></i>
                         </a>
                     </div>
                     <div class="block block-default block-ui-bordered">
                         <?php
-                        echo $this->BlockConfigMenu($this->translate("Контент"))->postMenu(
+                        echo $this->BlockConfigMenu($this->t("Контент"))->postMenu(
                             $this->escape($post['ID'])
                         );
                         ?>
                         <div class="block-header">
                             <h4>
                                 <div class="block-title text-bold">
-                                    <a href="<?php echo $defaultPostIDUrl; ?>">
-                                        <?php echo $this->truncate($this->escape($post['Name']))->toLength(100); ?>
+                                    <a href="<?= $defaultPostIDUrl; ?>">
+                                        <?= $this->truncate($this->escape($post['Name']))->toLength(100); ?>
                                     </a>
                                 </div>
                             </h4>
                             <?php if ($this->escape($post['ImageUrl']) != '') { ?>
                                 <div class="img-wrapper-250-250 overflow-hide center-block">
-                                    <img class="img-thumbnail img-responsive img-size-250" src="<?php echo $this->escape($post['ImageUrl']); ?>" />
+                                    <img class="img-thumbnail img-responsive img-size-250" src="<?= $this->escape($post['ImageUrl']); ?>" />
                                 </div>
                             <?php } ?>
                         </div>
@@ -82,22 +82,22 @@
                             ?>
                         </div>
                         <div class="block-footer clearfix">
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Просмотров');?>" data-placement="bottom">
+                            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Просмотров');?>" data-placement="bottom">
                                 <i class="fa fa-eye fa-lg"></i>
-                                <?php echo $this->escape($post['Views']); ?>
+                                <?= $this->escape($post['Views']); ?>
                             </div>
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Комментарии');?>" data-placement="bottom">
+                            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Комментарии');?>" data-placement="bottom">
                                 <i class="fa fa-comments-o fa-lg"></i>
-                                <?php echo $commentsСount; ?>
+                                <?= $commentsСount; ?>
                             </div>
-                            <div class="pull-left m-r-15 tooltip-field" data-title="<?php echo $this->translate('Автор');?>" data-placement="bottom">
-                                <a target="_blank" href="<?php echo $defaultUserIDUrl; ?>" >
+                            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Автор');?>" data-placement="bottom">
+                                <a target="_blank" href="<?= $defaultUserIDUrl; ?>" >
                                     <i class="fa fa-user fa-lg"></i>
-                                    <?php echo $this->escape($post['User']['NickName']); ?>
+                                    <?= $this->escape($post['User']['NickName']); ?>
                                 </a>
                             </div>
-                            <div class="pull-right tooltip-field" data-title="<?php echo $this->translate('Читать дальше');?>" data-placement="bottom">
-                                <a href="<?php echo $defaultPostIDUrl ?>" class="block-content-button-more">
+                            <div class="pull-right tooltip-field" data-title="<?= $this->t('Читать дальше');?>" data-placement="bottom">
+                                <a href="<?= $defaultPostIDUrl ?>" class="block-content-button-more">
                                     <i class="fa fa-arrow-right fa-lg"></i>
                                 </a>
                             </div>
@@ -111,7 +111,7 @@
                 <div class="col-md-12 col-lg-12">
                     <div class="block-item m-t-15">
                         <div class="pull-right">
-                            <?php echo $this->paginationControl(
+                            <?= $this->paginationControl(
                                 $this->postData, 'Sliding', 'pagers/default_pagination_tpl.phtml'
                             ); ?>
                         </div>

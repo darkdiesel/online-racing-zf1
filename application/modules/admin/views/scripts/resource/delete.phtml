@@ -4,20 +4,20 @@
         <table class="table table-striped table-bordered article_table">
     	<tbody>
     	    <tr>
-    		<td class="header_column"><span><?= $this->translate('Название'); ?></span></td>
+    		<td class="header_column"><span><?= $this->t('Название'); ?></span></td>
     		<td><span><?= $this->escape($this->resource->name); ?></span></td>
     	    </tr>
     	    <tr>
-    		<td class="header_column"><span><?= $this->translate('Описание'); ?></span></td>
+    		<td class="header_column"><span><?= $this->t('Описание'); ?></span></td>
     		<td><span><?= $this->escape($this->resource->description); ?></span></td>
     	    </tr>
     	</tbody>
         </table>
         <div class="article_info">
-    	<div class="resource_name article_info_item"><span class="bold_text"><?= $this->translate('Вид контента') ?>: </span><?= $this->translate('Ресурс'); ?></div>
-    	<div class="resource_date_create article_info_item"><span class="bold_text"><?= $this->translate('Опубликовано') ?>: </span><?= $this->escape($this->resource->date_create); ?></div>
+    	<div class="resource_name article_info_item"><span class="bold_text"><?= $this->t('Вид контента') ?>: </span><?= $this->t('Ресурс'); ?></div>
+    	<div class="resource_date_create article_info_item"><span class="bold_text"><?= $this->t('Опубликовано') ?>: </span><?= $this->escape($this->resource->date_create); ?></div>
 	    <?php if ($this->escape($this->resource->date_create) != $this->escape($this->resource->date_edit)) { ?>
-		<div class="resource_date_edit article_info_item"><span class="bold_text"><?= $this->translate('Последнее редактирование') ?>: </span><?= $this->escape($this->resource->date_edit); ?></div>
+		<div class="resource_date_edit article_info_item"><span class="bold_text"><?= $this->t('Последнее редактирование') ?>: </span><?= $this->escape($this->resource->date_edit); ?></div>
 	    <?php } ?>
         </div>
     </div>

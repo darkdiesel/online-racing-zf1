@@ -6,7 +6,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Гоночная серия'));
+        $this->view->headTitle($this->view->t('Гоночная серия'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -39,18 +39,18 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Гоночная серия') . ' :: ' . $result[0]['Name']
+                    $this->view->t('Гоночная серия') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая гоночная серия не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая гоночная серия не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Гоночная серия не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Гоночная серия не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Гоночная серия не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Гоночная серия не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -74,8 +74,8 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Гоночные серии'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Гоночные серии'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_RacingSeries rs')
@@ -91,7 +91,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
 
             if ($racingSeriesPaginator->count() == 0) {
                 $this->view->racingSeriesData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->racingSeriesData = $racingSeriesPaginator;
             }
@@ -103,8 +103,8 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
     // action for add new racing series
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить гоночнyю серию'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить гоночнyю серию'));
 
         // form
         $racingSeriesAddForm = new Peshkov_Form_RacingSeries_Add();
@@ -137,7 +137,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -146,8 +146,8 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
     // action for edit racing series
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать гоночную серию'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать гоночную серию'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -189,7 +189,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
                     $this->redirect($adminRacingSeriesIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -208,13 +208,13 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая гоночная серия не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая гоночная серия не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Гоночная серия не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Гоночная серия не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Гоночная серия не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Гоночная серия не найдена!'));
                 }
             }
 
@@ -226,8 +226,8 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
     // action for delete racing series
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить гоночную серию'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить гоночную серию'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -258,7 +258,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить гоночную серию')
+                    $this->view->t('Вы действительно хотите удалить гоночную серию')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -274,7 +274,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Гоночная серия <strong>" . $this->view->racingSeriesData['Name'] . "</strong> успешно удалена."
+                            $this->view->t("Гоночная серия <strong>" . $this->view->racingSeriesData['Name'] . "</strong> успешно удалена."
                             )
                         );
 
@@ -286,7 +286,7 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
                         $this->redirect($adminRacingSeriesAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
@@ -294,13 +294,13 @@ class Admin_RacingSeriesController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая гоночная серия не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая гоночная серия не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Гоночная серия не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Гоночная серия не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Гоночная серия не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Гоночная серия не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

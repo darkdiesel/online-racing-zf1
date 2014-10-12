@@ -6,7 +6,7 @@ class Admin_TeamController extends App_Controller_LoaderController
     public function init()
     {
         parent::init();
-        $this->view->headTitle($this->view->translate('Команда'));
+        $this->view->headTitle($this->view->t('Команда'));
 
         // set doctype for correctly displaying forms
         $this->view->doctype('XHTML1_STRICT');
@@ -40,18 +40,18 @@ class Admin_TeamController extends App_Controller_LoaderController
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
-                    $this->view->translate('Команда') . ' :: ' . $result[0]['Name']
+                    $this->view->t('Команда') . ' :: ' . $result[0]['Name']
                 );
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая команда не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Команда не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Команда не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Команда не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Команда не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');
@@ -75,8 +75,8 @@ class Admin_TeamController extends App_Controller_LoaderController
         // retrieve requested record
         // attach to view
         if ($requestData->isValid()) {
-            $this->view->headTitle($this->view->translate('Все'));
-            $this->view->pageTitle($this->view->translate('Команды'));
+            $this->view->headTitle($this->view->t('Все'));
+            $this->view->pageTitle($this->view->t('Команды'));
 
             $query = Doctrine_Query::create()
                 ->from('Default_Model_Team t')
@@ -93,7 +93,7 @@ class Admin_TeamController extends App_Controller_LoaderController
 
             if ($teamPaginator->count() == 0) {
                 $this->view->teamData = false;
-                $this->messages->addInfo($this->view->translate('Запрашиваемый контент на сайте не найден!'));
+                $this->messages->addInfo($this->view->t('Запрашиваемый контент на сайте не найден!'));
             } else {
                 $this->view->teamData = $teamPaginator;
             }
@@ -105,8 +105,8 @@ class Admin_TeamController extends App_Controller_LoaderController
     // action for add new racing series
     public function addAction()
     {
-        $this->view->headTitle($this->view->translate('Добавить'));
-        $this->view->pageTitle($this->view->translate('Добавить команду'));
+        $this->view->headTitle($this->view->t('Добавить'));
+        $this->view->pageTitle($this->view->t('Добавить команду'));
 
         // form
         $teamAddForm = new Peshkov_Form_Team_Add();
@@ -139,7 +139,7 @@ class Admin_TeamController extends App_Controller_LoaderController
 //                $this->_helper->getHelper('FlashMessenger')->addMessage('Your submission has been accepted as item #' . $id . '. A moderator will review it and, if approved, it will appear on the site within 48 hours.');
             } else {
                 $this->messages->addError(
-                    $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                    $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                 );
             }
         }
@@ -149,8 +149,8 @@ class Admin_TeamController extends App_Controller_LoaderController
     // action for edit racing series
     public function editAction()
     {
-        $this->view->headTitle($this->view->translate('Редактировать'));
-        $this->view->pageTitle($this->view->translate('Редактировать команду'));
+        $this->view->headTitle($this->view->t('Редактировать'));
+        $this->view->pageTitle($this->view->t('Редактировать команду'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -192,7 +192,7 @@ class Admin_TeamController extends App_Controller_LoaderController
                     $this->redirect($adminTeamIDUrl);
                 } else {
                     $this->messages->addError(
-                        $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                        $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                     );
                 }
             } else {
@@ -211,13 +211,13 @@ class Admin_TeamController extends App_Controller_LoaderController
                 } else {
 //                    throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                    $this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
+                    $this->messages->addError($this->view->t('Запрашиваемая команда не найдена!'));
 
-                    $this->view->headTitle($this->view->translate('Ошибка!'));
-                    $this->view->headTitle($this->view->translate('Команда не найдена!'));
+                    $this->view->headTitle($this->view->t('Ошибка!'));
+                    $this->view->headTitle($this->view->t('Команда не найдена!'));
 
-                    $this->view->pageTitle($this->view->translate('Ошибка!'));
-                    $this->view->pageTitle($this->view->translate('Команда не найдена!'));
+                    $this->view->pageTitle($this->view->t('Ошибка!'));
+                    $this->view->pageTitle($this->view->t('Команда не найдена!'));
                 }
             }
 
@@ -229,8 +229,8 @@ class Admin_TeamController extends App_Controller_LoaderController
     // action for delete team
     public function deleteAction()
     {
-        $this->view->headTitle($this->view->translate('Удалить'));
-        $this->view->pageTitle($this->view->translate('Удалить команду'));
+        $this->view->headTitle($this->view->t('Удалить'));
+        $this->view->pageTitle($this->view->t('Удалить команду'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -262,7 +262,7 @@ class Admin_TeamController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->translate('Вы действительно хотите удалить команду')
+                    $this->view->t('Вы действительно хотите удалить команду')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -278,7 +278,7 @@ class Admin_TeamController extends App_Controller_LoaderController
 
                         $this->messages->clearMessages();
                         $this->messages->addSuccess(
-                            $this->view->translate("Команда <strong>" . $this->view->teamData['Name'] . "</strong> успешно удалена."
+                            $this->view->t("Команда <strong>" . $this->view->teamData['Name'] . "</strong> успешно удалена."
                             )
                         );
 
@@ -290,7 +290,7 @@ class Admin_TeamController extends App_Controller_LoaderController
                         $this->redirect($adminTeamAllUrl);
                     } else {
                         $this->messages->addError(
-                            $this->view->translate('Исправьте следующие ошибки для корректного завершения операции!')
+                            $this->view->t('Исправьте следующие ошибки для корректного завершения операции!')
                         );
                     }
                 }
@@ -298,13 +298,13 @@ class Admin_TeamController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->translate('Запрашиваемая команда не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемая команда не найдена!'));
 
-                $this->view->headTitle($this->view->translate('Ошибка!'));
-                $this->view->headTitle($this->view->translate('Команда не найдена!'));
+                $this->view->headTitle($this->view->t('Ошибка!'));
+                $this->view->headTitle($this->view->t('Команда не найдена!'));
 
-                $this->view->pageTitle($this->view->translate('Ошибка!'));
-                $this->view->pageTitle($this->view->translate('Команда не найдена!'));
+                $this->view->pageTitle($this->view->t('Ошибка!'));
+                $this->view->pageTitle($this->view->t('Команда не найдена!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminContentTypeAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить тип контента'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить тип контента'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,13 +23,13 @@
                         <span>ID</span>
                     </th>
                     <th class="content-type-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="content-type-description">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </th>
                     <th class="content-type-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -69,7 +69,7 @@
                             </td>
                             <td class="content-type-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Тип контента"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Тип контента"), false)
                                         ->contentTypeMenu($this->escape($contentType['ID']), true);
                                     ?>
                                 </span>

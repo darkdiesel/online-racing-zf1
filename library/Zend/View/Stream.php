@@ -79,10 +79,10 @@ class Zend_View_Stream
         }
 
         /**
-         * Convert <?= ?> to long-form <?php echo ?> and <? ?> to <?php ?>
+         * Convert <?= ?> to long-form <?= ?> and <? ?> to <?php ?>
          *
          */
-        $this->_data = preg_replace('/\<\?\=/',          "<?php echo ",  $this->_data);
+        $this->_data = preg_replace('/\<\?\=/',          "<?= ",  $this->_data);
         $this->_data = preg_replace('/<\?(?!xml|php)/s', '<?php ',       $this->_data);
 
         /**

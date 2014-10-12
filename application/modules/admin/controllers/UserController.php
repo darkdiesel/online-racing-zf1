@@ -6,7 +6,7 @@ class Admin_UserController extends App_Controller_LoaderController
     public function init()
     {
 	parent::init();
-	$this->view->headTitle($this->view->translate('Пользователи'));
+	$this->view->headTitle($this->view->t('Пользователи'));
     }
     
     public function idAction()
@@ -17,8 +17,8 @@ class Admin_UserController extends App_Controller_LoaderController
     // action for view all users
     public function allAction()
     {
-	$this->view->headTitle($this->view->translate('Все'));
-	$this->view->pageTitle($this->view->translate('Пользователи'));
+	$this->view->headTitle($this->view->t('Все'));
+	$this->view->pageTitle($this->view->t('Пользователи'));
 
 	// pager settings
 	$pager_args = array(
@@ -32,7 +32,7 @@ class Admin_UserController extends App_Controller_LoaderController
 	if (count($paginator)) {
 	    $this->view->paginator = $paginator;
 	} else {
-	    $this->messages->addInfo("{$this->view->translate('Запрашиваемые пользователи на сайте не найдены!')}");
+	    $this->messages->addInfo("{$this->view->t('Запрашиваемые пользователи на сайте не найдены!')}");
 	}
     }
     
@@ -42,7 +42,7 @@ class Admin_UserController extends App_Controller_LoaderController
 	$request = $this->getRequest();
 	$user_id = (int) $request->getParam('user_id');
 
-	$this->view->headTitle($this->view->translate('Редактировать'));
+	$this->view->headTitle($this->view->t('Редактировать'));
 
 	$user_data = $this->db->get('user')->getItem($user_id);
 
@@ -75,19 +75,19 @@ class Admin_UserController extends App_Controller_LoaderController
 				'user_id' => $user_id), 'user_id', true
 		    ));
 		} else {
-		    $this->messages->addError($this->view->translate('Исправьте следующие ошибки для корректного завершения операции!'));
+		    $this->messages->addError($this->view->t('Исправьте следующие ошибки для корректного завершения операции!'));
 		}
 	    }
 	    $this->view->headTitle($user_data->name);
-	    $this->view->pageTitle("{$this->view->translate('Редактировать')} :: {$user_data->name}");
+	    $this->view->pageTitle("{$this->view->t('Редактировать')} :: {$user_data->name}");
 
 	    $form->user_role->setvalue($user_data->user_role_id);
 
 	    $this->view->form = $form;
 	} else {
-	    $this->messages->addError($this->view->translate('Запрашиваемая роль пользователя не найдена!'));
-	    $this->view->headTitle("{$this->view->translate('Ошибка!')} :: {$this->view->translate('Роль пользователя не найдена!')}");
-	    $this->view->pageTitle("{$this->view->translate('Ошибка!')} {$this->view->translate('Роль пользователя не найдена!')}");
+	    $this->messages->addError($this->view->t('Запрашиваемая роль пользователя не найдена!'));
+	    $this->view->headTitle("{$this->view->t('Ошибка!')} :: {$this->view->t('Роль пользователя не найдена!')}");
+	    $this->view->pageTitle("{$this->view->t('Ошибка!')} {$this->view->t('Роль пользователя не найдена!')}");
 	}
     }
 }

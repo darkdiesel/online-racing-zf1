@@ -36,16 +36,16 @@ $this->headLink()->appendStylesheet("/css/ie7.css", 'screen', 'IE 7');
 
 ?>
 
-<?php echo $this->doctype() ?>
+<?= $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headMeta() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    <?php echo $this->minifyHeadLink() ?>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->minifyHeadLink() ?>
 
-    <?php echo $this->jQuery(); ?>
+    <?= $this->jQuery(); ?>
 </head>
 <body>
 <div id="page-wrapper">
@@ -57,7 +57,7 @@ $this->headLink()->appendStylesheet("/css/ie7.css", 'screen', 'IE 7');
                 <div class="navbar-inner">
                     <a class="brand" href="#">Forum</a>
                     <ul class="nav">
-                        <li class="active"><a href="<?php echo $this->baseUrl() ?>">Home</a></li>
+                        <li class="active"><a href="<?= $this->baseUrl() ?>">Home</a></li>
                         <li><a href="#">Link1</a></li>
                         <li><a href="#">Link2</a></li>
                     </ul>
@@ -68,19 +68,19 @@ $this->headLink()->appendStylesheet("/css/ie7.css", 'screen', 'IE 7');
         <div id="main-wrapper">
             <div id="main" class="clearfix">
                 <div id="content">
-                    <?php echo $this->layout()->content ?>
+                    <?= $this->layout()->content ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php echo $this->render("common/page-scroller-block.phtml"); ?>
+<?= $this->render("common/page-scroller-block.phtml"); ?>
 
 <!-- scripts -->
 <?php //echo $this->headScript() ?>
-<?php echo $this->minifyHeadScript() ?>
+<?= $this->minifyHeadScript() ?>
 
-<?php echo $this->render("common/site-heart-js.phtml") ?>
-<?php echo $this->render("common/analytics-tracking-js-layout.phtml") ?>
+<?= $this->render("common/site-heart-js.phtml") ?>
+<?= $this->render("common/analytics-tracking-js-layout.phtml") ?>
 <!-- ./ scripts -->
 </body>

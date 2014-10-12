@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminRacingSeriesAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить гоночную серию'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить гоночную серию'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,13 +23,13 @@
                         <span>ID</span>
                     </th>
                     <th class="racing-series-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="racing-series-description">
-                        <span><?= $this->translate('Описание'); ?></span>
+                        <span><?= $this->t('Описание'); ?></span>
                     </th>
                     <th class="racing-series-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -69,7 +69,7 @@
                             </td>
                             <td class="racing-series-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Гоночная серия"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Гоночная серия"), false)
                                         ->racingSeriesMenu($this->escape($racingSeries['ID']), true);
                                     ?>
                                 </span>

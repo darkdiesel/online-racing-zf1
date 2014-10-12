@@ -12,7 +12,7 @@
                     );
                     ?>
                     <a href="<?= $adminTeamAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
-                        <i class="fa fa-plus"></i> <?= $this->translate('Добавить команду'); ?>
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить команду'); ?>
                     </a>
                 <?php endif; ?>
             </div>
@@ -23,13 +23,13 @@
                         <span>ID</span>
                     </th>
                     <th class="team-name">
-                        <span><?= $this->translate('Название'); ?></span>
+                        <span><?= $this->t('Название'); ?></span>
                     </th>
                     <th class="team-racing-series">
-                        <span><?= $this->translate('Гоночная серия'); ?></span>
+                        <span><?= $this->t('Гоночная серия'); ?></span>
                     </th>
                     <th class="team-action">
-                        <span><?= $this->translate('Действие'); ?></span>
+                        <span><?= $this->t('Действие'); ?></span>
                     </th>
                 </tr>
                 </thead>
@@ -82,7 +82,7 @@
                             </td>
                             <td class="team-action">
                                 <span>
-                                    <?= $this->BlockConfigMenu($this->translate("Команда"), false)
+                                    <?= $this->BlockConfigMenu($this->t("Команда"), false)
                                         ->teamMenu($this->escape($team['ID']), true);
                                     ?>
                                 </span>
