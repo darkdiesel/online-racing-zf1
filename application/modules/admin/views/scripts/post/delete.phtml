@@ -1,14 +1,18 @@
-<?php if ($this->postData) { ?>
+<?php
+$post = $this->postData;
+?>
+
+<?php if ($post) { ?>
     <div class="m-b-10">
         <?= $this->postDeleteForm; ?>
         <hr/>
     </div>
     <?php
-    // check access and generate link for user
+    // check access and generate link for /default/user/id
     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
         $defaultUserIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                'userID' => $this->escape($this->postData['User']['ID'])), 'defaultUserID'
+                'userID' => $this->escape($post['User']['ID'])), 'defaultUserID'
         );
     } else {
         $defaultUserIDUrl = '#';
@@ -16,35 +20,47 @@
     ?>
 
     <?php
-    // check access and generate link for post-category
+    // check access and generate link for admin/post-category/id
     if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'post-category', 'id')) {
-        $adminPostCategoryIdUrl = $this->url(
-            array('module' => 'default', 'controller' => 'post-category', 'action' => 'id',
-                'postCategoryID' => $this->escape($this->postData['PostCategory']['ID'])), 'adminPostCategoryID'
+        $adminPostCategoryIDUrl = $this->url(
+            array('module' => 'admin', 'controller' => 'post-category', 'action' => 'id',
+                'postCategoryID' => $this->escape($post['PostCategory']['ID'])), 'adminPostCategoryID'
         );
     } else {
-        $adminPostCategoryIdUrl = '#';
+        $adminPostCategoryIDUrl = '#';
+    }
+    ?>
+
+    <?php
+    // check access and generate link for admin/content-type/id
+    if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'content-type', 'id')) {
+        $adminContentTypeIDUrl = $this->url(
+            array('module' => 'admin', 'controller' => 'content-type', 'action' => 'id',
+                'contentTypeID' => $this->escape($post['ContentType']['ID'])), 'adminContentTypeID'
+        );
+    } else {
+        $adminContentTypeIDUrl = '#';
     }
     ?>
     <div class="block block-default block-ui-bordered">
         <div>
             <table class="table table-striped table-bordered m-b-0">
                 <tbody>
-                <tr>
+                <tr class="post-name">
                     <td class="text-bold">
                         <span><?= $this->translate('Название'); ?></span>
                     </td>
                     <td>
-                        <span><?= $this->escape($this->postData['Name']); ?></span>
+                        <span><?= $this->escape($post['Name']); ?></span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="post-publish">
                     <td class="text-bold">
                         <span><?= $this->translate('Опубликована'); ?></span>
                     </td>
                     <td>
                         <span>
-                            <?php if ($this->escape($this->postData['Publish'])) { ?>
+                            <?php if ($this->escape($post['Publish'])) { ?>
                                 <span class='label label-success'><i
                                         class="fa fa-check fa-lg"></i></i></span>
                             <?php } else { ?>
@@ -54,37 +70,50 @@
                         </span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="post-image">
                     <td class="text-bold">
                         <span><?= $this->translate('Картинка поста'); ?></span>
                     </td>
                     <td>
                         <span>
-                            <img
-                                src="<?= $this->baseUrl($this->escape($this->postData['ImageUrl'])); ?>">
+                            <?php if ($this->escape($post['ImageUrl'])): ?>
+                                <img src="<?= $this->baseUrl($this->escape($post['ImageUrl'])); ?>" />
+                            <?php endif; ?>
                         </span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="post-user">
                     <td class="text-bold">
                         <span><?= $this->translate('Автор'); ?></span>
                     </td>
                     <td>
                     <span>
                         <a target="_blank" href="<?= $defaultUserIDUrl; ?>">
-                            <?= $this->escape($this->postData['User']['NickName']); ?>
+                            <?= $this->escape($post['User']['NickName']); ?>
                         </a>
                     </span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="post-category">
                     <td class="text-bold">
                         <span><?= $this->translate('Категория поста'); ?></span>
                     </td>
                     <td>
                     <span>
-                        <a target="blank" href="<?= $adminPostCategoryIdUrl; ?>">
-                            <?= $this->escape($this->postData['PostCategory']['Name']) ?>
+                        <a target="blank" href="<?= $adminPostCategoryIDUrl; ?>">
+                            <?= $this->escape($post['PostCategory']['Name']) ?>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+                <tr class="post-content-type">
+                    <td class="text-bold">
+                        <span><?= $this->translate('Тип контента'); ?></span>
+                    </td>
+                    <td>
+                    <span>
+                        <a target="blank" href="<?= $adminContentTypeIDUrl; ?>">
+                            <?= $this->escape($post['ContentType']['Name']) ?>
                         </a>
                     </span>
                     </td>
@@ -101,13 +130,13 @@
             <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->translate('Дата создания'); ?>"
                  data-placement="bottom">
                 <i class="fa fa-calendar fa-lg"></i>
-                <?= $this->escape($this->postData['DateCreate']); ?>
+                <?= $this->escape($post['DateCreate']); ?>
             </div>
-            <?php if ($this->escape($this->postData['DateCreate']) != $this->escape($this->postData['DateEdit'])) : ?>
+            <?php if ($this->escape($post['DateCreate']) != $this->escape($post['DateEdit'])) : ?>
                 <div class="pull-right m-r-15 tooltip-field"
                      data-title="<?= $this->translate('Дата редактирования'); ?>" data-placement="bottom">
                     <i class="fa fa-pencil fa-lg"></i>
-                    <?= $this->escape($this->postData['DateEdit']); ?>
+                    <?= $this->escape($post['DateEdit']); ?>
                 </div>
             <?php endif; ?>
         </div>

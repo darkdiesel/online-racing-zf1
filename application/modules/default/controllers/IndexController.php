@@ -46,25 +46,18 @@ class IndexController extends App_Controller_LoaderController
 
         // Get Next Races
         $date = new Zend_Date();
-        $date_start = $date->toString('yyyy-MM-dd HH:mm:ss');
-        $date_end = $date->add(7, Zend_Date::DAY)->toString('yyyy-MM-dd HH:mm:ss');
+        $dateStart = $date->toString('yyyy-MM-dd HH:mm:ss');
+        $dateEnd = $date->add(7, Zend_Date::DAY)->toString('yyyy-MM-dd HH:mm:ss');
 
-        // TODO: Update championship model to Doctrine1
-        $this->view->race_data = $this->db->get('championship_race')->getAll(
-            array(
-                'race_date' => array(
-                    array(
-                        'value' => $date_start,
-                        'sign' => ">"
-                    ),
-                    array(
-                        'value' => $date_end,
-                        'sign' => "<",
-                        'condition' => "AND"
-                    )
-                )
-            ), "id, name, description, championship_id", array('race_date' => 'ASC')
-        );
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_RaceEvent re')
+            ->leftJoin('re.Championship champ')
+            ->where('re.DateStart >= ?', $dateStart)
+            ->addWhere('re.DateStart <= ?', $dateEnd)
+            ->orderBy('re.ID ASC');
+        $raceEventResult = $query->fetchArray();
+
+        $this->view->raceEventData = $raceEventResult;
 
 //		$cache = Zend_Registry::get('cache');
 //		if (!$result = $cache->load('mydata')) {

@@ -123,7 +123,7 @@
                             <td class="post-action">
                                 <span>
                                     <?= $this->BlockConfigMenu($this->translate("Пост"), false)
-                                        ->postMenu($this->$post($country['ID']), true);
+                                        ->postMenu($this->escape($post['ID']), true);
                                     ?>
                                 </span>
                             </td>

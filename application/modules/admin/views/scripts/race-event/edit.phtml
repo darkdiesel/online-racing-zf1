@@ -1,0 +1,35 @@
+<?php $this->CKEditor()->init(); ?>
+<?php $this->CKFinder()->init(); ?>
+
+<?php $this->headLink()->appendStylesheet($this->baseUrl("/library/jquery/css/jquery-ui-timepicker-addon.min.css")); ?>
+<?php $this->headScript()->appendFile($this->baseUrl("/library/jquery/js/jquery-ui-timepicker-addon.min.js")); ?>
+
+<?= $this->raceEventEditForm; ?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        <?= $this->CKEditor()->SetupFullHtmlEditor('Description'); ?>
+        <?= $this->CKFinder()->setupCKEditor('Description'); ?>
+
+
+        $("#DateStart").datetimepicker({
+            showButtonPanel: true,
+            dateFormat: "yy-mm-dd",
+            showAnim: "clip",
+            showSecond: true,
+            timeFormat: 'HH:mm:ss',
+            stepHour: 1,
+            stepSecond: 10
+        });
+
+        $("#DateEnd").datetimepicker({
+            showButtonPanel: true,
+            dateFormat: "yy-mm-dd",
+            showAnim: "clip",
+            showSecond: true,
+            timeFormat: 'HH:mm:ss',
+            stepHour: 1,
+            stepSecond: 10
+        });
+    });
+</script>

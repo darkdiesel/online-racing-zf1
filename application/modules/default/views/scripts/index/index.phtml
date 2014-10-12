@@ -1,10 +1,14 @@
+<?php
+    $raceEvents = $this->raceEventData;
+?>
+
 <div class="row">
 <!-- List of portal news -->
 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 m-t-10">
     <div class="block block-default block-ui-bordered block-list">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold">
-                <?php echo $this->translate('Новости портала') ?>
+                <?= $this->translate('Новости портала') ?>
             </div>
         </div>
         <div class="block-body">
@@ -47,16 +51,16 @@
                         ?>
                         <div class="block-body clearfix">
                             <?php if ($post['ImageUrl']) : ?>
-                                <a class="pull-left m-r-10" href="<?php echo $defaultPostIDUrl; ?>">
+                                <a class="pull-left m-r-10" href="<?= $defaultPostIDUrl; ?>">
                                     <div class="img-wrapper-100-100">
                                         <img class="media-object img-thumbnail img-responsive img-size-100"
-                                             src="<?php echo $post['ImageUrl']; ?>" alt="<?php echo $post['Name']; ?>"/>
+                                             src="<?= $post['ImageUrl']; ?>" alt="<?= $post['Name']; ?>"/>
                                     </div>
                                 </a>
                             <?php endif; ?>
                             <h4 class="block-title m-b-10">
-                                <a href="<?php echo $defaultPostIDUrl; ?>">
-                                    <?php echo $this->truncate($this->escape($post['Name']))->toLength(100); ?>
+                                <a href="<?= $defaultPostIDUrl; ?>">
+                                    <?= $this->truncate($this->escape($post['Name']))->toLength(100); ?>
                                 </a>
                             </h4>
                             <?php
@@ -71,18 +75,18 @@
                         </div>
                         <div class="block-footer clearfix">
                             <div class="pull-left m-r-15 tooltip-field"
-                                 data-title="<?php echo $this->translate('Просмотров'); ?>" data-placement="bottom">
+                                 data-title="<?= $this->translate('Просмотров'); ?>" data-placement="bottom">
                                 <i class="fa fa-eye fa-lg"></i>
-                                <?php echo $this->escape($post['Views']); ?>
+                                <?= $this->escape($post['Views']); ?>
                             </div>
                             <div class="pull-left m-r-15 tooltip-field"
-                                 data-title="<?php echo $this->translate('Комментарии'); ?>" data-placement="bottom">
+                                 data-title="<?= $this->translate('Комментарии'); ?>" data-placement="bottom">
                                 <i class="fa fa-comments-o fa-lg"></i>
-                                <?php echo $commentsСount ?>
+                                <?= $commentsСount ?>
                             </div>
                             <div class="pull-right tooltip-field"
-                                 data-title="<?php echo $this->translate('Читать дальше'); ?>" data-placement="bottom">
-                                <a href="<?php echo $defaultPostIDUrl ?>"
+                                 data-title="<?= $this->translate('Читать дальше'); ?>" data-placement="bottom">
+                                <a href="<?= $defaultPostIDUrl ?>"
                                    class="block-content-button-more">
                                     <i class="fa fa-arrow-right fa-lg"></i>
                                 </a>
@@ -97,7 +101,7 @@
                  */
                 ?>
                 <div class="alert alert-error">
-                    <?php echo $this->translate('Ошибка!'); ?>
+                    <?= $this->translate('Ошибка!'); ?>
                 </div>
             <?php } ?>
         </div>
@@ -108,51 +112,52 @@
 <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 m-t-10">
     <div class="block block-default block-ui-bordered block-table">
         <div class="block-header">
-            <div class="block-title text-uppercase text-bold">
-                <?php echo $this->translate('Ближайшие события') ?>
+            <div class="block-title text-uppercase text-bold" style="border:0; padding:0;">
+                <?= $this->translate('Ближайшие события') ?>
             </div>
         </div>
         <div class="block-body">
-            <?php if ($this->race_data) { ?>
-                <table class="table">
+            <?php if ($raceEvents) { ?>
+                <table class="table table-hover">
                     <tbody>
-                    <?php foreach ($this->race_data as $race): ?>
+                    <?php foreach ($raceEvents as $raceEvent): ?>
                         <?php
-                        $race_id_url = $this->url(
-                            array('module' => 'default', 'controller' => 'race', 'action' => 'id',
-                                'league_id' => $this->escape($race->league_id),
-                                'championship_id' => $this->escape($race->championship_id),
-                                'race_id' => $this->escape($race->id)), 'defaultChampionshipRaceId', true
-                        );
-                        $championship_id_url = $this->url(
-                            array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
-                                'league_id' => $this->escape($race->league_id),
-                                'championship_id' => $this->escape($race->championship_id)),
-                            'defaultChampionshipID',
-                            true
-                        );
+                        // check access and generate link for admin/race-event/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
+                            $defaultRaceEventIDUrl = $this->url(
+                                array('module' => 'admin', 'controller' => 'race-event', 'action' => 'id',
+                                    'raceEventID' => $this->escape($raceEvent['ID'])), 'defaultRaceEventID'
+                            );
+                        } else {
+                            $defaultRaceEventIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/championship/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
+                            $adminChampionshipIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                                    'championshipID' => $this->escape($raceEvent['ID'])), 'defaultChampionshipID'
+                            );
+                        } else {
+                            $adminChampionshipIDUrl = '#';
+                        }
                         ?>
                         <tr>
                             <td>
-                                <a href="<?php echo $race_id_url; ?>">
-                                    <img class="media-object img-responsive img-size-32"
-                                         src="<?php echo $race->country_ImageRoundUrl; ?>"
-                                         alt="<?php echo $race->name; ?>">
-                                </a>
-                            </td>
-                            <td>
                                 <span class="text-bold">
-                                    <a href="<?php echo $race_id_url; ?>"><?php echo $race->name; ?></a>
+                                    <a href="<?= $defaultRaceEventIDUrl; ?>"><?= $raceEvent['Name']; ?></a>
                                 </span>
                                 <br/>
                                 <small>
-                                    <a class="text-black" href="<?php echo $championship_id_url; ?>">
-                                        <?php echo $race->championship_name; ?>
+                                    <a class="text-black" href="<?= $adminChampionshipIDUrl; ?>">
+                                        <?= $raceEvent['Championship']['Name']; ?>
                                     </a>
                                 </small>
                             </td>
-                            <td class="text-italic">
-                                <?php echo $race->race_date; ?>
+                            <td class="text-italic text-right">
+                                <small><time><?= $raceEvent['DateStart']; ?></time></small>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -165,7 +170,7 @@
                 */
                 ?>
                 <div class="alert alert-info">
-                    <?php echo $this->translate('В ближайшее время события отсутствуют.'); ?>
+                    <?= $this->translate('В ближайшее время события отсутствуют.'); ?>
                 </div>
             <?php } ?>
         </div>
@@ -177,7 +182,7 @@
     <div class="block block-default block-ui-bordered block-media-list">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold">
-                <?php echo $this->translate('Лиги портала') ?>
+                <?= $this->translate('Лиги портала') ?>
             </div>
         </div>
         <div class="block-body">
@@ -188,16 +193,16 @@
                             'leagueID' => $this->escape($league['ID'])), 'defaultLeagueID', true
                     ); ?>
                     <li class="media">
-                        <a class="pull-left" href="<?php echo $defaultLeagueIDAllURL; ?>">
+                        <a class="pull-left" href="<?= $defaultLeagueIDAllURL; ?>">
                             <img class="media-object img-thumbnail img-responsive img-size-100"
-                                 src="<?php echo $league['LogoUrl']; ?>" alt="<?php echo $league['Name']; ?>">
+                                 src="<?= $league['LogoUrl']; ?>" alt="<?= $league['Name']; ?>">
                         </a>
 
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a href="<?php echo $defaultLeagueIDAllURL; ?>"><?php echo $league['Name']; ?></a>
+                                <a href="<?= $defaultLeagueIDAllURL; ?>"><?= $league['Name']; ?></a>
                             </h4>
-                            <?php echo $league['Description']; ?>
+                            <?= $league['Description']; ?>
                         </div>
                     </li>
                 <?php endforeach; ?>
@@ -211,7 +216,7 @@
     <div class="block block-default block-ui-bordered block-media-list block-media-list-rss">
         <div class="block-header">
             <div class="block-title text-uppercase text-bold">
-                <?php echo $this->translate('Новости из мира автоспорта') ?>
+                <?= $this->translate('Новости из мира автоспорта') ?>
             </div>
         </div>
         <div class="block-body">
@@ -221,11 +226,11 @@
                     <li class="media">
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a href="<?php echo $rss_url; ?>" target="_blank">
-                                    <?php echo $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?>
+                                <a href="<?= $rss_url; ?>" target="_blank">
+                                    <?= $this->rss_element[$this->rss_index["TITLE"][$i + 1]]["value"]; ?>
                                 </a>
                             </h4>
-                            <?php echo $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"]; ?>
+                            <?= $this->rss_element[$this->rss_index["DESCRIPTION"][$i]]["value"]; ?>
                         </div>
                     </li>
                 <?php endfor; ?>
@@ -241,7 +246,7 @@
         <div class="block block-default block-ui-bordered">
             <div class="block-header">
                 <div class="block-title text-uppercase text-bold">
-                    <?php echo $this->translate('Друзья и Партнеры'); ?>
+                    <?= $this->translate('Друзья и Партнеры'); ?>
                 </div>
             </div>
             <div class="block-body">
@@ -259,7 +264,7 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                     <a class="thumbnail" href="http://i-src.ru/" target="_blank">
                                         <img
-                                            alt="<?php echo $this->translate(''); ?>"
+                                            alt="<?= $this->translate(''); ?>"
                                             src="/data-content/ui/icons/partners/i-src-ru-logo-250.png"
                                             class="img-responsive">
                                     </a>

@@ -26,6 +26,7 @@ Doctrine_Manager::getInstance()->bindComponent('Default_Model_Championship', 'de
  * @property Default_Model_Post $PostRule
  * @property Default_Model_Post $PostGame
  * @property Default_Model_User $User
+ * @property Doctrine_Collection $RaceEvent
  * 
  * @package    ##PACKAGE##
  * @subpackage ##SUBPACKAGE##
@@ -182,5 +183,9 @@ abstract class Default_Model_Base_Championship extends Doctrine_Record
         $this->hasOne('Default_Model_User as User', array(
              'local' => 'UserID',
              'foreign' => 'ID'));
+
+        $this->hasMany('Default_Model_RaceEvent as RaceEvent', array(
+             'local' => 'ID',
+             'foreign' => 'ChampionshipID'));
     }
 }

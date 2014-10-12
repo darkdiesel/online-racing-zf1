@@ -28,9 +28,6 @@
                     <th class="team-racing-series">
                         <span><?= $this->translate('Гоночная серия'); ?></span>
                     </th>
-                    <th class="team-description">
-                        <span><?= $this->translate('Описание'); ?></span>
-                    </th>
                     <th class="team-action">
                         <span><?= $this->translate('Действие'); ?></span>
                     </th>
@@ -81,11 +78,6 @@
                                     <a href="<?= $adminRacingSeriesIdUrl; ?>">
                                         <?= $this->escape($team['RacingSeries']['Name']) ?>
                                     </a>
-                                </span>
-                            </td>
-                            <td class="team-description">
-                                <span>
-                                    <?= $this->renderContentTypeText($team['Description'], 'full_html'); ?>
                                 </span>
                             </td>
                             <td class="team-action">

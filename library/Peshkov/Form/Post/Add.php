@@ -150,18 +150,6 @@ class Peshkov_Form_Post_Add extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                $this->getElement('PostCategoryID'),
-                $this->getElement('ContentTypeID'),
-            ), 'PostSettings'
-        );
-
-        $this->getDisplayGroup('PostSettings')
-            ->setOrder(10)
-            ->setLegend('Настройки поста')
-            ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
-
-        $this->addDisplayGroup(
-            array(
                 $this->getElement('Name'),
                 $this->getElement('ImageUrl'),
                 $this->getElement('Preview'),
@@ -170,8 +158,20 @@ class Peshkov_Form_Post_Add extends Zend_Form
         );
 
         $this->getDisplayGroup('PostInfo')
-            ->setOrder(20)
+            ->setOrder(10)
             ->setLegend('Информация о посте')
+            ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
+
+        $this->addDisplayGroup(
+            array(
+                $this->getElement('PostCategoryID'),
+                $this->getElement('ContentTypeID'),
+            ), 'PostSettings'
+        );
+
+        $this->getDisplayGroup('PostSettings')
+            ->setOrder(20)
+            ->setLegend('Настройки поста')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(

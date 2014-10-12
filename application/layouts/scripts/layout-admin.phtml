@@ -49,6 +49,15 @@ $this->minifyHeadLink()->appendStylesheet('/css/buttons.css');
     <?php echo $this->jQuery(); ?>
 </head>
 <body id="<?php echo $this->module . '-' . $this->controller . '-' . $this->action; ?>">
+
+<div class="preloader">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
 <div id="page-wrapper">
     <div id="page">
         <div class="container-fluid">

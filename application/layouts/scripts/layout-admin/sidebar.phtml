@@ -223,6 +223,30 @@
         </li>
         <li>
             <?php
+            $adminRaceEventAllUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'race-event', 'action' => 'all'),
+                'adminRaceEventAll', true
+            )
+            ?>
+            <a href="<?php echo $adminRaceEventAllUrl; ?>">
+                <i class="fa fa-road"></i>
+                <?php echo $this->translate('Гоночные события'); ?>
+            </a>
+        </li>
+        <li>
+            <?php
+            $adminRaceAllUrl = $this->url(
+                array('module' => 'admin', 'controller' => 'race', 'action' => 'all'),
+                'adminRaceAll', true
+            )
+            ?>
+            <a href="<?php echo $adminRaceAllUrl; ?>">
+                <i class="fa fa-road"></i>
+                <?php echo $this->translate('Гонки'); ?>
+            </a>
+        </li>
+        <li>
+            <?php
             $adminTeamAllUrl = $this->url(
                 array('module' => 'admin', 'controller' => 'team', 'action' => 'all'),
                 'adminTeamAll', true

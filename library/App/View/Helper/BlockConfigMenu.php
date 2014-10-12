@@ -300,18 +300,40 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
     {
         if ($addIDurl) {
             if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'id')) {
-                $url = $this->view->url(array('module' => 'default', 'controller' => 'track', 'action' => 'id', 'trackID' => $trackID), 'adminTrackID', true);
+                $url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'id', 'trackID' => $trackID), 'adminTrackID', true);
                 $this->_menuLinks[] = '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>';
             }
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'edit')) {
-            $url = $this->view->url(array('module' => 'default', 'controller' => 'track', 'action' => 'edit', 'trackID' => $trackID), 'adminTrackAction', true);
+            $url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'trackID' => $trackID), 'adminTrackAction', true);
             $this->_menuLinks[] =  '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>';
         }
 
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'delete')) {
-            $url = $this->view->url(array('module' => 'default', 'controller' => 'track', 'action' => 'delete', 'trackID' => $trackID), 'adminTrackAction', true);
+            $url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'delete', 'trackID' => $trackID), 'adminTrackAction', true);
+            $this->_menuLinks[] =  '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>';
+        }
+
+        return $this;
+    }
+
+    public function raceEventMenu($raceEventID, $addIDurl = false)
+    {
+        if ($addIDurl) {
+            if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
+                $url = $this->view->url(array('module' => 'default', 'controller' => 'race-event', 'action' => 'id', 'raceEventID' => $raceEventID), 'defaultRaceEventID', true);
+                $this->_menuLinks[] = '<a href="' . $url . '">' . $this->_view_icon . $this->view->translate('Просмотр') . '</a>';
+            }
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race-event', 'edit')) {
+            $url = $this->view->url(array('module' => 'admin', 'controller' => 'race-event', 'action' => 'edit', 'raceEventID' => $raceEventID), 'adminRaceEventAction', true);
+            $this->_menuLinks[] =  '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать') . '</a>';
+        }
+
+        if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race-event', 'delete')) {
+            $url = $this->view->url(array('module' => 'admin', 'controller' => 'race-event', 'action' => 'delete', 'raceEventID' => $raceEventID), 'adminRaceEventAction', true);
             $this->_menuLinks[] =  '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>';
         }
 

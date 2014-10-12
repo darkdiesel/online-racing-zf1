@@ -359,38 +359,6 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
                 ), "admin/racing-series/all/page/%s.html"
             ));
 
-        // EVENT CONTROLLER ROUTERS
-        $router->addRoute(
-            'event_id', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)\.html', array(
-                    'module' => 'admin',
-                    'controller' => 'event',
-                    'action' => 'id',
-                    1 => 0), array(
-                    'event_id' => 1,
-                ), "admin/event/%d.html"
-            ));
-
-        $router->addRoute(
-            'event_action', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)/(\w*)\.html', array(
-                    'module' => 'admin',
-                    'controller' => 'event',
-                    1 => 0), array(
-                    'event_id' => 1,
-                    'action' => 2,
-                ), "admin/event/%d/%s.html"
-            ));
-
-        $router->addRoute(
-            'event_all', new Zend_Controller_Router_Route_Regex('admin/event/all/page/(\d+)\.html', array(
-                    'module' => 'admin',
-                    'controller' => 'event',
-                    'action' => 'all',
-                    1 => 1
-                ), array(
-                    'page' => 1,
-                ), "admin/event/all/page/%s.html"
-            ));
-
         //COUNTRY CONTROLLER ROUTERS
         $router->addRoute(
             'adminCountryID', new Zend_Controller_Router_Route_Regex('admin/country/(\d+)\.html',
@@ -491,6 +459,83 @@ class Admin_Bootstrap extends Zend_Application_Module_Bootstrap
                     'page' => 1,
                 ), "admin/track/all/page/%s.html"
             ));
+
+        //RACE-EVENT CONTROLLER ROUTERS
+        $router->addRoute(
+            'adminRaceEventAction', new Zend_Controller_Router_Route_Regex('admin/race-event/(\d+)/(\w*)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'race-event',
+                    1 => 0), array(
+                    'raceEventID' => 1,
+                    'action' => 2,
+                ), "admin/race-event/%d/%s.html"
+            ));
+
+        $router->addRoute(
+            'adminRaceEventAll', new Zend_Controller_Router_Route_Regex('admin/race-event/all/page/(\d+)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'race-event',
+                    'action' => 'all',
+                    1 => 1
+                ), array(
+                    'page' => 1,
+                ), "admin/race-event/all/page/%s.html"
+            ));
+
+        //RACE CONTROLLER ROUTERS
+        $router->addRoute(
+            'adminRaceAction', new Zend_Controller_Router_Route_Regex('admin/race/(\d+)/(\w*)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'race',
+                    1 => 0), array(
+                    'raceID' => 1,
+                    'action' => 2,
+                ), "admin/race/%d/%s.html"
+            ));
+
+        $router->addRoute(
+            'adminRaceAll', new Zend_Controller_Router_Route_Regex('admin/race/all/page/(\d+)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'race',
+                    'action' => 'all',
+                    1 => 1
+                ), array(
+                    'page' => 1,
+                ), "admin/race/all/page/%s.html"
+            ));
+
+        // EVENT CONTROLLER ROUTERS
+        $router->addRoute(
+            'event_id', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'event',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'event_id' => 1,
+                ), "admin/event/%d.html"
+            ));
+
+        $router->addRoute(
+            'event_action', new Zend_Controller_Router_Route_Regex('admin/event/(\d+)/(\w*)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'event',
+                    1 => 0), array(
+                    'event_id' => 1,
+                    'action' => 2,
+                ), "admin/event/%d/%s.html"
+            ));
+
+        $router->addRoute(
+            'event_all', new Zend_Controller_Router_Route_Regex('admin/event/all/page/(\d+)\.html', array(
+                    'module' => 'admin',
+                    'controller' => 'event',
+                    'action' => 'all',
+                    1 => 1
+                ), array(
+                    'page' => 1,
+                ), "admin/event/all/page/%s.html"
+            ));
+
     }
 
 }
