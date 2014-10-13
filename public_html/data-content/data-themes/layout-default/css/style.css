@@ -254,68 +254,89 @@ body {
 }
 
 /* page /default/league/all */
-#default-league-all {
+/* page /default/league/id */
+#default-league-all,
+#default-league-id {
 
 }
 
-#default-league-all .block-league {
+#default-league-all .block-league,
+#default-league-id .block-league {
 
 }
 
-#default-league-all .block-league hr {
+#default-league-all .block-league hr,
+#default-league-id .block-league hr
+{
     margin: 7px 0;
 }
 
-#default-league-all .block-league .league-name {
+#default-league-all .block-league .league-name,
+#default-league-id .block-league .league-name
+{
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 4px;
 }
 
 #default-league-all .block-league .league-name,
-#default-league-all .block-league .league-name a {
+#default-league-all .block-league .league-name a,
+#default-league-id .block-league .league-name,
+#default-league-id .block-league .league-name a {
     color: #c41d1d;
 }
 
 #default-league-all .block-league .league-administrator,
-#default-league-all .block-league .league-administrator a {
+#default-league-all .block-league .league-administrator a,
+#default-league-id .block-league .league-administrator,
+#default-league-id .block-league .league-administrator a {
     color: #888;
 }
 
-#default-league-all .league-description {
+#default-league-all .league-description,
+#default-league-id .league-description {
     margin: 0;
 }
 
 /* page default/championship/id */
+/* page /default/league/id */
 #default-championship-id {
 
 }
 
-#default-championship-id .block-championship {
+#default-championship-id .block-championship,
+#default-league-id .block-championship {
 
 }
 
-#default-league-all .block-championship hr {
+#default-championship-id .block-championship hr,
+#default-league-id .block-championship hr {
     margin: 7px 0;
 }
 
-#default-championship-id .block-championship .championship-name {
+#default-championship-id .block-championship .championship-name,
+#default-league-id .block-championship .championship-name {
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 4px;
 }
 
 #default-championship-id .block-championship .championship-name,
-#default-championship-id .block-championship .championship-name a {
+#default-championship-id .block-championship .championship-name a,
+#default-league-id .block-championship .championship-name,
+#default-league-id .block-championship .championship-name a {
     color: #c41d1d;
 }
 
 #default-championship-id .block-championship .championship-administrator,
-#default-championship-id .block-championship .championship-administrator a {
+#default-championship-id .block-championship .championship-administrator a,
+#default-league-id .block-championship .championship-administrator,
+#default-league-id .block-championship .championship-administrator a {
     color: #888;
 }
 
-#default-league-all .league-description {
+#default-championship-id .championship-description,
+#default-league-id .championship-description, {
     margin: 0;
 }
 

@@ -38,6 +38,11 @@ class ChampionshipController extends App_Controller_LoaderController
             if (count($result) == 1) {
                 $this->view->championshipData = $result[0];
 
+                //add breadscrumb
+                $this->view->breadcrumb()->LeagueAll('1')
+                    ->league($result[0]['League']['ID'], $result[0]['League']['Name'], 1)
+                    ->Championship($result[0]['ID'], $result[0]['Name'], 1);
+
                 $query = Doctrine_Query::create()
                     ->from('Default_Model_RaceEvent re')
                     ->where('re.ChampionshipID = ?', $requestData->championshipID)

@@ -65,7 +65,7 @@ if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 
                             <i class="fa fa-user fa-1x"></i>
                             <a class="tooltip-field"
                                title="<?= $this->escape($championship['User']['NickName']) ?>"
-                               target="blank" href="<?= $defaultUserIDUrl; ?>">
+                               target="_blank" href="<?= $defaultUserIDUrl; ?>">
                                 <?= $this->escape($this->getUser($championship['User'])->getFullName()); ?>
                             </a>
 
@@ -78,38 +78,9 @@ if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'racing-series', 
                             </p>
                         <?php endif; ?>
 
-                        <div class="block block-default block-ui-bordered">
-                            <div>
-                                <table class="table table-striped table-bordered m-b-0">
-                                    <tbody>
-                                    <tr class="championship-league">
-                                        <td class="text-bold">
-                                            <span><?= $this->t('Лига'); ?></span>
-                                        </td>
-                                        <td>
-                                        <span>
-                                            <a target="blank" href="<?= $defaultLeagueIDUrl; ?>">
-                                                <?= $this->escape($championship['League']['Name']) ?>
-                                            </a>
-                                        </span>
-                                        </td>
-                                    </tr>
-                                    <tr class="championship-racing-series">
-                                        <td class="text-bold">
-                                            <span><?= $this->t('Гоночная серия'); ?></span>
-                                        </td>
-                                        <td>
-                                        <span>
-                                            <a target="blank" href="<?= $defaultRacingSeriesIDUrl; ?>">
-                                                <?= $this->escape($championship['RacingSeries']['Name']) ?>
-                                            </a>
-                                        </span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <?php
+                        //TODO: Add logo of racing series
+                        ?>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="text-center">

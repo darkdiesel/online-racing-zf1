@@ -9,7 +9,37 @@ $races = $this->raceData;
 <?= $this->render('championship/common/hotlaps-menu.phtml') ?>
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="block block-default">
+            <div class="block-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <blockquote class="pull-right">
+                            <h3><?= $this->escape($raceEvent['Name']); ?></h3>
+
+                            <h1>
+                                <small>
+                                    <?= $this->t('Номер этапа'); ?>:
+                            <span class="label label-info">
+                                <?= $this->escape($raceEvent['OrderInChamp']); ?>
+                            </span>
+                                </small>
+                            </h1>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <?= $this->RenderContentTypeText($raceEvent['Description'], 'full_html'); ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <?php foreach ($races as $race): ?>
             <?php
             $defaultRaceIDUrl = $this->url(

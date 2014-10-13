@@ -41,7 +41,8 @@ class LeagueController extends App_Controller_LoaderController
                 );
 
                 //add breadscrumb
-                $this->view->breadcrumb()->LeagueAll('1')->league($requestData->leagueID, $result[0]['Name'], $requestData->page);
+                $this->view->breadcrumb()->LeagueAll('1')
+                    ->league($requestData->leagueID, $result[0]['Name'], $requestData->page);
 
                 $query = Doctrine_Query::create()
                     ->from('Default_Model_Championship champ')

@@ -18,50 +18,50 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
         $this->_pages = array(
             array(
                 // Я обворачиваю текст в _(), чтобы потом вытянуть его парсером gettext'а
-                'label'      => '<i class="fa fa-home"></i>',
-                'title'      => _('Главная'),
-                'module'     => 'default',
+                'label' => '<i class="fa fa-home"></i>',
+                'title' => _('Главная'),
+                'module' => 'default',
                 'controller' => 'index',
-                'action'     => 'index',
-                'route'      => 'default',
+                'action' => 'index',
+                'route' => 'default',
                 'class' => 'btn btn-default',
-                'pages'      => array(
+                'pages' => array(
                     array(
-                        'label'      => _('Гонщики'),
-                        'title'      => _('Гонщики'),
-                        'module'     => 'default',
+                        'label' => _('Гонщики'),
+                        'title' => _('Гонщики'),
+                        'module' => 'default',
                         'controller' => 'user',
-                        'action'     => 'all',
-                        'params'     => array(
+                        'action' => 'all',
+                        'params' => array(
                             'page' => '1'
                         ),
-                        'route'      => 'userAll',
-                        'pages'      => array(),
+                        'route' => 'userAll',
+                        'pages' => array(),
                         'class' => 'btn btn-default',
                     ),
                     array(
-                        'label'      => _('Новости'),
-                        'title'      => _('Новости'),
-                        'module'     => 'default',
+                        'label' => _('Новости'),
+                        'title' => _('Новости'),
+                        'module' => 'default',
                         'controller' => 'post',
-                        'action'     => 'all',
-                        'route'      => 'postAll',
-                        'pages'      => array(),
+                        'action' => 'all',
+                        'route' => 'postAll',
+                        'pages' => array(),
                         'class' => 'btn btn-default',
                     ),
                     array(
                         'label' => _('Файлы'),
                         'title' => _('Файлы'),
-                        'uri'   => '',
+                        'uri' => '',
                         'pages' => array(
                             array(
-                                'label'      => _('Игры и Моды'),
-                                'title'      => _('Игры и Моды'),
-                                'module'     => 'default',
+                                'label' => _('Игры и Моды'),
+                                'title' => _('Игры и Моды'),
+                                'module' => 'default',
                                 'controller' => 'post',
-                                'action'     => 'all-by-type',
-                                'route'      => 'postAllByType',
-                                'params'     => array(
+                                'action' => 'all-by-type',
+                                'route' => 'postAllByType',
+                                'params' => array(
                                     'post_type_id' => '3'
                                 ),
                                 'class' => 'btn btn-default',
@@ -72,42 +72,42 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                     array(
                         'label' => _('Форум'),
                         'title' => _('Форум'),
-                        'uri'   => 'http://f1orl.forum2x2.ru/',
+                        'uri' => 'http://f1orl.forum2x2.ru/',
                         'class' => 'btn btn-default',
                     ),
                     array(
-                        'label'      => _('Чат'),
-                        'title'      => _('Чат'),
-                        'module'     => 'default',
+                        'label' => _('Чат'),
+                        'title' => _('Чат'),
+                        'module' => 'default',
                         'controller' => 'chat',
-                        'action'     => 'index',
-                        'route'      => 'default',
+                        'action' => 'index',
+                        'route' => 'default',
                         'class' => 'btn btn-default',
                     ),
                     array(
-                        'label'      => _('Админ. панель'),
-                        'title'      => _('Панель администратора'),
-                        'module'     => 'admin',
+                        'label' => _('Админ. панель'),
+                        'title' => _('Панель администратора'),
+                        'module' => 'admin',
                         'controller' => 'index',
-                        'action'     => 'index',
-                        'route'      => 'default',
-                        'pages'      => array(),
+                        'action' => 'index',
+                        'route' => 'default',
+                        'pages' => array(),
                         'class' => 'btn btn-default',
                     ),
                     array(
-                        'label'      => _('Помощь порталу'),
-                        'title'      => _('Помощь порталу'),
+                        'label' => _('Помощь порталу'),
+                        'title' => _('Помощь порталу'),
                         'controller' => 'donate',
-                        'action'     => 'index',
+                        'action' => 'index',
                         'class' => 'btn btn-default',
                     ),
                 )
             ),
             array(
-                'label'      => _('Помощь порталу'),
-                'title'      => _('Помощь порталу'),
+                'label' => _('Помощь порталу'),
+                'title' => _('Помощь порталу'),
                 'controller' => 'donate',
-                'action'     => 'index',
+                'action' => 'index',
                 'class' => 'btn btn-default',
             ),
         );
@@ -121,7 +121,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => $post_title,
                 'title' => $post_title,
-                'uri'   => $this->view->url(
+                'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'post', 'action' => 'id', 'postID' => $post_id),
                     'defaultPostID', true
                 ),
@@ -140,7 +140,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => _('Контент сайта'),
                 'title' => _('Контент сайта'),
-                'uri'   => $this->view->url(
+                'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'post', 'action' => 'all', 'page' => $page),
                     'defaultPostAll', true
                 ),
@@ -159,7 +159,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => $user_login,
                 'title' => $user_login,
-                'uri'   => $this->view->url(
+                'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'user', 'action' => 'id', 'user_id' => $user_id),
                     'defaultUserID', true
                 ),
@@ -178,7 +178,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => _('Гонщики'),
                 'title' => _('Гонщики'),
-                'uri'   => $this->view->url(
+                'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'user', 'action' => 'all', 'page' => $page),
                     'defaultUserAll', true
                 ),
@@ -197,9 +197,9 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => $team_name,
                 'title' => $team_name,
-                'uri'   => $this->view->url(
-                    array('module'    => 'default', 'controller' => 'championship', 'action' => 'team',
-                          'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id),
+                'uri' => $this->view->url(
+                    array('module' => 'default', 'controller' => 'championship', 'action' => 'team',
+                        'league_id' => $league_id, 'championship_id' => $championship_id, 'team_id' => $team_id),
                     'defaultChampionshipTeam', true
                 ),
                 'pages' => array(),
@@ -217,9 +217,9 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => $race_name,
                 'title' => $race_name,
-                'uri'   => $this->view->url(
-                    array('module'    => 'default', 'controller' => 'championship', 'action' => 'team',
-                          'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id),
+                'uri' => $this->view->url(
+                    array('module' => 'default', 'controller' => 'championship', 'action' => 'team',
+                        'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id),
                     'defaultChampionshipRaceId', true
                 ),
                 'pages' => array(),
@@ -238,9 +238,9 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => 'Гонщики',
                 'title' => 'Гонщики',
-                'uri'   => $this->view->url(
-                    array('module'    => 'default', 'controller' => 'championship', 'action' => 'drivers',
-                          'league_id' => $league_id, 'championship_id' => $championship_id),
+                'uri' => $this->view->url(
+                    array('module' => 'default', 'controller' => 'championship', 'action' => 'drivers',
+                        'league_id' => $league_id, 'championship_id' => $championship_id),
                     'defaultChampionshipAction', true
                 ),
                 'pages' => array(),
@@ -255,15 +255,15 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
     public function Calendar($league_id, $championship_id)
     {
         $default_calendar_url = $this->view->url(
-            array('module'    => 'default', 'controller' => 'championship', 'action' => 'calendar',
-                  'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipAction', true
+            array('module' => 'default', 'controller' => 'championship', 'action' => 'calendar',
+                'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipAction', true
         );
 
         $pages = array(
             array(
                 'label' => 'Календарь',
                 'title' => 'Календарь',
-                'uri'   => $default_calendar_url,
+                'uri' => $default_calendar_url,
                 'pages' => array(),
                 'class' => 'btn btn-default',
             )
@@ -273,16 +273,15 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function Championship($league_id, $championship_id, $championship_name)
+    public function Championship($championship_id, $championship_name)
     {
         $pages = array(
             array(
                 'label' => $championship_name,
                 'title' => $championship_name,
-                'uri'   => $this->view->url(
-                    array('module'    => 'default', 'controller' => 'championship', 'action' => 'id',
-                          'league_id' => $league_id, 'championship_id' => $championship_id), 'defaultChampionshipID',
-                    true
+                'uri' => $this->view->url(
+                    array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                        'championship_id' => $championship_id), 'defaultChampionshipID'
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',
@@ -299,9 +298,9 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => $league_name,
                 'title' => $league_name,
-                'uri'   => $this->view->url(
+                'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id,
-                          'page'   => $page), 'defaultLeagueID', true
+                        'page' => $page), 'defaultLeagueID', true
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',
@@ -318,7 +317,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
             array(
                 'label' => _('Все лиги'),
                 'title' => _('Все лиги'),
-                'uri'   => $this->view->url(
+                'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'league', 'action' => 'all', 'page' => $page),
                     'defaultLeagueAll', true
                 ),

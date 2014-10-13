@@ -1,129 +1,129 @@
-<?php if ($this->leagueData) : ?>
+<?php if (!$this->leagueData) : return; endif; ?>
 
-    <?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-        $defaultUserIDUrl = $this->url(
-            array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                'userID' => $this->escape($this->leagueData['User']['ID'])), 'defaultUserID'
-        );
-    } else {
-        $defaultUserIDUrl = '#';
-    }
-    ?>
+<?php
+$league = $this->leagueData;
+$championships = $this->championshipData;
+?>
 
-    <div class="block block-default block-ui-bordered">
-        <?= $this->BlockConfigMenu(
-            $this->t("Лига"))->leagueMenu($this->escape($this->leagueData['ID'])
-        );
-        ?>
-        <div class="block-body">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <div class="block block-default block-ui-bordered">
-                        <div>
-                            <table class="table table-striped table-bordered m-b-0">
-                                <tbody>
-                                <tr>
-                                    <td class="text-bold">
-                                        <span><?= $this->t('Название'); ?></span>
-                                    </td>
-                                    <td>
-                                        <span><?= $this->escape($this->leagueData['Name']); ?></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-bold">
-                                        <span><?= $this->t('Администратор'); ?></span>
-                                    </td>
-                                    <td>
-                                        <span>
-                                            <a class="tooltip-field"
-                                               title="<?= $this->escape($this->leagueData['User']['NickName']) ?>"
-                                               target="blank" href="<?= $defaultUserIDUrl; ?>">
-                                                <?= $this->escape($this->getUser($this->leagueData['User'])->getFullName()); ?>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-bold">
-                                        <span><?= $this->t('Описание'); ?></span>
-                                    </td>
-                                    <td>
-                                        <span><?= $this->RenderContentTypeText($this->leagueData['Description'], 'full_html'); ?></span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+<?php if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+    $defaultUserIDUrl = $this->url(
+        array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+            'userID' => $this->escape($league['User']['ID'])), 'defaultUserID'
+    );
+} else {
+    $defaultUserIDUrl = '#';
+}
+?>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="block block-default block-ui-bordered block-league">
+            <?= $this->BlockConfigMenu(
+                $this->t("Лига"))->leagueMenu($this->escape($league['ID'])
+            );
+            ?>
+            <div class="block-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="text-center">
+                            <?php if ($this->escape($league['LogoUrl'])) { ?>
+                                <div class="m-b-15 center-block text-center">
+                                    <a href="#" data-toggle="modal"
+                                       data-target=".league-<?php print $league['ID']; ?>"
+                                       title="<?= $this->escape($league['Name']); ?>"
+                                       class="">
+                                        <img class="img-thumbnail img-responsive"
+                                             src="<?= $this->escape($league['LogoUrl']); ?>"/>
+                                    </a>
+                                    <?= $this->modal(
+                                        array(
+                                            'title' => $league['Name'],
+                                            'class' => 'league-' . $league['ID'],
+                                            'content' =>
+                                                '<img src="' . $this->escape($league['LogoUrl'])
+                                                . '" class="img-responsive img-rounded center-block" alt="">'
+                                        )
+                                    ); ?>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="text-center">
-                        <?php if ($this->escape($this->leagueData['LogoUrl'])) { ?>
-                            <div class="m-b-15 center-block text-center">
-                                <a href="#" data-toggle="modal"
-                                   data-target=".league-<?php print $this->leagueData['ID']; ?>"
-                                   title="<?= $this->escape($this->leagueData['Name']); ?>"
-                                   class="">
-                                    <img class="img-thumbnail img-responsive"
-                                         src="<?= $this->escape($this->leagueData['LogoUrl']); ?>"/>
-                                </a>
-                                <?= $this->modal(
-                                    array(
-                                        'title' => $this->leagueData['Name'],
-                                        'class' => 'league-' . $this->leagueData['ID'],
-                                        'content' =>
-                                            '<img src="' . $this->escape($this->leagueData['LogoUrl'])
-                                            . '" class="img-responsive img-rounded center-block" alt="">'
-                                    )
-                                ); ?>
-                            </div>
-                        <?php } ?>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <h4 class="league-name">
+                            <?= $this->escape($league['Name']); ?>
+                        </h4>
+
+                        <div class="league-administrator">
+                            <?= $this->t('Администратор'); ?>:
+                            <i class="fa fa-user fa-1x"></i>
+                            <a class="tooltip-field"
+                               title="<?= $this->escape($league['User']['NickName']) ?>"
+                               target="_blank" href="<?= $defaultUserIDUrl; ?>">
+                                <?= $this->escape($this->getUser($league['User'])->getFullName()); ?>
+                            </a>
+
+                        </div>
+
+                        <?php if ($league['Description']) : ?>
+                            <hr/>
+                            <p class="league-description">
+                                <?= $this->RenderContentTypeText($league['Description'], 'full_html'); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="block-footer clearfix">
-            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
-                 data-placement="bottom">
-                <i class="fa fa-filter fa-lg"></i>
-                <?= $this->t('Лига'); ?>
-            </div>
-            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
-                 data-placement="bottom">
-                <i class="fa fa-calendar fa-lg"></i>
-                <?= $this->escape($this->leagueData['DateCreate']); ?>
+            <div class="block-footer clearfix">
+                <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
+                     data-placement="bottom">
+                    <i class="fa fa-filter fa-lg"></i>
+                    <?= $this->t('Лига'); ?>
+                </div>
+                <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
+                     data-placement="bottom">
+                    <i class="fa fa-calendar fa-lg"></i>
+                    <?= $this->escape($league['DateCreate']); ?>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Championship start -->
-    <?php if ($this->championshipData) : ?>
-        <div class="section-title m-t-15 m-b-15"><?= $this->t('Чемпионаты лиги') ?></div>
-        <?php foreach ($this->championshipData as $championship): ?>
-            <?php
-            // check access and generate link for default/user/id
-            if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
-                $defaultUserIDUrl = $this->url(
-                    array('module' => 'default', 'controller' => 'user', 'action' => 'id',
-                        'userID' => $this->escape($championship['User']['ID'])), 'defaultUserID'
-                );
-            } else {
-                $defaultUserIDUrl = '#';
-            }
-            ?>
-            <?php
-            // check access and generate link for default/championship/id
-            if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
-                $defaultChampionshipIDUrl = $this->url(
-                    array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
-                        'championshipID' => $this->escape($championship['ID'])), 'defaultChampionshipID'
-                );
-            } else {
-                $defaultChampionshipIDUrl = '#';
-            }
-            ?>
-            <div class="block block-default block-ui-bordered m-b-10">
+
+<!-- Championship start -->
+<?php if (!$championships) : return; endif; ?>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="section-title section-title-bottom m-t-15 m-b-15"><?= $this->t('Чемпионаты лиги') ?></div>
+    </div>
+</div>
+
+<div class="row">
+    <?php foreach ($championships as $championship): ?>
+        <?php
+        // check access and generate link for default/user/id
+        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'user', 'id')) {
+            $defaultUserIDUrl = $this->url(
+                array('module' => 'default', 'controller' => 'user', 'action' => 'id',
+                    'userID' => $this->escape($championship['User']['ID'])), 'defaultUserID'
+            );
+        } else {
+            $defaultUserIDUrl = '#';
+        }
+        ?>
+        <?php
+        // check access and generate link for default/championship/id
+        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
+            $defaultChampionshipIDUrl = $this->url(
+                array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                    'championshipID' => $this->escape($championship['ID'])), 'defaultChampionshipID'
+            );
+        } else {
+            $defaultChampionshipIDUrl = '#';
+        }
+        ?>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="block block-default block-ui-bordered m-b-10 block-championship">
                 <?php
                 echo $this->BlockConfigMenu($this->t("Чемпионат"))->championshipMenu(
                     $this->escape($championship['ID'])
@@ -144,63 +144,43 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                            <div class="block block-default">
-                                <div>
-                                    <table class="table table-striped table-bordered m-b-0">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <span><?= $this->t('Название'); ?></span>
-                                            </td>
-                                            <td>
-                                            <span>
-                                                <a href="<?= $defaultChampionshipIDUrl; ?>">
-                                                    <?= $this->escape($championship['Name']); ?>
-                                                </a>
-                                            </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <span><?= $this->t('Администратор'); ?></span>
-                                            </td>
-                                            <td>
-                                        <span>
-                                            <a class="tooltip-field"
-                                               title="<?= $this->escape($championship['User']['NickName']) ?>"
-                                               target="blank" href="<?= $defaultUserIDUrl; ?>">
-                                                <?= $this->escape($this->getUser($championship['User'])->getFullName()); ?>
-                                            </a>
-                                        </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold">
-                                                <span><?= $this->t('Описание'); ?></span>
-                                            </td>
-                                            <td>
-                                                <span><?= $this->RenderContentTypeText($championship['Description'], 'full_html'); ?></span>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <h4 class="championship-name">
+                                <a href="<?= $defaultChampionshipIDUrl; ?>">
+                                    <?= $this->escape($championship['Name']); ?>
+                                </a>
+                            </h4>
+
+                            <div class="championship-administrator">
+                                <?= $this->t('Администратор'); ?>:
+                                <i class="fa fa-user fa-1x"></i>
+                                <a class="tooltip-field"
+                                   title="<?= $this->escape($championship['User']['NickName']) ?>"
+                                   target="_blank" href="<?= $defaultUserIDUrl; ?>">
+                                    <?= $this->escape($this->getUser($championship['User'])->getFullName()); ?>
+                                </a>
                             </div>
+
+                            <?php if ($championship['Description']) : ?>
+                                <hr/>
+                                <p class="championship-description">
+                                    <?= $this->RenderContentTypeText($championship['Description'], 'full_html'); ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
-                <div class="block-item m-t-15">
-                    <div class="pull-right">
-                        <?= $this->paginationControl($this->championshipData, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
         </div>
-    <?php endif; ?>
-    <!-- Championship end -->
-<?php endif; ?>
+    <?php endforeach; ?>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12">
+        <div class="block-item m-t-15">
+            <div class="pull-right">
+                <?= $this->paginationControl($championships, 'Sliding', 'pagers/default_pagination_tpl.phtml'); ?>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- Championship end -->
