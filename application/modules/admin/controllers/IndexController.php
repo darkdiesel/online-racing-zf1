@@ -13,6 +13,7 @@ class Admin_IndexController extends App_Controller_LoaderController
     {
         $this->view->headTitle($this->view->t('Панель управления'));
         $this->view->pageTitle($this->view->t('Панель управления'));
+        $this->view->pageIcon('<i class="fa fa-dashboard"></i>');
     }
 
 }

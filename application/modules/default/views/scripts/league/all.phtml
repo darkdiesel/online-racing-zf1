@@ -59,10 +59,13 @@
                             </a>
 
                         </div>
-                        <hr/>
-                        <p class="league-description">
-                            <?= $this->RenderContentTypeText($league['Description'], 'full_html'); ?>
-                        </p>
+
+                        <?php if ($league['Description']) : ?>
+                            <hr/>
+                            <p class="league-description">
+                                <?= $this->RenderContentTypeText($league['Description'], 'full_html'); ?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

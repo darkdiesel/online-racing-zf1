@@ -254,34 +254,159 @@ body {
 }
 
 /* page /default/league/all */
-#default-league-all{
+#default-league-all {
 
 }
 
-#default-league-all .block-league{
+#default-league-all .block-league {
 
 }
 
-#default-league-all .block-league hr{
+#default-league-all .block-league hr {
     margin: 7px 0;
 }
 
-#default-league-all .league-name{
+#default-league-all .block-league .league-name {
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 4px;
 }
 
-#default-league-all .league-name, #default-league-all .league-name a{
-    color:#c41d1d;
+#default-league-all .block-league .league-name,
+#default-league-all .block-league .league-name a {
+    color: #c41d1d;
 }
 
-#default-league-all .league-administrator, #default-league-all .league-administrator a{
-    color:#888;
+#default-league-all .block-league .league-administrator,
+#default-league-all .block-league .league-administrator a {
+    color: #888;
 }
 
-#default-league-all .league-description{
+#default-league-all .league-description {
     margin: 0;
+}
+
+/* page default/championship/id */
+#default-championship-id {
+
+}
+
+#default-championship-id .block-championship {
+
+}
+
+#default-league-all .block-championship hr {
+    margin: 7px 0;
+}
+
+#default-championship-id .block-championship .championship-name {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 0 0 4px;
+}
+
+#default-championship-id .block-championship .championship-name,
+#default-championship-id .block-championship .championship-name a {
+    color: #c41d1d;
+}
+
+#default-championship-id .block-championship .championship-administrator,
+#default-championship-id .block-championship .championship-administrator a {
+    color: #888;
+}
+
+#default-league-all .league-description {
+    margin: 0;
+}
+
+#default-championship-id .block-race-events {
+
+}
+
+#default-championship-id .block-race-events .race-event-name,
+#default-championship-id .block-race-events .race-event-name a {
+    color: #c41d1d;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* page default/race-event/id */
+#default-race-event-id .block-race .thumbnail {
+    border-radius: 0 !important;
+}
+
+#default-race-event-id .block-race .race-name,
+#default-race-event-id .block-race .race-name a{
+    color: #c41d1d;
+}
+
+#default-race-event-id .block-race:first-child {
+    margin-top: 0 !important;
+}
+
+#default-race-event-id .block-race {
+    margin-top: 20px;
+}
+
+#default-race-event-id .block-race .col-md-2 {
+    border-right: 1px dotted #ccc;
+    min-height: 140px;
+}
+
+#default-race-event-id .block-race ul {
+    padding-left: 0 !important;
+    list-style: none;
+}
+
+#default-race-event-id .block-race ul li {
+    font: 400 normal .85em Arial, Verdana, sans-serif;
+    line-height: 30px;
+}
+
+#default-race-event-id .block-race ul li i {
+    padding-right: 5px;
+}
+
+#default-race-event-id .block-race .col-md-7 {
+    position: relative;
+}
+
+#default-race-event-id .block-race h3 {
+    font: 500 normal 1.375em Arial, Verdana, sans-serif;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+}
+
+#default-race-event-id .block-race i {
+    color: #248dc1 !important;
+}
+
+#default-race-event-id .block-race p {
+    font: normal normal 1.125em Arial, Verdana, sans-serif;
+}
+
+#default-race-event-id .block-race span.plus {
+    position: relative;
+}
+
+#default-race-event-id .block-race span.plus a {
+    background-color: #248dc1;
+    padding: 5px 5px 3px 5px;
+}
+
+#default-race-event-id .block-race span.plus a:hover {
+    background-color: #414141;
+}
+
+#default-race-event-id .block-race span.plus a i {
+    color: #fff !important;
+}
+
+#default-race-event-id .block-race span.border {
+    display: block;
+    width: 97%;
+    margin: 0 15px;
+    border-bottom: 1px dotted #ccc;
 }
 
 /*Sidebar online-drivers block*/
@@ -323,100 +448,7 @@ body {
     font: bold 13px/10px arial;
 }
 
-/* Block race on championhsip calendar page */
-@import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
 
-hgroup {
-    padding-left: 15px;
-    border-bottom: 1px solid #ccc;
-}
-
-hgroup h1 {
-    font: 500 normal 1.625em "Roboto", Arial, Verdana, sans-serif;
-    color: #2a3644;
-    margin-top: 0;
-    line-height: 1.15;
-}
-
-hgroup h2.lead {
-    font: normal normal 1.125em "Roboto", Arial, Verdana, sans-serif;
-    color: #2a3644;
-    margin: 0;
-    padding-bottom: 10px;
-}
-
-#default-championship-calendar .block-race .thumbnail {
-    border-radius: 0 !important;
-}
-
-#default-championship-calendar .block-race:first-child {
-    margin-top: 0 !important;
-}
-
-#default-championship-calendar .block-race {
-    margin-top: 20px;
-}
-
-#default-championship-calendar .block-race .col-md-2 {
-    border-right: 1px dotted #ccc;
-    min-height: 140px;
-}
-
-#default-championship-calendar .block-race ul {
-    padding-left: 0 !important;
-    list-style: none;
-}
-
-#default-championship-calendar .block-race ul li {
-    font: 400 normal .85em "Roboto", Arial, Verdana, sans-serif;
-    line-height: 30px;
-}
-
-#default-championship-calendar .block-race ul li i {
-    padding-right: 5px;
-}
-
-#default-championship-calendar .block-race .col-md-7 {
-    position: relative;
-}
-
-#default-championship-calendar .block-race h3 {
-    font: 500 normal 1.375em "Roboto", Arial, Verdana, sans-serif;
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
-}
-
-#default-championship-calendar .block-race h3 > a, #default-championship-calendar .block-race i {
-    color: #248dc1 !important;
-}
-
-#default-championship-calendar .block-race p {
-    font: normal normal 1.125em "Roboto", Arial, Verdana, sans-serif;
-}
-
-#default-championship-calendar .block-race span.plus {
-    position: relative;
-}
-
-#default-championship-calendar .block-race span.plus a {
-    background-color: #248dc1;
-    padding: 5px 5px 3px 5px;
-}
-
-#default-championship-calendar .block-race span.plus a:hover {
-    background-color: #414141;
-}
-
-#default-championship-calendar .block-race span.plus a i {
-    color: #fff !important;
-}
-
-#default-championship-calendar .block-race span.border {
-    display: block;
-    width: 97%;
-    margin: 0 15px;
-    border-bottom: 1px dotted #ccc;
-}
 
 /* user id */
 .panel {

@@ -1,0 +1,166 @@
+<?php
+$races = $this->raceData;
+?>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <i class="fa fa-list fa-2x"></i>
+                <?php
+                // check access and generate link for admin/league/add
+                if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race', 'add')) : ?>
+                    <?php
+                    $adminRacingEventAddUrl = $this->url(
+                        array('module' => 'admin', 'controller' => 'race', 'action' => 'add'), 'default'
+                    );
+                    ?>
+                    <a href="<?= $adminRacingEventAddUrl; ?>" class="btn btn-xs btn-primary pull-right ">
+                        <i class="fa fa-plus"></i> <?= $this->t('Добавить гонку'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="race-id">
+                        <span>ID</span>
+                    </th>
+                    <th class="race-name">
+                        <span><?= $this->t('Название'); ?></span>
+                    </th>
+                    <th class="race-championship">
+                        <span><?= $this->t('Чемпионат'); ?></span>
+                    </th>
+                    <th class="race-race-event">
+                        <span><?= $this->t('Гоночное событие'); ?></span>
+                    </th>
+                    <th class="race-track">
+                        <span><?= $this->t('Трасса'); ?></span>
+                    </th>
+                    <th class="race-date-start">
+                        <span><?= $this->t('Дата начала'); ?></span>
+                    </th>
+                    <th class="race-action">
+                        <span><?= $this->t('Действие'); ?></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if ($races) : ?>
+                    <?php foreach ($races as $race): ?>
+                        <?php
+                        // check access and generate link for default/race/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race', 'id')) {
+                            $defaultRaceIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'race', 'action' => 'id',
+                                    'raceEventID' => $this->escape($race['ID'])), 'defaultRaceID'
+                            );
+                        } else {
+                            $defaultRaceIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/championship/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
+                            $defaultChampionshipIDUrl = $this->url(
+                                array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                                    'championshipID' => $this->escape($race['RaceEvent']['Championship']['ID'])), 'defaultChampionshipID'
+                            );
+                        } else {
+                            $defaultChampionshipIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for default/race-event/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
+                            $defaultRaceEventIDUrl = $this->url(
+                                array('default' => 'default', 'controller' => 'race-event', 'action' => 'id',
+                                    'raceEventID' => $this->escape($race['RaceEvent']['ID'])), 'defaultRaceEventID'
+                            );
+                        } else {
+                            $defaultRaceEventIDUrl = '#';
+                        }
+                        ?>
+
+                        <?php
+                        // check access and generate link for admin/track/id
+                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'id')) {
+                            $adminTrackIDUrl = $this->url(
+                                array('default' => 'admin', 'controller' => 'track', 'action' => 'id',
+                                    'trackID' => $this->escape($race['Track']['ID'])), 'adminTrackID'
+                            );
+                        } else {
+                            $adminTrackIDUrl = '#';
+                        }
+                        ?>
+                        <tr>
+                            <td class="race-id">
+                                <span>
+                                    <a href="<?= $defaultRaceIDUrl; ?>">
+                                        <?= $this->escape($race['ID']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="race-name">
+                                <span>
+                                    <a href="<?= $defaultRaceIDUrl; ?>">
+                                        <?= $this->escape($race['Name']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="race-championship">
+                                <span>
+                                    <a target="_blank" href="<?= $defaultChampionshipIDUrl; ?>">
+                                        <?= $this->escape($race['RaceEvent']['Championship']['Name']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="race-race-event">
+                                <span>
+                                    <a target="_blank" href="<?= $defaultRaceEventIDUrl; ?>">
+                                        <?= $this->escape($race['RaceEvent']['Name']) ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="race-track">
+                                <span>
+                                    <a target="_blank" href="<?= $adminTrackIDUrl; ?>">
+                                        <?= $this->escape($race['Track']['Name'] . ' (' . $race['Track']['Year'] . ')'); ?>
+                                    </a>
+                                </span>
+                            </td>
+                            <td class="race-date-start">
+                                <span>
+                                    <?= $this->escape($race['DateStart']) ?>
+                                </span>
+                            </td>
+                            <td class="race-action">
+                                <span>
+                                    <?= $this->BlockConfigMenu($this->t("Гонка"), false)
+                                        ->raceMenu($this->escape($race['ID']), true);
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr class="text-center danger">
+                        <td colspan="7"><?= $this->t('Нет гонок!'); ?></td>
+                    </tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <div class="panel-footer clearfix">
+                <?php if ($races) : ?>
+                    <div class="pull-right">
+                        <?= $this->paginationControl(
+                            $races, 'Sliding', 'pagers/default_pagination_tpl.phtml'
+                        ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

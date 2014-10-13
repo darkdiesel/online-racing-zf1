@@ -39,6 +39,7 @@ class Peshkov_View_Helper_GetDecorator extends Zend_View_Helper_Abstract
                     array('ViewHelper'),
                     //array('HtmlTag', array('tag' => 'div', 'class' => '')),
                     array('Label', array('class' => 'control-label')),
+                    array('Description', array('tag' => 'div', 'class' => 'description')),
                     array('Errors'),
                     array(array('elementWrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
                 );
@@ -57,6 +58,7 @@ class Peshkov_View_Helper_GetDecorator extends Zend_View_Helper_Abstract
                     array('File'),
                     //array('HtmlTag', array('tag' => 'div', 'class' => '')),
                     array('Label', array('class' => 'control-label')),
+                    array('Description', array('tag' => 'div', 'class' => 'description')),
                     array('Errors'),
                     array(array('elementWrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
                 );
@@ -87,7 +89,9 @@ class Peshkov_View_Helper_GetDecorator extends Zend_View_Helper_Abstract
             case 'TwitterBootstrap3':
                 $this->_decorator = array(
                     'ViewHelper', 'HtmlTag', 'Errors',
-                    array('label', array('class' => 'control-label', 'placement' => 'APPEND')),
+                    array('Label', array('class' => 'control-label', 'placement' => 'APPEND')),
+                    array('Description', array('tag' => 'div', 'class' => 'description')),
+                    array('Errors'),
                     array('HtmlTag', array('tag' => 'span')),
                     array(array('elementDiv' => 'HtmlTag'), array('tag' => 'div', 'class' => 'form-group')),
                 );

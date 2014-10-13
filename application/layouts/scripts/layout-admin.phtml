@@ -5,8 +5,8 @@ $this->headScript()->prependFile("/library/modernizr/modernizr.min.js"); // mode
 
 // Twitter Bootstrap 3
 $this->MinifyHeadScript()->appendFile("/library/bootstrap/js/bootstrap.min.js");
-$this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap.min.css");
-$this->minifyHeadLink()->appendStylesheet("/library/bootstrap/css/bootstrap-theme.min.css");
+$this->minifyHeadLink()->prependStylesheet("/library/bootstrap/css/bootstrap.min.css");
+$this->minifyHeadLink()->prependStylesheet("/library/bootstrap/css/bootstrap-theme.min.css");
 
 // Additional Twitter Bootstrap 3
 $this->minifyHeadLink()->appendStylesheet("/data-content/data-themes/layout-common/css/bootstrap-3-additional.css");

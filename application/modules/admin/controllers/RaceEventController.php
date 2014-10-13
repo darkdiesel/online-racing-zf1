@@ -7,6 +7,9 @@ class Admin_RaceEventController extends App_Controller_LoaderController
     {
         parent::init();
         $this->view->headTitle($this->view->t('Гоночное событие'));
+
+        // set doctype for correctly displaying forms
+        $this->view->doctype('XHTML1_STRICT');
     }
 
     // action for view all race events
@@ -223,7 +226,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
     public function deleteAction()
     {
         $this->view->headTitle($this->view->t('Удалить'));
-        $this->view->pageTitle($this->view->t('Удалить лигу'));
+        $this->view->pageTitle($this->view->t('Удалить гоночное событие'));
 
         // set filters and validators for GET input
         $filters = array(
@@ -246,7 +249,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
             $result = $query->fetchArray();
 
             if (count($result) == 1) {
-                // Create league delete form
+                // Create race-event delete form
                 $raceEventDeleteForm = new Peshkov_Form_RaceEvent_Delete();
 
                 $this->view->raceEventData = $result[0];
@@ -255,7 +258,7 @@ class Admin_RaceEventController extends App_Controller_LoaderController
                 $this->view->headTitle($result[0]['Name']);
 
                 $this->messages->addWarning(
-                    $this->view->t('Вы действительно хотите удалить лигу')
+                    $this->view->t('Вы действительно хотите удалить гоночное событие')
                     . " <strong>" . $result[0]['Name'] . "</strong>?"
                 );
 
@@ -292,13 +295,13 @@ class Admin_RaceEventController extends App_Controller_LoaderController
             } else {
 //                throw new Zend_Controller_Action_Exception('Page not found', 404);
 
-                $this->messages->addError($this->view->t('Запрашиваемая лига не найдена!'));
+                $this->messages->addError($this->view->t('Запрашиваемое гоночное событие не найдено!'));
 
                 $this->view->headTitle($this->view->t('Ошибка!'));
-                $this->view->headTitle($this->view->t('Лига не найдена!'));
+                $this->view->headTitle($this->view->t('Гоночное событие не найдено!'));
 
                 $this->view->pageTitle($this->view->t('Ошибка!'));
-                $this->view->pageTitle($this->view->t('Лига не найдена!'));
+                $this->view->pageTitle($this->view->t('Гоночное событие не найдено!'));
             }
         } else {
             throw new Zend_Controller_Action_Exception('Invalid input');

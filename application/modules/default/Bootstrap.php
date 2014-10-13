@@ -259,6 +259,19 @@ class Default_Bootstrap extends Zend_Application_Module_Bootstrap
                 ), "race-event/%d.html"
             ));
 
+        //RACE CONTROLLER ROUTERS
+        $router->addRoute(
+            'defaultRaceID',
+            new Zend_Controller_Router_Route_Regex('race/(\d+)\.html',
+                array(
+                    'module' => 'default',
+                    'controller' => 'race',
+                    'action' => 'id',
+                    1 => 0), array(
+                    'raceID' => 1,
+                ), "race/%d.html"
+            ));
+
         /*
           $router->addRoute(
           'championshipAll', new Zend_Controller_Router_Route('championship/all/:page', array(

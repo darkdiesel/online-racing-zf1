@@ -1,13 +1,15 @@
 <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-    <div id="main-content" >
+    <div id="main-content">
+        <?php if ($this->pageIcon() || $this->pageTitle()) : ?>
             <div class="row">
-                    <div id="main-content-top" class="clearfix">
-                        <div class="page-header pull-left">
-                            <h3><?= $this->pageTitle() ?></h3>
-                        </div>
+                <div id="main-content-top" class="clearfix">
+                    <div class="page-header pull-left">
+                        <h3><?= $this->pageIcon().' '; ?> <?= $this->pageTitle(); ?></h3>
                     </div>
+                </div>
             </div>
-            <?= $this->showMessages(); ?>
-            <?= $this->layout()->content ?>
+        <?php endif; ?>
+        <?= $this->showMessages(); ?>
+        <?= $this->layout()->content ?>
     </div>
 </div>

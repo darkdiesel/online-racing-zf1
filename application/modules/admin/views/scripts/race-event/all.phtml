@@ -37,16 +37,19 @@ $raceEvents = $this->raceEventData;
                     <th class="race-event-date-end">
                         <span><?= $this->t('Дата окончания'); ?></span>
                     </th>
+                    <th class="race-event-action">
+                        <span><?= $this->t('Действие'); ?></span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php if ($raceEvents) : ?>
                     <?php foreach ($raceEvents as $raceEvent): ?>
                         <?php
-                        // check access and generate link for admin/race-event/id
-                        if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
+                        // check access and generate link for default/race-event/id
+                        if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
                             $defaultRaceEventIDUrl = $this->url(
-                                array('module' => 'admin', 'controller' => 'race-event', 'action' => 'id',
+                                array('default' => 'admin', 'controller' => 'race-event', 'action' => 'id',
                                     'raceEventID' => $this->escape($raceEvent['ID'])), 'defaultRaceEventID'
                             );
                         } else {
@@ -57,12 +60,12 @@ $raceEvents = $this->raceEventData;
                         <?php
                         // check access and generate link for default/championship/id
                         if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
-                            $adminChampionshipIDUrl = $this->url(
+                            $defaultChampionshipIDUrl = $this->url(
                                 array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
-                                    'championshipID' => $this->escape($raceEvent['ID'])), 'defaultChampionshipID'
+                                    'championshipID' => $this->escape($raceEvent['Championship']['ID'])), 'defaultChampionshipID'
                             );
                         } else {
-                            $adminChampionshipIDUrl = '#';
+                            $defaultChampionshipIDUrl = '#';
                         }
                         ?>
                         <tr>
@@ -82,7 +85,7 @@ $raceEvents = $this->raceEventData;
                             </td>
                             <td class="race-event-championship">
                                 <span>
-                                    <a href="<?= $adminChampionshipIDUrl; ?>">
+                                    <a target="_blank" href="<?= $defaultChampionshipIDUrl; ?>">
                                         <?= $this->escape($raceEvent['Championship']['Name']) ?>
                                     </a>
                                 </span>

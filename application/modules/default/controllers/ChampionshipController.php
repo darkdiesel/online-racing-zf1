@@ -38,6 +38,15 @@ class ChampionshipController extends App_Controller_LoaderController
             if (count($result) == 1) {
                 $this->view->championshipData = $result[0];
 
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_RaceEvent re')
+                    ->where('re.ChampionshipID = ?', $requestData->championshipID)
+                    ->orderBy('re.OrderInChamp ASC')
+                    ->addOrderBy('re.Name ASC');
+
+                $result = $query->fetchArray();
+                $this->view->raceEventData = $result;
+
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle(
                     $this->view->t('Чемпионат ') . ' :: ' . $result[0]['Name']

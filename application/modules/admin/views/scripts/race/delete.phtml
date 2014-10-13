@@ -1,0 +1,141 @@
+<?php
+$race = $this->raceData;
+?>
+
+<?php if ($race) { ?>
+    <div class="m-b-10">
+        <?= $this->raceDeleteForm; ?>
+        <hr/>
+    </div>
+
+    <?php
+    // check access and generate link for default/championship/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
+        $defaultChampionshipIDUrl = $this->url(
+            array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
+                'championshipID' => $this->escape($race['RaceEvent']['Championship']['ID'])), 'defaultChampionshipID'
+        );
+    } else {
+        $defaultChampionshipIDUrl = '#';
+    }
+    ?>
+
+    <?php
+    // check access and generate link for default/race-event/id
+    if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race-event', 'id')) {
+        $defaultRaceEventIDUrl = $this->url(
+            array('default' => 'default', 'controller' => 'race-event', 'action' => 'id',
+                'raceEventID' => $this->escape($race['RaceEvent']['ID'])), 'defaultRaceEventID'
+        );
+    } else {
+        $defaultRaceEventIDUrl = '#';
+    }
+    ?>
+
+    <?php
+    // check access and generate link for admin/track/id
+    if ($this->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'id')) {
+        $adminTrackIDUrl = $this->url(
+            array('default' => 'admin', 'controller' => 'track', 'action' => 'id',
+                'trackID' => $this->escape($race['Track']['ID'])), 'adminTrackID'
+        );
+    } else {
+        $adminTrackIDUrl = '#';
+    }
+    ?>
+    <div class="block block-default block-ui-bordered">
+        <div>
+            <table class="table table-striped table-bordered m-b-0">
+                <tbody>
+                <tr class="race-name">
+                    <td class="text-bold">
+                        <span><?= $this->t('Название'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->escape($race['Name']); ?></span>
+                    </td>
+                </tr>
+                <tr class="race-description">
+                    <td class="text-bold">
+                        <span><?= $this->t('Описание'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->RenderContentTypeText($race['Description'], 'full_html'); ?></span>
+                    </td>
+                </tr>
+                <tr class="race-championship">
+                    <td class="text-bold">
+                        <span><?= $this->t('Чемпионат'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="_blank" href="<?= $defaultChampionshipIDUrl; ?>">
+                                <?= $this->escape($race['RaceEvent']['Championship']['Name']) ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="race-race-event">
+                    <td class="text-bold">
+                        <span><?= $this->t('Гоночное событие'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="_blank" href="<?= $defaultRaceEventIDUrl; ?>">
+                                <?= $this->escape($race['RaceEvent']['Name']) ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="race-track">
+                    <td class="text-bold">
+                        <span><?= $this->t('Трасса'); ?></span>
+                    </td>
+                    <td>
+                        <span>
+                            <a target="_blank" href="<?= $adminTrackIDUrl; ?>">
+                                <?= $this->escape($race['Track']['Name'] . ' (' . $race['Track']['Year'] . ')'); ?>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+                <tr class="race-order-in-event">
+                    <td class="text-bold">
+                        <span><?= $this->t('Порядковый номер в гоночном событии'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->escape($race['OrderInEvent']); ?></span>
+                    </td>
+                </tr>
+                <tr class="race-date-start">
+                    <td class="text-bold">
+                        <span><?= $this->t('Дата старта'); ?></span>
+                    </td>
+                    <td>
+                        <span><?= $this->escape($race['DateStart']); ?></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="block-footer clearfix">
+            <div class="pull-left m-r-15 tooltip-field" data-title="<?= $this->t('Тип контента'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-filter fa-lg"></i>
+                <?= $this->t('Гонка'); ?>
+            </div>
+            <div class="pull-right m-r-15 tooltip-field" data-title="<?= $this->t('Дата создания'); ?>"
+                 data-placement="bottom">
+                <i class="fa fa-calendar fa-lg"></i>
+                <?= $this->escape($race['DateCreate']); ?>
+            </div>
+            <?php if ($this->escape($race['DateCreate']) != $this->escape($race['DateEdit'])) : ?>
+                <div class="pull-right m-r-15 tooltip-field"
+                     data-title="<?= $this->t('Дата редактирования'); ?>" data-placement="bottom">
+                    <i class="fa fa-pencil fa-lg"></i>
+                    <?= $this->escape($race['DateEdit']); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php } ?>

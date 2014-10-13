@@ -1,8 +1,9 @@
 <?php $this->CKEditor()->init(); ?>
 <?php $this->CKFinder()->init(); ?>
 
-<?php $this->headLink()->appendStylesheet($this->baseUrl("/library/jquery/css/jquery-ui-timepicker-addon.min.css")); ?>
-<?php $this->headScript()->appendFile($this->baseUrl("/library/jquery/js/jquery-ui-timepicker-addon.min.js")); ?>
+<?php $this->minifyHeadLink()->appendStylesheet("/library/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"); ?>
+<?php $this->MinifyHeadScript()->appendFile("/library/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"); ?>
+<?php $this->MinifyHeadScript()->appendFile("/library/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ru.js"); ?>
 
 <?= $this->raceEventEditForm; ?>
 
@@ -12,24 +13,16 @@
         <?= $this->CKFinder()->setupCKEditor('Description'); ?>
 
 
-        $("#DateStart").datetimepicker({
-            showButtonPanel: true,
-            dateFormat: "yy-mm-dd",
-            showAnim: "clip",
-            showSecond: true,
-            timeFormat: 'HH:mm:ss',
-            stepHour: 1,
-            stepSecond: 10
-        });
-
-        $("#DateEnd").datetimepicker({
-            showButtonPanel: true,
-            dateFormat: "yy-mm-dd",
-            showAnim: "clip",
-            showSecond: true,
-            timeFormat: 'HH:mm:ss',
-            stepHour: 1,
-            stepSecond: 10
+        $('#DateStart, #DateEnd').datetimepicker({
+            language:  'ru',
+            format: "yyyy-mm-dd hh:ii:00",
+            weekStart: 1,
+            todayBtn:  1,
+            todayHighlight: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 1
         });
     });
 </script>

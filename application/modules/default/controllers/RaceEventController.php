@@ -34,6 +34,17 @@ class RaceEventController extends App_Controller_LoaderController
             if (count($result) == 1) {
                 $this->view->raceEventData = $result[0];
 
+                $query = Doctrine_Query::create()
+                    ->from('Default_Model_Race r')
+                    ->leftJoin('r.Track tr')
+                    ->leftJoin('tr.Country c')
+                    ->where('r.RaceEventID = ?', $requestData->raceEventID)
+                    ->orderBy('r.OrderInEvent ASC')
+                    ->addOrderBy('r.Name ASC');
+
+                $result = $query->fetchArray();
+                $this->view->raceData = $result;
+
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle($result[0]['Name']);
             } else {

@@ -3,37 +3,39 @@ $event = new Application_Model_DbTable_Event();
 $event_data = $event->getNext();
 
 if ($event_data) {
-	?>
-	<div class="col-lg-12 col-md-4 col-sm-6 col-xs-12">
-		<div id="next-event" class="block block-ui-bordered block-sidebar m-b-10">
-			<div class="block-header">
-				<div class="block-title">
-					<i class="fa fa-plane fa-lg"></i> <a href="<?= $this->baseUrl('event/id/' . $event_data->id); ?>"><?= $this->translate('Ближайшее событие') ?></a>
-				</div>
-			</div>
-			<div class="block-body">
-				<script type="text/javascript">
-					$(document).ready(function() {
-						var newYear = new Date();
-						newYear = new Date(
-	<?= date_format(date_create($event_data->date_event), 'Y') ?>,
-	<?= date_format(date_create($event_data->date_event), 'm') ?> - 1,
-	<?= date_format(date_create($event_data->date_event), 'd') ?>,
-	<?= date_format(date_create($event_data->date_event), 'H') ?>,
-	<?= date_format(date_create($event_data->date_event), 'i') ?>,
-	<?= date_format(date_create($event_data->date_event), 's') ?>
-						);
-						$('#countdown_dashboard').countdown({
-							until: newYear,
-							format: 'DHMS',
-							timeSeparator: ':',
-							compact: true,
-							timezone: +3,
-						});
-					});
-				</script>
-				<div id="countdown_dashboard" class="tooltip-field" data-placement="right" data-original-title="<?= $event_data->name; ?>"></div>
-			</div>
-		</div>
-	</div>
+    ?>
+    <div class="col-lg-12 col-md-4 col-sm-6 col-xs-12">
+        <div id="next-event" class="block block-ui-bordered block-sidebar m-b-10">
+            <div class="block-header">
+                <div class="block-title">
+                    <i class="fa fa-plane fa-lg"></i> <a
+                        href="<?= $this->baseUrl('event/id/' . $event_data->id); ?>"><?= $this->translate('Ближайшее событие') ?></a>
+                </div>
+            </div>
+            <div class="block-body">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var newYear = new Date();
+                        newYear = new Date(
+                            <?= date_format(date_create($event_data->date_event), 'Y') ?>,
+                            <?= date_format(date_create($event_data->date_event), 'm') ?> -1,
+                            <?= date_format(date_create($event_data->date_event), 'd') ?>,
+                            <?= date_format(date_create($event_data->date_event), 'H') ?>,
+                            <?= date_format(date_create($event_data->date_event), 'i') ?>,
+                            <?= date_format(date_create($event_data->date_event), 's') ?>
+                        );
+                        $('#countdown_dashboard').countdown({
+                            until: newYear,
+                            format: 'DHMS',
+                            timeSeparator: ':',
+                            compact: true,
+                            timezone: +3,
+                        });
+                    });
+                </script>
+                <div id="countdown_dashboard" class="tooltip-field" data-placement="right"
+                     data-original-title="<?= $event_data->name; ?>"></div>
+            </div>
+        </div>
+    </div>
 <?php } ?>

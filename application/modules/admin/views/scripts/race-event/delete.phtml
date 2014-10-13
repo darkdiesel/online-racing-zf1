@@ -11,12 +11,12 @@ $raceEvent = $this->raceEventData;
     <?php
     // check access and generate link for default/championship/id
     if ($this->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'championship', 'id')) {
-        $adminChampionshipIDUrl = $this->url(
+        $defaultChampionshipIDUrl = $this->url(
             array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
-                'championshipID' => $this->escape($raceEvent['ID'])), 'defaultChampionshipID'
+                'championshipID' => $this->escape($raceEvent['Championship']['ID'])), 'defaultChampionshipID'
         );
     } else {
-        $adminChampionshipIDUrl = '#';
+        $defaultChampionshipIDUrl = '#';
     }
     ?>
     <div class="block block-default block-ui-bordered">
@@ -45,7 +45,7 @@ $raceEvent = $this->raceEventData;
                     </td>
                     <td>
                         <span>
-                            <a href="<?= $adminChampionshipIDUrl; ?>">
+                            <a target="_blank" href="<?= $defaultChampionshipIDUrl; ?>">
                                 <?= $this->escape($raceEvent['Championship']['Name']) ?>
                             </a>
                         </span>

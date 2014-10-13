@@ -1,6 +1,6 @@
 <?php
 
-class Peshkov_Form_RaceEvent_Add extends Zend_Form
+class Peshkov_Form_Race_Add extends Zend_Form
 {
 
     protected function translate($str)
@@ -12,17 +12,17 @@ class Peshkov_Form_RaceEvent_Add extends Zend_Form
 
     public function init()
     {
-        $adminRaceEventAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'race-event', 'action' => 'add'), 'default');
-        $adminRaceEventAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'race-event', 'action' => 'all'), 'adminRaceEventAll');
+        $adminRaceAddUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'race', 'action' => 'add'), 'default');
+        $adminRaceAllUrl = $this->getView()->url(array('module' => 'admin', 'controller' => 'race', 'action' => 'all'), 'adminRaceAll');
 
         $this->setAttribs(
             array(
                 'class' => 'block-form block-form-default',
-                'id' => 'race-event-add'
+                'id' => 'race-add'
             )
         )
             ->setName('raceEventAdd')
-            ->setAction($adminRaceEventAddUrl)
+            ->setAction($adminRaceAddUrl)
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
@@ -46,20 +46,59 @@ class Peshkov_Form_RaceEvent_Add extends Zend_Form
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
-        $championships = new Zend_Form_Element_Select('ChampionshipID');
-        $championships->setLabel($this->translate('Чемпионат'))
+        $raceEvents = new Zend_Form_Element_Select('RaceEventID');
+        $raceEvents->setLabel($this->translate('Гоночное событие'))
             ->setOptions(array('class' => 'form-control'))
-            ->setAttrib('placeholder', $this->translate('Чемпионат'))
+            ->setAttrib('placeholder', $this->translate('Гоночное событие'))
             ->setRequired(true)
             ->addFilter('HtmlEntities')
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-        foreach ($this->getChampionships() as $championship) {
-            $championships->addMultiOption($championship['ID'], $championship['Name']);
+        foreach ($this->getRaceEvents() as $raceEvent) {
+            $raceEvents->addMultiOption($raceEvent['ID'], $raceEvent['Championship']['Name']. ' :: ' . $raceEvent['Name']);
         };
 
-        $orderInChamp = new Zend_Form_Element_Text('OrderInChamp');
-        $orderInChamp->setLabel($this->translate('Порядковый номер события в чемпионате'))
+        $tracks = new Zend_Form_Element_Select('TrackID');
+        $tracks->setLabel($this->translate('Трасса'))
+            ->setOptions(array('class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Трасса'))
+            ->setRequired(true)
+            ->addFilter('HtmlEntities')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+        foreach ($this->getTracks() as $track) {
+            $tracks->addMultiOption($track['ID'], $track['Country']['EnglishName']. ' :: ' . $track['Name'] . ' (' . $track['Year'] .')');
+        };
+
+        $lapsCount = new Zend_Form_Element_Text('LapsCount');
+        $lapsCount->setLabel($this->translate('Количество кругов'))
+            ->setOptions(array('maxLength' => 128, 'class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Количество кругов'))
+            ->setRequired(false)
+            ->addValidator('NotEmpty')
+            ->addValidator('Int')
+            ->addValidator('stringLength', false, array(1, 128, 'UTF-8'))
+            ->addFilter('Int')
+            ->addFilter('StripTags')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+        $lapsCount->setDescription($this->translate('При не надобности - оставить по умолчанию'));
+
+        $timeDuration = new Zend_Form_Element_Text('TimeDuration');
+        $timeDuration->setLabel($this->translate('Время продолжительности гонки'))
+            ->setOptions(array('maxLength' => 128, 'class' => 'form-control'))
+            ->setAttrib('placeholder', $this->translate('Время продолжительности гонки'))
+            ->setAttrib('readonly', 'readonly')
+            ->setRequired(false)
+            ->addValidator('NotEmpty')
+            ->addValidator('stringLength', false, array(1, 128, 'UTF-8'))
+            ->addFilter('StripTags')
+            ->addFilter('StringTrim')
+            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
+        $timeDuration->setDescription($this->translate('При не надобности - оставить по умолчанию'));
+
+        $orderInEvent = new Zend_Form_Element_Text('OrderInEvent');
+        $orderInEvent->setLabel($this->translate('Порядковый номер гонки в событии'))
             ->setOptions(array('maxLength' => 3, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Название'))
             ->setRequired(false)
@@ -70,24 +109,12 @@ class Peshkov_Form_RaceEvent_Add extends Zend_Form
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-        $orderInChamp->setDescription($this->translate('При не надобности - оставить по умолчанию'));
+        $orderInEvent->setDescription($this->translate('При не надобности - оставить по умолчанию'));
 
         $dateStart = new Zend_Form_Element_Text('DateStart');
         $dateStart->setLabel($this->translate('Дата старта'))
             ->setOptions(array('maxLength' => 128, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Дата старта'))
-            ->setAttrib('readonly', 'readonly')
-            ->setRequired(true)
-            ->addValidator('NotEmpty')
-            ->addValidator('stringLength', false, array(1, 128, 'UTF-8'))
-            ->addFilter('StripTags')
-            ->addFilter('StringTrim')
-            ->setDecorators($this->getView()->getDecorator()->elementDecorators());
-
-        $dateEnd = new Zend_Form_Element_Text('DateEnd');
-        $dateEnd->setLabel($this->translate('Дата окончания'))
-            ->setOptions(array('maxLength' => 128, 'class' => 'form-control'))
-            ->setAttrib('placeholder', $this->translate('Дата окончания'))
             ->setAttrib('readonly', 'readonly')
             ->setRequired(true)
             ->addValidator('NotEmpty')
@@ -110,18 +137,20 @@ class Peshkov_Form_RaceEvent_Add extends Zend_Form
 
         $cancel = new Zend_Form_Element_Button('Cancel');
         $cancel->setLabel($this->translate('Отмена'))
-            ->setAttrib('onClick', "location.href='".$adminRaceEventAllUrl."'")
+            ->setAttrib('onClick', "location.href='".$adminRaceAllUrl."'")
             ->setAttrib('class', 'btn btn-danger')
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
         $this->addElement($name)
-            ->addElement($championships)
+            ->addElement($raceEvents)
+            ->addElement($tracks)
             ->addElement($description);
 
-        $this->addElement($orderInChamp)
-            ->addElement($dateStart)
-            ->addElement($dateEnd);
+        $this->addElement($lapsCount)
+            ->addElement($timeDuration)
+            ->addElement($orderInEvent)
+            ->addElement($dateStart);
 
         $this->addElement($submit)
             ->addElement($reset)
@@ -130,27 +159,29 @@ class Peshkov_Form_RaceEvent_Add extends Zend_Form
         $this->addDisplayGroup(
             array(
                 $this->getElement('Name'),
-                $this->getElement('ChampionshipID'),
+                $this->getElement('RaceEventID'),
+                $this->getElement('TrackID'),
                 $this->getElement('Description'),
-            ), 'RaceEventInfo'
+            ), 'RaceInfo'
         );
 
-        $this->getDisplayGroup('RaceEventInfo')
+        $this->getDisplayGroup('RaceInfo')
             ->setOrder(10)
-            ->setLegend('Информация о гоночном событии')
+            ->setLegend('Информация о гонке')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(
             array(
-                $this->getElement('OrderInChamp'),
+                $this->getElement('LapsCount'),
+                $this->getElement('TimeDuration'),
+                $this->getElement('OrderInEvent'),
                 $this->getElement('DateStart'),
-                $this->getElement('DateEnd'),
-            ), 'AdditionalRaceEventInfo'
+            ), 'AdditionalRaceInfo'
         );
 
-        $this->getDisplayGroup('AdditionalRaceEventInfo')
+        $this->getDisplayGroup('AdditionalRaceInfo')
             ->setOrder(20)
-            ->setLegend('Дополнительная информация о гоночном событии')
+            ->setLegend('Дополнительная информация о гонке')
             ->setDecorators($this->getView()->getDecorator()->displayGroupDecorators());
 
         $this->addDisplayGroup(
@@ -166,10 +197,22 @@ class Peshkov_Form_RaceEvent_Add extends Zend_Form
             ->setDecorators($this->getView()->getDecorator()->formActionsGroupDecorators());
     }
 
-    public function getChampionships(){
+    public function getRaceEvents(){
         $query = Doctrine_Query::create()
-            ->from('Default_Model_Championship champ')
-            ->orderBy('champ.Name ASC');
+            ->from('Default_Model_RaceEvent re')
+            ->leftJoin('re.Championship champ')
+            ->orderBy('champ.DateCreate DESC')
+            ->addOrderBy('champ.Name ASC')
+            ->addOrderBy('re.DateStart ASC');
+        return $query->fetchArray();
+    }
+
+    public function getTracks(){
+        $query = Doctrine_Query::create()
+            ->from('Default_Model_Track tr')
+            ->leftJoin('tr.Country c')
+            ->orderBy('c.EnglishName ASC')
+            ->addOrderBy('tr.Name ASC');
         return $query->fetchArray();
     }
 

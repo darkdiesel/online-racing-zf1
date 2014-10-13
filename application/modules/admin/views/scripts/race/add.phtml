@@ -5,14 +5,14 @@
 <?php $this->MinifyHeadScript()->appendFile("/library/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"); ?>
 <?php $this->MinifyHeadScript()->appendFile("/library/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.ru.js"); ?>
 
-<?= $this->raceEventAddRorm; ?>
+<?= $this->raceAddRorm; ?>
 
 <script type="text/javascript">
     $(document).ready(function () {
         <?= $this->CKEditor()->SetupFullHtmlEditor('Description'); ?>
         <?= $this->CKFinder()->setupCKEditor('Description'); ?>
 
-        $('#DateStart, #DateEnd').datetimepicker({
+        $('#DateStart').datetimepicker({
             language:  'ru',
             format: "yyyy-mm-dd hh:ii:00",
             weekStart: 1,
@@ -22,6 +22,19 @@
             todayHighlight: 1,
             startView: 2,
             forceParse: 1
+        });
+
+        $('#TimeDuration').datetimepicker({
+            language:  'ru',
+            format: "hh:ii:00",
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 1,
+            minView: 0,
+            maxView: 1,
+            forceParse: 0
         });
     });
 </script>
