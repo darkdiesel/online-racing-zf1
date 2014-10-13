@@ -28,6 +28,7 @@ class RaceEventController extends App_Controller_LoaderController
             $query = Doctrine_Query::create()
                 ->from('Default_Model_RaceEvent re')
                 ->leftJoin('re.Championship champ')
+                ->leftJoin('champ.League l')
                 ->where('re.ID = ?', $requestData->raceEventID);
             $result = $query->fetchArray();
 
@@ -44,6 +45,12 @@ class RaceEventController extends App_Controller_LoaderController
 
                 $result = $query->fetchArray();
                 $this->view->raceData = $result;
+
+                //add breadscrumb
+                $this->view->breadcrumb()->LeagueAll('1')
+                    ->League($this->view->raceEventData['Championship']['League']['ID'], $this->view->raceEventData['Championship']['League']['Name'], 1)
+                    ->Championship($this->view->raceEventData['Championship']['ID'], $this->view->raceEventData['Championship']['Name'])
+                    ->RaceEvent($this->view->raceEventData['ID'], $this->view->raceEventData['Name']);
 
                 $this->view->headTitle($result[0]['Name']);
                 $this->view->pageTitle($result[0]['Name']);

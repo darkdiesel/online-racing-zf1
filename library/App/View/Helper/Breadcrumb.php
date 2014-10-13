@@ -211,16 +211,16 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function Championship_Race($league_id, $championship_id, $race_id, $race_name)
+    public function RaceEvent($race_id, $race_name)
     {
         $pages = array(
             array(
                 'label' => $race_name,
                 'title' => $race_name,
                 'uri' => $this->view->url(
-                    array('module' => 'default', 'controller' => 'championship', 'action' => 'team',
-                        'league_id' => $league_id, 'championship_id' => $championship_id, 'race_id' => $race_id),
-                    'defaultChampionshipRaceId', true
+                    array('module' => 'default', 'controller' => 'race-event', 'action' => 'id',
+                        'raceEventID' => $race_id),
+                    'defaultRaceEventID', true
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',
@@ -281,7 +281,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'title' => $championship_name,
                 'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'championship', 'action' => 'id',
-                        'championship_id' => $championship_id), 'defaultChampionshipID'
+                        'championshipID' => $championship_id), 'defaultChampionshipID'
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',
@@ -299,8 +299,8 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'label' => $league_name,
                 'title' => $league_name,
                 'uri' => $this->view->url(
-                    array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'league_id' => $league_id,
-                        'page' => $page), 'defaultLeagueID', true
+                    array('module' => 'default', 'controller' => 'league', 'action' => 'id', 'leagueID' => $league_id,
+                        'page' => $page), 'defaultLeagueID'
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',
@@ -319,7 +319,7 @@ class App_View_Helper_Breadcrumb extends Zend_View_Helper_Abstract
                 'title' => _('Все лиги'),
                 'uri' => $this->view->url(
                     array('module' => 'default', 'controller' => 'league', 'action' => 'all', 'page' => $page),
-                    'defaultLeagueAll', true
+                    'defaultLeagueAll'
                 ),
                 'pages' => array(),
                 'class' => 'btn btn-default',

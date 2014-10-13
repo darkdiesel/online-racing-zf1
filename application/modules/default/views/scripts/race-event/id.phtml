@@ -28,11 +28,15 @@ $races = $this->raceData;
                         </blockquote>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <?= $this->RenderContentTypeText($raceEvent['Description'], 'full_html'); ?></span>
+                <?php if ($raceEvent['Description']): ?>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="well well-sm">
+                                <?= $this->RenderContentTypeText($raceEvent['Description'], 'full_html'); ?></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -40,131 +44,192 @@ $races = $this->raceData;
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <?php foreach ($races as $race): ?>
-            <?php
-            $defaultRaceIDUrl = $this->url(
-                array('module' => 'default', 'controller' => 'race', 'action' => 'id',
-                    'raceID' => $race['ID']), 'defaultRaceID'
-            );
-            ?>
-            <div class="block block-default block-ui-bordered block-ui-shadow block-race m-b-15">
+        <div class="section-title section-title-bottom m-t-15 m-b-15">
+            <?= $this->t('Гонки'); ?>
+        </div>
+    </div>
+</div>
+
+<?php foreach ($races as $race): ?>
+
+    <?php
+    $defaultRaceIDUrl = $this->url(
+        array('module' => 'default', 'controller' => 'race', 'action' => 'id',
+            'raceID' => $race['ID']), 'defaultRaceID'
+    );
+    ?>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="block block-race m-b-15">
+                <?= $this->BlockConfigMenu($this->t("Гонка"))
+                    ->raceMenu($this->escape($race['ID']));
+                ?>
+                <?php if ($this->escape($race['Track']['SchemeUrl'])) : ?>
+                    <div class="">
+                        <a href="#" data-toggle="modal" data-target=".race-<?= $race['ID']; ?>"
+                           title="<?= $this->escape($race['Name']); ?>" class="thumbnail">
+                            <img class="img-responsive img-thumbnail"
+                                 src="<?= $this->baseUrl($this->escape($race['Track']['SchemeUrl'])); ?>"/>
+                        </a>
+                        <?= $this->modal(array(
+                            'title' => $race['Track']['Name'],
+                            'class' => 'race-' . $race['ID'],
+                            'content' => '<img src="'
+                                . $this->baseUrl($this->escape($race['Track']['SchemeUrl']))
+                                . '" class="img-responsive img-rounded center-block" alt="" />'
+                        )); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="block block-default block-ui-bordered block-race">
                 <?= $this->BlockConfigMenu($this->t("Гонка"))
                     ->raceMenu($this->escape($race['ID']));
                 ?>
                 <div class="block-body">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                            <?php if ($this->escape($race['Track']['SchemeUrl'])) : ?>
-                                <div class="img-wrapper-200-200 pull-left overflow-hide m-r-5">
-                                    <a href="#" data-toggle="modal" data-target=".race-<?= $race['ID']; ?>"
-                                       title="<?= $this->escape($race['Name']); ?>" class="thumbnail">
-                                        <img class="media-object img-size-200 img-responsive"
-                                             src="<?= $this->baseUrl($this->escape($race['Track']['SchemeUrl'])); ?>"/>
+                    <h4 class="race-name">
+                        <?= $this->escape($race['Name']); ?>
+                    </h4>
+                    <hr/>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        <?= $this->t('О гонке'); ?>
                                     </a>
-                                    <?= $this->modal(array(
-                                        'title' => $race['Track']['Name'],
-                                        'class' => 'race-' . $race['ID'],
-                                        'content' => '<img src="'
-                                            . $this->baseUrl($this->escape($race['Track']['SchemeUrl']))
-                                            . '" class="img-responsive img-rounded center-block" alt="" />'
-                                    )); ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <ul class="meta-search">
-                                <li>
-                                    <i class="fa fa-calendar fa-lg"></i>
-                                    <span>
-                                        <?= date_format(date_create($this->escape($race['DateStart'])), 'd-m, Y'); ?>
-                                    </span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-clock-o fa-lg"></i>
-                                    <span>
-                                        <?= date_format(date_create($this->escape($race['DateStart'])), 'H:i:s'); ?>
-                                    </span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-tags fa-lg"></i>
-                                    <span><?= $this->t('Гонка'); ?></span>
-                                </li>
-                                <li>
-                                    <i class="fa fa-map-marker fa-lg"></i>
-                                        <span class="tooltip-field" data-placement="bottom"
-                                              data-title="<?= $this->escape($race['Track']['Country']['EnglishName']); ?>">
-                                            <img class="img-size-30-30"
-                                                 src="<?= $this->baseUrl($this->escape($race['Track']['Country']['ImageRoundUrl'])); ?>"
-                                                 alt="<?= $this->escape($race['Track']['Country']['EnglishName']); ?>"/>
-                                        </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-                            <h3 class="race-name">
-                                <a href="<?= $defaultRaceIDUrl; ?>" title="">
-                                    <?= $this->escape($race['Name']); ?>
-                                </a>
-                            </h3>
-                            <!-- detail information for race  -->
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            #
-                                        </th>
-                                        <th>
-                                            <?= $this->t('Круги / Время'); ?>
-                                        </th>
-                                        <th>
-                                            <?= $this->t('Год конфиг. трассы'); ?>
-                                        </th>
-                                        <th>
-                                            <?= $this->t('Круг (км)'); ?>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <span class="label label-danger">
-                                                <?= $race['OrderInEvent'] ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <?php if ($race['LapsCount']): ?>
-                                                <?= $this->escape($race['LapsCount']); ?>
-                                            <?php endif; ?>
-
-                                            <?php if ($race['TimeDuration']): ?>
-                                                <?= $this->escape($race['TimeDuration']); ?>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td>
-                                            <?= $this->escape($race['Track']['Year']); ?>
-                                        </td>
-                                        <td>
-                                            <?= $this->escape($race['Track']['Length']); ?>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                </h4>
                             </div>
-                            <!-- end detail information for race  -->
-                            <!-- More btn -->
-                                <span class="plus">
-                                    <a href="<?= $defaultRaceIDUrl; ?>"
-                                       title="<?= $this->t('Подробнее...'); ?>" class="pull-right">
-                                        <i class="fa fa-arrow-right fa-2x"></i>
-                                    </a>
-                                </span>
-                            <!-- More btn -->
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <span><?= $this->t('Номер этапа'); ?></span>
+                                                </th>
+                                                <th>
+                                                    <span><?= $this->t('Дата проведения'); ?></span>
+                                                </th>
+                                                <th>
+                                                    <span><?= $this->t('Круги / Время'); ?></span>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-vertical-m">
+                                                    <span class="label label-danger">
+                                                        <?= $race['OrderInEvent'] ?>
+                                                    </span>
+                                                </td>
+                                                <td class="text-vertical-m">
+                                                    <span>
+                                                        <i class="fa fa-calendar fa-lg"></i>
+                                                        <span>
+                                                            <?= date_format(date_create($this->escape($race['DateStart'])), 'd-m, Y'); ?>
+                                                        </span>
+                                                        <i class="fa fa-clock-o fa-lg"></i>
+                                                        <span>
+                                                            <?= date_format(date_create($this->escape($race['DateStart'])), 'H:i:s'); ?>
+                                                        </span>
+                                                    </span>
+                                                </td>
+                                                <td class="text-vertical-m">
+                                                    <span>
+                                                        <?php if ($race['LapsCount']): ?>
+                                                            <?= $this->escape($race['LapsCount']); ?>
+                                                        <?php endif; ?>
+
+                                                        <?php if ($race['TimeDuration']): ?>
+                                                            <?= $this->escape($race['TimeDuration']); ?>
+                                                        <?php endif; ?>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <?php if ($race['Description']) : ?>
+                                        <div class="well well-sm">
+                                            <?= $this->RenderContentTypeText($race['Description'], 'full_html'); ?></span>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="clearfix borda"></span>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        <?= $this->t('О трассе'); ?>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="tooltip-field"
+                                                 title="<?= $this->escape($race['Track']['Country']['EnglishName']); ?>">
+                                                <img
+                                                    src="<?= $this->escape($race['Track']['Country']['ImageGlossyWaveUrl']); ?>"/>
+                                            </div>
+                                            <!-- detail information for race  -->
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <?= $this->t('Круги / Время'); ?>
+                                                        </th>
+                                                        <th>
+                                                            <?= $this->t('Год конфиг. трассы'); ?>
+                                                        </th>
+                                                        <th>
+                                                            <?= $this->t('Круг (км)'); ?>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <?php if ($race['LapsCount']): ?>
+                                                                <?= $this->escape($race['LapsCount']); ?>
+                                                            <?php endif; ?>
+
+                                                            <?php if ($race['TimeDuration']): ?>
+                                                                <?= $this->escape($race['TimeDuration']); ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $this->escape($race['Track']['Year']); ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $this->escape($race['Track']['Length']); ?>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- end detail information for race  -->
+                                            <?php if ($race['Track']['Description']) : ?>
+                                            <div class="well well-sm">
+                                                <?= $this->RenderContentTypeText($race['Track']['Description'], 'full_html'); ?></span>
+                                            </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?>
+        </div>
     </div>
-</div>
+<?php endforeach; ?>
