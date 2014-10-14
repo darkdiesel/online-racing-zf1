@@ -340,7 +340,7 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         return $this;
     }
 
-    public function raceMenu($raceID, $addIDurl = false)
+    public function raceMenu($raceID, $addIDurl = false, $trackID = null)
     {
         if ($addIDurl) {
             if ($this->view->checkUserAccess('default' . Acl::RESOURCE_SEPARATOR . 'race', 'id')) {
@@ -357,6 +357,13 @@ class App_View_Helper_BlockConfigMenu extends Zend_View_Helper_Abstract
         if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'race', 'delete')) {
             $url = $this->view->url(array('module' => 'admin', 'controller' => 'race', 'action' => 'delete', 'raceID' => $raceID), 'adminRaceAction', true);
             $this->_menuLinks[] =  '<a href="' . $url . '">' . $this->_delete_icon . $this->view->translate('Удалить') . '</a>';
+        }
+
+        if ($trackID){
+            if ($this->view->checkUserAccess('admin' . Acl::RESOURCE_SEPARATOR . 'track', 'edit')) {
+                $url = $this->view->url(array('module' => 'admin', 'controller' => 'track', 'action' => 'edit', 'trackID' => $trackID), 'adminTrackAction', true);
+                $this->_menuLinks[] =  '<a href="' . $url . '">' . $this->_edit_icon . $this->view->translate('Редактировать трассу') . '</a>';
+            }
         }
 
         return $this;

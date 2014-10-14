@@ -11,6 +11,9 @@ $races = $this->raceData;
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="block block-default">
+            <?= $this->BlockConfigMenu($this->t("Гоночное событие"))
+                ->raceEventMenu($this->escape($raceEvent['ID']));
+            ?>
             <div class="block-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -62,9 +65,6 @@ $races = $this->raceData;
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="block block-race m-b-15">
-                <?= $this->BlockConfigMenu($this->t("Гонка"))
-                    ->raceMenu($this->escape($race['ID']));
-                ?>
                 <?php if ($this->escape($race['Track']['SchemeUrl'])) : ?>
                     <div class="">
                         <a href="#" data-toggle="modal" data-target=".race-<?= $race['ID']; ?>"
@@ -86,7 +86,7 @@ $races = $this->raceData;
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
             <div class="block block-default block-ui-bordered block-race">
                 <?= $this->BlockConfigMenu($this->t("Гонка"))
-                    ->raceMenu($this->escape($race['ID']));
+                    ->raceMenu($this->escape($race['ID']), false, $race['Track']['ID']);
                 ?>
                 <div class="block-body">
                     <h4 class="race-name">
@@ -226,7 +226,6 @@ $races = $this->raceData;
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

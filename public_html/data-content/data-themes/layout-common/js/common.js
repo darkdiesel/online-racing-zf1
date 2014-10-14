@@ -12,7 +12,7 @@ $(document).ready(function () {
     $('.tooltip-field').tooltip();
 
     /* Add responsive class for images */
-    $('#default-post-id').find('img').each(function (el) {
+    $('body').find('img').each(function (el) {
         if (!$(this).hasClass('img-responsive')) {
             $(this).addClass('img-responsive');
         }

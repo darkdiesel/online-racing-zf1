@@ -379,15 +379,6 @@ body {
     list-style: none;
 }
 
-#default-race-event-id .block-race ul li {
-    font: 400 normal .85em Arial, Verdana, sans-serif;
-    line-height: 30px;
-}
-
-#default-race-event-id .block-race ul li i {
-    padding-right: 5px;
-}
-
 #default-race-event-id .block-race .col-md-7 {
     position: relative;
 }
@@ -469,13 +460,7 @@ body {
     font: bold 13px/10px arial;
 }
 
-
-
 /* user id */
-.panel {
-    background-image: url("");
-}
-
 .dropdown {
     position: absolute;
 }
