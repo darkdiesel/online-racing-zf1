@@ -660,7 +660,6 @@
 }
 
 .block-media-list .media-list .media .media-body .media-heading {
-    font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 15px;
     font-weight: bold;
     color: #C41D1D;
@@ -681,7 +680,6 @@
 
 .block-list .block .block-title,
 .block-list .block .block-title a {
-    font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 15px;
     font-weight: bold;
     color: #C41D1D;
