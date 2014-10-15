@@ -160,6 +160,10 @@
     padding: 6px 18px 6px 24px;
 }
 
+.btn-breadcrumb .btn.active{
+    z-index: 1;
+}
+
 /** Default button **/
 .btn-breadcrumb .btn.btn-default:not(:last-child):after {
     border-left: 10px solid #fff;
@@ -170,7 +174,7 @@
 }
 
 .btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
-    border-left: 10px solid #ebebeb;
+    border-left: 10px solid #e0e0e0;
 }
 
 .btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
