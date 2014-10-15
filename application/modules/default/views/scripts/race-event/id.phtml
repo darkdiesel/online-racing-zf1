@@ -8,50 +8,50 @@ $races = $this->raceData;
 <?= $this->render('championship/common/championship-menu.phtml') ?>
 <?= $this->render('championship/common/hotlaps-menu.phtml') ?>
 
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="block block-default">
-            <?= $this->BlockConfigMenu($this->t("Гоночное событие"))
-                ->raceEventMenu($this->escape($raceEvent['ID']));
-            ?>
-            <div class="block-body">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <blockquote class="pull-right">
-                            <h3><?= $this->escape($raceEvent['Name']); ?></h3>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="block block-default">
+                <?= $this->BlockConfigMenu($this->t("Гоночное событие"))
+                    ->raceEventMenu($this->escape($raceEvent['ID']));
+                ?>
+                <div class="block-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <blockquote class="pull-right">
+                                <h3><?= $this->escape($raceEvent['Name']); ?></h3>
 
-                            <h1>
-                                <small>
-                                    <?= $this->t('Номер этапа'); ?>:
+                                <h1>
+                                    <small>
+                                        <?= $this->t('Номер этапа'); ?>:
                             <span class="label label-info">
                                 <?= $this->escape($raceEvent['OrderInChamp']); ?>
                             </span>
-                                </small>
-                            </h1>
-                        </blockquote>
-                    </div>
-                </div>
-                <?php if ($raceEvent['Description']): ?>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="well well-sm">
-                                <?= $this->RenderContentTypeText($raceEvent['Description'], 'full_html'); ?></span>
-                            </div>
+                                    </small>
+                                </h1>
+                            </blockquote>
                         </div>
                     </div>
-                <?php endif; ?>
+                    <?php if ($raceEvent['Description']): ?>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="well well-sm">
+                                    <?= $this->RenderContentTypeText($raceEvent['Description'], 'full_html'); ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="section-title section-title-bottom m-t-15 m-b-15">
-            <?= $this->t('Гонки'); ?>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="section-title section-title-bottom m-t-15 m-b-15">
+                <?= $this->t('Гонки'); ?>
+            </div>
         </div>
     </div>
-</div>
 
 <?php foreach ($races as $race): ?>
 
@@ -92,9 +92,13 @@ $races = $this->raceData;
                     <h4 class="race-name">
                         <?= $this->escape($race['Name']); ?>
                     </h4>
+
+                    <p class="track-name">
+                        - <?= $this->escape($race['Track']['Name']); ?>
+                    </p>
                     <hr/>
                     <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default panel-race">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -109,7 +113,7 @@ $races = $this->raceData;
                                             <thead>
                                             <tr>
                                                 <th>
-                                                    <span><?= $this->t('Номер этапа'); ?></span>
+                                                    <span><?= $this->t('Номер гонки'); ?></span>
                                                 </th>
                                                 <th>
                                                     <span><?= $this->t('Дата проведения'); ?></span>
@@ -153,15 +157,15 @@ $races = $this->raceData;
                                             </tbody>
                                         </table>
                                         <?php if ($race['Description']) : ?>
-                                        <div class="well well-sm">
-                                            <?= $this->RenderContentTypeText($race['Description'], 'full_html'); ?></span>
-                                        </div>
+                                            <div class="well well-sm">
+                                                <?= $this->RenderContentTypeText($race['Description'], 'full_html'); ?></span>
+                                            </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
+                        <div class="panel panel-default panel-track">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
@@ -171,58 +175,59 @@ $races = $this->raceData;
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="tooltip-field"
-                                                 title="<?= $this->escape($race['Track']['Country']['EnglishName']); ?>">
-                                                <img
-                                                    src="<?= $this->escape($race['Track']['Country']['ImageGlossyWaveUrl']); ?>"/>
-                                            </div>
-                                            <!-- detail information for race  -->
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>
-                                                            <?= $this->t('Круги / Время'); ?>
-                                                        </th>
-                                                        <th>
-                                                            <?= $this->t('Год конфиг. трассы'); ?>
-                                                        </th>
-                                                        <th>
-                                                            <?= $this->t('Круг (км)'); ?>
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <?php if ($race['LapsCount']): ?>
-                                                                <?= $this->escape($race['LapsCount']); ?>
-                                                            <?php endif; ?>
-
-                                                            <?php if ($race['TimeDuration']): ?>
-                                                                <?= $this->escape($race['TimeDuration']); ?>
-                                                            <?php endif; ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $this->escape($race['Track']['Year']); ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $this->escape($race['Track']['Length']); ?>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- end detail information for race  -->
-                                            <?php if ($race['Track']['Description']) : ?>
-                                            <div class="well well-sm">
-                                                <?= $this->RenderContentTypeText($race['Track']['Description'], 'full_html'); ?></span>
-                                            </div>
-                                            <?php endif; ?>
-                                        </div>
+                                    <div class="tooltip-field pull-left m-r5"
+                                         title="<?= $this->escape($race['Track']['Country']['EnglishName']); ?>">
+                                        <img
+                                            src="<?= $this->escape($race['Track']['Country']['ImageGlossyWaveUrl']); ?>"/>
                                     </div>
+                                    <h3 class="track-name">
+                                        <?= $this->escape($race['Name']); ?>
+                                    </h3>
+
+                                    <div class="clearfix"></div>
+                                    <!-- detail information for race  -->
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <?= $this->t('Круги / Время'); ?>
+                                                </th>
+                                                <th>
+                                                    <?= $this->t('Год конфиг. трассы'); ?>
+                                                </th>
+                                                <th>
+                                                    <?= $this->t('Круг (км)'); ?>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <?php if ($race['LapsCount']): ?>
+                                                        <?= $this->escape($race['LapsCount']); ?>
+                                                    <?php endif; ?>
+
+                                                    <?php if ($race['TimeDuration']): ?>
+                                                        <?= $this->escape($race['TimeDuration']); ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?= $this->escape($race['Track']['Year']); ?>
+                                                </td>
+                                                <td>
+                                                    <?= $this->escape($race['Track']['Length']); ?>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end detail information for race  -->
+                                    <?php if ($race['Track']['Description']) : ?>
+                                        <div class="well well-sm">
+                                            <?= $this->RenderContentTypeText($race['Track']['Description'], 'full_html'); ?></span>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

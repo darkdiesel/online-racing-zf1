@@ -119,48 +119,84 @@ body {
 }
 
 /* Footer menu styles */
-#footer_menu {
+#footer-menu {
     display: inline-block;
     margin: 0 auto;
     overflow: hidden;
 }
 
-#footer_menu li {
+#footer-menu li {
     float: left;
     list-style-type: none;
     margin-right: 15px;
     margin-left: -2px;
 }
 
-#footer_menu li:before {
+#footer-menu li:before {
     content: "|";
     margin-right: 12px;
     line-height: 15px;
 }
 
-#footer_menu li a {
+#footer-menu li:first-child:before {
+    content: "";
+    margin-right: 12px;
+    line-height: 15px;
+}
+
+#footer-menu li a {
     font-size: 13px;
     font-family: sans-serif;
     color: #6C6A6A;
 }
 
-#footer_menu li a:hover {
+#footer-menu li a:hover {
     text-decoration: underline;
     color: #968F8F;
 }
 
-/* Footer web counters css */
-#footer .web_counters {
-    position: absolute;
-    right: 0px;
+#footer .copyright {
+    font-family: monospace;
+    text-align: left;
+    position: relative;
+    line-height: 15px;
     display: inline-block;
 }
 
-#footer .web_counters img {
+/*block for social network*/
+#footer .social-networks {
+}
+
+#footer .social-networks .social-networks-list a img {
+    opacity: 0.7;
+}
+
+#footer .social-networks .social-networks-list a:hover img {
+    opacity: 1;
+}
+
+/* Footer logo */
+#footer .footer-logo {
+
+}
+
+#footer .footer-logo img {
+    display: inline-block;
+}
+
+/* Footer web counters css */
+#footer .web-counters {
+}
+
+#footer .web-counters ul {
+    height: 30px;
+}
+
+#footer .web-counters ul li {
     opacity: 0.4;
 }
 
-#footer .web_counters img:hover {
+#footer .web-counters ul li:hover {
     opacity: 1;
 }
 
@@ -266,14 +302,12 @@ body {
 }
 
 #default-league-all .block-league hr,
-#default-league-id .block-league hr
-{
+#default-league-id .block-league hr {
     margin: 7px 0;
 }
 
 #default-league-all .block-league .league-name,
-#default-league-id .block-league .league-name
-{
+#default-league-id .block-league .league-name {
     text-transform: uppercase;
     font-weight: bold;
     margin: 0 0 4px;
@@ -357,8 +391,12 @@ body {
 }
 
 #default-race-event-id .block-race .race-name,
-#default-race-event-id .block-race .race-name a{
+#default-race-event-id .block-race .race-name a {
     color: #c41d1d;
+}
+
+#default-race-event-id .block-race .track-name{
+    color:#777;
 }
 
 #default-race-event-id .block-race:first-child {
@@ -383,42 +421,13 @@ body {
     position: relative;
 }
 
-#default-race-event-id .block-race h3 {
-    font: 500 normal 1.375em Arial, Verdana, sans-serif;
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
-}
-
 #default-race-event-id .block-race table i {
     color: #248dc1 !important;
 }
 
-#default-race-event-id .block-race p {
-    font: normal normal 1.125em Arial, Verdana, sans-serif;
-}
-
-#default-race-event-id .block-race span.plus {
-    position: relative;
-}
-
-#default-race-event-id .block-race span.plus a {
-    background-color: #248dc1;
-    padding: 5px 5px 3px 5px;
-}
-
-#default-race-event-id .block-race span.plus a:hover {
-    background-color: #414141;
-}
-
-#default-race-event-id .block-race span.plus a i {
-    color: #fff !important;
-}
-
-#default-race-event-id .block-race span.border {
-    display: block;
-    width: 97%;
-    margin: 0 15px;
-    border-bottom: 1px dotted #ccc;
+#default-race-event-id .block-race .panel-track .track-name{
+    margin:0;
+    line-height: 40px;
 }
 
 /*Sidebar online-drivers block*/

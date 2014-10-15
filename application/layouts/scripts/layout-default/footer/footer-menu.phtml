@@ -1,0 +1,37 @@
+<?php
+$defaultDonatePageUrl = $this->url(array('module' => 'default', 'controller' => 'donate', 'action' => 'index'), 'default');
+?>
+<div class="center-block text-center">
+    <ul id="footer-menu">
+        <li>
+            <a href="<?= $this->baseUrl("") ?>">
+                <?= $this->translate('Главная') ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?= $this->baseUrl("league/all") ?>">
+                <?= $this->translate('Лиги') ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?= $this->baseUrl("user/all") ?>">
+                <?= $this->translate('Гонщики') ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?= $this->baseUrl("post/all") ?>">
+                <?= $this->translate('Новости') ?>
+            </a>
+        </li>
+        <li>
+            <a href="http://f1orl.forum2x2.ru">
+                <?= $this->translate('Форум') ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?= $defaultDonatePageUrl; ?>">
+                <?= $this->translate('Помощь проекту') ?>
+            </a>
+        </li>
+    </ul>
+</div>

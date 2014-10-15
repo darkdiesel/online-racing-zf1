@@ -1,176 +1,159 @@
-body iframe{display:inline;}
+body iframe {
+    display: inline;
+}
 
-#moving_text{
-    background:url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
-    border:2px solid #292929;
-    border-top:none;
-    box-shadow:0 0 9px 5px #000000 inset;
-    color:#C5C5C2;
-    display:inline-block;
-    overflow:hidden;
-    padding:7px 5px 4px;
-    white-space:nowrap;
-    width:385px;
-    border-radius:0 0 0 10px;
-    left:15px;
-    position:relative;
+#moving_text {
+    background: url("../img/moving_text_bgr.png") repeat scroll 0 0 transparent;
+    border: 2px solid #292929;
+    border-top: none;
+    box-shadow: 0 0 9px 5px #000000 inset;
+    color: #C5C5C2;
+    display: inline-block;
+    overflow: hidden;
+    padding: 7px 5px 4px;
+    white-space: nowrap;
+    width: 385px;
+    border-radius: 0 0 0 10px;
+    left: 15px;
+    position: relative;
 }
-#moving_text marquee{
+
+#moving_text marquee {
 }
-#moving_text marquee .header_news{
-    margin:0;
+
+#moving_text marquee .header_news {
+    margin: 0;
 }
-#moving_text marquee .header_news li{
-    display:inline-block;
-    margin:0 40px 0 0;
-    font-weight:bold;
-    font-family:Verdana,Arial,Helvetica,sans-serif;
-    font-size:14px;
-    line-height:14px;
-    list-style-type:none;
+
+#moving_text marquee .header_news li {
+    display: inline-block;
+    margin: 0 40px 0 0;
+    font-weight: bold;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 14px;
+    list-style-type: none;
 }
-#moving_text marquee .header_news li:before{
-    content:"";
-    margin-right:10px;
-    font-size:7px;
-    background:url('../favicon.ico') no-repeat center center;
-    width:16px;
-    height:16px;
-    display:inline-block;
+
+#moving_text marquee .header_news li:before {
+    content: "";
+    margin-right: 10px;
+    font-size: 7px;
+    background: url('../favicon.ico') no-repeat center center;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
 }
-#moving_text marquee .header_news li a{
-    color:#E1E1E0;
-    text-decoration:underline;
+
+#moving_text marquee .header_news li a {
+    color: #E1E1E0;
+    text-decoration: underline;
 }
-#moving_text marquee .header_news li a:hover{
-    text-decoration:none;
+
+#moving_text marquee .header_news li a:hover {
+    text-decoration: none;
 }
 
 /*scroll to top button*/
 #back-top {
-    position:fixed;
-    bottom:10px;
-    margin-left:-85px;
-    display:none;
+    position: fixed;
+    bottom: 10px;
+    margin-left: -85px;
+    display: none;
 }
+
 #back-top a {
-    width:65px;
-    display:block;
-    text-align:center;
-    font:10px/100% Arial, Helvetica, sans-serif;
-    text-transform:uppercase;
-    text-decoration:none;
-    color:#bbb;
-    font-weight:bold;
-    opacity:0.5;
-
-}
-#back-top a:hover {
-    color:#bbbbbb;
-}
-#back-top span {
-    width:65px;
-    height:110px;
-    display:block;
-    margin-bottom:7px;
-    background:#ddd url("../img/scroll_to_top.gray.png") no-repeat center center;
-    -webkit-border-radius:15px;
-    -moz-border-radius:15px;
-    border-radius:15px;
-    -webkit-transition:1s;
-    -moz-transition:1s;
-    transition:1s;
-}
-
-#footer .copyright{
-    font-family:monospace;
-    text-align:left;
-    position:relative;
-    line-height:15px;
-    display:inline-block;
-}
-#footer .footer_logo{
-    margin-top:20px;
-}   
-#footer .footer_logo a {
-    display:block;
-}
-/*block for social network*/
-#footer .socialNetworks_slogan{
-    padding:5px 20px;
-    font-size:13px;
-    color:#6C6A6A;
-}
-#footer-social{
-    
-}
-#footer-social a > img{
-    opacity:0.7;
-}
-#footer-social a:hover > img{
-    opacity:1;
-}
-.soc_buttons {
-    position: absolute;
-    right:0;
-    top:15px;
-    width:70px;
-    left:-100px;
-    border:1px solid #fff;
-}
-.soc_buttons a {
+    width: 65px;
     display: block;
+    text-align: center;
+    font: 10px/100% Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #bbb;
+    font-weight: bold;
+    opacity: 0.5;
+
 }
 
+#back-top a:hover {
+    color: #bbbbbb;
+}
+
+#back-top span {
+    width: 65px;
+    height: 110px;
+    display: block;
+    margin-bottom: 7px;
+    background: #ddd url("../img/scroll_to_top.gray.png") no-repeat center center;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+}
 
 /* Old styles for share block */
-div.shareblock{position: absolute; right:-20px; top:-15px; opacity:0.5;}
-div.shareblock #shareblock{background:#F0F0F0; padding:10px; border-radius:10px; border:2px solid #706E88;}
-div.shareblock #shareblock a{border:3px solid #BCBBBB; border-radius:10px;}
-div.shareblock #shareblock:hover a{opacity:0.5;}
-div.shareblock #shareblock a:hover{opacity:1;}
+div.shareblock {
+    position: absolute;
+    right: -20px;
+    top: -15px;
+    opacity: 0.5;
+}
+
+div.shareblock #shareblock {
+    background: #F0F0F0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #706E88;
+}
+
+div.shareblock #shareblock a {
+    border: 3px solid #BCBBBB;
+    border-radius: 10px;
+}
+
+div.shareblock #shareblock:hover a {
+    opacity: 0.5;
+}
+
+div.shareblock #shareblock a:hover {
+    opacity: 1;
+}
 
 /* */
-.break_word_wrap{
-    overflow:hidden;
-    word-wrap:break-word;
+.break_word_wrap {
+    overflow: hidden;
+    word-wrap: break-word;
 }
-.no_image{
-    border:1px solid #D2D2D2;
-    border-radius:2px;
-    padding:10px 5px;
-    background:#ffffff;
-    box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);
-    color:#B5ADAD;
+
+.no_image {
+    border: 1px solid #D2D2D2;
+    border-radius: 2px;
+    padding: 10px 5px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #B5ADAD;
 }
-/* articles */
-#articles_block{
-    margin:0;
-}
+
 /* label for jQuery validate */
 label.error {
-    color:#BE3838;
-    font-family:serif;
-    font-size:14px;
-    line-height:14px;
-    list-style-type:none;
+    color: #BE3838;
+    font-family: serif;
+    font-size: 14px;
+    line-height: 14px;
+    list-style-type: none;
 }
-label.error:before{
-    content:"●";
-    margin-right:5px;
+
+label.error:before {
+    content: "●";
+    margin-right: 5px;
 }
+
 label.valid {
     background: url("../img/valid.png") no-repeat scroll center center transparent;
-    display:inline-block;
-    height:24px;
-    text-indent:-9999px;
-    width:24px;
+    display: inline-block;
+    height: 24px;
+    text-indent: -9999px;
+    width: 24px;
 }
-.user_light_status{
-    height:20px;
-    float:right;
-    position:absolute;
-    right:7px;
-    top:163px;
-}
-.no_width{width:auto!important;}
