@@ -79,8 +79,10 @@ class Admin_PostController extends App_Controller_LoaderController
 
                 $newPost = new Default_Model_Post();
 
+                $storage = Zend_Auth::getInstance()->getStorage()->read();
+
                 $newPost->fromArray($postAddForm->getValues());
-                $newPost->UserID = Zend_Auth::getInstance()->getStorage()->read()->id;
+                $newPost->UserID = $storage['UserID'];
                 $newPost->DateCreate = $date;
                 $newPost->DateEdit = $date;
 
