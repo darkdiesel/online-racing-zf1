@@ -39,10 +39,10 @@ class Peshkov_Form_Race_Add extends Zend_Form
 
         $description = new Zend_Form_Element_Textarea('Description');
         $description->setLabel($this->translate('Описание'))
-            ->setOptions(array('maxLength' => 500, 'class' => 'form-control'))
+            ->setOptions(array('maxLength' => 5000, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Описание'))
             ->setRequired(false)
-            ->addValidator('stringLength', false, array(0, 500, 'UTF-8'))
+            ->addValidator('stringLength', false, array(0, 5000, 'UTF-8'))
             ->addFilter('StringTrim')
             ->setDecorators($this->getView()->getDecorator()->elementDecorators());
 
