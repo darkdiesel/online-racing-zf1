@@ -29,8 +29,8 @@ class Peshkov_Form_Auth_SignUp extends Zend_Form
             ->setMethod('post')
             ->addDecorators($this->getView()->getDecorator()->formDecorators());
 
-        $name = new Zend_Form_Element_Text('Name');
-        $name->setLabel($this->translate('Имя'))
+        $firstName = new Zend_Form_Element_Text('FirstName');
+        $firstName->setLabel($this->translate('Имя'))
             ->setOptions(array('maxLength' => 255, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Имя'))
             ->setRequired(true)
@@ -47,8 +47,8 @@ class Peshkov_Form_Auth_SignUp extends Zend_Form
                 array(array('elementColumnWrapper' => 'HtmlTag'), array('tag' => 'div', 'class' => 'col-xs-12 col-sm-12 col-md-6 col-lg-6')),
             ));
 
-        $surName = new Zend_Form_Element_Text('Surname');
-        $surName->setLabel($this->translate('Фамилия'))
+        $lastName = new Zend_Form_Element_Text('LastName');
+        $lastName->setLabel($this->translate('Фамилия'))
             ->setOptions(array('maxLength' => 255, 'class' => 'form-control'))
             ->setAttrib('placeholder', $this->translate('Фамилия'))
             ->setRequired(true)
@@ -186,8 +186,8 @@ class Peshkov_Form_Auth_SignUp extends Zend_Form
             ->setIgnore(true)
             ->setDecorators($this->getView()->getDecorator()->buttonDecorators());
 
-        $this->addElement($name)
-            ->addElement($surName);
+        $this->addElement($firstName)
+            ->addElement($lastName);
 
 
         $this->addElement($countries);
@@ -205,8 +205,8 @@ class Peshkov_Form_Auth_SignUp extends Zend_Form
 
         $this->addDisplayGroup(
             array(
-                $this->getElement('Name'),
-                $this->getElement('Surname'),
+                $this->getElement('FirstName'),
+                $this->getElement('LastName'),
             ), 'UserIdencity'
         );
 

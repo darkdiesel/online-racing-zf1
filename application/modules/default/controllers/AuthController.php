@@ -232,8 +232,8 @@ class AuthController extends App_Controller_LoaderController
                 $html->setScriptPath(APPLICATION_PATH . '/modules/default/views/emails/');
 
                 // Assign e-mail template variables
-                $html->assign('Name', $newUser->Name);
-                $html->assign('Surname', $newUser->Surname);
+                $html->assign('Name', $newUser->FirstName);
+                $html->assign('Surname', $newUser->LastName);
                 $html->assign('NickName', $newUser->NickName);
                 $html->assign('Email', $newUser->Email);
                 $html->assign('Password', $authSignUpForm->getValue('Password'));
@@ -260,8 +260,8 @@ class AuthController extends App_Controller_LoaderController
                 // Assign e-mail template variables
                 //TODO: Get admin nick from admin from site setting.
                 $html->assign('NickName', "Администратор Online-Racing.Net");
-                $html->assign('Name', $newUser->Name);
-                $html->assign('Surname', $newUser->Surname);
+                $html->assign('Name', $newUser->FirstName);
+                $html->assign('Surname', $newUser->LastName);
                 $html->assign('NickName', $newUser->NickName);
                 $html->assign('Email', $newUser->Email);
                 $html->assign('ActivationCode', $newUser->ActivationCode);
